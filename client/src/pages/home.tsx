@@ -5,7 +5,7 @@ import { SectionLayout } from "@/components/landing/section-layout";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white font-sans selection:bg-lime-200">
+    <div className="min-h-screen bg-white font-sans">
       <Header />
       <main>
         <Hero />

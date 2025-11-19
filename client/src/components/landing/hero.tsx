@@ -1,5 +1,6 @@
 import { ArrowRight, Zap, Shield } from "lucide-react";
 import { SectionLayout } from "./section-layout";
+import ShinyText from "@/components/ui/shiny-text";
 
 export function Hero() {
   return (
@@ -27,7 +28,8 @@ export function Hero() {
         {/* Heading */}
         <h1 className="text-[48px] md:text-7xl font-bold leading-none tracking-tight text-[#1C1C1E]">
           Receba fácil. <br />
-          <span className="text-[#2869D6]">Cresça rápido.</span>
+          <span className="text-[#1C1C1E]">Cresça </span>
+          <ShinyText text="rápido." speed={3} className="text-[#1C1C1E]" />
         </h1>
 
         {/* Description */}
