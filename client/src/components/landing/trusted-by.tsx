@@ -107,7 +107,7 @@ export function TrustedBy() {
   return (
     <SectionLayout className="flex flex-col md:flex-row items-stretch">
       {/* Left Side: Text Label */}
-      <div className="p-[32px] border-b md:border-b-0 border-[#E2E7F1] flex items-center justify-center md:justify-start shrink-0">
+      <div className="w-full md:w-[260px] p-[24px] md:p-[32px] border-b md:border-b-0 border-[#E2E7F1] flex items-center justify-center md:justify-start">
         <p className="text-slate-500 font-medium text-sm max-w-[150px] md:max-w-[200px]">
           Estamos em grandes projetos como:
         </p>
@@ -117,7 +117,7 @@ export function TrustedBy() {
       <BoneDivider />
 
       {/* Right Side: Logo Carousel */}
-      <div className="flex-1 p-[32px] flex items-center justify-center overflow-hidden">
+      <div className="flex-1 p-[24px] md:p-[32px] flex items-center justify-center overflow-hidden">
         <div className="w-full max-w-full">
           <LogoCarousel />
         </div>
