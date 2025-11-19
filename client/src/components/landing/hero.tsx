@@ -2,6 +2,7 @@ import { ArrowRight, Zap, Shield } from "lucide-react";
 import { SectionLayout } from "./section-layout";
 import ShinyText from "@/components/ui/shiny-text";
 import { WebsiteMockup } from "./website-mockup";
+import { Iphone16Pro } from "@/components/ui/iphone-16-pro";
 
 export function Hero() {
   return (
@@ -86,7 +87,22 @@ export function Hero() {
 
       {/* Right Content (Website Mockup) */}
       <div className="relative hidden lg:block h-full min-h-[400px]" style={{ zIndex: 1 }}>
+        {/* Website Mockup */}
         <WebsiteMockup />
+        {/* iPhone Mockup - Overlay */}
+        <div className="website-mockup-iphone absolute bottom-0" style={{ left: '40px', transform: 'translateX(-50%)', zIndex: 50, filter: 'drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15))' }}>
+          <Iphone16Pro 
+            width={220}
+            height={420}
+            showIsland={true}
+            islandWidth={90}
+            islandHeight={30}
+            showCamera={false}
+            shadow={true}
+            rounded={true}
+            screenRadius={15}
+          />
+        </div>
       </div>
     </SectionLayout>
   );
