@@ -6,10 +6,20 @@ export function Hero() {
   return (
     <SectionLayout 
       showStripes={false}
-      className="grid grid-cols-1 lg:grid-cols-2 gap-12 px-6 md:px-16 lg:px-28 py-20 min-h-[600px] items-center"
+      className="grid grid-cols-1 lg:grid-cols-2 gap-12 px-6 md:px-16 lg:px-28 py-20 min-h-[600px] items-center relative overflow-hidden"
     >
+      {/* Gradient Effect - Desktop Only */}
+      <div className="hidden lg:block absolute bottom-0 right-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
+        <div 
+          className="absolute bottom-0 right-0 w-full h-full"
+          style={{
+            background: 'radial-gradient(ellipse 100% 150% at bottom right, #2869D6 0%, #2869D6 20%, rgba(40, 105, 214, 0.9) 30%, rgba(40, 105, 214, 0.7) 40%, rgba(40, 105, 214, 0.5) 48%, rgba(40, 105, 214, 0.3) 55%, rgba(40, 105, 214, 0.15) 62%, rgba(255, 255, 255, 0.8) 70%, white 80%, white 100%)'
+          }}
+        ></div>
+        <div className="absolute bottom-6 right-6 w-3 h-3 bg-[#2869D6] rounded-full"></div>
+      </div>
       {/* Left Content */}
-      <div className="flex flex-col justify-center items-start space-y-8 w-full">
+      <div className="flex flex-col justify-center items-start space-y-8 w-full relative" style={{ zIndex: 1 }}>
         {/* Badge */}
         <div className="inline-flex items-center gap-2 rounded-full pl-1 pr-4 py-1 border border-[#E2E7F1]">
           <div className="rounded-full p-1 border border-[#E2E7F1]">
@@ -74,10 +84,7 @@ export function Hero() {
       </div>
 
       {/* Right Content (Placeholder) */}
-      <div className="relative hidden lg:block h-full min-h-[400px]">
-        {/* Background gradient blob to simulate the glow in the original image */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-[#2869D6]/40 via-[#2869D6]/20 to-transparent rounded-full blur-3xl -z-10 opacity-70 pointer-events-none"></div>
-
+      <div className="relative hidden lg:block h-full min-h-[400px]" style={{ zIndex: 1 }}>
         {/* Empty placeholder as requested */}
         <div className="w-full h-full rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/50 flex items-center justify-center">
           <p className="text-[#1C1C1E] font-medium text-sm">Visual Mockup Placeholder</p>
