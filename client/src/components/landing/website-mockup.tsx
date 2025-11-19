@@ -1,5 +1,15 @@
 import { ArrowRight, Phone, Star } from "lucide-react";
 
+const videoUrls = [
+  'https://res.cloudinary.com/dopp0v9eq/video/upload/v1763591100/video1_uuhrry.mp4',
+  'https://res.cloudinary.com/dopp0v9eq/video/upload/v1763591114/video2_dwyo61.mp4',
+  'https://res.cloudinary.com/dopp0v9eq/video/upload/v1763591337/video3_mdyjag.mp4',
+  'https://res.cloudinary.com/dopp0v9eq/video/upload/v1763591345/video4_pttj0v.mp4',
+  'https://res.cloudinary.com/dopp0v9eq/video/upload/v1763591323/video5_b98qhu.mp4',
+  'https://res.cloudinary.com/dopp0v9eq/video/upload/v1763591295/video6_yubp62.mp4',
+  'https://res.cloudinary.com/dopp0v9eq/video/upload/v1763591303/video7_vxjpxl.mp4'
+];
+
 export function WebsiteMockup() {
   return (
     <>
@@ -21,7 +31,7 @@ export function WebsiteMockup() {
           }
         }
       `}</style>
-    <div className="h-full rounded-2xl border-4 overflow-hidden flex flex-col px-6 ml-8"
+    <div className="h-full rounded-2xl border-4 overflow-hidden flex flex-col px-6 ml-24"
       style={{
         backgroundColor: '#F0F0F0',
         borderColor: '#FFFFFF',
@@ -116,22 +126,36 @@ export function WebsiteMockup() {
             <div 
               className="flex flex-col gap-1"
               style={{
-                animation: 'scrollUp 20s linear infinite'
+                animation: 'scrollUp 40s linear infinite'
               }}
             >
-              {[...Array(4)].map((_, i) => (
+              {[...Array(7)].map((_, i) => (
                 <div key={`up-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
-                  <div className="w-full h-full bg-gradient-to-br from-purple-600 via-blue-600 to-teal-600 flex items-center justify-center">
-                    <div className="text-white text-xs opacity-50">Video {i + 1}</div>
-                  </div>
+                  <video 
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                  >
+                    <source src={videoUrls[i]} type="video/mp4" />
+                  </video>
                 </div>
               ))}
               {/* Duplicate for seamless loop */}
-              {[...Array(4)].map((_, i) => (
+              {[...Array(7)].map((_, i) => (
                 <div key={`up-dup-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
-                  <div className="w-full h-full bg-gradient-to-br from-pink-600 via-red-600 to-orange-600 flex items-center justify-center">
-                    <div className="text-white text-xs opacity-50">Video {i + 5}</div>
-                  </div>
+                  <video 
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                  >
+                    <source src={videoUrls[i]} type="video/mp4" />
+                  </video>
                 </div>
               ))}
             </div>
@@ -142,22 +166,36 @@ export function WebsiteMockup() {
             <div 
               className="flex flex-col gap-1"
               style={{
-                animation: 'scrollDown 20s linear infinite'
+                animation: 'scrollDown 40s linear infinite'
               }}
             >
-              {[...Array(4)].map((_, i) => (
+              {[...Array(7)].map((_, i) => (
                 <div key={`down-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
-                  <div className="w-full h-full bg-gradient-to-br from-green-600 via-emerald-600 to-cyan-600 flex items-center justify-center">
-                    <div className="text-white text-xs opacity-50">Video {i + 1}</div>
-                  </div>
+                  <video 
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                  >
+                    <source src={videoUrls[6 - i]} type="video/mp4" />
+                  </video>
                 </div>
               ))}
               {/* Duplicate for seamless loop */}
-              {[...Array(4)].map((_, i) => (
+              {[...Array(7)].map((_, i) => (
                 <div key={`down-dup-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
-                  <div className="w-full h-full bg-gradient-to-br from-yellow-600 via-amber-600 to-orange-600 flex items-center justify-center">
-                    <div className="text-white text-xs opacity-50">Video {i + 5}</div>
-                  </div>
+                  <video 
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                  >
+                    <source src={videoUrls[6 - i]} type="video/mp4" />
+                  </video>
                 </div>
               ))}
             </div>
