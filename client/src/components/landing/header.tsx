@@ -4,7 +4,7 @@ import { SectionLayout } from "./section-layout";
 
 export function Header() {
   return (
-    <SectionLayout className="flex items-center justify-between px-[32px] h-24 relative z-50">
+    <SectionLayout className="flex items-center justify-between px-4 md:px-[32px] h-24 relative z-50">
       {/* Logo */}
       <Link href="/" className="flex items-center gap-2 cursor-pointer">
         <div className="text-lime-500">

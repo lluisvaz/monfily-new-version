@@ -76,7 +76,7 @@ const LogoCarousel = () => {
   return (
     <div 
       ref={carouselRef}
-      className="relative overflow-hidden w-full"
+      className="relative overflow-hidden w-full max-w-full"
       style={{
         maskImage: 'linear-gradient(to right, transparent 0%, white 12%, white 88%, transparent 100%)',
         WebkitMaskImage: 'linear-gradient(to right, transparent 0%, white 12%, white 88%, transparent 100%)'
@@ -105,23 +105,45 @@ const LogoCarousel = () => {
 
 export function TrustedBy() {
   return (
-    <SectionLayout className="flex flex-col md:flex-row items-stretch">
-      {/* Left Side: Text Label */}
-      <div className="w-full md:w-[260px] p-[24px] md:p-[32px] border-b md:border-b-0 border-[#E2E7F1] flex items-center justify-center md:justify-start">
-        <p className="text-slate-500 font-medium text-sm max-w-[150px] md:max-w-[200px]">
-          Estamos em grandes projetos como:
-        </p>
-      </div>
-
-      {/* Custom Divider for Desktop */}
-      <BoneDivider />
-
-      {/* Right Side: Logo Carousel */}
-      <div className="flex-1 p-[24px] md:p-[32px] flex items-center justify-center overflow-hidden">
-        <div className="w-full max-w-full">
-          <LogoCarousel />
+    <>
+      {/* Mobile Section */}
+      <SectionLayout className="flex flex-col md:hidden px-6 py-[24px]">
+        <div className="flex flex-col w-full">
+          {/* Text Label */}
+          <div className="mb-6 flex items-center justify-center">
+            <p className="text-slate-500 font-medium text-sm text-center">
+              Estamos em grandes projetos como:
+            </p>
+          </div>
+          
+          {/* Logo Carousel */}
+          <div className="flex items-center justify-center overflow-hidden">
+            <div className="w-full max-w-full">
+              <LogoCarousel />
+            </div>
+          </div>
         </div>
-      </div>
-    </SectionLayout>
+      </SectionLayout>
+
+      {/* Desktop Section */}
+      <SectionLayout className="hidden md:flex flex-col md:flex-row items-stretch">
+        {/* Left Side: Text Label */}
+        <div className="w-full md:w-[220px] p-[24px] md:p-[32px] border-b md:border-b-0 border-[#E2E7F1] flex items-center justify-center md:justify-start">
+          <p className="text-slate-500 font-medium text-sm max-w-[150px] md:max-w-[200px]">
+            Estamos em grandes projetos como:
+          </p>
+        </div>
+
+        {/* Custom Divider for Desktop */}
+        <BoneDivider />
+
+        {/* Right Side: Logo Carousel */}
+        <div className="flex-1 p-[24px] md:p-[32px] flex items-center justify-center overflow-hidden">
+          <div className="w-full max-w-full">
+            <LogoCarousel />
+          </div>
+        </div>
+      </SectionLayout>
+    </>
   );
 }

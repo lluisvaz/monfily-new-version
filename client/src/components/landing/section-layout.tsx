@@ -30,21 +30,24 @@ export function SectionLayout({
   const noStripeClass = "bg-white";
 
   return (
-    <div className={`w-full flex flex-row border-b border-[#E2E7F1] relative ${containerClassName}`}>
-      {/* Left Decor */}
-      <div className={`flex-1 min-w-[1rem] md:min-w-[2rem] ${showStripes ? stripeClass : noStripeClass}`}></div>
+    <div className={`w-full flex flex-row relative ${containerClassName}`}>
+      {/* Top border line - very thin */}
+      <div className="absolute top-0 left-0 right-0 h-[0.5px] bg-[#E2E7F1] z-10"></div>
+      
+      {/* Left Decor - Hidden on mobile */}
+      <div className={`hidden md:block flex-1 min-w-0 md:min-w-[2rem] ${showStripes ? stripeClass : noStripeClass}`}></div>
 
       {/* Main Content */}
-      <div className={`relative w-full max-w-[1500px] mx-auto bg-white border-x border-[#E2E7F1] ${className}`}>
+      <div className={`relative w-full min-w-0 max-w-[1500px] mx-auto bg-white md:border-l-[0.5px] md:border-r-[0.5px] md:border-[#E2E7F1] ${className}`}>
         {children}
         
         {/* Grid Decorations at Bottom Corners - Centered on the intersection */}
-        <GridDecoration className="-bottom-[12px] -left-[12px]" />
-        <GridDecoration className="-bottom-[12px] -right-[12px]" />
+        <GridDecoration className="flex -bottom-[12px] -left-[12px]" />
+        <GridDecoration className="flex -bottom-[12px] -right-[12px]" />
       </div>
 
-      {/* Right Decor */}
-      <div className={`flex-1 min-w-[1rem] md:min-w-[2rem] ${showStripes ? stripeClass : noStripeClass}`}></div>
+      {/* Right Decor - Hidden on mobile */}
+      <div className={`hidden md:block flex-1 min-w-0 md:min-w-[2rem] ${showStripes ? stripeClass : noStripeClass}`}></div>
     </div>
   );
 }
