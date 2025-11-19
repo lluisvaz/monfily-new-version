@@ -1,6 +1,7 @@
 import { ArrowRight, Zap, Shield } from "lucide-react";
 import { SectionLayout } from "./section-layout";
 import ShinyText from "@/components/ui/shiny-text";
+import { WebsiteMockup } from "./website-mockup";
 
 export function Hero() {
   return (
@@ -83,12 +84,9 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Right Content (Placeholder) */}
+      {/* Right Content (Website Mockup) */}
       <div className="relative hidden lg:block h-full min-h-[400px]" style={{ zIndex: 1 }}>
-        {/* Empty placeholder as requested */}
-        <div className="w-full h-full rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/50 flex items-center justify-center">
-          <p className="text-[#1C1C1E] font-medium text-sm">Visual Mockup Placeholder</p>
-        </div>
+        <WebsiteMockup />
       </div>
     </SectionLayout>
   );
