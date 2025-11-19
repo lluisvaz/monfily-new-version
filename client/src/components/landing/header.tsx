@@ -19,10 +19,10 @@ export function Header() {
     <SectionLayout className="flex items-center justify-between px-4 md:px-[32px] h-24 relative z-50 min-w-0">
       {/* Logo */}
       <Link href="/" className="flex items-center gap-2 cursor-pointer flex-shrink-0">
-        <div className="text-lime-500">
-          <DashboardIcon size={24} className="text-lime-500" />
+        <div className="text-[#2869D6]">
+          <DashboardIcon size={24} className="text-[#2869D6]" />
         </div>
-        <span className="text-xl font-bold text-slate-800 tracking-tight">Pay</span>
+        <span className="text-xl font-bold text-[#1C1C1E] tracking-tight">Pay</span>
       </Link>
 
       {/* Desktop Navigation */}
@@ -33,7 +33,7 @@ export function Header() {
             <a
               key={item}
               href="#"
-              className="text-slate-600 hover:text-slate-900 font-medium text-[16px] py-[6px] px-[16px] transition-colors hover:bg-slate-50 rounded-lg whitespace-nowrap"
+              className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-[6px] px-[16px] transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap"
             >
               {item}
             </a>
@@ -45,11 +45,11 @@ export function Header() {
         <div className="flex items-center gap-2 flex-shrink-0">
           <a
             href="#"
-            className="text-slate-600 hover:text-slate-900 font-medium text-[16px] py-[6px] px-[16px] transition-colors hover:bg-slate-50 rounded-lg whitespace-nowrap"
+            className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-[6px] px-[16px] transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap"
           >
             Login
           </a>
-          <button className="bg-lime-400 hover:bg-lime-500 text-slate-900 font-bold text-[16px] py-[6px] px-[16px] rounded-full transition-colors cursor-pointer shadow-sm hover:shadow-md whitespace-nowrap">
+          <button className="bg-[#2869D6] hover:bg-[#1E4A8C] text-white font-bold text-[16px] py-[6px] px-[16px] rounded-full transition-colors cursor-pointer whitespace-nowrap">
             Cadastre-se
           </button>
         </div>
@@ -57,13 +57,13 @@ export function Header() {
 
       {/* Mobile/Tablet Menu */}
       <div className="flex lg:hidden items-center gap-2 flex-shrink-0">
-        <button className="bg-lime-400 hover:bg-lime-500 text-slate-900 font-bold text-sm py-2 px-3 sm:px-4 rounded-full transition-colors cursor-pointer shadow-sm hover:shadow-md whitespace-nowrap">
+        <button className="bg-[#2869D6] hover:bg-[#1E4A8C] text-white font-bold text-sm py-2 px-3 sm:px-4 rounded-full transition-colors cursor-pointer whitespace-nowrap">
           Cadastre-se
         </button>
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
-            <button className="p-2 text-slate-600 hover:text-slate-900 transition-colors flex-shrink-0">
-              <DashboardIcon size={24} className="text-slate-600" />
+            <button className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0">
+              <DashboardIcon size={24} className="text-[#1C1C1E]" />
             </button>
           </SheetTrigger>
           <SheetContent side="right" className="w-[300px]">
@@ -76,7 +76,7 @@ export function Header() {
                   key={item}
                   href="#"
                   onClick={() => setIsOpen(false)}
-                  className="text-slate-600 hover:text-slate-900 font-medium text-base py-2 px-4 transition-colors hover:bg-slate-50 rounded-lg"
+                  className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-2 px-4 transition-colors hover:bg-slate-50 rounded-full"
                 >
                   {item}
                 </a>
@@ -85,7 +85,7 @@ export function Header() {
               <a
                 href="#"
                 onClick={() => setIsOpen(false)}
-                className="text-slate-600 hover:text-slate-900 font-medium text-base py-2 px-4 transition-colors hover:bg-slate-50 rounded-lg"
+                className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-2 px-4 transition-colors hover:bg-slate-50 rounded-full"
               >
                 Login
               </a>

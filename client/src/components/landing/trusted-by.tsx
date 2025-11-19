@@ -111,8 +111,8 @@ export function TrustedBy() {
         <div className="flex flex-col w-full">
           {/* Text Label */}
           <div className="mb-6 flex items-center justify-center">
-            <p className="text-slate-500 font-medium text-sm text-center">
-              Estamos em grandes projetos como:
+            <p className="text-[#1C1C1E] font-medium text-sm text-center">
+              Utilizamos as melhores tecnologias:
             </p>
           </div>
           
@@ -129,8 +129,8 @@ export function TrustedBy() {
       <SectionLayout className="hidden md:flex flex-col md:flex-row items-stretch">
         {/* Left Side: Text Label */}
         <div className="w-full md:w-[220px] p-[24px] md:p-[32px] border-b md:border-b-0 border-[#E2E7F1] flex items-center justify-center md:justify-start">
-          <p className="text-slate-500 font-medium text-sm max-w-[150px] md:max-w-[200px]">
-            Estamos em grandes projetos como:
+          <p className="text-[#1C1C1E] font-medium text-sm max-w-[150px] md:max-w-[200px]">
+            Utilizamos as melhores tecnologias:
           </p>
         </div>
 
