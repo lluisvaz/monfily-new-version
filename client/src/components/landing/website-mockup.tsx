@@ -99,7 +99,7 @@ export function WebsiteMockup() {
 
           {/* Trust Indicators */}
           <div className="flex items-center gap-3">
-            <div className="flex -space-x-1">
+            <div className="flex -space-x-3">
               <div className="w-8 h-8 rounded-lg border-2 shadow-sm overflow-hidden" style={{ transform: 'rotate(-3deg)', borderColor: '#1E2939' }}>
                 <img 
                   src="https://framerusercontent.com/images/E3vzjdpFuSWiVeurdyPGMrSWk.png?scale-down-to=512&width=1200&height=992" 
