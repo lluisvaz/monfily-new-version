@@ -98,23 +98,40 @@ export function WebsiteMockup() {
           </div>
 
           {/* Trust Indicators */}
-          <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-3">
-              <div className="flex -space-x-2">
-                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-white"></div>
-                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-2 border-white"></div>
-                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 border-2 border-white"></div>
-                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 border-2 border-white"></div>
+          <div className="flex items-center gap-3">
+            <div className="flex -space-x-1">
+              <div className="w-8 h-8 rounded-lg border-2 shadow-sm overflow-hidden" style={{ transform: 'rotate(-3deg)', borderColor: '#1E2939' }}>
+                <img 
+                  src="https://framerusercontent.com/images/E3vzjdpFuSWiVeurdyPGMrSWk.png?scale-down-to=512&width=1200&height=992" 
+                  alt="Person 1" 
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <span className="text-sm font-semibold text-gray-700 leading-none">50+</span>
+              <div className="w-8 h-8 rounded-lg border-2 shadow-sm overflow-hidden" style={{ transform: 'rotate(2deg)', borderColor: '#1E2939' }}>
+                <img 
+                  src="https://framerusercontent.com/images/jC7KwluILkhO0KHxk6qWEttOxhE.png?scale-down-to=512&width=1200&height=1200" 
+                  alt="Person 2" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="w-8 h-8 rounded-lg border-2 shadow-sm overflow-hidden" style={{ transform: 'rotate(-2deg)', borderColor: '#1E2939' }}>
+                <img 
+                  src="https://framerusercontent.com/images/cFl24iPInxckRrL32eRgadp9ZJM.png?scale-down-to=512&width=1200&height=1200" 
+                  alt="Person 3" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="w-8 h-8 rounded-lg border-2 shadow-sm flex items-center justify-center overflow-hidden" style={{ transform: 'rotate(3deg)', borderColor: '#1E2939', backgroundColor: '#1E2939' }}>
+                <span className="text-white text-xs font-bold leading-none z-10">50+</span>
+              </div>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col gap-1">
               <div className="flex gap-0.5">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-red-500 text-red-500" />
+                  <Star key={i} className="w-3 h-3 fill-orange-500 text-orange-500" />
                 ))}
               </div>
-              <span className="text-sm text-gray-600 leading-none">Confiado Por Mais de 50 Empresas</span>
+              <span className="text-xs text-gray-600 leading-none">Confiado Por Mais de 50 Empresas</span>
             </div>
           </div>
         </div>
