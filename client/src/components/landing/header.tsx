@@ -19,10 +19,14 @@ export function Header() {
     <SectionLayout className="flex items-center justify-between px-4 md:px-[32px] h-24 relative z-50 min-w-0">
       {/* Logo */}
       <Link href="/" className="flex items-center gap-2 cursor-pointer flex-shrink-0">
-        <div className="text-[#2869D6]">
-          <DashboardIcon size={24} className="text-[#2869D6]" />
-        </div>
-        <span className="text-xl font-bold text-[#1C1C1E] tracking-tight">Pay</span>
+        <img 
+          src="https://res.cloudinary.com/dopp0v9eq/image/upload/v1763574787/monfily-black-nobg_risk6t.png" 
+          alt="Monfily" 
+          className="h-10 w-auto select-none"
+          draggable="false"
+          onContextMenu={(e) => e.preventDefault()}
+          onDragStart={(e) => e.preventDefault()}
+        />
       </Link>
 
       {/* Desktop Navigation */}
@@ -33,7 +37,7 @@ export function Header() {
             <a
               key={item}
               href="#"
-              className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-[6px] px-[16px] transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap"
+              className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap"
             >
               {item}
             </a>
@@ -45,11 +49,11 @@ export function Header() {
         <div className="flex items-center gap-2 flex-shrink-0">
           <a
             href="#"
-            className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-[6px] px-[16px] transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap"
+            className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap"
           >
             Login
           </a>
-          <button className="bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-[16px] py-[6px] px-[16px] rounded-full transition-colors cursor-pointer whitespace-nowrap">
+          <button className="bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-[16px] py-2 px-4 rounded-full transition-colors cursor-pointer whitespace-nowrap">
             Cadastre-se
           </button>
         </div>
@@ -57,13 +61,13 @@ export function Header() {
 
       {/* Mobile/Tablet Menu */}
       <div className="flex lg:hidden items-center gap-2 flex-shrink-0">
-        <button className="bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-[16px] py-2 px-3 sm:px-4 rounded-full transition-colors cursor-pointer whitespace-nowrap">
+        <button className="bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-[16px] py-2 px-4 rounded-full transition-colors cursor-pointer whitespace-nowrap">
           Cadastre-se
         </button>
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
             <button className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0">
-              <DashboardIcon size={24} className="text-[#1C1C1E]" />
+              <DashboardIcon size={28} className="text-[#1C1C1E]" />
             </button>
           </SheetTrigger>
           <SheetContent side="right" className="w-[300px]">
