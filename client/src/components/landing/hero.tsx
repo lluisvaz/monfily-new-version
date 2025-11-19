@@ -6,7 +6,7 @@ export function Hero() {
   return (
     <SectionLayout 
       showStripes={false}
-      className="grid grid-cols-1 lg:grid-cols-2 gap-12 px-6 md:px-12 py-20 min-h-[600px] items-center"
+      className="grid grid-cols-1 lg:grid-cols-2 gap-12 px-6 md:px-16 lg:px-28 py-20 min-h-[600px] items-center"
     >
       {/* Left Content */}
       <div className="flex flex-col justify-center items-start space-y-8 w-full">
