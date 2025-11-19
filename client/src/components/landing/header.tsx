@@ -49,7 +49,7 @@ export function Header() {
           >
             Login
           </a>
-          <button className="bg-[#2869D6] hover:bg-[#1E4A8C] text-white font-bold text-[16px] py-[6px] px-[16px] rounded-full transition-colors cursor-pointer whitespace-nowrap">
+          <button className="bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-[16px] py-[6px] px-[16px] rounded-full transition-colors cursor-pointer whitespace-nowrap">
             Cadastre-se
           </button>
         </div>
@@ -57,7 +57,7 @@ export function Header() {
 
       {/* Mobile/Tablet Menu */}
       <div className="flex lg:hidden items-center gap-2 flex-shrink-0">
-        <button className="bg-[#2869D6] hover:bg-[#1E4A8C] text-white font-bold text-sm py-2 px-3 sm:px-4 rounded-full transition-colors cursor-pointer whitespace-nowrap">
+        <button className="bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-[16px] py-2 px-3 sm:px-4 rounded-full transition-colors cursor-pointer whitespace-nowrap">
           Cadastre-se
         </button>
         <Sheet open={isOpen} onOpenChange={setIsOpen}>

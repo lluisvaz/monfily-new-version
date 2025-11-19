@@ -111,7 +111,7 @@ export function TrustedBy() {
         <div className="flex flex-col w-full">
           {/* Text Label */}
           <div className="mb-6 flex items-center justify-center">
-            <p className="text-[#1C1C1E] font-medium text-sm text-center">
+            <p className="text-[#1C1C1E] text-base text-center">
               Utilizamos as melhores tecnologias:
             </p>
           </div>
