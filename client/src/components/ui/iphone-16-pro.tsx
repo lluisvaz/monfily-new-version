@@ -1,4 +1,4 @@
-import { SVGProps, forwardRef, CSSProperties } from "react";
+import { SVGProps, forwardRef, CSSProperties, ReactNode } from "react";
 
 export interface Iphone16ProProps extends SVGProps<SVGSVGElement> {
     /** Frame width */
@@ -37,6 +37,8 @@ export interface Iphone16ProProps extends SVGProps<SVGSVGElement> {
     screenGradient?: string;
     /** Enable animation on hover */
     hoverAnimation?: boolean;
+    /** React content to render inside screen */
+    children?: ReactNode;
 }
 
 export const Iphone16Pro = forwardRef<SVGSVGElement, Iphone16ProProps>(
@@ -60,6 +62,7 @@ export const Iphone16Pro = forwardRef<SVGSVGElement, Iphone16ProProps>(
             showCamera = true,
             screenGradient,
             hoverAnimation = true,
+            children,
             ...props
         }: Iphone16ProProps,
         ref
@@ -84,7 +87,7 @@ export const Iphone16Pro = forwardRef<SVGSVGElement, Iphone16ProProps>(
                     y="1"
                     width={width - 2}
                     height={height - 2}
-                    rx={rounded ? 45 : 0}
+                    rx={rounded ? screenRadius : 0}
                     fill={frameColor}
                     stroke="rgb(229, 231, 235)"
                     strokeWidth="0.5"
@@ -96,7 +99,7 @@ export const Iphone16Pro = forwardRef<SVGSVGElement, Iphone16ProProps>(
                     y="12"
                     width={width - 24}
                     height={height - 24}
-                    rx={rounded ? 45 : 0}
+                    rx={rounded ? screenRadius : 0}
                     fill="rgb(245, 245, 245)"
                     stroke="rgba(212, 212, 212, 0.4)"
                     strokeWidth="0.5"
@@ -161,15 +164,32 @@ export const Iphone16Pro = forwardRef<SVGSVGElement, Iphone16ProProps>(
                     </foreignObject>
                 )}
 
+                {children && !src && !videoSrc && (
+                    <foreignObject
+                        x="13"
+                        y="13"
+                        width={width - 26}
+                        height={height - 26}
+                        clipPath="url(#screen)"
+                    >
+                        <div 
+                            className={`w-full h-full overflow-hidden ${contentClassName}`}
+                            style={{ borderRadius: `${screenRadius}px`, ...contentStyle }}
+                        >
+                            {children}
+                        </div>
+                    </foreignObject>
+                )}
+
                 {/* Dynamic island */}
                 {showIsland && (
                     <rect
                         x={width / 2 - islandWidth / 2}
-                        y="20"
+                        y="8"
                         width={islandWidth}
                         height={islandHeight}
-                        rx={20}
-                        fill="rgb(229, 231, 235)"
+                        rx={5}
+                        fill="rgb(255, 255, 255)"
                     />
                 )}
 

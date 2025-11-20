@@ -2,6 +2,7 @@ import { ArrowRight, Zap, Shield } from "lucide-react";
 import { SectionLayout } from "./section-layout";
 import ShinyText from "@/components/ui/shiny-text";
 import { WebsiteMockup } from "./website-mockup";
+import { WebsiteMockupMobile } from "./website-mockup-mobile";
 import { Iphone16Pro } from "@/components/ui/iphone-16-pro";
 
 export function Hero() {
@@ -96,12 +97,15 @@ export function Hero() {
             height={420}
             showIsland={true}
             islandWidth={90}
-            islandHeight={30}
+            islandHeight={20}
             showCamera={false}
             shadow={true}
             rounded={true}
             screenRadius={15}
-          />
+            hoverAnimation={false}
+          >
+            <WebsiteMockupMobile />
+          </Iphone16Pro>
         </div>
       </div>
     </SectionLayout>

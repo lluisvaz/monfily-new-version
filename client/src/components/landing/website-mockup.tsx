@@ -52,11 +52,11 @@ export function WebsiteMockup() {
         
         {/* Navigation */}
         <nav className="hidden sm:flex items-center gap-4 ml-auto">
-          <a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors leading-none">Serviços</a>
-          <a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors leading-none">Benefícios</a>
-          <a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors leading-none">Projetos</a>
-          <a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors leading-none">Preços</a>
-          <a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors leading-none">Clientes</a>
+          <a href="#" className="text-sm text-gray-600 leading-none">Serviços</a>
+          <a href="#" className="text-sm text-gray-600 leading-none">Benefícios</a>
+          <a href="#" className="text-sm text-gray-600 leading-none">Projetos</a>
+          <a href="#" className="text-sm text-gray-600 leading-none">Preços</a>
+          <a href="#" className="text-sm text-gray-600 leading-none">Clientes</a>
         </nav>
       </header>
       <div className="border-b border-gray-300" style={{ marginLeft: '-3.5rem', marginRight: '-3.5rem', width: 'calc(100% + 7rem)' }}></div>
@@ -83,13 +83,13 @@ export function WebsiteMockup() {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-start gap-2 mb-7">
-            <button className="bg-orange-500 hover:bg-orange-600 text-white text-sm px-3 py-2 rounded-3xl flex items-center gap-2 transition-colors">
+            <button className="bg-orange-500 text-white text-sm px-3 py-2 rounded-3xl flex items-center gap-2">
               <span className="leading-none">Ver Preços</span>
               <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#1E2939' }}>
                 <ArrowRight className="w-3 h-3 text-orange-500" />
               </div>
             </button>
-            <button className="text-white text-sm px-3 py-2 rounded-3xl flex items-center gap-2 transition-colors" style={{ backgroundColor: '#1E2939' }}>
+            <button className="text-white text-sm px-3 py-2 rounded-3xl flex items-center gap-2" style={{ backgroundColor: '#1E2939' }}>
               <span className="leading-none">Agendar Agora</span>
               <div className="w-6 h-6 rounded-full bg-orange-500 flex items-center justify-center">
                 <Phone className="w-3 h-3 text-white" />
@@ -150,7 +150,6 @@ export function WebsiteMockup() {
                 <div key={`up-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
                   <video 
                     className="w-full h-full object-cover"
-                    autoPlay
                     loop
                     muted
                     playsInline
@@ -165,7 +164,6 @@ export function WebsiteMockup() {
                 <div key={`up-dup-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
                   <video 
                     className="w-full h-full object-cover"
-                    autoPlay
                     loop
                     muted
                     playsInline
@@ -190,7 +188,6 @@ export function WebsiteMockup() {
                 <div key={`down-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
                   <video 
                     className="w-full h-full object-cover"
-                    autoPlay
                     loop
                     muted
                     playsInline
@@ -205,7 +202,6 @@ export function WebsiteMockup() {
                 <div key={`down-dup-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
                   <video 
                     className="w-full h-full object-cover"
-                    autoPlay
                     loop
                     muted
                     playsInline
