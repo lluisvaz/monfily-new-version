@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { useState } from "react";
 import { SectionLayout } from "./section-layout";
-import { DashboardIcon } from "@/components/ui/dashboard-icon";
+import { MenuIcon } from "@/components/ui/menu-icon";
 import {
   Sheet,
   SheetContent,
@@ -61,13 +61,10 @@ export function Header() {
 
       {/* Mobile/Tablet Menu */}
       <div className="flex lg:hidden items-center gap-2 flex-shrink-0">
-        <button className="bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-[16px] py-2 px-4 rounded-full transition-colors cursor-pointer whitespace-nowrap">
-          Cadastre-se
-        </button>
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
             <button className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0">
-              <DashboardIcon size={28} className="text-[#1C1C1E]" />
+              <MenuIcon size={32} className="text-[#1C1C1E]" />
             </button>
           </SheetTrigger>
           <SheetContent side="right" className="w-[300px]">
