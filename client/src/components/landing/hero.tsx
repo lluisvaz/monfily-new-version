@@ -21,8 +21,19 @@ export function Hero() {
         ></div>
         <div className="absolute bottom-6 right-6 w-3 h-3 bg-[#2869D6] rounded-full"></div>
       </div>
+
+      {/* Gradient Effect - Mobile Only (Bottom Center) */}
+      <div className="lg:hidden absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-3/4 pointer-events-none" style={{ zIndex: 0 }}>
+        <div 
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-full"
+          style={{
+            background: 'radial-gradient(ellipse 120% 100% at bottom center, #2869D6 0%, #2869D6 20%, rgba(40, 105, 214, 0.9) 30%, rgba(40, 105, 214, 0.7) 40%, rgba(40, 105, 214, 0.5) 48%, rgba(40, 105, 214, 0.3) 55%, rgba(40, 105, 214, 0.15) 62%, rgba(255, 255, 255, 0.8) 70%, white 80%, white 100%)'
+          }}
+        ></div>
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#2869D6] rounded-full"></div>
+      </div>
       {/* Left Content */}
-      <div className="flex flex-col justify-center items-start space-y-8 w-full relative" style={{ zIndex: 1 }}>
+      <div className="flex flex-col justify-center items-start space-y-8 w-full relative lg:pb-0 pb-[280px]" style={{ zIndex: 1 }}>
         {/* Badge */}
         <div className="inline-flex items-center gap-2 rounded-full pl-1 pr-4 py-1 border border-[#E2E7F1]">
           <div className="rounded-full p-1 border border-[#E2E7F1]">
@@ -106,6 +117,33 @@ export function Hero() {
           >
             <WebsiteMockupMobile />
           </Iphone16Pro>
+        </div>
+      </div>
+
+      {/* Mobile Mockups - Visible only on mobile, positioned at bottom */}
+      <div className="lg:hidden absolute bottom-0 left-0 right-0 w-screen flex justify-center items-end overflow-hidden pointer-events-none" style={{ zIndex: 1, left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw' }}>
+        <div className="relative" style={{ transform: 'scale(0.55)', transformOrigin: 'bottom center', pointerEvents: 'auto' }}>
+          {/* Website Mockup - Scaled down */}
+          <div className="relative" style={{ width: '145%', transform: 'scaleX(1)' }}>
+            <WebsiteMockup />
+          </div>
+          {/* iPhone Mockup - Overlay (maintaining desktop position relative to WebsiteMockup) */}
+          <div className="absolute bottom-0" style={{ left: '40px', transform: 'translateX(-50%)', zIndex: 50, filter: 'drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15))' }}>
+            <Iphone16Pro 
+              width={220}
+              height={420}
+              showIsland={true}
+              islandWidth={90}
+              islandHeight={20}
+              showCamera={false}
+              shadow={true}
+              rounded={true}
+              screenRadius={15}
+              hoverAnimation={false}
+            >
+              <WebsiteMockupMobile />
+            </Iphone16Pro>
+          </div>
         </div>
       </div>
     </SectionLayout>
