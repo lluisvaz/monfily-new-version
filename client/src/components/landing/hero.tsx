@@ -1,7 +1,7 @@
 import { ArrowRight, Zap, Shield } from "lucide-react";
-import React, { useState, useEffect, useRef } from "react";
 import { SectionLayout } from "./section-layout";
 import ShinyText from "@/components/ui/shiny-text";
+import TextType from "@/components/ui/text-type";
 import { WebsiteMockup } from "./website-mockup";
 import { WebsiteMockupMobile } from "./website-mockup-mobile";
 import { Iphone16Pro } from "@/components/ui/iphone-16-pro";
@@ -13,71 +13,6 @@ const rotatingTexts = [
   "Advocacia & Consultoria",
   "Serviços & Startups"
 ];
-
-function RotatingText() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
-  const [width, setWidth] = useState<number | null>(null);
-  const measureRef = useRef<HTMLSpanElement>(null);
-  const displayRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsVisible(false);
-      setTimeout(() => {
-        const nextIndex = (currentIndex + 1) % rotatingTexts.length;
-        // Medir a largura do novo texto antes de mostrar
-        if (measureRef.current) {
-          measureRef.current.textContent = rotatingTexts[nextIndex];
-          setWidth(measureRef.current.offsetWidth);
-        }
-        setCurrentIndex(nextIndex);
-        setIsVisible(true);
-      }, 300); // Meio da transição de fade
-    }, 2000); // Muda a cada 2 segundos
-
-    return () => clearInterval(interval);
-  }, [currentIndex]);
-
-  // Medir largura inicial
-  useEffect(() => {
-    if (measureRef.current && !width) {
-      measureRef.current.textContent = rotatingTexts[currentIndex];
-      setWidth(measureRef.current.offsetWidth);
-    }
-  }, [currentIndex, width]);
-
-  return (
-    <>
-      {/* Span invisível para medir largura */}
-      <span
-        ref={measureRef}
-        className="font-bold absolute opacity-0 pointer-events-none whitespace-nowrap"
-        style={{ visibility: 'hidden', position: 'absolute' }}
-        aria-hidden="true"
-      />
-      <span 
-        className="font-bold inline-block relative"
-        style={{
-          width: width ? `${width}px` : 'auto',
-          transition: 'width 0.5s ease-in-out',
-          verticalAlign: 'baseline'
-        }}
-      >
-        <span
-          ref={displayRef}
-          className="inline-block whitespace-nowrap"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transition: 'opacity 0.3s ease-in-out'
-          }}
-        >
-          {rotatingTexts[currentIndex]}
-        </span>
-      </span>
-    </>
-  );
-}
 
 export function Hero() {
   return (
@@ -131,7 +66,16 @@ export function Hero() {
             </div>
           </div>
           <span className="text-xs font-semibold text-[#1C1C1E]">
-            <span className="hidden lg:inline">Escolhido por </span>+100 Clientes em <RotatingText />
+            <span className="hidden lg:inline">Escolhido por </span>+100 Clientes em{' '}
+            <TextType
+              text={rotatingTexts}
+              typingSpeed={75}
+              pauseDuration={1500}
+              showCursor={true}
+              cursorCharacter="|"
+              as="span"
+              className="font-bold"
+            />
           </span>
         </div>
 
