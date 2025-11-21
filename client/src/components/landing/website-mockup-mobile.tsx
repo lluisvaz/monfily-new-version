@@ -1,4 +1,4 @@
-import { ArrowRight, Phone, Star, Wifi } from "lucide-react";
+import { ArrowRight, Phone, Star, Wifi, Menu } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const imageUrls = [
@@ -50,9 +50,9 @@ export function WebsiteMockupMobile() {
           }
         }
       `}</style>
-    <div className="w-full h-full bg-white flex flex-col overflow-hidden" style={{ userSelect: 'none', pointerEvents: 'none', WebkitUserSelect: 'none', MozUserSelect: 'none', msUserSelect: 'none' }}>
+    <div className="w-full h-full bg-white flex flex-col overflow-hidden" style={{ userSelect: 'none', pointerEvents: 'none', WebkitUserSelect: 'none', MozUserSelect: 'none', msUserSelect: 'none', borderRadius: '40px' }}>
       {/* Status Bar */}
-      <div className="px-2 py-1 flex items-center justify-between" style={{ backgroundColor: '#F0F0F0' }}>
+      <div className="px-4 py-1 flex items-center justify-between" style={{ backgroundColor: '#F0F0F0', paddingLeft: '20px', paddingRight: '20px' }}>
         <span className="text-[9px] font-semibold text-gray-900 leading-none">
           {formatTime(currentTime)}
         </span>
@@ -61,6 +61,8 @@ export function WebsiteMockupMobile() {
           {/* Battery Icon */}
           <svg className="w-3 h-3 text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <rect x="2" y="7" width="16" height="10" rx="2" ry="2" />
+            {/* Battery fill - 50% */}
+            <rect x="4" y="9" width="7" height="6" rx="1" fill="#22c55e" stroke="none" />
             <line x1="18" y1="10" x2="20" y2="10" strokeLinecap="round" />
           </svg>
         </div>
@@ -75,6 +77,8 @@ export function WebsiteMockupMobile() {
           </div>
           <span className="text-[10px] font-bold text-gray-900 leading-none">FORMIX</span>
         </div>
+        {/* Hamburger Menu */}
+        <Menu className="w-3 h-3 text-gray-900" />
       </header>
 
       {/* Hero Section */}

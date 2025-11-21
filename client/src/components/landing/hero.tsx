@@ -9,7 +9,7 @@ export function Hero() {
   return (
     <SectionLayout 
       showStripes={false}
-      className="grid grid-cols-1 lg:grid-cols-2 gap-12 px-6 md:px-16 lg:px-28 py-20 min-h-[600px] items-center relative overflow-hidden"
+      className="grid grid-cols-1 lg:grid-cols-2 gap-12 px-6 md:px-16 lg:px-28 py-20 min-h-[600px] items-center relative overflow-x-hidden"
     >
       {/* Gradient Effect - Desktop Only */}
       <div className="hidden lg:block absolute bottom-0 right-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
@@ -126,7 +126,7 @@ export function Hero() {
             showCamera={false}
             shadow={true}
             rounded={true}
-            screenRadius={15}
+            screenRadius={40}
             hoverAnimation={false}
           >
             <WebsiteMockupMobile />
@@ -152,7 +152,7 @@ export function Hero() {
               showCamera={false}
               shadow={true}
               rounded={true}
-              screenRadius={15}
+              screenRadius={40}
               hoverAnimation={false}
             >
               <WebsiteMockupMobile />

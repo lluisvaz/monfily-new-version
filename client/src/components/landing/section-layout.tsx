@@ -39,15 +39,25 @@ export function SectionLayout({
 
       {/* Main Content */}
       <div className={`relative w-full min-w-0 max-w-[1500px] mx-auto bg-white ${className}`} id="section-main-content">
-        {/* Border wrapper with lower z-index */}
-        <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 10 }}>
-          {/* Left border line */}
-          <div className="absolute top-0 bottom-0 left-0 w-[0.5px] bg-[#E2E7F1]"></div>
-          {/* Right border line */}
-          <div className="absolute top-0 bottom-0 right-0 w-[0.5px] bg-[#E2E7F1]"></div>
-        </div>
+        {/* Left border line */}
+        <div className="absolute top-0 bottom-0 left-0 w-[0.5px] bg-[#E2E7F1] pointer-events-none" style={{ zIndex: 1000 }}></div>
         
         {children}
+      </div>
+      
+      {/* Right border line - positioned using same flex structure */}
+      <div className="absolute top-0 bottom-0 pointer-events-none" style={{ 
+        left: 0,
+        right: 0,
+        zIndex: 1000
+      }}>
+        <div className="flex flex-row w-full h-full">
+          <div className="flex-1 min-w-[1rem] md:min-w-[2rem]"></div>
+          <div className="relative w-full min-w-0 max-w-[1500px] mx-auto">
+            <div className="absolute top-0 bottom-0 right-0 w-[0.5px] bg-[#E2E7F1]"></div>
+          </div>
+          <div className="flex-1 min-w-[1rem] md:min-w-[2rem]"></div>
+        </div>
       </div>
 
       {/* Right Decor - Visible on all screen sizes */}
