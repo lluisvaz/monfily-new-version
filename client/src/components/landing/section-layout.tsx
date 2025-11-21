@@ -8,7 +8,7 @@ interface SectionLayoutProps {
 }
 
 const GridDecoration = ({ className }: { className?: string }) => (
-  <div className={`absolute w-6 h-6 z-20 flex items-center justify-center pointer-events-none ${className}`}>
+  <div className={`absolute w-6 h-6 flex items-center justify-center pointer-events-none ${className}`} style={{ zIndex: 9999 }}>
     {/* White background to mask the lines crossing behind it for a cleaner look */}
     <div className="absolute w-4 h-4 bg-white rounded-full" />
     
@@ -38,16 +38,33 @@ export function SectionLayout({
       <div className={`flex-1 min-w-[1rem] md:min-w-[2rem] ${showStripes ? stripeClass : noStripeClass}`}></div>
 
       {/* Main Content */}
-      <div className={`relative w-full min-w-0 max-w-[1500px] mx-auto bg-white border-l-[0.5px] border-r-[0.5px] border-[#E2E7F1] ${className}`}>
-        {children}
+      <div className={`relative w-full min-w-0 max-w-[1500px] mx-auto bg-white ${className}`} id="section-main-content">
+        {/* Border wrapper with lower z-index */}
+        <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 10 }}>
+          {/* Left border line */}
+          <div className="absolute top-0 bottom-0 left-0 w-[0.5px] bg-[#E2E7F1]"></div>
+          {/* Right border line */}
+          <div className="absolute top-0 bottom-0 right-0 w-[0.5px] bg-[#E2E7F1]"></div>
+        </div>
         
-        {/* Grid Decorations at Bottom Corners - Centered on the intersection */}
-        <GridDecoration className="flex -bottom-[12px] -left-[12px]" />
-        <GridDecoration className="flex -bottom-[12px] -right-[12px]" />
+        {children}
       </div>
 
       {/* Right Decor - Visible on all screen sizes */}
       <div className={`flex-1 min-w-[1rem] md:min-w-[2rem] ${showStripes ? stripeClass : noStripeClass}`}></div>
+      
+      {/* Grid Decorations at Bottom Corners - Positioned at the highest level to appear above everything */}
+      {/* Using the same flex structure to align with main content */}
+      <div className="absolute left-0 right-0 pointer-events-none" style={{ bottom: 0, zIndex: 99999 }}>
+        <div className="flex flex-row w-full">
+          <div className="flex-1 min-w-[1rem] md:min-w-[2rem]"></div>
+          <div className="relative w-full min-w-0 max-w-[1500px] mx-auto">
+            <GridDecoration className="flex -bottom-[12px] -left-[12px]" />
+            <GridDecoration className="flex -bottom-[12px] -right-[12px]" />
+          </div>
+          <div className="flex-1 min-w-[1rem] md:min-w-[2rem]"></div>
+        </div>
+      </div>
     </div>
   );
 }

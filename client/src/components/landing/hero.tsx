@@ -38,10 +38,22 @@ export function Hero() {
         <div className="inline-flex items-center gap-2 rounded-full pl-1 pr-4 py-1 border border-[#E2E7F1]">
           <div className="rounded-full p-1 border border-[#E2E7F1]">
             <div className="flex -space-x-2 overflow-hidden">
-              {/* Avatars placeholder */}
-              <div className="inline-block h-5 w-5 rounded-full ring-2 ring-white bg-[#2869D6]/30" />
-              <div className="inline-block h-5 w-5 rounded-full ring-2 ring-white bg-orange-200" />
-              <div className="inline-block h-5 w-5 rounded-full ring-2 ring-white bg-blue-200" />
+              {/* Avatars */}
+              <img 
+                src="https://framerusercontent.com/images/E3vzjdpFuSWiVeurdyPGMrSWk.png?scale-down-to=512&width=1200&height=992" 
+                alt="Founder 1" 
+                className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover"
+              />
+              <img 
+                src="https://framerusercontent.com/images/jC7KwluILkhO0KHxk6qWEttOxhE.png?scale-down-to=512&width=1200&height=1200" 
+                alt="Founder 2" 
+                className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover"
+              />
+              <img 
+                src="https://framerusercontent.com/images/cFl24iPInxckRrL32eRgadp9ZJM.png?scale-down-to=512&width=1200&height=1200" 
+                alt="Founder 3" 
+                className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover"
+              />
             </div>
           </div>
           <span className="text-xs font-semibold text-[#1C1C1E]">
@@ -100,9 +112,11 @@ export function Hero() {
       {/* Right Content (Website Mockup) */}
       <div className="relative hidden lg:block h-full min-h-[400px]" style={{ zIndex: 1 }}>
         {/* Website Mockup */}
-        <WebsiteMockup />
+        <div style={{ userSelect: 'none', pointerEvents: 'none' }}>
+          <WebsiteMockup />
+        </div>
         {/* iPhone Mockup - Overlay */}
-        <div className="website-mockup-iphone absolute bottom-0" style={{ left: '40px', transform: 'translateX(-50%)', zIndex: 50, filter: 'drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15))' }}>
+        <div className="website-mockup-iphone absolute bottom-0" style={{ left: '40px', transform: 'translateX(-50%)', zIndex: 50, filter: 'drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15))', userSelect: 'none', pointerEvents: 'none' }}>
           <Iphone16Pro 
             width={220}
             height={420}
@@ -122,7 +136,7 @@ export function Hero() {
 
       {/* Mobile Mockups - Visible only on mobile, positioned at bottom */}
       <div className="lg:hidden absolute bottom-0 left-0 right-0 w-screen flex justify-center items-end overflow-hidden pointer-events-none" style={{ zIndex: 1, left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw' }}>
-        <div className="relative" style={{ transform: 'scale(0.55)', transformOrigin: 'bottom center', pointerEvents: 'auto' }}>
+        <div className="relative" style={{ transform: 'scale(0.55)', transformOrigin: 'bottom center', pointerEvents: 'none', userSelect: 'none' }}>
           {/* Website Mockup - Scaled down */}
           <div className="relative" style={{ width: '145%', transform: 'scaleX(1)' }}>
             <WebsiteMockup />

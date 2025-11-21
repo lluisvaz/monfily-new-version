@@ -1,13 +1,13 @@
 import { ArrowRight, Phone, Star } from "lucide-react";
 
-const videoUrls = [
-  'https://res.cloudinary.com/dopp0v9eq/video/upload/v1763591100/video1_uuhrry.mp4',
-  'https://res.cloudinary.com/dopp0v9eq/video/upload/v1763591114/video2_dwyo61.mp4',
-  'https://res.cloudinary.com/dopp0v9eq/video/upload/v1763591337/video3_mdyjag.mp4',
-  'https://res.cloudinary.com/dopp0v9eq/video/upload/v1763591345/video4_pttj0v.mp4',
-  'https://res.cloudinary.com/dopp0v9eq/video/upload/v1763591323/video5_b98qhu.mp4',
-  'https://res.cloudinary.com/dopp0v9eq/video/upload/v1763591295/video6_yubp62.mp4',
-  'https://res.cloudinary.com/dopp0v9eq/video/upload/v1763591303/video7_vxjpxl.mp4'
+const imageUrls = [
+  'https://res.cloudinary.com/dopp0v9eq/image/upload/v1763726833/imagem1_gokahh.jpg',
+  'https://res.cloudinary.com/dopp0v9eq/image/upload/v1763726833/imagem2_c6lkic.jpg',
+  'https://res.cloudinary.com/dopp0v9eq/image/upload/v1763726833/imagem3_s0n4gs.jpg',
+  'https://res.cloudinary.com/dopp0v9eq/image/upload/v1763726834/imagem4_ayub82.jpg',
+  'https://res.cloudinary.com/dopp0v9eq/image/upload/v1763726834/imagem5_manctr.jpg',
+  'https://res.cloudinary.com/dopp0v9eq/image/upload/v1763726833/imagem6_wdflq9.jpg',
+  'https://res.cloudinary.com/dopp0v9eq/image/upload/v1763726834/imagem7_n4u7u6.jpg'
 ];
 
 export function WebsiteMockup() {
@@ -37,7 +37,12 @@ export function WebsiteMockup() {
         borderColor: '#FFFFFF',
         boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
         width: '120%',
-        maxWidth: '120%'
+        maxWidth: '120%',
+        userSelect: 'none',
+        pointerEvents: 'none',
+        WebkitUserSelect: 'none',
+        MozUserSelect: 'none',
+        msUserSelect: 'none'
       }}
     >
       {/* Header */}
@@ -52,11 +57,11 @@ export function WebsiteMockup() {
         
         {/* Navigation */}
         <nav className="hidden sm:flex items-center gap-4 ml-auto">
-          <a href="#" className="text-sm text-gray-600 leading-none">Serviços</a>
-          <a href="#" className="text-sm text-gray-600 leading-none">Benefícios</a>
-          <a href="#" className="text-sm text-gray-600 leading-none">Projetos</a>
-          <a href="#" className="text-sm text-gray-600 leading-none">Preços</a>
-          <a href="#" className="text-sm text-gray-600 leading-none">Clientes</a>
+          <span className="text-sm text-gray-600 leading-none">Serviços</span>
+          <span className="text-sm text-gray-600 leading-none">Benefícios</span>
+          <span className="text-sm text-gray-600 leading-none">Projetos</span>
+          <span className="text-sm text-gray-600 leading-none">Preços</span>
+          <span className="text-sm text-gray-600 leading-none">Clientes</span>
         </nav>
       </header>
       <div className="border-b border-gray-300" style={{ marginLeft: '-3.5rem', marginRight: '-3.5rem', width: 'calc(100% + 7rem)' }}></div>
@@ -83,18 +88,18 @@ export function WebsiteMockup() {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-start gap-2 mb-7">
-            <button className="bg-orange-500 text-white text-sm px-3 py-2 rounded-3xl flex items-center gap-2">
+            <div className="bg-orange-500 text-white text-sm px-3 py-2 rounded-3xl flex items-center gap-2">
               <span className="leading-none">Ver Preços</span>
               <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#1E2939' }}>
                 <ArrowRight className="w-3 h-3 text-orange-500" />
               </div>
-            </button>
-            <button className="text-white text-sm px-3 py-2 rounded-3xl flex items-center gap-2" style={{ backgroundColor: '#1E2939' }}>
+            </div>
+            <div className="text-white text-sm px-3 py-2 rounded-3xl flex items-center gap-2" style={{ backgroundColor: '#1E2939' }}>
               <span className="leading-none">Agendar Agora</span>
               <div className="w-6 h-6 rounded-full bg-orange-500 flex items-center justify-center">
                 <Phone className="w-3 h-3 text-white" />
               </div>
-            </button>
+            </div>
           </div>
 
           {/* Trust Indicators */}
@@ -136,7 +141,7 @@ export function WebsiteMockup() {
           </div>
         </div>
 
-        {/* Right Content - Video Carousels */}
+        {/* Right Content - Image Carousels */}
         <div className="absolute right-8 top-0 bottom-0 flex gap-1.5 overflow-hidden" style={{ width: '240px' }}>
           {/* Carousel going up */}
           <div className="flex-1 flex flex-col gap-1 overflow-hidden h-full">
@@ -148,29 +153,23 @@ export function WebsiteMockup() {
             >
               {[...Array(7)].map((_, i) => (
                 <div key={`up-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
-                  <video 
+                  <img 
+                    src={imageUrls[i]} 
+                    alt={`Image ${i + 1}`}
                     className="w-full h-full object-cover"
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
-                  >
-                    <source src={videoUrls[i]} type="video/mp4" />
-                  </video>
+                    style={{ pointerEvents: 'none', userSelect: 'none' }}
+                  />
                 </div>
               ))}
               {/* Duplicate for seamless loop */}
               {[...Array(7)].map((_, i) => (
                 <div key={`up-dup-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
-                  <video 
+                  <img 
+                    src={imageUrls[i]} 
+                    alt={`Image ${i + 1}`}
                     className="w-full h-full object-cover"
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
-                  >
-                    <source src={videoUrls[i]} type="video/mp4" />
-                  </video>
+                    style={{ pointerEvents: 'none', userSelect: 'none' }}
+                  />
                 </div>
               ))}
             </div>
@@ -186,29 +185,23 @@ export function WebsiteMockup() {
             >
               {[...Array(7)].map((_, i) => (
                 <div key={`down-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
-                  <video 
+                  <img 
+                    src={imageUrls[6 - i]} 
+                    alt={`Image ${7 - i}`}
                     className="w-full h-full object-cover"
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
-                  >
-                    <source src={videoUrls[6 - i]} type="video/mp4" />
-                  </video>
+                    style={{ pointerEvents: 'none', userSelect: 'none' }}
+                  />
                 </div>
               ))}
               {/* Duplicate for seamless loop */}
               {[...Array(7)].map((_, i) => (
                 <div key={`down-dup-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
-                  <video 
+                  <img 
+                    src={imageUrls[6 - i]} 
+                    alt={`Image ${7 - i}`}
                     className="w-full h-full object-cover"
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
-                  >
-                    <source src={videoUrls[6 - i]} type="video/mp4" />
-                  </video>
+                    style={{ pointerEvents: 'none', userSelect: 'none' }}
+                  />
                 </div>
               ))}
             </div>
