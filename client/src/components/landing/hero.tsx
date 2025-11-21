@@ -1,9 +1,83 @@
 import { ArrowRight, Zap, Shield } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
 import { SectionLayout } from "./section-layout";
 import ShinyText from "@/components/ui/shiny-text";
 import { WebsiteMockup } from "./website-mockup";
 import { WebsiteMockupMobile } from "./website-mockup-mobile";
 import { Iphone16Pro } from "@/components/ui/iphone-16-pro";
+
+const rotatingTexts = [
+  "Varejo & E-commerce",
+  "Saúde & Clínicas",
+  "Imobiliária & Construção",
+  "Advocacia & Consultoria",
+  "Serviços & Startups"
+];
+
+function RotatingText() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+  const [width, setWidth] = useState<number | null>(null);
+  const measureRef = useRef<HTMLSpanElement>(null);
+  const displayRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsVisible(false);
+      setTimeout(() => {
+        const nextIndex = (currentIndex + 1) % rotatingTexts.length;
+        // Medir a largura do novo texto antes de mostrar
+        if (measureRef.current) {
+          measureRef.current.textContent = rotatingTexts[nextIndex];
+          setWidth(measureRef.current.offsetWidth);
+        }
+        setCurrentIndex(nextIndex);
+        setIsVisible(true);
+      }, 300); // Meio da transição de fade
+    }, 2000); // Muda a cada 2 segundos
+
+    return () => clearInterval(interval);
+  }, [currentIndex]);
+
+  // Medir largura inicial
+  useEffect(() => {
+    if (measureRef.current && !width) {
+      measureRef.current.textContent = rotatingTexts[currentIndex];
+      setWidth(measureRef.current.offsetWidth);
+    }
+  }, [currentIndex, width]);
+
+  return (
+    <>
+      {/* Span invisível para medir largura */}
+      <span
+        ref={measureRef}
+        className="font-bold absolute opacity-0 pointer-events-none whitespace-nowrap"
+        style={{ visibility: 'hidden', position: 'absolute' }}
+        aria-hidden="true"
+      />
+      <span 
+        className="font-bold inline-block relative"
+        style={{
+          width: width ? `${width}px` : 'auto',
+          transition: 'width 0.5s ease-in-out',
+          verticalAlign: 'baseline'
+        }}
+      >
+        <span
+          ref={displayRef}
+          className="inline-block whitespace-nowrap"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transition: 'opacity 0.3s ease-in-out'
+          }}
+        >
+          {rotatingTexts[currentIndex]}
+        </span>
+      </span>
+    </>
+  );
+}
 
 export function Hero() {
   return (
@@ -57,31 +131,31 @@ export function Hero() {
             </div>
           </div>
           <span className="text-xs font-semibold text-[#1C1C1E]">
-            Escolhido por +6000 founders
+            <span className="hidden lg:inline">Escolhido por </span>+100 Clientes em <RotatingText />
           </span>
         </div>
 
         {/* Heading */}
         <h1 className="text-[48px] md:text-7xl font-bold leading-none tracking-tight text-[#1C1C1E]">
-          Receba fácil. <br />
-          <span className="text-[#1C1C1E]">Cresça </span>
-          <ShinyText text="rápido." speed={1.5} className="text-[#1C1C1E]" />
+          Código Puro. <br />
+          <span className="text-[#1C1C1E]">Resultados </span>
+          <ShinyText text="Reais." speed={1.5} className="text-[#1C1C1E]" />
         </h1>
 
         {/* Description */}
-        <p className="text-base md:text-lg text-[#1C1C1E] max-w-md leading-none">
-          Infraestrutura de pagamentos em poucas linhas. Feito para devs, vibe-coders e AI Agents.
+        <p className="text-base md:text-lg text-[#1C1C1E] max-w-md leading-relaxed">
+          A infraestrutura digital completa para o seu negócio. Unimos design de <strong>Criação de Sites</strong> de alta performance, engenharia de <strong>Software</strong>, <strong>Inteligência Artificial</strong> (<strong>IA</strong>) e <strong>SEO</strong> técnico para gerar receita e eficiência.
         </p>
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center gap-6 pt-2 w-full">
           <button className="group bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto">
-            Integre ao seu negócio
+            Iniciar Meu Projeto
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </button>
 
           <a href="#" className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium transition-colors w-full sm:w-auto text-center sm:text-left">
-            Por que usar?
+            Por que nós?
           </a>
         </div>
 
@@ -92,8 +166,8 @@ export function Hero() {
               <Zap className="w-4 h-4 fill-current" />
             </div>
             <div>
-              <h3 className="font-bold text-[#1C1C1E] text-sm">Rápido</h3>
-              <p className="text-[#1C1C1E] text-xs mt-1">Integre em minutos, não dias.</p>
+              <h3 className="font-bold text-[#1C1C1E] text-sm">Performance</h3>
+              <p className="text-[#1C1C1E] text-xs mt-1">Sites rápidos que convertem.</p>
             </div>
           </div>
 
@@ -102,8 +176,8 @@ export function Hero() {
               <Shield className="w-4 h-4 fill-current" />
             </div>
             <div>
-              <h3 className="font-bold text-[#1C1C1E] text-sm">Seguro</h3>
-              <p className="text-[#1C1C1E] text-xs mt-1">Criptografia de ponta.</p>
+              <h3 className="font-bold text-[#1C1C1E] text-sm">Otimizado</h3>
+              <p className="text-[#1C1C1E] text-xs mt-1">Estrutura preparada para SEO.</p>
             </div>
           </div>
         </div>

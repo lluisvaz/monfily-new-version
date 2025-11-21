@@ -155,7 +155,7 @@ export function WebsiteMockup() {
                 <div key={`up-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
                   <img 
                     src={imageUrls[i]} 
-                    alt={`Image ${i + 1}`}
+                    alt="Mockup de desenvolvimento de website responsivo e software personalizado para desktop e mobile"
                     className="w-full h-full object-cover"
                     style={{ pointerEvents: 'none', userSelect: 'none' }}
                   />
@@ -166,7 +166,7 @@ export function WebsiteMockup() {
                 <div key={`up-dup-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
                   <img 
                     src={imageUrls[i]} 
-                    alt={`Image ${i + 1}`}
+                    alt="Mockup de desenvolvimento de website responsivo e software personalizado para desktop e mobile"
                     className="w-full h-full object-cover"
                     style={{ pointerEvents: 'none', userSelect: 'none' }}
                   />
@@ -187,7 +187,7 @@ export function WebsiteMockup() {
                 <div key={`down-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
                   <img 
                     src={imageUrls[6 - i]} 
-                    alt={`Image ${7 - i}`}
+                    alt="Mockup de desenvolvimento de website responsivo e software personalizado para desktop e mobile"
                     className="w-full h-full object-cover"
                     style={{ pointerEvents: 'none', userSelect: 'none' }}
                   />
@@ -198,7 +198,7 @@ export function WebsiteMockup() {
                 <div key={`down-dup-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
                   <img 
                     src={imageUrls[6 - i]} 
-                    alt={`Image ${7 - i}`}
+                    alt="Mockup de desenvolvimento de website responsivo e software personalizado para desktop e mobile"
                     className="w-full h-full object-cover"
                     style={{ pointerEvents: 'none', userSelect: 'none' }}
                   />
