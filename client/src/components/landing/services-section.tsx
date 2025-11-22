@@ -87,7 +87,7 @@ export function ServicesSection() {
       {/* Desktop Section */}
       <SectionLayout showStripes={false} className="hidden md:flex flex-col">
         {/* Header Section */}
-        <div className="flex flex-row items-start justify-between px-[64px] py-[100px] border-b border-[#E2E7F1] relative" style={{ borderWidth: '0.5px' }}>
+        <div className="flex flex-row items-start justify-between px-6 md:px-16 lg:px-28 py-[100px] border-b border-[#E2E7F1] relative" style={{ borderWidth: '0.5px' }}>
           {/* Background PixelBlast */}
           <div style={{ position: 'absolute', top: 0, bottom: 0, right: 0, left: '40%', pointerEvents: 'none', zIndex: 0, opacity: 0.3 }}>
             <PixelBlast
