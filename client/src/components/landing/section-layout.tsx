@@ -8,7 +8,7 @@ interface SectionLayoutProps {
 }
 
 const GridDecoration = ({ className }: { className?: string }) => (
-  <div className={`absolute w-6 h-6 flex items-center justify-center pointer-events-none ${className}`} style={{ zIndex: 9999 }}>
+  <div className={`absolute w-6 h-6 flex items-center justify-center pointer-events-none ${className}`} style={{ zIndex: 'var(--section-grid-z, 9999)' }}>
     {/* White background to mask the lines crossing behind it for a cleaner look */}
     <div className="absolute w-4 h-4 bg-white rounded-full" />
     
@@ -32,7 +32,7 @@ export function SectionLayout({
   return (
     <div className={`w-full flex flex-row relative ${containerClassName}`}>
       {/* Top border line - very thin */}
-      <div className="absolute top-0 left-0 right-0 h-[0.5px] bg-[#E2E7F1] z-10"></div>
+      <div className="absolute top-0 left-0 right-0 h-[0.5px] bg-[#E2E7F1]" style={{ zIndex: 10 }}></div>
       
       {/* Left Decor - Visible on all screen sizes */}
       <div className={`flex-1 min-w-[1rem] md:min-w-[2rem] ${showStripes ? stripeClass : noStripeClass}`}></div>
@@ -40,7 +40,7 @@ export function SectionLayout({
       {/* Main Content */}
       <div className={`relative w-full min-w-0 max-w-[1500px] mx-auto bg-white ${className}`} id="section-main-content">
         {/* Left border line */}
-        <div className="absolute top-0 bottom-0 left-0 w-[0.5px] bg-[#E2E7F1] pointer-events-none" style={{ zIndex: 1000 }}></div>
+        <div className="absolute top-0 bottom-0 left-0 w-[0.5px] bg-[#E2E7F1] pointer-events-none" style={{ zIndex: 'var(--section-border-z, 1000)' }}></div>
         
         {children}
       </div>
@@ -49,7 +49,7 @@ export function SectionLayout({
       <div className="absolute top-0 bottom-0 pointer-events-none" style={{ 
         left: 0,
         right: 0,
-        zIndex: 1000
+        zIndex: 'var(--section-border-z, 1000)'
       }}>
         <div className="flex flex-row w-full h-full">
           <div className="flex-1 min-w-[1rem] md:min-w-[2rem]"></div>
@@ -65,7 +65,7 @@ export function SectionLayout({
       
       {/* Grid Decorations at Bottom Corners - Positioned at the highest level to appear above everything */}
       {/* Using the same flex structure to align with main content */}
-      <div className="absolute left-0 right-0 pointer-events-none" style={{ bottom: 0, zIndex: 99999 }}>
+      <div className="absolute left-0 right-0 pointer-events-none" style={{ bottom: 0, zIndex: 'var(--section-grid-z, 99999)' }}>
         <div className="flex flex-row w-full">
           <div className="flex-1 min-w-[1rem] md:min-w-[2rem]"></div>
           <div className="relative w-full min-w-0 max-w-[1500px] mx-auto">
