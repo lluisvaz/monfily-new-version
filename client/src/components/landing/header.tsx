@@ -296,13 +296,6 @@ export function Header() {
 
             {/* Navigation Links */}
             <nav className="flex flex-col px-6 py-4">
-              <a
-                href="#"
-                onClick={() => setIsOpen(false)}
-                className="nav-item text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors"
-              >
-                Home
-              </a>
               
               {navItemsWithDropdown.map((item, index) => (
                 <Collapsible key={item} className="nav-item">
