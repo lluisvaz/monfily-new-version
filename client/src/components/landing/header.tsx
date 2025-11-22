@@ -122,7 +122,7 @@ export function Header() {
                 <span className="font-medium">Português (Brasil)</span>
               </DropdownMenuItem>
               <DropdownMenuItem className="cursor-pointer">
-                <span className="text-[#1C1C1E]/70 hover:text-[#1C1C1E]">English (United States)</span>
+                <span className="text-[#1C1C1E]/70 hover:text-[#1C1C1E]">Inglês (Estados Unidos)</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -387,7 +387,7 @@ export function Header() {
                         animation: 'fadeInSubmenuItem 0.3s ease-out 0.1s both'
                       }}
                     >
-                      English (United States)
+                      Inglês (Estados Unidos)
                     </a>
                   </div>
                 </CollapsibleContent>
