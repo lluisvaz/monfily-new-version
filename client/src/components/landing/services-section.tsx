@@ -24,60 +24,42 @@ const services = [
   }
 ];
 
-const DottedGrid = () => (
-  <div 
-    className="absolute inset-0"
-    style={{
-      backgroundImage: `radial-gradient(circle, #E2E7F1 1px, transparent 1px)`,
-      backgroundSize: '16px 16px',
-      backgroundPosition: '0 0',
-      opacity: 0.5
-    }}
-  />
-);
-
 export function ServicesSection() {
   return (
     <>
       {/* Mobile Section */}
-      <SectionLayout className="flex flex-col md:hidden px-6 py-8">
+      <SectionLayout showStripes={false} className="flex flex-col md:hidden px-6 py-8">
         <div className="flex flex-col w-full gap-8">
           {/* Header */}
           <div className="flex flex-col gap-6">
-            <h2 className="text-3xl font-bold text-[#1C1C1E] leading-tight">
+            <h2 className="text-3xl font-bold text-[#1C1C1E] leading-none">
               Soluções validadas em dezenas de mercados.
             </h2>
             
             {/* Metrics */}
             <div className="flex flex-col gap-4">
-              <div className="relative">
-                <DottedGrid />
-                <div className="relative z-10">
-                  <div className="text-4xl font-bold text-[#1C1C1E]">
-                    <span className="text-[#4ADE80]">+</span> 100
-                  </div>
-                  <div className="text-sm text-[#6B7280] mt-1">
-                    Projetos entregues
-                  </div>
+              <div>
+                <div className="text-5xl font-bold text-[#1C1C1E]">
+                  <span className="text-[#2869D6]">+</span> 50
+                </div>
+                <div className="text-base text-[#6B7280] mt-1">
+                  Projetos entregues
                 </div>
               </div>
               
-              <div className="relative">
-                <DottedGrid />
-                <div className="relative z-10">
-                  <div className="text-4xl font-bold text-[#1C1C1E]">
-                    <span className="text-[#4ADE80]">+</span> 50
-                  </div>
-                  <div className="text-sm text-[#6B7280] mt-1">
-                    Nichos atendidos
-                  </div>
+              <div>
+                <div className="text-5xl font-bold text-[#1C1C1E]">
+                  <span className="text-[#2869D6]">+</span> 10
+                </div>
+                <div className="text-base text-[#6B7280] mt-1">
+                  Nichos atendidos
                 </div>
               </div>
             </div>
           </div>
 
           {/* Divider */}
-          <div className="border-t border-dashed border-[#E2E7F1] my-4"></div>
+          <div className="border-t border-[#E2E7F1] my-4" style={{ borderWidth: '0.5px' }}></div>
 
           {/* Services Grid */}
           <div className="grid grid-cols-1 gap-8">
@@ -85,9 +67,6 @@ export function ServicesSection() {
               const Icon = service.icon;
               return (
                 <div key={index} className="flex gap-4 relative">
-                  {/* Left Green Bar */}
-                  <div className="w-1 bg-[#4ADE80] flex-shrink-0"></div>
-                  
                   <div className="flex-1 flex flex-col gap-3">
                     <Icon className="w-5 h-5 text-[#1C1C1E]" />
                     <h3 className="text-lg font-bold text-[#1C1C1E]">
@@ -105,53 +84,48 @@ export function ServicesSection() {
       </SectionLayout>
 
       {/* Desktop Section */}
-      <SectionLayout className="hidden md:flex flex-col">
+      <SectionLayout showStripes={false} className="hidden md:flex flex-col">
         {/* Header Section */}
-        <div className="flex flex-row items-start px-8 md:px-16 lg:px-28 py-12 border-b border-dashed border-[#E2E7F1]">
+        <div className="flex flex-row items-start justify-between px-[64px] py-[100px] border-b border-[#E2E7F1]" style={{ borderWidth: '0.5px' }}>
           {/* Left: Title */}
-          <div className="flex-1 pr-8">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#1C1C1E] leading-tight">
+          <div className="max-w-[50%] pr-8">
+            <h2 className="text-4xl md:text-5xl font-bold text-[#1C1C1E] leading-none">
               Soluções validadas em dezenas de mercados.
             </h2>
           </div>
 
           {/* Right: Metrics */}
-          <div className="flex gap-8 md:gap-12">
-            <div className="relative min-w-[140px] py-4">
-              <DottedGrid />
-              <div className="relative z-10">
-                <div className="text-5xl md:text-6xl font-bold text-[#1C1C1E]">
-                  <span className="text-[#4ADE80]">+</span> 100
-                </div>
-                <div className="text-sm text-[#6B7280] mt-2">
-                  Projetos entregues
-                </div>
+          <div className="flex gap-8 md:gap-12 flex-shrink-0">
+            <div className="min-w-[140px] py-4">
+              <div className="text-6xl md:text-7xl font-bold text-[#1C1C1E]">
+                <span className="text-[#2869D6]">+</span> 50
+              </div>
+              <div className="text-base md:text-lg text-[#6B7280] mt-2">
+                Projetos entregues
               </div>
             </div>
             
-            <div className="relative min-w-[140px] py-4">
-              <DottedGrid />
-              <div className="relative z-10">
-                <div className="text-5xl md:text-6xl font-bold text-[#1C1C1E]">
-                  <span className="text-[#4ADE80]">+</span> 50
-                </div>
-                <div className="text-sm text-[#6B7280] mt-2">
-                  Nichos atendidos
-                </div>
+            <div className="min-w-[140px] py-4">
+              <div className="text-6xl md:text-7xl font-bold text-[#1C1C1E]">
+                <span className="text-[#2869D6]">+</span> 10
+              </div>
+              <div className="text-base md:text-lg text-[#6B7280] mt-2">
+                Nichos atendidos
               </div>
             </div>
           </div>
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-4 divide-x divide-dashed divide-[#E2E7F1]">
+        <div className="grid grid-cols-4">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
-              <div key={index} className="flex flex-col px-6 md:px-8 py-8 relative">
-                {/* Left Green Bar */}
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#4ADE80]"></div>
-                
+              <div 
+                key={index} 
+                className={`flex flex-col px-6 md:px-8 py-8 relative ${index > 0 ? 'border-l border-dashed border-[#E2E7F1]' : ''}`}
+                style={index > 0 ? { borderLeftWidth: '0.5px' } : {}}
+              >
                 <div className="flex flex-col gap-4">
                   <Icon className="w-6 h-6 text-[#1C1C1E]" />
                   <h3 className="text-lg font-bold text-[#1C1C1E]">

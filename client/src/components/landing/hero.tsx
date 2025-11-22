@@ -87,7 +87,7 @@ export function Hero() {
         </h1>
 
         {/* Description */}
-        <p className="text-base md:text-lg text-[#1C1C1E] max-w-md leading-relaxed">
+        <p className="text-base md:text-lg text-[#1C1C1E] max-w-md leading-tight">
           A infraestrutura digital completa para o seu negócio. Unimos design de <strong>Criação de Sites</strong> de alta performance, engenharia de <strong>Software</strong>, <strong>Inteligência Artificial</strong> (<strong>IA</strong>) e <strong>SEO</strong> técnico para gerar receita e eficiência.
         </p>
 
