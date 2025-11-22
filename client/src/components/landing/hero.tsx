@@ -66,7 +66,7 @@ export function Hero() {
             </div>
           </div>
           <span className="text-xs font-semibold text-[#1C1C1E]">
-            <span className="hidden lg:inline">Escolhido por </span>+100 Clientes em{' '}
+            <span className="hidden lg:inline">Escolhido por </span>+50 Clientes em{' '}
             <TextType
               text={rotatingTexts}
               typingSpeed={75}
@@ -104,9 +104,9 @@ export function Hero() {
         </div>
 
         {/* Features */}
-        <div className="hidden md:grid grid-cols-2 gap-8 pt-8 w-full max-w-md">
+        <div className="hidden md:grid grid-cols-2 gap-8 pt-8 w-full max-w-lg">
           <div className="flex items-start gap-3">
-            <div className="bg-[#2869D6]/20 p-2 rounded-lg text-[#2869D6] mt-1">
+            <div className="bg-[#2869D6]/20 p-2 rounded-full w-10 h-10 flex items-center justify-center text-[#2869D6] mt-1">
               <Zap className="w-4 h-4 fill-current" />
             </div>
             <div>
@@ -116,7 +116,7 @@ export function Hero() {
           </div>
 
           <div className="flex items-start gap-3">
-            <div className="bg-[#2869D6]/20 p-2 rounded-lg text-[#2869D6] mt-1">
+            <div className="bg-[#2869D6]/20 p-2 rounded-full w-10 h-10 flex items-center justify-center text-[#2869D6] mt-1">
               <Shield className="w-4 h-4 fill-current" />
             </div>
             <div>
