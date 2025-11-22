@@ -1,5 +1,6 @@
 import { SectionLayout } from "./section-layout";
 import { Monitor, Code, Bot, TrendingUp } from "lucide-react";
+import PixelBlast from "@/components/ui/pixel-blast";
 
 const services = [
   {
@@ -86,16 +87,36 @@ export function ServicesSection() {
       {/* Desktop Section */}
       <SectionLayout showStripes={false} className="hidden md:flex flex-col">
         {/* Header Section */}
-        <div className="flex flex-row items-start justify-between px-[64px] py-[100px] border-b border-[#E2E7F1]" style={{ borderWidth: '0.5px' }}>
+        <div className="flex flex-row items-start justify-between px-[64px] py-[100px] border-b border-[#E2E7F1] relative" style={{ borderWidth: '0.5px' }}>
+          {/* Background PixelBlast */}
+          <div style={{ position: 'absolute', top: 0, bottom: 0, right: 0, left: '40%', pointerEvents: 'none', zIndex: 0, opacity: 0.3 }}>
+            <PixelBlast
+              variant="diamond"
+              pixelSize={4}
+              color="#1C1C1E"
+              patternScale={4.75}
+              patternDensity={0.55}
+              pixelSizeJitter={0}
+              enableRipples={false}
+              liquid
+              liquidStrength={0.12}
+              liquidRadius={1.2}
+              liquidWobbleSpeed={5}
+              speed={1.3}
+              edgeFade={0.5}
+              transparent
+            />
+          </div>
+          
           {/* Left: Title */}
-          <div className="max-w-[50%] pr-8">
+          <div className="max-w-[50%] pr-8 relative z-10">
             <h2 className="text-4xl md:text-5xl font-bold text-[#1C1C1E] leading-none">
               Soluções validadas em dezenas de mercados.
             </h2>
           </div>
 
           {/* Right: Metrics */}
-          <div className="flex gap-8 md:gap-12 flex-shrink-0">
+          <div className="flex gap-8 md:gap-12 flex-shrink-0 relative z-10">
             <div className="min-w-[140px] py-4">
               <div className="text-6xl md:text-7xl font-bold text-[#1C1C1E]">
                 <span className="text-[#2869D6]">+</span> 50
