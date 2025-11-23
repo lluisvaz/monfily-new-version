@@ -29,18 +29,37 @@ export function ServicesSection() {
   return (
     <>
       {/* Mobile Section */}
-      <SectionLayout showStripes={false} className="flex flex-col md:hidden px-6 py-8">
-        <div className="flex flex-col w-full gap-8">
+      <SectionLayout showStripes={false} className="flex flex-col md:hidden px-6">
+        <div className="flex flex-col w-full gap-8 py-8">
           {/* Header */}
-          <div className="flex flex-col gap-6">
-            <h2 className="text-3xl font-bold text-[#1C1C1E] leading-none">
+          <div className="flex flex-col gap-6 pt-8 pb-8 relative">
+            {/* Background PixelBlast */}
+            <div style={{ position: 'absolute', top: "35%", bottom: 0, right: 0, left: 0, pointerEvents: 'none', zIndex: 0, opacity: 0.2 }}>
+              <PixelBlast
+                variant="diamond"
+                pixelSize={4}
+                color="#1C1C1E"
+                patternScale={20}
+                patternDensity={1.8}
+                pixelSizeJitter={0}
+                enableRipples={false}
+                liquid
+                liquidStrength={0.12}
+                liquidRadius={1.2}
+                liquidWobbleSpeed={5}
+                speed={1.3}
+                edgeFade={0.5}
+                transparent
+              />
+            </div>
+            <h2 className="font-bold text-[#1C1C1E] leading-none relative z-10" style={{ fontSize: '36px' }}>
               Soluções validadas em dezenas de mercados.
             </h2>
             
             {/* Metrics */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 mt-8 relative z-10">
               <div>
-                <div className="text-5xl font-bold text-[#1C1C1E]">
+                <div className="font-bold text-[#1C1C1E]" style={{ fontSize: '32px' }}>
                   <span className="text-[#2869D6]">+</span> 50
                 </div>
                 <div className="text-base text-[#6B7280] mt-1">
@@ -49,7 +68,7 @@ export function ServicesSection() {
               </div>
               
               <div>
-                <div className="text-5xl font-bold text-[#1C1C1E]">
+                <div className="font-bold text-[#1C1C1E]" style={{ fontSize: '32px' }}>
                   <span className="text-[#2869D6]">+</span> 10
                 </div>
                 <div className="text-base text-[#6B7280] mt-1">
@@ -60,7 +79,7 @@ export function ServicesSection() {
           </div>
 
           {/* Divider */}
-          <div className="border-t border-[#E2E7F1] my-4" style={{ borderWidth: '0.5px' }}></div>
+          <div className="my-4 -mx-6" style={{ borderTop: '0.5px solid #E2E7F1' }}></div>
 
           {/* Services Grid */}
           <div className="grid grid-cols-1 gap-8">
@@ -87,15 +106,15 @@ export function ServicesSection() {
       {/* Desktop Section */}
       <SectionLayout showStripes={false} className="hidden md:flex flex-col">
         {/* Header Section */}
-        <div className="flex flex-row items-start justify-between px-6 md:px-16 lg:px-28 py-[100px] border-b border-[#E2E7F1] relative" style={{ borderWidth: '0.5px' }}>
+        <div className="flex flex-row items-center justify-between px-6 md:px-16 lg:px-28 py-[100px] border-b border-[#E2E7F1] relative" style={{ borderWidth: '0.5px' }}>
           {/* Background PixelBlast */}
-          <div style={{ position: 'absolute', top: 0, bottom: 0, right: 0, left: '40%', pointerEvents: 'none', zIndex: 0, opacity: 0.3 }}>
+          <div style={{ position: 'absolute', top: 0, bottom: 0, right: 0, left: '50%', pointerEvents: 'none', zIndex: 0, opacity: 0.2 }}>
             <PixelBlast
               variant="diamond"
               pixelSize={4}
               color="#1C1C1E"
-              patternScale={4.75}
-              patternDensity={0.55}
+              patternScale={20}
+              patternDensity={1.3}
               pixelSizeJitter={0}
               enableRipples={false}
               liquid
