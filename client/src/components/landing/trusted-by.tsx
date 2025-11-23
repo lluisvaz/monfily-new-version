@@ -6,7 +6,7 @@ const BoneDivider = () => (
     {/* Top Flare */}
     <svg
       viewBox="0 0 20 10"
-      className="absolute -top-[0px] left-1/2 -translate-x-1/2 w-5 h-[10px] fill-[#E2E7F1] pointer-events-none"
+      className="absolute -top-[0px] left-1/2 -translate-x-1/2 w-7 h-[14px] fill-[#E2E7F1] pointer-events-none"
       preserveAspectRatio="none"
     >
       <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
@@ -15,7 +15,7 @@ const BoneDivider = () => (
     {/* Bottom Flare */}
     <svg
       viewBox="0 0 20 10"
-      className="absolute -bottom-[0px] left-1/2 -translate-x-1/2 w-5 h-[10px] fill-[#E2E7F1] pointer-events-none rotate-180"
+      className="absolute -bottom-[0px] left-1/2 -translate-x-1/2 w-7 h-[14px] fill-[#E2E7F1] pointer-events-none rotate-180"
       preserveAspectRatio="none"
     >
       <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />

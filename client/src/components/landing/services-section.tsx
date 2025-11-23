@@ -2,6 +2,42 @@ import { SectionLayout } from "./section-layout";
 import { Monitor, Code, Bot, TrendingUp } from "lucide-react";
 import PixelBlast from "@/components/ui/pixel-blast";
 
+const HorizontalBoneDivider = () => (
+  <div className="relative my-4" style={{ marginLeft: '-24px', marginRight: '-24px' }}>
+    <div className="relative w-full" style={{ height: '1px' }}>
+      {/* Line that ends exactly at left:0 and right:0 (borders of section-main-content) */}
+      <div className="absolute left-0 right-0 bg-[#E2E7F1]" style={{ height: '0.5px', top: '50%', transform: 'translateY(-50%)' }}></div>
+      {/* Left Flare - positioned slightly inside to avoid overflow */}
+      <svg
+        viewBox="0 0 20 10"
+        className="absolute w-5 h-[10px] fill-[#E2E7F1] pointer-events-none"
+        preserveAspectRatio="none"
+        style={{ 
+          left: '4.5px',
+          top: '50%',
+          transform: 'translateY(-50%) translateX(-50%) rotate(-90deg)'
+        }}
+      >
+        <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
+      </svg>
+      
+      {/* Right Flare - positioned slightly inside to avoid overflow */}
+      <svg
+        viewBox="0 0 20 10"
+        className="absolute w-5 h-[10px] fill-[#E2E7F1] pointer-events-none"
+        preserveAspectRatio="none"
+        style={{ 
+          right: '4.5px',
+          top: '50%',
+          transform: 'translateY(-50%) translateX(50%) rotate(90deg)'
+        }}
+      >
+        <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
+      </svg>
+    </div>
+  </div>
+);
+
 const services = [
   {
     icon: Monitor,
@@ -29,8 +65,8 @@ export function ServicesSection() {
   return (
     <>
       {/* Mobile Section */}
-      <SectionLayout showStripes={false} className="flex flex-col md:hidden px-6">
-        <div className="flex flex-col w-full gap-8 py-8">
+      <SectionLayout showStripes={false} className="flex flex-col md:hidden px-6" containerClassName="overflow-visible">
+        <div className="flex flex-col w-full gap-8 py-8" style={{ overflow: 'visible' }}>
           {/* Header */}
           <div className="flex flex-col gap-6 pt-8 pb-8 relative">
             {/* Background PixelBlast */}
@@ -79,7 +115,7 @@ export function ServicesSection() {
           </div>
 
           {/* Divider */}
-          <div className="my-4 -mx-6" style={{ borderTop: '0.5px solid #E2E7F1' }}></div>
+          <HorizontalBoneDivider />
 
           {/* Services Grid */}
           <div className="grid grid-cols-1 gap-8">
@@ -154,6 +190,36 @@ export function ServicesSection() {
               </div>
             </div>
           </div>
+
+          {/* Left Flare - positioned at bottom border, left edge (compensating for padding, slightly inside) */}
+          <svg
+            viewBox="0 0 20 10"
+            className="absolute w-7 h-[14px] fill-[#E2E7F1] pointer-events-none"
+            preserveAspectRatio="none"
+            style={{ 
+              left: '5.5px',
+              bottom: 0,
+              transform: 'translateX(-50%) translateY(50%) rotate(-90deg)',
+              zIndex: 1001
+            }}
+          >
+            <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
+          </svg>
+          
+          {/* Right Flare - positioned at bottom border, right edge (compensating for padding, slightly inside) */}
+          <svg
+            viewBox="0 0 20 10"
+            className="absolute w-7 h-[14px] fill-[#E2E7F1] pointer-events-none"
+            preserveAspectRatio="none"
+            style={{ 
+              right: '5.5px',
+              bottom: 0,
+              transform: 'translateX(50%) translateY(50%) rotate(90deg)',
+              zIndex: 1001
+            }}
+          >
+            <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
+          </svg>
         </div>
 
         {/* Services Grid */}
