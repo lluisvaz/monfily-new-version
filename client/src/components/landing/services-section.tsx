@@ -7,13 +7,13 @@ const HorizontalBoneDivider = () => (
     <div className="relative w-full" style={{ height: '1px' }}>
       {/* Line that ends exactly at left:0 and right:0 (borders of section-main-content) */}
       <div className="absolute left-0 right-0 bg-[#E2E7F1]" style={{ height: '0.5px', top: '50%', transform: 'translateY(-50%)' }}></div>
-      {/* Left Flare - positioned slightly inside to avoid overflow */}
+      {/* Left Flare - positioned slightly inside to avoid overflow, same size as GridDecoration */}
       <svg
         viewBox="0 0 20 10"
-        className="absolute w-5 h-[10px] fill-[#E2E7F1] pointer-events-none"
+        className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none"
         preserveAspectRatio="none"
         style={{ 
-          left: '4.5px',
+          left: '6px',
           top: '50%',
           transform: 'translateY(-50%) translateX(-50%) rotate(-90deg)'
         }}
@@ -21,13 +21,13 @@ const HorizontalBoneDivider = () => (
         <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
       </svg>
       
-      {/* Right Flare - positioned slightly inside to avoid overflow */}
+      {/* Right Flare - positioned slightly inside to avoid overflow, same size as GridDecoration */}
       <svg
         viewBox="0 0 20 10"
-        className="absolute w-5 h-[10px] fill-[#E2E7F1] pointer-events-none"
+        className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none"
         preserveAspectRatio="none"
         style={{ 
-          right: '4.5px',
+          right: '5px',
           top: '50%',
           transform: 'translateY(-50%) translateX(50%) rotate(90deg)'
         }}
@@ -197,7 +197,7 @@ export function ServicesSection() {
             className="absolute w-7 h-[14px] fill-[#E2E7F1] pointer-events-none"
             preserveAspectRatio="none"
             style={{ 
-              left: '5.5px',
+              left: '6.5px',
               bottom: 0,
               transform: 'translateX(-50%) translateY(50%) rotate(-90deg)',
               zIndex: 1001
