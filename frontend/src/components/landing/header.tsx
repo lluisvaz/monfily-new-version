@@ -135,7 +135,7 @@ export function Header() {
             return (
               <a
                 key={item}
-                href="#"
+                href={item === t.header.nav.about ? "#servicos" : "#"}
                 className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap header-blur-animate"
                 style={{ animationDelay: `${0.2 + index * 0.05}s`, opacity: 0 }}
               >
@@ -420,16 +420,33 @@ export function Header() {
                 </Collapsible>
               ))}
               
-              {navItems.filter(item => !navItemsWithDropdown.includes(item)).map((item) => (
-                <a
-                  key={item}
-                  href="#"
-                  onClick={() => setIsOpen(false)}
-                  className="nav-item text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors"
-                >
-                  {item}
-                </a>
-              ))}
+              {navItems.filter(item => !navItemsWithDropdown.includes(item)).map((item) => {
+                const isAboutLink = item === t.header.nav.about;
+                return (
+                  <a
+                    key={item}
+                    href={isAboutLink ? "#servicos" : "#"}
+                    onClick={(e) => {
+                      if (isAboutLink) {
+                        e.preventDefault();
+                        setIsOpen(false);
+                        // Wait for menu to close, then scroll
+                        setTimeout(() => {
+                          const element = document.getElementById('servicos');
+                          if (element) {
+                            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          }
+                        }, 300);
+                      } else {
+                        setIsOpen(false);
+                      }
+                    }}
+                    className="nav-item text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors"
+                  >
+                    {item}
+                  </a>
+                );
+              })}
               
               {/* Separator */}
               <div className="h-px bg-[#E2E7F1] my-4 nav-item"></div>

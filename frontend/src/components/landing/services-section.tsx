@@ -112,7 +112,7 @@ export function ServicesSection() {
           animation: blurText 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
       `}</style>
-      <div ref={sectionRef}>
+      <div ref={sectionRef} id="servicos">
       {/* Mobile Section */}
       <SectionLayout showStripes={false} className="flex flex-col md:hidden px-6" containerClassName="overflow-visible">
         <div className="flex flex-col w-full gap-8 py-8" style={{ overflow: 'visible', position: 'relative' }}>
