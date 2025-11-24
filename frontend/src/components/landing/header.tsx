@@ -7,7 +7,10 @@ import {
   SheetContent,
   SheetTrigger,
   SheetClose,
+  SheetTitle,
+  SheetDescription,
 } from "@/components/ui/sheet";
+import * as VisuallyHiddenPrimitive from "@radix-ui/react-visually-hidden";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -168,6 +171,12 @@ export function Header() {
             side="right" 
             className="w-full sm:w-[400px] p-0 bg-white overflow-y-auto [&>button]:!hidden !z-[100000]"
           >
+            <VisuallyHiddenPrimitive.Root>
+              <SheetTitle>{t.header.nav.menu}</SheetTitle>
+              <SheetDescription>
+                {t.header.nav.menuDescription}
+              </SheetDescription>
+            </VisuallyHiddenPrimitive.Root>
             <style>{`
               @keyframes slideInRight {
                 from {

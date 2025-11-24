@@ -84,7 +84,23 @@ export function Hero() {
 
         {/* Description */}
         <p className="text-base md:text-lg text-[#1C1C1E] max-w-md leading-tight">
-          {t.hero.description}
+          {language === 'pt' ? (
+            <>
+              A infraestrutura digital completa para o seu negócio. Unimos design de{' '}
+              <strong>Criação de Sites de Alta Performance</strong>,{' '}
+              <strong>Engenharia de Software</strong>,{' '}
+              <strong>Inteligência Artificial (IA)</strong> e{' '}
+              <strong>SEO Técnico</strong> para gerar receita e eficiência.
+            </>
+          ) : (
+            <>
+              Complete digital infrastructure for your business. We combine high-performance{' '}
+              <strong>Website Creation</strong> design,{' '}
+              <strong>Software Engineering</strong>,{' '}
+              <strong>Artificial Intelligence (AI)</strong>, and{' '}
+              <strong>Technical SEO</strong> to generate revenue and efficiency.
+            </>
+          )}
         </p>
 
         {/* CTAs */}

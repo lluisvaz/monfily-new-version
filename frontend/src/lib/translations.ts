@@ -15,6 +15,8 @@ export interface Translations {
       methodology: string;
       support: string;
       insights: string;
+      menu: string;
+      menuDescription: string;
     };
     solutionsDropdown: {
       websiteCreation: string;
@@ -127,6 +129,8 @@ export const translations: Record<Language, Translations> = {
         methodology: 'Metodologia',
         support: 'Suporte',
         insights: 'Insights',
+        menu: 'Menu de Navegação',
+        menuDescription: 'Menu principal de navegação do site',
       },
       solutionsDropdown: {
         websiteCreation: 'Criação de Sites',
@@ -235,6 +239,8 @@ export const translations: Record<Language, Translations> = {
         methodology: 'Methodology',
         support: 'Support',
         insights: 'Insights',
+        menu: 'Navigation Menu',
+        menuDescription: 'Main site navigation menu',
       },
       solutionsDropdown: {
         websiteCreation: 'Website Creation',

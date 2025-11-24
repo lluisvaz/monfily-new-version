@@ -78,25 +78,62 @@ const LogoCarousel = () => {
   return (
     <div 
       ref={carouselRef}
-      className="relative overflow-hidden w-full max-w-full"
+      className="relative overflow-hidden w-full max-w-full select-none"
       style={{
         maskImage: 'linear-gradient(to right, transparent 0%, white 12%, white 88%, transparent 100%)',
-        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, white 12%, white 88%, transparent 100%)'
+        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, white 12%, white 88%, transparent 100%)',
+        userSelect: 'none',
+        WebkitUserSelect: 'none',
+        MozUserSelect: 'none',
+        msUserSelect: 'none'
       }}
+      onContextMenu={(e) => e.preventDefault()}
+      onDragStart={(e) => e.preventDefault()}
     >
       <div 
         ref={scrollRef}
-        className="flex items-center whitespace-nowrap"
-        style={{ transform: 'translateX(0px)', padding: '0 2rem' }}
+        className="flex items-center whitespace-nowrap select-none"
+        style={{ 
+          transform: 'translateX(0px)', 
+          padding: '0 2rem',
+          userSelect: 'none',
+          WebkitUserSelect: 'none',
+          MozUserSelect: 'none',
+          msUserSelect: 'none'
+        }}
+        onContextMenu={(e) => e.preventDefault()}
+        onDragStart={(e) => e.preventDefault()}
       >
         {logoUrls.map((url, index) => (
-          <div key={index} className="flex items-center justify-center px-6 flex-shrink-0">
+          <div 
+            key={index} 
+            className="flex items-center justify-center px-6 flex-shrink-0 select-none"
+            style={{
+              userSelect: 'none',
+              WebkitUserSelect: 'none',
+              MozUserSelect: 'none',
+              msUserSelect: 'none'
+            }}
+            onContextMenu={(e) => e.preventDefault()}
+            onDragStart={(e) => e.preventDefault()}
+          >
             <img
               src={url}
               alt={`Logo ${index + 1}`}
-              className="h-12 max-h-12 object-contain w-auto"
-              style={{ maxWidth: '120px', height: '48px' }}
+              className="h-12 max-h-12 object-contain w-auto select-none pointer-events-none"
+              style={{ 
+                maxWidth: '120px', 
+                height: '48px',
+                userSelect: 'none',
+                WebkitUserSelect: 'none',
+                MozUserSelect: 'none',
+                msUserSelect: 'none',
+                pointerEvents: 'none'
+              }}
               loading="lazy"
+              draggable="false"
+              onContextMenu={(e) => e.preventDefault()}
+              onDragStart={(e) => e.preventDefault()}
             />
           </div>
         ))}
