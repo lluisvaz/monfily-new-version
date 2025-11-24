@@ -1,4 +1,4 @@
-import { Link, useLocation } from "wouter";
+import { useLocation } from "wouter";
 import { useState, useEffect } from "react";
 import { SectionLayout } from "./section-layout";
 import { MenuIcon } from "@/components/ui/menu-icon";
@@ -79,8 +79,12 @@ export function Header() {
         }
       `}</style>
       {/* Logo */}
-      <Link 
-        href={`/${language}`} 
+      <a 
+        href={`/${language}`}
+        onClick={(e) => {
+          e.preventDefault();
+          window.location.href = `/${language}`;
+        }}
         className="flex items-center gap-2 cursor-pointer flex-shrink-0 header-blur-animate"
         style={{ animationDelay: '0.1s', opacity: 0 }}
       >
@@ -92,7 +96,7 @@ export function Header() {
           onContextMenu={(e) => e.preventDefault()}
           onDragStart={(e) => e.preventDefault()}
         />
-      </Link>
+      </a>
 
       {/* Desktop Navigation */}
       <div className="hidden lg:flex items-center gap-2 flex-shrink-0">
@@ -345,7 +349,15 @@ export function Header() {
             
             {/* Header do Menu */}
             <div className="flex items-center justify-between px-4 h-24 border-b border-[#E2E7F1]">
-              <Link href={`/${language}`} onClick={() => setIsOpen(false)} className="flex items-center gap-2 cursor-pointer flex-shrink-0">
+              <a 
+                href={`/${language}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsOpen(false);
+                  window.location.href = `/${language}`;
+                }}
+                className="flex items-center gap-2 cursor-pointer flex-shrink-0"
+              >
                 <img 
                   src="https://res.cloudinary.com/dopp0v9eq/image/upload/v1763574787/monfily-black-nobg_risk6t.png" 
                   alt="Monfily" 
@@ -354,7 +366,7 @@ export function Header() {
                   onContextMenu={(e) => e.preventDefault()}
                   onDragStart={(e) => e.preventDefault()}
                 />
-              </Link>
+              </a>
               <SheetClose asChild>
                 <button className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0">
                   <X className="h-8 w-8 text-[#1C1C1E]" />
@@ -426,6 +438,7 @@ export function Header() {
                   <a
                     key={item}
                     href={isAboutLink ? "#servicos" : "#"}
+                    data-custom-handler="true"
                     onClick={(e) => {
                       if (isAboutLink) {
                         e.preventDefault();
@@ -435,6 +448,10 @@ export function Header() {
                           const element = document.getElementById('servicos');
                           if (element) {
                             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            // Remove hash from URL after scroll
+                            if (window.history.replaceState) {
+                              window.history.replaceState(null, '', window.location.pathname + window.location.search);
+                            }
                           }
                         }, 300);
                       } else {
