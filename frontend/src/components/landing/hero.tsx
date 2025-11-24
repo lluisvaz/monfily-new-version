@@ -16,6 +16,21 @@ export function Hero() {
       showStripes={false}
       className="grid grid-cols-1 lg:grid-cols-2 gap-12 px-6 md:px-16 lg:px-28 py-20 min-h-[600px] items-center relative overflow-x-hidden"
     >
+      <style>{`
+        @keyframes blurText {
+          0% {
+            filter: blur(10px);
+            opacity: 0;
+          }
+          100% {
+            filter: blur(0px);
+            opacity: 1;
+          }
+        }
+        .hero-blur-animate {
+          animation: blurText 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+      `}</style>
       {/* Gradient Effect - Desktop Only */}
       <div className="hidden lg:block absolute bottom-0 right-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
         <div 
@@ -40,7 +55,10 @@ export function Hero() {
       {/* Left Content */}
       <div className="flex flex-col justify-center items-start space-y-8 w-full relative lg:pb-0 pb-[280px]" style={{ zIndex: 1 }}>
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 rounded-full pl-1 pr-4 py-1 border border-[#E2E7F1]">
+        <div 
+          className="inline-flex items-center gap-2 rounded-full pl-1 pr-4 py-1 border border-[#E2E7F1] hero-blur-animate"
+          style={{ animationDelay: '0.1s', opacity: 0 }}
+        >
           <div className="rounded-full p-1 border border-[#E2E7F1]">
             <div className="flex -space-x-2 overflow-hidden">
               {/* Avatars */}
@@ -76,14 +94,20 @@ export function Hero() {
         </div>
 
         {/* Heading */}
-        <h1 className="text-[48px] md:text-7xl font-bold leading-none tracking-tight text-[#1C1C1E]">
+        <h1 
+          className="text-[48px] md:text-7xl font-bold leading-none tracking-tight text-[#1C1C1E] hero-blur-animate"
+          style={{ animationDelay: '0.2s', opacity: 0 }}
+        >
           {t.hero.heading.line1} <br />
           <span className="text-[#1C1C1E]">{t.hero.heading.line2}</span>
           <ShinyText text={t.hero.heading.line3} speed={3} className="text-[#1C1C1E]" />
         </h1>
 
         {/* Description */}
-        <p className="text-base md:text-lg text-[#1C1C1E] max-w-md leading-tight">
+        <p 
+          className="text-base md:text-lg text-[#1C1C1E] max-w-md leading-tight hero-blur-animate"
+          style={{ animationDelay: '0.3s', opacity: 0 }}
+        >
           {language === 'pt' ? (
             <>
               A infraestrutura digital completa para o seu negócio. Unimos design de{' '}
@@ -104,7 +128,10 @@ export function Hero() {
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center gap-6 pt-2 w-full">
+        <div 
+          className="flex flex-col sm:flex-row items-center gap-6 pt-2 w-full hero-blur-animate"
+          style={{ animationDelay: '0.4s', opacity: 0 }}
+        >
           <button className="group bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto">
             {t.hero.cta.primary}
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -116,7 +143,10 @@ export function Hero() {
         </div>
 
         {/* Features */}
-        <div className="hidden md:grid grid-cols-2 gap-8 pt-8 w-full max-w-lg">
+        <div 
+          className="hidden md:grid grid-cols-2 gap-8 pt-8 w-full max-w-lg hero-blur-animate"
+          style={{ animationDelay: '0.5s', opacity: 0 }}
+        >
           <div className="flex items-start gap-3">
             <div className="bg-[#2869D6]/20 p-2 rounded-full w-10 h-10 flex items-center justify-center text-[#2869D6] mt-1">
               <Zap className="w-4 h-4 fill-current" />
@@ -140,7 +170,10 @@ export function Hero() {
       </div>
 
       {/* Right Content (Website Mockup) */}
-      <div className="relative hidden lg:block h-full min-h-[400px]" style={{ zIndex: 1 }}>
+      <div 
+        className="relative hidden lg:block h-full min-h-[400px] hero-blur-animate" 
+        style={{ zIndex: 1, animationDelay: '0.6s', opacity: 0 }}
+      >
         {/* Website Mockup */}
         <div style={{ userSelect: 'none', pointerEvents: 'none' }}>
           <WebsiteMockup />
@@ -165,7 +198,10 @@ export function Hero() {
       </div>
 
       {/* Mobile Mockups - Visible only on mobile, positioned at bottom */}
-      <div className="lg:hidden absolute bottom-0 left-0 right-0 w-screen flex justify-center items-end overflow-hidden pointer-events-none" style={{ zIndex: 1, left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw' }}>
+      <div 
+        className="lg:hidden absolute bottom-0 left-0 right-0 w-screen flex justify-center items-end overflow-hidden pointer-events-none hero-blur-animate" 
+        style={{ zIndex: 1, left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw', animationDelay: '0.6s', opacity: 0 }}
+      >
         <div className="relative" style={{ transform: 'scale(0.55)', transformOrigin: 'bottom center', pointerEvents: 'none', userSelect: 'none' }}>
           {/* Website Mockup - Scaled down */}
           <div className="relative" style={{ width: '145%', transform: 'scaleX(1)' }}>

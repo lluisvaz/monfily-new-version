@@ -3,6 +3,7 @@ import { Monitor, Code, Bot, TrendingUp } from "lucide-react";
 import PixelBlast from "@/components/ui/pixel-blast";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
+import { useEffect, useRef, useState } from "react";
 
 const HorizontalBoneDivider = () => (
   <div className="relative my-4" style={{ marginLeft: '-24px', marginRight: '-24px' }}>
@@ -43,6 +44,34 @@ const HorizontalBoneDivider = () => (
 export function ServicesSection() {
   const { language } = useLanguage();
   const t = translations[language];
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            // Disconnect after first trigger to prevent re-animation
+            observer.disconnect();
+          }
+        });
+      },
+      {
+        threshold: 0.1, // Trigger when 10% of the section is visible
+        rootMargin: '0px 0px -50px 0px' // Trigger slightly before fully visible
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   const services = [
     {
@@ -68,6 +97,22 @@ export function ServicesSection() {
   ];
   return (
     <>
+      <style>{`
+        @keyframes blurText {
+          0% {
+            filter: blur(10px);
+            opacity: 0;
+          }
+          100% {
+            filter: blur(0px);
+            opacity: 1;
+          }
+        }
+        .services-blur-animate {
+          animation: blurText 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+      `}</style>
+      <div ref={sectionRef}>
       {/* Mobile Section */}
       <SectionLayout showStripes={false} className="flex flex-col md:hidden px-6" containerClassName="overflow-visible">
         <div className="flex flex-col w-full gap-8 py-8" style={{ overflow: 'visible' }}>
@@ -92,12 +137,18 @@ export function ServicesSection() {
                 transparent
               />
             </div>
-            <h2 className="font-bold text-[#1C1C1E] leading-none relative z-10" style={{ fontSize: '36px' }}>
+            <h2 
+              className={`font-bold text-[#1C1C1E] leading-none relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+              style={{ fontSize: '36px', animationDelay: '0.1s', opacity: isVisible ? 0 : 0 }}
+            >
               {t.services.title}
             </h2>
             
             {/* Metrics */}
-            <div className="flex flex-col gap-4 mt-8 relative z-10">
+            <div 
+              className={`flex flex-col gap-4 mt-8 relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+              style={{ animationDelay: '0.2s', opacity: isVisible ? 0 : 0 }}
+            >
               <div>
                 <div className="font-bold text-[#1C1C1E]" style={{ fontSize: '32px' }}>
                   <span className="text-[#2869D6]">+</span> 50
@@ -126,7 +177,11 @@ export function ServicesSection() {
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
-                <div key={index} className="flex gap-4 relative">
+                <div 
+                  key={index} 
+                  className={`flex gap-4 relative ${isVisible ? 'services-blur-animate' : ''}`}
+                  style={{ animationDelay: `${0.3 + index * 0.1}s`, opacity: isVisible ? 0 : 0 }}
+                >
                   <div className="flex-1 flex flex-col gap-3">
                     <Icon className="w-5 h-5 text-[#1C1C1E]" />
                     <h3 className="text-lg font-bold text-[#1C1C1E]">
@@ -168,14 +223,20 @@ export function ServicesSection() {
           </div>
           
           {/* Left: Title */}
-          <div className="max-w-[50%] pr-8 relative z-10">
+          <div 
+            className={`max-w-[50%] pr-8 relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+            style={{ animationDelay: '0.1s', opacity: isVisible ? 0 : 0 }}
+          >
             <h2 className="text-4xl md:text-5xl font-bold text-[#1C1C1E] leading-none">
               {t.services.title}
             </h2>
           </div>
 
           {/* Right: Metrics */}
-          <div className="flex gap-8 md:gap-12 flex-shrink-0 relative z-10">
+          <div 
+            className={`flex gap-8 md:gap-12 flex-shrink-0 relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+            style={{ animationDelay: '0.2s', opacity: isVisible ? 0 : 0 }}
+          >
             <div className="min-w-[140px] py-4">
               <div className="text-6xl md:text-7xl font-bold text-[#1C1C1E]">
                 <span className="text-[#2869D6]">+</span> 50
@@ -233,8 +294,12 @@ export function ServicesSection() {
             return (
               <div 
                 key={index} 
-                className={`flex flex-col px-6 md:px-8 py-8 relative ${index > 0 ? 'border-l border-dashed border-[#E2E7F1]' : ''}`}
-                style={index > 0 ? { borderLeftWidth: '0.5px' } : {}}
+                className={`flex flex-col px-6 md:px-8 py-8 relative ${isVisible ? 'services-blur-animate' : ''} ${index > 0 ? 'border-l border-dashed border-[#E2E7F1]' : ''}`}
+                style={{
+                  ...(index > 0 ? { borderLeftWidth: '0.5px' } : {}),
+                  animationDelay: `${0.3 + index * 0.1}s`,
+                  opacity: isVisible ? 0 : 0
+                }}
               >
                 <div className="flex flex-col gap-4">
                   <Icon className="w-6 h-6 text-[#1C1C1E]" />
@@ -250,6 +315,7 @@ export function ServicesSection() {
           })}
         </div>
       </SectionLayout>
+      </div>
     </>
   );
 }
