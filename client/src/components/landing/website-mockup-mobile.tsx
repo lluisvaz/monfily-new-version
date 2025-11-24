@@ -1,5 +1,7 @@
 import { ArrowRight, Phone, Star, Wifi, Menu } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/hooks/use-language";
+import { translations } from "@/lib/translations";
 
 const imageUrls = [
   'https://res.cloudinary.com/dopp0v9eq/image/upload/v1763726833/imagem1_gokahh.jpg',
@@ -12,6 +14,8 @@ const imageUrls = [
 ];
 
 export function WebsiteMockupMobile() {
+  const { language } = useLanguage();
+  const t = translations[language];
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
@@ -23,7 +27,7 @@ export function WebsiteMockupMobile() {
   }, []);
 
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('pt-BR', { 
+    return date.toLocaleTimeString(language === 'pt' ? 'pt-BR' : 'en-US', { 
       hour: '2-digit', 
       minute: '2-digit',
       hour12: false 
@@ -86,29 +90,29 @@ export function WebsiteMockupMobile() {
         {/* Badge */}
         <div className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 w-fit" style={{ backgroundColor: '#1E2939' }}>
           <div className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-pulse"></div>
-          <span className="text-[10px] font-medium text-white leading-none">Disponível Para Projetos</span>
+          <span className="text-[10px] font-medium text-white leading-none">{t.mockup.badge}</span>
         </div>
 
         {/* Heading */}
         <h1 className="text-sm font-bold text-gray-900 leading-tight">
-          Parceiro de Design de Classe Mundial <span className="text-gray-600">Para Startups de IA</span>
+          {t.mockup.heading.line1}<span className="text-gray-600">{t.mockup.heading.line2}</span>
         </h1>
 
         {/* Description */}
         <p className="text-[10px] text-gray-600 leading-tight">
-          Soluções de design rápidas, confiáveis e escaláveis adaptadas para sua startup em crescimento.
+          {t.mockup.description}
         </p>
 
         {/* CTAs */}
         <div className="flex flex-col gap-1">
           <div className="bg-orange-500 text-white text-[10px] px-2 py-1 rounded-xl flex items-center justify-between">
-            <span className="leading-none">Ver Preços</span>
+            <span className="leading-none">{t.mockup.cta.viewPrices}</span>
             <div className="w-3 h-3 rounded-full flex items-center justify-center" style={{ backgroundColor: '#1E2939' }}>
               <ArrowRight className="w-1.5 h-1.5 text-orange-500" />
             </div>
           </div>
           <div className="text-white text-[10px] px-2 py-1 rounded-xl flex items-center justify-between" style={{ backgroundColor: '#1E2939' }}>
-            <span className="leading-none">Agendar Agora</span>
+            <span className="leading-none">{t.mockup.cta.scheduleNow}</span>
             <div className="w-3 h-3 rounded-full bg-orange-500 flex items-center justify-center">
               <Phone className="w-1.5 h-1.5 text-white" />
             </div>
@@ -149,7 +153,7 @@ export function WebsiteMockupMobile() {
                 <Star key={i} className="w-1.5 h-1.5 fill-orange-500 text-orange-500" />
               ))}
             </div>
-            <span className="text-[8px] text-gray-600 leading-none">Confiado Por Mais de 50 Empresas</span>
+            <span className="text-[8px] text-gray-600 leading-none">{t.mockup.trust}</span>
           </div>
         </div>
 

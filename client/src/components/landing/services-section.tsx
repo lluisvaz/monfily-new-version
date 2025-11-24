@@ -1,6 +1,8 @@
 import { SectionLayout } from "./section-layout";
 import { Monitor, Code, Bot, TrendingUp } from "lucide-react";
 import PixelBlast from "@/components/ui/pixel-blast";
+import { useLanguage } from "@/hooks/use-language";
+import { translations } from "@/lib/translations";
 
 const HorizontalBoneDivider = () => (
   <div className="relative my-4" style={{ marginLeft: '-24px', marginRight: '-24px' }}>
@@ -38,30 +40,32 @@ const HorizontalBoneDivider = () => (
   </div>
 );
 
-const services = [
-  {
-    icon: Monitor,
-    title: "Web Design Premium",
-    description: "Sites ultra-rápidos e visualmente impactantes. Transformamos visitantes em leads qualificados com UX de ponta."
-  },
-  {
-    icon: Code,
-    title: "Software Sob Medida",
-    description: "Do sistema interno ao SaaS complexo. Desenvolvemos a ferramenta exata que sua operação precisa para escalar sem travas."
-  },
-  {
-    icon: Bot,
-    title: "Automação com IA",
-    description: "Reduza custos operacionais. Implementamos agentes inteligentes que trabalham 24/7 no atendimento e processos repetitivos."
-  },
-  {
-    icon: TrendingUp,
-    title: "SEO Técnico & Growth",
-    description: "Pare de caçar clientes. Posicionamos sua marca no topo do Google para atrair tráfego orgânico e intencional."
-  }
-];
-
 export function ServicesSection() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
+  const services = [
+    {
+      icon: Monitor,
+      title: t.services.items.webDesign.title,
+      description: t.services.items.webDesign.description
+    },
+    {
+      icon: Code,
+      title: t.services.items.customSoftware.title,
+      description: t.services.items.customSoftware.description
+    },
+    {
+      icon: Bot,
+      title: t.services.items.aiAutomation.title,
+      description: t.services.items.aiAutomation.description
+    },
+    {
+      icon: TrendingUp,
+      title: t.services.items.seoGrowth.title,
+      description: t.services.items.seoGrowth.description
+    }
+  ];
   return (
     <>
       {/* Mobile Section */}
@@ -89,7 +93,7 @@ export function ServicesSection() {
               />
             </div>
             <h2 className="font-bold text-[#1C1C1E] leading-none relative z-10" style={{ fontSize: '36px' }}>
-              Soluções validadas em dezenas de mercados.
+              {t.services.title}
             </h2>
             
             {/* Metrics */}
@@ -99,7 +103,7 @@ export function ServicesSection() {
                   <span className="text-[#2869D6]">+</span> 50
                 </div>
                 <div className="text-base text-[#6B7280] mt-1">
-                  Projetos entregues
+                  {t.services.metrics.projectsDelivered}
                 </div>
               </div>
               
@@ -108,7 +112,7 @@ export function ServicesSection() {
                   <span className="text-[#2869D6]">+</span> 10
                 </div>
                 <div className="text-base text-[#6B7280] mt-1">
-                  Nichos atendidos
+                  {t.services.metrics.nichesServed}
                 </div>
               </div>
             </div>
@@ -166,7 +170,7 @@ export function ServicesSection() {
           {/* Left: Title */}
           <div className="max-w-[50%] pr-8 relative z-10">
             <h2 className="text-4xl md:text-5xl font-bold text-[#1C1C1E] leading-none">
-              Soluções validadas em dezenas de mercados.
+              {t.services.title}
             </h2>
           </div>
 
@@ -177,7 +181,7 @@ export function ServicesSection() {
                 <span className="text-[#2869D6]">+</span> 50
               </div>
               <div className="text-base md:text-lg text-[#6B7280] mt-2">
-                Projetos entregues
+                {t.services.metrics.projectsDelivered}
               </div>
             </div>
             
@@ -186,7 +190,7 @@ export function ServicesSection() {
                 <span className="text-[#2869D6]">+</span> 10
               </div>
               <div className="text-base md:text-lg text-[#6B7280] mt-2">
-                Nichos atendidos
+                {t.services.metrics.nichesServed}
               </div>
             </div>
           </div>

@@ -5,16 +5,12 @@ import TextType from "@/components/ui/text-type";
 import { WebsiteMockup } from "./website-mockup";
 import { WebsiteMockupMobile } from "./website-mockup-mobile";
 import { Iphone16Pro } from "@/components/ui/iphone-16-pro";
-
-const rotatingTexts = [
-  "Varejo & E-commerce",
-  "Saúde & Clínicas",
-  "Imobiliária & Construção",
-  "Advocacia & Consultoria",
-  "Serviços & Startups"
-];
+import { useLanguage } from "@/hooks/use-language";
+import { translations } from "@/lib/translations";
 
 export function Hero() {
+  const { language } = useLanguage();
+  const t = translations[language];
   return (
     <SectionLayout 
       showStripes={false}
@@ -66,9 +62,9 @@ export function Hero() {
             </div>
           </div>
           <span className="text-xs font-semibold text-[#1C1C1E]">
-            <span className="hidden lg:inline">Escolhido por </span>+50 Clientes em{' '}
+            <span className="hidden lg:inline">{t.hero.badge.chosenBy}</span>{t.hero.badge.clients}
             <TextType
-              text={rotatingTexts}
+              text={t.hero.rotatingTexts}
               typingSpeed={75}
               pauseDuration={1500}
               showCursor={true}
@@ -81,25 +77,25 @@ export function Hero() {
 
         {/* Heading */}
         <h1 className="text-[48px] md:text-7xl font-bold leading-none tracking-tight text-[#1C1C1E]">
-          Código Puro. <br />
-          <span className="text-[#1C1C1E]">Resultados </span>
-          <ShinyText text="Reais." speed={1.5} className="text-[#1C1C1E]" />
+          {t.hero.heading.line1} <br />
+          <span className="text-[#1C1C1E]">{t.hero.heading.line2}</span>
+          <ShinyText text={t.hero.heading.line3} speed={1.5} className="text-[#1C1C1E]" />
         </h1>
 
         {/* Description */}
         <p className="text-base md:text-lg text-[#1C1C1E] max-w-md leading-tight">
-          A infraestrutura digital completa para o seu negócio. Unimos design de <strong>Criação de Sites</strong> de alta performance, engenharia de <strong>Software</strong>, <strong>Inteligência Artificial</strong> (<strong>IA</strong>) e <strong>SEO</strong> técnico para gerar receita e eficiência.
+          {t.hero.description}
         </p>
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center gap-6 pt-2 w-full">
           <button className="group bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto">
-            Iniciar Meu Projeto
+            {t.hero.cta.primary}
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </button>
 
           <a href="#" className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium transition-colors w-full sm:w-auto text-center sm:text-left">
-            Por que nós?
+            {t.hero.cta.secondary}
           </a>
         </div>
 
@@ -110,8 +106,8 @@ export function Hero() {
               <Zap className="w-4 h-4 fill-current" />
             </div>
             <div>
-              <h3 className="font-bold text-[#1C1C1E] text-sm">Performance</h3>
-              <p className="text-[#1C1C1E] text-xs mt-1">Sites rápidos que convertem.</p>
+              <h3 className="font-bold text-[#1C1C1E] text-sm">{t.hero.features.performance.title}</h3>
+              <p className="text-[#1C1C1E] text-xs mt-1">{t.hero.features.performance.description}</p>
             </div>
           </div>
 
@@ -120,8 +116,8 @@ export function Hero() {
               <Shield className="w-4 h-4 fill-current" />
             </div>
             <div>
-              <h3 className="font-bold text-[#1C1C1E] text-sm">Otimizado</h3>
-              <p className="text-[#1C1C1E] text-xs mt-1">Estrutura preparada para SEO.</p>
+              <h3 className="font-bold text-[#1C1C1E] text-sm">{t.hero.features.optimized.title}</h3>
+              <p className="text-[#1C1C1E] text-xs mt-1">{t.hero.features.optimized.description}</p>
             </div>
           </div>
         </div>

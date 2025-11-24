@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useState, useEffect } from "react";
 import { SectionLayout } from "./section-layout";
 import { MenuIcon } from "@/components/ui/menu-icon";
@@ -22,12 +22,23 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { ChevronDown, X, Globe } from "lucide-react";
-
-const navItems = ["Soluções", "Sobre", "Metodologia", "Suporte", "Insights"];
-const navItemsWithDropdown = ["Soluções"];
+import { useLanguage } from "@/hooks/use-language";
+import { translations } from "@/lib/translations";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const { language, setLanguage } = useLanguage();
+  const [location] = useLocation();
+  const t = translations[language];
+
+  const navItems = [
+    t.header.nav.solutions,
+    t.header.nav.about,
+    t.header.nav.methodology,
+    t.header.nav.support,
+    t.header.nav.insights,
+  ];
+  const navItemsWithDropdown = [t.header.nav.solutions];
 
   // Adicionar/remover classe no body quando sidebar abre/fecha
   useEffect(() => {
@@ -41,10 +52,18 @@ export function Header() {
     };
   }, [isOpen]);
 
+  const handleLanguageChange = (lang: 'pt' | 'en') => {
+    // Remove current language prefix from path
+    const currentPath = location.replace(/^\/(pt|en)/, '') || '/';
+    const newPath = lang === 'pt' ? `/pt${currentPath}` : `/en${currentPath}`;
+    // Reload page for better optimization
+    window.location.href = newPath;
+  };
+
   return (
     <SectionLayout className="flex items-center justify-between px-4 md:px-[32px] h-24 relative z-50 min-w-0">
       {/* Logo */}
-      <Link href="/" className="flex items-center gap-2 cursor-pointer flex-shrink-0">
+      <Link href={`/${language}`} className="flex items-center gap-2 cursor-pointer flex-shrink-0">
         <img 
           src="https://res.cloudinary.com/dopp0v9eq/image/upload/v1763574787/monfily-black-nobg_risk6t.png" 
           alt="Monfily" 
@@ -75,16 +94,16 @@ export function Header() {
                     className="min-w-[220px] border border-[#E2E7F1] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.08)] rounded-lg data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-2"
                   >
                     <DropdownMenuItem className="cursor-pointer">
-                      <span className="text-[#1C1C1E] hover:text-[#1C1C1E]">Criação de Sites</span>
+                      <span className="text-[#1C1C1E] hover:text-[#1C1C1E]">{t.header.solutionsDropdown.websiteCreation}</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="cursor-pointer">
-                      <span className="text-[#1C1C1E] hover:text-[#1C1C1E]">Desenvolvimento de Software</span>
+                      <span className="text-[#1C1C1E] hover:text-[#1C1C1E]">{t.header.solutionsDropdown.softwareDevelopment}</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="cursor-pointer">
-                      <span className="text-[#1C1C1E] hover:text-[#1C1C1E]">Inteligência Artificial</span>
+                      <span className="text-[#1C1C1E] hover:text-[#1C1C1E]">{t.header.solutionsDropdown.artificialIntelligence}</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="cursor-pointer">
-                      <span className="text-[#1C1C1E] hover:text-[#1C1C1E]">SEO Técnico</span>
+                      <span className="text-[#1C1C1E] hover:text-[#1C1C1E]">{t.header.solutionsDropdown.technicalSEO}</span>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -117,17 +136,24 @@ export function Header() {
               sideOffset={20}
               className="min-w-[200px] border border-[#E2E7F1] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.08)] rounded-lg data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-2"
             >
-              <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
-                <Globe className="w-4 h-4 text-[#1C1C1E]" />
-                <span className="font-medium">Português (Brasil)</span>
+              <DropdownMenuItem 
+                className={`flex items-center gap-2 cursor-pointer ${language === 'pt' ? 'font-medium bg-slate-50' : ''}`}
+                onClick={() => handleLanguageChange('pt')}
+              >
+                {language === 'pt' && <Globe className="w-4 h-4 text-[#1C1C1E]" />}
+                <span className={language === 'pt' ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{t.header.languages.portuguese}</span>
               </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer">
-                <span className="text-[#1C1C1E]/70 hover:text-[#1C1C1E]">Inglês (Estados Unidos)</span>
+              <DropdownMenuItem 
+                className={`flex items-center gap-2 cursor-pointer ${language === 'en' ? 'font-medium bg-slate-50' : ''}`}
+                onClick={() => handleLanguageChange('en')}
+              >
+                {language === 'en' && <Globe className="w-4 h-4 text-[#1C1C1E]" />}
+                <span className={language === 'en' ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{t.header.languages.english}</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
           <button className="bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-[16px] py-2 px-4 rounded-full transition-colors cursor-pointer whitespace-nowrap">
-            Falar com Especialista
+            {t.header.cta}
           </button>
         </div>
       </div>
@@ -277,7 +303,7 @@ export function Header() {
             
             {/* Header do Menu */}
             <div className="flex items-center justify-between px-4 h-24 border-b border-[#E2E7F1]">
-              <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2 cursor-pointer flex-shrink-0">
+              <Link href={`/${language}`} onClick={() => setIsOpen(false)} className="flex items-center gap-2 cursor-pointer flex-shrink-0">
                 <img 
                   src="https://res.cloudinary.com/dopp0v9eq/image/upload/v1763574787/monfily-black-nobg_risk6t.png" 
                   alt="Monfily" 
@@ -315,7 +341,7 @@ export function Header() {
                           animation: 'fadeInSubmenuItem 0.3s ease-out 0.1s both'
                         }}
                       >
-                        Criação de Sites
+                        {t.header.solutionsDropdown.websiteCreation}
                       </a>
                       <a 
                         href="#" 
@@ -325,7 +351,7 @@ export function Header() {
                           animation: 'fadeInSubmenuItem 0.3s ease-out 0.15s both'
                         }}
                       >
-                        Desenvolvimento de Software
+                        {t.header.solutionsDropdown.softwareDevelopment}
                       </a>
                       <a 
                         href="#" 
@@ -335,7 +361,7 @@ export function Header() {
                           animation: 'fadeInSubmenuItem 0.3s ease-out 0.2s both'
                         }}
                       >
-                        Inteligência Artificial
+                        {t.header.solutionsDropdown.artificialIntelligence}
                       </a>
                       <a 
                         href="#" 
@@ -345,7 +371,7 @@ export function Header() {
                           animation: 'fadeInSubmenuItem 0.3s ease-out 0.25s both'
                         }}
                       >
-                        SEO Técnico
+                        {t.header.solutionsDropdown.technicalSEO}
                       </a>
                     </div>
                   </CollapsibleContent>
@@ -371,7 +397,7 @@ export function Header() {
                 <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group">
                   <div className="flex items-center gap-2">
                     <Globe className="h-4 w-4" />
-                    <span>Português (Brasil)</span>
+                    <span>{language === 'pt' ? t.header.languages.portuguese : t.header.languages.english}</span>
                   </div>
                   <ChevronDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
                 </CollapsibleTrigger>
@@ -381,13 +407,23 @@ export function Header() {
                   <div className="flex flex-col gap-2">
                     <a 
                       href="#" 
-                      onClick={() => setIsOpen(false)} 
-                      className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1"
+                      onClick={(e) => { e.preventDefault(); handleLanguageChange('pt'); }} 
+                      className={`text-sm py-1 px-2 rounded transition-all duration-200 hover:translate-x-1 ${language === 'pt' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
                       style={{
                         animation: 'fadeInSubmenuItem 0.3s ease-out 0.1s both'
                       }}
                     >
-                      Inglês (Estados Unidos)
+                      {t.header.languages.portuguese}
+                    </a>
+                    <a 
+                      href="#" 
+                      onClick={(e) => { e.preventDefault(); handleLanguageChange('en'); }} 
+                      className={`text-sm py-1 px-2 rounded transition-all duration-200 hover:translate-x-1 ${language === 'en' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
+                      style={{
+                        animation: 'fadeInSubmenuItem 0.3s ease-out 0.15s both'
+                      }}
+                    >
+                      {t.header.languages.english}
                     </a>
                   </div>
                 </CollapsibleContent>
@@ -398,7 +434,7 @@ export function Header() {
                 onClick={() => setIsOpen(false)}
                 className="nav-item mt-4 w-full bg-[#2869D6] hover:bg-[#1E4A8C] text-white font-medium text-base py-3 px-4 rounded-lg transition-colors"
               >
-                Falar com Especialista
+                {t.header.cta}
               </button>
             </nav>
           </SheetContent>

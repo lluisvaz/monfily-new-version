@@ -1,5 +1,7 @@
 import { SectionLayout } from "./section-layout";
 import { useEffect, useRef } from "react";
+import { useLanguage } from "@/hooks/use-language";
+import { translations } from "@/lib/translations";
 
 const BoneDivider = () => (
   <div className="relative w-px h-auto bg-[#E2E7F1] hidden md:block mx-0 shrink-0 self-stretch">
@@ -104,6 +106,9 @@ const LogoCarousel = () => {
 };
 
 export function TrustedBy() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   return (
     <>
       {/* Mobile Section */}
@@ -112,7 +117,7 @@ export function TrustedBy() {
           {/* Text Label */}
           <div className="mb-6 flex items-center justify-center">
             <p className="text-[#1C1C1E] text-base text-center">
-              Utilizamos as melhores tecnologias:
+              {t.trustedBy.label}
             </p>
           </div>
           
@@ -130,7 +135,7 @@ export function TrustedBy() {
         {/* Left Side: Text Label */}
         <div className="w-full md:w-[220px] p-[24px] md:p-[32px] border-b md:border-b-0 border-[#E2E7F1] flex items-center justify-center">
           <p className="text-[#1C1C1E] font-medium text-sm max-w-[150px] md:max-w-[200px] text-center">
-            Utilizamos as melhores tecnologias:
+            {t.trustedBy.label}
           </p>
         </div>
 

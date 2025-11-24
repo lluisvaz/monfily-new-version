@@ -1,4 +1,6 @@
 import { ArrowRight, Phone, Star } from "lucide-react";
+import { useLanguage } from "@/hooks/use-language";
+import { translations } from "@/lib/translations";
 
 const imageUrls = [
   'https://res.cloudinary.com/dopp0v9eq/image/upload/v1763726833/imagem1_gokahh.jpg',
@@ -11,6 +13,9 @@ const imageUrls = [
 ];
 
 export function WebsiteMockup() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   return (
     <>
       <style>{`
@@ -57,11 +62,11 @@ export function WebsiteMockup() {
         
         {/* Navigation */}
         <nav className="hidden sm:flex items-center gap-4 ml-auto">
-          <span className="text-sm text-gray-600 leading-none">Serviços</span>
-          <span className="text-sm text-gray-600 leading-none">Benefícios</span>
-          <span className="text-sm text-gray-600 leading-none">Projetos</span>
-          <span className="text-sm text-gray-600 leading-none">Preços</span>
-          <span className="text-sm text-gray-600 leading-none">Clientes</span>
+          <span className="text-sm text-gray-600 leading-none">{t.mockup.navigation.services}</span>
+          <span className="text-sm text-gray-600 leading-none">{t.mockup.navigation.benefits}</span>
+          <span className="text-sm text-gray-600 leading-none">{t.mockup.navigation.projects}</span>
+          <span className="text-sm text-gray-600 leading-none">{t.mockup.navigation.prices}</span>
+          <span className="text-sm text-gray-600 leading-none">{t.mockup.navigation.clients}</span>
         </nav>
       </header>
       <div className="border-b border-gray-300" style={{ marginLeft: '-3.5rem', marginRight: '-3.5rem', width: 'calc(100% + 7rem)' }}></div>
@@ -73,29 +78,29 @@ export function WebsiteMockup() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 w-fit mb-5" style={{ backgroundColor: '#1E2939' }}>
             <div className="w-2.5 h-2.5 bg-orange-500 rounded-full animate-pulse"></div>
-            <span className="text-sm font-medium text-white leading-none">Disponível Para Projetos</span>
+            <span className="text-sm font-medium text-white leading-none">{t.mockup.badge}</span>
           </div>
 
           {/* Heading */}
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 leading-none max-w-[320px]">
-            Parceiro de Design de Classe Mundial <span className="text-gray-600">Para Startups de IA</span>
+            {t.mockup.heading.line1}<span className="text-gray-600">{t.mockup.heading.line2}</span>
           </h1>
 
           {/* Description */}
           <p className="text-base text-gray-600 mb-7 max-w-[340px] leading-none">
-            Soluções de design rápidas, confiáveis e escaláveis adaptadas para sua startup em crescimento.
+            {t.mockup.description}
           </p>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-start gap-2 mb-7">
             <div className="bg-orange-500 text-white text-sm px-3 py-2 rounded-3xl flex items-center gap-2">
-              <span className="leading-none">Ver Preços</span>
+              <span className="leading-none">{t.mockup.cta.viewPrices}</span>
               <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#1E2939' }}>
                 <ArrowRight className="w-3 h-3 text-orange-500" />
               </div>
             </div>
             <div className="text-white text-sm px-3 py-2 rounded-3xl flex items-center gap-2" style={{ backgroundColor: '#1E2939' }}>
-              <span className="leading-none">Agendar Agora</span>
+              <span className="leading-none">{t.mockup.cta.scheduleNow}</span>
               <div className="w-6 h-6 rounded-full bg-orange-500 flex items-center justify-center">
                 <Phone className="w-3 h-3 text-white" />
               </div>
@@ -136,7 +141,7 @@ export function WebsiteMockup() {
                   <Star key={i} className="w-3 h-3 fill-orange-500 text-orange-500" />
                 ))}
               </div>
-              <span className="text-xs text-gray-600 leading-none">Confiado Por Mais de 50 Empresas</span>
+              <span className="text-xs text-gray-600 leading-none">{t.mockup.trust}</span>
             </div>
           </div>
         </div>
