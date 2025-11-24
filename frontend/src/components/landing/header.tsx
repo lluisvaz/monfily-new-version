@@ -63,8 +63,27 @@ export function Header() {
 
   return (
     <SectionLayout className="flex items-center justify-between px-4 md:px-[32px] h-24 relative z-50 min-w-0">
+      <style>{`
+        @keyframes blurText {
+          0% {
+            filter: blur(10px);
+            opacity: 0;
+          }
+          100% {
+            filter: blur(0px);
+            opacity: 1;
+          }
+        }
+        .header-blur-animate {
+          animation: blurText 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+      `}</style>
       {/* Logo */}
-      <Link href={`/${language}`} className="flex items-center gap-2 cursor-pointer flex-shrink-0">
+      <Link 
+        href={`/${language}`} 
+        className="flex items-center gap-2 cursor-pointer flex-shrink-0 header-blur-animate"
+        style={{ animationDelay: '0.1s', opacity: 0 }}
+      >
         <img 
           src="https://res.cloudinary.com/dopp0v9eq/image/upload/v1763574787/monfily-black-nobg_risk6t.png" 
           alt="Monfily" 
@@ -79,12 +98,15 @@ export function Header() {
       <div className="hidden lg:flex items-center gap-2 flex-shrink-0">
         {/* Navigation */}
         <nav className="flex items-center gap-2">
-          {navItems.map((item) => {
+          {navItems.map((item, index) => {
             if (navItemsWithDropdown.includes(item)) {
               return (
                 <DropdownMenu key={item}>
                   <DropdownMenuTrigger asChild>
-                    <button className="flex items-center gap-1 text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap focus:outline-none focus-visible:outline-none">
+                    <button 
+                      className="flex items-center gap-1 text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap focus:outline-none focus-visible:outline-none header-blur-animate"
+                      style={{ animationDelay: `${0.2 + index * 0.05}s`, opacity: 0 }}
+                    >
                       {item}
                       <ChevronDown className="w-3 h-3 transition-transform duration-200 data-[state=open]:rotate-180" />
                     </button>
@@ -114,20 +136,27 @@ export function Header() {
               <a
                 key={item}
                 href="#"
-                className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap"
+                className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap header-blur-animate"
+                style={{ animationDelay: `${0.2 + index * 0.05}s`, opacity: 0 }}
               >
                 {item}
               </a>
             );
           })}
-          <div className="h-6 w-px bg-slate-200 mx-2 flex-shrink-0"></div>
+          <div 
+            className="h-6 w-px bg-slate-200 mx-2 flex-shrink-0 header-blur-animate"
+            style={{ animationDelay: `${0.2 + navItems.length * 0.05}s`, opacity: 0 }}
+          ></div>
         </nav>
 
         {/* Actions */}
         <div className="flex items-center gap-2 flex-shrink-0">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="flex items-center justify-center py-2 px-2 rounded-full border border-[#E2E7F1] hover:bg-slate-50 transition-colors focus:outline-none focus-visible:outline-none">
+              <button 
+                className="flex items-center justify-center py-2 px-2 rounded-full border border-[#E2E7F1] hover:bg-slate-50 transition-colors focus:outline-none focus-visible:outline-none header-blur-animate"
+                style={{ animationDelay: `${0.3 + navItems.length * 0.05}s`, opacity: 0 }}
+              >
                 <Globe className="w-5 h-5 text-[#1C1C1E]" />
                 <ChevronDown className="w-3 h-3 ml-1 text-[#1C1C1E]" />
               </button>
@@ -153,7 +182,10 @@ export function Header() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <button className="bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-[16px] py-2 px-4 rounded-full transition-colors cursor-pointer whitespace-nowrap">
+          <button 
+            className="bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-[16px] py-2 px-4 rounded-full transition-colors cursor-pointer whitespace-nowrap header-blur-animate"
+            style={{ animationDelay: `${0.35 + navItems.length * 0.05}s`, opacity: 0 }}
+          >
             {t.header.cta}
           </button>
         </div>
@@ -163,7 +195,10 @@ export function Header() {
       <div className="flex lg:hidden items-center gap-2 flex-shrink-0">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
-            <button className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0">
+            <button 
+              className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 header-blur-animate"
+              style={{ animationDelay: '0.2s', opacity: 0 }}
+            >
               <MenuIcon size={32} className="text-[#1C1C1E]" />
             </button>
           </SheetTrigger>

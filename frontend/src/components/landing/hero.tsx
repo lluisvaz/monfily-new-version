@@ -79,7 +79,7 @@ export function Hero() {
         <h1 className="text-[48px] md:text-7xl font-bold leading-none tracking-tight text-[#1C1C1E]">
           {t.hero.heading.line1} <br />
           <span className="text-[#1C1C1E]">{t.hero.heading.line2}</span>
-          <ShinyText text={t.hero.heading.line3} speed={1.5} className="text-[#1C1C1E]" />
+          <ShinyText text={t.hero.heading.line3} speed={3} className="text-[#1C1C1E]" />
         </h1>
 
         {/* Description */}
