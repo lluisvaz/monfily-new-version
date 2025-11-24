@@ -115,28 +115,9 @@ export function ServicesSection() {
       <div ref={sectionRef}>
       {/* Mobile Section */}
       <SectionLayout showStripes={false} className="flex flex-col md:hidden px-6" containerClassName="overflow-visible">
-        <div className="flex flex-col w-full gap-8 py-8" style={{ overflow: 'visible' }}>
+        <div className="flex flex-col w-full gap-8 py-8" style={{ overflow: 'visible', position: 'relative' }}>
           {/* Header */}
           <div className="flex flex-col gap-6 pt-8 pb-8 relative">
-            {/* Background PixelBlast */}
-            <div style={{ position: 'absolute', top: "35%", bottom: 0, right: 0, left: 0, pointerEvents: 'none', zIndex: 0, opacity: 0.2 }}>
-              <PixelBlast
-                variant="diamond"
-                pixelSize={4}
-                color="#1C1C1E"
-                patternScale={20}
-                patternDensity={1.8}
-                pixelSizeJitter={0}
-                enableRipples={false}
-                liquid
-                liquidStrength={0.12}
-                liquidRadius={1.2}
-                liquidWobbleSpeed={5}
-                speed={1.3}
-                edgeFade={0.5}
-                transparent
-              />
-            </div>
             <h2 
               className={`font-bold text-[#1C1C1E] leading-none relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
               style={{ fontSize: '36px', animationDelay: '0.1s', opacity: isVisible ? 0 : 0 }}

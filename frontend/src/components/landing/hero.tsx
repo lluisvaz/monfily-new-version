@@ -14,7 +14,7 @@ export function Hero() {
   return (
     <SectionLayout 
       showStripes={false}
-      className="grid grid-cols-1 lg:grid-cols-2 gap-12 px-6 md:px-16 lg:px-28 py-20 min-h-[600px] items-center relative overflow-x-hidden"
+      className="grid grid-cols-1 lg:grid-cols-2 gap-12 px-6 md:px-16 lg:px-28 py-12 md:py-20 min-h-[500px] md:min-h-[600px] items-center relative overflow-x-hidden"
     >
       <style>{`
         @keyframes blurText {
@@ -53,7 +53,7 @@ export function Hero() {
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#2869D6] rounded-full"></div>
       </div>
       {/* Left Content */}
-      <div className="flex flex-col justify-center items-start space-y-8 w-full relative lg:pb-0 pb-[280px]" style={{ zIndex: 1 }}>
+      <div className="flex flex-col justify-center items-start space-y-6 md:space-y-8 w-full relative lg:pb-0 pb-[240px] md:pb-[280px]" style={{ zIndex: 1 }}>
         {/* Badge */}
         <div 
           className="inline-flex items-center gap-2 rounded-full pl-1 pr-4 py-1 border border-[#E2E7F1] hero-blur-animate"

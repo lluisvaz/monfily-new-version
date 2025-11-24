@@ -366,10 +366,43 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
 
     speedRef.current = speed;
 
+    // Wait for container to have dimensions (especially important on mobile)
+    let retryCount = 0;
+    const maxRetries = 10;
+    const checkAndInit = () => {
+      const container = containerRef.current;
+      if (!container) return;
+      
+      const hasDimensions = container.clientWidth > 0 && container.clientHeight > 0;
+      if (!hasDimensions && retryCount < maxRetries) {
+        retryCount++;
+        // Retry after frames with increasing delays
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            setTimeout(checkAndInit, 50);
+          });
+        });
+        return;
+      }
+      
+      // Initialize even if dimensions are small (will be updated by ResizeObserver)
+      if (container.clientWidth === 0) {
+        // Force minimum dimensions for initialization
+        container.style.minHeight = container.style.minHeight || '200px';
+      }
+      
+      // Now initialize WebGL
+      initializeWebGL();
+    };
+
     const needsReinitKeys = ['antialias', 'liquid', 'noiseAmount'];
     const cfg = { antialias, liquid, noiseAmount };
-
     let mustReinit = false;
+
+    const initializeWebGL = () => {
+      const container = containerRef.current;
+      if (!container) return;
+
     if (!threeRef.current) mustReinit = true;
     else if (prevConfigRef.current) {
       for (const k of needsReinitKeys)
@@ -393,12 +426,31 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
       }
 
       const canvas = document.createElement('canvas');
-      const renderer = new THREE.WebGLRenderer({
-        canvas,
-        antialias,
-        alpha: true,
-        powerPreference: 'high-performance'
-      });
+      let renderer: THREE.WebGLRenderer;
+      
+      // Detect mobile devices for better compatibility
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                       (window.innerWidth <= 768);
+      
+      try {
+        // Use 'default' powerPreference on mobile for better compatibility
+        renderer = new THREE.WebGLRenderer({
+          canvas,
+          antialias: isMobile ? false : antialias, // Disable antialias on mobile for performance
+          alpha: true,
+          powerPreference: isMobile ? 'default' : 'high-performance'
+        });
+      } catch (error) {
+        console.warn('WebGL renderer creation failed, trying with fallback options:', error);
+        // Fallback: try without high-performance preference (some mobile devices don't support it)
+        renderer = new THREE.WebGLRenderer({
+          canvas,
+          antialias: false,
+          alpha: true,
+          powerPreference: 'default'
+        });
+      }
+      
       renderer.domElement.style.width = '100%';
       renderer.domElement.style.height = '100%';
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -447,13 +499,26 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
       const setSize = () => {
         const w = container.clientWidth || 1;
         const h = container.clientHeight || 1;
-        renderer.setSize(w, h, false);
-        uniforms.uResolution.value.set(renderer.domElement.width, renderer.domElement.height);
-        if (threeRef.current?.composer)
-          threeRef.current.composer.setSize(renderer.domElement.width, renderer.domElement.height);
-        uniforms.uPixelSize.value = pixelSize * renderer.getPixelRatio();
+        if (w > 0 && h > 0) {
+          renderer.setSize(w, h, false);
+          uniforms.uResolution.value.set(renderer.domElement.width, renderer.domElement.height);
+          if (threeRef.current?.composer)
+            threeRef.current.composer.setSize(renderer.domElement.width, renderer.domElement.height);
+          uniforms.uPixelSize.value = pixelSize * renderer.getPixelRatio();
+        }
       };
+      
+      // Try to set size immediately
       setSize();
+      
+      // If container has no dimensions, retry after a short delay (common on mobile)
+      if (container.clientWidth === 0 || container.clientHeight === 0) {
+        requestAnimationFrame(() => {
+          setSize();
+          // Double-check after another frame for mobile devices
+          requestAnimationFrame(setSize);
+        });
+      }
 
       const ro = new ResizeObserver(setSize);
       ro.observe(container);
@@ -547,11 +612,23 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
       });
 
       let raf = 0;
+      let sizeCheckCounter = 0;
       const animate = () => {
         if (autoPauseOffscreen && !visibilityRef.current.visible) {
           raf = requestAnimationFrame(animate);
           return;
         }
+        
+        // Check and update size periodically (especially important on mobile)
+        sizeCheckCounter++;
+        if (sizeCheckCounter % 60 === 0) { // Check every 60 frames (~1 second at 60fps)
+          const w = container.clientWidth || 1;
+          const h = container.clientHeight || 1;
+          if (w > 0 && h > 0 && (renderer.domElement.width !== w || renderer.domElement.height !== h)) {
+            setSize();
+          }
+        }
+        
         uniforms.uTime.value = timeOffset + clock.getElapsedTime() * speedRef.current;
         if (liquidEffect) (liquidEffect as any).uniforms.get('uTime').value = uniforms.uTime.value;
         if (composer) {
@@ -611,6 +688,10 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
     }
 
     prevConfigRef.current = cfg;
+    }; // End of initializeWebGL
+    
+    // Start the initialization check
+    checkAndInit();
 
     return () => {
       if (threeRef.current && mustReinit) return;
