@@ -5,6 +5,18 @@ import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
 import { useEffect, useRef, useState } from "react";
 
+const GridDecoration = ({ className }: { className?: string }) => (
+  <div className={`absolute w-6 h-6 flex items-center justify-center pointer-events-none ${className}`} style={{ zIndex: 'var(--section-grid-z, 9999)' }}>
+    {/* White background to mask the lines crossing behind it for a cleaner look */}
+    <div className="absolute w-4 h-4 bg-white rounded-full" />
+    
+    {/* Minimalist Star/Cross Shape in border color #E2E7F1 */}
+    <svg viewBox="0 0 24 24" className="w-full h-full fill-[#E2E7F1] relative z-10">
+      <path d="M12 2C12 2 14 10 22 12C14 14 12 22 12 22C12 22 10 14 2 12C10 10 12 2 12 2Z" />
+    </svg>
+  </div>
+);
+
 const HorizontalBoneDivider = () => (
   <div className="relative my-4" style={{ marginLeft: '-24px', marginRight: '-24px' }}>
     <div className="relative w-full" style={{ height: '1px' }}>
@@ -40,6 +52,131 @@ const HorizontalBoneDivider = () => (
     </div>
   </div>
 );
+
+const LargeStripedDivider = () => {
+  const stripeClass = "bg-slate-50/30 bg-[image:repeating-linear-gradient(45deg,#E2E7F1_0px,#E2E7F1_1px,transparent_1px,transparent_12px)]";
+  
+  return (
+    <div className="w-full flex flex-row relative" style={{ marginTop: 0, paddingTop: 0, marginBottom: 0 }}>
+      {/* Top horizontal line - spans full width including margins */}
+      <div className="absolute top-0 left-0 right-0 h-[0.5px] bg-[#E2E7F1]" style={{ zIndex: 10 }}></div>
+      
+      {/* Bottom horizontal line - spans full width including margins */}
+      <div className="absolute" style={{ top: '70.5px', left: 0, right: 0, height: '0.5px', backgroundColor: '#E2E7F1', zIndex: 10 }}></div>
+      
+      {/* Left margin - white */}
+      <div className="flex-1 min-w-[1rem] md:min-w-[2rem] bg-white"></div>
+      
+      {/* Main Content Area */}
+      <div className="relative w-full min-w-0 max-w-[1500px] mx-auto bg-white">
+        {/* Left border line */}
+        <div className="absolute top-0 bottom-0 left-0 w-[0.5px] bg-[#E2E7F1] pointer-events-none"></div>
+        
+        {/* Vertical lines crossing - faint */}
+        <div className="absolute top-0 bottom-0 left-[20%] w-[0.5px] bg-[#E2E7F1] pointer-events-none opacity-20"></div>
+        <div className="absolute top-0 bottom-0 left-[40%] w-[0.5px] bg-[#E2E7F1] pointer-events-none opacity-20"></div>
+        <div className="absolute top-0 bottom-0 left-[60%] w-[0.5px] bg-[#E2E7F1] pointer-events-none opacity-20"></div>
+        <div className="absolute top-0 bottom-0 left-[80%] w-[0.5px] bg-[#E2E7F1] pointer-events-none opacity-20"></div>
+        
+        {/* Divider Structure - larger height */}
+        <div className="relative w-full" style={{ height: '200px' }}>
+          {/* Central striped area - starts immediately after top line */}
+          <div 
+            className={`absolute left-0 right-0 ${stripeClass}`}
+            style={{
+              top: '0.5px',
+              height: '70px'
+            }}
+          ></div>
+          
+          
+          {/* Connection points at intersections with vertical lines */}
+          {/* Top left */}
+          <svg
+            viewBox="0 0 24 24"
+            className="absolute w-3 h-3 fill-[#E2E7F1] pointer-events-none opacity-40"
+            style={{
+              left: '0',
+              top: '0',
+              transform: 'translate(-50%, -50%)'
+            }}
+          >
+            <path d="M12 2C12 2 14 10 22 12C14 14 12 22 12 22C12 22 10 14 2 12C10 10 12 2 12 2Z" />
+          </svg>
+          
+          {/* Top right */}
+          <svg
+            viewBox="0 0 24 24"
+            className="absolute w-3 h-3 fill-[#E2E7F1] pointer-events-none opacity-40"
+            style={{
+              right: '0',
+              top: '0',
+              transform: 'translate(50%, -50%)'
+            }}
+          >
+            <path d="M12 2C12 2 14 10 22 12C14 14 12 22 12 22C12 22 10 14 2 12C10 10 12 2 12 2Z" />
+          </svg>
+          
+          {/* Bottom left */}
+          <svg
+            viewBox="0 0 24 24"
+            className="absolute w-3 h-3 fill-[#E2E7F1] pointer-events-none opacity-40"
+            style={{
+              left: '0',
+              top: '70.5px',
+              transform: 'translate(-50%, -50%)'
+            }}
+          >
+            <path d="M12 2C12 2 14 10 22 12C14 14 12 22 12 22C12 22 10 14 2 12C10 10 12 2 12 2Z" />
+          </svg>
+          
+          {/* Bottom right */}
+          <svg
+            viewBox="0 0 24 24"
+            className="absolute w-3 h-3 fill-[#E2E7F1] pointer-events-none opacity-40"
+            style={{
+              right: '0',
+              top: '70.5px',
+              transform: 'translate(50%, -50%)'
+            }}
+          >
+            <path d="M12 2C12 2 14 10 22 12C14 14 12 22 12 22C12 22 10 14 2 12C10 10 12 2 12 2Z" />
+          </svg>
+        </div>
+        
+        {/* Right border line */}
+        <div className="absolute top-0 bottom-0 right-0 w-[0.5px] bg-[#E2E7F1] pointer-events-none"></div>
+      </div>
+      
+      {/* Right margin - white */}
+      <div className="flex-1 min-w-[1rem] md:min-w-[2rem] bg-white"></div>
+      
+      {/* Grid Decorations at Top (this is the bottom line of services section) */}
+      <div className="absolute left-0 right-0 pointer-events-none" style={{ top: 0, zIndex: 'var(--section-grid-z, 99999)' }}>
+        <div className="flex flex-row w-full">
+          <div className="flex-1 min-w-[1rem] md:min-w-[2rem]"></div>
+          <div className="relative w-full min-w-0 max-w-[1500px] mx-auto">
+            <GridDecoration className="flex -top-[12px] -left-[12px]" />
+            <GridDecoration className="flex -top-[12px] -right-[12px]" />
+          </div>
+          <div className="flex-1 min-w-[1rem] md:min-w-[2rem]"></div>
+        </div>
+      </div>
+      
+      {/* Grid Decorations at Bottom (at the bottom horizontal line) */}
+      <div className="absolute left-0 right-0 pointer-events-none" style={{ top: '70.5px', zIndex: 'var(--section-grid-z, 99999)' }}>
+        <div className="flex flex-row w-full">
+          <div className="flex-1 min-w-[1rem] md:min-w-[2rem]"></div>
+          <div className="relative w-full min-w-0 max-w-[1500px] mx-auto">
+            <GridDecoration className="flex -bottom-[12px] -left-[12px]" />
+            <GridDecoration className="flex -bottom-[12px] -right-[12px]" />
+          </div>
+          <div className="flex-1 min-w-[1rem] md:min-w-[2rem]"></div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export function ServicesSection() {
   const { language } = useLanguage();
@@ -182,7 +319,7 @@ export function ServicesSection() {
       {/* Desktop Section */}
       <SectionLayout showStripes={false} className="hidden md:flex flex-col">
         {/* Header Section */}
-        <div className="flex flex-row items-center justify-between px-6 md:px-16 lg:px-28 py-[100px] border-b border-[#E2E7F1] relative" style={{ borderWidth: '0.5px' }}>
+        <div className="flex flex-row items-center justify-between px-6 md:px-16 lg:px-28 py-[100px] relative">
           {/* Background PixelBlast */}
           <div style={{ position: 'absolute', top: 0, bottom: 0, right: 0, left: '50%', pointerEvents: 'none', zIndex: 0, opacity: 0.2 }}>
             <PixelBlast
@@ -237,30 +374,36 @@ export function ServicesSection() {
             </div>
           </div>
 
-          {/* Left Flare - positioned at bottom border, left edge (compensating for padding, slightly inside) */}
+        </div>
+
+        {/* Top border line for Services Grid with flares */}
+        <div className="relative" style={{ height: '1px' }}>
+          {/* Line that spans the full width of section-main-content */}
+          <div className="absolute left-0 right-0 bg-[#E2E7F1]" style={{ height: '0.5px', top: '50%', transform: 'translateY(-50%)' }}></div>
+          {/* Left Flare */}
           <svg
             viewBox="0 0 20 10"
             className="absolute w-7 h-[14px] fill-[#E2E7F1] pointer-events-none"
             preserveAspectRatio="none"
             style={{ 
-              left: '6.5px',
-              bottom: 0,
-              transform: 'translateX(-50%) translateY(50%) rotate(-90deg)',
+              left: '7px',
+              top: '50%',
+              transform: 'translateY(-50%) translateX(-50%) rotate(-90deg)',
               zIndex: 1001
             }}
           >
             <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
           </svg>
           
-          {/* Right Flare - positioned at bottom border, right edge (compensating for padding, slightly inside) */}
+          {/* Right Flare */}
           <svg
             viewBox="0 0 20 10"
             className="absolute w-7 h-[14px] fill-[#E2E7F1] pointer-events-none"
             preserveAspectRatio="none"
             style={{ 
-              right: '5.5px',
-              bottom: 0,
-              transform: 'translateX(50%) translateY(50%) rotate(90deg)',
+              right: '7px',
+              top: '50%',
+              transform: 'translateY(-50%) translateX(50%) rotate(90deg)',
               zIndex: 1001
             }}
           >
@@ -268,8 +411,7 @@ export function ServicesSection() {
           </svg>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-4">
+        {/* Services Grid */}        <div className="grid grid-cols-4">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
@@ -297,6 +439,9 @@ export function ServicesSection() {
         </div>
       </SectionLayout>
       </div>
+      
+      {/* Large Striped Divider */}
+      <LargeStripedDivider />
     </>
   );
 }
