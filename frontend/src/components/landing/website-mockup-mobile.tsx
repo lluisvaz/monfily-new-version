@@ -94,7 +94,15 @@ export function WebsiteMockupMobile() {
         </div>
 
         {/* Heading */}
-        <h1 className="text-sm font-bold text-gray-900 leading-tight">
+        <h1 
+          className="text-sm text-gray-900"
+          style={{
+            fontFamily: 'Fustat-Bold, sans-serif',
+            fontWeight: 'normal',
+            lineHeight: '0.9',
+            letterSpacing: '-0.06em'
+          }}
+        >
           {t.mockup.heading.line1}<span className="text-gray-600">{t.mockup.heading.line2}</span>
         </h1>
 

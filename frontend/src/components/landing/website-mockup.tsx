@@ -82,7 +82,15 @@ export function WebsiteMockup() {
           </div>
 
           {/* Heading */}
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 leading-none max-w-[320px]">
+          <h1 
+            className="text-3xl sm:text-4xl text-gray-900 mb-4 max-w-[320px]"
+            style={{
+              fontFamily: 'Fustat-Bold, sans-serif',
+              fontWeight: 'normal',
+              lineHeight: '0.9',
+              letterSpacing: '-0.06em'
+            }}
+          >
             {t.mockup.heading.line1}<span className="text-gray-600">{t.mockup.heading.line2}</span>
           </h1>
 
