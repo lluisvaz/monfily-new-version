@@ -5,9 +5,10 @@ interface ShinyTextProps {
   disabled?: boolean;
   speed?: number;
   className?: string;
+  style?: React.CSSProperties;
 }
 
-const ShinyText: React.FC<ShinyTextProps> = ({ text, disabled = false, speed = 5, className = '' }) => {
+const ShinyText: React.FC<ShinyTextProps> = ({ text, disabled = false, speed = 5, className = '', style = {} }) => {
   const animationDuration = `${speed}s`;
 
   return (
@@ -21,7 +22,8 @@ const ShinyText: React.FC<ShinyTextProps> = ({ text, disabled = false, speed = 5
         WebkitTextFillColor: 'transparent',
         backgroundClip: 'text',
         color: 'transparent',
-        animationDuration: animationDuration
+        animationDuration: animationDuration,
+        ...style
       }}
     >
       {text}

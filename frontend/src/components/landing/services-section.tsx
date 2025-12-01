@@ -256,8 +256,16 @@ export function ServicesSection() {
           {/* Header */}
           <div className="flex flex-col gap-6 pt-8 pb-8 relative">
             <h2 
-              className={`font-bold text-[#1C1C1E] leading-none relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
-              style={{ fontSize: '36px', animationDelay: '0.1s', opacity: isVisible ? 0 : 0 }}
+              className={`text-[#1C1C1E] leading-none relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+              style={{ 
+                fontSize: '36px', 
+                animationDelay: '0.1s', 
+                opacity: isVisible ? 0 : 0,
+                fontFamily: 'Fustat-Bold, sans-serif',
+                fontWeight: 'normal',
+                lineHeight: '0.9',
+                letterSpacing: '-0.06em'
+              }}
             >
               {t.services.title}
             </h2>
@@ -268,7 +276,14 @@ export function ServicesSection() {
               style={{ animationDelay: '0.2s', opacity: isVisible ? 0 : 0 }}
             >
               <div>
-                <div className="font-bold text-[#1C1C1E]" style={{ fontSize: '32px' }}>
+                <div 
+                  className="text-[#1C1C1E]" 
+                  style={{ 
+                    fontSize: '32px',
+                    fontFamily: 'Fustat-Bold, sans-serif',
+                    fontWeight: 'normal'
+                  }}
+                >
                   <span className="text-[#2869D6]">+</span> 50
                 </div>
                 <div className="text-base text-[#6B7280] mt-1">
@@ -277,7 +292,14 @@ export function ServicesSection() {
               </div>
               
               <div>
-                <div className="font-bold text-[#1C1C1E]" style={{ fontSize: '32px' }}>
+                <div 
+                  className="text-[#1C1C1E]" 
+                  style={{ 
+                    fontSize: '32px',
+                    fontFamily: 'Fustat-Bold, sans-serif',
+                    fontWeight: 'normal'
+                  }}
+                >
                   <span className="text-[#2869D6]">+</span> 10
                 </div>
                 <div className="text-base text-[#6B7280] mt-1">
@@ -302,7 +324,13 @@ export function ServicesSection() {
                 >
                   <div className="flex-1 flex flex-col gap-3">
                     <Icon className="w-5 h-5 text-[#1C1C1E]" />
-                    <h3 className="text-lg font-bold text-[#1C1C1E]">
+                    <h3 
+                      className="text-lg text-[#1C1C1E]"
+                      style={{ 
+                        fontFamily: 'Fustat-Bold, sans-serif',
+                        fontWeight: 'normal'
+                      }}
+                    >
                       {service.title}
                     </h3>
                     <p className="text-sm text-[#6B7280] leading-relaxed">
@@ -345,7 +373,15 @@ export function ServicesSection() {
             className={`max-w-[50%] pr-8 relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.1s', opacity: isVisible ? 0 : 0 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-[#1C1C1E] leading-none">
+            <h2 
+              className="text-4xl md:text-5xl text-[#1C1C1E] leading-none"
+              style={{ 
+                fontFamily: 'Fustat-Bold, sans-serif',
+                fontWeight: 'normal',
+                lineHeight: '0.9',
+                letterSpacing: '-0.06em'
+              }}
+            >
               {t.services.title}
             </h2>
           </div>
@@ -356,7 +392,13 @@ export function ServicesSection() {
             style={{ animationDelay: '0.2s', opacity: isVisible ? 0 : 0 }}
           >
             <div className="min-w-[140px] py-4">
-              <div className="text-6xl md:text-7xl font-bold text-[#1C1C1E]">
+              <div 
+                className="text-6xl md:text-7xl text-[#1C1C1E]"
+                style={{ 
+                  fontFamily: 'Fustat-Bold, sans-serif',
+                  fontWeight: 'normal'
+                }}
+              >
                 <span className="text-[#2869D6]">+</span> 50
               </div>
               <div className="text-base md:text-lg text-[#6B7280] mt-2">
@@ -365,7 +407,13 @@ export function ServicesSection() {
             </div>
             
             <div className="min-w-[140px] py-4">
-              <div className="text-6xl md:text-7xl font-bold text-[#1C1C1E]">
+              <div 
+                className="text-6xl md:text-7xl text-[#1C1C1E]"
+                style={{ 
+                  fontFamily: 'Fustat-Bold, sans-serif',
+                  fontWeight: 'normal'
+                }}
+              >
                 <span className="text-[#2869D6]">+</span> 10
               </div>
               <div className="text-base md:text-lg text-[#6B7280] mt-2">
@@ -426,7 +474,13 @@ export function ServicesSection() {
               >
                 <div className="flex flex-col gap-4">
                   <Icon className="w-6 h-6 text-[#1C1C1E]" />
-                  <h3 className="text-lg font-bold text-[#1C1C1E]">
+                  <h3 
+                    className="text-lg text-[#1C1C1E]"
+                    style={{ 
+                      fontFamily: 'Fustat-Bold, sans-serif',
+                      fontWeight: 'normal'
+                    }}
+                  >
                     {service.title}
                   </h3>
                   <p className="text-sm text-[#6B7280] leading-relaxed">

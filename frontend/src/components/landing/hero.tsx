@@ -91,7 +91,13 @@ export function Hero() {
               />
             </div>
           </div>
-          <span className="text-xs font-semibold text-[#1C1C1E]">
+          <span 
+            className="text-xs text-[#1C1C1E]"
+            style={{ 
+              fontFamily: 'Fustat-Bold, sans-serif',
+              fontWeight: 'normal'
+            }}
+          >
             <span className="hidden lg:inline">{t.hero.badge.chosenBy}</span>{t.hero.badge.clients}
             <TextType
               text={t.hero.rotatingTexts}
@@ -100,19 +106,29 @@ export function Hero() {
               showCursor={true}
               cursorCharacter="|"
               as="span"
-              className="font-bold"
+              style={{ 
+                fontFamily: 'Fustat-Bold, sans-serif',
+                fontWeight: 'normal'
+              }}
             />
           </span>
         </div>
 
         {/* Heading */}
         <h1 
-          className="text-[48px] md:text-7xl font-bold leading-none tracking-tight text-[#1C1C1E] hero-blur-animate"
-          style={{ animationDelay: '0.2s', opacity: 0 }}
+          className="text-[48px] md:text-7xl leading-none text-[#1C1C1E] hero-blur-animate"
+          style={{ 
+            animationDelay: '0.2s', 
+            opacity: 0,
+            fontFamily: 'Fustat-Bold, sans-serif',
+            fontWeight: 'normal',
+            lineHeight: '0.9',
+            letterSpacing: '-0.06em'
+          }}
         >
           {t.hero.heading.line1} <br />
-          <span className="text-[#1C1C1E]">{t.hero.heading.line2}</span>
-          <ShinyText text={t.hero.heading.line3} speed={3} className="text-[#1C1C1E]" />
+          <span className="text-[#1C1C1E]" style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>{t.hero.heading.line2}</span>
+          <ShinyText text={t.hero.heading.line3} speed={3} className="text-[#1C1C1E]" style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }} />
         </h1>
 
         {/* Description */}
@@ -123,18 +139,18 @@ export function Hero() {
           {language === 'pt' ? (
             <>
               A infraestrutura digital completa para o seu negócio. Unimos design de{' '}
-              <strong>Criação de Sites de Alta Performance</strong>,{' '}
-              <strong>Engenharia de Software</strong>,{' '}
-              <strong>Inteligência Artificial (IA)</strong> e{' '}
-              <strong>SEO Técnico</strong> para gerar receita e eficiência.
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Criação de Sites de Alta Performance</strong>,{' '}
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Engenharia de Software</strong>,{' '}
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Inteligência Artificial (IA)</strong> e{' '}
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>SEO Técnico</strong> para gerar receita e eficiência.
             </>
           ) : (
             <>
               Complete digital infrastructure for your business. We combine high-performance{' '}
-              <strong>Website Creation</strong> design,{' '}
-              <strong>Software Engineering</strong>,{' '}
-              <strong>Artificial Intelligence (AI)</strong>, and{' '}
-              <strong>Technical SEO</strong> to generate revenue and efficiency.
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Website Creation</strong> design,{' '}
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Software Engineering</strong>,{' '}
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Artificial Intelligence (AI)</strong>, and{' '}
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Technical SEO</strong> to generate revenue and efficiency.
             </>
           )}
         </p>
@@ -164,7 +180,15 @@ export function Hero() {
               <Zap className="w-4 h-4 fill-current" />
             </div>
             <div>
-              <h3 className="font-bold text-[#1C1C1E] text-sm">{t.hero.features.performance.title}</h3>
+              <h3 
+                className="text-[#1C1C1E] text-sm"
+                style={{ 
+                  fontFamily: 'Fustat-Bold, sans-serif',
+                  fontWeight: 'normal'
+                }}
+              >
+                {t.hero.features.performance.title}
+              </h3>
               <p className="text-[#1C1C1E] text-xs mt-1">{t.hero.features.performance.description}</p>
             </div>
           </div>
@@ -174,7 +198,15 @@ export function Hero() {
               <Shield className="w-4 h-4 fill-current" />
             </div>
             <div>
-              <h3 className="font-bold text-[#1C1C1E] text-sm">{t.hero.features.optimized.title}</h3>
+              <h3 
+                className="text-[#1C1C1E] text-sm"
+                style={{ 
+                  fontFamily: 'Fustat-Bold, sans-serif',
+                  fontWeight: 'normal'
+                }}
+              >
+                {t.hero.features.optimized.title}
+              </h3>
               <p className="text-[#1C1C1E] text-xs mt-1">{t.hero.features.optimized.description}</p>
             </div>
           </div>
