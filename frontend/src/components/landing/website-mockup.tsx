@@ -114,21 +114,33 @@ export function WebsiteMockup() {
                 <img 
                   src="https://framerusercontent.com/images/E3vzjdpFuSWiVeurdyPGMrSWk.png?scale-down-to=512&width=1200&height=992" 
                   alt="Person 1" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover select-none"
+                  draggable="false"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
+                  style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
                 />
               </div>
               <div className="w-8 h-8 rounded-lg border-2 shadow-sm overflow-hidden" style={{ transform: 'rotate(2deg)', borderColor: '#1E2939' }}>
                 <img 
                   src="https://framerusercontent.com/images/jC7KwluILkhO0KHxk6qWEttOxhE.png?scale-down-to=512&width=1200&height=1200" 
                   alt="Person 2" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover select-none"
+                  draggable="false"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
+                  style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
                 />
               </div>
               <div className="w-8 h-8 rounded-lg border-2 shadow-sm overflow-hidden" style={{ transform: 'rotate(-2deg)', borderColor: '#1E2939' }}>
                 <img 
                   src="https://framerusercontent.com/images/cFl24iPInxckRrL32eRgadp9ZJM.png?scale-down-to=512&width=1200&height=1200" 
                   alt="Person 3" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover select-none"
+                  draggable="false"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
+                  style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
                 />
               </div>
               <div className="w-8 h-8 rounded-lg border-2 shadow-sm flex items-center justify-center overflow-hidden" style={{ transform: 'rotate(3deg)', borderColor: '#1E2939', backgroundColor: '#1E2939' }}>

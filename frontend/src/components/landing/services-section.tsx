@@ -42,7 +42,7 @@ const HorizontalBoneDivider = () => (
         className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none"
         preserveAspectRatio="none"
         style={{ 
-          right: '5px',
+          right: '6px',
           top: '50%',
           transform: 'translateY(-50%) translateX(50%) rotate(90deg)'
         }}

@@ -65,17 +65,29 @@ export function Hero() {
               <img 
                 src="https://framerusercontent.com/images/E3vzjdpFuSWiVeurdyPGMrSWk.png?scale-down-to=512&width=1200&height=992" 
                 alt="Founder 1" 
-                className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover"
+                className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover select-none"
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
               />
               <img 
                 src="https://framerusercontent.com/images/jC7KwluILkhO0KHxk6qWEttOxhE.png?scale-down-to=512&width=1200&height=1200" 
                 alt="Founder 2" 
-                className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover"
+                className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover select-none"
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
               />
               <img 
                 src="https://framerusercontent.com/images/cFl24iPInxckRrL32eRgadp9ZJM.png?scale-down-to=512&width=1200&height=1200" 
                 alt="Founder 3" 
-                className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover"
+                className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover select-none"
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
               />
             </div>
           </div>
