@@ -1,5 +1,8 @@
 import { SectionLayout } from "./section-layout";
-import { Monitor, Code, Bot, TrendingUp } from "lucide-react";
+import { FigmaIcon } from "@/components/ui/figma-icon";
+import { CodeXmlIcon } from "@/components/ui/code-xml-icon";
+import { BrainIcon } from "@/components/ui/brain-icon";
+import { ChartNoAxesCombinedIcon } from "@/components/ui/chart-no-axes-combined-icon";
 import PixelBlast from "@/components/ui/pixel-blast";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
@@ -212,22 +215,38 @@ export function ServicesSection() {
 
   const services = [
     {
-      icon: Monitor,
+      icon: null,
+      isFigma: true,
+      isCodeXml: false,
+      isBrain: false,
+      isChart: false,
       title: t.services.items.webDesign.title,
       description: t.services.items.webDesign.description
     },
     {
-      icon: Code,
+      icon: null,
+      isFigma: false,
+      isCodeXml: true,
+      isBrain: false,
+      isChart: false,
       title: t.services.items.customSoftware.title,
       description: t.services.items.customSoftware.description
     },
     {
-      icon: Bot,
+      icon: null,
+      isFigma: false,
+      isCodeXml: false,
+      isBrain: true,
+      isChart: false,
       title: t.services.items.aiAutomation.title,
       description: t.services.items.aiAutomation.description
     },
     {
-      icon: TrendingUp,
+      icon: null,
+      isFigma: false,
+      isCodeXml: false,
+      isBrain: false,
+      isChart: true,
       title: t.services.items.seoGrowth.title,
       description: t.services.items.seoGrowth.description
     }
@@ -319,11 +338,25 @@ export function ServicesSection() {
               return (
                 <div 
                   key={index} 
-                  className={`flex gap-4 relative ${isVisible ? 'services-blur-animate' : ''}`}
-                  style={{ animationDelay: `${0.3 + index * 0.1}s`, opacity: isVisible ? 0 : 0 }}
+                  className={`flex gap-4 relative ${isVisible ? 'services-blur-animate' : ''} ${index > 0 ? 'border-t border-dashed border-[#E2E7F1] pt-8' : ''}`}
+                  style={{
+                    ...(index > 0 ? { borderTopWidth: '0.5px' } : {}),
+                    animationDelay: `${0.3 + index * 0.1}s`,
+                    opacity: isVisible ? 0 : 0
+                  }}
                 >
                   <div className="flex-1 flex flex-col gap-3">
-                    <Icon className="w-5 h-5 text-[#1C1C1E]" />
+                    {service.isFigma ? (
+                      <FigmaIcon size={20} className="text-[#1C1C1E] self-start" />
+                    ) : service.isCodeXml ? (
+                      <CodeXmlIcon size={20} className="text-[#1C1C1E] self-start" />
+                    ) : service.isBrain ? (
+                      <BrainIcon size={20} className="text-[#1C1C1E] self-start" />
+                    ) : service.isChart ? (
+                      <ChartNoAxesCombinedIcon size={20} className="text-[#1C1C1E] self-start" />
+                    ) : (
+                      Icon && <Icon className="w-5 h-5 text-[#1C1C1E]" />
+                    )}
                     <h3 
                       className="text-lg text-[#1C1C1E]"
                       style={{ 
@@ -473,7 +506,17 @@ export function ServicesSection() {
                 }}
               >
                 <div className="flex flex-col gap-4">
-                  <Icon className="w-6 h-6 text-[#1C1C1E]" />
+                  {service.isFigma ? (
+                    <FigmaIcon size={24} className="text-[#1C1C1E] self-start" />
+                  ) : service.isCodeXml ? (
+                    <CodeXmlIcon size={24} className="text-[#1C1C1E] self-start" />
+                  ) : service.isBrain ? (
+                    <BrainIcon size={24} className="text-[#1C1C1E] self-start" />
+                  ) : service.isChart ? (
+                    <ChartNoAxesCombinedIcon size={24} className="text-[#1C1C1E] self-start" />
+                  ) : (
+                    Icon && <Icon className="w-6 h-6 text-[#1C1C1E]" />
+                  )}
                   <h3 
                     className="text-lg text-[#1C1C1E]"
                     style={{ 
