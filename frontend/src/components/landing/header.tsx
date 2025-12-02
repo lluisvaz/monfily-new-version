@@ -217,6 +217,19 @@ export function Header() {
               </SheetDescription>
             </VisuallyHiddenPrimitive.Root>
             <style>{`
+              @keyframes blurText {
+                0% {
+                  filter: blur(10px);
+                  opacity: 0;
+                }
+                100% {
+                  filter: blur(0px);
+                  opacity: 1;
+                }
+              }
+              .sidebar-blur-animate {
+                animation: blurText 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+              }
               @keyframes slideInRight {
                 from {
                   transform: translateX(100%);
@@ -347,172 +360,227 @@ export function Header() {
               }
             `}</style>
             
-            {/* Header do Menu */}
-            <div className="flex items-center justify-between px-4 h-24 border-b border-[#E2E7F1]">
-              <a 
-                href={`/${language}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsOpen(false);
-                  window.location.href = `/${language}`;
-                }}
-                className="flex items-center gap-2 cursor-pointer flex-shrink-0"
-              >
-                <img 
-                  src="https://res.cloudinary.com/dopp0v9eq/image/upload/v1763574787/monfily-black-nobg_risk6t.png" 
-                  alt="Monfily" 
-                  className="h-10 w-auto select-none"
-                  draggable="false"
-                  onContextMenu={(e) => e.preventDefault()}
-                  onDragStart={(e) => e.preventDefault()}
-                />
-              </a>
-              <SheetClose asChild>
-                <button className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0">
-                  <X className="h-8 w-8 text-[#1C1C1E]" />
-                </button>
-              </SheetClose>
-            </div>
-
-            {/* Navigation Links */}
-            <nav className="flex flex-col px-6 py-4">
+            {/* Sidebar Layout with Margins and Grid Decoration */}
+            <div className="w-full h-full flex flex-row relative">
+              {/* Top border line */}
+              <div className="absolute top-0 left-0 right-0 h-[0.5px] bg-[#E2E7F1]" style={{ zIndex: 10 }}></div>
               
-              {navItemsWithDropdown.map((item) => (
-                <Collapsible key={item} className="nav-item">
-                  <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group">
-                    <span>{item}</span>
-                    <ChevronDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
-                  </CollapsibleTrigger>
-                  <CollapsibleContent 
-                    className="pl-4 pb-2 overflow-hidden"
-                  >
-                    <div className="flex flex-col gap-2">
-                      <a 
-                        href="#" 
-                        onClick={() => setIsOpen(false)} 
-                        className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1"
-                        style={{
-                          animation: 'fadeInSubmenuItem 0.3s ease-out 0.1s both'
-                        }}
-                      >
-                        {t.header.solutionsDropdown.websiteCreation}
-                      </a>
-                      <a 
-                        href="#" 
-                        onClick={() => setIsOpen(false)} 
-                        className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1"
-                        style={{
-                          animation: 'fadeInSubmenuItem 0.3s ease-out 0.15s both'
-                        }}
-                      >
-                        {t.header.solutionsDropdown.softwareDevelopment}
-                      </a>
-                      <a 
-                        href="#" 
-                        onClick={() => setIsOpen(false)} 
-                        className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1"
-                        style={{
-                          animation: 'fadeInSubmenuItem 0.3s ease-out 0.2s both'
-                        }}
-                      >
-                        {t.header.solutionsDropdown.artificialIntelligence}
-                      </a>
-                      <a 
-                        href="#" 
-                        onClick={() => setIsOpen(false)} 
-                        className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1"
-                        style={{
-                          animation: 'fadeInSubmenuItem 0.3s ease-out 0.25s both'
-                        }}
-                      >
-                        {t.header.solutionsDropdown.technicalSEO}
-                      </a>
-                    </div>
-                  </CollapsibleContent>
-                </Collapsible>
-              ))}
+              {/* Header Bottom Border Line - Infinite line that extends through margins and passes through grid decorations */}
+              <div className="absolute left-0 right-0 h-[0.5px] bg-[#E2E7F1] pointer-events-none" style={{ top: '96px', zIndex: 1000 }}></div>
               
-              {navItems.filter(item => !navItemsWithDropdown.includes(item)).map((item) => {
-                const isAboutLink = item === t.header.nav.about;
-                return (
-                  <a
-                    key={item}
-                    href={isAboutLink ? "#servicos" : "#"}
-                    data-custom-handler="true"
+              {/* Left Margin */}
+              <div className="flex-1 min-w-[1rem] md:min-w-[2rem] bg-white"></div>
+              
+              {/* Main Content */}
+              <div className="relative w-full min-w-0 bg-white flex flex-col">
+                {/* Left border line */}
+                <div className="absolute top-0 bottom-0 left-0 w-[0.5px] bg-[#E2E7F1] pointer-events-none" style={{ zIndex: 1000 }}></div>
+                
+                {/* Right border line */}
+                <div className="absolute top-0 bottom-0 right-0 w-[0.5px] bg-[#E2E7F1] pointer-events-none" style={{ zIndex: 1000 }}></div>
+                
+                {/* Grid Decorations at Header Bottom Corners (where vertical lines meet header bottom border) */}
+                <div className="absolute pointer-events-none" style={{ top: '96px', left: 0, right: 0, zIndex: 99999 }}>
+                  {/* Left grid decoration */}
+                  <div className="absolute w-6 h-6 flex items-center justify-center pointer-events-none" style={{ left: '-12px', top: '-12px', zIndex: 99999 }}>
+                    <div className="absolute w-4 h-4 bg-white rounded-full" />
+                    <svg viewBox="0 0 24 24" className="w-full h-full fill-[#E2E7F1] relative z-10">
+                      <path d="M12 2C12 2 14 10 22 12C14 14 12 22 12 22C12 22 10 14 2 12C10 10 12 2 12 2Z" />
+                    </svg>
+                  </div>
+                  {/* Right grid decoration */}
+                  <div className="absolute w-6 h-6 flex items-center justify-center pointer-events-none" style={{ right: '-12px', top: '-12px', zIndex: 99999 }}>
+                    <div className="absolute w-4 h-4 bg-white rounded-full" />
+                    <svg viewBox="0 0 24 24" className="w-full h-full fill-[#E2E7F1] relative z-10">
+                      <path d="M12 2C12 2 14 10 22 12C14 14 12 22 12 22C12 22 10 14 2 12C10 10 12 2 12 2Z" />
+                    </svg>
+                  </div>
+                </div>
+                
+                {/* Header do Menu */}
+                <div className="flex items-center justify-between px-4 h-24">
+                  <a 
+                    href={`/${language}`}
                     onClick={(e) => {
-                      if (isAboutLink) {
-                        e.preventDefault();
-                        setIsOpen(false);
-                        // Wait for menu to close, then scroll
-                        setTimeout(() => {
-                          const element = document.getElementById('servicos');
-                          if (element) {
-                            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                            // Remove hash from URL after scroll
-                            if (window.history.replaceState) {
-                              window.history.replaceState(null, '', window.location.pathname + window.location.search);
-                            }
-                          }
-                        }, 300);
-                      } else {
-                        setIsOpen(false);
-                      }
+                      e.preventDefault();
+                      setIsOpen(false);
+                      window.location.href = `/${language}`;
                     }}
-                    className="nav-item text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors"
+                    className="flex items-center gap-2 cursor-pointer flex-shrink-0 sidebar-blur-animate"
+                    style={{ animationDelay: '0.1s', opacity: 0 }}
                   >
-                    {item}
+                    <img 
+                      src="https://res.cloudinary.com/dopp0v9eq/image/upload/v1763574787/monfily-black-nobg_risk6t.png" 
+                      alt="Monfily" 
+                      className="h-10 w-auto select-none"
+                      draggable="false"
+                      onContextMenu={(e) => e.preventDefault()}
+                      onDragStart={(e) => e.preventDefault()}
+                    />
                   </a>
-                );
-              })}
-              
-              {/* Separator */}
-              <div className="h-px bg-[#E2E7F1] my-4 nav-item"></div>
-              
-              {/* Language Selector */}
-              <Collapsible className="nav-item">
-                <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group">
-                  <div className="flex items-center gap-2">
-                    <Globe className="h-4 w-4" />
-                    <span>{language === 'pt' ? t.header.languages.portuguese : t.header.languages.english}</span>
-                  </div>
-                  <ChevronDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
-                </CollapsibleTrigger>
-                <CollapsibleContent 
-                  className="pl-4 pb-2 overflow-hidden"
-                >
-                  <div className="flex flex-col gap-2">
-                    <a 
-                      href="#" 
-                      onClick={(e) => { e.preventDefault(); handleLanguageChange('pt'); }} 
-                      className={`text-sm py-1 px-2 rounded transition-all duration-200 hover:translate-x-1 ${language === 'pt' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
-                      style={{
-                        animation: 'fadeInSubmenuItem 0.3s ease-out 0.1s both'
-                      }}
+                  <SheetClose asChild>
+                    <button 
+                      className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 sidebar-blur-animate"
+                      style={{ animationDelay: '0.15s', opacity: 0 }}
                     >
-                      {t.header.languages.portuguese}
-                    </a>
-                    <a 
-                      href="#" 
-                      onClick={(e) => { e.preventDefault(); handleLanguageChange('en'); }} 
-                      className={`text-sm py-1 px-2 rounded transition-all duration-200 hover:translate-x-1 ${language === 'en' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
-                      style={{
-                        animation: 'fadeInSubmenuItem 0.3s ease-out 0.15s both'
-                      }}
+                      <X className="h-8 w-8 text-[#1C1C1E]" />
+                    </button>
+                  </SheetClose>
+                </div>
+
+                {/* Navigation Links */}
+                <nav className="flex flex-col px-6 py-4 flex-1 overflow-y-auto">
+                  
+                  {navItemsWithDropdown.map((item, index) => (
+                    <Collapsible key={item} className="sidebar-blur-animate" style={{ animationDelay: `${0.2 + index * 0.05}s`, opacity: 0 }}>
+                      <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group">
+                        <span>{item}</span>
+                        <ChevronDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
+                      </CollapsibleTrigger>
+                      <CollapsibleContent 
+                        className="pl-4 pb-2 overflow-hidden"
+                      >
+                        <div className="flex flex-col gap-2">
+                          <a 
+                            href="#" 
+                            onClick={() => setIsOpen(false)} 
+                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1"
+                            style={{
+                              animation: 'fadeInSubmenuItem 0.3s ease-out 0.1s both'
+                            }}
+                          >
+                            {t.header.solutionsDropdown.websiteCreation}
+                          </a>
+                          <a 
+                            href="#" 
+                            onClick={() => setIsOpen(false)} 
+                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1"
+                            style={{
+                              animation: 'fadeInSubmenuItem 0.3s ease-out 0.15s both'
+                            }}
+                          >
+                            {t.header.solutionsDropdown.softwareDevelopment}
+                          </a>
+                          <a 
+                            href="#" 
+                            onClick={() => setIsOpen(false)} 
+                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1"
+                            style={{
+                              animation: 'fadeInSubmenuItem 0.3s ease-out 0.2s both'
+                            }}
+                          >
+                            {t.header.solutionsDropdown.artificialIntelligence}
+                          </a>
+                          <a 
+                            href="#" 
+                            onClick={() => setIsOpen(false)} 
+                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1"
+                            style={{
+                              animation: 'fadeInSubmenuItem 0.3s ease-out 0.25s both'
+                            }}
+                          >
+                            {t.header.solutionsDropdown.technicalSEO}
+                          </a>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+                  ))}
+                  
+                  {navItems.filter(item => !navItemsWithDropdown.includes(item)).map((item, index) => {
+                    const isAboutLink = item === t.header.nav.about;
+                    const dropdownCount = navItemsWithDropdown.length;
+                    return (
+                      <a
+                        key={item}
+                        href={isAboutLink ? "#servicos" : "#"}
+                        data-custom-handler="true"
+                        onClick={(e) => {
+                          if (isAboutLink) {
+                            e.preventDefault();
+                            setIsOpen(false);
+                            // Wait for menu to close, then scroll
+                            setTimeout(() => {
+                              const element = document.getElementById('servicos');
+                              if (element) {
+                                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                // Remove hash from URL after scroll
+                                if (window.history.replaceState) {
+                                  window.history.replaceState(null, '', window.location.pathname + window.location.search);
+                                }
+                              }
+                            }, 300);
+                          } else {
+                            setIsOpen(false);
+                          }
+                        }}
+                        className="sidebar-blur-animate text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors"
+                        style={{ animationDelay: `${0.2 + dropdownCount * 0.05 + index * 0.05}s`, opacity: 0 }}
+                      >
+                        {item}
+                      </a>
+                    );
+                  })}
+                  
+                  {/* Separator */}
+                  <div 
+                    className="h-px bg-[#E2E7F1] my-4 sidebar-blur-animate"
+                    style={{ animationDelay: `${0.2 + navItems.length * 0.05}s`, opacity: 0 }}
+                  ></div>
+                  
+                  {/* Language Selector */}
+                  <Collapsible 
+                    className="sidebar-blur-animate"
+                    style={{ animationDelay: `${0.25 + navItems.length * 0.05}s`, opacity: 0 }}
+                  >
+                    <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group">
+                      <div className="flex items-center gap-2">
+                        <Globe className="h-4 w-4" />
+                        <span>{language === 'pt' ? t.header.languages.portuguese : t.header.languages.english}</span>
+                      </div>
+                      <ChevronDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
+                    </CollapsibleTrigger>
+                    <CollapsibleContent 
+                      className="pl-4 pb-2 overflow-hidden"
                     >
-                      {t.header.languages.english}
-                    </a>
-                  </div>
-                </CollapsibleContent>
-              </Collapsible>
+                      <div className="flex flex-col gap-2">
+                        <a 
+                          href="#" 
+                          onClick={(e) => { e.preventDefault(); handleLanguageChange('pt'); }} 
+                          className={`text-sm py-1 px-2 rounded transition-all duration-200 hover:translate-x-1 ${language === 'pt' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
+                          style={{
+                            animation: 'fadeInSubmenuItem 0.3s ease-out 0.1s both'
+                          }}
+                        >
+                          {t.header.languages.portuguese}
+                        </a>
+                        <a 
+                          href="#" 
+                          onClick={(e) => { e.preventDefault(); handleLanguageChange('en'); }} 
+                          className={`text-sm py-1 px-2 rounded transition-all duration-200 hover:translate-x-1 ${language === 'en' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
+                          style={{
+                            animation: 'fadeInSubmenuItem 0.3s ease-out 0.15s both'
+                          }}
+                        >
+                          {t.header.languages.english}
+                        </a>
+                      </div>
+                    </CollapsibleContent>
+                  </Collapsible>
+                  
+                  {/* Falar com Especialista Button */}
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="sidebar-blur-animate mt-4 w-full bg-[#2869D6] hover:bg-[#1E4A8C] text-white font-medium text-base py-3 px-4 rounded-lg transition-colors"
+                    style={{ animationDelay: `${0.3 + navItems.length * 0.05}s`, opacity: 0 }}
+                  >
+                    {t.header.cta}
+                  </button>
+                </nav>
+              </div>
               
-              {/* Falar com Especialista Button */}
-              <button
-                onClick={() => setIsOpen(false)}
-                className="nav-item mt-4 w-full bg-[#2869D6] hover:bg-[#1E4A8C] text-white font-medium text-base py-3 px-4 rounded-lg transition-colors"
-              >
-                {t.header.cta}
-              </button>
-            </nav>
+              {/* Right Margin */}
+              <div className="flex-1 min-w-[1rem] md:min-w-[2rem] bg-white"></div>
+            </div>
           </SheetContent>
         </Sheet>
       </div>
