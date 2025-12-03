@@ -334,7 +334,6 @@ export function ServicesSection() {
           {/* Services Grid */}
           <div className="grid grid-cols-1 gap-8">
             {services.map((service, index) => {
-              const Icon = service.icon;
               return (
                 <div 
                   key={index} 
@@ -354,9 +353,7 @@ export function ServicesSection() {
                       <BrainIcon size={20} className="text-[#1C1C1E] self-start" />
                     ) : service.isChart ? (
                       <ChartNoAxesCombinedIcon size={20} className="text-[#1C1C1E] self-start" />
-                    ) : (
-                      Icon && <Icon className="w-5 h-5 text-[#1C1C1E]" />
-                    )}
+                    ) : null}
                     <h3 
                       className="text-lg text-[#1C1C1E]"
                       style={{ 
@@ -494,7 +491,6 @@ export function ServicesSection() {
 
         {/* Services Grid */}        <div className="grid grid-cols-4">
           {services.map((service, index) => {
-            const Icon = service.icon;
             return (
               <div 
                 key={index} 
@@ -514,9 +510,7 @@ export function ServicesSection() {
                     <BrainIcon size={24} className="text-[#1C1C1E] self-start" />
                   ) : service.isChart ? (
                     <ChartNoAxesCombinedIcon size={24} className="text-[#1C1C1E] self-start" />
-                  ) : (
-                    Icon && <Icon className="w-6 h-6 text-[#1C1C1E]" />
-                  )}
+                  ) : null}
                   <h3 
                     className="text-lg text-[#1C1C1E]"
                     style={{ 
