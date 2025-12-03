@@ -273,9 +273,9 @@ export function ServicesSection() {
       <SectionLayout showStripes={false} className="flex flex-col md:hidden px-6" containerClassName="overflow-visible">
         <div className="flex flex-col w-full gap-8 py-8" style={{ overflow: 'visible', position: 'relative' }}>
           {/* Header */}
-          <div className="flex flex-col gap-6 pt-8 pb-8 relative">
+          <div className="flex flex-col gap-6 pt-8 pb-8 relative items-center" style={{ paddingTop: '32px', paddingBottom: '32px' }}>
             <h2 
-              className={`text-[#1C1C1E] leading-none relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+              className={`text-[#1C1C1E] leading-none relative z-10 text-center ${isVisible ? 'services-blur-animate' : ''}`}
               style={{ 
                 fontSize: '36px', 
                 animationDelay: '0.1s', 
@@ -291,12 +291,12 @@ export function ServicesSection() {
             
             {/* Metrics */}
             <div 
-              className={`flex flex-col gap-4 mt-8 relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+              className={`flex flex-row gap-6 mt-8 relative z-10 items-center justify-center ${isVisible ? 'services-blur-animate' : ''}`}
               style={{ animationDelay: '0.2s', opacity: isVisible ? 0 : 0 }}
             >
-              <div>
+              <div className="flex-1 flex flex-col items-center text-center">
                 <div 
-                  className="text-[#1C1C1E]" 
+                  className="text-[#1C1C1E] whitespace-nowrap" 
                   style={{ 
                     fontSize: '32px',
                     fontFamily: 'Fustat-Bold, sans-serif',
@@ -305,14 +305,14 @@ export function ServicesSection() {
                 >
                   <span className="text-[#2869D6]">+</span> 50
                 </div>
-                <div className="text-base text-[#6B7280] mt-1">
+                <div className="text-base text-[#6B7280] mt-1 whitespace-nowrap">
                   {t.services.metrics.projectsDelivered}
                 </div>
               </div>
               
-              <div>
+              <div className="flex-1 flex flex-col items-center text-center">
                 <div 
-                  className="text-[#1C1C1E]" 
+                  className="text-[#1C1C1E] whitespace-nowrap" 
                   style={{ 
                     fontSize: '32px',
                     fontFamily: 'Fustat-Bold, sans-serif',
@@ -321,7 +321,7 @@ export function ServicesSection() {
                 >
                   <span className="text-[#2869D6]">+</span> 10
                 </div>
-                <div className="text-base text-[#6B7280] mt-1">
+                <div className="text-base text-[#6B7280] mt-1 whitespace-nowrap">
                   {t.services.metrics.nichesServed}
                 </div>
               </div>
