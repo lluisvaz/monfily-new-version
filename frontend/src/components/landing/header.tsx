@@ -200,7 +200,7 @@ export function Header() {
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
             <button 
-              className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 header-blur-animate"
+              className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 header-blur-animate focus:outline-none focus-visible:outline-none"
               style={{ animationDelay: '0.2s', opacity: 0 }}
             >
               <MenuIcon size={32} className="text-[#1C1C1E]" />
@@ -420,7 +420,7 @@ export function Header() {
                   </a>
                   <SheetClose asChild>
                     <button 
-                      className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 sidebar-blur-animate"
+                      className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 sidebar-blur-animate focus:outline-none focus-visible:outline-none"
                       style={{ animationDelay: '0.15s', opacity: 0 }}
                     >
                       <X className="h-8 w-8 text-[#1C1C1E]" />
