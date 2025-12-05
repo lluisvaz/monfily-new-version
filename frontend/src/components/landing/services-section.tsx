@@ -533,7 +533,262 @@ export function ServicesSection() {
       
       {/* Large Striped Divider */}
       <LargeStripedDivider />
+
+      {/* Expertise Section */}
+      <ExpertiseSection />
     </>
   );
 }
+
+// Expertise Section Component
+const ExpertiseSection = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  return (
+    <SectionLayout showStripes={false} showTopBorder={false} className="relative pt-0 md:pt-0 pb-16 md:pb-24 px-6 md:px-16 lg:px-28">
+      <div ref={sectionRef} className="relative z-10 -mt-12 md:-mt-6">
+        {/* Background Pattern */}
+        <div 
+          className="absolute inset-0 opacity-40 pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(circle, #E2E7F1 1.5px, transparent 1.5px)',
+            backgroundSize: '24px 24px',
+            backgroundPosition: '0 0'
+          }}
+        />
+
+        {/* Mobile Layout */}
+        <div className="flex flex-col md:hidden items-center text-center gap-4">
+          {/* Label Pill */}
+          <div 
+            className={`inline-flex items-center px-3 py-1 rounded-full bg-[#E8F5E9] text-[#1C1C1E] text-xs font-medium ${isVisible ? 'services-blur-animate' : ''}`}
+            style={{ animationDelay: '0.1s', opacity: isVisible ? 0 : 0 }}
+          >
+            {t.expertise.label}
+          </div>
+
+          {/* Heading */}
+          <h2 
+            className={`text-3xl text-[#1C1C1E] leading-tight ${isVisible ? 'services-blur-animate' : ''}`}
+            style={{ 
+              animationDelay: '0.2s', 
+              opacity: isVisible ? 0 : 0,
+              fontFamily: 'Fustat-Bold, sans-serif',
+              fontWeight: 'normal',
+              lineHeight: '1.1',
+              letterSpacing: '-0.06em'
+            }}
+          >
+            {t.expertise.heading.line1}
+            <br />
+            {t.expertise.heading.line2}
+          </h2>
+
+          {/* Description */}
+          <p 
+            className={`text-sm text-[#6B7280] max-w-md leading-relaxed ${isVisible ? 'services-blur-animate' : ''}`}
+            style={{ animationDelay: '0.3s', opacity: isVisible ? 0 : 0 }}
+          >
+            {t.expertise.description}
+          </p>
+
+          {/* CTA Button */}
+          <button
+            className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#4CAF50] text-white font-medium text-sm hover:bg-[#45a049] transition-colors ${isVisible ? 'services-blur-animate' : ''}`}
+            style={{ animationDelay: '0.4s', opacity: isVisible ? 0 : 0 }}
+          >
+            {t.expertise.cta}
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+
+          {/* Floating Icons - Mobile */}
+          <div className="relative w-full h-80 mt-4">
+            <FloatingIcon name="python" position={{ top: '5%', left: '0%' }} delay={0.5} isVisible={isVisible} />
+            <FloatingIcon name="n8n" position={{ top: '25%', left: '5%' }} delay={0.6} isVisible={isVisible} />
+            <FloatingIcon name="react" position={{ top: '20%', right: '0%' }} delay={0.7} isVisible={isVisible} />
+            <FloatingIcon name="chatgpt" position={{ top: '60%', left: '8%' }} delay={0.8} isVisible={isVisible} />
+            <FloatingIcon name="claude" position={{ top: '75%', right: '0%' }} delay={0.9} isVisible={isVisible} />
+          </div>
+        </div>
+
+        {/* Desktop Layout */}
+        <div className="hidden md:flex flex-col items-center text-center gap-6 relative">
+          {/* Label Pill */}
+          <div 
+            className={`inline-flex items-center px-4 py-1.5 rounded-full bg-[#E8F5E9] text-[#1C1C1E] text-sm font-medium ${isVisible ? 'services-blur-animate' : ''}`}
+            style={{ animationDelay: '0.1s', opacity: isVisible ? 0 : 0 }}
+          >
+            {t.expertise.label}
+          </div>
+
+          {/* Heading */}
+          <h2 
+            className={`text-5xl md:text-6xl text-[#1C1C1E] leading-tight max-w-4xl ${isVisible ? 'services-blur-animate' : ''}`}
+            style={{ 
+              animationDelay: '0.2s', 
+              opacity: isVisible ? 0 : 0,
+              fontFamily: 'Fustat-Bold, sans-serif',
+              fontWeight: 'normal',
+              lineHeight: '1.1',
+              letterSpacing: '-0.06em'
+            }}
+          >
+            {t.expertise.heading.line1}
+            <br />
+            {t.expertise.heading.line2}
+          </h2>
+
+          {/* Description */}
+          <p 
+            className={`text-base md:text-lg text-[#6B7280] max-w-2xl leading-relaxed ${isVisible ? 'services-blur-animate' : ''}`}
+            style={{ animationDelay: '0.3s', opacity: isVisible ? 0 : 0 }}
+          >
+            {t.expertise.description}
+          </p>
+
+          {/* CTA Button */}
+          <button
+            className={`inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-[#4CAF50] text-white font-medium text-base hover:bg-[#45a049] transition-colors ${isVisible ? 'services-blur-animate' : ''}`}
+            style={{ animationDelay: '0.4s', opacity: isVisible ? 0 : 0 }}
+          >
+            {t.expertise.cta}
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+
+          {/* Floating Icons - Desktop */}
+          <div className="relative w-full h-[500px] mt-8">
+            <FloatingIcon name="python" position={{ top: '8%', left: '5%' }} delay={0.5} isVisible={isVisible} />
+            <FloatingIcon name="n8n" position={{ top: '25%', left: '8%' }} delay={0.6} isVisible={isVisible} />
+            <FloatingIcon name="react" position={{ top: '18%', right: '8%' }} delay={0.7} isVisible={isVisible} />
+            <FloatingIcon name="chatgpt" position={{ top: '55%', left: '6%' }} delay={0.8} isVisible={isVisible} />
+            <FloatingIcon name="claude" position={{ top: '70%', right: '5%' }} delay={0.9} isVisible={isVisible} />
+          </div>
+        </div>
+      </div>
+    </SectionLayout>
+  );
+};
+
+// Floating Icon Component
+const FloatingIcon = ({ 
+  name, 
+  position, 
+  delay, 
+  isVisible 
+}: { 
+  name: string; 
+  position: { top: string; left?: string; right?: string }; 
+  delay: number; 
+  isVisible: boolean;
+}) => {
+  const getIcon = () => {
+    switch (name) {
+      case 'python':
+        return (
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.5 2.5C14.5 2.5 15.5 2.5 15.5 3.5C15.5 4.5 14.5 5.5 13.5 5.5C12.5 5.5 11.5 4.5 11.5 3.5C11.5 2.5 12.5 1.5 13.5 1.5C14.5 1.5 14.5 2.5 14.5 2.5Z" fill="#3776AB"/>
+            <path d="M9.5 21.5C9.5 21.5 8.5 21.5 8.5 20.5C8.5 19.5 9.5 18.5 10.5 18.5C11.5 18.5 12.5 19.5 12.5 20.5C12.5 21.5 11.5 22.5 10.5 22.5C9.5 22.5 9.5 21.5 9.5 21.5Z" fill="#FFD43B"/>
+            <path d="M12 2C8.5 2 6 3.5 6 6.5V9H9V8H12V6.5C12 5.5 12.5 5 13.5 5C14.5 5 15 5.5 15 6.5V9H18V6.5C18 3.5 15.5 2 12 2Z" fill="#3776AB"/>
+            <path d="M12 22C15.5 22 18 20.5 18 17.5V15H15V16H12V17.5C12 18.5 11.5 19 10.5 19C9.5 19 9 18.5 9 17.5V15H6V17.5C6 20.5 8.5 22 12 22Z" fill="#FFD43B"/>
+            <path d="M6 10.5H18V13.5H6V10.5Z" fill="#3776AB"/>
+          </svg>
+        );
+      case 'n8n':
+        return (
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#FF6D5B"/>
+            <path d="M2 17L12 22L22 17V12L12 17L2 12V17Z" fill="#FF6D5B"/>
+          </svg>
+        );
+      case 'react':
+        return (
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="2" fill="#61DAFB"/>
+            <ellipse cx="12" cy="12" rx="11" ry="4.2" stroke="#61DAFB" strokeWidth="1.5" fill="none"/>
+            <ellipse cx="12" cy="12" rx="11" ry="4.2" stroke="#61DAFB" strokeWidth="1.5" fill="none" transform="rotate(60 12 12)"/>
+            <ellipse cx="12" cy="12" rx="11" ry="4.2" stroke="#61DAFB" strokeWidth="1.5" fill="none" transform="rotate(120 12 12)"/>
+          </svg>
+        );
+      case 'chatgpt':
+        return (
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21.5 9.5C21.5 9.5 21.5 8.5 20.5 8.5C19.5 8.5 18.5 9.5 18.5 9.5C18.5 9.5 17.5 9.5 17.5 10.5C17.5 11.5 18.5 12.5 18.5 12.5C18.5 12.5 17.5 13.5 17.5 14.5C17.5 15.5 18.5 16.5 18.5 16.5C18.5 16.5 19.5 16.5 20.5 16.5C21.5 16.5 21.5 15.5 21.5 15.5C21.5 15.5 22.5 15.5 22.5 14.5C22.5 13.5 21.5 12.5 21.5 12.5C21.5 12.5 22.5 11.5 22.5 10.5C22.5 9.5 21.5 9.5 21.5 9.5Z" fill="#10A37F"/>
+            <path d="M5.5 9.5C5.5 9.5 5.5 8.5 4.5 8.5C3.5 8.5 2.5 9.5 2.5 9.5C2.5 9.5 1.5 9.5 1.5 10.5C1.5 11.5 2.5 12.5 2.5 12.5C2.5 12.5 1.5 13.5 1.5 14.5C1.5 15.5 2.5 16.5 2.5 16.5C2.5 16.5 3.5 16.5 4.5 16.5C5.5 16.5 5.5 15.5 5.5 15.5C5.5 15.5 6.5 15.5 6.5 14.5C6.5 13.5 5.5 12.5 5.5 12.5C5.5 12.5 6.5 11.5 6.5 10.5C6.5 9.5 5.5 9.5 5.5 9.5Z" fill="#10A37F"/>
+            <path d="M12 2C12 2 11 2 11 3C11 4 12 5 12 5C12 5 13 5 13 4C13 3 12 2 12 2Z" fill="#10A37F"/>
+            <path d="M12 19C12 19 11 19 11 20C11 21 12 22 12 22C12 22 13 22 13 21C13 20 12 19 12 19Z" fill="#10A37F"/>
+            <path d="M12 7C8 7 5 10 5 14C5 18 8 21 12 21C16 21 19 18 19 14C19 10 16 7 12 7Z" fill="#10A37F"/>
+          </svg>
+        );
+      case 'claude':
+        return (
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2Z" fill="#D97757"/>
+            <path d="M12 6C8.7 6 6 8.7 6 12C6 15.3 8.7 18 12 18C15.3 18 18 15.3 18 12C18 8.7 15.3 6 12 6Z" fill="#F4A261"/>
+          </svg>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const getLabel = () => {
+    switch (name) {
+      case 'python': return 'Python';
+      case 'n8n': return 'n8n';
+      case 'react': return 'React';
+      case 'chatgpt': return 'ChatGPT';
+      case 'claude': return 'Claude';
+      default: return '';
+    }
+  };
+
+  return (
+    <div
+      className={`absolute flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm hover:shadow-md transition-shadow ${isVisible ? 'services-blur-animate' : ''}`}
+      style={{
+        ...position,
+        animationDelay: `${delay}s`,
+        opacity: isVisible ? 0 : 0,
+        zIndex: 10
+      }}
+    >
+      <div className="flex-shrink-0">
+        {getIcon()}
+      </div>
+      <span className="text-sm font-medium text-[#1C1C1E] whitespace-nowrap">{getLabel()}</span>
+    </div>
+  );
+};
 

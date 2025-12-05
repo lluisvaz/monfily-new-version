@@ -5,6 +5,7 @@ interface SectionLayoutProps {
   className?: string;
   containerClassName?: string;
   showStripes?: boolean;
+  showTopBorder?: boolean;
 }
 
 const GridDecoration = ({ className }: { className?: string }) => (
@@ -23,7 +24,8 @@ export function SectionLayout({
   children, 
   className = "", 
   containerClassName = "",
-  showStripes = true 
+  showStripes = true,
+  showTopBorder = true
 }: SectionLayoutProps) {
   // Adjusted to user requested color #E2E7F1 for a more subtle look
   const stripeClass = "bg-slate-50/30 bg-[image:repeating-linear-gradient(45deg,#E2E7F1_0px,#E2E7F1_1px,transparent_1px,transparent_12px)]";
@@ -32,7 +34,9 @@ export function SectionLayout({
   return (
     <div className={`w-full flex flex-row relative ${containerClassName}`}>
       {/* Top border line - very thin */}
-      <div className="absolute top-0 left-0 right-0 h-[0.5px] bg-[#E2E7F1]" style={{ zIndex: 10 }}></div>
+      {showTopBorder && (
+        <div className="absolute top-0 left-0 right-0 h-[0.5px] bg-[#E2E7F1]" style={{ zIndex: 10 }}></div>
+      )}
       
       {/* Left Decor - Visible on all screen sizes */}
       <div className={`flex-1 min-w-[1rem] md:min-w-[2rem] ${showStripes ? stripeClass : noStripeClass}`}></div>
