@@ -268,6 +268,17 @@ export function ServicesSection() {
         .services-blur-animate {
           animation: blurText 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
+        @keyframes pulse-slow-1 {
+          0%, 100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.7;
+          }
+        }
+        .animate-pulse-slow-1 {
+          animation: pulse-slow-1 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
       `}</style>
       <div ref={sectionRef} id="servicos">
       {/* Mobile Section */}
@@ -587,10 +598,10 @@ const ExpertiseSection = () => {
         />
 
         {/* Mobile Layout */}
-        <div className="flex flex-col md:hidden items-start text-left space-y-6 pt-16 pb-8">
+        <div className="flex flex-col md:hidden items-start text-left space-y-6 pt-16 pb-8 relative">
           {/* Label Pill */}
           <div 
-            className={`inline-flex items-center px-3 py-1 rounded-full border border-[#E2E7F1] text-[#1C1C1E] text-xs ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`inline-flex items-center px-3 py-1 rounded-full border border-[#E2E7F1] text-[#1C1C1E] text-xs relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ 
               animationDelay: '0.1s', 
               opacity: isVisible ? 0 : 0,
@@ -603,7 +614,7 @@ const ExpertiseSection = () => {
 
           {/* Heading */}
           <h2 
-            className={`text-[#1C1C1E] leading-none ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`text-[#1C1C1E] leading-none relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ 
               animationDelay: '0.2s', 
               opacity: isVisible ? 0 : 0,
@@ -619,7 +630,7 @@ const ExpertiseSection = () => {
 
           {/* Description */}
           <p 
-            className={`text-base md:text-lg text-[#1C1C1E] max-w-md leading-tight ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`text-base md:text-lg text-[#1C1C1E] max-w-md leading-tight relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.3s', opacity: isVisible ? 0 : 0 }}
           >
             {t.expertise.description}
@@ -627,7 +638,7 @@ const ExpertiseSection = () => {
 
           {/* CTA Button */}
           <button
-            className={`group bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer w-full sm:w-auto ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`group bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-start gap-3 cursor-pointer w-auto relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.4s', opacity: isVisible ? 0 : 0 }}
           >
             {t.expertise.cta}
@@ -635,22 +646,23 @@ const ExpertiseSection = () => {
               <ArrowRight className="w-3 h-3 text-[#2869D6]" />
             </div>
           </button>
-
-          {/* Floating Icons - Mobile */}
-          <div className="relative w-full h-80">
-            <FloatingIcon name="python" position={{ top: '5%', left: '0%' }} delay={0.5} isVisible={isVisible} />
-            <FloatingIcon name="n8n" position={{ top: '25%', left: '5%' }} delay={0.6} isVisible={isVisible} />
-            <FloatingIcon name="react" position={{ top: '20%', right: '0%' }} delay={0.7} isVisible={isVisible} />
-            <FloatingIcon name="chatgpt" position={{ top: '60%', left: '8%' }} delay={0.8} isVisible={isVisible} />
-            <FloatingIcon name="claude" position={{ top: '75%', right: '0%' }} delay={0.9} isVisible={isVisible} />
-          </div>
         </div>
 
         {/* Desktop Layout */}
         <div className="hidden md:flex flex-col items-center text-center space-y-8 relative pt-[140px] pb-[100px]">
+          {/* Floating Icons - Desktop */}
+          <div className="absolute inset-0 pointer-events-none">
+            <FloatingIcon name="python" position={{ top: '22%', left: '5%' }} delay={0.5} isVisible={isVisible} />
+            <FloatingIcon name="n8n" position={{ top: '52%', left: '0%' }} delay={0.6} isVisible={isVisible} />
+            <FloatingIcon name="react" position={{ top: '22%', right: '8%' }} delay={0.7} isVisible={isVisible} />
+            <FloatingIcon name="nodejs" position={{ top: '52%', right: '0%' }} delay={0.75} isVisible={isVisible} />
+            <FloatingIcon name="chatgpt" position={{ top: '82%', left: '6%' }} delay={0.8} isVisible={isVisible} />
+            <FloatingIcon name="claude" position={{ top: '82%', right: '5%' }} delay={0.9} isVisible={isVisible} />
+          </div>
+
           {/* Label Pill */}
           <div 
-            className={`inline-flex items-center px-4 py-1.5 rounded-full border border-[#E2E7F1] text-[#1C1C1E] text-sm ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`inline-flex items-center px-4 py-1.5 rounded-full border border-[#E2E7F1] text-[#1C1C1E] text-sm relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ 
               animationDelay: '0.1s', 
               opacity: isVisible ? 0 : 0,
@@ -663,7 +675,7 @@ const ExpertiseSection = () => {
 
           {/* Heading */}
           <h2 
-            className={`text-4xl md:text-5xl text-[#1C1C1E] leading-none max-w-4xl ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`text-4xl md:text-5xl text-[#1C1C1E] leading-none max-w-4xl relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ 
               animationDelay: '0.2s', 
               opacity: isVisible ? 0 : 0,
@@ -680,7 +692,7 @@ const ExpertiseSection = () => {
 
           {/* Description */}
           <p 
-            className={`text-base md:text-lg text-[#1C1C1E] max-w-2xl leading-tight ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`text-base md:text-lg text-[#1C1C1E] max-w-xl leading-tight relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.3s', opacity: isVisible ? 0 : 0 }}
           >
             {t.expertise.description}
@@ -688,7 +700,7 @@ const ExpertiseSection = () => {
 
           {/* CTA Button */}
           <button
-            className={`group bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`group bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.4s', opacity: isVisible ? 0 : 0 }}
           >
             {t.expertise.cta}
@@ -696,15 +708,6 @@ const ExpertiseSection = () => {
               <ArrowRight className="w-3 h-3 text-[#2869D6]" />
             </div>
           </button>
-
-          {/* Floating Icons - Desktop */}
-          <div className="relative w-full h-[500px]">
-            <FloatingIcon name="python" position={{ top: '8%', left: '5%' }} delay={0.5} isVisible={isVisible} />
-            <FloatingIcon name="n8n" position={{ top: '25%', left: '8%' }} delay={0.6} isVisible={isVisible} />
-            <FloatingIcon name="react" position={{ top: '18%', right: '8%' }} delay={0.7} isVisible={isVisible} />
-            <FloatingIcon name="chatgpt" position={{ top: '55%', left: '6%' }} delay={0.8} isVisible={isVisible} />
-            <FloatingIcon name="claude" position={{ top: '70%', right: '5%' }} delay={0.9} isVisible={isVisible} />
-          </div>
         </div>
       </div>
     </SectionLayout>
@@ -751,6 +754,17 @@ const FloatingIcon = ({
             <ellipse cx="12" cy="12" rx="11" ry="4.2" stroke="#61DAFB" strokeWidth="1.5" fill="none" transform="rotate(120 12 12)"/>
           </svg>
         );
+      case 'nodejs':
+        return (
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#339933"/>
+            <path d="M12.5 7H11.5V17H12.5V7Z" fill="#FFFFFF"/>
+            <path d="M16 9C16.55 9 17 9.45 17 10C17 10.55 16.55 11 16 11C15.45 11 15 10.55 15 10C15 9.45 15.45 9 16 9Z" fill="#FFFFFF"/>
+            <path d="M8 9C8.55 9 9 9.45 9 10C9 10.55 8.55 11 8 11C7.45 11 7 10.55 7 10C7 9.45 7.45 9 8 9Z" fill="#FFFFFF"/>
+            <path d="M16 13C16.55 13 17 13.45 17 14C17 14.55 16.55 15 16 15C15.45 15 15 14.55 15 14C15 13.45 15.45 13 16 13Z" fill="#FFFFFF"/>
+            <path d="M8 13C8.55 13 9 13.45 9 14C9 14.55 8.55 15 8 15C7.45 15 7 14.55 7 14C7 13.45 7.45 13 8 13Z" fill="#FFFFFF"/>
+          </svg>
+        );
       case 'chatgpt':
         return (
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -778,6 +792,7 @@ const FloatingIcon = ({
       case 'python': return 'Python';
       case 'n8n': return 'n8n';
       case 'react': return 'React';
+      case 'nodejs': return 'Node.js';
       case 'chatgpt': return 'ChatGPT';
       case 'claude': return 'Claude';
       default: return '';
@@ -786,18 +801,30 @@ const FloatingIcon = ({
 
   return (
     <div
-      className={`absolute flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm hover:shadow-md transition-shadow ${isVisible ? 'services-blur-animate' : ''}`}
+      className={`absolute flex items-center gap-2 bg-white rounded-full shadow-sm hover:shadow-md transition-shadow ${isVisible ? 'services-blur-animate' : ''} animate-pulse-slow-1`}
       style={{
         ...position,
         animationDelay: `${delay}s`,
         opacity: isVisible ? 0 : 0,
-        zIndex: 10
+        zIndex: 10,
+        padding: '8px 12px',
+        minHeight: '48px'
       }}
     >
       <div className="flex-shrink-0">
         {getIcon()}
       </div>
-      <span className="text-sm font-medium text-[#1C1C1E] whitespace-nowrap">{getLabel()}</span>
+      <span 
+        className="whitespace-nowrap"
+        style={{
+          fontSize: '20px',
+          color: '#121217',
+          fontFamily: 'Fustat-Bold, sans-serif',
+          fontWeight: 'normal'
+        }}
+      >
+        {getLabel()}
+      </span>
     </div>
   );
 };
