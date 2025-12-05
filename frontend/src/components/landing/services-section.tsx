@@ -594,8 +594,8 @@ const ExpertiseSection = () => {
             top: 0,
             bottom: 0,
             backgroundImage: `
-              linear-gradient(#E2E7F1 1px, transparent 1px),
-              linear-gradient(90deg, #E2E7F1 1px, transparent 1px)
+              linear-gradient(#CBD5E1 1px, transparent 1px),
+              linear-gradient(90deg, #CBD5E1 1px, transparent 1px)
             `,
             backgroundSize: '24px 24px',
             backgroundPosition: '0 0'
@@ -615,7 +615,7 @@ const ExpertiseSection = () => {
         <div className="flex flex-col md:hidden items-start text-left space-y-6 pt-16 pb-16 relative">
           {/* Label Pill */}
           <div 
-            className={`inline-flex items-center px-3 py-1 rounded-full border border-[#E2E7F1] text-[#1C1C1E] text-xs relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`inline-flex items-center px-3 py-1 rounded-full border border-[#E2E7F1] text-[#1C1C1E] text-xs relative z-10 bg-white ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ 
               animationDelay: '0.1s', 
               opacity: isVisible ? 0 : 0,
@@ -676,7 +676,7 @@ const ExpertiseSection = () => {
 
           {/* Label Pill */}
           <div 
-            className={`inline-flex items-center px-4 py-1.5 rounded-full border border-[#E2E7F1] text-[#1C1C1E] text-sm relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`inline-flex items-center px-4 py-1.5 rounded-full border border-[#E2E7F1] text-[#1C1C1E] text-sm relative z-10 bg-white ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ 
               animationDelay: '0.1s', 
               opacity: isVisible ? 0 : 0,
