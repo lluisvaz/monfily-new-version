@@ -587,18 +587,32 @@ const ExpertiseSection = () => {
   return (
     <SectionLayout showStripes={false} showTopBorder={false} className="relative pt-0 pb-16 md:pb-24 px-6 md:px-16 lg:px-28">
       <div ref={sectionRef} className="relative z-10 -mt-[129.5px] md:-mt-[129.5px]">
-        {/* Background Pattern */}
+        {/* Background Pattern - Squares */}
         <div 
-          className="absolute inset-0 opacity-40 pointer-events-none"
+          className="absolute opacity-40 pointer-events-none -left-6 -right-6 md:-left-16 md:-right-16 lg:-left-28 lg:-right-28"
           style={{
-            backgroundImage: 'radial-gradient(circle, #E2E7F1 1.5px, transparent 1.5px)',
+            top: 0,
+            bottom: 0,
+            backgroundImage: `
+              linear-gradient(#E2E7F1 1px, transparent 1px),
+              linear-gradient(90deg, #E2E7F1 1px, transparent 1px)
+            `,
             backgroundSize: '24px 24px',
             backgroundPosition: '0 0'
           }}
         />
+        {/* Gradient overlay - white to transparent for fade effect */}
+        <div 
+          className="absolute pointer-events-none -left-6 -right-6 md:-left-16 md:-right-16 lg:-left-28 lg:-right-28"
+          style={{
+            top: 0,
+            bottom: 0,
+            background: 'radial-gradient(circle at center, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0.3) 70%, rgba(255, 255, 255, 0.1) 85%, transparent 95%)'
+          }}
+        />
 
         {/* Mobile Layout */}
-        <div className="flex flex-col md:hidden items-start text-left space-y-6 pt-16 pb-8 relative">
+        <div className="flex flex-col md:hidden items-start text-left space-y-6 pt-16 pb-16 relative">
           {/* Label Pill */}
           <div 
             className={`inline-flex items-center px-3 py-1 rounded-full border border-[#E2E7F1] text-[#1C1C1E] text-xs relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
@@ -649,7 +663,7 @@ const ExpertiseSection = () => {
         </div>
 
         {/* Desktop Layout */}
-        <div className="hidden md:flex flex-col items-center text-center space-y-8 relative pt-[140px] pb-[100px]">
+        <div className="hidden md:flex flex-col items-center text-center space-y-8 relative pt-[140px] pb-[140px]">
           {/* Floating Icons - Desktop */}
           <div className="absolute inset-0 pointer-events-none">
             <FloatingIcon name="python" position={{ top: '22%', left: '5%' }} delay={0.5} isVisible={isVisible} />
@@ -727,64 +741,27 @@ const FloatingIcon = ({
   isVisible: boolean;
 }) => {
   const getIcon = () => {
-    switch (name) {
-      case 'python':
-        return (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14.5 2.5C14.5 2.5 15.5 2.5 15.5 3.5C15.5 4.5 14.5 5.5 13.5 5.5C12.5 5.5 11.5 4.5 11.5 3.5C11.5 2.5 12.5 1.5 13.5 1.5C14.5 1.5 14.5 2.5 14.5 2.5Z" fill="#3776AB"/>
-            <path d="M9.5 21.5C9.5 21.5 8.5 21.5 8.5 20.5C8.5 19.5 9.5 18.5 10.5 18.5C11.5 18.5 12.5 19.5 12.5 20.5C12.5 21.5 11.5 22.5 10.5 22.5C9.5 22.5 9.5 21.5 9.5 21.5Z" fill="#FFD43B"/>
-            <path d="M12 2C8.5 2 6 3.5 6 6.5V9H9V8H12V6.5C12 5.5 12.5 5 13.5 5C14.5 5 15 5.5 15 6.5V9H18V6.5C18 3.5 15.5 2 12 2Z" fill="#3776AB"/>
-            <path d="M12 22C15.5 22 18 20.5 18 17.5V15H15V16H12V17.5C12 18.5 11.5 19 10.5 19C9.5 19 9 18.5 9 17.5V15H6V17.5C6 20.5 8.5 22 12 22Z" fill="#FFD43B"/>
-            <path d="M6 10.5H18V13.5H6V10.5Z" fill="#3776AB"/>
-          </svg>
-        );
-      case 'n8n':
-        return (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#FF6D5B"/>
-            <path d="M2 17L12 22L22 17V12L12 17L2 12V17Z" fill="#FF6D5B"/>
-          </svg>
-        );
-      case 'react':
-        return (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="2" fill="#61DAFB"/>
-            <ellipse cx="12" cy="12" rx="11" ry="4.2" stroke="#61DAFB" strokeWidth="1.5" fill="none"/>
-            <ellipse cx="12" cy="12" rx="11" ry="4.2" stroke="#61DAFB" strokeWidth="1.5" fill="none" transform="rotate(60 12 12)"/>
-            <ellipse cx="12" cy="12" rx="11" ry="4.2" stroke="#61DAFB" strokeWidth="1.5" fill="none" transform="rotate(120 12 12)"/>
-          </svg>
-        );
-      case 'nodejs':
-        return (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#339933"/>
-            <path d="M12.5 7H11.5V17H12.5V7Z" fill="#FFFFFF"/>
-            <path d="M16 9C16.55 9 17 9.45 17 10C17 10.55 16.55 11 16 11C15.45 11 15 10.55 15 10C15 9.45 15.45 9 16 9Z" fill="#FFFFFF"/>
-            <path d="M8 9C8.55 9 9 9.45 9 10C9 10.55 8.55 11 8 11C7.45 11 7 10.55 7 10C7 9.45 7.45 9 8 9Z" fill="#FFFFFF"/>
-            <path d="M16 13C16.55 13 17 13.45 17 14C17 14.55 16.55 15 16 15C15.45 15 15 14.55 15 14C15 13.45 15.45 13 16 13Z" fill="#FFFFFF"/>
-            <path d="M8 13C8.55 13 9 13.45 9 14C9 14.55 8.55 15 8 15C7.45 15 7 14.55 7 14C7 13.45 7.45 13 8 13Z" fill="#FFFFFF"/>
-          </svg>
-        );
-      case 'chatgpt':
-        return (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M21.5 9.5C21.5 9.5 21.5 8.5 20.5 8.5C19.5 8.5 18.5 9.5 18.5 9.5C18.5 9.5 17.5 9.5 17.5 10.5C17.5 11.5 18.5 12.5 18.5 12.5C18.5 12.5 17.5 13.5 17.5 14.5C17.5 15.5 18.5 16.5 18.5 16.5C18.5 16.5 19.5 16.5 20.5 16.5C21.5 16.5 21.5 15.5 21.5 15.5C21.5 15.5 22.5 15.5 22.5 14.5C22.5 13.5 21.5 12.5 21.5 12.5C21.5 12.5 22.5 11.5 22.5 10.5C22.5 9.5 21.5 9.5 21.5 9.5Z" fill="#10A37F"/>
-            <path d="M5.5 9.5C5.5 9.5 5.5 8.5 4.5 8.5C3.5 8.5 2.5 9.5 2.5 9.5C2.5 9.5 1.5 9.5 1.5 10.5C1.5 11.5 2.5 12.5 2.5 12.5C2.5 12.5 1.5 13.5 1.5 14.5C1.5 15.5 2.5 16.5 2.5 16.5C2.5 16.5 3.5 16.5 4.5 16.5C5.5 16.5 5.5 15.5 5.5 15.5C5.5 15.5 6.5 15.5 6.5 14.5C6.5 13.5 5.5 12.5 5.5 12.5C5.5 12.5 6.5 11.5 6.5 10.5C6.5 9.5 5.5 9.5 5.5 9.5Z" fill="#10A37F"/>
-            <path d="M12 2C12 2 11 2 11 3C11 4 12 5 12 5C12 5 13 5 13 4C13 3 12 2 12 2Z" fill="#10A37F"/>
-            <path d="M12 19C12 19 11 19 11 20C11 21 12 22 12 22C12 22 13 22 13 21C13 20 12 19 12 19Z" fill="#10A37F"/>
-            <path d="M12 7C8 7 5 10 5 14C5 18 8 21 12 21C16 21 19 18 19 14C19 10 16 7 12 7Z" fill="#10A37F"/>
-          </svg>
-        );
-      case 'claude':
-        return (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2Z" fill="#D97757"/>
-            <path d="M12 6C8.7 6 6 8.7 6 12C6 15.3 8.7 18 12 18C15.3 18 18 15.3 18 12C18 8.7 15.3 6 12 6Z" fill="#F4A261"/>
-          </svg>
-        );
-      default:
-        return null;
-    }
+    const iconUrls: Record<string, string> = {
+      python: 'https://res.cloudinary.com/dopp0v9eq/image/upload/v1764964166/python_umggwd.png',
+      n8n: 'https://res.cloudinary.com/dopp0v9eq/image/upload/v1764964165/n8n_frmmel.png',
+      chatgpt: 'https://res.cloudinary.com/dopp0v9eq/image/upload/v1764964165/chatgpt_m0zqpv.png',
+      react: 'https://res.cloudinary.com/dopp0v9eq/image/upload/v1764964166/react_y5fogs.png',
+      nodejs: 'https://res.cloudinary.com/dopp0v9eq/image/upload/v1764964166/nodejs_qzxzzd.png',
+      claude: 'https://res.cloudinary.com/dopp0v9eq/image/upload/v1764964166/claude_kmb9jl.png'
+    };
+
+    const iconUrl = iconUrls[name];
+    if (!iconUrl) return null;
+
+    return (
+      <img 
+        src={iconUrl} 
+        alt={getLabel()} 
+        width={20} 
+        height={20}
+        style={{ display: 'block' }}
+      />
+    );
   };
 
   const getLabel = () => {
@@ -801,26 +778,30 @@ const FloatingIcon = ({
 
   return (
     <div
-      className={`absolute flex items-center gap-2 bg-white rounded-full shadow-sm hover:shadow-md transition-shadow ${isVisible ? 'services-blur-animate' : ''} animate-pulse-slow-1`}
+      className={`absolute flex items-center gap-2 bg-white rounded-full border border-[#E2E7F1] shadow-sm hover:shadow-md transition-shadow select-none ${isVisible ? 'services-blur-animate' : ''} animate-pulse-slow-1`}
       style={{
         ...position,
         animationDelay: `${delay}s`,
-        opacity: isVisible ? 0 : 0,
+        opacity: 0,
         zIndex: 10,
         padding: '8px 12px',
-        minHeight: '48px'
+        minHeight: '48px',
+        userSelect: 'none',
+        WebkitUserSelect: 'none'
       }}
     >
       <div className="flex-shrink-0">
         {getIcon()}
       </div>
       <span 
-        className="whitespace-nowrap"
+        className="whitespace-nowrap select-none"
         style={{
           fontSize: '20px',
           color: '#121217',
           fontFamily: 'Fustat-Bold, sans-serif',
-          fontWeight: 'normal'
+          fontWeight: 'normal',
+          userSelect: 'none',
+          WebkitUserSelect: 'none'
         }}
       >
         {getLabel()}
