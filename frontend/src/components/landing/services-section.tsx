@@ -3,7 +3,6 @@ import { FigmaIcon } from "@/components/ui/figma-icon";
 import { CodeXmlIcon } from "@/components/ui/code-xml-icon";
 import { BrainIcon } from "@/components/ui/brain-icon";
 import { ChartNoAxesCombinedIcon } from "@/components/ui/chart-no-axes-combined-icon";
-import PixelBlast from "@/components/ui/pixel-blast";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
 import { useEffect, useRef, useState } from "react";
@@ -390,25 +389,41 @@ export function ServicesSection() {
       <SectionLayout showStripes={false} className="hidden md:flex flex-col">
         {/* Header Section */}
         <div className="flex flex-row items-center justify-between px-6 md:px-16 lg:px-28 py-[100px] relative">
-          {/* Background PixelBlast */}
-          <div style={{ position: 'absolute', top: 0, bottom: 0, right: 0, left: '50%', pointerEvents: 'none', zIndex: 0, opacity: 0.2 }}>
-            <PixelBlast
-              variant="diamond"
-              pixelSize={4}
-              color="#1C1C1E"
-              patternScale={20}
-              patternDensity={1.3}
-              pixelSizeJitter={0}
-              enableRipples={false}
-              liquid
-              liquidStrength={0.12}
-              liquidRadius={1.2}
-              liquidWobbleSpeed={5}
-              speed={1.3}
-              edgeFade={0.5}
-              transparent
-            />
-          </div>
+          {/* Background Pattern - Squares */}
+          <div 
+            className="absolute opacity-40 pointer-events-none"
+            style={{
+              top: 0,
+              bottom: 0,
+              right: 0,
+              left: '50%',
+              zIndex: 0,
+              backgroundImage: `
+                linear-gradient(#CBD5E1 1px, transparent 1px),
+                linear-gradient(90deg, #CBD5E1 1px, transparent 1px)
+              `,
+              backgroundSize: '24px 24px',
+              backgroundPosition: '0 0'
+            }}
+          />
+          {/* Gradient overlay - white intense on sides, transparent in center */}
+          <div 
+            className="absolute pointer-events-none"
+            style={{
+              top: 0,
+              bottom: 0,
+              right: 0,
+              left: '50%',
+              zIndex: 0,
+              background: `
+                radial-gradient(circle at center, transparent 0%, rgba(255, 255, 255, 0.2) 40%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0.7) 80%),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 0%, transparent 30%),
+                linear-gradient(to top, rgba(255, 255, 255, 0.6) 0%, transparent 30%),
+                linear-gradient(to right, rgba(255, 255, 255, 0.6) 0%, transparent 30%),
+                linear-gradient(to left, rgba(255, 255, 255, 0.6) 0%, transparent 30%)
+              `
+            }}
+          />
           
           {/* Left: Title */}
           <div 
@@ -601,13 +616,19 @@ const ExpertiseSection = () => {
             backgroundPosition: '0 0'
           }}
         />
-        {/* Gradient overlay - white to transparent for fade effect */}
+        {/* Gradient overlay - white intense on sides, transparent in center */}
         <div 
           className="absolute pointer-events-none -left-6 -right-6 md:-left-16 md:-right-16 lg:-left-28 lg:-right-28"
           style={{
             top: 0,
             bottom: 0,
-            background: 'radial-gradient(circle at center, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0.3) 70%, rgba(255, 255, 255, 0.1) 85%, transparent 95%)'
+            background: `
+              radial-gradient(circle at center, transparent 0%, rgba(255, 255, 255, 0.2) 40%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0.7) 80%),
+              linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 0%, transparent 30%),
+              linear-gradient(to top, rgba(255, 255, 255, 0.6) 0%, transparent 30%),
+              linear-gradient(to right, rgba(255, 255, 255, 0.6) 0%, transparent 30%),
+              linear-gradient(to left, rgba(255, 255, 255, 0.6) 0%, transparent 30%)
+            `
           }}
         />
 
