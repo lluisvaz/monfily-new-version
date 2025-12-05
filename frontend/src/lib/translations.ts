@@ -244,7 +244,7 @@ export const translations: Record<Language, Translations> = {
         line2: 'Performance escalável.',
       },
       description: 'Criamos ecossistemas digitais seguros e velozes. Unimos engenharia de software avançada com as melhores práticas de SEO Técnico para garantir que sua empresa cresça sem travas.',
-      cta: 'Falar com um Especialista',
+      cta: 'Falar com Especialista',
     },
   },
   en: {
