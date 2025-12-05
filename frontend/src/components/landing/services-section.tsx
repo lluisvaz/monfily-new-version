@@ -7,6 +7,7 @@ import PixelBlast from "@/components/ui/pixel-blast";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
 import { useEffect, useRef, useState } from "react";
+import { ArrowRight } from "lucide-react";
 
 const GridDecoration = ({ className }: { className?: string }) => (
   <div className={`absolute w-6 h-6 flex items-center justify-center pointer-events-none ${className}`} style={{ zIndex: 'var(--section-grid-z, 9999)' }}>
@@ -573,8 +574,8 @@ const ExpertiseSection = () => {
   }, []);
 
   return (
-    <SectionLayout showStripes={false} showTopBorder={false} className="relative pt-0 md:pt-0 pb-16 md:pb-24 px-6 md:px-16 lg:px-28">
-      <div ref={sectionRef} className="relative z-10 -mt-12 md:-mt-6">
+    <SectionLayout showStripes={false} showTopBorder={false} className="relative pt-0 pb-16 md:pb-24 px-6 md:px-16 lg:px-28">
+      <div ref={sectionRef} className="relative z-10 -mt-[129.5px] md:-mt-[129.5px]">
         {/* Background Pattern */}
         <div 
           className="absolute inset-0 opacity-40 pointer-events-none"
@@ -586,35 +587,39 @@ const ExpertiseSection = () => {
         />
 
         {/* Mobile Layout */}
-        <div className="flex flex-col md:hidden items-center text-center gap-4">
+        <div className="flex flex-col md:hidden items-start text-left space-y-6 pt-16 pb-8">
           {/* Label Pill */}
           <div 
-            className={`inline-flex items-center px-3 py-1 rounded-full bg-[#E8F5E9] text-[#1C1C1E] text-xs font-medium ${isVisible ? 'services-blur-animate' : ''}`}
-            style={{ animationDelay: '0.1s', opacity: isVisible ? 0 : 0 }}
+            className={`inline-flex items-center px-3 py-1 rounded-full border border-[#E2E7F1] text-[#1C1C1E] text-xs ${isVisible ? 'services-blur-animate' : ''}`}
+            style={{ 
+              animationDelay: '0.1s', 
+              opacity: isVisible ? 0 : 0,
+              fontFamily: 'Fustat-Bold, sans-serif',
+              fontWeight: 'normal'
+            }}
           >
             {t.expertise.label}
           </div>
 
           {/* Heading */}
           <h2 
-            className={`text-3xl text-[#1C1C1E] leading-tight ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`text-[#1C1C1E] leading-none ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ 
               animationDelay: '0.2s', 
               opacity: isVisible ? 0 : 0,
+              fontSize: '36px',
               fontFamily: 'Fustat-Bold, sans-serif',
               fontWeight: 'normal',
-              lineHeight: '1.1',
+              lineHeight: '0.9',
               letterSpacing: '-0.06em'
             }}
           >
-            {t.expertise.heading.line1}
-            <br />
-            {t.expertise.heading.line2}
+            {t.expertise.heading.line1} {t.expertise.heading.line2}
           </h2>
 
           {/* Description */}
           <p 
-            className={`text-sm text-[#6B7280] max-w-md leading-relaxed ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`text-base md:text-lg text-[#1C1C1E] max-w-md leading-tight ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.3s', opacity: isVisible ? 0 : 0 }}
           >
             {t.expertise.description}
@@ -622,17 +627,17 @@ const ExpertiseSection = () => {
 
           {/* CTA Button */}
           <button
-            className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#4CAF50] text-white font-medium text-sm hover:bg-[#45a049] transition-colors ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`group bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer w-full sm:w-auto ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.4s', opacity: isVisible ? 0 : 0 }}
           >
             {t.expertise.cta}
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <div className="bg-white rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
+              <ArrowRight className="w-3 h-3 text-[#2869D6]" />
+            </div>
           </button>
 
           {/* Floating Icons - Mobile */}
-          <div className="relative w-full h-80 mt-4">
+          <div className="relative w-full h-80">
             <FloatingIcon name="python" position={{ top: '5%', left: '0%' }} delay={0.5} isVisible={isVisible} />
             <FloatingIcon name="n8n" position={{ top: '25%', left: '5%' }} delay={0.6} isVisible={isVisible} />
             <FloatingIcon name="react" position={{ top: '20%', right: '0%' }} delay={0.7} isVisible={isVisible} />
@@ -642,24 +647,29 @@ const ExpertiseSection = () => {
         </div>
 
         {/* Desktop Layout */}
-        <div className="hidden md:flex flex-col items-center text-center gap-6 relative">
+        <div className="hidden md:flex flex-col items-center text-center space-y-8 relative pt-[140px] pb-[100px]">
           {/* Label Pill */}
           <div 
-            className={`inline-flex items-center px-4 py-1.5 rounded-full bg-[#E8F5E9] text-[#1C1C1E] text-sm font-medium ${isVisible ? 'services-blur-animate' : ''}`}
-            style={{ animationDelay: '0.1s', opacity: isVisible ? 0 : 0 }}
+            className={`inline-flex items-center px-4 py-1.5 rounded-full border border-[#E2E7F1] text-[#1C1C1E] text-sm ${isVisible ? 'services-blur-animate' : ''}`}
+            style={{ 
+              animationDelay: '0.1s', 
+              opacity: isVisible ? 0 : 0,
+              fontFamily: 'Fustat-Bold, sans-serif',
+              fontWeight: 'normal'
+            }}
           >
             {t.expertise.label}
           </div>
 
           {/* Heading */}
           <h2 
-            className={`text-5xl md:text-6xl text-[#1C1C1E] leading-tight max-w-4xl ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`text-4xl md:text-5xl text-[#1C1C1E] leading-none max-w-4xl ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ 
               animationDelay: '0.2s', 
               opacity: isVisible ? 0 : 0,
               fontFamily: 'Fustat-Bold, sans-serif',
               fontWeight: 'normal',
-              lineHeight: '1.1',
+              lineHeight: '0.9',
               letterSpacing: '-0.06em'
             }}
           >
@@ -670,7 +680,7 @@ const ExpertiseSection = () => {
 
           {/* Description */}
           <p 
-            className={`text-base md:text-lg text-[#6B7280] max-w-2xl leading-relaxed ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`text-base md:text-lg text-[#1C1C1E] max-w-2xl leading-tight ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.3s', opacity: isVisible ? 0 : 0 }}
           >
             {t.expertise.description}
@@ -678,17 +688,17 @@ const ExpertiseSection = () => {
 
           {/* CTA Button */}
           <button
-            className={`inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-[#4CAF50] text-white font-medium text-base hover:bg-[#45a049] transition-colors ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`group bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.4s', opacity: isVisible ? 0 : 0 }}
           >
             {t.expertise.cta}
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <div className="bg-white rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
+              <ArrowRight className="w-3 h-3 text-[#2869D6]" />
+            </div>
           </button>
 
           {/* Floating Icons - Desktop */}
-          <div className="relative w-full h-[500px] mt-8">
+          <div className="relative w-full h-[500px]">
             <FloatingIcon name="python" position={{ top: '8%', left: '5%' }} delay={0.5} isVisible={isVisible} />
             <FloatingIcon name="n8n" position={{ top: '25%', left: '8%' }} delay={0.6} isVisible={isVisible} />
             <FloatingIcon name="react" position={{ top: '18%', right: '8%' }} delay={0.7} isVisible={isVisible} />

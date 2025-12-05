@@ -160,9 +160,11 @@ export function Hero() {
           className="flex flex-col sm:flex-row items-center gap-6 pt-2 w-full hero-blur-animate"
           style={{ animationDelay: '0.4s', opacity: 0 }}
         >
-          <button className="group bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto">
+          <button className="group bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer w-full sm:w-auto">
             {t.hero.cta.primary}
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            <div className="bg-white rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
+              <ArrowRight className="w-3 h-3 text-[#2869D6]" />
+            </div>
           </button>
 
           <a href="#servicos" className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium transition-colors w-full sm:w-auto text-center sm:text-left">
