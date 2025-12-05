@@ -284,9 +284,39 @@ export function ServicesSection() {
       <SectionLayout showStripes={false} className="flex flex-col md:hidden px-6" containerClassName="overflow-visible">
         <div className="flex flex-col w-full gap-8 py-8" style={{ overflow: 'visible', position: 'relative' }}>
           {/* Header */}
-          <div className="flex flex-col gap-6 pt-8 pb-8 relative items-center" style={{ paddingTop: '32px', paddingBottom: '32px' }}>
+          <div className="flex flex-col gap-6 pt-8 pb-8 relative items-center z-10" style={{ paddingTop: '32px', paddingBottom: '32px' }}>
+            {/* Background Pattern - Squares */}
+            <div 
+              className="absolute opacity-40 pointer-events-none"
+              style={{
+                top: '-32px',
+                left: '-24px',
+                right: '-24px',
+                height: 'calc(100% + 64px)',
+                backgroundImage: `
+                  linear-gradient(#CBD5E1 1px, transparent 1px),
+                  linear-gradient(90deg, #CBD5E1 1px, transparent 1px)
+                `,
+                backgroundSize: '24px 24px',
+                backgroundPosition: '0 0'
+              }}
+            />
+            {/* Gradient overlay - white intense on sides, transparent in center */}
+            <div 
+              className="absolute pointer-events-none"
+              style={{
+                top: '-32px',
+                left: '-24px',
+                right: '-24px',
+                height: 'calc(100% + 64px)',
+                background: `
+                  linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 8%, rgba(255, 255, 255, 0.6) 15%, rgba(255, 255, 255, 0.3) 25%, transparent 40%),
+                  linear-gradient(to left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 8%, rgba(255, 255, 255, 0.6) 15%, rgba(255, 255, 255, 0.3) 25%, transparent 40%)
+                `
+              }}
+            />
             <h2 
-              className={`text-[#1C1C1E] leading-none relative z-10 text-center ${isVisible ? 'services-blur-animate' : ''}`}
+              className={`text-[#1C1C1E] leading-none relative z-20 text-center ${isVisible ? 'services-blur-animate' : ''}`}
               style={{ 
                 fontSize: '36px', 
                 animationDelay: '0.1s', 
@@ -302,7 +332,7 @@ export function ServicesSection() {
             
             {/* Metrics */}
             <div 
-              className={`flex flex-row gap-6 mt-8 relative z-10 items-center justify-center ${isVisible ? 'services-blur-animate' : ''}`}
+              className={`flex flex-row gap-6 mt-8 relative z-20 items-center justify-center ${isVisible ? 'services-blur-animate' : ''}`}
               style={{ animationDelay: '0.2s', opacity: isVisible ? 0 : 0 }}
             >
               <div className="flex-1 flex flex-col items-center text-center">
@@ -616,18 +646,14 @@ const ExpertiseSection = () => {
             backgroundPosition: '0 0'
           }}
         />
-        {/* Gradient overlay - white intense on sides, transparent in center */}
+        {/* Gradient overlay - white intense in center, transparent on sides */}
         <div 
           className="absolute pointer-events-none -left-6 -right-6 md:-left-16 md:-right-16 lg:-left-28 lg:-right-28"
           style={{
             top: 0,
             bottom: 0,
             background: `
-              radial-gradient(circle at center, transparent 0%, rgba(255, 255, 255, 0.2) 40%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0.7) 80%),
-              linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 0%, transparent 30%),
-              linear-gradient(to top, rgba(255, 255, 255, 0.6) 0%, transparent 30%),
-              linear-gradient(to right, rgba(255, 255, 255, 0.6) 0%, transparent 30%),
-              linear-gradient(to left, rgba(255, 255, 255, 0.6) 0%, transparent 30%)
+              radial-gradient(circle at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 20%, rgba(255, 255, 255, 0.7) 40%, rgba(255, 255, 255, 0.4) 60%, rgba(255, 255, 255, 0.1) 80%, transparent 95%)
             `
           }}
         />
