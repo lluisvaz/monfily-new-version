@@ -593,6 +593,9 @@ export function ServicesSection() {
 
       {/* Expertise Section */}
       <ExpertiseSection />
+
+      {/* Large Striped Divider (below Expertise Section) */}
+      <LargeStripedDivider />
     </>
   );
 }
@@ -630,7 +633,7 @@ const ExpertiseSection = () => {
   }, []);
 
   return (
-    <SectionLayout showStripes={false} showTopBorder={false} className="relative pt-0 pb-16 md:pb-24 px-6 md:px-16 lg:px-28">
+    <SectionLayout showStripes={false} showTopBorder={false} className="relative pt-0 pb-0 md:pb-0 px-6 md:px-16 lg:px-28">
       <div ref={sectionRef} className="relative z-10 -mt-[129.5px] md:-mt-[129.5px]">
         {/* Background Pattern - Squares */}
         <div 
@@ -659,7 +662,7 @@ const ExpertiseSection = () => {
         />
 
         {/* Mobile Layout */}
-        <div className="flex flex-col md:hidden items-start text-left space-y-6 pt-16 pb-16 relative">
+        <div className="flex flex-col md:hidden items-start text-left space-y-6 pt-[64px] pb-[64px] relative">
           {/* Label Pill */}
           <div 
             className={`inline-flex items-center px-3 py-1 rounded-full border border-[#E2E7F1] text-[#1C1C1E] text-xs relative z-10 bg-white ${isVisible ? 'services-blur-animate' : ''}`}
@@ -856,4 +859,3 @@ const FloatingIcon = ({
     </div>
   );
 };
-
