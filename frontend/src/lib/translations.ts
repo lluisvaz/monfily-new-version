@@ -15,6 +15,8 @@ export interface Translations {
       methodology: string;
       support: string;
       insights: string;
+      menu: string;
+      menuDescription: string;
     };
     solutionsDropdown: {
       websiteCreation: string;
@@ -112,6 +114,17 @@ export interface Translations {
     };
     trust: string;
   };
+
+  // Expertise Section
+  expertise: {
+    label: string;
+    heading: {
+      line1: string;
+      line2: string;
+    };
+    description: string;
+    cta: string;
+  };
 }
 
 export const translations: Record<Language, Translations> = {
@@ -127,6 +140,8 @@ export const translations: Record<Language, Translations> = {
         methodology: 'Metodologia',
         support: 'Suporte',
         insights: 'Insights',
+        menu: 'Menu de Navegação',
+        menuDescription: 'Menu principal de navegação do site',
       },
       solutionsDropdown: {
         websiteCreation: 'Criação de Sites',
@@ -222,6 +237,15 @@ export const translations: Record<Language, Translations> = {
       },
       trust: 'Confiado Por Mais de 50 Empresas',
     },
+    expertise: {
+      label: 'Nossa Expertise',
+      heading: {
+        line1: 'Desenvolvimento robusto.',
+        line2: 'Performance escalável.',
+      },
+      description: 'Criamos ecossistemas digitais seguros e velozes. Unimos engenharia de software avançada com as melhores práticas de SEO Técnico para garantir que sua empresa cresça sem travas.',
+      cta: 'Falar com Especialista',
+    },
   },
   en: {
     seo: {
@@ -235,6 +259,8 @@ export const translations: Record<Language, Translations> = {
         methodology: 'Methodology',
         support: 'Support',
         insights: 'Insights',
+        menu: 'Navigation Menu',
+        menuDescription: 'Main site navigation menu',
       },
       solutionsDropdown: {
         websiteCreation: 'Website Creation',
@@ -329,6 +355,15 @@ export const translations: Record<Language, Translations> = {
         scheduleNow: 'Schedule Now',
       },
       trust: 'Trusted By More Than 50 Companies',
+    },
+    expertise: {
+      label: 'Our Expertise',
+      heading: {
+        line1: 'Robust development.',
+        line2: 'Scalable performance.',
+      },
+      description: 'We create secure and fast digital ecosystems. We combine advanced software engineering with best practices in Technical SEO to ensure your company grows without bottlenecks.',
+      cta: 'Talk to an Expert',
     },
   },
 };

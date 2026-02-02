@@ -17,7 +17,7 @@ export type Language = 'pt' | 'en';
  * Detecta o país do usuário usando uma API de geolocalização por IP
  * Retorna 'pt' se o país for lusófono, 'en' caso contrário
  */
-export async function detectLanguageByLocation(): Promise<Language> {
+async function detectLanguageByLocation(): Promise<Language> {
   try {
     // Usar ipapi.co (gratuita, 1000 requisições/dia)
     // Timeout de 3 segundos para evitar espera longa
@@ -56,7 +56,7 @@ export async function detectLanguageByLocation(): Promise<Language> {
  * Detecta o idioma preferido do navegador
  * Útil como fallback se a API de IP falhar
  */
-export function detectLanguageFromBrowser(): Language {
+function detectLanguageFromBrowser(): Language {
   if (typeof window === 'undefined') return 'pt';
 
   const browserLang = navigator.language || (navigator as any).userLanguage;

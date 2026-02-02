@@ -86,7 +86,7 @@ export function WebsiteMockupMobile() {
       </header>
 
       {/* Hero Section */}
-      <div className="flex-1 px-2 pt-8 pb-2 flex flex-col gap-1.5 overflow-y-auto" style={{ backgroundColor: '#F0F0F0' }}>
+      <div className="flex-1 px-2 pt-5 pb-2 flex flex-col gap-1 overflow-y-auto" style={{ backgroundColor: '#F0F0F0' }}>
         {/* Badge */}
         <div className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 w-fit" style={{ backgroundColor: '#1E2939' }}>
           <div className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-pulse"></div>
@@ -94,7 +94,15 @@ export function WebsiteMockupMobile() {
         </div>
 
         {/* Heading */}
-        <h1 className="text-sm font-bold text-gray-900 leading-tight">
+        <h1 
+          className="text-xl text-gray-900"
+          style={{
+            fontFamily: 'Fustat-Bold, sans-serif',
+            fontWeight: 'normal',
+            lineHeight: '0.9',
+            letterSpacing: '-0.06em'
+          }}
+        >
           {t.mockup.heading.line1}<span className="text-gray-600">{t.mockup.heading.line2}</span>
         </h1>
 
@@ -120,27 +128,39 @@ export function WebsiteMockupMobile() {
         </div>
 
         {/* Trust Indicators */}
-        <div className="flex items-center gap-1 pt-1">
+        <div className="flex items-center gap-1 pt-0.5">
           <div className="flex -space-x-1.5">
             <div className="w-4 h-4 rounded-lg border border-[1px] shadow-sm overflow-hidden" style={{ transform: 'rotate(-3deg)', borderColor: '#1E2939' }}>
               <img 
                 src="https://framerusercontent.com/images/E3vzjdpFuSWiVeurdyPGMrSWk.png?scale-down-to=512&width=1200&height=992" 
                 alt="Person 1" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover select-none"
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
               />
             </div>
             <div className="w-4 h-4 rounded-lg border border-[1px] shadow-sm overflow-hidden" style={{ transform: 'rotate(2deg)', borderColor: '#1E2939' }}>
               <img 
                 src="https://framerusercontent.com/images/jC7KwluILkhO0KHxk6qWEttOxhE.png?scale-down-to=512&width=1200&height=1200" 
                 alt="Person 2" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover select-none"
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
               />
             </div>
             <div className="w-4 h-4 rounded-lg border border-[1px] shadow-sm overflow-hidden" style={{ transform: 'rotate(-2deg)', borderColor: '#1E2939' }}>
               <img 
                 src="https://framerusercontent.com/images/cFl24iPInxckRrL32eRgadp9ZJM.png?scale-down-to=512&width=1200&height=1200" 
                 alt="Person 3" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover select-none"
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
               />
             </div>
             <div className="w-4 h-4 rounded-lg border border-[1px] shadow-sm flex items-center justify-center overflow-hidden" style={{ transform: 'rotate(3deg)', borderColor: '#1E2939', backgroundColor: '#1E2939' }}>
@@ -158,13 +178,19 @@ export function WebsiteMockupMobile() {
         </div>
 
         {/* Image Carousels - Horizontal */}
-        <div className="flex flex-col gap-1 overflow-hidden mt-2">
+        <div className="flex flex-col gap-1 overflow-hidden mt-1">
           {/* Carousel going left */}
           <div className="relative flex flex-row gap-1 overflow-hidden" style={{ height: '60px' }}>
             {/* Left fade gradient */}
-            <div className="absolute left-0 top-0 bottom-0 w-8 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #F0F0F0, transparent)' }}></div>
+            <div
+              className="absolute left-0 top-0 bottom-0 w-12 z-10 pointer-events-none"
+              style={{ background: 'linear-gradient(to right, #F0F0F0 0%, rgba(240,240,240,0.85) 40%, transparent 100%)' }}
+            ></div>
             {/* Right fade gradient */}
-            <div className="absolute right-0 top-0 bottom-0 w-8 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, #F0F0F0, transparent)' }}></div>
+            <div
+              className="absolute right-0 top-0 bottom-0 w-12 z-10 pointer-events-none"
+              style={{ background: 'linear-gradient(to left, #F0F0F0 0%, rgba(240,240,240,0.85) 40%, transparent 100%)' }}
+            ></div>
             <div 
               className="flex flex-row gap-1"
               style={{
@@ -198,9 +224,15 @@ export function WebsiteMockupMobile() {
           {/* Carousel going right */}
           <div className="relative flex flex-row gap-1 overflow-hidden" style={{ height: '60px' }}>
             {/* Left fade gradient */}
-            <div className="absolute left-0 top-0 bottom-0 w-8 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #F0F0F0, transparent)' }}></div>
+            <div
+              className="absolute left-0 top-0 bottom-0 w-12 z-10 pointer-events-none"
+              style={{ background: 'linear-gradient(to right, #F0F0F0 0%, rgba(240,240,240,0.85) 40%, transparent 100%)' }}
+            ></div>
             {/* Right fade gradient */}
-            <div className="absolute right-0 top-0 bottom-0 w-8 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, #F0F0F0, transparent)' }}></div>
+            <div
+              className="absolute right-0 top-0 bottom-0 w-12 z-10 pointer-events-none"
+              style={{ background: 'linear-gradient(to left, #F0F0F0 0%, rgba(240,240,240,0.85) 40%, transparent 100%)' }}
+            ></div>
             <div 
               className="flex flex-row gap-1"
               style={{

@@ -78,25 +78,64 @@ const LogoCarousel = () => {
   return (
     <div 
       ref={carouselRef}
-      className="relative overflow-hidden w-full max-w-full"
+      className="relative overflow-hidden w-full max-w-full select-none trusted-blur-animate"
       style={{
         maskImage: 'linear-gradient(to right, transparent 0%, white 12%, white 88%, transparent 100%)',
-        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, white 12%, white 88%, transparent 100%)'
+        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, white 12%, white 88%, transparent 100%)',
+        userSelect: 'none',
+        WebkitUserSelect: 'none',
+        MozUserSelect: 'none',
+        msUserSelect: 'none',
+        animationDelay: '1.1s',
+        opacity: 0
       }}
+      onContextMenu={(e) => e.preventDefault()}
+      onDragStart={(e) => e.preventDefault()}
     >
       <div 
         ref={scrollRef}
-        className="flex items-center whitespace-nowrap"
-        style={{ transform: 'translateX(0px)', padding: '0 2rem' }}
+        className="flex items-center whitespace-nowrap select-none"
+        style={{ 
+          transform: 'translateX(0px)', 
+          padding: '0 2rem',
+          userSelect: 'none',
+          WebkitUserSelect: 'none',
+          MozUserSelect: 'none',
+          msUserSelect: 'none'
+        }}
+        onContextMenu={(e) => e.preventDefault()}
+        onDragStart={(e) => e.preventDefault()}
       >
         {logoUrls.map((url, index) => (
-          <div key={index} className="flex items-center justify-center px-6 flex-shrink-0">
+          <div 
+            key={index} 
+            className="flex items-center justify-center px-6 flex-shrink-0 select-none"
+            style={{
+              userSelect: 'none',
+              WebkitUserSelect: 'none',
+              MozUserSelect: 'none',
+              msUserSelect: 'none'
+            }}
+            onContextMenu={(e) => e.preventDefault()}
+            onDragStart={(e) => e.preventDefault()}
+          >
             <img
               src={url}
               alt={`Logo ${index + 1}`}
-              className="h-12 max-h-12 object-contain w-auto"
-              style={{ maxWidth: '120px', height: '48px' }}
+              className="h-12 max-h-12 object-contain w-auto select-none pointer-events-none"
+              style={{ 
+                maxWidth: '120px', 
+                height: '48px',
+                userSelect: 'none',
+                WebkitUserSelect: 'none',
+                MozUserSelect: 'none',
+                msUserSelect: 'none',
+                pointerEvents: 'none'
+              }}
               loading="lazy"
+              draggable="false"
+              onContextMenu={(e) => e.preventDefault()}
+              onDragStart={(e) => e.preventDefault()}
             />
           </div>
         ))}
@@ -111,11 +150,29 @@ export function TrustedBy() {
 
   return (
     <>
+      <style>{`
+        @keyframes blurText {
+          0% {
+            filter: blur(10px);
+            opacity: 0;
+          }
+          100% {
+            filter: blur(0px);
+            opacity: 1;
+          }
+        }
+        .trusted-blur-animate {
+          animation: blurText 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+      `}</style>
       {/* Mobile Section */}
       <SectionLayout className="flex flex-col md:hidden px-6 py-[24px]">
         <div className="flex flex-col w-full">
           {/* Text Label */}
-          <div className="mb-6 flex items-center justify-center">
+          <div 
+            className="mb-6 flex items-center justify-center trusted-blur-animate"
+            style={{ animationDelay: '0.9s', opacity: 0 }}
+          >
             <p className="text-[#1C1C1E] text-base text-center">
               {t.trustedBy.label}
             </p>
@@ -133,7 +190,10 @@ export function TrustedBy() {
       {/* Desktop Section */}
       <SectionLayout className="hidden md:flex flex-col md:flex-row items-stretch">
         {/* Left Side: Text Label */}
-        <div className="w-full md:w-[220px] p-[24px] md:p-[32px] border-b md:border-b-0 border-[#E2E7F1] flex items-center justify-center">
+        <div 
+          className="w-full md:w-[220px] p-[24px] md:p-[32px] border-b md:border-b-0 border-[#E2E7F1] flex items-center justify-center trusted-blur-animate"
+          style={{ animationDelay: '0.9s', opacity: 0 }}
+        >
           <p className="text-[#1C1C1E] font-medium text-sm max-w-[150px] md:max-w-[200px] text-center">
             {t.trustedBy.label}
           </p>

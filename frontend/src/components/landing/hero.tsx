@@ -14,8 +14,23 @@ export function Hero() {
   return (
     <SectionLayout 
       showStripes={false}
-      className="grid grid-cols-1 lg:grid-cols-2 gap-12 px-6 md:px-16 lg:px-28 py-20 min-h-[600px] items-center relative overflow-x-hidden"
+      className="grid grid-cols-1 lg:grid-cols-2 gap-12 px-6 md:px-16 lg:px-28 py-12 md:py-20 min-h-[500px] md:min-h-[600px] items-center relative overflow-x-hidden"
     >
+      <style>{`
+        @keyframes blurText {
+          0% {
+            filter: blur(10px);
+            opacity: 0;
+          }
+          100% {
+            filter: blur(0px);
+            opacity: 1;
+          }
+        }
+        .hero-blur-animate {
+          animation: blurText 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+      `}</style>
       {/* Gradient Effect - Desktop Only */}
       <div className="hidden lg:block absolute bottom-0 right-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
         <div 
@@ -38,30 +53,51 @@ export function Hero() {
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#2869D6] rounded-full"></div>
       </div>
       {/* Left Content */}
-      <div className="flex flex-col justify-center items-start space-y-8 w-full relative lg:pb-0 pb-[280px]" style={{ zIndex: 1 }}>
+      <div className="flex flex-col justify-center items-start space-y-6 md:space-y-8 w-full relative lg:pb-0 pb-[240px] md:pb-[280px]" style={{ zIndex: 1 }}>
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 rounded-full pl-1 pr-4 py-1 border border-[#E2E7F1]">
+        <div 
+          className="inline-flex items-center gap-2 rounded-full pl-1 pr-4 py-1 border border-[#E2E7F1] hero-blur-animate"
+          style={{ animationDelay: '0.1s', opacity: 0 }}
+        >
           <div className="rounded-full p-1 border border-[#E2E7F1]">
             <div className="flex -space-x-2 overflow-hidden">
               {/* Avatars */}
               <img 
                 src="https://framerusercontent.com/images/E3vzjdpFuSWiVeurdyPGMrSWk.png?scale-down-to=512&width=1200&height=992" 
                 alt="Founder 1" 
-                className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover"
+                className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover select-none"
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
               />
               <img 
                 src="https://framerusercontent.com/images/jC7KwluILkhO0KHxk6qWEttOxhE.png?scale-down-to=512&width=1200&height=1200" 
                 alt="Founder 2" 
-                className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover"
+                className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover select-none"
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
               />
               <img 
                 src="https://framerusercontent.com/images/cFl24iPInxckRrL32eRgadp9ZJM.png?scale-down-to=512&width=1200&height=1200" 
                 alt="Founder 3" 
-                className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover"
+                className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover select-none"
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
               />
             </div>
           </div>
-          <span className="text-xs font-semibold text-[#1C1C1E]">
+          <span 
+            className="text-xs text-[#1C1C1E]"
+            style={{ 
+              fontFamily: 'Fustat-Bold, sans-serif',
+              fontWeight: 'normal'
+            }}
+          >
             <span className="hidden lg:inline">{t.hero.badge.chosenBy}</span>{t.hero.badge.clients}
             <TextType
               text={t.hero.rotatingTexts}
@@ -70,43 +106,91 @@ export function Hero() {
               showCursor={true}
               cursorCharacter="|"
               as="span"
-              className="font-bold"
+              style={{ 
+                fontFamily: 'Fustat-Bold, sans-serif',
+                fontWeight: 'normal'
+              }}
             />
           </span>
         </div>
 
         {/* Heading */}
-        <h1 className="text-[48px] md:text-7xl font-bold leading-none tracking-tight text-[#1C1C1E]">
+        <h1 
+          className="text-[48px] md:text-7xl leading-none text-[#1C1C1E] hero-blur-animate"
+          style={{ 
+            animationDelay: '0.2s', 
+            opacity: 0,
+            fontFamily: 'Fustat-Bold, sans-serif',
+            fontWeight: 'normal',
+            lineHeight: '0.9',
+            letterSpacing: '-0.06em'
+          }}
+        >
           {t.hero.heading.line1} <br />
-          <span className="text-[#1C1C1E]">{t.hero.heading.line2}</span>
-          <ShinyText text={t.hero.heading.line3} speed={1.5} className="text-[#1C1C1E]" />
+          <span className="text-[#1C1C1E]" style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>{t.hero.heading.line2}</span>
+          <ShinyText text={t.hero.heading.line3} speed={3} className="text-[#1C1C1E]" style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }} />
         </h1>
 
         {/* Description */}
-        <p className="text-base md:text-lg text-[#1C1C1E] max-w-md leading-tight">
-          {t.hero.description}
+        <p 
+          className="text-base md:text-lg text-[#1C1C1E] max-w-md leading-tight hero-blur-animate"
+          style={{ animationDelay: '0.3s', opacity: 0 }}
+        >
+          {language === 'pt' ? (
+            <>
+              A infraestrutura digital completa para o seu negócio. Unimos design de{' '}
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Criação de Sites de Alta Performance</strong>,{' '}
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Engenharia de Software</strong>,{' '}
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Inteligência Artificial (IA)</strong> e{' '}
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>SEO Técnico</strong> para gerar receita e eficiência.
+            </>
+          ) : (
+            <>
+              Complete digital infrastructure for your business. We combine high-performance{' '}
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Website Creation</strong> design,{' '}
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Software Engineering</strong>,{' '}
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Artificial Intelligence (AI)</strong>, and{' '}
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Technical SEO</strong> to generate revenue and efficiency.
+            </>
+          )}
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center gap-6 pt-2 w-full">
-          <button className="group bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto">
+        <div 
+          className="flex flex-col sm:flex-row items-center gap-6 pt-2 w-full hero-blur-animate"
+          style={{ animationDelay: '0.4s', opacity: 0 }}
+        >
+          <button className="group bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer w-full sm:w-auto">
             {t.hero.cta.primary}
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            <div className="bg-white rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
+              <ArrowRight className="w-3 h-3 text-[#2869D6]" />
+            </div>
           </button>
 
-          <a href="#" className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium transition-colors w-full sm:w-auto text-center sm:text-left">
+          <a href="#servicos" className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium transition-colors w-full sm:w-auto text-center sm:text-left">
             {t.hero.cta.secondary}
           </a>
         </div>
 
         {/* Features */}
-        <div className="hidden md:grid grid-cols-2 gap-8 pt-8 w-full max-w-lg">
+        <div 
+          className="hidden md:grid grid-cols-2 gap-8 pt-8 w-full max-w-lg hero-blur-animate"
+          style={{ animationDelay: '0.5s', opacity: 0 }}
+        >
           <div className="flex items-start gap-3">
             <div className="bg-[#2869D6]/20 p-2 rounded-full w-10 h-10 flex items-center justify-center text-[#2869D6] mt-1">
               <Zap className="w-4 h-4 fill-current" />
             </div>
             <div>
-              <h3 className="font-bold text-[#1C1C1E] text-sm">{t.hero.features.performance.title}</h3>
+              <h3 
+                className="text-[#1C1C1E] text-sm"
+                style={{ 
+                  fontFamily: 'Fustat-Bold, sans-serif',
+                  fontWeight: 'normal'
+                }}
+              >
+                {t.hero.features.performance.title}
+              </h3>
               <p className="text-[#1C1C1E] text-xs mt-1">{t.hero.features.performance.description}</p>
             </div>
           </div>
@@ -116,7 +200,15 @@ export function Hero() {
               <Shield className="w-4 h-4 fill-current" />
             </div>
             <div>
-              <h3 className="font-bold text-[#1C1C1E] text-sm">{t.hero.features.optimized.title}</h3>
+              <h3 
+                className="text-[#1C1C1E] text-sm"
+                style={{ 
+                  fontFamily: 'Fustat-Bold, sans-serif',
+                  fontWeight: 'normal'
+                }}
+              >
+                {t.hero.features.optimized.title}
+              </h3>
               <p className="text-[#1C1C1E] text-xs mt-1">{t.hero.features.optimized.description}</p>
             </div>
           </div>
@@ -124,7 +216,10 @@ export function Hero() {
       </div>
 
       {/* Right Content (Website Mockup) */}
-      <div className="relative hidden lg:block h-full min-h-[400px]" style={{ zIndex: 1 }}>
+      <div 
+        className="relative hidden lg:block h-full min-h-[400px] hero-blur-animate" 
+        style={{ zIndex: 1, animationDelay: '0.6s', opacity: 0 }}
+      >
         {/* Website Mockup */}
         <div style={{ userSelect: 'none', pointerEvents: 'none' }}>
           <WebsiteMockup />
@@ -149,7 +244,10 @@ export function Hero() {
       </div>
 
       {/* Mobile Mockups - Visible only on mobile, positioned at bottom */}
-      <div className="lg:hidden absolute bottom-0 left-0 right-0 w-screen flex justify-center items-end overflow-hidden pointer-events-none" style={{ zIndex: 1, left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw' }}>
+      <div 
+        className="lg:hidden absolute bottom-0 left-0 right-0 w-screen flex justify-center items-end overflow-hidden pointer-events-none hero-blur-animate" 
+        style={{ zIndex: 1, left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw', animationDelay: '0.6s', opacity: 0 }}
+      >
         <div className="relative" style={{ transform: 'scale(0.55)', transformOrigin: 'bottom center', pointerEvents: 'none', userSelect: 'none' }}>
           {/* Website Mockup - Scaled down */}
           <div className="relative" style={{ width: '145%', transform: 'scaleX(1)' }}>

@@ -38,6 +38,9 @@ export function SEOHead() {
     // Update Twitter Card tags
     updateMetaTag('twitter:title', t.seo.title);
     updateMetaTag('twitter:description', t.seo.description);
+
+    // Disable Google Translate automatic translation
+    updateMetaTag('google', 'notranslate');
   }, [language, t]);
 
   return null;
