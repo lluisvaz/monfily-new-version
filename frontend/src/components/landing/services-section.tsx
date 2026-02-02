@@ -83,7 +83,7 @@ const LargeStripedDivider = () => {
         <div className="absolute top-0 bottom-0 left-[80%] w-[0.5px] bg-[#E2E7F1] pointer-events-none opacity-20"></div>
 
         {/* Divider Structure - larger height */}
-        <div className="relative w-full" style={{ height: '200px' }}>
+        <div className="relative w-full" style={{ height: '71px' }}>
           {/* Central striped area - starts immediately after top line */}
           <div
             className={`absolute left-0 right-0 ${stripeClass}`}
@@ -656,7 +656,7 @@ const ExpertiseSection = () => {
 
   return (
     <SectionLayout showStripes={false} showTopBorder={false} className="relative pt-0 pb-0 md:pb-0 px-6 md:px-16 lg:px-28">
-      <div ref={sectionRef} className="relative z-10 -mt-[129.5px] md:-mt-[129.5px]">
+      <div ref={sectionRef} className="relative z-10">
         {/* Background Pattern - Squares */}
         <div
           className="absolute opacity-40 pointer-events-none -left-6 -right-6 md:-left-16 md:-right-16 lg:-left-28 lg:-right-28"
@@ -840,12 +840,12 @@ const SolutionsSuiteSection = () => {
           {parts[0]}
           <span className="relative inline-block">
             {target}
-            <svg viewBox="0 0 100 40" className="absolute -left-1 -right-1 -top-1 -bottom-1 w-[calc(100%+8px)] h-[calc(100%+8px)] pointer-events-none" preserveAspectRatio="none">
+            <svg viewBox="0 0 100 40" className="absolute -left-4 -right-4 -top-2 -bottom-2 w-[calc(100%+32px)] h-[calc(100%+16px)] pointer-events-none" preserveAspectRatio="none">
               <motion.path
                 d="M5,20 Q5,5 50,5 Q95,5 95,20 Q95,35 50,35 Q5,35 5,20"
                 fill="none"
                 stroke="#4ADE80"
-                strokeWidth="2"
+                strokeWidth="1.5"
                 initial={{ pathLength: 0 }}
                 animate={isVisible ? { pathLength: 1 } : { pathLength: 0 }}
                 transition={{ duration: 1, ease: "easeInOut", delay: 0.5 }}
@@ -919,21 +919,21 @@ const SolutionsSuiteSection = () => {
     <SectionLayout showStripes={false} showTopBorder={false} className="relative pt-16 md:pt-24 pb-0">
       <div ref={sectionRef} className="max-w-[1500px] mx-auto relative z-10">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start mb-12 md:mb-20 gap-8 px-6 md:px-16 lg:px-28">
+        <div className="flex flex-col md:flex-row justify-between items-start mb-16 md:mb-24 gap-8 px-6 md:px-16 lg:px-28">
           <h2
-            className={`text-[#1C1C1E] max-w-xl leading-[1.1] ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`text-4xl md:text-5xl text-[#1C1C1E] max-w-xl ${isVisible ? 'services-blur-animate' : ''}`}
             style={{
-              fontSize: 'clamp(32px, 5vw, 56px)',
               fontFamily: 'Fustat-Bold, sans-serif',
               fontWeight: 'normal',
-              letterSpacing: '-0.04em',
+              lineHeight: '0.9',
+              letterSpacing: '-0.06em',
               opacity: isVisible ? 1 : 0
             }}
           >
             {renderHeading()}
           </h2>
           <p
-            className={`text-base md:text-lg text-[#6B7280] max-w-md leading-relaxed md:pt-4 ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`text-base md:text-lg text-[#1C1C1E] max-w-xl leading-tight ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.2s', opacity: isVisible ? 1 : 0 }}
           >
             {t.solutionsSuite.description}
@@ -954,7 +954,7 @@ const SolutionsSuiteSection = () => {
           {/* Left Flare */}
           <svg
             viewBox="0 0 20 10"
-            className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none hidden md:block"
+            className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none"
             preserveAspectRatio="none"
             style={{
               left: '6px',
@@ -998,7 +998,7 @@ const SolutionsSuiteSection = () => {
           {/* Right Flare */}
           <svg
             viewBox="0 0 20 10"
-            className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none hidden md:block"
+            className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none"
             preserveAspectRatio="none"
             style={{
               right: '6px',
@@ -1080,6 +1080,37 @@ const SolutionsSuiteSection = () => {
                 className={`flex flex-col relative ${isVisible ? 'services-blur-animate' : ''} ${index < 2 ? 'border-b md:border-b-0 border-[#E2E7F1]' : ''}`}
                 style={{ animationDelay: `${0.3 + index * 0.1}s`, opacity: isVisible ? 1 : 0 }}
               >
+                {/* Mobile flares for stacked cards */}
+                {index > 0 && (
+                  <>
+                    <svg
+                      viewBox="0 0 20 10"
+                      className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none md:hidden"
+                      preserveAspectRatio="none"
+                      style={{
+                        left: '6px',
+                        top: '0',
+                        transform: 'translateY(-50%) translateX(-50%) rotate(-90deg)',
+                        zIndex: 30
+                      }}
+                    >
+                      <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
+                    </svg>
+                    <svg
+                      viewBox="0 0 20 10"
+                      className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none md:hidden"
+                      preserveAspectRatio="none"
+                      style={{
+                        right: '6px',
+                        top: '0',
+                        transform: 'translateY(-50%) translateX(50%) rotate(90deg)',
+                        zIndex: 30
+                      }}
+                    >
+                      <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
+                    </svg>
+                  </>
+                )}
                 {/* Card Image/Icon Area */}
                 <div className="h-64 md:h-80 relative overflow-hidden bg-[#FAFBFC]">
                   {/* Background Grid */}
