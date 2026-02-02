@@ -394,7 +394,7 @@ export const translations: Record<Language, Translations> = {
           llms: 'LLMs.txt',
         },
       },
-      copyright: 'Copyright © 2025 AbacatePay LLC - Abacatepay Tecnologia - CNPJ: 58.271.413/0001-90 ABACATEPAY TECNOLOGIA LTDA',
+      copyright: `Copyright © ${new Date().getFullYear()} Monfily Digital`,
     },
   },
   en: {
@@ -598,7 +598,7 @@ export const translations: Record<Language, Translations> = {
           llms: 'LLMs.txt',
         },
       },
-      copyright: 'Copyright © 2025 AbacatePay LLC - Abacatepay Tecnologia - CNPJ: 58.271.413/0001-90 ABACATEPAY TECNOLOGIA LTDA',
+      copyright: `Copyright © ${new Date().getFullYear()} Monfily Digital`,
     },
   },
 };
