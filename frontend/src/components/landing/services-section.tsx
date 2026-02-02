@@ -6,8 +6,9 @@ import { ChartNoAxesCombinedIcon } from "@/components/ui/chart-no-axes-combined-
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 import { ArrowRight, ShieldCheck, CircleDollarSign, CalendarDays, RefreshCw, Plus, Instagram, Twitter, Youtube } from "lucide-react";
+import SpotlightCard from "@/components/ui/spotlight-card";
 
 const GridDecoration = ({ className }: { className?: string }) => (
   <div className={`absolute w-6 h-6 flex items-center justify-center pointer-events-none ${className}`} style={{ zIndex: 'var(--section-grid-z, 9999)' }}>
@@ -622,6 +623,52 @@ export function ServicesSection() {
   );
 }
 
+// Spotlight Button Component
+const SpotlightButton = ({ 
+  children, 
+  className, 
+  style, 
+  spotlightColor = "rgba(255, 255, 255, 0.25)" 
+}: { 
+  children: React.ReactNode; 
+  className?: string; 
+  style?: React.CSSProperties;
+  spotlightColor?: string;
+}) => {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
+  return (
+    <button
+      className={`group relative overflow-hidden ${className}`}
+      onMouseMove={handleMouseMove}
+      style={style}
+    >
+      <motion.div
+        className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              circle at ${mouseX}px ${mouseY}px,
+              ${spotlightColor},
+              transparent 80%
+            )
+          `,
+        }}
+      />
+      <div className={`relative z-10 flex items-center w-full h-full gap-3 ${className?.includes('justify-start') ? 'justify-start' : 'justify-center'}`}>
+        {children}
+      </div>
+    </button>
+  );
+};
+
 // Expertise Section Component
 const ExpertiseSection = () => {
   const { language } = useLanguage();
@@ -723,15 +770,15 @@ const ExpertiseSection = () => {
           </p>
 
           {/* CTA Button */}
-          <button
-            className={`group bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-start gap-3 cursor-pointer w-auto relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+          <SpotlightButton
+            className={`group bg-[#2869D6] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-start gap-3 cursor-pointer w-auto relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.4s', opacity: isVisible ? 0 : 0 }}
           >
             {t.expertise.cta}
             <div className="bg-white rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
               <ArrowRight className="w-3 h-3 text-[#2869D6]" />
             </div>
-          </button>
+          </SpotlightButton>
         </div>
 
         {/* Desktop Layout */}
@@ -785,15 +832,15 @@ const ExpertiseSection = () => {
           </p>
 
           {/* CTA Button */}
-          <button
-            className={`group bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+          <SpotlightButton
+            className={`group bg-[#2869D6] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.4s', opacity: isVisible ? 0 : 0 }}
           >
             {t.expertise.cta}
             <div className="bg-white rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
               <ArrowRight className="w-3 h-3 text-[#2869D6]" />
             </div>
-          </button>
+          </SpotlightButton>
         </div>
       </div>
     </SectionLayout>
@@ -1075,10 +1122,11 @@ const SolutionsSuiteSection = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 bg-white">
             {cards.map((card, index) => (
-              <div
+              <SpotlightCard
                 key={index}
                 className={`flex flex-col relative ${isVisible ? 'services-blur-animate' : ''} ${index < 2 ? 'border-b md:border-b-0 border-[#E2E7F1]' : ''}`}
                 style={{ animationDelay: `${0.3 + index * 0.1}s`, opacity: isVisible ? 1 : 0 }}
+                spotlightColor="rgba(255, 255, 255, 0.2)"
               >
                 {/* Mobile flares for stacked cards */}
                 {index > 0 && (
@@ -1154,7 +1202,7 @@ const SolutionsSuiteSection = () => {
                     {card.description}
                   </p>
                 </div>
-              </div>
+              </SpotlightCard>
             ))}
           </div>
         </div>
@@ -1199,17 +1247,17 @@ const FAQSection = () => {
         {/* Left Side: Heading and Description */}
         <div className={`flex flex-col space-y-8 ${isVisible ? 'services-blur-animate' : ''}`} style={{ opacity: 0 }}>
           <h2
-            className="text-[#1C1C1E] leading-[1.1]"
+            className="text-4xl md:text-5xl text-[#1C1C1E] leading-none"
             style={{
-              fontSize: 'clamp(36px, 5vw, 56px)',
               fontFamily: 'Fustat-Bold, sans-serif',
               fontWeight: 'normal',
-              letterSpacing: '-0.04em'
+              lineHeight: '0.9',
+              letterSpacing: '-0.06em'
             }}
           >
             {t.faq.heading}
           </h2>
-          <p className="text-[#6B7280] text-lg md:text-xl max-w-md leading-relaxed">
+          <p className="text-[#1C1C1E] text-base md:text-lg max-w-md leading-tight">
             {t.faq.description}
           </p>
         </div>
@@ -1220,7 +1268,7 @@ const FAQSection = () => {
             <div key={index} className="flex flex-col">
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="flex items-start gap-4 p-6 md:p-8 text-left hover:bg-slate-50/50 transition-colors group w-full"
+                className="flex items-start gap-4 p-6 md:p-8 text-left hover:bg-slate-50/50 transition-colors group w-full cursor-pointer"
               >
                 <div className="flex-shrink-0 mt-1">
                   <Plus
@@ -1228,7 +1276,7 @@ const FAQSection = () => {
                   />
                 </div>
                 <span
-                  className="text-[#1C1C1E] text-lg md:text-xl flex-1 pr-4"
+                  className="text-[#1C1C1E] text-base md:text-lg flex-1 pr-4"
                   style={{
                     fontFamily: 'Fustat-Bold, sans-serif',
                     fontWeight: 'normal',
@@ -1311,12 +1359,15 @@ const FinalCTASection = () => {
           </p>
 
           <div className="pt-4">
-            <button className="inline-flex items-center gap-4 bg-white text-[#1C1C1E] px-8 py-5 rounded-full hover:shadow-2xl transition-all group active:scale-95">
+            <SpotlightButton 
+              className="inline-flex items-center gap-4 bg-white text-[#1C1C1E] px-8 py-5 rounded-full transition-all group active:scale-95"
+              spotlightColor="rgba(0, 0, 0, 0.05)"
+            >
               <span className="text-xl" style={{ fontFamily: 'Fustat-Bold, sans-serif' }}>{t.finalCTA.cta}</span>
               <div className="w-8 h-8 rounded-full bg-[#1C1C1E] flex items-center justify-center text-white transition-transform group-hover:translate-x-1">
                 <ArrowRight className="w-5 h-5" />
               </div>
-            </button>
+            </SpotlightButton>
           </div>
         </div>
 

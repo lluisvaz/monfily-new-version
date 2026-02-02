@@ -1,5 +1,5 @@
 import { useLocation } from "wouter";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { SectionLayout } from "./section-layout";
 import { MenuIcon } from "@/components/ui/menu-icon";
 import {
@@ -25,6 +25,7 @@ import {
 import { ChevronDown, X, Globe } from "lucide-react";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
+import { motion, useMotionValue, useSpring, useMotionTemplate } from "framer-motion";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,6 +60,39 @@ export function Header() {
     const newPath = lang === 'pt' ? `/pt${currentPath}` : `/en${currentPath}`;
     // Reload page for better optimization
     window.location.href = newPath;
+  };
+
+  const SpotlightButton = ({ children, className, style }: { children: React.ReactNode, className?: string, style?: any }) => {
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+
+    function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+      const { left, top } = currentTarget.getBoundingClientRect();
+      mouseX.set(clientX - left);
+      mouseY.set(clientY - top);
+    }
+
+    return (
+      <button
+        className={`group relative bg-[#2869D6] text-white text-[16px] h-10 px-4 rounded-full transition-colors cursor-pointer whitespace-nowrap overflow-hidden flex items-center justify-center ${className}`}
+        onMouseMove={handleMouseMove}
+        style={style}
+      >
+        <motion.div
+          className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"
+          style={{
+            background: useMotionTemplate`
+              radial-gradient(
+                circle at ${mouseX}px ${mouseY}px,
+                rgba(255, 255, 255, 0.25),
+                transparent 80%
+              )
+            `,
+          }}
+        />
+        <span className="relative z-10">{children}</span>
+      </button>
+    );
   };
 
   return (
@@ -108,7 +142,7 @@ export function Header() {
                 <DropdownMenu key={item}>
                   <DropdownMenuTrigger asChild>
                     <button 
-                      className="flex items-center gap-1 text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap focus:outline-none focus-visible:outline-none header-blur-animate"
+                      className="flex items-center gap-1 text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
                       style={{ animationDelay: `${0.2 + index * 0.05}s`, opacity: 0 }}
                     >
                       {item}
@@ -140,7 +174,7 @@ export function Header() {
               <a
                 key={item}
                 href={item === t.header.nav.about ? "#servicos" : "#"}
-                className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap header-blur-animate"
+                className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap header-blur-animate cursor-pointer"
                 style={{ animationDelay: `${0.2 + index * 0.05}s`, opacity: 0 }}
               >
                 {item}
@@ -158,7 +192,7 @@ export function Header() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button 
-                className="flex items-center justify-center py-2 px-2 rounded-full border border-[#E2E7F1] hover:bg-slate-50 transition-colors focus:outline-none focus-visible:outline-none header-blur-animate"
+                className="flex items-center justify-center h-10 px-3 rounded-full border border-[#E2E7F1] hover:bg-slate-50 transition-colors focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
                 style={{ animationDelay: `${0.3 + navItems.length * 0.05}s`, opacity: 0 }}
               >
                 <Globe className="w-5 h-5 text-[#1C1C1E]" />
@@ -186,12 +220,12 @@ export function Header() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <button 
-            className="bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-[16px] py-2 px-4 rounded-full transition-colors cursor-pointer whitespace-nowrap header-blur-animate"
+          <SpotlightButton 
+            className="header-blur-animate"
             style={{ animationDelay: `${0.35 + navItems.length * 0.05}s`, opacity: 0 }}
           >
             {t.header.cta}
-          </button>
+          </SpotlightButton>
         </div>
       </div>
 
@@ -200,7 +234,7 @@ export function Header() {
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
             <button 
-              className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 header-blur-animate focus:outline-none focus-visible:outline-none"
+              className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 header-blur-animate focus:outline-none focus-visible:outline-none cursor-pointer"
               style={{ animationDelay: '0.2s', opacity: 0 }}
             >
               <MenuIcon size={32} className="text-[#1C1C1E]" />
@@ -420,7 +454,7 @@ export function Header() {
                   </a>
                   <SheetClose asChild>
                     <button 
-                      className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 sidebar-blur-animate focus:outline-none focus-visible:outline-none"
+                      className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 sidebar-blur-animate focus:outline-none focus-visible:outline-none cursor-pointer"
                       style={{ animationDelay: '0.15s', opacity: 0 }}
                     >
                       <X className="h-8 w-8 text-[#1C1C1E]" />
@@ -433,7 +467,7 @@ export function Header() {
                   
                   {navItemsWithDropdown.map((item, index) => (
                     <Collapsible key={item} className="sidebar-blur-animate" style={{ animationDelay: `${0.2 + index * 0.05}s`, opacity: 0 }}>
-                      <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group">
+                      <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group cursor-pointer">
                         <span>{item}</span>
                         <ChevronDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
                       </CollapsibleTrigger>
@@ -444,7 +478,7 @@ export function Header() {
                           <a 
                             href="#" 
                             onClick={() => setIsOpen(false)} 
-                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1"
+                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1 cursor-pointer"
                             style={{
                               animation: 'fadeInSubmenuItem 0.3s ease-out 0.1s both'
                             }}
@@ -454,7 +488,7 @@ export function Header() {
                           <a 
                             href="#" 
                             onClick={() => setIsOpen(false)} 
-                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1"
+                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1 cursor-pointer"
                             style={{
                               animation: 'fadeInSubmenuItem 0.3s ease-out 0.15s both'
                             }}
@@ -464,7 +498,7 @@ export function Header() {
                           <a 
                             href="#" 
                             onClick={() => setIsOpen(false)} 
-                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1"
+                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1 cursor-pointer"
                             style={{
                               animation: 'fadeInSubmenuItem 0.3s ease-out 0.2s both'
                             }}
@@ -474,7 +508,7 @@ export function Header() {
                           <a 
                             href="#" 
                             onClick={() => setIsOpen(false)} 
-                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1"
+                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1 cursor-pointer"
                             style={{
                               animation: 'fadeInSubmenuItem 0.3s ease-out 0.25s both'
                             }}
@@ -513,7 +547,7 @@ export function Header() {
                             setIsOpen(false);
                           }
                         }}
-                        className="sidebar-blur-animate text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors"
+                        className="sidebar-blur-animate text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors cursor-pointer"
                         style={{ animationDelay: `${0.2 + dropdownCount * 0.05 + index * 0.05}s`, opacity: 0 }}
                       >
                         {item}
@@ -532,7 +566,7 @@ export function Header() {
                     className="sidebar-blur-animate"
                     style={{ animationDelay: `${0.25 + navItems.length * 0.05}s`, opacity: 0 }}
                   >
-                    <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group">
+                    <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group cursor-pointer">
                       <div className="flex items-center gap-2">
                         <Globe className="h-4 w-4" />
                         <span>{language === 'pt' ? t.header.languages.portuguese : t.header.languages.english}</span>
@@ -546,7 +580,7 @@ export function Header() {
                         <a 
                           href="#" 
                           onClick={(e) => { e.preventDefault(); handleLanguageChange('pt'); }} 
-                          className={`text-sm py-1 px-2 rounded transition-all duration-200 hover:translate-x-1 ${language === 'pt' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
+                          className={`text-sm py-1 px-2 rounded transition-all duration-200 hover:translate-x-1 cursor-pointer ${language === 'pt' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
                           style={{
                             animation: 'fadeInSubmenuItem 0.3s ease-out 0.1s both'
                           }}
@@ -556,7 +590,7 @@ export function Header() {
                         <a 
                           href="#" 
                           onClick={(e) => { e.preventDefault(); handleLanguageChange('en'); }} 
-                          className={`text-sm py-1 px-2 rounded transition-all duration-200 hover:translate-x-1 ${language === 'en' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
+                          className={`text-sm py-1 px-2 rounded transition-all duration-200 hover:translate-x-1 cursor-pointer ${language === 'en' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
                           style={{
                             animation: 'fadeInSubmenuItem 0.3s ease-out 0.15s both'
                           }}
@@ -568,13 +602,12 @@ export function Header() {
                   </Collapsible>
                   
                   {/* Falar com Especialista Button */}
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="sidebar-blur-animate mt-4 w-full bg-[#2869D6] hover:bg-[#1E4A8C] text-white font-medium text-base py-3 px-4 rounded-lg transition-colors"
+                  <SpotlightButton
+                    className="sidebar-blur-animate mt-4 w-full"
                     style={{ animationDelay: `${0.3 + navItems.length * 0.05}s`, opacity: 0 }}
                   >
                     {t.header.cta}
-                  </button>
+                  </SpotlightButton>
                 </nav>
               </div>
               
