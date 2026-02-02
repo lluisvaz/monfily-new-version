@@ -125,6 +125,71 @@ export interface Translations {
     description: string;
     cta: string;
   };
+
+  // Solutions Suite Section
+  solutionsSuite: {
+    heading: string;
+    description: string;
+    items: {
+      antiFraud: {
+        title: string;
+        description: string;
+      };
+      checkout: {
+        title: string;
+        description: string;
+      };
+      subscriptions: {
+        title: string;
+        description: string;
+        badge: string;
+      };
+    };
+  };
+  faq: {
+    heading: string;
+    description: string;
+    items: {
+      question: string;
+      answer: string;
+    }[];
+  };
+  finalCTA: {
+    heading: string;
+    description: string;
+    cta: string;
+  };
+  footer: {
+    columns: {
+      account: {
+        title: string;
+        signup: string;
+        login: string;
+      };
+      support: {
+        title: string;
+        email: string;
+        talkToSupport: string;
+        joinDiscord: string;
+      };
+      website: {
+        title: string;
+        docs: string;
+        integrations: string;
+        products: string;
+        fees: string;
+        privacy: string;
+        terms: string;
+        status: string;
+      };
+      ai: {
+        title: string;
+        chat: string;
+        llms: string;
+      };
+    };
+    copyright: string;
+  };
 }
 
 export const translations: Record<Language, Translations> = {
@@ -246,6 +311,91 @@ export const translations: Record<Language, Translations> = {
       description: 'Criamos ecossistemas digitais seguros e velozes. Unimos engenharia de software avançada com as melhores práticas de SEO Técnico para garantir que sua empresa cresça sem travas.',
       cta: 'Falar com Especialista',
     },
+    solutionsSuite: {
+      heading: 'Uma suíte de soluções para o seu negócio.',
+      description: 'Centralize as operações da sua empresa com uma suíte completa que une pagamentos, dados e automações. Nossa tecnologia foi desenvolvida para garantir eficiência, segurança e escalabilidade à medida que o seu negócio evolui.',
+      items: {
+        antiFraud: {
+          title: 'Proteção antifraude.',
+          description: 'Detecte e previna fraudes automaticamente, garantindo segurança para você e seus clientes e principalmente seu negócio.',
+        },
+        checkout: {
+          title: 'Check-out integrado.',
+          description: 'Ofereça um processo de pagamento rápido e intuitivo, totalmente integrado à sua plataforma ou site totalmente customizável.',
+        },
+        subscriptions: {
+          title: 'Assinaturas.',
+          description: 'Gerencie planos recorrentes de forma simples, garantindo pagamentos previsíveis e fidelização de clientes.',
+          badge: 'Em breve',
+        },
+      },
+    },
+    faq: {
+      heading: 'Tem dúvidas? Relaxa, nós temos as respostas.',
+      description: 'Selecionamos algumas dúvidas que recebemos com frequência sobre nossos serviços, elas podem ser úteis para você!',
+      items: [
+        {
+          question: 'O que é a AbacatePay e para quem ela serve?',
+          answer: 'A AbacatePay é uma plataforma de pagamentos completa desenvolvida para facilitar transações online para empresas de todos os tamanhos, desde startups até grandes corporações.',
+        },
+        {
+          question: 'Quais formas de pagamento são aceitas (PIX, cartão de crédito, boleto)?',
+          answer: 'Aceitamos as principais formas de pagamento do mercado, incluindo PIX com confirmação instantânea, cartões de crédito de diversas bandeiras e boleto bancário.',
+        },
+        {
+          question: 'Posso usar com pessoa física ou é necessário CNPJ?',
+          answer: 'Sim, a AbacatePay permite o cadastro tanto para pessoas físicas (CPF) quanto para pessoas jurídicas (CNPJ), facilitando o início de qualquer projeto.',
+        },
+        {
+          question: 'A AbacatePay pode ser integrada apps feitos em lovable?',
+          answer: 'Com certeza! Nossa API foi desenvolvida para ser flexível e pode ser integrada facilmente com aplicações criadas no Lovable e outras ferramentas no-code/low-code.',
+        },
+        {
+          question: 'É possível fazer split de pagamento entre diferentes recebedores?',
+          answer: 'Sim, possuímos uma funcionalidade robusta de split de pagamento que permite dividir os valores entre diferentes contas de forma automática e segura.',
+        },
+        {
+          question: 'Quanto tempo demora para a minha conta ser verificada?',
+          answer: 'Nosso processo de verificação é ágil e geralmente leva de 24 a 48 horas úteis após o envio de toda a documentação necessária.',
+        },
+      ],
+    },
+    finalCTA: {
+      heading: 'Você chegou no fim da página.',
+      description: 'Se chegou até aqui, é porque tá interessado. Então vai lá, faz logo o cadastro.',
+      cta: 'Vai, clica nesse botão',
+    },
+    footer: {
+      columns: {
+        account: {
+          title: 'Conta',
+          signup: 'Cadastre-se',
+          login: 'Login',
+        },
+        support: {
+          title: 'Suporte',
+          email: 'ajuda@abacatepay.com',
+          talkToSupport: 'Falar com suporte',
+          joinDiscord: 'Entre no discord',
+        },
+        website: {
+          title: 'Website',
+          docs: 'Documentação',
+          integrations: 'Integrações',
+          products: 'Produtos',
+          fees: 'Taxas',
+          privacy: 'Privacidade',
+          terms: 'Termos e condições',
+          status: 'Status dos serviços',
+        },
+        ai: {
+          title: 'A.I',
+          chat: 'Abacate Chat',
+          llms: 'LLMs.txt',
+        },
+      },
+      copyright: 'Copyright © 2025 AbacatePay LLC - Abacatepay Tecnologia - CNPJ: 58.271.413/0001-90 ABACATEPAY TECNOLOGIA LTDA',
+    },
   },
   en: {
     seo: {
@@ -364,6 +514,91 @@ export const translations: Record<Language, Translations> = {
       },
       description: 'We create secure and fast digital ecosystems. We combine advanced software engineering with best practices in Technical SEO to ensure your company grows without bottlenecks.',
       cta: 'Talk to an Expert',
+    },
+    solutionsSuite: {
+      heading: 'A suite of solutions for your business.',
+      description: 'Centralize your company operations with a complete suite that combines payments, data and automation. Our technology was developed to ensure efficiency, security and scalability as your business evolves.',
+      items: {
+        antiFraud: {
+          title: 'Anti-fraud protection.',
+          description: 'Automatically detect and prevent fraud, ensuring security for you and your customers and especially your business.',
+        },
+        checkout: {
+          title: 'Integrated check-out.',
+          description: 'Offer a fast and intuitive payment process, fully integrated into your platform or fully customizable website.',
+        },
+        subscriptions: {
+          title: 'Subscriptions.',
+          description: 'Manage recurring plans simply, ensuring predictable payments and customer loyalty.',
+          badge: 'Coming soon',
+        },
+      },
+    },
+    faq: {
+      heading: 'Got questions? Relax, we have the answers.',
+      description: "We've selected some common questions we receive about our services, they might be useful for you!",
+      items: [
+        {
+          question: 'What is AbacatePay and who is it for?',
+          answer: 'AbacatePay is a complete payment platform designed to facilitate online transactions for companies of all sizes, from startups to large corporations.',
+        },
+        {
+          question: 'What payment methods are accepted (PIX, credit card, bank slip)?',
+          answer: 'We accept the main payment methods on the market, including PIX with instant confirmation, credit cards from various brands, and bank slips.',
+        },
+        {
+          question: 'Can I use it as an individual or do I need a CNPJ (Business ID)?',
+          answer: 'Yes, AbacatePay allows registration for both individuals (CPF) and legal entities (CNPJ), making it easy to start any project.',
+        },
+        {
+          question: 'Can AbacatePay be integrated with apps made in lovable?',
+          answer: 'Absolutely! Our API was developed to be flexible and can be easily integrated with applications created in Lovable and other no-code/low-code tools.',
+        },
+        {
+          question: 'Is it possible to split payments between different recipients?',
+          answer: 'Yes, we have a robust payment split functionality that allows you to divide values between different accounts automatically and securely.',
+        },
+        {
+          question: 'How long does it take for my account to be verified?',
+          answer: 'Our verification process is agile and usually takes 24 to 48 business hours after submitting all the necessary documentation.',
+        },
+      ],
+    },
+    finalCTA: {
+      heading: "You've reached the end of the page.",
+      description: "If you've made it this far, it's because you're interested. So go ahead, sign up now.",
+      cta: 'Go on, click this button',
+    },
+    footer: {
+      columns: {
+        account: {
+          title: 'Account',
+          signup: 'Sign up',
+          login: 'Login',
+        },
+        support: {
+          title: 'Support',
+          email: 'ajuda@abacatepay.com',
+          talkToSupport: 'Talk to support',
+          joinDiscord: 'Join discord',
+        },
+        website: {
+          title: 'Website',
+          docs: 'Documentation',
+          integrations: 'Integrations',
+          products: 'Products',
+          fees: 'Fees',
+          privacy: 'Privacy',
+          terms: 'Terms and conditions',
+          status: 'Service status',
+        },
+        ai: {
+          title: 'A.I',
+          chat: 'Abacate Chat',
+          llms: 'LLMs.txt',
+        },
+      },
+      copyright: 'Copyright © 2025 AbacatePay LLC - Abacatepay Tecnologia - CNPJ: 58.271.413/0001-90 ABACATEPAY TECNOLOGIA LTDA',
     },
   },
 };
