@@ -1468,9 +1468,9 @@ const FooterSection = () => {
   return (
     <SectionLayout showStripes={false} showTopBorder={false} className="pt-24 pb-12 px-6 md:px-16 lg:px-28">
       {/* Main footer content */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-12 mb-24">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24 mb-24">
         {/* Logo Column */}
-        <div className="md:col-span-4 flex items-start">
+        <div className="md:col-span-3 flex items-start">
           <div className="flex items-center gap-8 md:gap-12 w-full">
             <a 
               href={`/${language}`}
@@ -1494,7 +1494,7 @@ const FooterSection = () => {
         </div>
 
         {/* Links Columns */}
-        <div className="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 sm:gap-12 md:gap-16">
+        <div className="md:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 md:gap-24">
           {/* Account */}
           <div className="flex flex-col space-y-6">
             <h4 className="text-[#1C1C1E] text-lg" style={{ fontFamily: 'Fustat-Bold, sans-serif' }}>
