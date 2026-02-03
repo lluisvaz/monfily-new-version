@@ -9,51 +9,7 @@ import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 
-// Spotlight Button Component
-const SpotlightButton = ({ 
-  children, 
-  className, 
-  style, 
-  spotlightColor = "rgba(255, 255, 255, 0.25)" 
-}: { 
-  children: React.ReactNode; 
-  className?: string; 
-  style?: React.CSSProperties;
-  spotlightColor?: string;
-}) => {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
-    const { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  }
-
-  return (
-    <button
-      className={`group relative overflow-hidden ${className}`}
-      onMouseMove={handleMouseMove}
-      style={style}
-    >
-      <motion.div
-        className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"
-        style={{
-          background: useMotionTemplate`
-            radial-gradient(
-              circle at ${mouseX}px ${mouseY}px,
-              ${spotlightColor},
-              transparent 80%
-            )
-          `,
-        }}
-      />
-      <div className={`relative z-10 flex items-center w-full h-full gap-3 justify-center`}>
-        {children}
-      </div>
-    </button>
-  );
-};
+import { SpotlightButton } from "@/components/ui/spotlight-button";
 
 export function Hero() {
   const { language } = useLanguage();

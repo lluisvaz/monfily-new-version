@@ -22,10 +22,11 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { ChevronDown, X, Globe } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
 import { motion, useMotionValue, useSpring, useMotionTemplate } from "framer-motion";
+import { SpotlightButton } from "@/components/ui/spotlight-button";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,39 +61,6 @@ export function Header() {
     const newPath = lang === 'pt' ? `/pt${currentPath}` : `/en${currentPath}`;
     // Reload page for better optimization
     window.location.href = newPath;
-  };
-
-  const SpotlightButton = ({ children, className, style }: { children: React.ReactNode, className?: string, style?: any }) => {
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
-
-    function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
-      const { left, top } = currentTarget.getBoundingClientRect();
-      mouseX.set(clientX - left);
-      mouseY.set(clientY - top);
-    }
-
-    return (
-      <button
-        className={`group relative bg-[#2869D6] text-white text-[16px] h-10 px-4 rounded-full transition-colors cursor-pointer whitespace-nowrap overflow-hidden flex items-center justify-center ${className}`}
-        onMouseMove={handleMouseMove}
-        style={style}
-      >
-        <motion.div
-          className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"
-          style={{
-            background: useMotionTemplate`
-              radial-gradient(
-                circle at ${mouseX}px ${mouseY}px,
-                rgba(255, 255, 255, 0.25),
-                transparent 80%
-              )
-            `,
-          }}
-        />
-        <span className="relative z-10">{children}</span>
-      </button>
-    );
   };
 
   return (
@@ -195,7 +163,11 @@ export function Header() {
                 className="flex items-center justify-center h-10 px-3 rounded-full border border-[#E2E7F1] hover:bg-slate-50 transition-colors focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
                 style={{ animationDelay: `${0.3 + navItems.length * 0.05}s`, opacity: 0 }}
               >
-                <Globe className="w-5 h-5 text-[#1C1C1E]" />
+                <img 
+                  src={`https://flagcdn.com/w20/${language === 'pt' ? 'br' : 'us'}.png`} 
+                  alt={language} 
+                  className="w-5 h-auto rounded-sm flex-shrink-0"
+                />
                 <ChevronDown className="w-3 h-3 ml-1 text-[#1C1C1E]" />
               </button>
             </DropdownMenuTrigger>
@@ -208,20 +180,20 @@ export function Header() {
                 className={`flex items-center gap-2 cursor-pointer ${language === 'pt' ? 'font-medium bg-slate-50' : ''}`}
                 onClick={() => handleLanguageChange('pt')}
               >
-                {language === 'pt' && <Globe className="w-4 h-4 text-[#1C1C1E]" />}
+                <img src="https://flagcdn.com/w20/br.png" alt="BR" className="w-4 h-auto rounded-sm" />
                 <span className={language === 'pt' ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{t.header.languages.portuguese}</span>
               </DropdownMenuItem>
               <DropdownMenuItem 
                 className={`flex items-center gap-2 cursor-pointer ${language === 'en' ? 'font-medium bg-slate-50' : ''}`}
                 onClick={() => handleLanguageChange('en')}
               >
-                {language === 'en' && <Globe className="w-4 h-4 text-[#1C1C1E]" />}
+                <img src="https://flagcdn.com/w20/us.png" alt="US" className="w-4 h-auto rounded-sm" />
                 <span className={language === 'en' ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{t.header.languages.english}</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
           <SpotlightButton 
-            className="header-blur-animate"
+            className="bg-[#2869D6] text-white h-10 px-6 rounded-full font-medium header-blur-animate flex items-center justify-center cursor-pointer"
             style={{ animationDelay: `${0.35 + navItems.length * 0.05}s`, opacity: 0 }}
           >
             {t.header.cta}
@@ -568,7 +540,11 @@ export function Header() {
                   >
                     <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group cursor-pointer">
                       <div className="flex items-center gap-2">
-                        <Globe className="h-4 w-4" />
+                        <img 
+                          src={`https://flagcdn.com/w20/${language === 'pt' ? 'br' : 'us'}.png`} 
+                          alt={language} 
+                          className="w-5 h-auto rounded-sm"
+                        />
                         <span>{language === 'pt' ? t.header.languages.portuguese : t.header.languages.english}</span>
                       </div>
                       <ChevronDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
@@ -579,22 +555,24 @@ export function Header() {
                       <div className="flex flex-col gap-2">
                         <a 
                           href="#" 
-                          onClick={(e) => { e.preventDefault(); handleLanguageChange('pt'); }} 
-                          className={`text-sm py-1 px-2 rounded transition-all duration-200 hover:translate-x-1 cursor-pointer ${language === 'pt' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
+                          onClick={(e) => { e.preventDefault(); handleLanguageChange('pt'); setIsOpen(false); }} 
+                          className={`text-sm py-2 px-2 rounded transition-all duration-200 hover:translate-x-1 cursor-pointer flex items-center gap-2 ${language === 'pt' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
                           style={{
                             animation: 'fadeInSubmenuItem 0.3s ease-out 0.1s both'
                           }}
                         >
+                          <img src="https://flagcdn.com/w20/br.png" alt="BR" className="w-4 h-auto rounded-sm" />
                           {t.header.languages.portuguese}
                         </a>
                         <a 
                           href="#" 
-                          onClick={(e) => { e.preventDefault(); handleLanguageChange('en'); }} 
-                          className={`text-sm py-1 px-2 rounded transition-all duration-200 hover:translate-x-1 cursor-pointer ${language === 'en' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
+                          onClick={(e) => { e.preventDefault(); handleLanguageChange('en'); setIsOpen(false); }} 
+                          className={`text-sm py-2 px-2 rounded transition-all duration-200 hover:translate-x-1 cursor-pointer flex items-center gap-2 ${language === 'en' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
                           style={{
                             animation: 'fadeInSubmenuItem 0.3s ease-out 0.15s both'
                           }}
                         >
+                          <img src="https://flagcdn.com/w20/us.png" alt="US" className="w-4 h-auto rounded-sm" />
                           {t.header.languages.english}
                         </a>
                       </div>
@@ -603,7 +581,7 @@ export function Header() {
                   
                   {/* Falar com Especialista Button */}
                   <SpotlightButton
-                    className="sidebar-blur-animate mt-4 w-full"
+                    className="bg-[#2869D6] text-white py-4 rounded-full font-medium sidebar-blur-animate mt-4 w-full flex items-center justify-center cursor-pointer"
                     style={{ animationDelay: `${0.3 + navItems.length * 0.05}s`, opacity: 0 }}
                   >
                     {t.header.cta}

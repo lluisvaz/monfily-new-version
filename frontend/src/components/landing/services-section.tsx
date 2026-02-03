@@ -9,6 +9,8 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 import { ArrowRight, ShieldCheck, CircleDollarSign, CalendarDays, RefreshCw, Plus, Instagram, Twitter, Youtube } from "lucide-react";
 import SpotlightCard from "@/components/ui/spotlight-card";
+import { SpotlightButton } from "@/components/ui/spotlight-button";
+import LeadForm from "@/components/forms/lead-form";
 
 const GridDecoration = ({ className }: { className?: string }) => (
   <div className={`absolute w-6 h-6 flex items-center justify-center pointer-events-none ${className}`} style={{ zIndex: 'var(--section-grid-z, 9999)' }}>
@@ -623,51 +625,6 @@ export function ServicesSection() {
   );
 }
 
-// Spotlight Button Component
-const SpotlightButton = ({ 
-  children, 
-  className, 
-  style, 
-  spotlightColor = "rgba(255, 255, 255, 0.25)" 
-}: { 
-  children: React.ReactNode; 
-  className?: string; 
-  style?: React.CSSProperties;
-  spotlightColor?: string;
-}) => {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
-    const { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  }
-
-  return (
-    <button
-      className={`group relative overflow-hidden ${className}`}
-      onMouseMove={handleMouseMove}
-      style={style}
-    >
-      <motion.div
-        className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"
-        style={{
-          background: useMotionTemplate`
-            radial-gradient(
-              circle at ${mouseX}px ${mouseY}px,
-              ${spotlightColor},
-              transparent 80%
-            )
-          `,
-        }}
-      />
-      <div className={`relative z-10 flex items-center w-full h-full gap-3 ${className?.includes('justify-start') ? 'justify-start' : 'justify-center'}`}>
-        {children}
-      </div>
-    </button>
-  );
-};
 
 // Expertise Section Component
 const ExpertiseSection = () => {
@@ -706,10 +663,12 @@ const ExpertiseSection = () => {
       <div ref={sectionRef} className="relative z-10">
         {/* Background Pattern - Squares */}
         <div
-          className="absolute opacity-40 pointer-events-none -left-6 -right-6 md:-left-16 md:-right-16 lg:-left-28 lg:-right-28"
+          className={`absolute opacity-40 pointer-events-none -left-6 -right-6 md:-left-16 md:-right-16 lg:-left-28 lg:-right-28 ${isVisible ? 'services-blur-animate' : ''}`}
           style={{
             top: 0,
             bottom: 0,
+            opacity: 0,
+            animationDelay: '0.05s',
             backgroundImage: `
               linear-gradient(#CBD5E1 1px, transparent 1px),
               linear-gradient(90deg, #CBD5E1 1px, transparent 1px)
@@ -720,10 +679,12 @@ const ExpertiseSection = () => {
         />
         {/* Gradient overlay - white intense in center, transparent on sides */}
         <div
-          className="absolute pointer-events-none -left-6 -right-6 md:-left-16 md:-right-16 lg:-left-28 lg:-right-28"
+          className={`absolute pointer-events-none -left-6 -right-6 md:-left-16 md:-right-16 lg:-left-28 lg:-right-28 ${isVisible ? 'services-blur-animate' : ''}`}
           style={{
             top: 0,
             bottom: 0,
+            opacity: 0,
+            animationDelay: '0.1s',
             background: `
               radial-gradient(circle at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 20%, rgba(255, 255, 255, 0.7) 40%, rgba(255, 255, 255, 0.4) 60%, rgba(255, 255, 255, 0.1) 80%, transparent 95%)
             `
@@ -731,7 +692,7 @@ const ExpertiseSection = () => {
         />
 
         {/* Mobile Layout */}
-        <div className="flex flex-col md:hidden items-start text-left space-y-6 pt-[64px] pb-[64px] relative">
+        <div className={`flex flex-col md:hidden items-start text-left space-y-6 pt-[64px] pb-[64px] relative ${isVisible ? 'services-blur-animate' : ''}`} style={{ opacity: 0, animationDelay: '0.15s' }}>
           {/* Label Pill */}
           <div
             className={`inline-flex items-center px-3 py-1 rounded-full border border-[#E2E7F1] text-[#1C1C1E] text-xs relative z-10 bg-white ${isVisible ? 'services-blur-animate' : ''}`}
@@ -782,9 +743,9 @@ const ExpertiseSection = () => {
         </div>
 
         {/* Desktop Layout */}
-        <div className="hidden md:flex flex-col items-center text-center space-y-8 relative pt-[140px] pb-[140px]">
+        <div className={`hidden md:flex flex-col items-center text-center space-y-8 relative pt-[140px] pb-[140px] ${isVisible ? 'services-blur-animate' : ''}`} style={{ opacity: 0, animationDelay: '0.2s' }}>
           {/* Floating Icons - Desktop */}
-          <div className="absolute inset-0 pointer-events-none">
+          <div className={`absolute inset-0 pointer-events-none ${isVisible ? 'services-blur-animate' : ''}`} style={{ opacity: 0, animationDelay: '0.25s' }}>
             <FloatingIcon name="python" position={{ top: '22%', left: '5%' }} delay={0.5} isVisible={isVisible} />
             <FloatingIcon name="n8n" position={{ top: '52%', left: '0%' }} delay={0.6} isVisible={isVisible} />
             <FloatingIcon name="react" position={{ top: '22%', right: '8%' }} delay={0.7} isVisible={isVisible} />
@@ -1338,41 +1299,35 @@ const FinalCTASection = () => {
     <SectionLayout showStripes={false} showTopBorder={false} className="py-24 px-6 md:px-16 lg:px-28">
       <div
         ref={sectionRef}
-        className={`relative overflow-hidden rounded-[2.5rem] bg-[#4ADE80] p-10 md:p-20 flex flex-col md:flex-row items-center justify-between gap-12 ${isVisible ? 'services-blur-animate' : ''}`}
+        className={`relative flex flex-col md:flex-row items-start justify-between gap-12 ${isVisible ? 'services-blur-animate' : ''}`}
         style={{ opacity: 0 }}
       >
         {/* Content Side */}
-        <div className="flex flex-col space-y-8 z-10 w-full md:w-3/5">
+        <div className="flex flex-col space-y-8 z-10 w-full md:w-2/5">
           <h2
-            className="text-[#1C1C1E] leading-[1.1]"
+            className="text-4xl md:text-5xl text-[#1C1C1E] leading-none max-w-md md:max-w-lg"
             style={{
-              fontSize: 'clamp(40px, 6vw, 64px)',
               fontFamily: 'Fustat-Bold, sans-serif',
               fontWeight: 'normal',
-              letterSpacing: '-0.04em'
+              lineHeight: '0.9',
+              letterSpacing: '-0.06em'
             }}
           >
             {t.finalCTA.heading}
           </h2>
-          <p className="text-[#1C1C1E] text-lg md:text-xl max-w-md leading-tight">
+          <p className="text-[#1C1C1E] text-base md:text-lg max-w-md leading-tight">
             {t.finalCTA.description}
           </p>
 
-          <div className="pt-4">
-            <SpotlightButton 
-              className="inline-flex items-center gap-4 bg-white text-[#1C1C1E] px-8 py-5 rounded-full transition-all group active:scale-95"
-              spotlightColor="rgba(0, 0, 0, 0.05)"
-            >
-              <span className="text-xl" style={{ fontFamily: 'Fustat-Bold, sans-serif' }}>{t.finalCTA.cta}</span>
-              <div className="w-8 h-8 rounded-full bg-[#1C1C1E] flex items-center justify-center text-white transition-transform group-hover:translate-x-1">
-                <ArrowRight className="w-5 h-5" />
-              </div>
-            </SpotlightButton>
-          </div>
+        </div>
+
+        {/* Lead Form Side */}
+        <div className="w-full md:w-3/5">
+          <LeadForm />
         </div>
 
         {/* Illustration Side */}
-        <div className="relative w-full md:w-2/5 flex justify-center md:justify-end">
+        <div className="hidden">
           <div className="relative w-full max-w-[500px] h-[300px] md:h-[400px]">
             {/* 
                 Since we don't have the original asset, we'll use a stylized representation 

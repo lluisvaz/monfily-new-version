@@ -15,9 +15,8 @@ export type Language = 'pt' | 'en';
 
 /**
  * Detecta o país do usuário usando uma API de geolocalização por IP
- * Retorna 'pt' se o país for lusófono, 'en' caso contrário
  */
-async function detectLanguageByLocation(): Promise<Language> {
+export async function detectCountryCode(): Promise<string | null> {
   try {
     // Usar ipapi.co (gratuita, 1000 requisições/dia)
     // Timeout de 3 segundos para evitar espera longa
@@ -35,21 +34,39 @@ async function detectLanguageByLocation(): Promise<Language> {
     clearTimeout(timeoutId);
 
     if (!response.ok) {
-      throw new Error('Failed to fetch location');
+      throw new Error('Failed to fetch location from ipapi');
     }
 
     const data = await response.json();
-    const countryCode = data.country_code;
-
-    if (countryCode && PORTUGUESE_SPEAKING_COUNTRIES.includes(countryCode.toUpperCase())) {
-      return 'pt';
-    }
-
-    return 'en';
+    if (data.country_code) return data.country_code;
+    throw new Error('No country code in response');
   } catch (error) {
-    // Se a API falhar, lança erro para usar fallback
-    throw error;
+    // Fallback para api.country.is
+    try {
+      const response = await fetch('https://api.country.is', { method: 'GET' });
+      if (response.ok) {
+        const data = await response.json();
+        return data.country || null;
+      }
+    } catch (e) {
+      // ignore
+    }
+    return null;
   }
+}
+
+/**
+ * Detecta o idioma baseado na localização (usando o código do país)
+ * Retorna 'pt' se o país for lusófono, 'en' caso contrário
+ */
+async function detectLanguageByLocation(): Promise<Language> {
+  const countryCode = await detectCountryCode();
+
+  if (countryCode && PORTUGUESE_SPEAKING_COUNTRIES.includes(countryCode.toUpperCase())) {
+    return 'pt';
+  }
+
+  return 'en';
 }
 
 /**
