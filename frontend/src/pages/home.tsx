@@ -39,7 +39,9 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white font-sans" data-scroll-container ref={containerRef}>
       <SEOHead />
-      <Header />
+      <section data-scroll-section>
+        <Header />
+      </section>
       <main>
         <section data-scroll-section>
           <Hero />

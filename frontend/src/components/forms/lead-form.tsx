@@ -261,8 +261,8 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
     <div className={`${baseCard} ${className ?? ''}`}>
       {/* Header */}
       <div className="px-5 py-4 border-b border-[#E2E7F1]">
-        <div className="text-xs text-[#1C1C1E] mb-2" style={{ fontFamily: 'Fustat-Bold, sans-serif' }}>{t.title}</div>
-        <div className="text-[13px] text-[#6B7280] leading-snug">{t.subtitle}</div>
+        <div className="text-base md:text-lg text-[#1C1C1E] mb-1" style={{ fontFamily: 'Fustat-Bold, sans-serif' }}>{t.title}</div>
+        <div className="text-sm text-[#6B7280] leading-snug">{t.subtitle}</div>
         {/* Steps */}
         <div className="mt-4 flex items-center gap-2">
           {t.steps.map((label, idx) => (
