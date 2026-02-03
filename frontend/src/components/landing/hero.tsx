@@ -1,4 +1,5 @@
-import { ArrowRight, Zap, Shield } from "lucide-react";
+import { ArrowRight } from "iconoir-react";
+import { BoltIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
 import { SectionLayout } from "./section-layout";
 import ShinyText from "@/components/ui/shiny-text";
 import TextType from "@/components/ui/text-type";
@@ -7,7 +8,6 @@ import { WebsiteMockupMobile } from "./website-mockup-mobile";
 import { Iphone16Pro } from "@/components/ui/iphone-16-pro";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
-import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 
 import { SpotlightButton } from "@/components/ui/spotlight-button";
 
@@ -182,7 +182,7 @@ export function Hero() {
         >
           <div className="flex items-start gap-3">
             <div className="bg-[#2869D6]/20 p-2 rounded-full w-10 h-10 flex items-center justify-center text-[#2869D6] mt-1">
-              <Zap className="w-4 h-4 fill-current" />
+              <BoltIcon className="w-5 h-5 fill-current" />
             </div>
             <div>
               <h3 
@@ -200,7 +200,7 @@ export function Hero() {
 
           <div className="flex items-start gap-3">
             <div className="bg-[#2869D6]/20 p-2 rounded-full w-10 h-10 flex items-center justify-center text-[#2869D6] mt-1">
-              <Shield className="w-4 h-4 fill-current" />
+              <RocketLaunchIcon className="w-5 h-5 fill-current" />
             </div>
             <div>
               <h3 

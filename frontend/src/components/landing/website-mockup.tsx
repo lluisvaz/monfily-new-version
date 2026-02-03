@@ -1,4 +1,4 @@
-import { ArrowRight, Phone, Star } from "lucide-react";
+import { ArrowRight, Phone, Star } from "iconoir-react";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
 

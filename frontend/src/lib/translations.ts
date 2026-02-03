@@ -195,8 +195,8 @@ export interface Translations {
 export const translations: Record<Language, Translations> = {
   pt: {
     seo: {
-      title: 'Desenvolvimento de Software, Sites e Automação com IA | Monfily',
-      description: 'Especialistas em transformação digital. Oferecemos criação de websites, sistemas web personalizados, automação de processos com IA e consultoria de SEO para alavancar seus resultados. Peça um orçamento.',
+      title: 'Criação de Sites, Softwares e Automações com IA | Monfily',
+      description: 'Desenvolvemos sites rápidos, sistemas sob medida e automações com IA para empresas que precisam de eficiência operacional e presença digital profissional.',
     },
     header: {
       nav: {
@@ -258,112 +258,116 @@ export const translations: Record<Language, Translations> = {
       label: 'Utilizamos as melhores tecnologias:',
     },
     services: {
-      title: 'Soluções validadas em dezenas de mercados.',
+      title: 'Soluções digitais para diferentes mercados.',
       metrics: {
         projectsDelivered: 'Projetos entregues',
-        nichesServed: 'Nichos atendidos',
+        nichesServed: 'Segmentos atendidos',
       },
       items: {
         webDesign: {
-          title: 'Web Design Premium',
-          description: 'Sites ultra-rápidos e visualmente impactantes. Transformamos visitantes em leads qualificados com UX de ponta.',
+          title: 'Criação de Sites',
+          description: 'Sites rápidos e adaptados para dispositivos móveis. Focamos na clareza das informações para facilitar o contato do seu cliente.',
         },
         customSoftware: {
-          title: 'Software Sob Medida',
-          description: 'Do sistema interno ao SaaS complexo. Desenvolvemos a ferramenta exata que sua operação precisa para escalar sem travas.',
+          title: 'Sistemas Sob Medida',
+          description: 'Desenvolvemos ferramentas para organizar processos internos ou criar novos produtos digitais, com foco em segurança e usabilidade.',
         },
         aiAutomation: {
           title: 'Automação com IA',
-          description: 'Reduza custos operacionais. Implementamos agentes inteligentes que trabalham 24/7 no atendimento e processos repetitivos.',
+          description: 'Integração de assistentes inteligentes para atendimento e fluxos de trabalho, reduzindo o tempo gasto em tarefas manuais e repetitivas.',
         },
         seoGrowth: {
-          title: 'SEO Técnico & Growth',
-          description: 'Pare de caçar clientes. Posicionamos sua marca no topo do Google para atrair tráfego orgânico e intencional.',
+          title: 'SEO Técnico',
+          description: 'Otimização da estrutura técnica do site para melhorar o posicionamento nos motores de busca de forma orgânica.',
         },
       },
     },
     mockup: {
       navigation: {
         services: 'Serviços',
-        benefits: 'Benefícios',
-        projects: 'Projetos',
-        prices: 'Preços',
+        benefits: 'Vantagens',
+        projects: 'Portfólio',
+        prices: 'Orçamento',
         clients: 'Clientes',
       },
-      badge: 'Disponível Para Projetos',
+      badge: 'Disponível para novos projetos',
       heading: {
-        line1: 'Parceiro de Design de Classe Mundial ',
-        line2: 'Para Startups de IA',
+        line1: 'Desenvolvimento de Software',
+        line2: 'Para Empresas e Startups',
       },
-      description: 'Soluções de design rápidas, confiáveis e escaláveis adaptadas para sua startup em crescimento.',
+      description: 'Entregamos tecnologia de forma clara, com prazos reais e suporte contínuo para o seu crescimento digital.',
       cta: {
-        viewPrices: 'Ver Preços',
-        scheduleNow: 'Agendar Agora',
+        viewPrices: 'Ver Portfólio',
+        scheduleNow: 'Agendar Reunião',
       },
-      trust: 'Confiado Por Mais de 50 Empresas',
+      trust: 'Mais de 50 empresas atendidas',
     },
     expertise: {
       label: 'Nossa Expertise',
       heading: {
-        line1: 'Desenvolvimento robusto.',
-        line2: 'Performance escalável.',
+        line1: 'Desenvolvimento técnico',
+        line2: 'focado em utilidade.',
       },
-      description: 'Criamos ecossistemas digitais seguros e velozes. Unimos engenharia de software avançada com as melhores práticas de SEO Técnico para garantir que sua empresa cresça sem travas.',
+      description: 'Não criamos apenas telas. Construímos a lógica por trás do seu negócio, garantindo que cada linha de código tenha um propósito prático para sua empresa.',
       cta: 'Falar com Especialista',
     },
     solutionsSuite: {
-      heading: 'Uma suíte de soluções para o seu negócio.',
-      description: 'Centralize as operações da sua empresa com uma suíte completa que une pagamentos, dados e automações. Nossa tecnologia foi desenvolvida para garantir eficiência, segurança e escalabilidade à medida que o seu negócio evolui.',
+      heading: 'Tecnologia que organiza sua operação.',
+      description: 'Mais do que um site, entregamos ferramentas que ajudam na gestão e no crescimento do seu negócio.',
       items: {
         antiFraud: {
-          title: 'Proteção antifraude.',
-          description: 'Detecte e previna fraudes automaticamente, garantindo segurança para você e seus clientes e principalmente seu negócio.',
+          title: 'Segurança de Dados',
+          description: 'Implementamos protocolos de segurança para proteger as informações da sua empresa e dos seus clientes.',
         },
         checkout: {
-          title: 'Check-out integrado.',
-          description: 'Ofereça um processo de pagamento rápido e intuitivo, totalmente integrado à sua plataforma ou site totalmente customizável.',
+          title: 'Integrações',
+          description: 'Conectamos seu site ou sistema com as ferramentas que você já usa, como CRMs, meios de pagamento e ERPs.',
         },
         subscriptions: {
-          title: 'Assinaturas.',
-          description: 'Gerencie planos recorrentes de forma simples, garantindo pagamentos previsíveis e fidelização de clientes.',
-          badge: 'Em breve',
+          title: 'Escalabilidade',
+          description: 'Desenvolvemos sistemas preparados para suportar o aumento de acessos e dados sem perda de velocidade.',
+          badge: '',
         },
       },
     },
     faq: {
-      heading: 'Tem dúvidas? Relaxa, nós temos as respostas.',
-      description: 'Selecionamos algumas dúvidas que recebemos com frequência sobre nossos serviços, elas podem ser úteis para você!',
+      heading: 'Dúvidas Frequentes',
+      description: 'Respostas diretas sobre como trabalhamos e o que você pode esperar de nossos serviços.',
       items: [
         {
-          question: 'O que é a AbacatePay e para quem ela serve?',
-          answer: 'A AbacatePay é uma plataforma de pagamentos completa desenvolvida para facilitar transações online para empresas de todos os tamanhos, desde startups até grandes corporações.',
+          question: 'Como funciona o processo de criação?',
+          answer: 'O processo é dividido em quatro etapas: entendimento das necessidades, desenho da solução (design), desenvolvimento do código e entrega final com treinamento, se necessário.',
         },
         {
-          question: 'Quais formas de pagamento são aceitas (PIX, cartão de crédito, boleto)?',
-          answer: 'Aceitamos as principais formas de pagamento do mercado, incluindo PIX com confirmação instantânea, cartões de crédito de diversas bandeiras e boleto bancário.',
+          question: 'O que eu preciso enviar para começar o projeto?',
+          answer: 'Basicamente as informações sobre seus serviços, sua logomarca e o acesso ao seu domínio, caso já possua um.',
         },
         {
-          question: 'Posso usar com pessoa física ou é necessário CNPJ?',
-          answer: 'Sim, a AbacatePay permite o cadastro tanto para pessoas físicas (CPF) quanto para pessoas jurídicas (CNPJ), facilitando o início de qualquer projeto.',
+          question: 'Vocês oferecem suporte após a entrega?',
+          answer: 'Sim. Oferecemos suporte técnico para correções e atualizações, garantindo que sua plataforma continue funcionando sem interrupções.',
         },
         {
-          question: 'A AbacatePay pode ser integrada apps feitos em lovable?',
-          answer: 'Com certeza! Nossa API foi desenvolvida para ser flexível e pode ser integrada facilmente com aplicações criadas no Lovable e outras ferramentas no-code/low-code.',
+          question: 'O site será otimizado para celulares?',
+          answer: 'Sim. Todos os nossos projetos são desenvolvidos com tecnologia responsiva, garantindo que funcionem perfeitamente em smartphones, tablets e computadores.',
         },
         {
-          question: 'É possível fazer split de pagamento entre diferentes recebedores?',
-          answer: 'Sim, possuímos uma funcionalidade robusta de split de pagamento que permite dividir os valores entre diferentes contas de forma automática e segura.',
+          question: 'Vocês cuidam da hospedagem do site?',
+          answer: 'Nós auxiliamos na escolha e configuração da melhor hospedagem para o seu projeto, mas a contratação do serviço é feita diretamente por você para garantir total autonomia.',
         },
         {
-          question: 'Quanto tempo demora para a minha conta ser verificada?',
-          answer: 'Nosso processo de verificação é ágil e geralmente leva de 24 a 48 horas úteis após o envio de toda a documentação necessária.',
+          question: 'Vocês fazem a identidade visual/logotipo?',
+          answer: 'Focamos no desenvolvimento digital (sites e sistemas). Caso você não tenha uma identidade visual, podemos indicar parceiros de design ou trabalhar com o que você já possui.',
+        },
+        {
+          question: 'Como é feita a comunicação durante o projeto?',
+          answer: 'Utilizamos canais diretos como WhatsApp e reuniões agendadas para garantir que você acompanhe cada evolução do desenvolvimento.',
         },
       ],
     },
     finalCTA: {
-      heading: 'Você chegou no fim da página.',
-      description: 'Se chegou até aqui, é porque tá interessado. Então vai lá, faz logo o cadastro.',
-      cta: 'Vai, clica nesse botão',
+      heading: 'Pronto para tirar seu projeto do papel?',
+      description: 'Fale com um de nossos especialistas e receba uma análise técnica preliminar para o seu negócio.',
+      cta: 'Falar com Especialista',
     },
     footer: {
       columns: {
@@ -399,8 +403,8 @@ export const translations: Record<Language, Translations> = {
   },
   en: {
     seo: {
-      title: 'Software Development, Websites & AI Automation | Monfily',
-      description: 'Digital transformation experts. We offer website creation, custom web systems, AI process automation, and SEO consulting to boost your results. Get a quote.',
+      title: 'Website Creation, Software & AI Automation | Monfily',
+      description: 'We develop fast websites, custom systems, and AI automations for companies looking for operational efficiency and a professional digital presence.',
     },
     header: {
       nav: {
@@ -442,7 +446,7 @@ export const translations: Record<Language, Translations> = {
         line2: 'Real ',
         line3: 'Results.',
       },
-      description: 'Complete digital infrastructure for your business. We combine high-performance Website Creation design, Software engineering, Artificial Intelligence (AI), and technical SEO to generate revenue and efficiency.',
+      description: 'Complete digital infrastructure for your business. We combine high-performance Website Creation design, Software engineering, Artificial Intelligence (IA), and technical SEO to generate revenue and efficiency.',
       cta: {
         primary: 'Start My Project',
         secondary: 'Why us?',
@@ -462,112 +466,116 @@ export const translations: Record<Language, Translations> = {
       label: 'We use the best technologies:',
     },
     services: {
-      title: 'Solutions validated across dozens of markets.',
+      title: 'Digital solutions for different markets.',
       metrics: {
         projectsDelivered: 'Projects delivered',
-        nichesServed: 'Niches served',
+        nichesServed: 'Industries served',
       },
       items: {
         webDesign: {
-          title: 'Premium Web Design',
-          description: 'Ultra-fast and visually impactful websites. We turn visitors into qualified leads with cutting-edge UX.',
+          title: 'Website Creation',
+          description: 'Fast, mobile-friendly websites. We focus on clear information to make it easier for customers to reach you.',
         },
         customSoftware: {
-          title: 'Custom Software',
-          description: 'From internal systems to complex SaaS. We develop the exact tool your operation needs to scale without bottlenecks.',
+          title: 'Custom Systems',
+          description: 'We develop tools to organize internal processes or create new digital products, focusing on security and usability.',
         },
         aiAutomation: {
           title: 'AI Automation',
-          description: 'Reduce operational costs. We implement intelligent agents that work 24/7 on customer service and repetitive processes.',
+          description: 'Integration of intelligent assistants for customer service and workflows, reducing time spent on manual tasks.',
         },
         seoGrowth: {
-          title: 'Technical SEO & Growth',
-          description: 'Stop hunting for clients. We position your brand at the top of Google to attract organic and intentional traffic.',
+          title: 'Technical SEO',
+          description: 'Optimizing the technical structure of the site to improve organic search engine rankings.',
         },
       },
     },
     mockup: {
       navigation: {
         services: 'Services',
-        benefits: 'Benefits',
-        projects: 'Projects',
-        prices: 'Prices',
+        benefits: 'Advantages',
+        projects: 'Portfolio',
+        prices: 'Quote',
         clients: 'Clients',
       },
-      badge: 'Available For Projects',
+      badge: 'Available for new projects',
       heading: {
-        line1: 'World-Class Design Partner ',
-        line2: 'For AI Startups',
+        line1: 'Software Development',
+        line2: 'For Companies and Startups',
       },
-      description: 'Fast, reliable, and scalable design solutions tailored for your growing startup.',
+      description: 'We deliver technology clearly, with realistic deadlines and continuous support for your digital growth.',
       cta: {
-        viewPrices: 'View Prices',
-        scheduleNow: 'Schedule Now',
+        viewPrices: 'View Portfolio',
+        scheduleNow: 'Book a Meeting',
       },
-      trust: 'Trusted By More Than 50 Companies',
+      trust: 'More than 50 companies served',
     },
     expertise: {
       label: 'Our Expertise',
       heading: {
-        line1: 'Robust development.',
-        line2: 'Scalable performance.',
+        line1: 'Technical development',
+        line2: 'focused on utility.',
       },
-      description: 'We create secure and fast digital ecosystems. We combine advanced software engineering with best practices in Technical SEO to ensure your company grows without bottlenecks.',
+      description: 'We don\'t just create screens. We build the logic behind your business, ensuring every line of code has a practical purpose for your company.',
       cta: 'Talk to an Expert',
     },
     solutionsSuite: {
-      heading: 'A suite of solutions for your business.',
-      description: 'Centralize your company operations with a complete suite that combines payments, data and automation. Our technology was developed to ensure efficiency, security and scalability as your business evolves.',
+      heading: 'Technology that organizes your operation.',
+      description: 'More than just a website, we deliver tools that help manage and grow your business.',
       items: {
         antiFraud: {
-          title: 'Anti-fraud protection.',
-          description: 'Automatically detect and prevent fraud, ensuring security for you and your customers and especially your business.',
+          title: 'Data Security',
+          description: 'We implement security protocols to protect your company\'s and your clients\' information.',
         },
         checkout: {
-          title: 'Integrated check-out.',
-          description: 'Offer a fast and intuitive payment process, fully integrated into your platform or fully customizable website.',
+          title: 'Integrations',
+          description: 'We connect your site or system with the tools you already use, such as CRMs, payment gateways, and ERPs.',
         },
         subscriptions: {
-          title: 'Subscriptions.',
-          description: 'Manage recurring plans simply, ensuring predictable payments and customer loyalty.',
-          badge: 'Coming soon',
+          title: 'Scalability',
+          description: 'We develop systems prepared to handle increased traffic and data without losing speed.',
+          badge: '',
         },
       },
     },
     faq: {
-      heading: 'Got questions? Relax, we have the answers.',
-      description: "We've selected some common questions we receive about our services, they might be useful for you!",
+      heading: 'Frequently Asked Questions',
+      description: 'Straight answers about how we work and what you can expect from our services.',
       items: [
         {
-          question: 'What is AbacatePay and who is it for?',
-          answer: 'AbacatePay is a complete payment platform designed to facilitate online transactions for companies of all sizes, from startups to large corporations.',
+          question: 'How does the creation process work?',
+          answer: 'The process is divided into four stages: understanding needs, solution design, code development, and final delivery with training if necessary.',
         },
         {
-          question: 'What payment methods are accepted (PIX, credit card, bank slip)?',
-          answer: 'We accept the main payment methods on the market, including PIX with instant confirmation, credit cards from various brands, and bank slips.',
+          question: 'What do I need to send to start the project?',
+          answer: 'Basically, information about your services, your logo, and access to your domain if you already have one.',
         },
         {
-          question: 'Can I use it as an individual or do I need a CNPJ (Business ID)?',
-          answer: 'Yes, AbacatePay allows registration for both individuals (CPF) and legal entities (CNPJ), making it easy to start any project.',
+          question: 'Do you offer support after delivery?',
+          answer: 'Yes. We offer technical support for fixes and updates, ensuring your platform continues to run smoothly.',
         },
         {
-          question: 'Can AbacatePay be integrated with apps made in lovable?',
-          answer: 'Absolutely! Our API was developed to be flexible and can be easily integrated with applications created in Lovable and other no-code/low-code tools.',
+          question: 'Will the website be mobile-friendly?',
+          answer: 'Yes. All our projects are developed with responsive technology, ensuring they work perfectly on smartphones, tablets, and computers.',
         },
         {
-          question: 'Is it possible to split payments between different recipients?',
-          answer: 'Yes, we have a robust payment split functionality that allows you to divide values between different accounts automatically and securely.',
+          question: 'Do you handle website hosting?',
+          answer: 'We assist in choosing and configuring the best hosting for your project, but the service is contracted directly by you to ensure total autonomy.',
         },
         {
-          question: 'How long does it take for my account to be verified?',
-          answer: 'Our verification process is agile and usually takes 24 to 48 business hours after submitting all the necessary documentation.',
+          question: 'Do you create visual identities or logos?',
+          answer: 'We focus on digital development (websites and systems). If you don\'t have a visual identity, we can recommend design partners or work with what you already have.',
+        },
+        {
+          question: 'How is communication handled during the project?',
+          answer: 'We use direct channels like WhatsApp and scheduled meetings to ensure you follow every stage of the development evolution.',
         },
       ],
     },
     finalCTA: {
-      heading: "You've reached the end of the page.",
-      description: "If you've made it this far, it's because you're interested. So go ahead, sign up now.",
-      cta: 'Go on, click this button',
+      heading: 'Ready to bring your project to life?',
+      description: 'Talk to one of our experts and receive a preliminary technical analysis for your business.',
+      cta: 'Talk to an Expert',
     },
     footer: {
       columns: {

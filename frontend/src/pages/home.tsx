@@ -3,10 +3,27 @@ import { Hero } from "@/components/landing/hero";
 import { TrustedBy } from "@/components/landing/trusted-by";
 import { ServicesSection } from "@/components/landing/services-section";
 import { SEOHead } from "@/components/seo-head";
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import GradualBlur from '@/components/ui/gradual-blur';
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [footerVisible, setFooterVisible] = useState(false);
+
+  useEffect(() => {
+    // Observer to detect when footer is visible to fade out the gradual blur
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setFooterVisible(entry.isIntersecting);
+      },
+      { threshold: 0.01 } // Trigger as soon as the footer starts to appear
+    );
+
+    const footer = document.getElementById('footer');
+    if (footer) observer.observe(footer);
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     let scroll: any;
@@ -37,7 +54,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white font-sans" data-scroll-container ref={containerRef}>
+    <>
+      <div className="min-h-screen bg-white font-sans" data-scroll-container ref={containerRef}>
       <SEOHead />
       <section data-scroll-section>
         <Header />
@@ -54,5 +72,18 @@ export default function Home() {
         </section>
       </main>
     </div>
-  );
+    <GradualBlur
+      target="page"
+      position="bottom"
+      height="7rem"
+      strength={2}
+      divCount={5}
+      curve="bezier"
+      exponential
+      style={{ opacity: footerVisible ? 0 : 1 }}
+      animated={true}
+      duration="0.5s"
+    />
+  </>
+);
 }

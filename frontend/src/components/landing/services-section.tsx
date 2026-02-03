@@ -1,13 +1,10 @@
 import { SectionLayout } from "./section-layout";
-import { FigmaIcon } from "@/components/ui/figma-icon";
-import { CodeXmlIcon } from "@/components/ui/code-xml-icon";
-import { BrainIcon } from "@/components/ui/brain-icon";
-import { ChartNoAxesCombinedIcon } from "@/components/ui/chart-no-axes-combined-icon";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
 import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
-import { ArrowRight, ShieldCheck, CircleDollarSign, CalendarDays, RefreshCw, Plus, Instagram, Twitter, Youtube } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight, Plus, Instagram, X, Youtube, Discord } from "iconoir-react";
+import { WindowIcon, CommandLineIcon, CpuChipIcon, ChartBarIcon } from "@heroicons/react/24/outline";
 import SpotlightCard from "@/components/ui/spotlight-card";
 import { SpotlightButton } from "@/components/ui/spotlight-button";
 import LeadForm from "@/components/forms/lead-form";
@@ -391,13 +388,13 @@ export function ServicesSection() {
                   >
                     <div className="flex-1 flex flex-col gap-3">
                       {service.isFigma ? (
-                        <FigmaIcon size={20} className="text-[#1C1C1E] self-start" />
+                        <WindowIcon className="w-5 h-5 text-[#1C1C1E] self-start" />
                       ) : service.isCodeXml ? (
-                        <CodeXmlIcon size={20} className="text-[#1C1C1E] self-start" />
+                        <CommandLineIcon className="w-5 h-5 text-[#1C1C1E] self-start" />
                       ) : service.isBrain ? (
-                        <BrainIcon size={20} className="text-[#1C1C1E] self-start" />
+                        <CpuChipIcon className="w-5 h-5 text-[#1C1C1E] self-start" />
                       ) : service.isChart ? (
-                        <ChartNoAxesCombinedIcon size={20} className="text-[#1C1C1E] self-start" />
+                        <ChartBarIcon className="w-5 h-5 text-[#1C1C1E] self-start" />
                       ) : null}
                       <h3
                         className="text-lg text-[#1C1C1E]"
@@ -564,13 +561,13 @@ export function ServicesSection() {
                 >
                   <div className="flex flex-col gap-4">
                     {service.isFigma ? (
-                      <FigmaIcon size={24} className="text-[#1C1C1E] self-start" />
+                      <WindowIcon className="w-6 h-6 text-[#1C1C1E] self-start" />
                     ) : service.isCodeXml ? (
-                      <CodeXmlIcon size={24} className="text-[#1C1C1E] self-start" />
+                      <CommandLineIcon className="w-6 h-6 text-[#1C1C1E] self-start" />
                     ) : service.isBrain ? (
-                      <BrainIcon size={24} className="text-[#1C1C1E] self-start" />
+                      <CpuChipIcon className="w-6 h-6 text-[#1C1C1E] self-start" />
                     ) : service.isChart ? (
-                      <ChartNoAxesCombinedIcon size={24} className="text-[#1C1C1E] self-start" />
+                      <ChartBarIcon className="w-6 h-6 text-[#1C1C1E] self-start" />
                     ) : null}
                     <h3
                       className="text-lg text-[#1C1C1E]"
@@ -852,7 +849,7 @@ const SolutionsSuiteSection = () => {
               <motion.path
                 d="M5,20 Q5,5 50,5 Q95,5 95,20 Q95,35 50,35 Q5,35 5,20"
                 fill="none"
-                stroke="#4ADE80"
+                stroke="#2869D6"
                 strokeWidth="1.5"
                 initial={{ pathLength: 0 }}
                 animate={isVisible ? { pathLength: 1 } : { pathLength: 0 }}
@@ -873,16 +870,38 @@ const SolutionsSuiteSection = () => {
       description: t.solutionsSuite.items.antiFraud.description,
       icon: (
         <div className="relative w-full h-full flex items-center justify-center">
-          {/* Isometric Platform */}
-          <div className="absolute w-32 h-16 bg-white rounded-[100%] border border-[#E2E7F1] transform -rotate-[15deg] shadow-lg flex items-center justify-center">
-            <div className="w-24 h-12 bg-[#4ADE80]/10 rounded-[100%] blur-md" />
-          </div>
-          <div className="relative z-10 transform -translate-y-4">
-            <div className="relative">
-              <ShieldCheck size={48} className="text-[#4ADE80] fill-[#4ADE80]/10" />
-              <RefreshCw size={20} className="text-[#4ADE80] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-            </div>
-          </div>
+          <motion.div
+            className="relative z-10"
+            initial={{ y: 0 }}
+            animate={{ y: [0, -15, 0] }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <svg
+              className="w-24 h-32 md:w-[140px] md:h-[180px]"
+              viewBox="0 0 94 120"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{
+                filter: 'drop-shadow(0 0 6px rgba(40, 105, 214, 0.8))'
+              }}
+            >
+              <path d="M62.83 43.5L55.93 36.5601L36.64 17.12L22 14.96L2 12.02V42.3301C2 54.9201 5.26 68.2501 11.8 82.3301C18.33 96.4201 26.61 107.8 36.64 116.49C43.88 118.58 50.21 118.21 55.62 115.38C57.71 114.29 59.66 112.84 61.48 111.02C62.48 110.02 63.41 108.94 64.24 107.8C68.94 101.48 71.28 92.9901 71.28 82.3301V52.02L62.83 43.5ZM49.63 94.1801L41.57 89.52L23.65 79.1801V54.3301L25.41 55.34L27.98 56.8301V51.87C27.98 49.13 28.83 47.2801 30.52 46.3201C32.22 45.3501 34.26 45.5501 36.64 46.9301C37.51 47.4301 38.34 48.04 39.12 48.76C39.69 49.27 40.22 49.8301 40.73 50.4501C41.46 51.3201 42.13 52.3 42.76 53.38C43.09 53.95 43.39 54.53 43.65 55.09C44.75 57.41 45.3 59.67 45.3 61.87V66.8301L49.63 69.3301V94.1801Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M45.3001 61.87V62.17L43.6501 62.99L40.9701 64.3301V59.37C40.9701 57.96 40.56 56.54 39.73 55.11C39.02 53.88 38.17 52.93 37.17 52.24C37 52.12 36.82 52.01 36.64 51.9C35.53 51.26 34.59 51.1 33.8 51.42L39.12 48.76C39.69 49.27 40.22 49.8301 40.73 50.4501C41.46 51.3201 42.13 52.3 42.76 53.38C43.09 53.95 43.3901 54.53 43.6501 55.09C44.7501 57.41 45.3001 59.67 45.3001 61.87Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M39.12 48.76L33.8 51.4201L33.55 51.5401C32.72 52.0201 32.31 52.96 32.31 54.37V54.6701L27.98 56.8301V51.87C27.98 49.13 28.83 47.2801 30.52 46.3201C32.22 45.3501 34.26 45.5501 36.64 46.9301C37.51 47.4301 38.34 48.04 39.12 48.76Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M40.9701 59.37V64.33L32.3101 59.33V54.37C32.3101 52.96 32.7201 52.02 33.5501 51.54L33.8001 51.42C34.5901 51.1 35.5301 51.26 36.6401 51.9C36.8201 52.01 37.0001 52.12 37.1701 52.24C38.1701 52.93 39.0201 53.88 39.7301 55.11C40.5601 56.54 40.9701 57.96 40.9701 59.37Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M49.6299 72.63V94.1801L41.5699 89.52L23.6499 79.1801L43.6499 69.1801L49.6299 72.63Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M43.6499 62.99V69.1801L23.6499 79.1801V54.3301L25.4099 55.34L27.9799 56.8301L32.3099 54.67V59.3301L40.9699 64.3301L43.6499 62.99Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M91.2801 42.02V72.3301C91.2801 84.9201 88.0201 94.48 81.4801 101.02C79.4401 103.06 77.2301 104.64 74.8401 105.77L55.6201 115.38C57.7101 114.29 59.6601 112.84 61.4801 111.02C62.4801 110.02 63.4101 108.94 64.2401 107.8C68.9401 101.48 71.2801 92.9901 71.2801 82.3301V52.02L91.2801 42.02Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M91.2799 42.02L71.2799 52.02L62.8299 43.5L55.9299 36.5601L36.6399 17.12L56.6399 7.12L91.2799 42.02Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M56.64 7.12L36.64 17.12L22 14.96L2 12.02L22 2.02002L56.64 7.12Z" stroke="#2869D6" strokeWidth="1.5" />
+            </svg>
+          </motion.div>
         </div>
       )
     },
@@ -891,13 +910,48 @@ const SolutionsSuiteSection = () => {
       description: t.solutionsSuite.items.checkout.description,
       icon: (
         <div className="relative w-full h-full flex items-center justify-center">
-          {/* Isometric Platform */}
-          <div className="absolute w-32 h-16 bg-white rounded-[100%] border border-[#E2E7F1] transform -rotate-[15deg] shadow-lg flex items-center justify-center">
-            <div className="w-24 h-12 bg-[#4ADE80]/10 rounded-[100%] blur-md" />
-          </div>
-          <div className="relative z-10 transform -translate-y-4">
-            <CircleDollarSign size={48} className="text-[#4ADE80] fill-[#4ADE80]/10" />
-          </div>
+          <motion.div
+            className="relative z-10"
+            initial={{ y: 0 }}
+            animate={{ y: [0, -15, 0] }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <svg
+              className="w-24 h-32 md:w-[135px] md:h-[180px]"
+              viewBox="0 0 92 122"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{
+                filter: 'drop-shadow(0 0 6px rgba(40, 105, 214, 0.8))'
+              }}
+            >
+              <path d="M61.2599 87.6301V92.1601L53.3599 87.6001L60.3299 84.1201C60.9499 85.3001 61.2599 86.4701 61.2599 87.6301Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M60.3299 84.1201L53.3599 87.6001V83.0601C53.3599 81.7801 53.7399 80.9201 54.4899 80.4901C55.2499 80.0601 56.1899 80.1701 57.3099 80.8101C58.4299 81.4601 59.3699 82.4301 60.1199 83.7401C60.1899 83.8701 60.2599 83.9901 60.3299 84.1201Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M65.2098 44.5703L54.4498 38.3603C56.5898 41.8103 58.3898 45.1403 59.8398 48.3703C61.0198 50.9803 61.9598 53.5203 62.6898 55.9803C64.0198 60.4903 64.8198 64.8503 65.0898 69.0403C65.1598 69.9603 65.1998 70.8703 65.2098 71.7703L62.6198 70.2803L57.3098 67.2103C57.3098 63.3603 56.6298 59.3603 55.2798 55.2203C54.8698 53.9403 54.3998 52.6603 53.8598 51.3603C52.6698 48.4503 51.1898 45.4903 49.4098 42.4703V53.5803L45.6998 51.4403L42.5398 49.6103L41.5098 49.0203V21.8203L61.5098 33.3603L65.2098 35.5003V44.5703Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M14.34 26.5902C11.38 29.5302 9.9 33.9402 9.9 39.8402C9.9 43.9202 10.61 48.0902 12.02 52.3402C12.51 53.8002 13.05 55.2402 13.66 56.6502C14.82 59.3702 16.2 62.0102 17.8 64.5702V53.4702L18.83 54.0602L22 55.8902L25.7 58.0302V85.2302L2 71.5402V62.4802L12.76 68.6902C10.88 65.7402 9.22 62.7002 7.8 59.5802C6.68 57.1402 5.7 54.6602 4.86 52.1202C2.95 46.3302 2 40.7202 2 35.2802C2 26.8102 4.24 20.6402 8.71 16.7702C9.74 15.8702 10.84 15.1302 12 14.5602L12.43 14.3502C15.78 12.7702 19.65 12.4602 24.03 13.4102C24.58 13.5302 25.14 13.6702 25.7 13.8302V23.3502C24.42 23.1402 23.21 23.0702 22.06 23.1402C19.06 23.3202 16.49 24.4702 14.34 26.5902Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M89.1597 86.7202V109.39L69.1597 119.39V96.7202L89.1597 86.7202Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M65.46 94.5801L65.21 94.4401V89.9101C65.21 87.5801 64.54 85.1701 63.18 82.6901C63.09 82.5101 62.99 82.3401 62.89 82.1601C61.52 79.8001 59.91 77.9902 58.05 76.7402C57.81 76.5802 57.56 76.4201 57.31 76.2801C55.36 75.1501 53.67 74.8901 52.22 75.4801L51.73 75.7201C50.18 76.6001 49.41 78.2902 49.41 80.7802V85.3201L45.46 83.0401V105.7L69.16 119.39V96.7202L65.46 94.5801ZM61.26 92.1601L53.36 87.6001V83.0602C53.36 81.7802 53.74 80.9202 54.49 80.4902C55.25 80.0602 56.19 80.1702 57.31 80.8102C58.43 81.4602 59.37 82.4302 60.12 83.7402C60.19 83.8702 60.26 83.9902 60.33 84.1202C60.95 85.3002 61.26 86.4701 61.26 87.6301V92.1601Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M89.16 86.7202L69.16 96.7202L65.46 94.5802V94.3202L85.21 84.4402L89.16 86.7202Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M85.21 25.5V34.57L79.43 37.46L73.47 40.44L69.41 42.47L68.38 42.99L65.21 44.57V35.5L69.41 33.4L69.83 33.19L75.62 30.3L76.79 29.71L85.21 25.5Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M85.2098 25.5001L76.7898 29.7101L75.6198 30.3001L69.8298 33.1901L69.4098 33.4001L65.2098 35.5001L61.5098 33.3601L41.5098 21.8201L61.5098 11.8201L85.2098 25.5001Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M85.21 61.7702L76.78 65.9902L69.49 69.6302L65.22 71.7702C65.21 70.8702 65.17 69.9602 65.1 69.0402C64.83 64.8502 64.03 60.4902 62.7 55.9802C61.97 53.5202 61.03 50.9802 59.85 48.3702C58.4 45.1402 56.6 41.8102 54.46 38.3602L65.22 44.5702L68.39 42.9902L69.42 42.4702L73.48 40.4402L79.44 37.4602C80.81 40.4002 81.89 43.2302 82.7 45.9802C84.32 51.4802 85.16 56.7502 85.22 61.7702H85.21Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M45.6997 51.4401V75.2301L25.6997 85.2301V58.0301L28.8697 56.4401L30.8297 55.4701L36.6097 52.5701L37.7997 51.9801L42.5397 49.6101L45.6997 51.4401Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M42.5398 49.6102L37.7998 51.9802L36.6098 52.5702L30.8298 55.4702L28.8698 56.4402L25.6998 58.0302L21.9998 55.8902L18.8298 54.0602L17.7998 53.4702L27.3898 48.6702L33.2798 45.7302L37.7998 43.4702L41.5098 45.6102V49.0202L42.5398 49.6102Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M33.2799 45.7301L27.3899 48.6701L17.7999 53.4701V64.5701C16.1999 62.0101 14.8199 59.3701 13.6599 56.6501C13.0499 55.2401 12.5099 53.8001 12.0199 52.3401C10.6099 48.0901 9.8999 43.9201 9.8999 39.8401C9.8999 33.9401 11.3799 29.5301 14.3399 26.5901C16.4899 24.4701 19.0599 23.3201 22.0599 23.1401C23.2099 23.0701 24.4199 23.1401 25.6999 23.3501L31.7199 20.3401C30.5099 22.9001 29.8999 26.0601 29.8999 29.8401C29.8999 33.9201 30.6099 38.0901 32.0199 42.3401C32.3999 43.4801 32.8199 44.6101 33.2799 45.7301Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M45.6997 3.83008V13.3501L31.7197 20.3401L25.6997 23.3501V13.8301L45.6997 3.83008Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M45.6997 3.83009L25.6997 13.8301C25.1397 13.6701 24.5797 13.5301 24.0297 13.4101C19.6497 12.4601 15.7797 12.7701 12.4297 14.3501L31.2197 4.98009H31.2397C35.2597 2.63009 40.0797 2.25009 45.6997 3.83009Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M53.8602 51.3602L49.4102 53.5802V42.4702C51.1902 45.4902 52.6702 48.4502 53.8602 51.3602Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M12.76 68.6901L2 62.4801L7.8 59.5801C9.22 62.7001 10.88 65.7401 12.76 68.6901Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M49.41 81.0701V85.3201L45.46 83.0401L49.41 81.0701Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M85.2102 79.91V84.44L65.4602 94.32L65.2102 94.44V89.91C65.2102 87.58 64.5402 85.17 63.1802 82.69C63.0902 82.51 62.9902 82.34 62.8902 82.16C61.5202 79.8 59.9102 77.99 58.0502 76.74C57.8102 76.58 57.5602 76.42 57.3102 76.28C55.3602 75.15 53.6702 74.89 52.2202 75.48L62.6202 70.28L65.2102 71.77L69.4802 69.64L76.7702 65.99C76.9402 66.08 77.1202 66.18 77.3002 66.28C79.4702 67.53 81.3302 69.49 82.8802 72.16C84.4302 74.83 85.2002 77.41 85.2002 79.91H85.2102Z" stroke="#2869D6" strokeWidth="1.5" />
+            </svg>
+          </motion.div>
         </div>
       )
     },
@@ -907,17 +961,35 @@ const SolutionsSuiteSection = () => {
       badge: t.solutionsSuite.items.subscriptions.badge,
       icon: (
         <div className="relative w-full h-full flex items-center justify-center">
-          {/* Isometric Platform */}
-          <div className="absolute w-32 h-16 bg-white rounded-[100%] border border-[#E2E7F1] transform -rotate-[15deg] shadow-lg flex items-center justify-center">
-            <div className="w-24 h-12 bg-[#4ADE80]/10 rounded-[100%] blur-md" />
-          </div>
-          <div className="relative z-10 transform -translate-y-4">
-            <div className="relative">
-              <div className="w-12 h-12 bg-[#4ADE80] rounded-lg flex items-center justify-center text-white font-bold text-xl">
-                31
-              </div>
-            </div>
-          </div>
+          <motion.div
+            className="relative z-10"
+            initial={{ y: 0 }}
+            animate={{ y: [0, -15, 0] }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <svg
+              className="w-40 h-24 md:w-[200px] md:h-[110px]"
+              viewBox="0 0 102 56"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{
+                filter: 'drop-shadow(0 0 6px rgba(40, 105, 214, 0.8))'
+              }}
+            >
+              <path d="M99.7433 16.5999L79.7433 26.5999L75.4532 24.12L57.7032 13.87L56.5732 13.22L57.1533 12.93L76.5732 3.21997L99.7433 16.5999Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M79.7437 26.5999V53.19L72.0237 48.7299V37.21L65.9236 40.69L46.5338 51.74L31.7037 26.15L31.0937 25.0999L27.3137 27.2599L7.92371 38.31L2.51367 28.9799L31.0937 12.47L31.7637 13.6299L37.2037 23.02L46.5338 39.11L60.4837 31.31L66.0137 28.21L66.6137 27.8799L65.4236 27.19L56.5737 22.09V13.22L57.7037 13.87L75.4537 24.12L79.7437 26.5999Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M31.7038 26.1499L27.9238 28.3099L7.92383 38.3099L27.3138 27.2599L31.0938 25.0999L31.7038 26.1499Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M72.0242 37.21V38.61L66.5342 41.74L46.5342 51.74L65.9241 40.69L72.0242 37.21Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M99.7441 16.5999V43.1899L79.7441 53.1899V26.5999L99.7441 16.5999Z" stroke="#2869D6" strokeWidth="1.5" />
+              <path d="M66.0138 28.21L60.4838 31.31L46.5338 39.11L37.2037 23.02L31.7638 13.6299L31.0938 12.47L51.0938 2.46997L57.1538 12.93L56.5737 13.22V22.09L65.4237 27.19L66.0138 28.21Z" stroke="#2869D6" strokeWidth="1.5" />
+            </svg>
+          </motion.div>
         </div>
       )
     }
@@ -935,14 +1007,14 @@ const SolutionsSuiteSection = () => {
               fontWeight: 'normal',
               lineHeight: '0.9',
               letterSpacing: '-0.06em',
-              opacity: isVisible ? 1 : 0
+              opacity: 0
             }}
           >
             {renderHeading()}
           </h2>
           <p
             className={`text-base md:text-lg text-[#1C1C1E] max-w-xl leading-tight ${isVisible ? 'services-blur-animate' : ''}`}
-            style={{ animationDelay: '0.2s', opacity: isVisible ? 1 : 0 }}
+            style={{ animationDelay: '0.2s', opacity: 0 }}
           >
             {t.solutionsSuite.description}
           </p>
@@ -1086,7 +1158,7 @@ const SolutionsSuiteSection = () => {
               <SpotlightCard
                 key={index}
                 className={`flex flex-col relative ${isVisible ? 'services-blur-animate' : ''} ${index < 2 ? 'border-b md:border-b-0 border-[#E2E7F1]' : ''}`}
-                style={{ animationDelay: `${0.3 + index * 0.1}s`, opacity: isVisible ? 1 : 0 }}
+                style={{ animationDelay: `${0.3 + index * 0.1}s`, opacity: 0 }}
                 spotlightColor="rgba(255, 255, 255, 0.2)"
               >
                 {/* Mobile flares for stacked cards */}
@@ -1137,7 +1209,7 @@ const SolutionsSuiteSection = () => {
 
                   {index === 2 && card.badge && (
                     <div className="absolute top-4 right-4 z-20">
-                      <span className="px-3 py-1 bg-[#4ADE80]/20 text-[#166534] text-xs font-semibold rounded-full border border-[#4ADE80]/30">
+                      <span className="px-3 py-1 bg-[#2869D6]/20 text-[#1E3A8A] text-xs font-semibold rounded-full border border-[#2869D6]/30">
                         {card.badge}
                       </span>
                     </div>
@@ -1233,7 +1305,7 @@ const FAQSection = () => {
               >
                 <div className="flex-shrink-0 mt-1">
                   <Plus
-                    className={`w-5 h-5 text-[#4ADE80] transition-transform duration-300 ${openIndex === index ? 'rotate-45' : ''}`}
+                    className={`w-5 h-5 text-[#2869D6] transition-transform duration-300 ${openIndex === index ? 'rotate-45' : ''}`}
                   />
                 </div>
                 <span
@@ -1384,48 +1456,45 @@ const FinalCTASection = () => {
 };
 
 // AbacatePay Logo Component
-const AbacatePayLogo = () => (
-  <div className="flex items-center gap-2">
-    <div className="w-10 h-10 relative">
-      <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-sm">
-        {/* Avocado Outer Body */}
-        <path
-          d="M50,15 C35,15 20,40 20,65 C20,85 35,95 50,95 C65,95 80,85 80,65 C80,40 65,15 50,15 Z"
-          fill="#4ADE80"
-        />
-        {/* Avocado Pit */}
-        <circle cx="50" cy="65" r="18" fill="#166534" />
-        {/* Highlight for depth */}
-        <path
-          d="M40,30 Q30,40 30,60"
-          fill="none"
-          stroke="white"
-          strokeWidth="3"
-          strokeLinecap="round"
-          opacity="0.3"
-        />
-      </svg>
-    </div>
-    <span
-      className="text-3xl text-[#1C1C1E] tracking-tight"
-      style={{ fontFamily: 'Fustat-Bold, sans-serif' }}
-    >
-      Pay
-    </span>
-  </div>
-);
 
 // Footer Section Component
 const FooterSection = () => {
   const { language } = useLanguage();
   const t = translations[language];
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <SectionLayout showStripes={false} showTopBorder={false} className="pt-24 pb-12 px-6 md:px-16 lg:px-28">
+    <SectionLayout showStripes={false} showTopBorder={false} className="pt-24 pb-12 px-6 md:px-16 lg:px-28" id="footer">
       {/* Main footer content */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24 mb-24">
+      <div ref={sectionRef} className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24 mb-24">
         {/* Logo Column */}
-        <div className="md:col-span-3 flex items-start">
+        <div 
+          className={`md:col-span-3 flex items-start ${isVisible ? 'services-blur-animate' : ''}`}
+          style={{ opacity: 0 }}
+        >
           <div className="flex items-center gap-8 md:gap-12 w-full">
             <a 
               href={`/${language}`}
@@ -1451,7 +1520,10 @@ const FooterSection = () => {
         {/* Links Columns */}
         <div className="md:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 md:gap-24">
           {/* Account */}
-          <div className="flex flex-col space-y-6">
+          <div 
+            className={`flex flex-col space-y-6 ${isVisible ? 'services-blur-animate' : ''}`}
+            style={{ animationDelay: '0.1s', opacity: 0 }}
+          >
             <h4 className="text-[#1C1C1E] text-lg" style={{ fontFamily: 'Fustat-Bold, sans-serif' }}>
               {t.footer.columns.account.title}
             </h4>
@@ -1470,7 +1542,10 @@ const FooterSection = () => {
           </div>
 
           {/* Support */}
-          <div className="flex flex-col space-y-6">
+          <div 
+            className={`flex flex-col space-y-6 ${isVisible ? 'services-blur-animate' : ''}`}
+            style={{ animationDelay: '0.2s', opacity: 0 }}
+          >
             <h4 className="text-[#1C1C1E] text-lg" style={{ fontFamily: 'Fustat-Bold, sans-serif' }}>
               {t.footer.columns.support.title}
             </h4>
@@ -1494,7 +1569,10 @@ const FooterSection = () => {
           </div>
 
           {/* Website */}
-          <div className="flex flex-col space-y-6">
+          <div 
+            className={`flex flex-col space-y-6 ${isVisible ? 'services-blur-animate' : ''}`}
+            style={{ animationDelay: '0.3s', opacity: 0 }}
+          >
             <h4 className="text-[#1C1C1E] text-lg" style={{ fontFamily: 'Fustat-Bold, sans-serif' }}>
               {t.footer.columns.website.title}
             </h4>
@@ -1510,7 +1588,10 @@ const FooterSection = () => {
           </div>
 
           {/* A.I */}
-          <div className="flex flex-col space-y-6">
+          <div 
+            className={`flex flex-col space-y-6 ${isVisible ? 'services-blur-animate' : ''}`}
+            style={{ animationDelay: '0.4s', opacity: 0 }}
+          >
             <h4 className="text-[#1C1C1E] text-lg" style={{ fontFamily: 'Fustat-Bold, sans-serif' }}>
               {t.footer.columns.ai.title}
             </h4>
@@ -1523,7 +1604,10 @@ const FooterSection = () => {
       </div>
 
       {/* Dotted Divider & Bottom Bar */}
-      <div className="w-full border-t border-dotted border-[#E2E7F1] pt-12 flex flex-col md:flex-row items-center justify-between gap-8">
+      <div 
+        className={`w-full border-t border-dotted border-[#E2E7F1] pt-12 flex flex-col md:flex-row items-center justify-between gap-8 ${isVisible ? 'services-blur-animate' : ''}`}
+        style={{ animationDelay: '0.5s', opacity: 0 }}
+      >
         <p className="text-[#6B7280] text-lg text-center md:text-left leading-relaxed max-w-4xl">
           {t.footer.copyright}
         </p>
@@ -1532,12 +1616,10 @@ const FooterSection = () => {
           {/* Social Icons */}
           <div className="flex items-center gap-6">
             <a href="#" className="text-[#1C1C1E] hover:text-[#4ADE80] transition-colors">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.069.069 0 0 0-.032.027C.533 9.048-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
-              </svg>
+              <Discord className="w-5 h-5" />
             </a>
             <Instagram className="w-5 h-5 text-[#1C1C1E] hover:text-[#4ADE80] transition-colors cursor-pointer" />
-            <Twitter className="w-5 h-5 text-[#1C1C1E] hover:text-[#4ADE80] transition-colors cursor-pointer" />
+            <X className="w-5 h-5 text-[#1C1C1E] hover:text-[#4ADE80] transition-colors cursor-pointer" />
             <Youtube className="w-5 h-5 text-[#1C1C1E] hover:text-[#4ADE80] transition-colors cursor-pointer" />
           </div>
         </div>

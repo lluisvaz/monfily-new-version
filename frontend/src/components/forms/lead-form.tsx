@@ -1,7 +1,7 @@
-import React, { useMemo, useState, useEffect, useRef } from 'react';
+import { useMemo, useState, useEffect, useRef } from 'react';
 import { useLanguage } from '@/hooks/use-language';
 import type { Language } from '@/lib/translations';
-import { ArrowRight, ArrowLeft, Check, Loader2, AlertCircle, ChevronDown, Search } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Check, SystemRestart, WarningCircle, NavArrowDown, Search } from 'iconoir-react';
 import { detectCountryCode } from '@/lib/geo-location';
 import { SpotlightButton } from '@/components/ui/spotlight-button';
 
@@ -211,10 +211,6 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
     );
   }, [countries, searchTerm]);
 
-  const flagEmoji = (code: string) =>
-    code && code.length === 2
-      ? String.fromCodePoint(...[...code.toUpperCase()].map((c) => 127397 + c.charCodeAt(0)))
-      : '';
 
   const canNext = useMemo(() => {
     if (step === 0) return Boolean(data.name && data.email && data.phone && data.country);
@@ -335,7 +331,7 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
                         </span>
                       )}
                     </span>
-                    <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${isCountryOpen ? 'rotate-180' : ''}`} />
+                    <NavArrowDown className={`w-4 h-4 text-slate-400 transition-transform ${isCountryOpen ? 'rotate-180' : ''}`} />
                   </button>
 
                   {isCountryOpen && (
@@ -515,7 +511,7 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
             <div className="flex flex-col items-end gap-2">
               {error && (
                 <div className="text-xs text-red-500 flex items-center gap-1 mb-1">
-                  <AlertCircle className="w-3 h-3" />
+                  <WarningCircle className="w-3 h-3" />
                   {t.error}
                 </div>
               )}
@@ -525,7 +521,7 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
                 className={`group bg-[#2869D6] text-white text-sm py-3 px-6 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer min-w-[120px]`}
               >
                 {submitting ? (
-                  <Loader2 className="w-4 h-4 animate-spin mx-auto" />
+                  <SystemRestart className="w-4 h-4 animate-spin mx-auto" />
                 ) : (
                   <>
                     {t.actions.submit}

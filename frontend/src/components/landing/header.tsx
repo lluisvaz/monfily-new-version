@@ -1,7 +1,6 @@
 import { useLocation } from "wouter";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { SectionLayout } from "./section-layout";
-import { MenuIcon } from "@/components/ui/menu-icon";
 import {
   Sheet,
   SheetContent,
@@ -22,10 +21,9 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { ChevronDown, X } from "lucide-react";
+import { NavArrowDown, Xmark, Menu } from "iconoir-react";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
-import { motion, useMotionValue, useSpring, useMotionTemplate } from "framer-motion";
 import { SpotlightButton } from "@/components/ui/spotlight-button";
 
 export function Header() {
@@ -64,7 +62,7 @@ export function Header() {
   };
 
   return (
-    <SectionLayout className="flex items-center justify-between px-4 md:px-[32px] h-24 relative z-50 min-w-0">
+    <SectionLayout className="flex items-center justify-between px-4 md:px-[32px] h-24 relative z-[2000] min-w-0">
       <style>{`
         @keyframes blurText {
           0% {
@@ -114,7 +112,7 @@ export function Header() {
                       style={{ animationDelay: `${0.2 + index * 0.05}s`, opacity: 0 }}
                     >
                       {item}
-                      <ChevronDown className="w-3 h-3 transition-transform duration-200 data-[state=open]:rotate-180" />
+                      <NavArrowDown className="w-3 h-3 transition-transform duration-200 data-[state=open]:rotate-180" />
                     </button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent 
@@ -168,7 +166,7 @@ export function Header() {
                   alt={language} 
                   className="w-5 h-auto rounded-sm flex-shrink-0"
                 />
-                <ChevronDown className="w-3 h-3 ml-1 text-[#1C1C1E]" />
+                <NavArrowDown className="w-3 h-3 ml-1 text-[#1C1C1E]" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent 
@@ -209,7 +207,7 @@ export function Header() {
               className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 header-blur-animate focus:outline-none focus-visible:outline-none cursor-pointer"
               style={{ animationDelay: '0.2s', opacity: 0 }}
             >
-              <MenuIcon size={32} className="text-[#1C1C1E]" />
+              <Menu width={32} height={32} className="text-[#1C1C1E]" />
             </button>
           </SheetTrigger>
           <SheetContent 
@@ -429,7 +427,7 @@ export function Header() {
                       className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 sidebar-blur-animate focus:outline-none focus-visible:outline-none cursor-pointer"
                       style={{ animationDelay: '0.15s', opacity: 0 }}
                     >
-                      <X className="h-8 w-8 text-[#1C1C1E]" />
+                      <Xmark className="h-8 w-8 text-[#1C1C1E]" />
                     </button>
                   </SheetClose>
                 </div>
@@ -441,7 +439,7 @@ export function Header() {
                     <Collapsible key={item} className="sidebar-blur-animate" style={{ animationDelay: `${0.2 + index * 0.05}s`, opacity: 0 }}>
                       <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group cursor-pointer">
                         <span>{item}</span>
-                        <ChevronDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
+                        <NavArrowDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
                       </CollapsibleTrigger>
                       <CollapsibleContent 
                         className="pl-4 pb-2 overflow-hidden"
@@ -547,7 +545,7 @@ export function Header() {
                         />
                         <span>{language === 'pt' ? t.header.languages.portuguese : t.header.languages.english}</span>
                       </div>
-                      <ChevronDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
+                      <NavArrowDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
                     </CollapsibleTrigger>
                     <CollapsibleContent 
                       className="pl-4 pb-2 overflow-hidden"
