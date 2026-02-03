@@ -227,9 +227,22 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
       if (onSubmit) {
         await onSubmit(data);
       } else {
-        // Simulação de envio para demonstração
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        console.log('Lead form submit:', data);
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          console.error('Server validation error details:', errorData);
+          throw new Error(errorData.message || 'Failed to submit form');
+        }
+
+        const result = await response.json();
+        console.log('Form submission successful:', result);
       }
       
       setDone(true);
