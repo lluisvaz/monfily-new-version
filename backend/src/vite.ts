@@ -1,9 +1,7 @@
 import express, { type Express } from "express";
 import fs from "fs";
 import path from "path";
-import { createServer as createViteServer, createLogger } from "vite";
 import { type Server } from "http";
-const viteLogger = createLogger();
 
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
@@ -17,6 +15,11 @@ export function log(message: string, source = "express") {
 }
 
 export async function setupVite(app: Express, server: Server) {
+  // Dynamic import to avoid loading Vite in production (it's a devDependency)
+  const viteModule = await import("vite");
+  const createViteServer = viteModule.createServer;
+  const viteLogger = viteModule.createLogger();
+
   const serverOptions = {
     middlewareMode: true,
     hmr: { server },
