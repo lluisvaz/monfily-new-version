@@ -16,6 +16,10 @@
     "clean": "rimraf node_modules dist frontend/node_modules shared/node_modules",
     "install:all": "npm install"
   },
+  "dependencies": {
+    "nodemailer": "^6.9.16",
+    "zod": "^3.25.76"
+  },
   "devDependencies": {
     "@vercel/node": "^5.1.8",
     "concurrently": "^9.1.0",
