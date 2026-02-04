@@ -30,12 +30,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
         setLocation('/pt');
         setLanguageState('pt');
       });
-    } else if (!pathLang) {
-      // Se não é a rota raiz mas não tem idioma, redireciona para /pt
-      const newPath = `/pt${location}`;
-      setLocation(newPath);
-      setLanguageState('pt');
-    } else {
+    } else if (pathLang) {
       setLanguageState(pathLang);
     }
   }, [location, setLocation]);
