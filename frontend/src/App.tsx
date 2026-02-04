@@ -1,20 +1,44 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/hooks/use-language";
 import Home from "@/pages/home";
-import NotFound from "@/pages/not-found";
+import { LoadingScreen } from "@/components/ui/loading-screen";
 import { useEffect } from "react";
 
+function RedirectToLast() {
+  const [location, setLocation] = useLocation();
+
+  useEffect(() => {
+    const lastPath = localStorage.getItem("last_path") || "/";
+    // Evita loop infinito se já estivermos no destino
+    if (location !== lastPath) {
+      setLocation(lastPath, { replace: true });
+    }
+  }, [location, setLocation]);
+
+  return null;
+}
+
 function Router() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    // Lista de rotas válidas (baseado no que está no Switch abaixo)
+    const validPaths = ["/", "/pt", "/en"];
+    if (validPaths.includes(location)) {
+      localStorage.setItem("last_path", location);
+    }
+  }, [location]);
+
   return (
     <Switch>
       <Route path="/pt" component={Home} />
       <Route path="/en" component={Home} />
       <Route path="/" component={Home} />
-      <Route component={NotFound} />
+      <Route component={RedirectToLast} />
     </Switch>
   );
 }
@@ -41,8 +65,17 @@ function App() {
           const element = document.getElementById(id);
           
           if (element) {
-            // Faz scroll suave até o elemento
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Se o Locomotive Scroll estiver ativo, usamos a API dele
+            const scrollInstance = (window as any).locomotiveScroll;
+            if (scrollInstance) {
+              scrollInstance.scrollTo(element, {
+                duration: 1000,
+                easing: [0.25, 0.00, 0.35, 1.00]
+              });
+            } else {
+              // Fallback para scroll nativo suave
+              element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
             
             // Atualiza a URL sem o hash usando replaceState
             if (window.history.replaceState) {
@@ -64,6 +97,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
         <TooltipProvider>
+          <LoadingScreen />
           <Toaster />
           <Router />
         </TooltipProvider>

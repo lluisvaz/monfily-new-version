@@ -1,7 +1,6 @@
 import { useLocation } from "wouter";
 import { useState, useEffect } from "react";
 import { SectionLayout } from "./section-layout";
-import { MenuIcon } from "@/components/ui/menu-icon";
 import {
   Sheet,
   SheetContent,
@@ -22,9 +21,10 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { ChevronDown, X, Globe } from "lucide-react";
+import { NavArrowDown, Xmark, Menu } from "iconoir-react";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
+import { SpotlightButton } from "@/components/ui/spotlight-button";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -62,7 +62,7 @@ export function Header() {
   };
 
   return (
-    <SectionLayout className="flex items-center justify-between px-4 md:px-[32px] h-24 relative z-50 min-w-0">
+    <SectionLayout className="flex items-center justify-between px-4 md:px-[32px] h-24 relative z-[2000] min-w-0">
       <style>{`
         @keyframes blurText {
           0% {
@@ -108,11 +108,11 @@ export function Header() {
                 <DropdownMenu key={item}>
                   <DropdownMenuTrigger asChild>
                     <button 
-                      className="flex items-center gap-1 text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap focus:outline-none focus-visible:outline-none header-blur-animate"
+                      className="flex items-center gap-1 text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
                       style={{ animationDelay: `${0.2 + index * 0.05}s`, opacity: 0 }}
                     >
                       {item}
-                      <ChevronDown className="w-3 h-3 transition-transform duration-200 data-[state=open]:rotate-180" />
+                      <NavArrowDown className="w-3 h-3 transition-transform duration-200 data-[state=open]:rotate-180" />
                     </button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent 
@@ -140,7 +140,7 @@ export function Header() {
               <a
                 key={item}
                 href={item === t.header.nav.about ? "#servicos" : "#"}
-                className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap header-blur-animate"
+                className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap header-blur-animate cursor-pointer"
                 style={{ animationDelay: `${0.2 + index * 0.05}s`, opacity: 0 }}
               >
                 {item}
@@ -158,11 +158,15 @@ export function Header() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button 
-                className="flex items-center justify-center py-2 px-2 rounded-full border border-[#E2E7F1] hover:bg-slate-50 transition-colors focus:outline-none focus-visible:outline-none header-blur-animate"
+                className="flex items-center justify-center h-10 px-3 rounded-full border border-[#E2E7F1] hover:bg-slate-50 transition-colors focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
                 style={{ animationDelay: `${0.3 + navItems.length * 0.05}s`, opacity: 0 }}
               >
-                <Globe className="w-5 h-5 text-[#1C1C1E]" />
-                <ChevronDown className="w-3 h-3 ml-1 text-[#1C1C1E]" />
+                <img 
+                  src={`https://flagcdn.com/w20/${language === 'pt' ? 'br' : 'us'}.png`} 
+                  alt={language} 
+                  className="w-5 h-auto rounded-sm flex-shrink-0"
+                />
+                <NavArrowDown className="w-3 h-3 ml-1 text-[#1C1C1E]" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent 
@@ -174,24 +178,33 @@ export function Header() {
                 className={`flex items-center gap-2 cursor-pointer ${language === 'pt' ? 'font-medium bg-slate-50' : ''}`}
                 onClick={() => handleLanguageChange('pt')}
               >
-                {language === 'pt' && <Globe className="w-4 h-4 text-[#1C1C1E]" />}
+                <img src="https://flagcdn.com/w20/br.png" alt="BR" className="w-4 h-auto rounded-sm" />
                 <span className={language === 'pt' ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{t.header.languages.portuguese}</span>
               </DropdownMenuItem>
               <DropdownMenuItem 
                 className={`flex items-center gap-2 cursor-pointer ${language === 'en' ? 'font-medium bg-slate-50' : ''}`}
                 onClick={() => handleLanguageChange('en')}
               >
-                {language === 'en' && <Globe className="w-4 h-4 text-[#1C1C1E]" />}
+                <img src="https://flagcdn.com/w20/us.png" alt="US" className="w-4 h-auto rounded-sm" />
                 <span className={language === 'en' ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{t.header.languages.english}</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <button 
-            className="bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-[16px] py-2 px-4 rounded-full transition-colors cursor-pointer whitespace-nowrap header-blur-animate"
+          <SpotlightButton 
+            onClick={() => {
+              const el = document.getElementById('contato');
+              const scrollInstance = (window as any).locomotiveScroll;
+              if (scrollInstance && el) {
+                scrollInstance.scrollTo(el, { duration: 1000, easing: [0.25, 0.00, 0.35, 1.00] });
+              } else if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+            }}
+            className="bg-[#2869D6] text-white h-10 px-6 rounded-full font-medium header-blur-animate flex items-center justify-center cursor-pointer"
             style={{ animationDelay: `${0.35 + navItems.length * 0.05}s`, opacity: 0 }}
           >
             {t.header.cta}
-          </button>
+          </SpotlightButton>
         </div>
       </div>
 
@@ -200,15 +213,15 @@ export function Header() {
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
             <button 
-              className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 header-blur-animate focus:outline-none focus-visible:outline-none"
+              className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 header-blur-animate focus:outline-none focus-visible:outline-none cursor-pointer"
               style={{ animationDelay: '0.2s', opacity: 0 }}
             >
-              <MenuIcon size={32} className="text-[#1C1C1E]" />
+              <Menu width={32} height={32} className="text-[#1C1C1E]" />
             </button>
           </SheetTrigger>
           <SheetContent 
             side="right" 
-            className="w-full sm:w-[400px] p-0 bg-white overflow-y-auto [&>button]:!hidden !z-[100000]"
+            className="w-full sm:w-[400px] p-0 bg-white overflow-y-auto [&>button]:!hidden !z-[9999]"
           >
             <VisuallyHiddenPrimitive.Root>
               <SheetTitle>{t.header.nav.menu}</SheetTitle>
@@ -326,7 +339,7 @@ export function Header() {
                 background: rgba(255, 255, 255, 0.3) !important;
                 backdrop-filter: blur(12px) saturate(180%) !important;
                 -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
-                z-index: 99998 !important;
+                z-index: 9998 !important;
               }
               /* Reduzir z-index das linhas laterais e grid quando sidebar aberto */
               [data-radix-dialog-overlay][data-state="open"] ~ * [id="section-main-content"],
@@ -340,7 +353,7 @@ export function Header() {
                 --section-grid-z: 1 !important;
               }
               [data-radix-dialog-content] {
-                z-index: 100000 !important;
+                z-index: 9999 !important;
                 position: fixed !important;
               }
               /* Animação minimalista de fechamento */
@@ -352,7 +365,7 @@ export function Header() {
               }
               /* Garantir que o SheetPortal renderize acima de tudo */
               [data-radix-portal] {
-                z-index: 100000 !important;
+                z-index: 9999 !important;
               }
               /* Esconder o botão X padrão do SheetContent */
               [data-radix-dialog-content] > button[data-radix-dialog-close] {
@@ -380,16 +393,16 @@ export function Header() {
                 <div className="absolute top-0 bottom-0 right-0 w-[0.5px] bg-[#E2E7F1] pointer-events-none" style={{ zIndex: 1000 }}></div>
                 
                 {/* Grid Decorations at Header Bottom Corners (where vertical lines meet header bottom border) */}
-                <div className="absolute pointer-events-none" style={{ top: '96px', left: 0, right: 0, zIndex: 99999 }}>
+                <div className="absolute pointer-events-none" style={{ top: '96px', left: 0, right: 0, zIndex: 9995 }}>
                   {/* Left grid decoration */}
-                  <div className="absolute w-6 h-6 flex items-center justify-center pointer-events-none" style={{ left: '-12px', top: '-12px', zIndex: 99999 }}>
+                  <div className="absolute w-6 h-6 flex items-center justify-center pointer-events-none" style={{ left: '-12px', top: '-12px', zIndex: 9995 }}>
                     <div className="absolute w-4 h-4 bg-white rounded-full" />
                     <svg viewBox="0 0 24 24" className="w-full h-full fill-[#E2E7F1] relative z-10">
                       <path d="M12 2C12 2 14 10 22 12C14 14 12 22 12 22C12 22 10 14 2 12C10 10 12 2 12 2Z" />
                     </svg>
                   </div>
                   {/* Right grid decoration */}
-                  <div className="absolute w-6 h-6 flex items-center justify-center pointer-events-none" style={{ right: '-12px', top: '-12px', zIndex: 99999 }}>
+                  <div className="absolute w-6 h-6 flex items-center justify-center pointer-events-none" style={{ right: '-12px', top: '-12px', zIndex: 9995 }}>
                     <div className="absolute w-4 h-4 bg-white rounded-full" />
                     <svg viewBox="0 0 24 24" className="w-full h-full fill-[#E2E7F1] relative z-10">
                       <path d="M12 2C12 2 14 10 22 12C14 14 12 22 12 22C12 22 10 14 2 12C10 10 12 2 12 2Z" />
@@ -420,10 +433,10 @@ export function Header() {
                   </a>
                   <SheetClose asChild>
                     <button 
-                      className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 sidebar-blur-animate focus:outline-none focus-visible:outline-none"
+                      className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 sidebar-blur-animate focus:outline-none focus-visible:outline-none cursor-pointer"
                       style={{ animationDelay: '0.15s', opacity: 0 }}
                     >
-                      <X className="h-8 w-8 text-[#1C1C1E]" />
+                      <Xmark className="h-8 w-8 text-[#1C1C1E]" />
                     </button>
                   </SheetClose>
                 </div>
@@ -433,9 +446,9 @@ export function Header() {
                   
                   {navItemsWithDropdown.map((item, index) => (
                     <Collapsible key={item} className="sidebar-blur-animate" style={{ animationDelay: `${0.2 + index * 0.05}s`, opacity: 0 }}>
-                      <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group">
+                      <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group cursor-pointer">
                         <span>{item}</span>
-                        <ChevronDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
+                        <NavArrowDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
                       </CollapsibleTrigger>
                       <CollapsibleContent 
                         className="pl-4 pb-2 overflow-hidden"
@@ -444,7 +457,7 @@ export function Header() {
                           <a 
                             href="#" 
                             onClick={() => setIsOpen(false)} 
-                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1"
+                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1 cursor-pointer"
                             style={{
                               animation: 'fadeInSubmenuItem 0.3s ease-out 0.1s both'
                             }}
@@ -454,7 +467,7 @@ export function Header() {
                           <a 
                             href="#" 
                             onClick={() => setIsOpen(false)} 
-                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1"
+                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1 cursor-pointer"
                             style={{
                               animation: 'fadeInSubmenuItem 0.3s ease-out 0.15s both'
                             }}
@@ -464,7 +477,7 @@ export function Header() {
                           <a 
                             href="#" 
                             onClick={() => setIsOpen(false)} 
-                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1"
+                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1 cursor-pointer"
                             style={{
                               animation: 'fadeInSubmenuItem 0.3s ease-out 0.2s both'
                             }}
@@ -474,7 +487,7 @@ export function Header() {
                           <a 
                             href="#" 
                             onClick={() => setIsOpen(false)} 
-                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1"
+                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1 cursor-pointer"
                             style={{
                               animation: 'fadeInSubmenuItem 0.3s ease-out 0.25s both'
                             }}
@@ -501,19 +514,22 @@ export function Header() {
                             // Wait for menu to close, then scroll
                             setTimeout(() => {
                               const element = document.getElementById('servicos');
-                              if (element) {
-                                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                // Remove hash from URL after scroll
+                              const scrollInstance = (window as any).locomotiveScroll;
+                              if (scrollInstance && element) {
+                                scrollInstance.scrollTo(element, { duration: 1000, easing: [0.25, 0.00, 0.35, 1.00] });
+                              } else if (element) {
+                                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                              }
+                              // Remove hash from URL after scroll
                                 if (window.history.replaceState) {
                                   window.history.replaceState(null, '', window.location.pathname + window.location.search);
                                 }
-                              }
                             }, 300);
                           } else {
                             setIsOpen(false);
                           }
                         }}
-                        className="sidebar-blur-animate text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors"
+                        className="sidebar-blur-animate text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors cursor-pointer"
                         style={{ animationDelay: `${0.2 + dropdownCount * 0.05 + index * 0.05}s`, opacity: 0 }}
                       >
                         {item}
@@ -532,12 +548,16 @@ export function Header() {
                     className="sidebar-blur-animate"
                     style={{ animationDelay: `${0.25 + navItems.length * 0.05}s`, opacity: 0 }}
                   >
-                    <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group">
+                    <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group cursor-pointer">
                       <div className="flex items-center gap-2">
-                        <Globe className="h-4 w-4" />
+                        <img 
+                          src={`https://flagcdn.com/w20/${language === 'pt' ? 'br' : 'us'}.png`} 
+                          alt={language} 
+                          className="w-5 h-auto rounded-sm"
+                        />
                         <span>{language === 'pt' ? t.header.languages.portuguese : t.header.languages.english}</span>
                       </div>
-                      <ChevronDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
+                      <NavArrowDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
                     </CollapsibleTrigger>
                     <CollapsibleContent 
                       className="pl-4 pb-2 overflow-hidden"
@@ -545,22 +565,24 @@ export function Header() {
                       <div className="flex flex-col gap-2">
                         <a 
                           href="#" 
-                          onClick={(e) => { e.preventDefault(); handleLanguageChange('pt'); }} 
-                          className={`text-sm py-1 px-2 rounded transition-all duration-200 hover:translate-x-1 ${language === 'pt' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
+                          onClick={(e) => { e.preventDefault(); handleLanguageChange('pt'); setIsOpen(false); }} 
+                          className={`text-sm py-2 px-2 rounded transition-all duration-200 hover:translate-x-1 cursor-pointer flex items-center gap-2 ${language === 'pt' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
                           style={{
                             animation: 'fadeInSubmenuItem 0.3s ease-out 0.1s both'
                           }}
                         >
+                          <img src="https://flagcdn.com/w20/br.png" alt="BR" className="w-4 h-auto rounded-sm" />
                           {t.header.languages.portuguese}
                         </a>
                         <a 
                           href="#" 
-                          onClick={(e) => { e.preventDefault(); handleLanguageChange('en'); }} 
-                          className={`text-sm py-1 px-2 rounded transition-all duration-200 hover:translate-x-1 ${language === 'en' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
+                          onClick={(e) => { e.preventDefault(); handleLanguageChange('en'); setIsOpen(false); }} 
+                          className={`text-sm py-2 px-2 rounded transition-all duration-200 hover:translate-x-1 cursor-pointer flex items-center gap-2 ${language === 'en' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
                           style={{
                             animation: 'fadeInSubmenuItem 0.3s ease-out 0.15s both'
                           }}
                         >
+                          <img src="https://flagcdn.com/w20/us.png" alt="US" className="w-4 h-auto rounded-sm" />
                           {t.header.languages.english}
                         </a>
                       </div>
@@ -568,13 +590,24 @@ export function Header() {
                   </Collapsible>
                   
                   {/* Falar com Especialista Button */}
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="sidebar-blur-animate mt-4 w-full bg-[#2869D6] hover:bg-[#1E4A8C] text-white font-medium text-base py-3 px-4 rounded-lg transition-colors"
+                  <SpotlightButton
+                    onClick={() => {
+                      setIsOpen(false);
+                      setTimeout(() => {
+                        const el = document.getElementById('contato');
+                        const scrollInstance = (window as any).locomotiveScroll;
+                        if (scrollInstance && el) {
+                          scrollInstance.scrollTo(el, { duration: 1000, easing: [0.25, 0.00, 0.35, 1.00] });
+                        } else if (el) {
+                          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                      }, 300);
+                    }}
+                    className="bg-[#2869D6] text-white py-4 rounded-full font-medium sidebar-blur-animate mt-4 w-full flex items-center justify-center cursor-pointer"
                     style={{ animationDelay: `${0.3 + navItems.length * 0.05}s`, opacity: 0 }}
                   >
                     {t.header.cta}
-                  </button>
+                  </SpotlightButton>
                 </nav>
               </div>
               

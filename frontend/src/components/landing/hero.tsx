@@ -1,4 +1,5 @@
-import { ArrowRight, Zap, Shield } from "lucide-react";
+import { ArrowRight } from "iconoir-react";
+import { BoltIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
 import { SectionLayout } from "./section-layout";
 import ShinyText from "@/components/ui/shiny-text";
 import TextType from "@/components/ui/text-type";
@@ -7,6 +8,8 @@ import { WebsiteMockupMobile } from "./website-mockup-mobile";
 import { Iphone16Pro } from "@/components/ui/iphone-16-pro";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
+
+import { SpotlightButton } from "@/components/ui/spotlight-button";
 
 export function Hero() {
   const { language } = useLanguage();
@@ -160,12 +163,23 @@ export function Hero() {
           className="flex flex-col sm:flex-row items-center gap-6 pt-2 w-full hero-blur-animate"
           style={{ animationDelay: '0.4s', opacity: 0 }}
         >
-          <button className="group bg-[#2869D6] hover:bg-[#1E4A8C] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer w-full sm:w-auto">
+          <SpotlightButton 
+            onClick={() => {
+              const el = document.getElementById('contato');
+              const scrollInstance = (window as any).locomotiveScroll;
+              if (scrollInstance && el) {
+                scrollInstance.scrollTo(el, { duration: 1000, easing: [0.25, 0.00, 0.35, 1.00] });
+              } else if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+            }}
+            className="group bg-[#2869D6] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer w-full sm:w-auto"
+          >
             {t.hero.cta.primary}
             <div className="bg-white rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
               <ArrowRight className="w-3 h-3 text-[#2869D6]" />
             </div>
-          </button>
+          </SpotlightButton>
 
           <a href="#servicos" className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium transition-colors w-full sm:w-auto text-center sm:text-left">
             {t.hero.cta.secondary}
@@ -179,7 +193,7 @@ export function Hero() {
         >
           <div className="flex items-start gap-3">
             <div className="bg-[#2869D6]/20 p-2 rounded-full w-10 h-10 flex items-center justify-center text-[#2869D6] mt-1">
-              <Zap className="w-4 h-4 fill-current" />
+              <BoltIcon className="w-5 h-5 fill-current" />
             </div>
             <div>
               <h3 
@@ -197,7 +211,7 @@ export function Hero() {
 
           <div className="flex items-start gap-3">
             <div className="bg-[#2869D6]/20 p-2 rounded-full w-10 h-10 flex items-center justify-center text-[#2869D6] mt-1">
-              <Shield className="w-4 h-4 fill-current" />
+              <RocketLaunchIcon className="w-5 h-5 fill-current" />
             </div>
             <div>
               <h3 

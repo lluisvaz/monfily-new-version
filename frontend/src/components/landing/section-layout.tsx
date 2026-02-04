@@ -6,10 +6,11 @@ interface SectionLayoutProps {
   containerClassName?: string;
   showStripes?: boolean;
   showTopBorder?: boolean;
+  id?: string;
 }
 
 const GridDecoration = ({ className }: { className?: string }) => (
-  <div className={`absolute w-6 h-6 flex items-center justify-center pointer-events-none ${className}`} style={{ zIndex: 'var(--section-grid-z, 9999)' }}>
+  <div className={`absolute w-6 h-6 flex items-center justify-center pointer-events-none ${className}`} style={{ zIndex: 'var(--section-grid-z, 9990)' }}>
     {/* White background to mask the lines crossing behind it for a cleaner look */}
     <div className="absolute w-4 h-4 bg-white rounded-full" />
     
@@ -25,14 +26,15 @@ export function SectionLayout({
   className = "", 
   containerClassName = "",
   showStripes = true,
-  showTopBorder = true
+  showTopBorder = true,
+  id
 }: SectionLayoutProps) {
   // Adjusted to user requested color #E2E7F1 for a more subtle look
   const stripeClass = "bg-slate-50/30 bg-[image:repeating-linear-gradient(45deg,#E2E7F1_0px,#E2E7F1_1px,transparent_1px,transparent_12px)]";
   const noStripeClass = "bg-white";
 
   return (
-    <div className={`w-full flex flex-row relative ${containerClassName}`}>
+    <div className={`w-full flex flex-row relative ${containerClassName}`} id={id}>
       {/* Top border line - very thin */}
       {showTopBorder && (
         <div className="absolute top-0 left-0 right-0 h-[0.5px] bg-[#E2E7F1]" style={{ zIndex: 10 }}></div>
@@ -67,14 +69,14 @@ export function SectionLayout({
       {/* Right Decor - Visible on all screen sizes */}
       <div className={`flex-1 min-w-[1rem] md:min-w-[2rem] ${showStripes ? stripeClass : noStripeClass}`}></div>
       
-      {/* Grid Decorations at Bottom Corners - Positioned at the highest level to appear above everything */}
+      {/* Grid Decorations at Top Corners - Positioned at the highest level to appear above everything */}
       {/* Using the same flex structure to align with main content */}
-      <div className="absolute left-0 right-0 pointer-events-none" style={{ bottom: 0, zIndex: 'var(--section-grid-z, 99999)' }}>
+      <div className="absolute left-0 right-0 pointer-events-none" style={{ top: 0, zIndex: 'var(--section-grid-z, 9995)' }}>
         <div className="flex flex-row w-full">
           <div className="flex-1 min-w-[1rem] md:min-w-[2rem]"></div>
           <div className="relative w-full min-w-0 max-w-[1500px] mx-auto">
-            <GridDecoration className="flex -bottom-[12px] -left-[12px]" />
-            <GridDecoration className="flex -bottom-[12px] -right-[12px]" />
+            <GridDecoration className="flex -top-[12px] -left-[12px]" />
+            <GridDecoration className="flex -top-[12px] -right-[12px]" />
           </div>
           <div className="flex-1 min-w-[1rem] md:min-w-[2rem]"></div>
         </div>

@@ -10,6 +10,7 @@ const BoneDivider = () => (
       viewBox="0 0 20 10"
       className="absolute -top-[0px] left-1/2 -translate-x-1/2 w-7 h-[14px] fill-[#E2E7F1] pointer-events-none"
       preserveAspectRatio="none"
+      style={{ zIndex: 9990 }}
     >
       <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
     </svg>
@@ -19,6 +20,7 @@ const BoneDivider = () => (
       viewBox="0 0 20 10"
       className="absolute -bottom-[0px] left-1/2 -translate-x-1/2 w-7 h-[14px] fill-[#E2E7F1] pointer-events-none rotate-180"
       preserveAspectRatio="none"
+      style={{ zIndex: 9990 }}
     >
       <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
     </svg>
