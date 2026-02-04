@@ -31,7 +31,7 @@ export function Hero() {
           }
         }
         .hero-blur-animate {
-          animation: blurText 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+          animation: blurText 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
         }
       `}</style>
       {/* Gradient Effect - Desktop Only */}
@@ -60,7 +60,7 @@ export function Hero() {
         {/* Badge */}
         <div
           className="inline-flex items-center gap-2 rounded-full pl-1 pr-4 py-1 border border-[#E2E7F1] hero-blur-animate"
-          style={{ animationDelay: '0.1s', opacity: 0 }}
+          style={{ animationDelay: '0.1s' }}
         >
           <div className="rounded-full p-1 border border-[#E2E7F1]">
             <div className="flex -space-x-2 overflow-hidden">
@@ -122,7 +122,6 @@ export function Hero() {
           className="text-[48px] md:text-7xl leading-none text-[#1C1C1E] hero-blur-animate"
           style={{
             animationDelay: '0.2s',
-            opacity: 0,
             fontFamily: 'Fustat-Bold, sans-serif',
             fontWeight: 'normal',
             lineHeight: '0.9',
@@ -137,7 +136,7 @@ export function Hero() {
         {/* Description */}
         <p
           className="text-base md:text-lg text-[#1C1C1E] max-w-md leading-tight hero-blur-animate"
-          style={{ animationDelay: '0.3s', opacity: 0 }}
+          style={{ animationDelay: '0.3s' }}
         >
           {language === 'pt' ? (
             <>
@@ -161,7 +160,7 @@ export function Hero() {
         {/* CTAs */}
         <div
           className="flex flex-col sm:flex-row items-center gap-6 pt-2 w-full hero-blur-animate"
-          style={{ animationDelay: '0.4s', opacity: 0 }}
+          style={{ animationDelay: '0.4s' }}
         >
           <SpotlightButton
             onClick={() => {
@@ -189,7 +188,7 @@ export function Hero() {
         {/* Features */}
         <div
           className="hidden md:grid grid-cols-2 gap-8 pt-8 w-full max-w-lg hero-blur-animate"
-          style={{ animationDelay: '0.5s', opacity: 0 }}
+          style={{ animationDelay: '0.5s' }}
         >
           <div className="flex items-start gap-3">
             <div className="bg-[#2869D6]/20 p-2 rounded-full w-10 h-10 flex items-center justify-center text-[#2869D6] mt-1">
@@ -232,7 +231,7 @@ export function Hero() {
       {/* Right Content (Website Mockup) */}
       <div
         className="relative hidden lg:block h-full min-h-[400px] hero-blur-animate"
-        style={{ zIndex: 1, animationDelay: '0.6s', opacity: 0 }}
+        style={{ zIndex: 1, animationDelay: '0.6s' }}
       >
         {/* Website Mockup */}
         <div style={{ userSelect: 'none', pointerEvents: 'none' }}>
@@ -260,7 +259,7 @@ export function Hero() {
       {/* Mobile Mockups - Visible only on mobile, positioned at bottom */}
       <div
         className="lg:hidden absolute bottom-0 left-0 right-0 w-screen flex justify-center items-end overflow-hidden pointer-events-none hero-blur-animate"
-        style={{ zIndex: 1, left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw', animationDelay: '0.6s', opacity: 0 }}
+        style={{ zIndex: 1, left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw', animationDelay: '0.6s' }}
       >
         <div className="relative" style={{ transform: 'scale(0.55)', transformOrigin: 'bottom center', pointerEvents: 'none', userSelect: 'none' }}>
           {/* Website Mockup - Scaled down */}
