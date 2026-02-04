@@ -16,8 +16,9 @@ export function log(message: string, source = "express") {
 
 export async function setupVite(app: Express, server: Server) {
   // Dynamic import to avoid loading Vite in production (it's a devDependency)
-  const { createServer as createViteServer, createLogger } = await import("vite");
-  const viteLogger = createLogger();
+  const viteModule = await import("vite");
+  const createViteServer = viteModule.createServer;
+  const viteLogger = viteModule.createLogger();
 
   const serverOptions = {
     middlewareMode: true,
