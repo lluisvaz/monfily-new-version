@@ -1210,50 +1210,50 @@ const SolutionsSuiteSection = () => {
                   style={{ animationDelay: `${0.3 + index * 0.1}s`, opacity: 0 }}
                   spotlightColor="rgba(255, 255, 255, 0.2)"
                 >
-                {/* Card Image/Icon Area */}
-                <div className="h-64 md:h-80 relative overflow-hidden bg-[#FAFBFC]">
-                  {/* Background Grid */}
-                  <div
-                    className="absolute inset-0 opacity-[0.15]"
-                    style={{
-                      backgroundImage: `
+                  {/* Card Image/Icon Area */}
+                  <div className="h-64 md:h-80 relative overflow-hidden bg-[#FAFBFC]">
+                    {/* Background Grid */}
+                    <div
+                      className="absolute inset-0 opacity-[0.15]"
+                      style={{
+                        backgroundImage: `
                         linear-gradient(#E2E7F1 1px, transparent 1px),
                         linear-gradient(90deg, #E2E7F1 1px, transparent 1px)
                       `,
-                      backgroundSize: '24px 24px',
-                      backgroundPosition: 'center center'
-                    }}
-                  />
+                        backgroundSize: '24px 24px',
+                        backgroundPosition: 'center center'
+                      }}
+                    />
 
-                  {index === 2 && card.badge && (
-                    <div className="absolute top-4 right-4 z-20">
-                      <span className="px-3 py-1 bg-[#2869D6]/20 text-[#1E3A8A] text-xs font-semibold rounded-full border border-[#2869D6]/30">
-                        {card.badge}
-                      </span>
+                    {index === 2 && card.badge && (
+                      <div className="absolute top-4 right-4 z-20">
+                        <span className="px-3 py-1 bg-[#2869D6]/20 text-[#1E3A8A] text-xs font-semibold rounded-full border border-[#2869D6]/30">
+                          {card.badge}
+                        </span>
+                      </div>
+                    )}
+
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      {card.icon}
                     </div>
-                  )}
-
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    {card.icon}
                   </div>
-                </div>
 
-                {/* Card Content */}
-                <div className="p-8 border-t border-[#E2E7F1]">
-                  <h3
-                    className="text-xl text-[#1C1C1E] mb-3"
-                    style={{
-                      fontFamily: 'Fustat-Bold, sans-serif',
-                      fontWeight: 'normal'
-                    }}
-                  >
-                    {card.title}
-                  </h3>
-                  <p className="text-[#6B7280] text-sm leading-relaxed">
-                    {card.description}
-                  </p>
-                </div>
-              </SpotlightCard>
+                  {/* Card Content */}
+                  <div className="p-8 border-t border-[#E2E7F1]">
+                    <h3
+                      className="text-xl text-[#1C1C1E] mb-3"
+                      style={{
+                        fontFamily: 'Fustat-Bold, sans-serif',
+                        fontWeight: 'normal'
+                      }}
+                    >
+                      {card.title}
+                    </h3>
+                    <p className="text-[#6B7280] text-sm leading-relaxed">
+                      {card.description}
+                    </p>
+                  </div>
+                </SpotlightCard>
               </div>
             ))}
           </div>
@@ -1510,12 +1510,12 @@ const FooterSection = () => {
       {/* Main footer content */}
       <div ref={sectionRef} className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24 mb-24">
         {/* Logo Column */}
-        <div 
+        <div
           className={`md:col-span-3 flex items-start ${isVisible ? 'services-blur-animate' : ''}`}
           style={{ opacity: 0 }}
         >
           <div className="flex items-center gap-8 md:gap-12 w-full">
-            <a 
+            <a
               href={`/${language}`}
               onClick={(e) => {
                 e.preventDefault();
@@ -1523,9 +1523,9 @@ const FooterSection = () => {
               }}
               className="flex items-center gap-2 cursor-pointer flex-shrink-0"
             >
-              <img 
-                src="https://res.cloudinary.com/dopp0v9eq/image/upload/v1763574787/monfily-black-nobg_risk6t.png" 
-                alt="Monfily" 
+              <img
+                src="https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_80/v1763574787/monfily-black-nobg_risk6t.png"
+                alt="Monfily"
                 className="h-10 w-auto select-none"
                 draggable="false"
                 onContextMenu={(e) => e.preventDefault()}
@@ -1539,7 +1539,7 @@ const FooterSection = () => {
         {/* Links Columns */}
         <div className="md:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 md:gap-24">
           {/* Account */}
-          <div 
+          <div
             className={`flex flex-col space-y-6 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.1s', opacity: 0 }}
           >
@@ -1561,7 +1561,7 @@ const FooterSection = () => {
           </div>
 
           {/* Support */}
-          <div 
+          <div
             className={`flex flex-col space-y-6 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.2s', opacity: 0 }}
           >
@@ -1588,7 +1588,7 @@ const FooterSection = () => {
           </div>
 
           {/* Website */}
-          <div 
+          <div
             className={`flex flex-col space-y-6 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.3s', opacity: 0 }}
           >
@@ -1607,7 +1607,7 @@ const FooterSection = () => {
           </div>
 
           {/* A.I */}
-          <div 
+          <div
             className={`flex flex-col space-y-6 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.4s', opacity: 0 }}
           >
@@ -1623,7 +1623,7 @@ const FooterSection = () => {
       </div>
 
       {/* Dotted Divider & Bottom Bar */}
-      <div 
+      <div
         className={`w-full border-t border-dotted border-[#E2E7F1] pt-12 flex flex-col md:flex-row items-center justify-between gap-8 ${isVisible ? 'services-blur-animate' : ''}`}
         style={{ animationDelay: '0.5s', opacity: 0 }}
       >
@@ -1634,13 +1634,13 @@ const FooterSection = () => {
           <div className="hidden md:block w-px h-6 bg-[#E2E7F1]"></div>
           {/* Social Icons */}
           <div className="flex items-center gap-6">
-            <a href="https://www.instagram.com/monfilydigital/" target="_blank" rel="noopener noreferrer" className="text-[#1C1C1E] hover:text-[#2869D6] transition-colors">
+            <a href="https://www.instagram.com/monfilydigital/" target="_blank" rel="noopener noreferrer" className="text-[#1C1C1E] hover:text-[#2869D6] transition-colors" aria-label="Instagram da Monfily">
               <Instagram className="w-5 h-5" />
             </a>
-            <a href="mailto:monfilydigital@gmail.com" className="text-[#1C1C1E] hover:text-[#2869D6] transition-colors">
+            <a href="mailto:monfilydigital@gmail.com" className="text-[#1C1C1E] hover:text-[#2869D6] transition-colors" aria-label="Enviar e-mail para Monfily">
               <Mail className="w-5 h-5" />
             </a>
-            <a href="https://wa.me/5511978267321" target="_blank" rel="noopener noreferrer" className="text-[#1C1C1E] hover:text-[#2869D6] transition-colors">
+            <a href="https://wa.me/5511978267321" target="_blank" rel="noopener noreferrer" className="text-[#1C1C1E] hover:text-[#2869D6] transition-colors" aria-label="WhatsApp da Monfily">
               <Whatsapp className="w-5 h-5" />
             </a>
           </div>
@@ -1664,12 +1664,12 @@ const FloatingIcon = ({
 }) => {
   const getIcon = () => {
     const iconUrls: Record<string, string> = {
-      python: 'https://res.cloudinary.com/dopp0v9eq/image/upload/v1764964166/python_umggwd.png',
-      n8n: 'https://res.cloudinary.com/dopp0v9eq/image/upload/v1764964165/n8n_frmmel.png',
-      chatgpt: 'https://res.cloudinary.com/dopp0v9eq/image/upload/v1764964165/chatgpt_m0zqpv.png',
-      react: 'https://res.cloudinary.com/dopp0v9eq/image/upload/v1764964166/react_y5fogs.png',
-      nodejs: 'https://res.cloudinary.com/dopp0v9eq/image/upload/v1764964166/nodejs_qzxzzd.png',
-      claude: 'https://res.cloudinary.com/dopp0v9eq/image/upload/v1764964166/claude_kmb9jl.png'
+      python: 'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_40/v1764964166/python_umggwd.png',
+      n8n: 'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_40/v1764964165/n8n_frmmel.png',
+      chatgpt: 'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_40/v1764964165/chatgpt_m0zqpv.png',
+      react: 'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_40/v1764964166/react_y5fogs.png',
+      nodejs: 'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_40/v1764964166/nodejs_qzxzzd.png',
+      claude: 'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_40/v1764964166/claude_kmb9jl.png'
     };
 
     const iconUrl = iconUrls[name];

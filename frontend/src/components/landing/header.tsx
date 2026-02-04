@@ -79,7 +79,7 @@ export function Header() {
         }
       `}</style>
       {/* Logo */}
-      <a 
+      <a
         href={`/${language}`}
         onClick={(e) => {
           e.preventDefault();
@@ -88,9 +88,9 @@ export function Header() {
         className="flex items-center gap-2 cursor-pointer flex-shrink-0 header-blur-animate"
         style={{ animationDelay: '0.1s', opacity: 0 }}
       >
-        <img 
-          src="https://res.cloudinary.com/dopp0v9eq/image/upload/v1763574787/monfily-black-nobg_risk6t.png" 
-          alt="Monfily" 
+        <img
+          src="https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_120/v1763574787/monfily-black-nobg_risk6t.png"
+          alt="Monfily"
           className="h-10 w-auto select-none"
           draggable="false"
           onContextMenu={(e) => e.preventDefault()}
@@ -107,7 +107,7 @@ export function Header() {
               return (
                 <DropdownMenu key={item}>
                   <DropdownMenuTrigger asChild>
-                    <button 
+                    <button
                       className="flex items-center gap-1 text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
                       style={{ animationDelay: `${0.2 + index * 0.05}s`, opacity: 0 }}
                     >
@@ -115,8 +115,8 @@ export function Header() {
                       <NavArrowDown className="w-3 h-3 transition-transform duration-200 data-[state=open]:rotate-180" />
                     </button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent 
-                    align="start" 
+                  <DropdownMenuContent
+                    align="start"
                     sideOffset={8}
                     className="min-w-[220px] border border-[#E2E7F1] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.08)] rounded-lg data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-2"
                   >
@@ -147,7 +147,7 @@ export function Header() {
               </a>
             );
           })}
-          <div 
+          <div
             className="h-6 w-px bg-slate-200 mx-2 flex-shrink-0 header-blur-animate"
             style={{ animationDelay: `${0.2 + navItems.length * 0.05}s`, opacity: 0 }}
           ></div>
@@ -157,31 +157,31 @@ export function Header() {
         <div className="flex items-center gap-2 flex-shrink-0">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button 
+              <button
                 className="flex items-center justify-center h-10 px-3 rounded-full border border-[#E2E7F1] hover:bg-slate-50 transition-colors focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
                 style={{ animationDelay: `${0.3 + navItems.length * 0.05}s`, opacity: 0 }}
               >
-                <img 
-                  src={`https://flagcdn.com/w20/${language === 'pt' ? 'br' : 'us'}.png`} 
-                  alt={language} 
+                <img
+                  src={`https://flagcdn.com/w20/${language === 'pt' ? 'br' : 'us'}.png`}
+                  alt={language}
                   className="w-5 h-auto rounded-sm flex-shrink-0"
                 />
                 <NavArrowDown className="w-3 h-3 ml-1 text-[#1C1C1E]" />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent 
-              align="end" 
+            <DropdownMenuContent
+              align="end"
               sideOffset={20}
               className="min-w-[200px] border border-[#E2E7F1] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.08)] rounded-lg data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-2"
             >
-              <DropdownMenuItem 
+              <DropdownMenuItem
                 className={`flex items-center gap-2 cursor-pointer ${language === 'pt' ? 'font-medium bg-slate-50' : ''}`}
                 onClick={() => handleLanguageChange('pt')}
               >
                 <img src="https://flagcdn.com/w20/br.png" alt="BR" className="w-4 h-auto rounded-sm" />
                 <span className={language === 'pt' ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{t.header.languages.portuguese}</span>
               </DropdownMenuItem>
-              <DropdownMenuItem 
+              <DropdownMenuItem
                 className={`flex items-center gap-2 cursor-pointer ${language === 'en' ? 'font-medium bg-slate-50' : ''}`}
                 onClick={() => handleLanguageChange('en')}
               >
@@ -190,7 +190,7 @@ export function Header() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <SpotlightButton 
+          <SpotlightButton
             onClick={() => {
               const el = document.getElementById('contato');
               const scrollInstance = (window as any).locomotiveScroll;
@@ -212,15 +212,16 @@ export function Header() {
       <div className="flex lg:hidden items-center gap-2 flex-shrink-0">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
-            <button 
+            <button
               className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 header-blur-animate focus:outline-none focus-visible:outline-none cursor-pointer"
               style={{ animationDelay: '0.2s', opacity: 0 }}
+              aria-label="Abrir menu de navegação"
             >
               <Menu width={32} height={32} className="text-[#1C1C1E]" />
             </button>
           </SheetTrigger>
-          <SheetContent 
-            side="right" 
+          <SheetContent
+            side="right"
             className="w-full sm:w-[400px] p-0 bg-white overflow-y-auto [&>button]:!hidden !z-[9999]"
           >
             <VisuallyHiddenPrimitive.Root>
@@ -372,26 +373,26 @@ export function Header() {
                 display: none !important;
               }
             `}</style>
-            
+
             {/* Sidebar Layout with Margins and Grid Decoration */}
             <div className="w-full h-full flex flex-row relative">
               {/* Top border line */}
               <div className="absolute top-0 left-0 right-0 h-[0.5px] bg-[#E2E7F1]" style={{ zIndex: 10 }}></div>
-              
+
               {/* Header Bottom Border Line - Infinite line that extends through margins and passes through grid decorations */}
               <div className="absolute left-0 right-0 h-[0.5px] bg-[#E2E7F1] pointer-events-none" style={{ top: '96px', zIndex: 1000 }}></div>
-              
+
               {/* Left Margin */}
               <div className="flex-1 min-w-[1rem] md:min-w-[2rem] bg-white"></div>
-              
+
               {/* Main Content */}
               <div className="relative w-full min-w-0 bg-white flex flex-col">
                 {/* Left border line */}
                 <div className="absolute top-0 bottom-0 left-0 w-[0.5px] bg-[#E2E7F1] pointer-events-none" style={{ zIndex: 1000 }}></div>
-                
+
                 {/* Right border line */}
                 <div className="absolute top-0 bottom-0 right-0 w-[0.5px] bg-[#E2E7F1] pointer-events-none" style={{ zIndex: 1000 }}></div>
-                
+
                 {/* Grid Decorations at Header Bottom Corners (where vertical lines meet header bottom border) */}
                 <div className="absolute pointer-events-none" style={{ top: '96px', left: 0, right: 0, zIndex: 9995 }}>
                   {/* Left grid decoration */}
@@ -409,10 +410,10 @@ export function Header() {
                     </svg>
                   </div>
                 </div>
-                
+
                 {/* Header do Menu */}
                 <div className="flex items-center justify-between px-4 h-24">
-                  <a 
+                  <a
                     href={`/${language}`}
                     onClick={(e) => {
                       e.preventDefault();
@@ -422,9 +423,9 @@ export function Header() {
                     className="flex items-center gap-2 cursor-pointer flex-shrink-0 sidebar-blur-animate"
                     style={{ animationDelay: '0.1s', opacity: 0 }}
                   >
-                    <img 
-                      src="https://res.cloudinary.com/dopp0v9eq/image/upload/v1763574787/monfily-black-nobg_risk6t.png" 
-                      alt="Monfily" 
+                    <img
+                      src="https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_120/v1763574787/monfily-black-nobg_risk6t.png"
+                      alt="Monfily"
                       className="h-10 w-auto select-none"
                       draggable="false"
                       onContextMenu={(e) => e.preventDefault()}
@@ -432,7 +433,7 @@ export function Header() {
                     />
                   </a>
                   <SheetClose asChild>
-                    <button 
+                    <button
                       className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 sidebar-blur-animate focus:outline-none focus-visible:outline-none cursor-pointer"
                       style={{ animationDelay: '0.15s', opacity: 0 }}
                     >
@@ -443,20 +444,20 @@ export function Header() {
 
                 {/* Navigation Links */}
                 <nav className="flex flex-col px-6 py-4 flex-1 overflow-y-auto">
-                  
+
                   {navItemsWithDropdown.map((item, index) => (
                     <Collapsible key={item} className="sidebar-blur-animate" style={{ animationDelay: `${0.2 + index * 0.05}s`, opacity: 0 }}>
                       <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group cursor-pointer">
                         <span>{item}</span>
                         <NavArrowDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
                       </CollapsibleTrigger>
-                      <CollapsibleContent 
+                      <CollapsibleContent
                         className="pl-4 pb-2 overflow-hidden"
                       >
                         <div className="flex flex-col gap-2">
-                          <a 
-                            href="#" 
-                            onClick={() => setIsOpen(false)} 
+                          <a
+                            href="#"
+                            onClick={() => setIsOpen(false)}
                             className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1 cursor-pointer"
                             style={{
                               animation: 'fadeInSubmenuItem 0.3s ease-out 0.1s both'
@@ -464,9 +465,9 @@ export function Header() {
                           >
                             {t.header.solutionsDropdown.websiteCreation}
                           </a>
-                          <a 
-                            href="#" 
-                            onClick={() => setIsOpen(false)} 
+                          <a
+                            href="#"
+                            onClick={() => setIsOpen(false)}
                             className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1 cursor-pointer"
                             style={{
                               animation: 'fadeInSubmenuItem 0.3s ease-out 0.15s both'
@@ -474,9 +475,9 @@ export function Header() {
                           >
                             {t.header.solutionsDropdown.softwareDevelopment}
                           </a>
-                          <a 
-                            href="#" 
-                            onClick={() => setIsOpen(false)} 
+                          <a
+                            href="#"
+                            onClick={() => setIsOpen(false)}
                             className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1 cursor-pointer"
                             style={{
                               animation: 'fadeInSubmenuItem 0.3s ease-out 0.2s both'
@@ -484,9 +485,9 @@ export function Header() {
                           >
                             {t.header.solutionsDropdown.artificialIntelligence}
                           </a>
-                          <a 
-                            href="#" 
-                            onClick={() => setIsOpen(false)} 
+                          <a
+                            href="#"
+                            onClick={() => setIsOpen(false)}
                             className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1 cursor-pointer"
                             style={{
                               animation: 'fadeInSubmenuItem 0.3s ease-out 0.25s both'
@@ -498,7 +499,7 @@ export function Header() {
                       </CollapsibleContent>
                     </Collapsible>
                   ))}
-                  
+
                   {navItems.filter(item => !navItemsWithDropdown.includes(item)).map((item, index) => {
                     const isAboutLink = item === t.header.nav.about;
                     const dropdownCount = navItemsWithDropdown.length;
@@ -521,9 +522,9 @@ export function Header() {
                                 element.scrollIntoView({ behavior: 'smooth', block: 'center' });
                               }
                               // Remove hash from URL after scroll
-                                if (window.history.replaceState) {
-                                  window.history.replaceState(null, '', window.location.pathname + window.location.search);
-                                }
+                              if (window.history.replaceState) {
+                                window.history.replaceState(null, '', window.location.pathname + window.location.search);
+                              }
                             }, 300);
                           } else {
                             setIsOpen(false);
@@ -536,36 +537,36 @@ export function Header() {
                       </a>
                     );
                   })}
-                  
+
                   {/* Separator */}
-                  <div 
+                  <div
                     className="h-px bg-[#E2E7F1] my-4 sidebar-blur-animate"
                     style={{ animationDelay: `${0.2 + navItems.length * 0.05}s`, opacity: 0 }}
                   ></div>
-                  
+
                   {/* Language Selector */}
-                  <Collapsible 
+                  <Collapsible
                     className="sidebar-blur-animate"
                     style={{ animationDelay: `${0.25 + navItems.length * 0.05}s`, opacity: 0 }}
                   >
                     <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group cursor-pointer">
                       <div className="flex items-center gap-2">
-                        <img 
-                          src={`https://flagcdn.com/w20/${language === 'pt' ? 'br' : 'us'}.png`} 
-                          alt={language} 
+                        <img
+                          src={`https://flagcdn.com/w20/${language === 'pt' ? 'br' : 'us'}.png`}
+                          alt={language}
                           className="w-5 h-auto rounded-sm"
                         />
                         <span>{language === 'pt' ? t.header.languages.portuguese : t.header.languages.english}</span>
                       </div>
                       <NavArrowDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
                     </CollapsibleTrigger>
-                    <CollapsibleContent 
+                    <CollapsibleContent
                       className="pl-4 pb-2 overflow-hidden"
                     >
                       <div className="flex flex-col gap-2">
-                        <a 
-                          href="#" 
-                          onClick={(e) => { e.preventDefault(); handleLanguageChange('pt'); setIsOpen(false); }} 
+                        <a
+                          href="#"
+                          onClick={(e) => { e.preventDefault(); handleLanguageChange('pt'); setIsOpen(false); }}
                           className={`text-sm py-2 px-2 rounded transition-all duration-200 hover:translate-x-1 cursor-pointer flex items-center gap-2 ${language === 'pt' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
                           style={{
                             animation: 'fadeInSubmenuItem 0.3s ease-out 0.1s both'
@@ -574,9 +575,9 @@ export function Header() {
                           <img src="https://flagcdn.com/w20/br.png" alt="BR" className="w-4 h-auto rounded-sm" />
                           {t.header.languages.portuguese}
                         </a>
-                        <a 
-                          href="#" 
-                          onClick={(e) => { e.preventDefault(); handleLanguageChange('en'); setIsOpen(false); }} 
+                        <a
+                          href="#"
+                          onClick={(e) => { e.preventDefault(); handleLanguageChange('en'); setIsOpen(false); }}
                           className={`text-sm py-2 px-2 rounded transition-all duration-200 hover:translate-x-1 cursor-pointer flex items-center gap-2 ${language === 'en' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
                           style={{
                             animation: 'fadeInSubmenuItem 0.3s ease-out 0.15s both'
@@ -588,7 +589,7 @@ export function Header() {
                       </div>
                     </CollapsibleContent>
                   </Collapsible>
-                  
+
                   {/* Falar com Especialista Button */}
                   <SpotlightButton
                     onClick={() => {
@@ -610,7 +611,7 @@ export function Header() {
                   </SpotlightButton>
                 </nav>
               </div>
-              
+
               {/* Right Margin */}
               <div className="flex-1 min-w-[1rem] md:min-w-[2rem] bg-white"></div>
             </div>
