@@ -191,6 +191,15 @@ export function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
           <SpotlightButton 
+            onClick={() => {
+              const el = document.getElementById('contato');
+              const scrollInstance = (window as any).locomotiveScroll;
+              if (scrollInstance && el) {
+                scrollInstance.scrollTo(el, { duration: 1000, easing: [0.25, 0.00, 0.35, 1.00] });
+              } else if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+            }}
             className="bg-[#2869D6] text-white h-10 px-6 rounded-full font-medium header-blur-animate flex items-center justify-center cursor-pointer"
             style={{ animationDelay: `${0.35 + navItems.length * 0.05}s`, opacity: 0 }}
           >
@@ -505,13 +514,16 @@ export function Header() {
                             // Wait for menu to close, then scroll
                             setTimeout(() => {
                               const element = document.getElementById('servicos');
-                              if (element) {
-                                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                // Remove hash from URL after scroll
+                              const scrollInstance = (window as any).locomotiveScroll;
+                              if (scrollInstance && element) {
+                                scrollInstance.scrollTo(element, { duration: 1000, easing: [0.25, 0.00, 0.35, 1.00] });
+                              } else if (element) {
+                                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                              }
+                              // Remove hash from URL after scroll
                                 if (window.history.replaceState) {
                                   window.history.replaceState(null, '', window.location.pathname + window.location.search);
                                 }
-                              }
                             }, 300);
                           } else {
                             setIsOpen(false);
@@ -579,6 +591,18 @@ export function Header() {
                   
                   {/* Falar com Especialista Button */}
                   <SpotlightButton
+                    onClick={() => {
+                      setIsOpen(false);
+                      setTimeout(() => {
+                        const el = document.getElementById('contato');
+                        const scrollInstance = (window as any).locomotiveScroll;
+                        if (scrollInstance && el) {
+                          scrollInstance.scrollTo(el, { duration: 1000, easing: [0.25, 0.00, 0.35, 1.00] });
+                        } else if (el) {
+                          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                      }, 300);
+                    }}
                     className="bg-[#2869D6] text-white py-4 rounded-full font-medium sidebar-blur-animate mt-4 w-full flex items-center justify-center cursor-pointer"
                     style={{ animationDelay: `${0.3 + navItems.length * 0.05}s`, opacity: 0 }}
                   >

@@ -28,6 +28,7 @@ export default function Home() {
   useEffect(() => {
     let scroll: any;
     let cancelled = false;
+    let resizeObserver: ResizeObserver | null = null;
 
     (async () => {
       try {
@@ -36,8 +37,30 @@ export default function Home() {
           scroll = new LocomotiveScroll({
             el: containerRef.current,
             smooth: true,
+            multiplier: 1,
+            lerp: 0.1,
             smartphone: { smooth: true },
             tablet: { smooth: true },
+          });
+
+          // Expose scroll instance globally for use in other components
+          (window as any).locomotiveScroll = scroll;
+
+          // Force update after a short delay to ensure initial height is correct
+          setTimeout(() => {
+            scroll.update();
+          }, 1000);
+
+          // Update on resize
+          resizeObserver = new ResizeObserver(() => {
+            scroll.update();
+          });
+          resizeObserver.observe(containerRef.current);
+
+          // Update on image load
+          const images = containerRef.current.querySelectorAll('img');
+          images.forEach(img => {
+            img.addEventListener('load', () => scroll.update());
           });
         }
       } catch (e) {
@@ -49,6 +72,10 @@ export default function Home() {
       cancelled = true;
       if (scroll && typeof scroll.destroy === 'function') {
         scroll.destroy();
+        (window as any).locomotiveScroll = undefined;
+      }
+      if (resizeObserver) {
+        resizeObserver.disconnect();
       }
     };
   }, []);

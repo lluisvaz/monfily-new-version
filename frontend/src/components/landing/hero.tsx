@@ -163,7 +163,18 @@ export function Hero() {
           className="flex flex-col sm:flex-row items-center gap-6 pt-2 w-full hero-blur-animate"
           style={{ animationDelay: '0.4s', opacity: 0 }}
         >
-          <SpotlightButton className="group bg-[#2869D6] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer w-full sm:w-auto">
+          <SpotlightButton 
+            onClick={() => {
+              const el = document.getElementById('contato');
+              const scrollInstance = (window as any).locomotiveScroll;
+              if (scrollInstance && el) {
+                scrollInstance.scrollTo(el, { duration: 1000, easing: [0.25, 0.00, 0.35, 1.00] });
+              } else if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+            }}
+            className="group bg-[#2869D6] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer w-full sm:w-auto"
+          >
             {t.hero.cta.primary}
             <div className="bg-white rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
               <ArrowRight className="w-3 h-3 text-[#2869D6]" />

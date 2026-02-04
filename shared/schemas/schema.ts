@@ -28,6 +28,7 @@ export const leadFormSchema = z.object({
   budget: z.string().min(1, "Budget is required"),
   timeframe: z.string().min(1, "Timeframe is required"),
   message: z.string().min(1, "Message is required"),
+  language: z.string().optional().default("pt"),
 });
 
 export type LeadFormData = z.infer<typeof leadFormSchema>;

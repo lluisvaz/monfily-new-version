@@ -729,6 +729,15 @@ const ExpertiseSection = () => {
 
           {/* CTA Button */}
           <SpotlightButton
+            onClick={() => {
+              const el = document.getElementById('contato');
+              const scrollInstance = (window as any).locomotiveScroll;
+              if (scrollInstance && el) {
+                scrollInstance.scrollTo(el, { duration: 1000, easing: [0.25, 0.00, 0.35, 1.00] });
+              } else if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+            }}
             className={`group bg-[#2869D6] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-start gap-3 cursor-pointer w-auto relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.4s', opacity: isVisible ? 0 : 0 }}
           >
@@ -791,6 +800,15 @@ const ExpertiseSection = () => {
 
           {/* CTA Button */}
           <SpotlightButton
+            onClick={() => {
+              const el = document.getElementById('contato');
+              const scrollInstance = (window as any).locomotiveScroll;
+              if (scrollInstance && el) {
+                scrollInstance.scrollTo(el, { duration: 1000, easing: [0.25, 0.00, 0.35, 1.00] });
+              } else if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+            }}
             className={`group bg-[#2869D6] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.4s', opacity: isVisible ? 0 : 0 }}
           >
@@ -1368,7 +1386,7 @@ const FinalCTASection = () => {
   }, []);
 
   return (
-    <SectionLayout showStripes={false} showTopBorder={false} className="py-24 px-6 md:px-16 lg:px-28">
+    <SectionLayout id="contato" showStripes={false} showTopBorder={false} className="py-24 px-6 md:px-16 lg:px-28">
       <div
         ref={sectionRef}
         className={`relative flex flex-col md:flex-row items-start justify-between gap-12 ${isVisible ? 'services-blur-animate' : ''}`}
