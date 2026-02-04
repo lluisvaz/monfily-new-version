@@ -8,7 +8,7 @@ Este projeto está preparado para deploy 100% funcional na **Vercel**.
 2. **Configurações de Build**:
    - **Framework Preset**: Vite (ou Other)
    - **Build Command**: `npm run build`
-   - **Output Directory**: `public`
+   - **Output Directory**: `dist`
    - **Root Directory**: `./` (Raiz do projeto)
 3. **Variáveis de Ambiente**:
    Adicione as seguintes variáveis no painel da Vercel (`Settings -> Environment Variables`):
@@ -50,11 +50,11 @@ O projeto inclui um arquivo `vercel.json` que configura headers de segurança re
 - `vercel.json`: Configurações de redirecionamento, rewrites de API e Headers.
 - `api/index.ts`: Ponto de entrada para as Serverless Functions da Vercel, integrando o app Express.
 - `tsconfig.json` (raiz): Facilita a compilação do TypeScript pela Vercel e resolve aliases.
-- `public`: Local onde o build do frontend é gerado e servido estaticamente.
+- `dist`: Local onde o build do frontend é gerado e servido estaticamente.
 
 ## 🧪 Checklist de Validação
 
-- [ ] `npm run build` gera a pasta `public` na raiz com sucesso.
+- [ ] `npm run build` gera a pasta `dist` na raiz com sucesso.
 - [ ] Rotas SPA (ex: `/about`, `/services`) funcionam com refresh de página.
 - [ ] API em `/api/contact` é acessível e integrada.
 - [ ] Headers de segurança presentes em todas as respostas.
