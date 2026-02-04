@@ -1634,13 +1634,13 @@ const FooterSection = () => {
           <div className="hidden md:block w-px h-6 bg-[#E2E7F1]"></div>
           {/* Social Icons */}
           <div className="flex items-center gap-6">
-            <a href="https://www.instagram.com/monfilydigital/" target="_blank" rel="noopener noreferrer" className="text-[#1C1C1E] hover:text-[#4ADE80] transition-colors">
+            <a href="https://www.instagram.com/monfilydigital/" target="_blank" rel="noopener noreferrer" className="text-[#1C1C1E] hover:text-[#2869D6] transition-colors">
               <Instagram className="w-5 h-5" />
             </a>
-            <a href="mailto:monfilydigital@gmail.com" className="text-[#1C1C1E] hover:text-[#4ADE80] transition-colors">
+            <a href="mailto:monfilydigital@gmail.com" className="text-[#1C1C1E] hover:text-[#2869D6] transition-colors">
               <Mail className="w-5 h-5" />
             </a>
-            <a href="https://wa.me/5511978267321" target="_blank" rel="noopener noreferrer" className="text-[#1C1C1E] hover:text-[#4ADE80] transition-colors">
+            <a href="https://wa.me/5511978267321" target="_blank" rel="noopener noreferrer" className="text-[#1C1C1E] hover:text-[#2869D6] transition-colors">
               <Whatsapp className="w-5 h-5" />
             </a>
           </div>
