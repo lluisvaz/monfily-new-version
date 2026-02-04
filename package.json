@@ -6,26 +6,19 @@
   "license": "MIT",
   "workspaces": [
     "frontend",
-    "backend",
     "shared"
   ],
   "scripts": {
-    "dev": "npm run dev:backend",
+    "dev": "vercel dev",
     "dev:frontend": "npm run dev --workspace=@monfily/frontend",
-    "dev:backend": "npm run dev --workspace=@monfily/backend",
-    "build": "npm run build:frontend && npm run build:backend",
-    "build:frontend": "npm run build --workspace=@monfily/frontend",
-    "build:backend": "npm run build --workspace=@monfily/backend",
-    "start": "npm run start --workspace=@monfily/backend",
+    "build": "npm run build --workspace=@monfily/frontend",
     "check": "npm run check --workspaces --if-present",
-    "db:push": "npm run db:push --workspace=@monfily/backend",
-    "clean": "rimraf node_modules dist frontend/node_modules backend/node_modules shared/node_modules",
+    "clean": "rimraf node_modules dist frontend/node_modules shared/node_modules",
     "install:all": "npm install"
   },
   "devDependencies": {
     "@vercel/node": "^5.1.8",
     "concurrently": "^9.1.0",
-    "drizzle-kit": "^0.31.4",
     "rimraf": "^6.0.1",
     "typescript": "5.6.3"
   },
