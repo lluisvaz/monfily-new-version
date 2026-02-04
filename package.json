@@ -9,7 +9,9 @@
     "shared"
   ],
   "scripts": {
-    "dev": "vercel dev",
+    "dev": "concurrently \"npm run dev --workspace=@monfily/frontend\" \"npm run vercel -- --port 3001\"",
+    "dev:all": "concurrently \"npm run dev --workspace=@monfily/frontend\" \"npm run vercel -- --port 3001\"",
+    "vercel": "vercel dev",
     "dev:frontend": "npm run dev --workspace=@monfily/frontend",
     "build": "npm run build --workspace=@monfily/frontend",
     "check": "npm run check --workspaces --if-present",
