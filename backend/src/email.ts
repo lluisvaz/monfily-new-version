@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import type { LeadFormData } from "@shared/schemas/schema";
+import type { LeadFormData } from "../../shared/schemas/schema";
 
 let transporter: nodemailer.Transporter | null = null;
 

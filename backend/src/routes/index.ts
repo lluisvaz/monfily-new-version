@@ -1,6 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { leadFormSchema } from "@shared/schemas/schema";
+import { leadFormSchema } from "../../../shared/schemas/schema";
 import { sendLeadEmails } from "../email";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -10,9 +10,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const result = leadFormSchema.safeParse(req.body);
       if (!result.success) {
         console.warn("Validation failed for contact form:", result.error.errors);
-        return res.status(400).json({ 
-          message: "Dados inválidos", 
-          errors: result.error.errors 
+        return res.status(400).json({
+          message: "Dados inválidos",
+          errors: result.error.errors
         });
       }
 
