@@ -66,3 +66,5 @@ backend/migrations/
 # Old directories (to be removed)
 client/
 server/
+.vercel
+.env*.local

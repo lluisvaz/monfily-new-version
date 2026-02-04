@@ -71,6 +71,15 @@ async function sendLeadEmails(data: LeadFormData) {
     const formattedBudget = budgetLabels[data.budget] || data.budget;
     const formattedTimeframe = timeframeLabels[data.timeframe] || data.timeframe;
 
+    let countryName = data.country;
+    try {
+        const regionNames = new Intl.DisplayNames(['pt'], { type: 'region' });
+        countryName = regionNames.of(data.country) || data.country;
+    } catch (e) {
+        console.error("Error formatting country name:", e);
+    }
+    const flagUrl = `https://flagcdn.com/w40/${data.country.toLowerCase()}.png`;
+
     const lang = data.language === 'en' ? 'en' : 'pt';
 
     const translations = {
@@ -150,7 +159,11 @@ async function sendLeadEmails(data: LeadFormData) {
                 <p class="data-row"><span class="data-label">Nome:</span> ${data.name}</p>
                 <p class="data-row"><span class="data-label">E-mail:</span> <a href="mailto:${data.email}" class="link-action">${data.email}</a></p>
                 <p class="data-row"><span class="data-label">Telefone:</span> <a href="https://wa.me/${data.phone}" target="_blank" class="link-action">${data.phone} ⬈</a></p>
-                <p class="data-row"><span class="data-label">País:</span> ${data.country}</p>
+                <p class="data-row">
+                  <span class="data-label">País:</span> 
+                  <img src="${flagUrl}" width="20" alt="${data.country}" style="vertical-align: middle; margin-right: 4px; border-radius: 2px;">
+                  ${countryName}
+                </p>
                 <p class="data-row"><span class="data-label">Empresa:</span> ${data.company}</p>
                 <p class="data-row"><span class="data-label">Website:</span> ${data.website || "N/A"}</p>
                 <p class="data-row"><span class="data-label">Serviços:</span> ${servicesHtml}</p>
@@ -202,7 +215,7 @@ async function sendLeadEmails(data: LeadFormData) {
     .email-wrapper { width: 100%; height: 100%; padding: 40px 0; }
     .email-container { width: 600px; max-width: 600px; margin: 0 auto; background-color: #ffffff; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
     .content-cell { font-family: 'Fustat', 'Segoe UI', Helvetica, Arial, sans-serif; color: #1C1C1E; padding: 40px; }
-    .button-style { background-color: #2869D6; color: #ffffff; padding: 12px 28px; font-size: 15px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; font-family: 'Fustat', sans-serif; }
+    .button-style { background-color: #2869D6; color: #ffffff !important; padding: 12px 28px; font-size: 15px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; font-family: 'Fustat', sans-serif; }
     @media only screen and (max-width: 600px) {
       .email-wrapper { padding: 20px 0 !important; }
       .email-container { width: 92% !important; max-width: 92% !important; margin: 0 auto !important; border: 1px solid #E2E7F1 !important; }
@@ -236,7 +249,7 @@ async function sendLeadEmails(data: LeadFormData) {
               <h1 class="title" style="margin: 0 0 24px 0; font-size: 24px; font-weight: bold; color: #1C1C1E; font-family: 'Fustat', sans-serif;">${t.title}</h1>
               <p style="margin: 0 0 32px 0; font-size: 16px; line-height: 1.7; color: #4B5563;">${t.message}</p>
               <div style="text-align: left; margin-bottom: 40px;">
-                <a href="https://monfily.com" target="_blank" class="button-style">${t.button}</a>
+                <a href="https://monfily.com" target="_blank" class="button-style" style="color: #ffffff;">${t.button}</a>
               </div>
               <p style="margin: 0; font-size: 16px; line-height: 1.7; color: #4B5563;">${t.closing}</p>
             </td>

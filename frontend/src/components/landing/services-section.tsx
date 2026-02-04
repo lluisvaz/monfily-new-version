@@ -3,7 +3,7 @@ import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Plus, Instagram, X, Youtube, Discord } from "iconoir-react";
+import { ArrowRight, Plus, Instagram, Mail, Whatsapp } from "iconoir-react";
 import { WindowIcon, CommandLineIcon, CpuChipIcon, ChartBarIcon } from "@heroicons/react/24/outline";
 import SpotlightCard from "@/components/ui/spotlight-card";
 import { SpotlightButton } from "@/components/ui/spotlight-button";
@@ -1634,12 +1634,15 @@ const FooterSection = () => {
           <div className="hidden md:block w-px h-6 bg-[#E2E7F1]"></div>
           {/* Social Icons */}
           <div className="flex items-center gap-6">
-            <a href="#" className="text-[#1C1C1E] hover:text-[#4ADE80] transition-colors">
-              <Discord className="w-5 h-5" />
+            <a href="https://www.instagram.com/monfilydigital/" target="_blank" rel="noopener noreferrer" className="text-[#1C1C1E] hover:text-[#4ADE80] transition-colors">
+              <Instagram className="w-5 h-5" />
             </a>
-            <Instagram className="w-5 h-5 text-[#1C1C1E] hover:text-[#4ADE80] transition-colors cursor-pointer" />
-            <X className="w-5 h-5 text-[#1C1C1E] hover:text-[#4ADE80] transition-colors cursor-pointer" />
-            <Youtube className="w-5 h-5 text-[#1C1C1E] hover:text-[#4ADE80] transition-colors cursor-pointer" />
+            <a href="mailto:monfilydigital@gmail.com" className="text-[#1C1C1E] hover:text-[#4ADE80] transition-colors">
+              <Mail className="w-5 h-5" />
+            </a>
+            <a href="https://wa.me/5511978267321" target="_blank" rel="noopener noreferrer" className="text-[#1C1C1E] hover:text-[#4ADE80] transition-colors">
+              <Whatsapp className="w-5 h-5" />
+            </a>
           </div>
         </div>
       </div>

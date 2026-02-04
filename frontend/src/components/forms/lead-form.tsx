@@ -4,6 +4,8 @@ import type { Language } from '@/lib/translations';
 import { ArrowRight, ArrowLeft, Check, SystemRestart, WarningCircle, NavArrowDown, Search } from 'iconoir-react';
 import { detectCountryCode } from '@/lib/geo-location';
 import { SpotlightButton } from '@/components/ui/spotlight-button';
+import { AsYouType, getExampleNumber, type CountryCode } from 'libphonenumber-js';
+import examples from 'libphonenumber-js/examples.mobile.json';
 
 export type LeadFormData = {
   name: string;
@@ -153,6 +155,8 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const phoneInputRef = useRef<HTMLInputElement>(null);
 
+  const isPhoneFocused = useRef(false);
+
   const placeholders = useMemo(() => (
     language === 'pt'
       ? {
@@ -172,47 +176,86 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
   ), [language]);
 
   const phonePlaceholder = useMemo(() => {
+    const countryCode = data.country as CountryCode;
+    if (countryCode) {
+      try {
+        const example = getExampleNumber(countryCode, examples);
+        if (example) {
+          return example.formatInternational();
+        }
+      } catch (e) {
+        console.error('Error getting example number:', e);
+      }
+    }
     const prefix = getDialCode(data.country) || (language === 'pt' ? '+55' : '+1');
     return language === 'pt' ? `${prefix} 11 91234-5678` : `${prefix} (555) 000-0000`;
   }, [language, data.country]);
 
   const handlePhoneInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const prefix = getDialCode(data.country);
+    let value = e.target.value;
+    
+    // Garantir que comece com +
+    if (!value.startsWith('+')) {
+      value = '+' + value.replace(/\D/g, '');
+    }
 
-    if (!prefix) {
-      setData((d) => ({ ...d, phone: value }));
+    // Se for apenas "+", permitir
+    if (value === '+') {
+      setData((d) => ({ ...d, phone: '+' }));
       return;
     }
 
-    let normalized = value;
-    if (!value.startsWith(prefix)) {
-      const rest = value.replace(/^\+[\d\s()\-]*/, '');
-      normalized = `${prefix} ${rest}`.replace(/\s+/g, ' ').trimEnd();
+    // Usar AsYouType para formatar
+    const asYouType = new AsYouType(data.country as CountryCode);
+    let formatted = asYouType.input(value);
+    const detectedCountry = asYouType.getCountry();
+
+    // Se o país for detectado e for diferente do atual, atualiza
+    let finalCountry = detectedCountry || data.country;
+
+    // Limitar o comprimento
+    const digitsOnly = value.replace(/\D/g, '');
+    let maxDigits = 15; // E.164 max fallback
+
+    if (finalCountry) {
+      try {
+        const example = getExampleNumber(finalCountry as CountryCode, examples);
+        if (example) {
+          maxDigits = example.formatInternational().replace(/\D/g, '').length;
+        }
+      } catch (e) {
+        // use fallback 15
+      }
     }
 
-    if (normalized.length < prefix.length) {
-      normalized = prefix + ' ';
+    if (digitsOnly.length > maxDigits) {
+      const keptDigits = digitsOnly.substring(0, maxDigits);
+      // Re-formatar com os dígitos limitados
+      const freshAsYouType = new AsYouType(finalCountry as CountryCode);
+      formatted = freshAsYouType.input('+' + keptDigits);
     }
 
-    setData((d) => ({ ...d, phone: normalized }));
+    setData((d) => ({ 
+      ...d, 
+      phone: formatted,
+      country: finalCountry || d.country 
+    }));
   };
 
   const handlePhoneKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const prefix = getDialCode(data.country);
-    if (!prefix) return;
-
     const input = e.currentTarget;
     const caretPos = input.selectionStart ?? 0;
 
-    // Prevent deleting the prefix
-    if ((e.key === 'Backspace' && caretPos <= prefix.length + 1) || (e.key === 'Delete' && caretPos < prefix.length + 1)) {
+    // Impedir apagar o "+"
+    if (e.key === 'Backspace' && caretPos === 1 && input.value === '+') {
       e.preventDefault();
     }
   };
 
   // Ensure phone always starts with country dial code when country changes
   useEffect(() => {
+    if (isPhoneFocused.current) return;
+    
     const prefix = getDialCode(data.country);
     if (!prefix) return;
 
@@ -302,8 +345,15 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
 
 
   const canNext = useMemo(() => {
-    if (step === 0) return Boolean(data.name && data.email && data.phone && data.country);
-    if (step === 1) return Boolean(data.company && data.message);
+    if (step === 0) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const isValidEmail = emailRegex.test(data.email || '');
+      return Boolean(data.name && isValidEmail && data.phone && data.country);
+    }
+    if (step === 1) {
+      const isValidWebsite = !data.website || data.website.startsWith('https://');
+      return Boolean(data.company && data.message && isValidWebsite);
+    }
     if (step === 2) return Boolean((data.services && data.services.length > 0) && data.budget && data.timeframe);
     return false;
   }, [step, data]);
@@ -409,6 +459,8 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
                   value={data.phone ?? ''}
                   onChange={handlePhoneInputChange}
                   onKeyDown={handlePhoneKeyDown}
+                  onFocus={() => { isPhoneFocused.current = true; }}
+                  onBlur={() => { isPhoneFocused.current = false; }}
                   placeholder={phonePlaceholder}
                 />
               </div>
