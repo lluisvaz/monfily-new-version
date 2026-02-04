@@ -15,7 +15,7 @@ export function Hero() {
   const { language } = useLanguage();
   const t = translations[language];
   return (
-    <SectionLayout 
+    <SectionLayout
       showStripes={false}
       className="grid grid-cols-1 lg:grid-cols-2 gap-12 px-6 md:px-16 lg:px-28 py-12 md:py-20 min-h-[500px] md:min-h-[600px] items-center relative overflow-x-hidden"
     >
@@ -36,7 +36,7 @@ export function Hero() {
       `}</style>
       {/* Gradient Effect - Desktop Only */}
       <div className="hidden lg:block absolute bottom-0 right-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
-        <div 
+        <div
           className="absolute bottom-0 right-0 w-full h-full"
           style={{
             background: 'radial-gradient(ellipse 100% 150% at bottom right, #2869D6 0%, #2869D6 20%, rgba(40, 105, 214, 0.9) 30%, rgba(40, 105, 214, 0.7) 40%, rgba(40, 105, 214, 0.5) 48%, rgba(40, 105, 214, 0.3) 55%, rgba(40, 105, 214, 0.15) 62%, rgba(255, 255, 255, 0.8) 70%, white 80%, white 100%)'
@@ -47,7 +47,7 @@ export function Hero() {
 
       {/* Gradient Effect - Mobile Only (Bottom Center) */}
       <div className="lg:hidden absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-3/4 pointer-events-none" style={{ zIndex: 0 }}>
-        <div 
+        <div
           className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-full"
           style={{
             background: 'radial-gradient(ellipse 120% 100% at bottom center, #2869D6 0%, #2869D6 20%, rgba(40, 105, 214, 0.9) 30%, rgba(40, 105, 214, 0.7) 40%, rgba(40, 105, 214, 0.5) 48%, rgba(40, 105, 214, 0.3) 55%, rgba(40, 105, 214, 0.15) 62%, rgba(255, 255, 255, 0.8) 70%, white 80%, white 100%)'
@@ -58,34 +58,34 @@ export function Hero() {
       {/* Left Content */}
       <div className="flex flex-col justify-center items-start space-y-6 md:space-y-8 w-full relative lg:pb-0 pb-[240px] md:pb-[280px]" style={{ zIndex: 1 }}>
         {/* Badge */}
-        <div 
+        <div
           className="inline-flex items-center gap-2 rounded-full pl-1 pr-4 py-1 border border-[#E2E7F1] hero-blur-animate"
           style={{ animationDelay: '0.1s', opacity: 0 }}
         >
           <div className="rounded-full p-1 border border-[#E2E7F1]">
             <div className="flex -space-x-2 overflow-hidden">
               {/* Avatars */}
-              <img 
-                src="https://framerusercontent.com/images/E3vzjdpFuSWiVeurdyPGMrSWk.png?scale-down-to=512&width=1200&height=992" 
-                alt="Founder 1" 
+              <img
+                src="https://framerusercontent.com/images/E3vzjdpFuSWiVeurdyPGMrSWk.png?scale-down-to=64"
+                alt="Founder 1"
                 className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover select-none"
                 draggable="false"
                 onContextMenu={(e) => e.preventDefault()}
                 onDragStart={(e) => e.preventDefault()}
                 style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
               />
-              <img 
-                src="https://framerusercontent.com/images/jC7KwluILkhO0KHxk6qWEttOxhE.png?scale-down-to=512&width=1200&height=1200" 
-                alt="Founder 2" 
+              <img
+                src="https://framerusercontent.com/images/jC7KwluILkhO0KHxk6qWEttOxhE.png?scale-down-to=64"
+                alt="Founder 2"
                 className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover select-none"
                 draggable="false"
                 onContextMenu={(e) => e.preventDefault()}
                 onDragStart={(e) => e.preventDefault()}
                 style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
               />
-              <img 
-                src="https://framerusercontent.com/images/cFl24iPInxckRrL32eRgadp9ZJM.png?scale-down-to=512&width=1200&height=1200" 
-                alt="Founder 3" 
+              <img
+                src="https://framerusercontent.com/images/cFl24iPInxckRrL32eRgadp9ZJM.png?scale-down-to=64"
+                alt="Founder 3"
                 className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover select-none"
                 draggable="false"
                 onContextMenu={(e) => e.preventDefault()}
@@ -94,9 +94,9 @@ export function Hero() {
               />
             </div>
           </div>
-          <span 
+          <span
             className="text-xs text-[#1C1C1E]"
-            style={{ 
+            style={{
               fontFamily: 'Fustat-Bold, sans-serif',
               fontWeight: 'normal'
             }}
@@ -109,7 +109,7 @@ export function Hero() {
               showCursor={true}
               cursorCharacter="|"
               as="span"
-              style={{ 
+              style={{
                 fontFamily: 'Fustat-Bold, sans-serif',
                 fontWeight: 'normal'
               }}
@@ -118,10 +118,10 @@ export function Hero() {
         </div>
 
         {/* Heading */}
-        <h1 
+        <h1
           className="text-[48px] md:text-7xl leading-none text-[#1C1C1E] hero-blur-animate"
-          style={{ 
-            animationDelay: '0.2s', 
+          style={{
+            animationDelay: '0.2s',
             opacity: 0,
             fontFamily: 'Fustat-Bold, sans-serif',
             fontWeight: 'normal',
@@ -135,7 +135,7 @@ export function Hero() {
         </h1>
 
         {/* Description */}
-        <p 
+        <p
           className="text-base md:text-lg text-[#1C1C1E] max-w-md leading-tight hero-blur-animate"
           style={{ animationDelay: '0.3s', opacity: 0 }}
         >
@@ -159,11 +159,11 @@ export function Hero() {
         </p>
 
         {/* CTAs */}
-        <div 
+        <div
           className="flex flex-col sm:flex-row items-center gap-6 pt-2 w-full hero-blur-animate"
           style={{ animationDelay: '0.4s', opacity: 0 }}
         >
-          <SpotlightButton 
+          <SpotlightButton
             onClick={() => {
               const el = document.getElementById('contato');
               const scrollInstance = (window as any).locomotiveScroll;
@@ -187,7 +187,7 @@ export function Hero() {
         </div>
 
         {/* Features */}
-        <div 
+        <div
           className="hidden md:grid grid-cols-2 gap-8 pt-8 w-full max-w-lg hero-blur-animate"
           style={{ animationDelay: '0.5s', opacity: 0 }}
         >
@@ -196,9 +196,9 @@ export function Hero() {
               <BoltIcon className="w-5 h-5 fill-current" />
             </div>
             <div>
-              <h3 
+              <h3
                 className="text-[#1C1C1E] text-sm"
-                style={{ 
+                style={{
                   fontFamily: 'Fustat-Bold, sans-serif',
                   fontWeight: 'normal'
                 }}
@@ -214,9 +214,9 @@ export function Hero() {
               <RocketLaunchIcon className="w-5 h-5 fill-current" />
             </div>
             <div>
-              <h3 
+              <h3
                 className="text-[#1C1C1E] text-sm"
-                style={{ 
+                style={{
                   fontFamily: 'Fustat-Bold, sans-serif',
                   fontWeight: 'normal'
                 }}
@@ -230,8 +230,8 @@ export function Hero() {
       </div>
 
       {/* Right Content (Website Mockup) */}
-      <div 
-        className="relative hidden lg:block h-full min-h-[400px] hero-blur-animate" 
+      <div
+        className="relative hidden lg:block h-full min-h-[400px] hero-blur-animate"
         style={{ zIndex: 1, animationDelay: '0.6s', opacity: 0 }}
       >
         {/* Website Mockup */}
@@ -240,7 +240,7 @@ export function Hero() {
         </div>
         {/* iPhone Mockup - Overlay */}
         <div className="website-mockup-iphone absolute bottom-0" style={{ left: '40px', transform: 'translateX(-50%)', zIndex: 50, filter: 'drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15))', userSelect: 'none', pointerEvents: 'none' }}>
-          <Iphone16Pro 
+          <Iphone16Pro
             width={220}
             height={420}
             showIsland={true}
@@ -258,8 +258,8 @@ export function Hero() {
       </div>
 
       {/* Mobile Mockups - Visible only on mobile, positioned at bottom */}
-      <div 
-        className="lg:hidden absolute bottom-0 left-0 right-0 w-screen flex justify-center items-end overflow-hidden pointer-events-none hero-blur-animate" 
+      <div
+        className="lg:hidden absolute bottom-0 left-0 right-0 w-screen flex justify-center items-end overflow-hidden pointer-events-none hero-blur-animate"
         style={{ zIndex: 1, left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw', animationDelay: '0.6s', opacity: 0 }}
       >
         <div className="relative" style={{ transform: 'scale(0.55)', transformOrigin: 'bottom center', pointerEvents: 'none', userSelect: 'none' }}>
@@ -269,7 +269,7 @@ export function Hero() {
           </div>
           {/* iPhone Mockup - Overlay (maintaining desktop position relative to WebsiteMockup) */}
           <div className="absolute bottom-0" style={{ left: '40px', transform: 'translateX(-50%)', zIndex: 50, filter: 'drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15))' }}>
-            <Iphone16Pro 
+            <Iphone16Pro
               width={220}
               height={420}
               showIsland={true}

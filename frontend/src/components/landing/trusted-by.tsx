@@ -14,7 +14,7 @@ const BoneDivider = () => (
     >
       <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
     </svg>
-    
+
     {/* Bottom Flare */}
     <svg
       viewBox="0 0 20 10"
@@ -28,13 +28,13 @@ const BoneDivider = () => (
 );
 
 const logoUrls = [
-  "https://res.cloudinary.com/dopp0v9eq/image/upload/v1763560672/docker_logo_tezv1k.png",
-  "https://res.cloudinary.com/dopp0v9eq/image/upload/v1763560672/terraform_logo_zpfnxm.png",
-  "https://res.cloudinary.com/dopp0v9eq/image/upload/v1763560672/datadog_logo_llg8kx.png",
-  "https://res.cloudinary.com/dopp0v9eq/image/upload/v1763560672/digitalocean_logo_e8sdqh.png",
-  "https://res.cloudinary.com/dopp0v9eq/image/upload/v1763560672/aws_amazon_web_services_logo_wcepsv.png",
-  "https://res.cloudinary.com/dopp0v9eq/image/upload/v1763560672/azure_logo_pcpoq8.png",
-  "https://res.cloudinary.com/dopp0v9eq/image/upload/v1763560672/dynatrace_logo_ab5ntw.png"
+  "https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,h_96/v1763560672/docker_logo_tezv1k.png",
+  "https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,h_96/v1763560672/terraform_logo_zpfnxm.png",
+  "https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,h_96/v1763560672/datadog_logo_llg8kx.png",
+  "https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,h_96/v1763560672/digitalocean_logo_e8sdqh.png",
+  "https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,h_96/v1763560672/aws_amazon_web_services_logo_wcepsv.png",
+  "https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,h_96/v1763560672/azure_logo_pcpoq8.png",
+  "https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,h_96/v1763560672/dynatrace_logo_ab5ntw.png"
 ];
 
 const LogoCarousel = () => {
@@ -44,7 +44,7 @@ const LogoCarousel = () => {
   useEffect(() => {
     const carousel = carouselRef.current;
     const scroll = scrollRef.current;
-    
+
     if (!carousel || !scroll) return;
 
     // Clone logos for infinite scroll
@@ -62,13 +62,13 @@ const LogoCarousel = () => {
 
     const animate = () => {
       position -= pixelsPerFrame;
-      
+
       // Reset position when first set of logos completely scrolls out
       const scrollWidth = scroll.scrollWidth / 2;
       if (Math.abs(position) >= scrollWidth) {
         position = 0;
       }
-      
+
       scroll.style.transform = `translateX(${position}px)`;
     };
 
@@ -78,7 +78,7 @@ const LogoCarousel = () => {
   }, []);
 
   return (
-    <div 
+    <div
       ref={carouselRef}
       className="relative overflow-hidden w-full max-w-full select-none trusted-blur-animate"
       style={{
@@ -94,11 +94,11 @@ const LogoCarousel = () => {
       onContextMenu={(e) => e.preventDefault()}
       onDragStart={(e) => e.preventDefault()}
     >
-      <div 
+      <div
         ref={scrollRef}
         className="flex items-center whitespace-nowrap select-none"
-        style={{ 
-          transform: 'translateX(0px)', 
+        style={{
+          transform: 'translateX(0px)',
           padding: '0 2rem',
           userSelect: 'none',
           WebkitUserSelect: 'none',
@@ -109,8 +109,8 @@ const LogoCarousel = () => {
         onDragStart={(e) => e.preventDefault()}
       >
         {logoUrls.map((url, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className="flex items-center justify-center px-6 flex-shrink-0 select-none"
             style={{
               userSelect: 'none',
@@ -125,8 +125,8 @@ const LogoCarousel = () => {
               src={url}
               alt={`Logo ${index + 1}`}
               className="h-12 max-h-12 object-contain w-auto select-none pointer-events-none"
-              style={{ 
-                maxWidth: '120px', 
+              style={{
+                maxWidth: '120px',
                 height: '48px',
                 userSelect: 'none',
                 WebkitUserSelect: 'none',
@@ -171,7 +171,7 @@ export function TrustedBy() {
       <SectionLayout className="flex flex-col md:hidden px-6 py-[24px]">
         <div className="flex flex-col w-full">
           {/* Text Label */}
-          <div 
+          <div
             className="mb-6 flex items-center justify-center trusted-blur-animate"
             style={{ animationDelay: '0.9s', opacity: 0 }}
           >
@@ -179,7 +179,7 @@ export function TrustedBy() {
               {t.trustedBy.label}
             </p>
           </div>
-          
+
           {/* Logo Carousel */}
           <div className="flex items-center justify-center overflow-hidden">
             <div className="w-full max-w-full">
@@ -192,7 +192,7 @@ export function TrustedBy() {
       {/* Desktop Section */}
       <SectionLayout className="hidden md:flex flex-col md:flex-row items-stretch">
         {/* Left Side: Text Label */}
-        <div 
+        <div
           className="w-full md:w-[220px] p-[24px] md:p-[32px] border-b md:border-b-0 border-[#E2E7F1] flex items-center justify-center trusted-blur-animate"
           style={{ animationDelay: '0.9s', opacity: 0 }}
         >
