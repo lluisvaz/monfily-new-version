@@ -10,7 +10,7 @@ coverage/
 
 # Production builds
 dist/
-/public/
+public/
 build/
 *.tsbuildinfo
 
