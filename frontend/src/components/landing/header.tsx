@@ -221,7 +221,7 @@ export function Header() {
           </SheetTrigger>
           <SheetContent 
             side="right" 
-            className="w-full sm:w-[400px] p-0 bg-white overflow-y-auto [&>button]:!hidden !z-[100000]"
+            className="w-full sm:w-[400px] p-0 bg-white overflow-y-auto [&>button]:!hidden !z-[9999]"
           >
             <VisuallyHiddenPrimitive.Root>
               <SheetTitle>{t.header.nav.menu}</SheetTitle>
@@ -339,7 +339,7 @@ export function Header() {
                 background: rgba(255, 255, 255, 0.3) !important;
                 backdrop-filter: blur(12px) saturate(180%) !important;
                 -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
-                z-index: 99998 !important;
+                z-index: 9998 !important;
               }
               /* Reduzir z-index das linhas laterais e grid quando sidebar aberto */
               [data-radix-dialog-overlay][data-state="open"] ~ * [id="section-main-content"],
@@ -353,7 +353,7 @@ export function Header() {
                 --section-grid-z: 1 !important;
               }
               [data-radix-dialog-content] {
-                z-index: 100000 !important;
+                z-index: 9999 !important;
                 position: fixed !important;
               }
               /* Animação minimalista de fechamento */
@@ -365,7 +365,7 @@ export function Header() {
               }
               /* Garantir que o SheetPortal renderize acima de tudo */
               [data-radix-portal] {
-                z-index: 100000 !important;
+                z-index: 9999 !important;
               }
               /* Esconder o botão X padrão do SheetContent */
               [data-radix-dialog-content] > button[data-radix-dialog-close] {
@@ -393,16 +393,16 @@ export function Header() {
                 <div className="absolute top-0 bottom-0 right-0 w-[0.5px] bg-[#E2E7F1] pointer-events-none" style={{ zIndex: 1000 }}></div>
                 
                 {/* Grid Decorations at Header Bottom Corners (where vertical lines meet header bottom border) */}
-                <div className="absolute pointer-events-none" style={{ top: '96px', left: 0, right: 0, zIndex: 99999 }}>
+                <div className="absolute pointer-events-none" style={{ top: '96px', left: 0, right: 0, zIndex: 9995 }}>
                   {/* Left grid decoration */}
-                  <div className="absolute w-6 h-6 flex items-center justify-center pointer-events-none" style={{ left: '-12px', top: '-12px', zIndex: 99999 }}>
+                  <div className="absolute w-6 h-6 flex items-center justify-center pointer-events-none" style={{ left: '-12px', top: '-12px', zIndex: 9995 }}>
                     <div className="absolute w-4 h-4 bg-white rounded-full" />
                     <svg viewBox="0 0 24 24" className="w-full h-full fill-[#E2E7F1] relative z-10">
                       <path d="M12 2C12 2 14 10 22 12C14 14 12 22 12 22C12 22 10 14 2 12C10 10 12 2 12 2Z" />
                     </svg>
                   </div>
                   {/* Right grid decoration */}
-                  <div className="absolute w-6 h-6 flex items-center justify-center pointer-events-none" style={{ right: '-12px', top: '-12px', zIndex: 99999 }}>
+                  <div className="absolute w-6 h-6 flex items-center justify-center pointer-events-none" style={{ right: '-12px', top: '-12px', zIndex: 9995 }}>
                     <div className="absolute w-4 h-4 bg-white rounded-full" />
                     <svg viewBox="0 0 24 24" className="w-full h-full fill-[#E2E7F1] relative z-10">
                       <path d="M12 2C12 2 14 10 22 12C14 14 12 22 12 22C12 22 10 14 2 12C10 10 12 2 12 2Z" />

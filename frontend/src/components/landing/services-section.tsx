@@ -10,7 +10,7 @@ import { SpotlightButton } from "@/components/ui/spotlight-button";
 import LeadForm from "@/components/forms/lead-form";
 
 const GridDecoration = ({ className }: { className?: string }) => (
-  <div className={`absolute w-6 h-6 flex items-center justify-center pointer-events-none ${className}`} style={{ zIndex: 'var(--section-grid-z, 9999)' }}>
+  <div className={`absolute w-6 h-6 flex items-center justify-center pointer-events-none ${className}`} style={{ zIndex: 'var(--section-grid-z, 9990)' }}>
     {/* White background to mask the lines crossing behind it for a cleaner look */}
     <div className="absolute w-4 h-4 bg-white rounded-full" />
 
@@ -1058,7 +1058,7 @@ const SolutionsSuiteSection = () => {
               left: '6px',
               top: '0',
               transform: 'translateY(-50%) translateX(-50%) rotate(-90deg)',
-              zIndex: 30
+              zIndex: 9990
             }}
           >
             <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
@@ -1073,7 +1073,7 @@ const SolutionsSuiteSection = () => {
               left: '33.333%',
               top: '0',
               transform: 'translateX(-50%)',
-              zIndex: 30
+              zIndex: 9990
             }}
           >
             <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
@@ -1087,7 +1087,7 @@ const SolutionsSuiteSection = () => {
               left: '66.666%',
               top: '0',
               transform: 'translateX(-50%)',
-              zIndex: 30
+              zIndex: 9990
             }}
           >
             <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
@@ -1102,7 +1102,7 @@ const SolutionsSuiteSection = () => {
               right: '6px',
               top: '0',
               transform: 'translateY(-50%) translateX(50%) rotate(90deg)',
-              zIndex: 30
+              zIndex: 9990
             }}
           >
             <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
@@ -1117,7 +1117,7 @@ const SolutionsSuiteSection = () => {
               left: '6px',
               top: '320px',
               transform: 'translateY(-50%) translateX(-50%) rotate(-90deg)',
-              zIndex: 30
+              zIndex: 9990
             }}
           >
             <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
@@ -1134,7 +1134,7 @@ const SolutionsSuiteSection = () => {
               right: '6px',
               top: '320px',
               transform: 'translateY(-50%) translateX(50%) rotate(90deg)',
-              zIndex: 30
+              zIndex: 9990
             }}
           >
             <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
@@ -1151,7 +1151,7 @@ const SolutionsSuiteSection = () => {
               left: '33.333%',
               bottom: '0',
               transform: 'translateX(-50%) rotate(180deg)',
-              zIndex: 30
+              zIndex: 9990
             }}
           >
             <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
@@ -1164,7 +1164,7 @@ const SolutionsSuiteSection = () => {
               left: '66.666%',
               bottom: '0',
               transform: 'translateX(-50%) rotate(180deg)',
-              zIndex: 30
+              zIndex: 9990
             }}
           >
             <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
@@ -1173,12 +1173,7 @@ const SolutionsSuiteSection = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 bg-white">
             {cards.map((card, index) => (
-              <SpotlightCard
-                key={index}
-                className={`flex flex-col relative ${isVisible ? 'services-blur-animate' : ''} ${index < 2 ? 'border-b md:border-b-0 border-[#E2E7F1]' : ''}`}
-                style={{ animationDelay: `${0.3 + index * 0.1}s`, opacity: 0 }}
-                spotlightColor="rgba(255, 255, 255, 0.2)"
-              >
+              <div key={index} className="relative flex flex-col">
                 {/* Mobile flares for stacked cards */}
                 {index > 0 && (
                   <>
@@ -1190,7 +1185,7 @@ const SolutionsSuiteSection = () => {
                         left: '6px',
                         top: '0',
                         transform: 'translateY(-50%) translateX(-50%) rotate(-90deg)',
-                        zIndex: 30
+                        zIndex: 9990
                       }}
                     >
                       <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
@@ -1203,13 +1198,18 @@ const SolutionsSuiteSection = () => {
                         right: '6px',
                         top: '0',
                         transform: 'translateY(-50%) translateX(50%) rotate(90deg)',
-                        zIndex: 30
+                        zIndex: 9990
                       }}
                     >
                       <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
                     </svg>
                   </>
                 )}
+                <SpotlightCard
+                  className={`flex-1 flex flex-col relative ${isVisible ? 'services-blur-animate' : ''} ${index < 2 ? 'border-b md:border-b-0 border-[#E2E7F1]' : ''}`}
+                  style={{ animationDelay: `${0.3 + index * 0.1}s`, opacity: 0 }}
+                  spotlightColor="rgba(255, 255, 255, 0.2)"
+                >
                 {/* Card Image/Icon Area */}
                 <div className="h-64 md:h-80 relative overflow-hidden bg-[#FAFBFC]">
                   {/* Background Grid */}
@@ -1254,6 +1254,7 @@ const SolutionsSuiteSection = () => {
                   </p>
                 </div>
               </SpotlightCard>
+              </div>
             ))}
           </div>
         </div>
