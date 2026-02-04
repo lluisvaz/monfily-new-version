@@ -3,13 +3,13 @@ import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
 
 const imageUrls = [
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_400/v1763726833/imagem1_gokahh.jpg',
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_400/v1763726833/imagem2_c6lkic.jpg',
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_400/v1763726833/imagem3_s0n4gs.jpg',
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_400/v1763726834/imagem4_ayub82.jpg',
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_400/v1763726834/imagem5_manctr.jpg',
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_400/v1763726833/imagem6_wdflq9.jpg',
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_400/v1763726834/imagem7_n4u7u6.jpg'
+  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_250/v1763726833/imagem1_gokahh.jpg',
+  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_250/v1763726833/imagem2_c6lkic.jpg',
+  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_250/v1763726833/imagem3_s0n4gs.jpg',
+  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_250/v1763726834/imagem4_ayub82.jpg',
+  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_250/v1763726834/imagem5_manctr.jpg',
+  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_250/v1763726833/imagem6_wdflq9.jpg',
+  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_250/v1763726834/imagem7_n4u7u6.jpg'
 ];
 
 export function WebsiteMockup() {

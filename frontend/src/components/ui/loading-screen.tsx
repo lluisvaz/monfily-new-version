@@ -153,16 +153,16 @@ export function LoadingScreen() {
 
       <div className={`loading-overlay ${isFadingOut ? 'fade-out' : ''}`}>
         <div className="loading-container">
-          <img 
-            src="https://res.cloudinary.com/dopp0v9eq/image/upload/v1763574787/monfily-black-nobg_risk6t.png" 
-            alt="Monfily" 
+          <img
+            src="https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_120/v1763574787/monfily-black-nobg_risk6t.png"
+            alt="Monfily"
             className="project-logo"
             draggable="false"
           />
-          
+
           <div className="progress-track">
-            <div 
-              className="progress-bar" 
+            <div
+              className="progress-bar"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
