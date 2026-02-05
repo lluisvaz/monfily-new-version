@@ -65,12 +65,12 @@ function App() {
           const element = document.getElementById(id);
           
           if (element) {
-            // Se o Locomotive Scroll estiver ativo, usamos a API dele
-            const scrollInstance = (window as any).locomotiveScroll;
-            if (scrollInstance) {
-              scrollInstance.scrollTo(element, {
-                duration: 1000,
-                easing: [0.25, 0.00, 0.35, 1.00]
+            // Se o Lenis estiver ativo, usamos a API dele
+            const lenis = (window as any).lenis;
+            if (lenis) {
+              lenis.scrollTo(element, {
+                duration: 1,
+                easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
               });
             } else {
               // Fallback para scroll nativo suave
