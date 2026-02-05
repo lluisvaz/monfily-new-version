@@ -5,9 +5,9 @@ import { ServicesSection } from "@/components/landing/services-section";
 import { SEOHead } from "@/components/seo-head";
 import { useEffect, useRef, useState } from 'react';
 import GradualBlur from '@/components/ui/gradual-blur';
+import Lenis from 'lenis';
 
 export default function Home() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const [footerVisible, setFooterVisible] = useState(false);
 
   useEffect(() => {
@@ -26,75 +26,48 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    let scroll: any;
-    let cancelled = false;
-    let resizeObserver: ResizeObserver | null = null;
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+    });
 
-    (async () => {
-      try {
-        const LocomotiveScroll = (await import('locomotive-scroll')).default as any;
-        if (!cancelled && containerRef.current) {
-          scroll = new LocomotiveScroll({
-            el: containerRef.current,
-            smooth: true,
-            multiplier: 1,
-            lerp: 0.1,
-            smartphone: { smooth: true },
-            tablet: { smooth: true },
-          });
+    // Expose lenis instance globally for use in other components
+    (window as any).lenis = lenis;
 
-          // Expose scroll instance globally for use in other components
-          (window as any).locomotiveScroll = scroll;
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
 
-          // Force update after a short delay to ensure initial height is correct
-          setTimeout(() => {
-            scroll.update();
-          }, 1000);
-
-          // Update on resize
-          resizeObserver = new ResizeObserver(() => {
-            scroll.update();
-          });
-          resizeObserver.observe(containerRef.current);
-
-          // Update on image load
-          const images = containerRef.current.querySelectorAll('img');
-          images.forEach(img => {
-            img.addEventListener('load', () => scroll.update());
-          });
-        }
-      } catch (e) {
-        console.warn('LocomotiveScroll failed to init:', e);
-      }
-    })();
+    requestAnimationFrame(raf);
 
     return () => {
-      cancelled = true;
-      if (scroll && typeof scroll.destroy === 'function') {
-        scroll.destroy();
-        (window as any).locomotiveScroll = undefined;
-      }
-      if (resizeObserver) {
-        resizeObserver.disconnect();
-      }
+      lenis.destroy();
+      (window as any).lenis = undefined;
     };
   }, []);
 
   return (
     <>
-      <div className="min-h-screen bg-white font-sans" data-scroll-container ref={containerRef}>
+      <div className="min-h-screen bg-white font-sans">
       <SEOHead />
-      <section data-scroll-section>
+      <section>
         <Header />
       </section>
       <main>
-        <section data-scroll-section>
+        <section>
           <Hero />
         </section>
-        <section data-scroll-section>
+        <section>
           <TrustedBy />
         </section>
-        <section data-scroll-section id="servicos">
+        <section id="servicos">
           <ServicesSection />
         </section>
       </main>
