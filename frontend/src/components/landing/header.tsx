@@ -62,7 +62,7 @@ export function Header() {
   };
 
   return (
-    <SectionLayout className="flex items-center justify-between px-4 md:px-[32px] h-24 relative z-[2000] min-w-0">
+    <SectionLayout className="flex items-center justify-between px-4 md:px-[32px] h-24 relative z-[40] min-w-0">
       <style>{`
         @keyframes blurText {
           0% {
