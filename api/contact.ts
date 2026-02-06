@@ -26,10 +26,15 @@ function createTransporter() {
     const pass = process.env.EMAIL_PASS;
 
     if (!host || !user || !pass) {
-        console.error("Missing email configuration:", { host, user, pass: pass ? "set" : "missing" });
-        throw new Error("Email configuration is missing");
+        console.error("Missing email configuration:", { 
+            host: host ? "ok" : "missing", 
+            user: user ? "ok" : "missing", 
+            pass: pass ? "set" : "missing" 
+        });
+        throw new Error("Configuração de e-mail ausente no servidor");
     }
 
+    console.log("Creating transporter for:", host, port);
     return nodemailer.createTransport({
         host,
         port,
@@ -40,8 +45,15 @@ function createTransporter() {
 }
 
 async function sendLeadEmails(data: LeadFormData) {
+    console.log("Preparing to send emails for lead:", data.email);
     const transporter = createTransporter();
     const adminEmail = process.env.RECEIVER_EMAIL;
+    
+    if (!adminEmail) {
+        console.error("RECEIVER_EMAIL not set");
+        throw new Error("E-mail de destino não configurado");
+    }
+
     const currentYear = new Date().getFullYear();
 
     const serviceLabels: Record<string, string> = {
@@ -73,8 +85,10 @@ async function sendLeadEmails(data: LeadFormData) {
 
     let countryName = data.country;
     try {
-        const regionNames = new Intl.DisplayNames(['pt'], { type: 'region' });
-        countryName = regionNames.of(data.country) || data.country;
+        if (typeof Intl !== 'undefined' && (Intl as any).DisplayNames) {
+            const regionNames = new Intl.DisplayNames(['pt'], { type: 'region' });
+            countryName = regionNames.of(data.country) || data.country;
+        }
     } catch (e) {
         console.error("Error formatting country name:", e);
     }
@@ -277,23 +291,31 @@ async function sendLeadEmails(data: LeadFormData) {
 </body>
 </html>`;
 
-    await Promise.all([
-        transporter.sendMail({
-            from: `"Monfily Website" <${process.env.EMAIL_USER}>`,
-            to: adminEmail,
-            subject: `Novo Lead: ${data.name} - ${data.company}`,
-            html: adminHtml,
-        }),
-        transporter.sendMail({
-            from: `"Monfily Digital" <${process.env.EMAIL_USER}>`,
-            to: data.email,
-            subject: t.subject,
-            html: leadHtml,
-        }),
-    ]);
+    console.log("Sending both emails...");
+    try {
+        await Promise.all([
+            transporter.sendMail({
+                from: `"Monfily Website" <${process.env.EMAIL_USER}>`,
+                to: adminEmail,
+                subject: `Novo Lead: ${data.name} - ${data.company}`,
+                html: adminHtml,
+            }),
+            transporter.sendMail({
+                from: `"Monfily Digital" <${process.env.EMAIL_USER}>`,
+                to: data.email,
+                subject: t.subject,
+                html: leadHtml,
+            }),
+        ]);
+        console.log("All emails sent successfully");
+    } catch (mailError) {
+        console.error("Error in transporter.sendMail:", mailError);
+        throw mailError;
+    }
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+    console.log(`[${new Date().toISOString()}] Incoming request: ${req.method} ${req.url}`);
     // Enable CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -308,9 +330,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     try {
-        console.log("Received contact form submission:", req.body);
+        let body = req.body;
+        if (Buffer.isBuffer(body)) {
+            body = body.toString('utf8');
+        }
+        if (typeof body === 'string') {
+            try {
+                body = JSON.parse(body);
+            } catch (e) {
+                console.error("Failed to parse body as JSON:", body);
+            }
+        }
+        console.log("Received contact form submission:", body);
 
-        const result = leadFormSchema.safeParse(req.body);
+        const result = leadFormSchema.safeParse(body);
         if (!result.success) {
             console.warn("Validation failed:", result.error.errors);
             return res.status(400).json({
@@ -319,9 +352,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             });
         }
 
-        console.log("Sending emails for lead:", result.data.email);
+        console.log("Lead data validated for:", result.data.email);
         await sendLeadEmails(result.data);
-        console.log("Emails sent successfully");
 
         return res.status(200).json({ message: "Formulário enviado com sucesso" });
     } catch (error) {
