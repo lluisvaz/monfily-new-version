@@ -69,7 +69,11 @@ const copy = {
       submit: 'Enviar'
     },
     error: 'Ops! Ocorreu um erro ao tentar enviar o formulário. Tente novamente.',
-    success: 'Pronto! Recebemos seus dados.'
+    success: 'Pronto! Recebemos seus dados.',
+    rateLimit: {
+      email: 'Este e-mail já enviou um formulário nas últimas 24 horas.',
+      device: 'Limite de envios excedido para este dispositivo. O envio está bloqueado por 15 dias para evitar abusos.',
+    }
   },
   en: {
     title: 'Start your project',
@@ -113,7 +117,11 @@ const copy = {
       submit: 'Send'
     },
     error: 'Oops! An error occurred while trying to send the form. Please try again.',
-    success: 'Done! We received your info.'
+    success: 'Done! We received your info.',
+    rateLimit: {
+      email: 'This email has already submitted a form in the last 24 hours.',
+      device: 'Submission limit exceeded for this device. Sending is blocked for 15 days to prevent abuse.',
+    }
   }
 } as const;
 
@@ -148,6 +156,7 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState(false);
+  const [rateLimitError, setRateLimitError] = useState<string | null>(null);
   const [data, setData] = useState<LeadFormData>(initialData);
   const [isCountryOpen, setIsCountryOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -362,6 +371,41 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
     try {
       setSubmitting(true);
       setError(false);
+      setRateLimitError(null);
+
+      // --- Rate Limiting Logic ---
+      const now = Date.now();
+      const fifteenDaysInMs = 15 * 24 * 60 * 60 * 1000;
+      const twentyFourHoursInMs = 24 * 60 * 60 * 1000;
+
+      // 1. Device Block Check
+      const blockedUntil = localStorage.getItem('monfily_blocked_until');
+      if (blockedUntil && parseInt(blockedUntil) > now) {
+        setRateLimitError(t.rateLimit.device);
+        setSubmitting(false);
+        return;
+      }
+
+      // 2. Email Limit Check (24h)
+      const lastSubmissions = JSON.parse(localStorage.getItem('monfily_email_submissions') || '{}');
+      const lastEmailTime = lastSubmissions[data.email];
+      if (lastEmailTime && (now - lastEmailTime) < twentyFourHoursInMs) {
+        setRateLimitError(t.rateLimit.email);
+        setSubmitting(false);
+        return;
+      }
+
+      // 3. Device Frequency Check (> 3 in 15 days)
+      const deviceTimestamps: number[] = JSON.parse(localStorage.getItem('monfily_device_submissions') || '[]');
+      const recentSubmissions = deviceTimestamps.filter(ts => (now - ts) < fifteenDaysInMs);
+      
+      if (recentSubmissions.length >= 3) {
+        localStorage.setItem('monfily_blocked_until', (now + fifteenDaysInMs).toString());
+        setRateLimitError(t.rateLimit.device);
+        setSubmitting(false);
+        return;
+      }
+      // --- End Rate Limiting Logic ---
       
       if (onSubmit) {
         await onSubmit(data);
@@ -377,12 +421,24 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}));
           console.error('Server validation error details:', errorData);
+          if (response.status === 429) {
+            setRateLimitError(errorData.message || t.rateLimit.email);
+            setSubmitting(false);
+            return;
+          }
           throw new Error(errorData.message || 'Failed to submit form');
         }
 
         const result = await response.json();
         console.log('Form submission successful:', result);
       }
+
+      // Update Rate Limiting Data on Success
+      const updatedEmailSubmissions = { ...lastSubmissions, [data.email]: now };
+      localStorage.setItem('monfily_email_submissions', JSON.stringify(updatedEmailSubmissions));
+      
+      const updatedDeviceSubmissions = [...recentSubmissions, now];
+      localStorage.setItem('monfily_device_submissions', JSON.stringify(updatedDeviceSubmissions));
       
       setDone(true);
       
@@ -686,10 +742,12 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
       )}
     </div>
     
-    {error && (
-      <div className="mt-4 flex items-center justify-center gap-2 text-red-500 animate-in fade-in slide-in-from-top-2 duration-300">
-        <WarningCircle className="w-5 h-5" />
-        <span className="text-sm font-medium">{t.error}</span>
+    {(error || rateLimitError) && (
+      <div className="mt-4 flex items-center justify-center gap-2 text-red-500 animate-in fade-in slide-in-from-top-2 duration-300 text-center max-w-sm mx-auto">
+        <div className="flex-shrink-0">
+          <WarningCircle className="w-5 h-5" />
+        </div>
+        <span className="text-sm font-medium">{rateLimitError || t.error}</span>
       </div>
     )}
   </div>

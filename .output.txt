@@ -1,0 +1,490 @@
+Get-ChildItem : Não foi possível localizar uma parte do caminho
+'C:\Users\lluis\OneDrive\Área de
+Trabalho\monfily-new-version\node_modules\@monfily\backend'.
+No linha:1 caractere:1
++ Get-ChildItem -Recurse -Exclude "node_modules" | Select-String -Patte ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ReadError: (C:\Users\lluis\...monfily\backend:St
+   ring) [Get-ChildItem], DirectoryNotFoundException
+    + FullyQualifiedErrorId : DirIOError,Microsoft.PowerShell.Commands.GetChil
+   dItemCommand
+
+node_modules\drizzle-kit\api.js:80526:function drizzle(...params) {
+node_modules\drizzle-kit\api.js:155264:const db = drizzle(client);
+node_modules\drizzle-kit\api.mjs:80530:function drizzle(...params) {
+node_modules\drizzle-kit\api.mjs:155264:const db = drizzle(client);
+node_modules\drizzle-kit\bin.cjs:80498:          const db = drizzle(rdsClient,
+config);
+node_modules\drizzle-kit\bin.cjs:80548:          const drzl = drizzle(pglite);
+node_modules\drizzle-kit\bin.cjs:80617:        const db = drizzle(client);
+node_modules\drizzle-kit\bin.cjs:80676:        const db = drizzle(client);
+node_modules\drizzle-kit\bin.cjs:80739:        const db = drizzle(client);
+node_modules\drizzle-kit\bin.cjs:80818:        const db = drizzle(client);
+node_modules\drizzle-kit\bin.cjs:80955:        const db = drizzle(connection);
+node_modules\drizzle-kit\bin.cjs:81028:        const db = drizzle(connection);
+node_modules\drizzle-kit\bin.cjs:81085:        const db = drizzle(connection);
+node_modules\drizzle-kit\bin.cjs:81207:          const drzl =
+drizzle(remoteCallback);
+node_modules\drizzle-kit\bin.cjs:81253:        const drzl = drizzle(client);
+node_modules\drizzle-kit\bin.cjs:81305:        const drzl = drizzle(sqlite);
+node_modules\drizzle-kit\bin.cjs:81361:        const drzl = drizzle(client);
+node_modules\drizzle-orm\aws-data-api\pg\driver.cjs:97:function
+drizzle(...params) {
+node_modules\drizzle-orm\aws-data-api\pg\driver.js:75:function
+drizzle(...params) {
+node_modules\drizzle-orm\better-sqlite3\driver.cjs:71:function
+drizzle(...params) {
+node_modules\drizzle-orm\better-sqlite3\driver.js:40:function
+drizzle(...params) {
+node_modules\drizzle-orm\bun-sql\driver.cjs:61:function drizzle(...params) {
+node_modules\drizzle-orm\bun-sql\driver.js:40:function drizzle(...params) {
+node_modules\drizzle-orm\bun-sqlite\driver.cjs:61:function drizzle(...params) {
+node_modules\drizzle-orm\bun-sqlite\driver.js:40:function drizzle(...params) {
+node_modules\drizzle-orm\d1\driver.cjs:37:function drizzle(client, config =
+{}) {
+node_modules\drizzle-orm\d1\driver.js:16:function drizzle(client, config = {})
+{
+node_modules\drizzle-orm\durable-sqlite\driver.cjs:34:function drizzle(client,
+config = {}) {
+node_modules\drizzle-orm\durable-sqlite\driver.js:13:function drizzle(client,
+config = {}) {
+node_modules\drizzle-orm\expo-sqlite\driver.cjs:34:function drizzle(client,
+config = {}) {
+node_modules\drizzle-orm\expo-sqlite\driver.js:13:function drizzle(client,
+config = {}) {
+node_modules\drizzle-orm\libsql\http\index.cjs:27:function drizzle(...params) {
+node_modules\drizzle-orm\libsql\http\index.js:4:function drizzle(...params) {
+node_modules\drizzle-orm\libsql\node\index.cjs:27:function drizzle(...params) {
+node_modules\drizzle-orm\libsql\node\index.js:4:function drizzle(...params) {
+node_modules\drizzle-orm\libsql\sqlite3\index.cjs:27:function
+drizzle(...params) {
+node_modules\drizzle-orm\libsql\sqlite3\index.js:4:function drizzle(...params)
+{
+node_modules\drizzle-orm\libsql\wasm\index.cjs:27:function drizzle(...params) {
+node_modules\drizzle-orm\libsql\wasm\index.js:4:function drizzle(...params) {
+node_modules\drizzle-orm\libsql\web\index.cjs:27:function drizzle(...params) {
+node_modules\drizzle-orm\libsql\web\index.js:4:function drizzle(...params) {
+node_modules\drizzle-orm\libsql\ws\index.cjs:27:function drizzle(...params) {
+node_modules\drizzle-orm\libsql\ws\index.js:4:function drizzle(...params) {
+node_modules\drizzle-orm\libsql\driver.cjs:29:function drizzle(...params) {
+node_modules\drizzle-orm\libsql\driver.js:5:function drizzle(...params) {
+node_modules\drizzle-orm\mysql-proxy\driver.cjs:34:function drizzle(callback,
+config = {}) {
+node_modules\drizzle-orm\mysql-proxy\driver.js:13:function drizzle(callback,
+config = {}) {
+node_modules\drizzle-orm\mysql2\driver.cjs:87:function drizzle(...params) {
+node_modules\drizzle-orm\mysql2\driver.js:64:function drizzle(...params) {
+node_modules\drizzle-orm\neon-http\driver.cjs:119:function drizzle(...params) {
+node_modules\drizzle-orm\neon-http\driver.js:94:function drizzle(...params) {
+node_modules\drizzle-orm\neon-serverless\driver.cjs:74:function
+drizzle(...params) {
+node_modules\drizzle-orm\neon-serverless\driver.js:52:function
+drizzle(...params) {
+node_modules\drizzle-orm\node-postgres\driver.cjs:84:function
+drizzle(...params) {
+node_modules\drizzle-orm\node-postgres\driver.js:52:function
+drizzle(...params) {
+node_modules\drizzle-orm\op-sqlite\driver.cjs:34:function drizzle(client,
+config = {}) {
+node_modules\drizzle-orm\op-sqlite\driver.js:13:function drizzle(client,
+config = {}) {
+node_modules\drizzle-orm\pg-proxy\driver.cjs:34:function drizzle(callback,
+config = {}, _dialect = () => new import_dialect.PgDialect({ casing:
+config.casing })) {
+node_modules\drizzle-orm\pg-proxy\driver.js:13:function drizzle(callback,
+config = {}, _dialect = () => new PgDialect({ casing: config.casing })) {
+node_modules\drizzle-orm\pglite\driver.cjs:74:function drizzle(...params) {
+node_modules\drizzle-orm\pglite\driver.js:52:function drizzle(...params) {
+node_modules\drizzle-orm\planetscale-serverless\driver.cjs:48:const db =
+drizzle(client);
+node_modules\drizzle-orm\planetscale-serverless\driver.cjs:75:function
+drizzle(...params) {
+node_modules\drizzle-orm\planetscale-serverless\driver.cjs.map:1:{"version":3,"
+sources":["../../src/planetscale-serverless/driver.ts"],"sourcesContent":["impo
+rt type { Config } from '@planetscale/database';\nimport { Client } from
+'@planetscale/database';\nimport { entityKind } from '~/entity.ts';\nimport
+type { Logger } from '~/logger.ts';\nimport { DefaultLogger } from
+'~/logger.ts';\nimport { MySqlDatabase } from '~/mysql-core/db.ts';\nimport {
+MySqlDialect } from '~/mysql-core/dialect.ts';\nimport
+{\n\tcreateTableRelationsHelpers,\n\textractTablesRelationalConfig,\n\ttype
+RelationalSchemaConfig,\n\ttype TablesRelationalConfig,\n} from
+'~/relations.ts';\nimport { type DrizzleConfig, isConfig } from
+'~/utils.ts';\nimport type { PlanetScalePreparedQueryHKT,
+PlanetscaleQueryResultHKT } from './session.ts';\nimport { PlanetscaleSession
+} from './session.ts';\n\nexport interface PlanetscaleSDriverOptions
+{\n\tlogger?: Logger;\n}\n\nexport class PlanetScaleDatabase<\n\tTSchema
+extends Record<string, unknown> = Record<string, never>,\n> extends
+MySqlDatabase<PlanetscaleQueryResultHKT, PlanetScalePreparedQueryHKT, TSchema>
+{\n\tstatic override readonly [entityKind]: string =
+'PlanetScaleDatabase';\n}\n\nfunction construct<\n\tTSchema extends
+Record<string, unknown> = Record<string, never>,\n\tTClient extends Client =
+Client,\n>(\n\tclient: TClient,\n\tconfig: DrizzleConfig<TSchema> = {},\n):
+PlanetScaleDatabase<TSchema> & {\n\t$client: TClient;\n} {\n\t// Client is not
+Drizzle Object, so we can ignore this rule here\n\t// eslint-disable-next-line
+no-instanceof/no-instanceof\n\tif (!(client instanceof Client)) {\n\t\tthrow
+new Error(`Warning: You need to pass an instance of Client:\n\nimport { Client
+} from \"@planetscale/database\";\n\nconst client = new Client({\n  host:
+process.env[\"DATABASE_HOST\"],\n  username:
+process.env[\"DATABASE_USERNAME\"],\n  password:
+process.env[\"DATABASE_PASSWORD\"],\n});\n\nconst db =
+drizzle(client);\n\t\t`);\n\t}\n\n\tconst dialect = new MySqlDialect({ casing:
+config.casing });\n\tlet logger;\n\tif (config.logger === true) {\n\t\tlogger
+= new DefaultLogger();\n\t} else if (config.logger !== false) {\n\t\tlogger =
+config.logger;\n\t}\n\n\tlet schema:
+RelationalSchemaConfig<TablesRelationalConfig> | undefined;\n\tif
+(config.schema) {\n\t\tconst tablesConfig = extractTablesRelationalConfig(\n\t\
+t\tconfig.schema,\n\t\t\tcreateTableRelationsHelpers,\n\t\t);\n\t\tschema =
+{\n\t\t\tfullSchema: config.schema,\n\t\t\tschema:
+tablesConfig.tables,\n\t\t\ttableNamesMap:
+tablesConfig.tableNamesMap,\n\t\t};\n\t}\n\n\tconst session = new
+PlanetscaleSession(client, dialect, undefined, schema, { logger });\n\tconst
+db = new PlanetScaleDatabase(dialect, session, schema as any, 'planetscale')
+as PlanetScaleDatabase<TSchema>;\n\t(<any> db).$client = client;\n\n\treturn
+db as any;\n}\n\nexport function drizzle<\n\tTSchema extends Record<string,
+unknown> = Record<string, never>,\n\tTClient extends Client =
+Client,\n>(\n\t...params: [\n\t\tTClient | string,\n\t] | [\n\t\tTClient |
+string,\n\t\tDrizzleConfig<TSchema>,\n\t] | [\n\t\t(\n\t\t\t&
+DrizzleConfig<TSchema>\n\t\t\t& ({\n\t\t\t\tconnection: string |
+Config;\n\t\t\t} | {\n\t\t\t\tclient: TClient;\n\t\t\t})\n\t\t),\n\t]\n):
+PlanetScaleDatabase<TSchema> & {\n\t$client: TClient;\n} {\n\tif (typeof
+params[0] === 'string') {\n\t\tconst instance = new Client({\n\t\t\turl:
+params[0],\n\t\t});\n\n\t\treturn construct(instance, params[1]) as
+any;\n\t}\n\n\tif (isConfig(params[0])) {\n\t\tconst { connection, client,
+...drizzleConfig } = params[0] as\n\t\t\t& { connection?: Config | string;
+client?: TClient }\n\t\t\t& DrizzleConfig;\n\n\t\tif (client) return
+construct(client, drizzleConfig) as any;\n\n\t\tconst instance = typeof
+connection === 'string'\n\t\t\t? new Client({\n\t\t\t\turl:
+connection,\n\t\t\t})\n\t\t\t: new
+Client(\n\t\t\t\tconnection!,\n\t\t\t);\n\n\t\treturn construct(instance,
+drizzleConfig) as any;\n\t}\n\n\treturn construct(params[0] as TClient,
+params[1] as DrizzleConfig<TSchema> | undefined) as any;\n}\n\nexport
+namespace drizzle {\n\texport function mock<TSchema extends Record<string,
+unknown> = Record<string, never>>(\n\t\tconfig?: DrizzleConfig<TSchema>,\n\t):
+PlanetScaleDatabase<TSchema> & {\n\t\t$client: '$client is not available on
+drizzle.mock()';\n\t} {\n\t\treturn construct({} as any, config) as any;\n\t}\n
+}\n"],"mappings":";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AACA,sBAAuB;A
+ACvB,oBAA2B;AAE3B,oBAA8B;AAC9B,gBAA8B;AAC9B,qBAA6B;AAC7B,uBAKO;AACP,mBAA6C;AAE7
+C,qBAAmC;AAM5B,MAAM,4BAEH,wBAA+E;AAAA,EACxF,QAA0B,wBAAU,IAAY;AACjD;AAEA,SAAS,UA
+IR,QACA,SAAiC,CAAC,GAGjC;AAGD,MAAI,EAAE,kBAAkB,yBAAS;AAChC,UAAM,IAAI,MAAM;AAAA;
+AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,GAWf;AAAA,EACF;AAEA,QAAM,UAAU
+,IAAI,4BAAa,EAAE,QAAQ,OAAO,OAAO,CAAC;AAC1D,MAAI;AACJ,MAAI,OAAO,WAAW,MAAM;AAC3B,
+aAAS,IAAI,4BAAc;AAAA,EAC5B,WAAW,OAAO,WAAW,OAAO;AACnC,aAAS,OAAO;AAAA,EACjB;AAEA,
+MAAI;AACJ,MAAI,OAAO,QAAQ;AAClB,UAAM,mBAAe;AAAA,MACpB,OAAO;AAAA,MACP;AAAA,IACD;A
+ACA,aAAS;AAAA,MACR,YAAY,OAAO;AAAA,MACnB,QAAQ,aAAa;AAAA,MACrB,eAAe,aAAa;AAAA,IAC
+7B;AAAA,EACD;AAEA,QAAM,UAAU,IAAI,kCAAmB,QAAQ,SAAS,QAAW,QAAQ,EAAE,OAAO,CAAC;AACr
+F,QAAM,KAAK,IAAI,oBAAoB,SAAS,SAAS,QAAe,aAAa;AACjF,EAAO,GAAI,UAAU;AAErB,SAAO;AAC
+R;AAEO,SAAS,WAIZ,QAiBF;AACD,MAAI,OAAO,OAAO,CAAC,MAAM,UAAU;AAClC,UAAM,WAAW,IAAI,
+uBAAO;AAAA,MAC3B,KAAK,OAAO,CAAC;AAAA,IACd,CAAC;AAED,WAAO,UAAU,UAAU,OAAO,CAAC,CA
+AC;AAAA,EACrC;AAEA,UAAI,uBAAS,OAAO,CAAC,CAAC,GAAG;AACxB,UAAM,EAAE,YAAY,QAAQ,GAA
+G,cAAc,IAAI,OAAO,CAAC;AAIzD,QAAI;AAAQ,aAAO,UAAU,QAAQ,aAAa;AAElD,UAAM,WAAW,OAAO,
+eAAe,WACpC,IAAI,uBAAO;AAAA,MACZ,KAAK;AAAA,IACN,CAAC,IACC,IAAI;AAAA,MACL;AAAA,IA
+CD;AAED,WAAO,UAAU,UAAU,aAAa;AAAA,EACzC;AAEA,SAAO,UAAU,OAAO,CAAC,GAAc,OAAO,CAAC,
+CAAuC;AACvF;AAAA,CAEO,CAAUA,aAAV;AACC,WAAS,KACf,QAGC;AACD,WAAO,UAAU,CAAC,GAAU,M
+AAM;AAAA,EACnC;AANO,EAAAA,SAAS;AAAA,GADA;","names":["drizzle"]}
+node_modules\drizzle-orm\planetscale-serverless\driver.js:27:const db =
+drizzle(client);
+node_modules\drizzle-orm\planetscale-serverless\driver.js:54:function
+drizzle(...params) {
+node_modules\drizzle-orm\planetscale-serverless\driver.js.map:1:{"version":3,"s
+ources":["../../src/planetscale-serverless/driver.ts"],"sourcesContent":["impor
+t type { Config } from '@planetscale/database';\nimport { Client } from
+'@planetscale/database';\nimport { entityKind } from '~/entity.ts';\nimport
+type { Logger } from '~/logger.ts';\nimport { DefaultLogger } from
+'~/logger.ts';\nimport { MySqlDatabase } from '~/mysql-core/db.ts';\nimport {
+MySqlDialect } from '~/mysql-core/dialect.ts';\nimport
+{\n\tcreateTableRelationsHelpers,\n\textractTablesRelationalConfig,\n\ttype
+RelationalSchemaConfig,\n\ttype TablesRelationalConfig,\n} from
+'~/relations.ts';\nimport { type DrizzleConfig, isConfig } from
+'~/utils.ts';\nimport type { PlanetScalePreparedQueryHKT,
+PlanetscaleQueryResultHKT } from './session.ts';\nimport { PlanetscaleSession
+} from './session.ts';\n\nexport interface PlanetscaleSDriverOptions
+{\n\tlogger?: Logger;\n}\n\nexport class PlanetScaleDatabase<\n\tTSchema
+extends Record<string, unknown> = Record<string, never>,\n> extends
+MySqlDatabase<PlanetscaleQueryResultHKT, PlanetScalePreparedQueryHKT, TSchema>
+{\n\tstatic override readonly [entityKind]: string =
+'PlanetScaleDatabase';\n}\n\nfunction construct<\n\tTSchema extends
+Record<string, unknown> = Record<string, never>,\n\tTClient extends Client =
+Client,\n>(\n\tclient: TClient,\n\tconfig: DrizzleConfig<TSchema> = {},\n):
+PlanetScaleDatabase<TSchema> & {\n\t$client: TClient;\n} {\n\t// Client is not
+Drizzle Object, so we can ignore this rule here\n\t// eslint-disable-next-line
+no-instanceof/no-instanceof\n\tif (!(client instanceof Client)) {\n\t\tthrow
+new Error(`Warning: You need to pass an instance of Client:\n\nimport { Client
+} from \"@planetscale/database\";\n\nconst client = new Client({\n  host:
+process.env[\"DATABASE_HOST\"],\n  username:
+process.env[\"DATABASE_USERNAME\"],\n  password:
+process.env[\"DATABASE_PASSWORD\"],\n});\n\nconst db =
+drizzle(client);\n\t\t`);\n\t}\n\n\tconst dialect = new MySqlDialect({ casing:
+config.casing });\n\tlet logger;\n\tif (config.logger === true) {\n\t\tlogger
+= new DefaultLogger();\n\t} else if (config.logger !== false) {\n\t\tlogger =
+config.logger;\n\t}\n\n\tlet schema:
+RelationalSchemaConfig<TablesRelationalConfig> | undefined;\n\tif
+(config.schema) {\n\t\tconst tablesConfig = extractTablesRelationalConfig(\n\t\
+t\tconfig.schema,\n\t\t\tcreateTableRelationsHelpers,\n\t\t);\n\t\tschema =
+{\n\t\t\tfullSchema: config.schema,\n\t\t\tschema:
+tablesConfig.tables,\n\t\t\ttableNamesMap:
+tablesConfig.tableNamesMap,\n\t\t};\n\t}\n\n\tconst session = new
+PlanetscaleSession(client, dialect, undefined, schema, { logger });\n\tconst
+db = new PlanetScaleDatabase(dialect, session, schema as any, 'planetscale')
+as PlanetScaleDatabase<TSchema>;\n\t(<any> db).$client = client;\n\n\treturn
+db as any;\n}\n\nexport function drizzle<\n\tTSchema extends Record<string,
+unknown> = Record<string, never>,\n\tTClient extends Client =
+Client,\n>(\n\t...params: [\n\t\tTClient | string,\n\t] | [\n\t\tTClient |
+string,\n\t\tDrizzleConfig<TSchema>,\n\t] | [\n\t\t(\n\t\t\t&
+DrizzleConfig<TSchema>\n\t\t\t& ({\n\t\t\t\tconnection: string |
+Config;\n\t\t\t} | {\n\t\t\t\tclient: TClient;\n\t\t\t})\n\t\t),\n\t]\n):
+PlanetScaleDatabase<TSchema> & {\n\t$client: TClient;\n} {\n\tif (typeof
+params[0] === 'string') {\n\t\tconst instance = new Client({\n\t\t\turl:
+params[0],\n\t\t});\n\n\t\treturn construct(instance, params[1]) as
+any;\n\t}\n\n\tif (isConfig(params[0])) {\n\t\tconst { connection, client,
+...drizzleConfig } = params[0] as\n\t\t\t& { connection?: Config | string;
+client?: TClient }\n\t\t\t& DrizzleConfig;\n\n\t\tif (client) return
+construct(client, drizzleConfig) as any;\n\n\t\tconst instance = typeof
+connection === 'string'\n\t\t\t? new Client({\n\t\t\t\turl:
+connection,\n\t\t\t})\n\t\t\t: new
+Client(\n\t\t\t\tconnection!,\n\t\t\t);\n\n\t\treturn construct(instance,
+drizzleConfig) as any;\n\t}\n\n\treturn construct(params[0] as TClient,
+params[1] as DrizzleConfig<TSchema> | undefined) as any;\n}\n\nexport
+namespace drizzle {\n\texport function mock<TSchema extends Record<string,
+unknown> = Record<string, never>>(\n\t\tconfig?: DrizzleConfig<TSchema>,\n\t):
+PlanetScaleDatabase<TSchema> & {\n\t\t$client: '$client is not available on
+drizzle.mock()';\n\t} {\n\t\treturn construct({} as any, config) as any;\n\t}\n
+}\n"],"mappings":"AACA,SAAS,cAAc;AACvB,SAAS,kBAAkB;AAE3B,SAAS,qBAAqB;AAC9B,SAAS
+,qBAAqB;AAC9B,SAAS,oBAAoB;AAC7B;AAAA,EACC;AAAA,EACA;AAAA,OAGM;AACP,SAA6B,gBAAgB
+;AAE7C,SAAS,0BAA0B;AAM5B,MAAM,4BAEH,cAA+E;AAAA,EACxF,QAA0B,UAAU,IAAY;AACjD;AAEA
+,SAAS,UAIR,QACA,SAAiC,CAAC,GAGjC;AAGD,MAAI,EAAE,kBAAkB,SAAS;AAChC,UAAM,IAAI,MAA
+M;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,GAWf;AAAA,EACF;AAEA,QA
+AM,UAAU,IAAI,aAAa,EAAE,QAAQ,OAAO,OAAO,CAAC;AAC1D,MAAI;AACJ,MAAI,OAAO,WAAW,MAAM;
+AAC3B,aAAS,IAAI,cAAc;AAAA,EAC5B,WAAW,OAAO,WAAW,OAAO;AACnC,aAAS,OAAO;AAAA,EACjB;
+AAEA,MAAI;AACJ,MAAI,OAAO,QAAQ;AAClB,UAAM,eAAe;AAAA,MACpB,OAAO;AAAA,MACP;AAAA,IA
+CD;AACA,aAAS;AAAA,MACR,YAAY,OAAO;AAAA,MACnB,QAAQ,aAAa;AAAA,MACrB,eAAe,aAAa;AAAA
+,IAC7B;AAAA,EACD;AAEA,QAAM,UAAU,IAAI,mBAAmB,QAAQ,SAAS,QAAW,QAAQ,EAAE,OAAO,CAAC;
+AACrF,QAAM,KAAK,IAAI,oBAAoB,SAAS,SAAS,QAAe,aAAa;AACjF,EAAO,GAAI,UAAU;AAErB,SAAO
+;AACR;AAEO,SAAS,WAIZ,QAiBF;AACD,MAAI,OAAO,OAAO,CAAC,MAAM,UAAU;AAClC,UAAM,WAAW,I
+AAI,OAAO;AAAA,MAC3B,KAAK,OAAO,CAAC;AAAA,IACd,CAAC;AAED,WAAO,UAAU,UAAU,OAAO,CAAC
+,CAAC;AAAA,EACrC;AAEA,MAAI,SAAS,OAAO,CAAC,CAAC,GAAG;AACxB,UAAM,EAAE,YAAY,QAAQ,G
+AAG,cAAc,IAAI,OAAO,CAAC;AAIzD,QAAI;AAAQ,aAAO,UAAU,QAAQ,aAAa;AAElD,UAAM,WAAW,OAA
+O,eAAe,WACpC,IAAI,OAAO;AAAA,MACZ,KAAK;AAAA,IACN,CAAC,IACC,IAAI;AAAA,MACL;AAAA,I
+ACD;AAED,WAAO,UAAU,UAAU,aAAa;AAAA,EACzC;AAEA,SAAO,UAAU,OAAO,CAAC,GAAc,OAAO,CAAC
+,CAAuC;AACvF;AAAA,CAEO,CAAUA,aAAV;AACC,WAAS,KACf,QAGC;AACD,WAAO,UAAU,CAAC,GAAU,
+MAAM;AAAA,EACnC;AANO,EAAAA,SAAS;AAAA,GADA;","names":["drizzle"]}
+node_modules\drizzle-orm\postgres-js\driver.cjs:78:function drizzle(...params)
+{
+node_modules\drizzle-orm\postgres-js\driver.js:47:function drizzle(...params) {
+node_modules\drizzle-orm\prisma\mysql\driver.cjs:37:function drizzle(config =
+{}) {
+node_modules\drizzle-orm\prisma\mysql\driver.cjs.map:1:{"version":3,"sources":[
+"../../../src/prisma/mysql/driver.ts"],"sourcesContent":["import type {
+PrismaClient } from '@prisma/client/extension';\n\nimport { Prisma } from
+'@prisma/client';\n\nimport { entityKind } from '~/entity.ts';\nimport type {
+Logger } from '~/logger.ts';\nimport { DefaultLogger } from
+'~/logger.ts';\nimport { MySqlDatabase, MySqlDialect } from
+'~/mysql-core/index.ts';\nimport type { DrizzleConfig } from
+'~/utils.ts';\nimport type { PrismaMySqlPreparedQueryHKT,
+PrismaMySqlQueryResultHKT } from './session.ts';\nimport { PrismaMySqlSession
+} from './session.ts';\n\nexport class PrismaMySqlDatabase\n\textends
+MySqlDatabase<PrismaMySqlQueryResultHKT, PrismaMySqlPreparedQueryHKT,
+Record<string, never>>\n{\n\tstatic override readonly [entityKind]: string =
+'PrismaMySqlDatabase';\n\n\tconstructor(client: PrismaClient, logger: Logger |
+undefined) {\n\t\tconst dialect = new MySqlDialect();\n\t\tsuper(dialect, new
+PrismaMySqlSession(dialect, client, { logger }), undefined,
+'default');\n\t}\n}\n\nexport type PrismaMySqlConfig = Omit<DrizzleConfig,
+'schema'>;\n\nexport function drizzle(config: PrismaMySqlConfig = {}) {\n\tlet
+logger: Logger | undefined;\n\tif (config.logger === true) {\n\t\tlogger = new
+DefaultLogger();\n\t} else if (config.logger !== false) {\n\t\tlogger =
+config.logger;\n\t}\n\n\treturn Prisma.defineExtension((client) =>
+{\n\t\treturn client.$extends({\n\t\t\tname: 'drizzle',\n\t\t\tclient:
+{\n\t\t\t\t$drizzle: new PrismaMySqlDatabase(client, logger),\n\t\t\t},\n\t\t})
+;\n\t});\n}\n"],"mappings":";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAE
+A,oBAAuB;AAEvB,oBAA2B;AAE3B,oBAA8B;AAC9B,wBAA4C;AAG5C,qBAAmC;AAE5B,MAAM,4BACJ,g
+CACT;AAAA,EACC,QAA0B,wBAAU,IAAY;AAAA,EAEhD,YAAY,QAAsB,QAA4B;AAC7D,UAAM,UAAU,IAA
+I,+BAAa;AACjC,UAAM,SAAS,IAAI,kCAAmB,SAAS,QAAQ,EAAE,OAAO,CAAC,GAAG,QAAW,SAAS;AAA
+A,EACzF;AACD;AAIO,SAAS,QAAQ,SAA4B,CAAC,GAAG;AACvD,MAAI;AACJ,MAAI,OAAO,WAAW,MAAM
+;AAC3B,aAAS,IAAI,4BAAc;AAAA,EAC5B,WAAW,OAAO,WAAW,OAAO;AACnC,aAAS,OAAO;AAAA,EACj
+B;AAEA,SAAO,qBAAO,gBAAgB,CAAC,WAAW;AACzC,WAAO,OAAO,SAAS;AAAA,MACtB,MAAM;AAAA,MA
+CN,QAAQ;AAAA,QACP,UAAU,IAAI,oBAAoB,QAAQ,MAAM;AAAA,MACjD;AAAA,IACD,CAAC;AAAA,EAC
+F,CAAC;AACF;","names":[]}
+node_modules\drizzle-orm\prisma\mysql\driver.d.cts:12:export declare function
+drizzle(config?: PrismaMySqlConfig): (client: any) => {
+node_modules\drizzle-orm\prisma\mysql\driver.d.ts:12:export declare function
+drizzle(config?: PrismaMySqlConfig): (client: any) => {
+node_modules\drizzle-orm\prisma\mysql\driver.js:13:function drizzle(config =
+{}) {
+node_modules\drizzle-orm\prisma\mysql\driver.js.map:1:{"version":3,"sources":["
+../../../src/prisma/mysql/driver.ts"],"sourcesContent":["import type {
+PrismaClient } from '@prisma/client/extension';\n\nimport { Prisma } from
+'@prisma/client';\n\nimport { entityKind } from '~/entity.ts';\nimport type {
+Logger } from '~/logger.ts';\nimport { DefaultLogger } from
+'~/logger.ts';\nimport { MySqlDatabase, MySqlDialect } from
+'~/mysql-core/index.ts';\nimport type { DrizzleConfig } from
+'~/utils.ts';\nimport type { PrismaMySqlPreparedQueryHKT,
+PrismaMySqlQueryResultHKT } from './session.ts';\nimport { PrismaMySqlSession
+} from './session.ts';\n\nexport class PrismaMySqlDatabase\n\textends
+MySqlDatabase<PrismaMySqlQueryResultHKT, PrismaMySqlPreparedQueryHKT,
+Record<string, never>>\n{\n\tstatic override readonly [entityKind]: string =
+'PrismaMySqlDatabase';\n\n\tconstructor(client: PrismaClient, logger: Logger |
+undefined) {\n\t\tconst dialect = new MySqlDialect();\n\t\tsuper(dialect, new
+PrismaMySqlSession(dialect, client, { logger }), undefined,
+'default');\n\t}\n}\n\nexport type PrismaMySqlConfig = Omit<DrizzleConfig,
+'schema'>;\n\nexport function drizzle(config: PrismaMySqlConfig = {}) {\n\tlet
+logger: Logger | undefined;\n\tif (config.logger === true) {\n\t\tlogger = new
+DefaultLogger();\n\t} else if (config.logger !== false) {\n\t\tlogger =
+config.logger;\n\t}\n\n\treturn Prisma.defineExtension((client) =>
+{\n\t\treturn client.$extends({\n\t\t\tname: 'drizzle',\n\t\t\tclient:
+{\n\t\t\t\t$drizzle: new PrismaMySqlDatabase(client, logger),\n\t\t\t},\n\t\t})
+;\n\t});\n}\n"],"mappings":"AAEA,SAAS,cAAc;AAEvB,SAAS,kBAAkB;AAE3B,SAAS,qBAAqB;
+AAC9B,SAAS,eAAe,oBAAoB;AAG5C,SAAS,0BAA0B;AAE5B,MAAM,4BACJ,cACT;AAAA,EACC,QAA0B,
+UAAU,IAAY;AAAA,EAEhD,YAAY,QAAsB,QAA4B;AAC7D,UAAM,UAAU,IAAI,aAAa;AACjC,UAAM,SAAS
+,IAAI,mBAAmB,SAAS,QAAQ,EAAE,OAAO,CAAC,GAAG,QAAW,SAAS;AAAA,EACzF;AACD;AAIO,SAAS,
+QAAQ,SAA4B,CAAC,GAAG;AACvD,MAAI;AACJ,MAAI,OAAO,WAAW,MAAM;AAC3B,aAAS,IAAI,cAAc;A
+AAA,EAC5B,WAAW,OAAO,WAAW,OAAO;AACnC,aAAS,OAAO;AAAA,EACjB;AAEA,SAAO,OAAO,gBAAgB,
+CAAC,WAAW;AACzC,WAAO,OAAO,SAAS;AAAA,MACtB,MAAM;AAAA,MACN,QAAQ;AAAA,QACP,UAAU,IA
+AI,oBAAoB,QAAQ,MAAM;AAAA,MACjD;AAAA,IACD,CAAC;AAAA,EACF,CAAC;AACF;","names":[]}
+node_modules\drizzle-orm\prisma\pg\driver.cjs:37:function drizzle(config = {})
+{
+node_modules\drizzle-orm\prisma\pg\driver.cjs.map:1:{"version":3,"sources":["..
+/../../src/prisma/pg/driver.ts"],"sourcesContent":["import type { PrismaClient
+} from '@prisma/client/extension';\n\nimport { Prisma } from
+'@prisma/client';\n\nimport { entityKind } from '~/entity.ts';\nimport type {
+Logger } from '~/logger.ts';\nimport { DefaultLogger } from
+'~/logger.ts';\nimport { PgDatabase, PgDialect } from
+'~/pg-core/index.ts';\nimport type { DrizzleConfig } from
+'~/utils.ts';\nimport type { PrismaPgQueryResultHKT } from
+'./session.ts';\nimport { PrismaPgSession } from './session.ts';\n\nexport
+class PrismaPgDatabase extends PgDatabase<PrismaPgQueryResultHKT,
+Record<string, never>> {\n\tstatic override readonly [entityKind]: string =
+'PrismaPgDatabase';\n\n\tconstructor(client: PrismaClient, logger: Logger |
+undefined) {\n\t\tconst dialect = new PgDialect();\n\t\tsuper(dialect, new
+PrismaPgSession(dialect, client, { logger }), undefined);\n\t}\n}\n\nexport
+type PrismaPgConfig = Omit<DrizzleConfig, 'schema'>;\n\nexport function
+drizzle(config: PrismaPgConfig = {}) {\n\tlet logger: Logger |
+undefined;\n\tif (config.logger === true) {\n\t\tlogger = new
+DefaultLogger();\n\t} else if (config.logger !== false) {\n\t\tlogger =
+config.logger;\n\t}\n\n\treturn Prisma.defineExtension((client) =>
+{\n\t\treturn client.$extends({\n\t\t\tname: 'drizzle',\n\t\t\tclient:
+{\n\t\t\t\t$drizzle: new PrismaPgDatabase(client, logger),\n\t\t\t},\n\t\t});\n
+\t});\n}\n"],"mappings":";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAEA,o
+BAAuB;AAEvB,oBAA2B;AAE3B,oBAA8B;AAC9B,qBAAsC;AAGtC,qBAAgC;AAEzB,MAAM,yBAAyB,0BA
+A0D;AAAA,EAC/F,QAA0B,wBAAU,IAAY;AAAA,EAEhD,YAAY,QAAsB,QAA4B;AAC7D,UAAM,UAAU,IAA
+I,yBAAU;AAC9B,UAAM,SAAS,IAAI,+BAAgB,SAAS,QAAQ,EAAE,OAAO,CAAC,GAAG,MAAS;AAAA,EAC
+3E;AACD;AAIO,SAAS,QAAQ,SAAyB,CAAC,GAAG;AACpD,MAAI;AACJ,MAAI,OAAO,WAAW,MAAM;AAC3
+B,aAAS,IAAI,4BAAc;AAAA,EAC5B,WAAW,OAAO,WAAW,OAAO;AACnC,aAAS,OAAO;AAAA,EACjB;AAE
+A,SAAO,qBAAO,gBAAgB,CAAC,WAAW;AACzC,WAAO,OAAO,SAAS;AAAA,MACtB,MAAM;AAAA,MACN,QA
+AQ;AAAA,QACP,UAAU,IAAI,iBAAiB,QAAQ,MAAM;AAAA,MAC9C;AAAA,IACD,CAAC;AAAA,EACF,CAA
+C;AACF;","names":[]}
+node_modules\drizzle-orm\prisma\pg\driver.d.cts:12:export declare function
+drizzle(config?: PrismaPgConfig): (client: any) => {
+node_modules\drizzle-orm\prisma\pg\driver.d.ts:12:export declare function
+drizzle(config?: PrismaPgConfig): (client: any) => {
+node_modules\drizzle-orm\prisma\pg\driver.js:13:function drizzle(config = {}) {
+node_modules\drizzle-orm\prisma\pg\driver.js.map:1:{"version":3,"sources":["../
+../../src/prisma/pg/driver.ts"],"sourcesContent":["import type { PrismaClient
+} from '@prisma/client/extension';\n\nimport { Prisma } from
+'@prisma/client';\n\nimport { entityKind } from '~/entity.ts';\nimport type {
+Logger } from '~/logger.ts';\nimport { DefaultLogger } from
+'~/logger.ts';\nimport { PgDatabase, PgDialect } from
+'~/pg-core/index.ts';\nimport type { DrizzleConfig } from
+'~/utils.ts';\nimport type { PrismaPgQueryResultHKT } from
+'./session.ts';\nimport { PrismaPgSession } from './session.ts';\n\nexport
+class PrismaPgDatabase extends PgDatabase<PrismaPgQueryResultHKT,
+Record<string, never>> {\n\tstatic override readonly [entityKind]: string =
+'PrismaPgDatabase';\n\n\tconstructor(client: PrismaClient, logger: Logger |
+undefined) {\n\t\tconst dialect = new PgDialect();\n\t\tsuper(dialect, new
+PrismaPgSession(dialect, client, { logger }), undefined);\n\t}\n}\n\nexport
+type PrismaPgConfig = Omit<DrizzleConfig, 'schema'>;\n\nexport function
+drizzle(config: PrismaPgConfig = {}) {\n\tlet logger: Logger |
+undefined;\n\tif (config.logger === true) {\n\t\tlogger = new
+DefaultLogger();\n\t} else if (config.logger !== false) {\n\t\tlogger =
+config.logger;\n\t}\n\n\treturn Prisma.defineExtension((client) =>
+{\n\t\treturn client.$extends({\n\t\t\tname: 'drizzle',\n\t\t\tclient:
+{\n\t\t\t\t$drizzle: new PrismaPgDatabase(client, logger),\n\t\t\t},\n\t\t});\n
+\t});\n}\n"],"mappings":"AAEA,SAAS,cAAc;AAEvB,SAAS,kBAAkB;AAE3B,SAAS,qBAAqB;AAC
+9B,SAAS,YAAY,iBAAiB;AAGtC,SAAS,uBAAuB;AAEzB,MAAM,yBAAyB,WAA0D;AAAA,EAC/F,QAA0B,
+UAAU,IAAY;AAAA,EAEhD,YAAY,QAAsB,QAA4B;AAC7D,UAAM,UAAU,IAAI,UAAU;AAC9B,UAAM,SAAS
+,IAAI,gBAAgB,SAAS,QAAQ,EAAE,OAAO,CAAC,GAAG,MAAS;AAAA,EAC3E;AACD;AAIO,SAAS,QAAQ,
+SAAyB,CAAC,GAAG;AACpD,MAAI;AACJ,MAAI,OAAO,WAAW,MAAM;AAC3B,aAAS,IAAI,cAAc;AAAA,E
+AC5B,WAAW,OAAO,WAAW,OAAO;AACnC,aAAS,OAAO;AAAA,EACjB;AAEA,SAAO,OAAO,gBAAgB,CAAC,
+WAAW;AACzC,WAAO,OAAO,SAAS;AAAA,MACtB,MAAM;AAAA,MACN,QAAQ;AAAA,QACP,UAAU,IAAI,iB
+AAiB,QAAQ,MAAM;AAAA,MAC9C;AAAA,IACD,CAAC;AAAA,EACF,CAAC;AACF;","names":[]}
+node_modules\drizzle-orm\prisma\sqlite\driver.cjs:28:function drizzle(config =
+{}) {
+node_modules\drizzle-orm\prisma\sqlite\driver.cjs.map:1:{"version":3,"sources":
+["../../../src/prisma/sqlite/driver.ts"],"sourcesContent":["import { Prisma }
+from '@prisma/client';\n\nimport type { Logger } from '~/logger.ts';\nimport {
+DefaultLogger } from '~/logger.ts';\nimport { BaseSQLiteDatabase,
+SQLiteAsyncDialect } from '~/sqlite-core/index.ts';\nimport type {
+DrizzleConfig } from '~/utils.ts';\nimport { PrismaSQLiteSession } from
+'./session.ts';\n\nexport type PrismaSQLiteDatabase =
+BaseSQLiteDatabase<'async', []>;\n\nexport type PrismaSQLiteConfig =
+Omit<DrizzleConfig, 'schema'>;\n\nexport function drizzle(config:
+PrismaSQLiteConfig = {}) {\n\tconst dialect = new SQLiteAsyncDialect();\n\tlet
+logger: Logger | undefined;\n\tif (config.logger === true) {\n\t\tlogger = new
+DefaultLogger();\n\t} else if (config.logger !== false) {\n\t\tlogger =
+config.logger;\n\t}\n\n\treturn Prisma.defineExtension((client) =>
+{\n\t\tconst session = new PrismaSQLiteSession(client, dialect, { logger
+});\n\n\t\treturn client.$extends({\n\t\t\tname: 'drizzle',\n\t\t\tclient:
+{\n\t\t\t\t$drizzle: new BaseSQLiteDatabase('async', dialect, session,
+undefined) as PrismaSQLiteDatabase,\n\t\t\t},\n\t\t});\n\t});\n}\n"],"mappings"
+:";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,oBAAuB;AAGvB,oBAA8B;AAC9B,yBA
+AuD;AAEvD,qBAAoC;AAM7B,SAAS,QAAQ,SAA6B,CAAC,GAAG;AACxD,QAAM,UAAU,IAAI,sCAAmB;AA
+CvC,MAAI;AACJ,MAAI,OAAO,WAAW,MAAM;AAC3B,aAAS,IAAI,4BAAc;AAAA,EAC5B,WAAW,OAAO,WA
+AW,OAAO;AACnC,aAAS,OAAO;AAAA,EACjB;AAEA,SAAO,qBAAO,gBAAgB,CAAC,WAAW;AACzC,UAAM,
+UAAU,IAAI,mCAAoB,QAAQ,SAAS,EAAE,OAAO,CAAC;AAEnE,WAAO,OAAO,SAAS;AAAA,MACtB,MAAM;
+AAAA,MACN,QAAQ;AAAA,QACP,UAAU,IAAI,sCAAmB,SAAS,SAAS,SAAS,MAAS;AAAA,MACtE;AAAA,I
+ACD,CAAC;AAAA,EACF,CAAC;AACF;","names":[]}
+node_modules\drizzle-orm\prisma\sqlite\driver.d.cts:5:export declare function
+drizzle(config?: PrismaSQLiteConfig): (client: any) => {
+node_modules\drizzle-orm\prisma\sqlite\driver.d.ts:5:export declare function
+drizzle(config?: PrismaSQLiteConfig): (client: any) => {
+node_modules\drizzle-orm\prisma\sqlite\driver.js:5:function drizzle(config =
+{}) {
+node_modules\drizzle-orm\prisma\sqlite\driver.js.map:1:{"version":3,"sources":[
+"../../../src/prisma/sqlite/driver.ts"],"sourcesContent":["import { Prisma }
+from '@prisma/client';\n\nimport type { Logger } from '~/logger.ts';\nimport {
+DefaultLogger } from '~/logger.ts';\nimport { BaseSQLiteDatabase,
+SQLiteAsyncDialect } from '~/sqlite-core/index.ts';\nimport type {
+DrizzleConfig } from '~/utils.ts';\nimport { PrismaSQLiteSession } from
+'./session.ts';\n\nexport type PrismaSQLiteDatabase =
+BaseSQLiteDatabase<'async', []>;\n\nexport type PrismaSQLiteConfig =
+Omit<DrizzleConfig, 'schema'>;\n\nexport function drizzle(config:
+PrismaSQLiteConfig = {}) {\n\tconst dialect = new SQLiteAsyncDialect();\n\tlet
+logger: Logger | undefined;\n\tif (config.logger === true) {\n\t\tlogger = new
+DefaultLogger();\n\t} else if (config.logger !== false) {\n\t\tlogger =
+config.logger;\n\t}\n\n\treturn Prisma.defineExtension((client) =>
+{\n\t\tconst session = new PrismaSQLiteSession(client, dialect, { logger
+});\n\n\t\treturn client.$extends({\n\t\t\tname: 'drizzle',\n\t\t\tclient:
+{\n\t\t\t\t$drizzle: new BaseSQLiteDatabase('async', dialect, session,
+undefined) as PrismaSQLiteDatabase,\n\t\t\t},\n\t\t});\n\t});\n}\n"],"mappings"
+:"AAAA,SAAS,cAAc;AAGvB,SAAS,qBAAqB;AAC9B,SAAS,oBAAoB,0BAA0B;AAEvD,SAAS,2BAA2B;A
+AM7B,SAAS,QAAQ,SAA6B,CAAC,GAAG;AACxD,QAAM,UAAU,IAAI,mBAAmB;AACvC,MAAI;AACJ,MAAI
+,OAAO,WAAW,MAAM;AAC3B,aAAS,IAAI,cAAc;AAAA,EAC5B,WAAW,OAAO,WAAW,OAAO;AACnC,aAAS,
+OAAO;AAAA,EACjB;AAEA,SAAO,OAAO,gBAAgB,CAAC,WAAW;AACzC,UAAM,UAAU,IAAI,oBAAoB,QAA
+Q,SAAS,EAAE,OAAO,CAAC;AAEnE,WAAO,OAAO,SAAS;AAAA,MACtB,MAAM;AAAA,MACN,QAAQ;AAAA,
+QACP,UAAU,IAAI,mBAAmB,SAAS,SAAS,SAAS,MAAS;AAAA,MACtE;AAAA,IACD,CAAC;AAAA,EACF,C
+AAC;AACF;","names":[]}
+node_modules\drizzle-orm\singlestore\driver.cjs:80:function drizzle(...params)
+{
+node_modules\drizzle-orm\singlestore\driver.js:57:function drizzle(...params) {
+node_modules\drizzle-orm\singlestore-proxy\driver.cjs:34:function
+drizzle(callback, config = {}) {
+node_modules\drizzle-orm\singlestore-proxy\driver.js:15:function
+drizzle(callback, config = {}) {
+node_modules\drizzle-orm\sql-js\driver.cjs:29:function drizzle(client, config
+= {}) {
+node_modules\drizzle-orm\sql-js\driver.js:9:function drizzle(client, config =
+{}) {
+node_modules\drizzle-orm\sqlite-proxy\driver.cjs:37:function drizzle(callback,
+batchCallback, config) {
+node_modules\drizzle-orm\sqlite-proxy\driver.js:13:function drizzle(callback,
+batchCallback, config) {
+node_modules\drizzle-orm\tidb-serverless\driver.cjs:61:function
+drizzle(...params) {
+node_modules\drizzle-orm\tidb-serverless\driver.js:40:function
+drizzle(...params) {
+node_modules\drizzle-orm\vercel-postgres\driver.cjs:74:function
+drizzle(...params) {
+node_modules\drizzle-orm\vercel-postgres\driver.js:52:function
+drizzle(...params) {
+node_modules\drizzle-orm\xata-http\driver.cjs:51:function drizzle(client,
+config = {}) {
+node_modules\drizzle-orm\xata-http\driver.js:26:function drizzle(client,
+config = {}) {

@@ -26,8 +26,13 @@ function createTransporter() {
     const pass = process.env.EMAIL_PASS;
 
     if (!host || !user || !pass) {
-        console.error("Missing email configuration:", { host, user, pass: pass ? "set" : "missing" });
-        throw new Error("Email configuration is missing");
+        console.error("Missing email configuration. Please check your .env file:", { 
+            host: host || "MISSING", 
+            user: user || "MISSING", 
+            pass: pass ? "SET" : "MISSING",
+            receiver: process.env.RECEIVER_EMAIL || "MISSING"
+        });
+        throw new Error("Email configuration is missing on the server");
     }
 
     return nodemailer.createTransport({
@@ -310,6 +315,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     try {
         console.log("Received contact form submission:", req.body);
 
+        // Basic server-side rate limit using cookies as a secondary layer
+        const lastEmailSent = req.cookies?.[`sent_${req.body.email?.replace(/[^a-zA-Z0-9]/g, '_')}`];
+        if (lastEmailSent && Date.now() - parseInt(lastEmailSent) < 24 * 60 * 60 * 1000) {
+            return res.status(429).json({ message: "Limite de 1 envio por e-mail a cada 24 horas excedido" });
+        }
+
         const result = leadFormSchema.safeParse(req.body);
         if (!result.success) {
             console.warn("Validation failed:", result.error.errors);
@@ -322,6 +333,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         console.log("Sending emails for lead:", result.data.email);
         await sendLeadEmails(result.data);
         console.log("Emails sent successfully");
+
+        // Set a cookie to help with rate limiting (24h)
+        const cookieName = `sent_${result.data.email.replace(/[^a-zA-Z0-9]/g, '_')}`;
+        res.setHeader('Set-Cookie', `${cookieName}=${Date.now()}; Path=/; Max-Age=${24 * 60 * 60}; HttpOnly; SameSite=Strict`);
 
         return res.status(200).json({ message: "Formulário enviado com sucesso" });
     } catch (error) {
