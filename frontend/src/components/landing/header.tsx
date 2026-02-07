@@ -34,8 +34,6 @@ export function Header() {
 
   const navItems = [
     t.header.nav.solutions,
-    t.header.nav.about,
-    t.header.nav.methodology,
     t.header.nav.support,
     t.header.nav.insights,
   ];
@@ -139,7 +137,7 @@ export function Header() {
             return (
               <a
                 key={item}
-                href={item === t.header.nav.about ? "#servicos" : "#"}
+                href="#"
                 className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap header-blur-animate cursor-pointer"
                 style={{ animationDelay: `${0.2 + index * 0.05}s`, opacity: 0 }}
               >
@@ -501,34 +499,14 @@ export function Header() {
                   ))}
 
                   {navItems.filter(item => !navItemsWithDropdown.includes(item)).map((item, index) => {
-                    const isAboutLink = item === t.header.nav.about;
                     const dropdownCount = navItemsWithDropdown.length;
                     return (
                       <a
                         key={item}
-                        href={isAboutLink ? "#servicos" : "#"}
+                        href="#"
                         data-custom-handler="true"
                         onClick={(e) => {
-                          if (isAboutLink) {
-                            e.preventDefault();
-                            setIsOpen(false);
-                            // Wait for menu to close, then scroll
-                            setTimeout(() => {
-                              const element = document.getElementById('servicos');
-                              const lenis = (window as any).lenis;
-                              if (lenis && element) {
-                                lenis.scrollTo(element, { duration: 1, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-                              } else if (element) {
-                                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                              }
-                              // Remove hash from URL after scroll
-                              if (window.history.replaceState) {
-                                window.history.replaceState(null, '', window.location.pathname + window.location.search);
-                              }
-                            }, 300);
-                          } else {
-                            setIsOpen(false);
-                          }
+                          setIsOpen(false);
                         }}
                         className="sidebar-blur-animate text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors cursor-pointer"
                         style={{ animationDelay: `${0.2 + dropdownCount * 0.05 + index * 0.05}s`, opacity: 0 }}

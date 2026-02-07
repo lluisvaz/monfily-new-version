@@ -3,6 +3,7 @@ import { useLanguage } from '@/hooks/use-language';
 import type { Language } from '@/lib/translations';
 import { ArrowRight, ArrowLeft, Check, SystemRestart, WarningCircle, NavArrowDown, Search } from 'iconoir-react';
 import { detectCountryCode } from '@/lib/geo-location';
+import { getCurrencyForCountry, getCurrencySymbol, formatCurrency, convertFromBRL } from '@shared/currencies';
 import { SpotlightButton } from '@/components/ui/spotlight-button';
 import { AsYouType, getExampleNumber, type CountryCode } from 'libphonenumber-js';
 import examples from 'libphonenumber-js/examples.mobile.json';
@@ -19,6 +20,7 @@ export type LeadFormData = {
   timeframe?: 'urgent' | '1to2' | '3to6' | 'flexible';
   message?: string;
   language?: string;
+  detectedCountry?: string;
 };
 
 export interface LeadFormProps {
@@ -49,13 +51,6 @@ const copy = {
       ai: 'Automação com IA',
       seo: 'SEO Técnico',
       other: 'Personalizado'
-    },
-    budgets: {
-      lt5k: 'Até R$ 5 mil',
-      '5to15': 'R$ 5–15 mil',
-      '15to30': 'R$ 15–30 mil',
-      gt30: 'Acima de R$ 30 mil',
-      undecided: 'A definir'
     },
     timeframes: {
       urgent: 'Urgente (até 2 semanas)',
@@ -97,13 +92,6 @@ const copy = {
       ai: 'AI Automation',
       seo: 'Technical SEO',
       other: 'Custom'
-    },
-    budgets: {
-      lt5k: 'Up to $1k',
-      '5to15': '$1k–3k',
-      '15to30': '$3k–6k',
-      gt30: 'Over $6k',
-      undecided: 'Undecided'
     },
     timeframes: {
       urgent: 'Urgent (up to 2 weeks)',
@@ -149,7 +137,7 @@ function getDialCode(country?: string) {
 }
 
 export default function LeadForm({ onSubmit, className }: LeadFormProps) {
-  const { language } = useLanguage();
+  const { language, detectedCountry } = useLanguage();
   const t = copy[language as Language] ?? copy.pt;
 
   const [step, setStep] = useState(0);
@@ -158,6 +146,41 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
   const [error, setError] = useState(false);
   const [rateLimitError, setRateLimitError] = useState<string | null>(null);
   const [data, setData] = useState<LeadFormData>(initialData);
+
+  const budgetOptions = useMemo(() => {
+    // Sempre usa a geolocalização (detectedCountry) para determinar a moeda, ignorando a seleção manual
+    const country = detectedCountry || (language === 'pt' ? 'BR' : 'US');
+    const currencyCode = getCurrencyForCountry(country);
+    const locale = language === 'pt' ? 'pt-BR' : 'en-US';
+    
+    // Valores base para conversão (considerando BRL como referência)
+    const baseValues = {
+      v5k: 5000,
+      v15k: 15000,
+      v30k: 30000
+    };
+
+    const format = (val: number) => formatCurrency(convertFromBRL(val, currencyCode), currencyCode, locale);
+
+    if (language === 'pt') {
+      return {
+        lt5k: `Até ${format(baseValues.v5k)}`,
+        '5to15': `${format(baseValues.v5k)} – ${format(baseValues.v15k)}`,
+        '15to30': `${format(baseValues.v15k)} – ${format(baseValues.v30k)}`,
+        gt30: `Acima de ${format(baseValues.v30k)}`,
+        undecided: 'A definir'
+      };
+    } else {
+      return {
+        lt5k: `Up to ${format(baseValues.v5k)}`,
+        '5to15': `${format(baseValues.v5k)} – ${format(baseValues.v15k)}`,
+        '15to30': `${format(baseValues.v15k)} – ${format(baseValues.v30k)}`,
+        gt30: `Over ${format(baseValues.v30k)}`,
+        undecided: 'Undecided'
+      };
+    }
+  }, [detectedCountry, language]);
+
   const [isCountryOpen, setIsCountryOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const countryRef = useRef<HTMLDivElement>(null);
@@ -283,18 +306,28 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
       try {
         const code = await detectCountryCode();
         if (code) {
+          const upperCode = code.toUpperCase();
           setData((prev) => {
             // Se o usuário já selecionou algo ou já foi preenchido, mantém
             if (prev.country && prev.country !== '') return prev;
-            return { ...prev, country: code.toUpperCase() };
+            return { ...prev, country: upperCode };
           });
+          console.log(`[LeadForm] Auto-detected country: ${upperCode}`);
         }
       } catch (err) {
-        console.error('Error auto-detecting country:', err);
+        console.error('[LeadForm] Error auto-detecting country:', err);
       }
     };
     autoDetect();
   }, []);
+
+  // Diagnostic log for currency detection
+  useEffect(() => {
+    if (detectedCountry) {
+      const currency = getCurrencyForCountry(detectedCountry);
+      console.log(`[LeadForm] Currency calculation source: ${detectedCountry} -> ${currency}`);
+    }
+  }, [detectedCountry]);
 
   // Focus search input when dropdown opens
   useEffect(() => {
@@ -408,14 +441,14 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
       // --- End Rate Limiting Logic ---
       
       if (onSubmit) {
-        await onSubmit(data);
+        await onSubmit({ ...data, detectedCountry });
       } else {
         const response = await fetch('/api/contact', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify({ ...data, detectedCountry }),
         });
 
         if (!response.ok) {
@@ -665,7 +698,7 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
                       onClick={() => setData((d) => ({ ...d, budget: key }))}
                       className={`text-sm px-3 py-2 rounded-sm border cursor-pointer ${data.budget === key ? 'border-[#2869D6] bg-[#2869D6]/5 text-[#1C1C1E]' : 'border-[#E2E7F1] text-[#1C1C1E]'}`}
                     >
-                      {t.budgets[key]}
+                      {budgetOptions[key]}
                     </button>
                   ))}
                 </div>

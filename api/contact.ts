@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import nodemailer from "nodemailer";
 import { z } from "zod";
+import { getCurrencyForCountry, getCurrencySymbol, formatCurrency, convertFromBRL } from "../shared/currencies";
 
 // Lead form validation schema
 const leadFormSchema = z.object({
@@ -15,6 +16,7 @@ const leadFormSchema = z.object({
     timeframe: z.string().min(1, "Timeframe is required"),
     message: z.string().min(1, "Message is required"),
     language: z.string().optional().default("pt"),
+    detectedCountry: z.string().optional(),
 });
 
 type LeadFormData = z.infer<typeof leadFormSchema>;
@@ -57,19 +59,38 @@ async function sendLeadEmails(data: LeadFormData) {
         other: 'Personalizado'
     };
 
-    const budgetLabels: Record<string, string> = {
-        lt5k: 'Até R$ 5 mil',
-        '5to15': 'R$ 5–15 mil',
-        '15to30': 'R$ 15–30 mil',
-        gt30: 'Acima de R$ 30 mil',
-        undecided: 'A definir'
-    };
-
     const timeframeLabels: Record<string, string> = {
         urgent: 'Urgente (até 2 semanas)',
         '1to2': '1–2 meses',
         '3to6': '3–6 meses',
         flexible: 'Flexível'
+    };
+
+    const countryForCurrency = data.detectedCountry || data.country;
+    const currencyCode = getCurrencyForCountry(countryForCurrency);
+    const locale = data.language === 'en' ? 'en-US' : 'pt-BR';
+
+    // Valores base para conversão (considerando BRL como referência)
+    const baseValues = {
+        v5k: 5000,
+        v15k: 15000,
+        v30k: 30000
+    };
+
+    const format = (val: number) => formatCurrency(convertFromBRL(val, currencyCode), currencyCode, locale);
+
+    const budgetLabels: Record<string, string> = data.language === 'en' ? {
+        lt5k: `Up to ${format(baseValues.v5k)}`,
+        '5to15': `${format(baseValues.v5k)} – ${format(baseValues.v15k)}`,
+        '15to30': `${format(baseValues.v15k)} – ${format(baseValues.v30k)}`,
+        gt30: `Over ${format(baseValues.v30k)}`,
+        undecided: 'Undecided'
+    } : {
+        lt5k: `Até ${format(baseValues.v5k)}`,
+        '5to15': `${format(baseValues.v5k)} – ${format(baseValues.v15k)}`,
+        '15to30': `${format(baseValues.v15k)} – ${format(baseValues.v30k)}`,
+        gt30: `Acima de ${format(baseValues.v30k)}`,
+        undecided: 'A definir'
     };
 
     const servicesHtml = data.services.map(s => serviceLabels[s] || s).join(", ");

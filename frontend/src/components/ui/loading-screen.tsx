@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useLanguage } from '@/hooks/use-language';
 
 export function LoadingScreen() {
   const [progress, setProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const [isFadingOut, setIsFadingOut] = useState(false);
+  const { isReady } = useLanguage();
 
   useEffect(() => {
     // Bloqueia o scroll enquanto o loading está visível
@@ -60,7 +62,7 @@ export function LoadingScreen() {
   }, []);
 
   useEffect(() => {
-    if (progress >= 100) {
+    if (progress >= 100 && isReady) {
       const timer = setTimeout(() => {
         setIsFadingOut(true);
         setTimeout(() => {
@@ -70,7 +72,7 @@ export function LoadingScreen() {
       }, 500); // Delay após chegar em 100%
       return () => clearTimeout(timer);
     }
-  }, [progress]);
+  }, [progress, isReady]);
 
   if (!isVisible) return null;
 
