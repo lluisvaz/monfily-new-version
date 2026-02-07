@@ -73,7 +73,7 @@ async function detectLanguageByLocation(): Promise<Language> {
  * Detecta o idioma preferido do navegador
  * Útil como fallback se a API de IP falhar
  */
-function detectLanguageFromBrowser(): Language {
+export function detectLanguageFromBrowser(): Language {
   if (typeof window === 'undefined') return 'pt';
 
   const browserLang = navigator.language || (navigator as any).userLanguage;

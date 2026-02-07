@@ -11,8 +11,6 @@ export interface Translations {
   header: {
     nav: {
       solutions: string;
-      about: string;
-      methodology: string;
       support: string;
       insights: string;
       menu: string;
@@ -174,8 +172,6 @@ export interface Translations {
       };
       website: {
         title: string;
-        docs: string;
-        integrations: string;
         products: string;
         fees: string;
         privacy: string;
@@ -201,8 +197,6 @@ export const translations: Record<Language, Translations> = {
     header: {
       nav: {
         solutions: 'Soluções',
-        about: 'Sobre',
-        methodology: 'Metodologia',
         support: 'Suporte',
         insights: 'Insights',
         menu: 'Menu de Navegação',
@@ -384,8 +378,6 @@ export const translations: Record<Language, Translations> = {
         },
         website: {
           title: 'Recursos',
-          docs: 'Sobre',
-          integrations: 'Metodologia',
           products: 'Insights',
           fees: 'Portfólio',
           privacy: 'Privacidade',
@@ -409,8 +401,6 @@ export const translations: Record<Language, Translations> = {
     header: {
       nav: {
         solutions: 'Solutions',
-        about: 'About',
-        methodology: 'Methodology',
         support: 'Support',
         insights: 'Insights',
         menu: 'Navigation Menu',
@@ -592,8 +582,6 @@ export const translations: Record<Language, Translations> = {
         },
         website: {
           title: 'Resources',
-          docs: 'About',
-          integrations: 'Methodology',
           products: 'Insights',
           fees: 'Portfolio',
           privacy: 'Privacy',

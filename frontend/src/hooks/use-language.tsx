@@ -1,39 +1,63 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useLocation } from 'wouter';
 import type { Language } from '@/lib/translations';
-import { detectLanguage } from '@/lib/geo-location';
+import { detectLanguage, detectLanguageFromBrowser } from '@/lib/geo-location';
 
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
+  isReady: boolean;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [location, setLocation] = useLocation();
-  const [language, setLanguageState] = useState<Language>('pt');
+  const [language, setLanguageState] = useState<Language>(() => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname;
+      if (path.startsWith('/en')) return 'en';
+      if (path.startsWith('/pt')) return 'pt';
+      // Fallback síncrono para o navegador se estivermos na raiz
+      return detectLanguageFromBrowser();
+    }
+    return 'pt';
+  });
+  const [isReady, setIsReady] = useState(false);
 
   // Extract language from path and detect location if needed
   useEffect(() => {
     const pathLang = location.startsWith('/en') ? 'en' : location.startsWith('/pt') ? 'pt' : null;
     
-    // If no language in path, detect location and redirect
+    // Se não houver idioma no path e estivermos na raiz, detectamos via IP (mais preciso)
     if (!pathLang && location === '/') {
-      // Detecta o idioma pela localização sempre (sem cache)
       detectLanguage().then((detectedLang) => {
         const newPath = detectedLang === 'pt' ? '/pt' : '/en';
-        setLocation(newPath);
-        setLanguageState(detectedLang);
+        
+        // Só redireciona se ainda estivermos na raiz
+        if (location === '/') {
+          setLocation(newPath);
+          setLanguageState(detectedLang);
+          // Não marcamos isReady como true aqui, deixamos o próximo ciclo (com o novo path) fazer isso
+        }
       }).catch(() => {
         // Em caso de erro, usa português como padrão
-        setLocation('/pt');
-        setLanguageState('pt');
+        if (location === '/') {
+          setLocation('/pt');
+          setLanguageState('pt');
+        }
       });
     } else if (pathLang) {
-      setLanguageState(pathLang);
+      // Se o path já tem idioma, sincronizamos o estado e marcamos como pronto
+      if (language !== pathLang) {
+        setLanguageState(pathLang);
+      }
+      setIsReady(true);
+    } else {
+      // Para outras rotas, marcamos como pronto para não travar o app
+      setIsReady(true);
     }
-  }, [location, setLocation]);
+  }, [location, setLocation, language]);
 
   const setLanguage = (lang: Language) => {
     // Remove current language prefix from path
@@ -44,7 +68,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage }}>
+    <LanguageContext.Provider value={{ language, setLanguage, isReady }}>
       {children}
     </LanguageContext.Provider>
   );

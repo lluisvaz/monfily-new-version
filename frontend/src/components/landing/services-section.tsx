@@ -1596,8 +1596,6 @@ const FooterSection = () => {
               {t.footer.columns.website.title}
             </h4>
             <ul className="flex flex-col space-y-4">
-              <li><a href="#" className="text-[#6B7280] hover:text-[#1C1C1E] transition-colors text-lg">{t.footer.columns.website.docs}</a></li>
-              <li><a href="#" className="text-[#6B7280] hover:text-[#1C1C1E] transition-colors text-lg">{t.footer.columns.website.integrations}</a></li>
               <li><a href="#" className="text-[#6B7280] hover:text-[#1C1C1E] transition-colors text-lg">{t.footer.columns.website.products}</a></li>
               <li><a href="#" className="text-[#6B7280] hover:text-[#1C1C1E] transition-colors text-lg">{t.footer.columns.website.fees}</a></li>
               <li><a href="#" className="text-[#6B7280] hover:text-[#1C1C1E] transition-colors text-lg">{t.footer.columns.website.privacy}</a></li>
