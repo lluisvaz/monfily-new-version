@@ -21,7 +21,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { NavArrowDown, Xmark, Menu } from "iconoir-react";
+import { NavArrowDown } from "iconoir-react";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
 import { SpotlightButton } from "@/components/ui/spotlight-button";
@@ -208,14 +208,53 @@ export function Header() {
 
       {/* Mobile/Tablet Menu */}
       <div className="flex lg:hidden items-center gap-2 flex-shrink-0">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button
+              className="flex items-center justify-center h-10 px-3 rounded-full border border-[#E2E7F1] hover:bg-slate-50 transition-colors focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
+              style={{ animationDelay: '0.15s', opacity: 0 }}
+            >
+              <img
+                src={`https://flagcdn.com/w20/${language === 'pt' ? 'br' : 'us'}.png`}
+                alt={language}
+                className="w-5 h-auto rounded-sm flex-shrink-0"
+              />
+              <NavArrowDown className="w-3 h-3 ml-1 text-[#1C1C1E]" />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="end"
+            sideOffset={20}
+            className="min-w-[200px] border border-[#E2E7F1] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.08)] rounded-lg data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-2"
+          >
+            <DropdownMenuItem
+              className={`flex items-center gap-2 cursor-pointer ${language === 'pt' ? 'font-medium bg-slate-50' : ''}`}
+              onClick={() => handleLanguageChange('pt')}
+            >
+              <img src="https://flagcdn.com/w20/br.png" alt="BR" className="w-4 h-auto rounded-sm" />
+              <span className={language === 'pt' ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{t.header.languages.portuguese}</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className={`flex items-center gap-2 cursor-pointer ${language === 'en' ? 'font-medium bg-slate-50' : ''}`}
+              onClick={() => handleLanguageChange('en')}
+            >
+              <img src="https://flagcdn.com/w20/us.png" alt="US" className="w-4 h-auto rounded-sm" />
+              <span className={language === 'en' ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{t.header.languages.english}</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
             <button
-              className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 header-blur-animate focus:outline-none focus-visible:outline-none cursor-pointer"
+              className="group flex items-center justify-center h-10 w-10 rounded-full hover:bg-slate-50 transition-colors flex-shrink-0 header-blur-animate focus:outline-none focus-visible:outline-none cursor-pointer"
               style={{ animationDelay: '0.2s', opacity: 0 }}
               aria-label="Abrir menu de navegação"
             >
-              <Menu width={32} height={32} className="text-[#1C1C1E]" />
+              <div className="w-6 h-6 flex flex-col justify-center items-end gap-1.5">
+                <div className="w-6 h-[2px] bg-current rounded-full transition-all duration-300" />
+                <div className="w-4 h-[2px] bg-current rounded-full transition-all duration-300 group-hover:w-6" />
+              </div>
             </button>
           </SheetTrigger>
           <SheetContent
@@ -432,10 +471,13 @@ export function Header() {
                   </a>
                   <SheetClose asChild>
                     <button
-                      className="p-2 text-[#1C1C1E] hover:text-[#1C1C1E] transition-colors flex-shrink-0 sidebar-blur-animate focus:outline-none focus-visible:outline-none cursor-pointer"
+                      className="group flex items-center justify-center h-10 w-10 rounded-full hover:bg-slate-50 transition-colors flex-shrink-0 sidebar-blur-animate focus:outline-none focus-visible:outline-none cursor-pointer"
                       style={{ animationDelay: '0.15s', opacity: 0 }}
                     >
-                      <Xmark className="h-8 w-8 text-[#1C1C1E]" />
+                      <div className="relative w-6 h-6 flex items-center justify-center">
+                        <div className="absolute w-6 h-[2px] bg-current rounded-full rotate-45 transition-all duration-300 group-hover:rotate-90" />
+                        <div className="absolute w-6 h-[2px] bg-current rounded-full -rotate-45 transition-all duration-300 group-hover:rotate-0" />
+                      </div>
                     </button>
                   </SheetClose>
                 </div>
