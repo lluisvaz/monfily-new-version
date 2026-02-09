@@ -854,7 +854,7 @@ const SolutionsSuiteSection = () => {
 
   const renderHeading = () => {
     const heading = t.solutionsSuite.heading;
-    const target = language === 'pt' ? 'soluções' : 'solutions';
+    const target = (language === 'pt-br' || language === 'pt-pt') ? 'soluções' : language === 'es' ? 'soluciones' : 'solutions';
     const parts = heading.split(target);
 
     if (parts.length === 2) {

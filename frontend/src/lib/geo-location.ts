@@ -1,4 +1,4 @@
-// Lista de países lusófonos
+// Lista de países lusófonos (excluindo Portugal que terá tratamento especial)
 const PORTUGUESE_SPEAKING_COUNTRIES = [
   'AO', // Angola
   'BR', // Brasil
@@ -6,12 +6,36 @@ const PORTUGUESE_SPEAKING_COUNTRIES = [
   'GW', // Guiné-Bissau
   'GQ', // Guiné Equatorial
   'MZ', // Moçambique
-  'PT', // Portugal
   'ST', // São Tomé e Príncipe
   'TL', // Timor-Leste
 ];
 
-export type Language = 'pt' | 'en';
+// Lista de países hispanofalantes
+const SPANISH_SPEAKING_COUNTRIES = [
+  'ES', // España
+  'MX', // México
+  'AR', // Argentina
+  'CO', // Colombia
+  'PE', // Perú
+  'VE', // Venezuela
+  'CL', // Chile
+  'EC', // Ecuador
+  'GT', // Guatemala
+  'CU', // Cuba
+  'BO', // Bolivia
+  'DO', // República Dominicana
+  'HN', // Honduras
+  'PY', // Paraguay
+  'SV', // El Salvador
+  'NI', // Nicaragua
+  'CR', // Costa Rica
+  'PA', // Panamá
+  'UY', // Uruguay
+  'PR', // Puerto Rico
+  'GQ', // Guinea Ecuatorial (también portugués)
+];
+
+export type Language = 'pt-br' | 'pt-pt' | 'en' | 'es';
 
 /**
  * Detecta o país do usuário usando uma API de geolocalização por IP
@@ -64,13 +88,25 @@ export async function detectCountryCode(): Promise<string | null> {
 
 /**
  * Detecta o idioma baseado na localização (usando o código do país)
- * Retorna 'pt' se o país for lusófono, 'en' caso contrário
+ * Retorna 'pt-pt' se o país for Portugal, 'pt-br' se for outro país lusófono, 'en' caso contrário
  */
 async function detectLanguageByLocation(): Promise<Language> {
   const countryCode = await detectCountryCode();
 
-  if (countryCode && PORTUGUESE_SPEAKING_COUNTRIES.includes(countryCode.toUpperCase())) {
-    return 'pt';
+  if (countryCode) {
+    const upperCode = countryCode.toUpperCase();
+    // Portugal recebe pt-pt
+    if (upperCode === 'PT') {
+      return 'pt-pt';
+    }
+    // Outros países lusófonos recebem pt-br
+    if (PORTUGUESE_SPEAKING_COUNTRIES.includes(upperCode)) {
+      return 'pt-br';
+    }
+    // Países hispanofalantes recebem es
+    if (SPANISH_SPEAKING_COUNTRIES.includes(upperCode)) {
+      return 'es';
+    }
   }
 
   return 'en';
@@ -81,13 +117,24 @@ async function detectLanguageByLocation(): Promise<Language> {
  * Útil como fallback se a API de IP falhar
  */
 export function detectLanguageFromBrowser(): Language {
-  if (typeof window === 'undefined') return 'pt';
+  if (typeof window === 'undefined') return 'pt-br';
 
   const browserLang = navigator.language || (navigator as any).userLanguage;
-  
-  // Verifica se o idioma do navegador começa com 'pt'
-  if (browserLang && browserLang.toLowerCase().startsWith('pt')) {
-    return 'pt';
+
+  if (browserLang) {
+    const lang = browserLang.toLowerCase();
+    // pt-PT ou pt (sem região) -> Português Portugal
+    if (lang === 'pt-pt' || lang === 'pt') {
+      return 'pt-pt';
+    }
+    // pt-BR -> Português Brasil
+    if (lang.startsWith('pt')) {
+      return 'pt-br';
+    }
+    // Espanhol -> es
+    if (lang.startsWith('es')) {
+      return 'es';
+    }
   }
 
   return 'en';
@@ -100,10 +147,24 @@ export function detectLanguageFromBrowser(): Language {
 export async function detectLocationData(): Promise<{ language: Language; country: string | null }> {
   try {
     const countryCode = await detectCountryCode();
-    
+
     if (countryCode) {
       const upperCode = countryCode.toUpperCase();
-      const language = PORTUGUESE_SPEAKING_COUNTRIES.includes(upperCode) ? 'pt' : 'en';
+      let language: Language = 'en';
+
+      // Portugal recebe pt-pt
+      if (upperCode === 'PT') {
+        language = 'pt-pt';
+      }
+      // Outros países lusófonos recebem pt-br
+      else if (PORTUGUESE_SPEAKING_COUNTRIES.includes(upperCode)) {
+        language = 'pt-br';
+      }
+      // Países hispanofalantes recebem es
+      else if (SPANISH_SPEAKING_COUNTRIES.includes(upperCode)) {
+        language = 'es';
+      }
+
       return { language, country: upperCode };
     }
   } catch (error) {
@@ -111,9 +172,9 @@ export async function detectLocationData(): Promise<{ language: Language; countr
   }
 
   // Fallback para detecção pelo navegador
-  return { 
-    language: detectLanguageFromBrowser(), 
-    country: null 
+  return {
+    language: detectLanguageFromBrowser(),
+    country: null
   };
 }
 

@@ -23,17 +23,17 @@ export function SEOHead() {
 
     // Update title meta
     updateMetaTag('title', t.seo.title);
-    
+
     // Update description meta
     updateMetaTag('description', t.seo.description);
 
     // Update html lang attribute
-    document.documentElement.lang = language === 'pt' ? 'pt-BR' : 'en-US';
+    document.documentElement.lang = language === 'pt-br' ? 'pt-BR' : language === 'pt-pt' ? 'pt-PT' : 'en-US';
 
     // Update Open Graph tags
     updateMetaTag('og:title', t.seo.title, 'property');
     updateMetaTag('og:description', t.seo.description, 'property');
-    updateMetaTag('og:locale', language === 'pt' ? 'pt_BR' : 'en_US', 'property');
+    updateMetaTag('og:locale', language === 'pt-br' ? 'pt_BR' : language === 'pt-pt' ? 'pt_PT' : 'en_US', 'property');
 
     // Update Twitter Card tags
     updateMetaTag('twitter:title', t.seo.title);

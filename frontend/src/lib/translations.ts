@@ -1,4 +1,4 @@
-export type Language = 'pt' | 'en';
+export type Language = 'pt-br' | 'pt-pt' | 'en' | 'es';
 
 export interface Translations {
   // SEO Meta Tags
@@ -6,7 +6,7 @@ export interface Translations {
     title: string;
     description: string;
   };
-  
+
   // Header
   header: {
     nav: {
@@ -23,12 +23,14 @@ export interface Translations {
       technicalSEO: string;
     };
     languages: {
-      portuguese: string;
+      portugueseBrazil: string;
+      portuguesePortugal: string;
       english: string;
+      spanish: string;
     };
     cta: string;
   };
-  
+
   // Hero Section
   hero: {
     badge: {
@@ -58,12 +60,12 @@ export interface Translations {
       };
     };
   };
-  
+
   // Trusted By Section
   trustedBy: {
     label: string;
   };
-  
+
   // Services Section
   services: {
     title: string;
@@ -90,7 +92,7 @@ export interface Translations {
       };
     };
   };
-  
+
   // Website Mockups
   mockup: {
     navigation: {
@@ -189,7 +191,7 @@ export interface Translations {
 }
 
 export const translations: Record<Language, Translations> = {
-  pt: {
+  'pt-br': {
     seo: {
       title: 'Criação de Sites, Softwares e Automações com IA | Monfily',
       description: 'Desenvolvemos sites rápidos, sistemas sob medida e automações com IA para empresas que precisam de eficiência operacional e presença digital profissional.',
@@ -209,8 +211,10 @@ export const translations: Record<Language, Translations> = {
         technicalSEO: 'SEO Técnico',
       },
       languages: {
-        portuguese: 'Português (Brasil)',
+        portugueseBrazil: 'Português (Brasil)',
+        portuguesePortugal: 'Português (Portugal)',
         english: 'Inglês (Estados Unidos)',
+        spanish: 'Espanhol',
       },
       cta: 'Falar com Especialista',
     },
@@ -393,6 +397,212 @@ export const translations: Record<Language, Translations> = {
       copyright: `© ${new Date().getFullYear()} Monfily Digital. Todos os direitos reservados.`,
     },
   },
+  'pt-pt': {
+    seo: {
+      title: 'Criação de Websites, Software e Automações com IA | Monfily',
+      description: 'Desenvolvemos websites rápidos, sistemas à medida e automações com IA para empresas que precisam de eficiência operacional e presença digital profissional.',
+    },
+    header: {
+      nav: {
+        solutions: 'Soluções',
+        support: 'Suporte',
+        insights: 'Insights',
+        menu: 'Menu de Navegação',
+        menuDescription: 'Menu principal de navegação do site',
+      },
+      solutionsDropdown: {
+        websiteCreation: 'Criação de Websites',
+        softwareDevelopment: 'Desenvolvimento de Software',
+        artificialIntelligence: 'Inteligência Artificial',
+        technicalSEO: 'SEO Técnico',
+      },
+      languages: {
+        portugueseBrazil: 'Português (Brasil)',
+        portuguesePortugal: 'Português (Portugal)',
+        english: 'Inglês (Estados Unidos)',
+        spanish: 'Espanhol',
+      },
+      cta: 'Falar com Especialista',
+    },
+    hero: {
+      badge: {
+        chosenBy: 'Escolhido por ',
+        clients: '+50 Clientes em ',
+        in: '',
+      },
+      rotatingTexts: [
+        'Retalho & E-commerce',
+        'Saúde & Clínicas',
+        'Imobiliário & Construção',
+        'Advocacia & Consultoria',
+        'Serviços & Startups',
+      ],
+      heading: {
+        line1: 'Código Puro.',
+        line2: 'Resultados ',
+        line3: 'Reais.',
+      },
+      description: 'A infraestrutura digital completa para o seu negócio. Combinamos design de Criação de Websites de alta performance, engenharia de Software, Inteligência Artificial (IA) e SEO técnico para gerar receita e eficiência.',
+      cta: {
+        primary: 'Iniciar o Meu Projeto',
+        secondary: 'Porquê nós?',
+      },
+      features: {
+        performance: {
+          title: 'Performance',
+          description: 'Websites rápidos que convertem.',
+        },
+        optimized: {
+          title: 'Otimizado',
+          description: 'Estrutura preparada para SEO.',
+        },
+      },
+    },
+    trustedBy: {
+      label: 'Utilizamos as melhores tecnologias:',
+    },
+    services: {
+      title: 'Soluções digitais para diferentes mercados.',
+      metrics: {
+        projectsDelivered: 'Projetos entregues',
+        nichesServed: 'Segmentos atendidos',
+      },
+      items: {
+        webDesign: {
+          title: 'Criação de Websites',
+          description: 'Websites rápidos e adaptados para dispositivos móveis. Focamos na clareza das informações para facilitar o contacto do seu cliente.',
+        },
+        customSoftware: {
+          title: 'Sistemas à Medida',
+          description: 'Desenvolvemos ferramentas para organizar processos internos ou criar novos produtos digitais, com foco em segurança e usabilidade.',
+        },
+        aiAutomation: {
+          title: 'Automação com IA',
+          description: 'Integração de assistentes inteligentes para atendimento e fluxos de trabalho, reduzindo o tempo gasto em tarefas manuais e repetitivas.',
+        },
+        seoGrowth: {
+          title: 'SEO Técnico',
+          description: 'Otimização da estrutura técnica do website para melhorar o posicionamento nos motores de busca de forma orgânica.',
+        },
+      },
+    },
+    mockup: {
+      navigation: {
+        services: 'Serviços',
+        benefits: 'Vantagens',
+        projects: 'Portfólio',
+        prices: 'Orçamento',
+        clients: 'Clientes',
+      },
+      badge: 'Disponível para novos projetos',
+      heading: {
+        line1: 'Desenvolvimento de Software',
+        line2: 'Para Empresas e Startups',
+      },
+      description: 'Entregamos tecnologia de forma clara, com prazos reais e suporte contínuo para o seu crescimento digital.',
+      cta: {
+        viewPrices: 'Ver Portfólio',
+        scheduleNow: 'Agendar Reunião',
+      },
+      trust: 'Mais de 50 empresas atendidas',
+    },
+    expertise: {
+      label: 'A Nossa Expertise',
+      heading: {
+        line1: 'Desenvolvimento técnico',
+        line2: 'focado em utilidade.',
+      },
+      description: 'Não criamos apenas ecrãs. Construímos a lógica por trás do seu negócio, garantindo que cada linha de código tenha um propósito prático para a sua empresa.',
+      cta: 'Falar com Especialista',
+    },
+    solutionsSuite: {
+      heading: 'Tecnologia que organiza a sua operação.',
+      description: 'Mais do que um website, entregamos ferramentas que ajudam na gestão e no crescimento do seu negócio.',
+      items: {
+        antiFraud: {
+          title: 'Segurança de Dados',
+          description: 'Implementamos protocolos de segurança para proteger as informações da sua empresa e dos seus clientes.',
+        },
+        checkout: {
+          title: 'Integrações',
+          description: 'Ligamos o seu website ou sistema às ferramentas que já utiliza, como CRMs, meios de pagamento e ERPs.',
+        },
+        subscriptions: {
+          title: 'Escalabilidade',
+          description: 'Desenvolvemos sistemas preparados para suportar o aumento de acessos e dados sem perda de velocidade.',
+          badge: '',
+        },
+      },
+    },
+    faq: {
+      heading: 'Perguntas Frequentes',
+      description: 'Respostas diretas sobre como trabalhamos e o que pode esperar dos nossos serviços.',
+      items: [
+        {
+          question: 'Como funciona o processo de criação?',
+          answer: 'O processo divide-se em quatro etapas: compreensão das necessidades, desenho da solução (design), desenvolvimento do código e entrega final com formação, se necessário.',
+        },
+        {
+          question: 'O que preciso de enviar para começar o projeto?',
+          answer: 'Basicamente as informações sobre os seus serviços, o seu logótipo e o acesso ao seu domínio, caso já possua um.',
+        },
+        {
+          question: 'Oferecem suporte após a entrega?',
+          answer: 'Sim. Oferecemos suporte técnico para correções e atualizações, garantindo que a sua plataforma continue a funcionar sem interrupções.',
+        },
+        {
+          question: 'O website será otimizado para telemóveis?',
+          answer: 'Sim. Todos os nossos projetos são desenvolvidos com tecnologia responsiva, garantindo que funcionem perfeitamente em smartphones, tablets e computadores.',
+        },
+        {
+          question: 'Tratam do alojamento do website?',
+          answer: 'Auxiliamos na escolha e configuração do melhor alojamento para o seu projeto, mas a contratação do serviço é feita diretamente por si para garantir total autonomia.',
+        },
+        {
+          question: 'Fazem a identidade visual/logótipo?',
+          answer: 'Focamo-nos no desenvolvimento digital (websites e sistemas). Caso não tenha uma identidade visual, podemos indicar parceiros de design ou trabalhar com o que já possui.',
+        },
+        {
+          question: 'Como é feita a comunicação durante o projeto?',
+          answer: 'Utilizamos canais diretos como WhatsApp e reuniões agendadas para garantir que acompanha cada evolução do desenvolvimento.',
+        },
+      ],
+    },
+    finalCTA: {
+      heading: 'Pronto para tirar o seu projeto do papel?',
+      description: 'Fale com um dos nossos especialistas e receba uma análise técnica preliminar para o seu negócio.',
+      cta: 'Falar com Especialista',
+    },
+    footer: {
+      columns: {
+        account: {
+          title: 'Soluções',
+          signup: 'Criação de Websites',
+          login: 'Desenvolvimento de Software',
+        },
+        support: {
+          title: 'Contacto',
+          email: 'contacto@monfily.com',
+          talkToSupport: 'Falar com especialista',
+          joinDiscord: 'Agendar reunião',
+        },
+        website: {
+          title: 'Recursos',
+          products: 'Insights',
+          fees: 'Portfólio',
+          privacy: 'Privacidade',
+          terms: 'Termos e condições',
+          status: 'FAQ',
+        },
+        ai: {
+          title: 'IA',
+          chat: 'Assistente IA',
+          llms: 'Modelos e LLMs',
+        },
+      },
+      copyright: `© ${new Date().getFullYear()} Monfily Digital. Todos os direitos reservados.`,
+    },
+  },
   en: {
     seo: {
       title: 'Website Creation, Software & AI Automation | Monfily',
@@ -413,8 +623,10 @@ export const translations: Record<Language, Translations> = {
         technicalSEO: 'Technical SEO',
       },
       languages: {
-        portuguese: 'Portuguese (Brazil)',
+        portugueseBrazil: 'Portuguese (Brazil)',
+        portuguesePortugal: 'Portuguese (Portugal)',
         english: 'English (United States)',
+        spanish: 'Spanish',
       },
       cta: 'Talk to an Expert',
     },
@@ -595,6 +807,212 @@ export const translations: Record<Language, Translations> = {
         },
       },
       copyright: `© ${new Date().getFullYear()} Monfily Digital. All rights reserved.`,
+    },
+  },
+  es: {
+    seo: {
+      title: 'Creación de Sitios Web, Software y Automatizaciones con IA | Monfily',
+      description: 'Desarrollamos sitios rápidos, sistemas a medida y automatizaciones con IA para empresas que necesitan eficiencia operativa y presencia digital profesional.',
+    },
+    header: {
+      nav: {
+        solutions: 'Soluciones',
+        support: 'Soporte',
+        insights: 'Insights',
+        menu: 'Menú de Navegación',
+        menuDescription: 'Menú principal de navegación del sitio',
+      },
+      solutionsDropdown: {
+        websiteCreation: 'Creación de Sitios Web',
+        softwareDevelopment: 'Desarrollo de Software',
+        artificialIntelligence: 'Inteligencia Artificial',
+        technicalSEO: 'SEO Técnico',
+      },
+      languages: {
+        portugueseBrazil: 'Portugués (Brasil)',
+        portuguesePortugal: 'Portugués (Portugal)',
+        english: 'Inglés (Estados Unidos)',
+        spanish: 'Español',
+      },
+      cta: 'Hablar con Especialista',
+    },
+    hero: {
+      badge: {
+        chosenBy: 'Elegido por ',
+        clients: '+50 Clientes en ',
+        in: '',
+      },
+      rotatingTexts: [
+        'Retail y E-commerce',
+        'Salud y Clínicas',
+        'Inmobiliaria y Construcción',
+        'Abogacía y Consultoría',
+        'Servicios y Startups',
+      ],
+      heading: {
+        line1: 'Código Puro.',
+        line2: 'Resultados ',
+        line3: 'Reales.',
+      },
+      description: 'La infraestructura digital completa para tu negocio. Unimos diseño de creación de sitios de alto rendimiento, ingeniería de software, inteligencia artificial (IA) y SEO técnico para generar ingresos y eficiencia.',
+      cta: {
+        primary: 'Iniciar Mi Proyecto',
+        secondary: '¿Por qué nosotros?',
+      },
+      features: {
+        performance: {
+          title: 'Rendimiento',
+          description: 'Sitios rápidos que convierten.',
+        },
+        optimized: {
+          title: 'Optimizado',
+          description: 'Estructura preparada para SEO.',
+        },
+      },
+    },
+    trustedBy: {
+      label: 'Utilizamos las mejores tecnologías:',
+    },
+    services: {
+      title: 'Soluciones digitales para diferentes mercados.',
+      metrics: {
+        projectsDelivered: 'Proyectos entregados',
+        nichesServed: 'Segmentos atendidos',
+      },
+      items: {
+        webDesign: {
+          title: 'Creación de Sitios Web',
+          description: 'Sitios rápidos y adaptados para dispositivos móviles. Nos enfocamos en la claridad de la información para facilitar el contacto de tu cliente.',
+        },
+        customSoftware: {
+          title: 'Sistemas a Medida',
+          description: 'Desarrollamos herramientas para organizar procesos internos o crear nuevos productos digitales, con enfoque en seguridad y usabilidad.',
+        },
+        aiAutomation: {
+          title: 'Automatización con IA',
+          description: 'Integración de asistentes inteligentes para atención y flujos de trabajo, reduciendo el tiempo dedicado a tareas manuales y repetitivas.',
+        },
+        seoGrowth: {
+          title: 'SEO Técnico',
+          description: 'Optimización de la estructura técnica del sitio para mejorar el posicionamiento en los motores de búsqueda de forma orgánica.',
+        },
+      },
+    },
+    mockup: {
+      navigation: {
+        services: 'Servicios',
+        benefits: 'Ventajas',
+        projects: 'Portfolio',
+        prices: 'Presupuesto',
+        clients: 'Clientes',
+      },
+      badge: 'Disponible para nuevos proyectos',
+      heading: {
+        line1: 'Desarrollo de Software',
+        line2: 'Para Empresas y Startups',
+      },
+      description: 'Entregamos tecnología de forma clara, con plazos reales y soporte continuo para tu crecimiento digital.',
+      cta: {
+        viewPrices: 'Ver Portfolio',
+        scheduleNow: 'Agendar Reunión',
+      },
+      trust: 'Más de 50 empresas atendidas',
+    },
+    expertise: {
+      label: 'Nuestra Expertise',
+      heading: {
+        line1: 'Desarrollo técnico',
+        line2: 'enfocado en utilidad.',
+      },
+      description: 'No creamos solo pantallas. Construimos la lógica detrás de tu negocio, garantizando que cada línea de código tenga un propósito práctico para tu empresa.',
+      cta: 'Hablar con Especialista',
+    },
+    solutionsSuite: {
+      heading: 'Tecnología que organiza tu operación.',
+      description: 'Más que un sitio, entregamos herramientas que ayudan en la gestión y el crecimiento de tu negocio.',
+      items: {
+        antiFraud: {
+          title: 'Seguridad de Datos',
+          description: 'Implementamos protocolos de seguridad para proteger la información de tu empresa y de tus clientes.',
+        },
+        checkout: {
+          title: 'Integraciones',
+          description: 'Conectamos tu sitio o sistema con las herramientas que ya usas, como CRMs, medios de pago y ERPs.',
+        },
+        subscriptions: {
+          title: 'Escalabilidad',
+          description: 'Desarrollamos sistemas preparados para soportar el aumento de accesos y datos sin pérdida de velocidad.',
+          badge: '',
+        },
+      },
+    },
+    faq: {
+      heading: 'Preguntas Frecuentes',
+      description: 'Respuestas directas sobre cómo trabajamos y qué puedes esperar de nuestros servicios.',
+      items: [
+        {
+          question: '¿Cómo funciona el proceso de creación?',
+          answer: 'El proceso se divide en cuatro etapas: entendimiento de las necesidades, diseño de la solución, desarrollo del código y entrega final con capacitación, si es necesario.',
+        },
+        {
+          question: '¿Qué necesito enviar para comenzar el proyecto?',
+          answer: 'Básicamente la información sobre tus servicios, tu logotipo y el acceso a tu dominio, si ya tienes uno.',
+        },
+        {
+          question: '¿Ofrecen soporte después de la entrega?',
+          answer: 'Sí. Ofrecemos soporte técnico para correcciones y actualizaciones, garantizando que tu plataforma continúe funcionando sin interrupciones.',
+        },
+        {
+          question: '¿El sitio estará optimizado para celulares?',
+          answer: 'Sí. Todos nuestros proyectos se desarrollan con tecnología responsive, garantizando que funcionen perfectamente en smartphones, tablets y computadoras.',
+        },
+        {
+          question: '¿Se encargan del hosting del sitio?',
+          answer: 'Ayudamos en la elección y configuración del mejor hosting para tu proyecto, pero la contratación del servicio se hace directamente por ti para garantizar total autonomía.',
+        },
+        {
+          question: '¿Hacen la identidad visual/logotipo?',
+          answer: 'Nos enfocamos en el desarrollo digital (sitios y sistemas). Si no tienes una identidad visual, podemos indicar socios de diseño o trabajar con lo que ya tienes.',
+        },
+        {
+          question: '¿Cómo es la comunicación durante el proyecto?',
+          answer: 'Utilizamos canales directos como WhatsApp y reuniones agendadas para garantizar que acompañes cada evolución del desarrollo.',
+        },
+      ],
+    },
+    finalCTA: {
+      heading: '¿Listo para sacar tu proyecto del papel?',
+      description: 'Habla con uno de nuestros especialistas y recibe un análisis técnico preliminar para tu negocio.',
+      cta: 'Hablar con Especialista',
+    },
+    footer: {
+      columns: {
+        account: {
+          title: 'Soluciones',
+          signup: 'Creación de Sitios Web',
+          login: 'Desarrollo de Software',
+        },
+        support: {
+          title: 'Contacto',
+          email: 'contacto@monfily.com',
+          talkToSupport: 'Hablar con especialista',
+          joinDiscord: 'Agendar reunión',
+        },
+        website: {
+          title: 'Recursos',
+          products: 'Insights',
+          fees: 'Portfolio',
+          privacy: 'Privacidad',
+          terms: 'Términos y condiciones',
+          status: 'FAQ',
+        },
+        ai: {
+          title: 'IA',
+          chat: 'Asistente IA',
+          llms: 'Modelos y LLMs',
+        },
+      },
+      copyright: `© ${new Date().getFullYear()} Monfily Digital. Todos los derechos reservados.`,
     },
   },
 };

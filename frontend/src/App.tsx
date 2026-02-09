@@ -27,7 +27,7 @@ function Router() {
 
   useEffect(() => {
     // Lista de rotas válidas (baseado no que está no Switch abaixo)
-    const validPaths = ["/", "/pt", "/en"];
+    const validPaths = ["/", "/pt-br", "/pt-pt", "/en", "/es"];
     if (validPaths.includes(location)) {
       localStorage.setItem("last_path", location);
     }
@@ -35,8 +35,10 @@ function Router() {
 
   return (
     <Switch>
-      <Route path="/pt" component={Home} />
+      <Route path="/pt-br" component={Home} />
+      <Route path="/pt-pt" component={Home} />
       <Route path="/en" component={Home} />
+      <Route path="/es" component={Home} />
       <Route path="/" component={Home} />
       <Route component={RedirectToLast} />
     </Switch>
@@ -50,20 +52,20 @@ function App() {
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const link = target.closest('a[href^="#"]') as HTMLAnchorElement;
-      
+
       if (link && link.getAttribute('href')?.startsWith('#')) {
         // Não intercepta se o link tem um handler customizado
         if (link.getAttribute('data-custom-handler') === 'true') {
           return; // Deixa o onClick customizado funcionar
         }
-        
+
         const href = link.getAttribute('href');
         if (href && href !== '#') {
           e.preventDefault();
-          
+
           const id = href.substring(1);
           const element = document.getElementById(id);
-          
+
           if (element) {
             // Se o Lenis estiver ativo, usamos a API dele
             const lenis = (window as any).lenis;
@@ -76,7 +78,7 @@ function App() {
               // Fallback para scroll nativo suave
               element.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
-            
+
             // Atualiza a URL sem o hash usando replaceState
             if (window.history.replaceState) {
               window.history.replaceState(null, '', window.location.pathname + window.location.search);
@@ -87,7 +89,7 @@ function App() {
     };
 
     document.addEventListener('click', handleAnchorClick);
-    
+
     return () => {
       document.removeEventListener('click', handleAnchorClick);
     };

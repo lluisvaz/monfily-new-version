@@ -27,7 +27,8 @@ export function WebsiteMockupMobile() {
   }, []);
 
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString(language === 'pt' ? 'pt-BR' : 'en-US', {
+    const locale = language === 'pt-br' ? 'pt-BR' : language === 'pt-pt' ? 'pt-PT' : 'en-US';
+    return date.toLocaleTimeString(locale, {
       hour: '2-digit',
       minute: '2-digit',
       hour12: false
