@@ -138,13 +138,21 @@ export function Hero() {
           className="text-base md:text-lg text-[#1C1C1E] max-w-md leading-tight hero-blur-animate"
           style={{ animationDelay: '0.3s' }}
         >
-          {language === 'pt' ? (
+          {(language === 'pt-br' || language === 'pt-pt') ? (
             <>
               A infraestrutura digital completa para o seu negócio. Unimos design de{' '}
               <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Criação de Sites de Alta Performance</strong>,{' '}
               <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Engenharia de Software</strong>,{' '}
               <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Inteligência Artificial (IA)</strong> e{' '}
               <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>SEO Técnico</strong> para gerar receita e eficiência.
+            </>
+          ) : language === 'es' ? (
+            <>
+              La infraestructura digital completa para tu negocio. Unimos diseño de{' '}
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Creación de Sitios de Alto Rendimiento</strong>,{' '}
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Ingeniería de Software</strong>,{' '}
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Inteligencia Artificial (IA)</strong> y{' '}
+              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>SEO Técnico</strong> para generar ingresos y eficiencia.
             </>
           ) : (
             <>

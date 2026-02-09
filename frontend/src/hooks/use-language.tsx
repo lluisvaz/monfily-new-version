@@ -12,25 +12,48 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+/**
+ * Detecta o idioma a partir do path da URL
+ */
+function getLanguageFromPath(path: string): Language | null {
+  if (path.startsWith('/pt-pt')) return 'pt-pt';
+  if (path.startsWith('/pt-br')) return 'pt-br';
+  if (path.startsWith('/en')) return 'en';
+  if (path.startsWith('/es')) return 'es';
+  return null;
+}
+
+/**
+ * Retorna o prefixo da rota para um idioma
+ */
+function getRoutePrefix(lang: Language): string {
+  switch (lang) {
+    case 'pt-pt': return '/pt-pt';
+    case 'pt-br': return '/pt-br';
+    case 'en': return '/en';
+    case 'es': return '/es';
+  }
+}
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [location, setLocation] = useLocation();
   const [language, setLanguageState] = useState<Language>(() => {
     if (typeof window !== 'undefined') {
       const path = window.location.pathname;
-      if (path.startsWith('/en')) return 'en';
-      if (path.startsWith('/pt')) return 'pt';
+      const pathLang = getLanguageFromPath(path);
+      if (pathLang) return pathLang;
       // Fallback síncrono para o navegador se estivermos na raiz
       return detectLanguageFromBrowser();
     }
-    return 'pt';
+    return 'pt-br';
   });
   const [isReady, setIsReady] = useState(false);
   const [detectedCountry, setDetectedCountry] = useState<string>('');
 
   // Extract language from path and detect location if needed
   useEffect(() => {
-    const pathLang = location.startsWith('/en') ? 'en' : location.startsWith('/pt') ? 'pt' : null;
-    
+    const pathLang = getLanguageFromPath(location);
+
     // Se ainda não estamos prontos, fazemos a detecção completa (IP + Idioma)
     if (!isReady) {
       detectLocationData().then(({ language: detectedLang, country }) => {
@@ -41,8 +64,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
         }
 
         if (!pathLang && location === '/') {
-          const newPath = detectedLang === 'pt' ? '/pt' : '/en';
-          
+          const newPath = getRoutePrefix(detectedLang);
+
           // Só redireciona se ainda estivermos na raiz
           if (location === '/') {
             setLocation(newPath);
@@ -59,8 +82,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       }).catch((e) => {
         console.error('[LanguageProvider] Detection failed:', e);
         if (!pathLang && location === '/') {
-          setLocation('/pt');
-          setLanguageState('pt');
+          setLocation('/pt-br');
+          setLanguageState('pt-br');
         } else {
           setIsReady(true);
         }
@@ -70,8 +93,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const setLanguage = (lang: Language) => {
     // Remove current language prefix from path
-    const currentPath = location.replace(/^\/(pt|en)/, '') || '/';
-    const newPath = lang === 'pt' ? `/pt${currentPath}` : `/en${currentPath}`;
+    const currentPath = location.replace(/^\/(pt-pt|pt-br|en|es)/, '') || '/';
+    const newPath = `${getRoutePrefix(lang)}${currentPath === '/' ? '' : currentPath}`;
     setLocation(newPath);
     setLanguageState(lang);
   };
@@ -90,4 +113,3 @@ export function useLanguage() {
   }
   return context;
 }
-

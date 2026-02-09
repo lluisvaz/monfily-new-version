@@ -29,7 +29,7 @@ export interface LeadFormProps {
 }
 
 const copy = {
-  pt: {
+  'pt-br': {
     title: 'Comece seu projeto',
     subtitle: 'Deixe seus dados e retornamos em até 1 dia útil.',
     steps: ['Contato', 'Negócio', 'Interesse'],
@@ -70,9 +70,50 @@ const copy = {
       device: 'Limite de envios excedido para este dispositivo. O envio está bloqueado por 15 dias para evitar abusos.',
     }
   },
+  'pt-pt': {
+    title: 'Inicie o seu projeto',
+    subtitle: 'Deixe os seus dados e respondemos em até 1 dia útil.',
+    steps: ['Contacto', 'Negócio', 'Interesse'],
+    labels: {
+      name: 'Nome completo',
+      email: 'E-mail',
+      phone: 'Telefone',
+      country: 'País',
+      company: 'Empresa',
+      website: 'Website (opcional)',
+      service: 'Que serviço procura?',
+      budget: 'Orçamento estimado',
+      timeframe: 'Prazo pretendido',
+      message: 'Contexto do projeto'
+    },
+    services: {
+      website: 'Criação de Website',
+      software: 'Software à Medida',
+      ai: 'Automação com IA',
+      seo: 'SEO Técnico',
+      other: 'Personalizado'
+    },
+    timeframes: {
+      urgent: 'Urgente (até 2 semanas)',
+      '1to2': '1–2 meses',
+      '3to6': '3–6 meses',
+      flexible: 'Flexível'
+    },
+    actions: {
+      next: 'Continuar',
+      back: 'Voltar',
+      submit: 'Enviar'
+    },
+    error: 'Ops! Ocorreu um erro ao tentar enviar o formulário. Tente novamente.',
+    success: 'Pronto! Recebemos os seus dados.',
+    rateLimit: {
+      email: 'Este e-mail já enviou um formulário nas últimas 24 horas.',
+      device: 'Limite de envios excedido para este dispositivo. O envio está bloqueado por 15 dias para evitar abusos.',
+    }
+  },
   en: {
     title: 'Start your project',
-    subtitle: 'Leave your details and we’ll reply within 1 business day.',
+    subtitle: "Leave your details and we'll reply within 1 business day.",
     steps: ['Contact', 'Business', 'Interest'],
     labels: {
       name: 'Full name',
@@ -110,6 +151,47 @@ const copy = {
       email: 'This email has already submitted a form in the last 24 hours.',
       device: 'Submission limit exceeded for this device. Sending is blocked for 15 days to prevent abuse.',
     }
+  },
+  es: {
+    title: 'Comienza tu proyecto',
+    subtitle: 'Deja tus datos y te responderemos en 1 día hábil.',
+    steps: ['Contacto', 'Negocio', 'Interés'],
+    labels: {
+      name: 'Nombre completo',
+      email: 'Correo electrónico',
+      phone: 'Teléfono',
+      country: 'País',
+      company: 'Empresa',
+      website: 'Sitio web (opcional)',
+      service: '¿Qué servicio necesitas?',
+      budget: 'Presupuesto estimado',
+      timeframe: 'Plazo deseado',
+      message: 'Contexto del proyecto'
+    },
+    services: {
+      website: 'Creación de Sitio Web',
+      software: 'Software a Medida',
+      ai: 'Automatización con IA',
+      seo: 'SEO Técnico',
+      other: 'Personalizado'
+    },
+    timeframes: {
+      urgent: 'Urgente (hasta 2 semanas)',
+      '1to2': '1–2 meses',
+      '3to6': '3–6 meses',
+      flexible: 'Flexible'
+    },
+    actions: {
+      next: 'Continuar',
+      back: 'Volver',
+      submit: 'Enviar'
+    },
+    error: '¡Ups! Ocurrió un error al intentar enviar el formulario. Inténtalo de nuevo.',
+    success: '¡Listo! Recibimos tus datos.',
+    rateLimit: {
+      email: 'Este correo ya envió un formulario en las últimas 24 horas.',
+      device: 'Límite de envíos excedido para este dispositivo. El envío está bloqueado por 15 días para evitar abusos.',
+    }
   }
 } as const;
 
@@ -138,7 +220,7 @@ function getDialCode(country?: string) {
 
 export default function LeadForm({ onSubmit, className }: LeadFormProps) {
   const { language, detectedCountry } = useLanguage();
-  const t = copy[language as Language] ?? copy.pt;
+  const t = copy[language];
 
   const [step, setStep] = useState(0);
   const [submitting, setSubmitting] = useState(false);
@@ -149,10 +231,10 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
 
   const budgetOptions = useMemo(() => {
     // Sempre usa a geolocalização (detectedCountry) para determinar a moeda, ignorando a seleção manual
-    const country = detectedCountry || (language === 'pt' ? 'BR' : 'US');
+    const country = detectedCountry || ((language === 'pt-br' || language === 'pt-pt') ? 'BR' : language === 'es' ? 'ES' : 'US');
     const currencyCode = getCurrencyForCountry(country);
-    const locale = language === 'pt' ? 'pt-BR' : 'en-US';
-    
+    const locale = (language === 'pt-br' || language === 'pt-pt') ? 'pt-BR' : language === 'es' ? 'es-ES' : 'en-US';
+
     // Valores base para conversão (considerando BRL como referência)
     const baseValues = {
       v5k: 5000,
@@ -162,12 +244,20 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
 
     const format = (val: number) => formatCurrency(convertFromBRL(val, currencyCode), currencyCode, locale);
 
-    if (language === 'pt') {
+    if (language === 'pt-br' || language === 'pt-pt') {
       return {
         lt5k: `Até ${format(baseValues.v5k)}`,
         '5to15': `${format(baseValues.v5k)} – ${format(baseValues.v15k)}`,
         '15to30': `${format(baseValues.v15k)} – ${format(baseValues.v30k)}`,
         gt30: `Acima de ${format(baseValues.v30k)}`,
+        undecided: 'A definir'
+      };
+    } else if (language === 'es') {
+      return {
+        lt5k: `Hasta ${format(baseValues.v5k)}`,
+        '5to15': `${format(baseValues.v5k)} – ${format(baseValues.v15k)}`,
+        '15to30': `${format(baseValues.v15k)} – ${format(baseValues.v30k)}`,
+        gt30: `Más de ${format(baseValues.v30k)}`,
         undecided: 'A definir'
       };
     } else {
@@ -190,15 +280,23 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
   const isPhoneFocused = useRef(false);
 
   const placeholders = useMemo(() => (
-    language === 'pt'
+    (language === 'pt-br' || language === 'pt-pt')
       ? {
-          name: 'João Silva',
-          email: 'joao@email.com',
-          company: 'Minha Empresa Ltda',
-          website: 'https://suaempresa.com',
-          message: 'Conte brevemente sobre seu projeto.'
+        name: 'João Silva',
+        email: 'joao@email.com',
+        company: 'Minha Empresa Ltda',
+        website: 'https://suaempresa.com',
+        message: 'Conte brevemente sobre seu projeto.'
+      }
+      : language === 'es'
+        ? {
+          name: 'Juan García',
+          email: 'juan@email.com',
+          company: 'Mi Empresa S.L.',
+          website: 'https://tuempresa.com',
+          message: 'Cuéntanos brevemente sobre tu proyecto.'
         }
-      : {
+        : {
           name: 'Jane Doe',
           email: 'jane@email.com',
           company: 'My Company LLC',
@@ -219,13 +317,13 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
         console.error('Error getting example number:', e);
       }
     }
-    const prefix = getDialCode(data.country) || (language === 'pt' ? '+55' : '+1');
-    return language === 'pt' ? `${prefix} 11 91234-5678` : `${prefix} (555) 000-0000`;
+    const prefix = getDialCode(data.country) || ((language === 'pt-br' || language === 'pt-pt') ? '+55' : language === 'es' ? '+34' : '+1');
+    return (language === 'pt-br' || language === 'pt-pt') ? `${prefix} 11 91234-5678` : language === 'es' ? `${prefix} 612 345 678` : `${prefix} (555) 000-0000`;
   }, [language, data.country]);
 
   const handlePhoneInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
-    
+
     // Garantir que comece com +
     if (!value.startsWith('+')) {
       value = '+' + value.replace(/\D/g, '');
@@ -267,10 +365,10 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
       formatted = freshAsYouType.input('+' + keptDigits);
     }
 
-    setData((d) => ({ 
-      ...d, 
+    setData((d) => ({
+      ...d,
       phone: formatted,
-      country: finalCountry || d.country 
+      country: finalCountry || d.country
     }));
   };
 
@@ -287,7 +385,7 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
   // Ensure phone always starts with country dial code when country changes
   useEffect(() => {
     if (isPhoneFocused.current) return;
-    
+
     const prefix = getDialCode(data.country);
     if (!prefix) return;
 
@@ -363,7 +461,7 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
 
   const regionDisplay = useMemo(() => {
     try {
-      return new Intl.DisplayNames([language === 'pt' ? 'pt-BR' : 'en-US'], { type: 'region' });
+      return new Intl.DisplayNames([(language === 'pt-br' || language === 'pt-pt') ? 'pt-BR' : language === 'es' ? 'es-ES' : 'en-US'], { type: 'region' });
     } catch {
       return null;
     }
@@ -374,13 +472,13 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
       .filter((code) => /^[A-Z]{2}$/.test(code))
       .map((code) => ({ code, name: regionDisplay?.of(code) || code }))
       .sort((a, b) => a.name.localeCompare(b.name))
-  , [countryCodes, regionDisplay]);
+    , [countryCodes, regionDisplay]);
 
   const filteredCountries = useMemo(() => {
     if (!searchTerm) return countries;
     const lowerSearch = searchTerm.toLowerCase();
-    return countries.filter(c => 
-      c.name.toLowerCase().includes(lowerSearch) || 
+    return countries.filter(c =>
+      c.name.toLowerCase().includes(lowerSearch) ||
       c.code.toLowerCase().includes(lowerSearch)
     );
   }, [countries, searchTerm]);
@@ -431,7 +529,7 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
       // 3. Device Frequency Check (> 3 in 15 days)
       const deviceTimestamps: number[] = JSON.parse(localStorage.getItem('monfily_device_submissions') || '[]');
       const recentSubmissions = deviceTimestamps.filter(ts => (now - ts) < fifteenDaysInMs);
-      
+
       if (recentSubmissions.length >= 3) {
         localStorage.setItem('monfily_blocked_until', (now + fifteenDaysInMs).toString());
         setRateLimitError(t.rateLimit.device);
@@ -439,7 +537,7 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
         return;
       }
       // --- End Rate Limiting Logic ---
-      
+
       if (onSubmit) {
         await onSubmit({ ...data, detectedCountry });
       } else {
@@ -469,19 +567,19 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
       // Update Rate Limiting Data on Success
       const updatedEmailSubmissions = { ...lastSubmissions, [data.email]: now };
       localStorage.setItem('monfily_email_submissions', JSON.stringify(updatedEmailSubmissions));
-      
+
       const updatedDeviceSubmissions = [...recentSubmissions, now];
       localStorage.setItem('monfily_device_submissions', JSON.stringify(updatedDeviceSubmissions));
-      
+
       setDone(true);
-      
+
       // Volta para a primeira etapa após 5 segundos
       setTimeout(() => {
         setDone(false);
         setStep(0);
         setData({ ...initialData, language });
       }, 5000);
-      
+
     } catch (err) {
       console.error('Error submitting form:', err);
       setError(true);
@@ -497,292 +595,292 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
   return (
     <div className="flex flex-col w-full">
       <div className={`${baseCard} ${className ?? ''}`}>
-      {/* Header */}
-      <div className="px-5 py-4 border-b border-[#E2E7F1]">
-        <div className="text-base md:text-lg text-[#1C1C1E] mb-1" style={{ fontFamily: 'Fustat-Bold, sans-serif' }}>{t.title}</div>
-        <div className="text-sm text-[#6B7280] leading-snug">{t.subtitle}</div>
-        {/* Steps */}
-        <div className="mt-4 flex items-center gap-2">
-          {t.steps.map((label, idx) => (
-            <div key={label} className="flex-1 flex items-center gap-2">
-              <div className={`h-1 w-full ${idx <= step ? 'bg-[#2869D6]' : 'bg-[#E2E7F1]'}`} />
-            </div>
-          ))}
+        {/* Header */}
+        <div className="px-5 py-4 border-b border-[#E2E7F1]">
+          <div className="text-base md:text-lg text-[#1C1C1E] mb-1" style={{ fontFamily: 'Fustat-Bold, sans-serif' }}>{t.title}</div>
+          <div className="text-sm text-[#6B7280] leading-snug">{t.subtitle}</div>
+          {/* Steps */}
+          <div className="mt-4 flex items-center gap-2">
+            {t.steps.map((label, idx) => (
+              <div key={label} className="flex-1 flex items-center gap-2">
+                <div className={`h-1 w-full ${idx <= step ? 'bg-[#2869D6]' : 'bg-[#E2E7F1]'}`} />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* Body */}
-      {!done ? (
-        <div className="px-5 py-5 grid gap-4">
-          {step === 0 && (
-            <>
-              <div className="grid gap-2">
-                <label className={labelClass}>{t.labels.name}</label>
-                <input
-                  type="text"
-                  required
-                  className={inputClass}
-                  value={data.name}
-                  onChange={(e) => setData((d) => ({ ...d, name: e.target.value }))}
-                  placeholder={placeholders.name}
-                />
-              </div>
-              <div className="grid gap-2">
-                <label className={labelClass}>{t.labels.email}</label>
-                <input
-                  type="email"
-                  required
-                  className={inputClass}
-                  value={data.email}
-                  onChange={(e) => setData((d) => ({ ...d, email: e.target.value }))}
-                  placeholder={placeholders.email}
-                />
-              </div>
-              <div className="grid gap-2">
-                <label className={labelClass}>{t.labels.phone}</label>
-                <input
-                  ref={phoneInputRef}
-                  type="tel"
-                  required
-                  className={inputClass}
-                  value={data.phone ?? ''}
-                  onChange={handlePhoneInputChange}
-                  onKeyDown={handlePhoneKeyDown}
-                  onFocus={() => { isPhoneFocused.current = true; }}
-                  onBlur={() => { isPhoneFocused.current = false; }}
-                  placeholder={phonePlaceholder}
-                />
-              </div>
-              <div className="grid gap-2 relative" ref={countryRef}>
-                <label className={labelClass}>{t.labels.country}</label>
-                <div className="relative">
-                  <button
-                    type="button"
-                    onClick={() => setIsCountryOpen(!isCountryOpen)}
-                    className={`${inputClass} flex items-center justify-between bg-white text-left cursor-pointer`}
-                  >
-                    <span className="flex items-center gap-2">
-                      {data.country ? (
-                        <>
-                          <img 
-                            src={`https://flagcdn.com/w20/${data.country.toLowerCase()}.png`} 
-                            alt="" 
-                            className="w-5 h-auto rounded-sm"
-                          />
-                          {countries.find(c => c.code === data.country)?.name}
-                        </>
-                      ) : (
-                        <span className="text-slate-400">
-                          {language === 'pt' ? 'Selecione um país' : 'Select a country'}
-                        </span>
-                      )}
-                    </span>
-                    <NavArrowDown className={`w-4 h-4 text-slate-400 transition-transform ${isCountryOpen ? 'rotate-180' : ''}`} />
-                  </button>
-
-                  {isCountryOpen && (
-                    <div className="absolute z-50 w-full mt-1 bg-white border border-[#E2E7F1] rounded-sm shadow-lg max-h-60 overflow-y-auto">
-                      <div className="sticky top-0 bg-white p-2 border-b border-[#E2E7F1] z-10">
-                        <div className="relative">
-                          <Search className="absolute left-2 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                          <input
-                            ref={searchInputRef}
-                            type="text"
-                            className="w-full pl-8 pr-3 py-1.5 text-sm bg-slate-50 border border-[#E2E7F1] rounded-sm focus:outline-none focus:ring-1 focus:ring-[#2869D6] focus:border-[#2869D6]"
-                            placeholder={language === 'pt' ? 'Pesquisar país...' : 'Search country...'}
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            onClick={(e) => e.stopPropagation()}
-                          />
-                        </div>
-                      </div>
-                      {filteredCountries.length > 0 ? (
-                        filteredCountries.map((c) => (
-                          <button
-                            key={c.code}
-                            type="button"
-                            className="w-full px-3 py-2 flex items-center gap-2 hover:bg-slate-50 text-sm text-left cursor-pointer"
-                            onClick={() => {
-                              setData((d) => ({ ...d, country: c.code }));
-                              setIsCountryOpen(false);
-                            }}
-                          >
-                            <img 
-                              src={`https://flagcdn.com/w20/${c.code.toLowerCase()}.png`} 
-                              alt="" 
+        {/* Body */}
+        {!done ? (
+          <div className="px-5 py-5 grid gap-4">
+            {step === 0 && (
+              <>
+                <div className="grid gap-2">
+                  <label className={labelClass}>{t.labels.name}</label>
+                  <input
+                    type="text"
+                    required
+                    className={inputClass}
+                    value={data.name}
+                    onChange={(e) => setData((d) => ({ ...d, name: e.target.value }))}
+                    placeholder={placeholders.name}
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <label className={labelClass}>{t.labels.email}</label>
+                  <input
+                    type="email"
+                    required
+                    className={inputClass}
+                    value={data.email}
+                    onChange={(e) => setData((d) => ({ ...d, email: e.target.value }))}
+                    placeholder={placeholders.email}
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <label className={labelClass}>{t.labels.phone}</label>
+                  <input
+                    ref={phoneInputRef}
+                    type="tel"
+                    required
+                    className={inputClass}
+                    value={data.phone ?? ''}
+                    onChange={handlePhoneInputChange}
+                    onKeyDown={handlePhoneKeyDown}
+                    onFocus={() => { isPhoneFocused.current = true; }}
+                    onBlur={() => { isPhoneFocused.current = false; }}
+                    placeholder={phonePlaceholder}
+                  />
+                </div>
+                <div className="grid gap-2 relative" ref={countryRef}>
+                  <label className={labelClass}>{t.labels.country}</label>
+                  <div className="relative">
+                    <button
+                      type="button"
+                      onClick={() => setIsCountryOpen(!isCountryOpen)}
+                      className={`${inputClass} flex items-center justify-between bg-white text-left cursor-pointer`}
+                    >
+                      <span className="flex items-center gap-2">
+                        {data.country ? (
+                          <>
+                            <img
+                              src={`https://flagcdn.com/w20/${data.country.toLowerCase()}.png`}
+                              alt=""
                               className="w-5 h-auto rounded-sm"
                             />
-                            {c.name}
-                          </button>
-                        ))
-                      ) : (
-                        <div className="px-3 py-4 text-sm text-slate-400 text-center">
-                          {language === 'pt' ? 'Nenhum país encontrado' : 'No country found'}
+                            {countries.find(c => c.code === data.country)?.name}
+                          </>
+                        ) : (
+                          <span className="text-slate-400">
+                            {(language === 'pt-br' || language === 'pt-pt') ? 'Selecione um país' : language === 'es' ? 'Selecciona un país' : 'Select a country'}
+                          </span>
+                        )}
+                      </span>
+                      <NavArrowDown className={`w-4 h-4 text-slate-400 transition-transform ${isCountryOpen ? 'rotate-180' : ''}`} />
+                    </button>
+
+                    {isCountryOpen && (
+                      <div className="absolute z-50 w-full mt-1 bg-white border border-[#E2E7F1] rounded-sm shadow-lg max-h-60 overflow-y-auto">
+                        <div className="sticky top-0 bg-white p-2 border-b border-[#E2E7F1] z-10">
+                          <div className="relative">
+                            <Search className="absolute left-2 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                            <input
+                              ref={searchInputRef}
+                              type="text"
+                              className="w-full pl-8 pr-3 py-1.5 text-sm bg-slate-50 border border-[#E2E7F1] rounded-sm focus:outline-none focus:ring-1 focus:ring-[#2869D6] focus:border-[#2869D6]"
+                              placeholder={(language === 'pt-br' || language === 'pt-pt') ? 'Pesquisar país...' : language === 'es' ? 'Buscar país...' : 'Search country...'}
+                              value={searchTerm}
+                              onChange={(e) => setSearchTerm(e.target.value)}
+                              onClick={(e) => e.stopPropagation()}
+                            />
+                          </div>
                         </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </>
-          )}
-
-          {step === 1 && (
-            <>
-              <div className="grid gap-2">
-                <label className={labelClass}>{t.labels.company}</label>
-                <input
-                  type="text"
-                  required
-                  className={inputClass}
-                  value={data.company ?? ''}
-                  onChange={(e) => setData((d) => ({ ...d, company: e.target.value }))}
-                  placeholder={placeholders.company}
-                />
-              </div>
-              <div className="grid gap-2">
-                <label className={labelClass}>{t.labels.website}</label>
-                <input
-                  type="url"
-                  className={inputClass}
-                  value={data.website ?? ''}
-                  onChange={(e) => setData((d) => ({ ...d, website: e.target.value }))}
-                  placeholder={placeholders.website}
-                />
-              </div>
-              <div className="grid gap-2">
-                <label className={labelClass}>{t.labels.message}</label>
-                <textarea
-                  className={`${inputClass} min-h-[88px]`}
-                  required
-                  value={data.message ?? ''}
-                  onChange={(e) => setData((d) => ({ ...d, message: e.target.value }))}
-                  placeholder={placeholders.message}
-                />
-              </div>
-            </>
-          )}
-
-          {step === 2 && (
-            <>
-              <div className="grid gap-2">
-                <label className={labelClass}>{t.labels.service}</label>
-                <div className="grid grid-cols-2 gap-2">
-                  {(['website','software','ai','seo','other'] as const).map((key) => (
-                    <button
-                      type="button"
-                      key={key}
-                      onClick={() =>
-                        setData((d) => {
-                          const current = d.services ?? [];
-                          return current.includes(key)
-                            ? { ...d, services: current.filter((k) => k !== key) }
-                            : { ...d, services: [...current, key] };
-                        })
-                      }
-                      className={`text-sm px-3 py-2 rounded-sm border cursor-pointer ${ (data.services ?? []).includes(key) ? 'border-[#2869D6] bg-[#2869D6]/5 text-[#1C1C1E]' : 'border-[#E2E7F1] text-[#1C1C1E]'}`}
-                    >
-                      {t.services[key]}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="grid gap-2">
-                <label className={labelClass}>{t.labels.budget}</label>
-                <div className="grid grid-cols-2 gap-2">
-                  {(['lt5k','5to15','15to30','gt30','undecided'] as const).map((key) => (
-                    <button
-                      type="button"
-                      key={key}
-                      onClick={() => setData((d) => ({ ...d, budget: key }))}
-                      className={`text-sm px-3 py-2 rounded-sm border cursor-pointer ${data.budget === key ? 'border-[#2869D6] bg-[#2869D6]/5 text-[#1C1C1E]' : 'border-[#E2E7F1] text-[#1C1C1E]'}`}
-                    >
-                      {budgetOptions[key]}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="grid gap-2">
-                <label className={labelClass}>{t.labels.timeframe}</label>
-                <div className="grid grid-cols-2 gap-2">
-                  {(['urgent','1to2','3to6','flexible'] as const).map((key) => (
-                    <button
-                      type="button"
-                      key={key}
-                      onClick={() => setData((d) => ({ ...d, timeframe: key }))}
-                      className={`text-sm px-3 py-2 rounded-sm border cursor-pointer ${data.timeframe === key ? 'border-[#2869D6] bg-[#2869D6]/5 text-[#1C1C1E]' : 'border-[#E2E7F1] text-[#1C1C1E]'}`}
-                    >
-                      {t.timeframes[key]}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </>
-          )}
-        </div>
-      ) : (
-        <div className="px-5 py-20 flex flex-col items-center justify-center text-center gap-4 text-[#1C1C1E]">
-          <div className="bg-[#4ADE80] text-white rounded-full p-2">
-            <Check className="w-8 h-8" />
-          </div>
-          <div className="text-lg" style={{ fontFamily: 'Fustat-Bold, sans-serif' }}>{t.success}</div>
-        </div>
-      )}
-
-      {/* Footer actions */}
-      {!done && (
-        <div className="px-5 py-4 border-t border-[#E2E7F1] flex items-center justify-between">
-          <button
-            type="button"
-            onClick={() => setStep((s) => Math.max(0, s - 1))}
-            className={`flex items-center gap-2 text-sm text-[#1C1C1E] cursor-pointer ${step === 0 ? 'opacity-40 pointer-events-none' : ''}`}
-          >
-            <ArrowLeft className="w-4 h-4" /> {t.actions.back}
-          </button>
-
-          {step < 2 ? (
-            <SpotlightButton
-              onClick={() => setStep((s) => Math.min(2, s + 1))}
-              disabled={!canNext}
-              className={`group bg-[#2869D6] text-white text-sm py-3 px-6 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer`}
-            >
-              {t.actions.next}
-              <div className="bg-white rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
-                <ArrowRight className="w-3 h-3 text-[#2869D6]" />
-              </div>
-            </SpotlightButton>
-          ) : (
-            <SpotlightButton
-              onClick={handleSubmit}
-              disabled={!canNext || submitting}
-              className={`group bg-[#2869D6] text-white text-sm py-3 px-6 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer min-w-[120px]`}
-            >
-              {submitting ? (
-                <SystemRestart className="w-4 h-4 animate-spin mx-auto" />
-              ) : (
-                <>
-                  {t.actions.submit}
-                  <div className="bg-white rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
-                    <ArrowRight className="w-3 h-3 text-[#2869D6]" />
+                        {filteredCountries.length > 0 ? (
+                          filteredCountries.map((c) => (
+                            <button
+                              key={c.code}
+                              type="button"
+                              className="w-full px-3 py-2 flex items-center gap-2 hover:bg-slate-50 text-sm text-left cursor-pointer"
+                              onClick={() => {
+                                setData((d) => ({ ...d, country: c.code }));
+                                setIsCountryOpen(false);
+                              }}
+                            >
+                              <img
+                                src={`https://flagcdn.com/w20/${c.code.toLowerCase()}.png`}
+                                alt=""
+                                className="w-5 h-auto rounded-sm"
+                              />
+                              {c.name}
+                            </button>
+                          ))
+                        ) : (
+                          <div className="px-3 py-4 text-sm text-slate-400 text-center">
+                            {(language === 'pt-br' || language === 'pt-pt') ? 'Nenhum país encontrado' : language === 'es' ? 'Ningún país encontrado' : 'No country found'}
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
-                </>
-              )}
-            </SpotlightButton>
-          )}
+                </div>
+              </>
+            )}
+
+            {step === 1 && (
+              <>
+                <div className="grid gap-2">
+                  <label className={labelClass}>{t.labels.company}</label>
+                  <input
+                    type="text"
+                    required
+                    className={inputClass}
+                    value={data.company ?? ''}
+                    onChange={(e) => setData((d) => ({ ...d, company: e.target.value }))}
+                    placeholder={placeholders.company}
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <label className={labelClass}>{t.labels.website}</label>
+                  <input
+                    type="url"
+                    className={inputClass}
+                    value={data.website ?? ''}
+                    onChange={(e) => setData((d) => ({ ...d, website: e.target.value }))}
+                    placeholder={placeholders.website}
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <label className={labelClass}>{t.labels.message}</label>
+                  <textarea
+                    className={`${inputClass} min-h-[88px]`}
+                    required
+                    value={data.message ?? ''}
+                    onChange={(e) => setData((d) => ({ ...d, message: e.target.value }))}
+                    placeholder={placeholders.message}
+                  />
+                </div>
+              </>
+            )}
+
+            {step === 2 && (
+              <>
+                <div className="grid gap-2">
+                  <label className={labelClass}>{t.labels.service}</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {(['website', 'software', 'ai', 'seo', 'other'] as const).map((key) => (
+                      <button
+                        type="button"
+                        key={key}
+                        onClick={() =>
+                          setData((d) => {
+                            const current = d.services ?? [];
+                            return current.includes(key)
+                              ? { ...d, services: current.filter((k) => k !== key) }
+                              : { ...d, services: [...current, key] };
+                          })
+                        }
+                        className={`text-sm px-3 py-2 rounded-sm border cursor-pointer ${(data.services ?? []).includes(key) ? 'border-[#2869D6] bg-[#2869D6]/5 text-[#1C1C1E]' : 'border-[#E2E7F1] text-[#1C1C1E]'}`}
+                      >
+                        {t.services[key]}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="grid gap-2">
+                  <label className={labelClass}>{t.labels.budget}</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {(['lt5k', '5to15', '15to30', 'gt30', 'undecided'] as const).map((key) => (
+                      <button
+                        type="button"
+                        key={key}
+                        onClick={() => setData((d) => ({ ...d, budget: key }))}
+                        className={`text-sm px-3 py-2 rounded-sm border cursor-pointer ${data.budget === key ? 'border-[#2869D6] bg-[#2869D6]/5 text-[#1C1C1E]' : 'border-[#E2E7F1] text-[#1C1C1E]'}`}
+                      >
+                        {budgetOptions[key]}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="grid gap-2">
+                  <label className={labelClass}>{t.labels.timeframe}</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {(['urgent', '1to2', '3to6', 'flexible'] as const).map((key) => (
+                      <button
+                        type="button"
+                        key={key}
+                        onClick={() => setData((d) => ({ ...d, timeframe: key }))}
+                        className={`text-sm px-3 py-2 rounded-sm border cursor-pointer ${data.timeframe === key ? 'border-[#2869D6] bg-[#2869D6]/5 text-[#1C1C1E]' : 'border-[#E2E7F1] text-[#1C1C1E]'}`}
+                      >
+                        {t.timeframes[key]}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        ) : (
+          <div className="px-5 py-20 flex flex-col items-center justify-center text-center gap-4 text-[#1C1C1E]">
+            <div className="bg-[#4ADE80] text-white rounded-full p-2">
+              <Check className="w-8 h-8" />
+            </div>
+            <div className="text-lg" style={{ fontFamily: 'Fustat-Bold, sans-serif' }}>{t.success}</div>
+          </div>
+        )}
+
+        {/* Footer actions */}
+        {!done && (
+          <div className="px-5 py-4 border-t border-[#E2E7F1] flex items-center justify-between">
+            <button
+              type="button"
+              onClick={() => setStep((s) => Math.max(0, s - 1))}
+              className={`flex items-center gap-2 text-sm text-[#1C1C1E] cursor-pointer ${step === 0 ? 'opacity-40 pointer-events-none' : ''}`}
+            >
+              <ArrowLeft className="w-4 h-4" /> {t.actions.back}
+            </button>
+
+            {step < 2 ? (
+              <SpotlightButton
+                onClick={() => setStep((s) => Math.min(2, s + 1))}
+                disabled={!canNext}
+                className={`group bg-[#2869D6] text-white text-sm py-3 px-6 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer`}
+              >
+                {t.actions.next}
+                <div className="bg-white rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
+                  <ArrowRight className="w-3 h-3 text-[#2869D6]" />
+                </div>
+              </SpotlightButton>
+            ) : (
+              <SpotlightButton
+                onClick={handleSubmit}
+                disabled={!canNext || submitting}
+                className={`group bg-[#2869D6] text-white text-sm py-3 px-6 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer min-w-[120px]`}
+              >
+                {submitting ? (
+                  <SystemRestart className="w-4 h-4 animate-spin mx-auto" />
+                ) : (
+                  <>
+                    {t.actions.submit}
+                    <div className="bg-white rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
+                      <ArrowRight className="w-3 h-3 text-[#2869D6]" />
+                    </div>
+                  </>
+                )}
+              </SpotlightButton>
+            )}
+          </div>
+        )}
+      </div>
+
+      {(error || rateLimitError) && (
+        <div className="mt-4 flex items-center justify-center gap-2 text-red-500 animate-in fade-in slide-in-from-top-2 duration-300 text-center max-w-sm mx-auto">
+          <div className="flex-shrink-0">
+            <WarningCircle className="w-5 h-5" />
+          </div>
+          <span className="text-sm font-medium">{rateLimitError || t.error}</span>
         </div>
       )}
     </div>
-    
-    {(error || rateLimitError) && (
-      <div className="mt-4 flex items-center justify-center gap-2 text-red-500 animate-in fade-in slide-in-from-top-2 duration-300 text-center max-w-sm mx-auto">
-        <div className="flex-shrink-0">
-          <WarningCircle className="w-5 h-5" />
-        </div>
-        <span className="text-sm font-medium">{rateLimitError || t.error}</span>
-      </div>
-    )}
-  </div>
-);
+  );
 }
