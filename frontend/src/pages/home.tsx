@@ -11,7 +11,7 @@ export default function Home() {
   const [footerVisible, setFooterVisible] = useState(false);
 
   useEffect(() => {
-    // Observer to detect when footer is visible to fade out the gradual blur
+    // Observer to detect when footer is visible to fade out the gradual blurr
     const observer = new IntersectionObserver(
       ([entry]) => {
         setFooterVisible(entry.isIntersecting);
