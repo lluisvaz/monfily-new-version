@@ -67,17 +67,8 @@ function App() {
           const element = document.getElementById(id);
 
           if (element) {
-            // Se o Lenis estiver ativo, usamos a API dele
-            const lenis = (window as any).lenis;
-            if (lenis) {
-              lenis.scrollTo(element, {
-                duration: 1,
-                easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-              });
-            } else {
-              // Fallback para scroll nativo suave
-              element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
+            // Scroll nativo suave
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
             // Atualiza a URL sem o hash usando replaceState
             if (window.history.replaceState) {
