@@ -29,6 +29,7 @@ export const leadFormSchema = z.object({
   timeframe: z.string().min(1, "Timeframe is required"),
   message: z.string().min(1, "Message is required"),
   language: z.string().optional().default("pt"),
+  detectedCountry: z.string().optional(),
 });
 
 export type LeadFormData = z.infer<typeof leadFormSchema>;

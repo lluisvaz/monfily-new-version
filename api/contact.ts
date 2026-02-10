@@ -1,25 +1,15 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import nodemailer from "nodemailer";
 import { z } from "zod";
-import { getCurrencyForCountry, getCurrencySymbol, formatCurrency, convertFromBRL } from "../shared/currencies";
+import { 
+    leadFormSchema, 
+    type LeadFormData, 
+    getCurrencyForCountry, 
+    getCurrencySymbol, 
+    formatCurrency, 
+    convertFromBRL 
+} from "@monfily/shared";
 
-// Lead form validation schema
-const leadFormSchema = z.object({
-    name: z.string().min(1, "Name is required"),
-    email: z.string().email("Invalid email"),
-    phone: z.string().min(1, "Phone is required"),
-    country: z.string().min(1, "Country is required"),
-    company: z.string().min(1, "Company is required"),
-    website: z.string().optional().or(z.literal("")),
-    services: z.array(z.string()).min(1, "Select at least one service"),
-    budget: z.string().min(1, "Budget is required"),
-    timeframe: z.string().min(1, "Timeframe is required"),
-    message: z.string().min(1, "Message is required"),
-    language: z.string().optional().default("pt"),
-    detectedCountry: z.string().optional(),
-});
-
-type LeadFormData = z.infer<typeof leadFormSchema>;
 
 function createTransporter() {
     const host = process.env.EMAIL_HOST;
@@ -51,24 +41,77 @@ async function sendLeadEmails(data: LeadFormData) {
     const adminEmail = process.env.RECEIVER_EMAIL;
     const currentYear = new Date().getFullYear();
 
-    const serviceLabels: Record<string, string> = {
-        website: 'Criação de Site',
-        software: 'Software Sob Medida',
-        ai: 'Automação com IA',
-        seo: 'SEO Técnico',
-        other: 'Personalizado'
+    // Map language for translations
+    const lang = (data.language || 'pt-br').toLowerCase();
+    const effectiveLang: 'pt-br' | 'pt-pt' | 'en' | 'es' = 
+        (lang === 'pt' || lang === 'pt-br') ? 'pt-br' : 
+        lang === 'pt-pt' ? 'pt-pt' :
+        lang === 'es' ? 'es' : 'en';
+
+    const serviceLabelsMap: Record<string, Record<string, string>> = {
+        'pt-br': {
+            website: 'Criação de Site',
+            software: 'Software Sob Medida',
+            ai: 'Automação com IA',
+            seo: 'SEO Técnico',
+            other: 'Personalizado'
+        },
+        'pt-pt': {
+            website: 'Criação de Website',
+            software: 'Software à Medida',
+            ai: 'Automação com IA',
+            seo: 'SEO Técnico',
+            other: 'Personalizado'
+        },
+        en: {
+            website: 'Website Creation',
+            software: 'Custom Software',
+            ai: 'AI Automation',
+            seo: 'Technical SEO',
+            other: 'Custom Project'
+        },
+        es: {
+            website: 'Creación de Sitio Web',
+            software: 'Software a Medida',
+            ai: 'Automatización con IA',
+            seo: 'SEO Técnico',
+            other: 'Personalizado'
+        }
     };
 
-    const timeframeLabels: Record<string, string> = {
-        urgent: 'Urgente (até 2 semanas)',
-        '1to2': '1–2 meses',
-        '3to6': '3–6 meses',
-        flexible: 'Flexível'
+    const timeframeLabelsMap: Record<string, Record<string, string>> = {
+        'pt-br': {
+            urgent: 'Urgente (até 2 semanas)',
+            '1to2': '1–2 meses',
+            '3to6': '3–6 meses',
+            flexible: 'Flexível'
+        },
+        'pt-pt': {
+            urgent: 'Urgente (até 2 semanas)',
+            '1to2': '1–2 meses',
+            '3to6': '3–6 meses',
+            flexible: 'Flexível'
+        },
+        en: {
+            urgent: 'Urgent (up to 2 weeks)',
+            '1to2': '1–2 months',
+            '3to6': '3–6 months',
+            flexible: 'Flexible'
+        },
+        es: {
+            urgent: 'Urgente (hasta 2 semanas)',
+            '1to2': '1–2 meses',
+            '3to6': '3–6 meses',
+            flexible: 'Flexible'
+        }
     };
+
+    const serviceLabels = serviceLabelsMap[effectiveLang] || serviceLabelsMap['en'];
+    const timeframeLabels = timeframeLabelsMap[effectiveLang] || timeframeLabelsMap['en'];
 
     const countryForCurrency = data.detectedCountry || data.country;
     const currencyCode = getCurrencyForCountry(countryForCurrency);
-    const locale = data.language === 'en' ? 'en-US' : 'pt-BR';
+    const locale = (effectiveLang === 'pt-br' || effectiveLang === 'pt-pt') ? 'pt-BR' : effectiveLang === 'es' ? 'es-ES' : 'en-US';
 
     // Valores base para conversão (considerando BRL como referência)
     const baseValues = {
@@ -79,18 +122,24 @@ async function sendLeadEmails(data: LeadFormData) {
 
     const format = (val: number) => formatCurrency(convertFromBRL(val, currencyCode), currencyCode, locale);
 
-    const budgetLabels: Record<string, string> = data.language === 'en' ? {
-        lt5k: `Up to ${format(baseValues.v5k)}`,
-        '5to15': `${format(baseValues.v5k)} – ${format(baseValues.v15k)}`,
-        '15to30': `${format(baseValues.v15k)} – ${format(baseValues.v30k)}`,
-        gt30: `Over ${format(baseValues.v30k)}`,
-        undecided: 'Undecided'
-    } : {
+    const budgetLabels: Record<string, string> = (effectiveLang === 'pt-br' || effectiveLang === 'pt-pt') ? {
         lt5k: `Até ${format(baseValues.v5k)}`,
         '5to15': `${format(baseValues.v5k)} – ${format(baseValues.v15k)}`,
         '15to30': `${format(baseValues.v15k)} – ${format(baseValues.v30k)}`,
         gt30: `Acima de ${format(baseValues.v30k)}`,
         undecided: 'A definir'
+    } : effectiveLang === 'es' ? {
+        lt5k: `Hasta ${format(baseValues.v5k)}`,
+        '5to15': `${format(baseValues.v5k)} – ${format(baseValues.v15k)}`,
+        '15to30': `${format(baseValues.v15k)} – ${format(baseValues.v30k)}`,
+        gt30: `Más de ${format(baseValues.v30k)}`,
+        undecided: 'A definir'
+    } : {
+        lt5k: `Up to ${format(baseValues.v5k)}`,
+        '5to15': `${format(baseValues.v5k)} – ${format(baseValues.v15k)}`,
+        '15to30': `${format(baseValues.v15k)} – ${format(baseValues.v30k)}`,
+        gt30: `Over ${format(baseValues.v30k)}`,
+        undecided: 'Undecided'
     };
 
     const servicesHtml = data.services.map(s => serviceLabels[s] || s).join(", ");
@@ -99,23 +148,29 @@ async function sendLeadEmails(data: LeadFormData) {
 
     let countryName = data.country;
     try {
-        const regionNames = new Intl.DisplayNames(['pt'], { type: 'region' });
+        const regionNames = new Intl.DisplayNames([effectiveLang.split('-')[0]], { type: 'region' });
         countryName = regionNames.of(data.country) || data.country;
     } catch (e) {
         console.error("Error formatting country name:", e);
     }
     const flagUrl = `https://flagcdn.com/w40/${data.country.toLowerCase()}.png`;
 
-    const lang = data.language === 'en' ? 'en' : 'pt';
-
-    const translations = {
-        pt: {
+    const translations: Record<string, any> = {
+        'pt-br': {
             subject: "Recebemos seu contato! - Monfily",
             title: `Olá, ${data.name}!`,
             message: `Obrigado por entrar em contato com a Monfily. Recebemos seus dados e nossa equipe analisará sua solicitação para o projeto na <strong>${data.company}</strong>.<br><br>Em até 1 dia útil entraremos em contato para agendarmos uma conversa inicial.`,
             button: "Conheça nosso portfólio",
             footer: `&copy; ${currentYear} Monfily Digital. Todos os direitos reservados.`,
             closing: "Estamos ansiosos para trabalhar com você!"
+        },
+        'pt-pt': {
+            subject: "Recebemos o seu contacto! - Monfily",
+            title: `Olá, ${data.name}!`,
+            message: `Obrigado por entrar em contacto com a Monfily. Recebemos os seus dados e a nossa equipa analisará a sua solicitação para o projeto na <strong>${data.company}</strong>.<br><br>Em até 1 dia útil entraremos em contacto para agendarmos uma conversa inicial.`,
+            button: "Conheça o nosso portfólio",
+            footer: `&copy; ${currentYear} Monfily Digital. Todos os direitos reservados.`,
+            closing: "Estamos ansiosos por trabalhar consigo!"
         },
         en: {
             subject: "We received your contact! - Monfily",
@@ -124,10 +179,18 @@ async function sendLeadEmails(data: LeadFormData) {
             button: "Check our portfolio",
             footer: `&copy; ${currentYear} Monfily Digital. All rights reserved.`,
             closing: "We look forward to working with you!"
+        },
+        es: {
+            subject: "¡Hemos recibido tu contacto! - Monfily",
+            title: `¡Hola, ${data.name}!`,
+            message: `Gracias por contactar con Monfily. Hemos recibido tus datos y nuestro equipo analizará tu solicitud para el proyecto en <strong>${data.company}</strong>.<br><br>En un plazo de 1 día hábil nos pondremos en contacto contigo para programar una conversación inicial.`,
+            button: "Conoce nuestro portafolio",
+            footer: `&copy; ${currentYear} Monfily Digital. Todos los derechos reservados.`,
+            closing: "¡Estamos ansiosos por trabajar contigo!"
         }
     };
 
-    const t = translations[lang];
+    const t = translations[effectiveLang] || translations['en'];
 
     // Email to Admin (styled)
     const adminHtml = `
