@@ -731,10 +731,7 @@ const ExpertiseSection = () => {
           <SpotlightButton
             onClick={() => {
               const el = document.getElementById('contato');
-              const lenis = (window as any).lenis;
-              if (lenis && el) {
-                lenis.scrollTo(el, { duration: 1, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-              } else if (el) {
+              if (el) {
                 el.scrollIntoView({ behavior: 'smooth', block: 'center' });
               }
             }}
@@ -802,10 +799,7 @@ const ExpertiseSection = () => {
           <SpotlightButton
             onClick={() => {
               const el = document.getElementById('contato');
-              const lenis = (window as any).lenis;
-              if (lenis && el) {
-                lenis.scrollTo(el, { duration: 1, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-              } else if (el) {
+              if (el) {
                 el.scrollIntoView({ behavior: 'smooth', block: 'center' });
               }
             }}

@@ -679,7 +679,7 @@ export default function LeadForm({ onSubmit, className }: LeadFormProps) {
                     </button>
 
                     {isCountryOpen && (
-                      <div className="absolute z-50 w-full mt-1 bg-white border border-[#E2E7F1] rounded-sm shadow-lg max-h-60 overflow-y-auto">
+                      <div className="absolute z-[10000] w-full mt-1 bg-white border border-[#E2E7F1] rounded-sm shadow-lg max-h-60 overflow-y-auto">
                         <div className="sticky top-0 bg-white p-2 border-b border-[#E2E7F1] z-10">
                           <div className="relative">
                             <Search className="absolute left-2 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />

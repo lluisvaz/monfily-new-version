@@ -211,10 +211,7 @@ export function Header() {
           <SpotlightButton
             onClick={() => {
               const el = document.getElementById('contato');
-              const lenis = (window as any).lenis;
-              if (lenis && el) {
-                lenis.scrollTo(el, { duration: 1, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-              } else if (el) {
+              if (el) {
                 el.scrollIntoView({ behavior: 'smooth', block: 'center' });
               }
             }}
@@ -606,11 +603,11 @@ export function Header() {
                     <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group cursor-pointer">
                       <div className="flex items-center gap-2">
                         <img
-                          src={`https://flagcdn.com/w20/${language === 'pt-br' ? 'br' : language === 'pt-pt' ? 'pt' : 'us'}.png`}
-                          alt={language}
-                          className="w-5 h-auto rounded-sm"
-                        />
-                        <span>{language === 'pt-br' ? t.header.languages.portugueseBrazil : language === 'pt-pt' ? t.header.languages.portuguesePortugal : t.header.languages.english}</span>
+                            src={`https://flagcdn.com/w20/${language === 'pt-br' ? 'br' : language === 'pt-pt' ? 'pt' : language === 'es' ? 'es' : 'us'}.png`}
+                            alt={language}
+                            className="w-5 h-auto rounded-sm"
+                          />
+                          <span>{language === 'pt-br' ? t.header.languages.portugueseBrazil : language === 'pt-pt' ? t.header.languages.portuguesePortugal : language === 'es' ? t.header.languages.spanish : t.header.languages.english}</span>
                       </div>
                       <NavArrowDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
                     </CollapsibleTrigger>
@@ -672,10 +669,7 @@ export function Header() {
                       setIsOpen(false);
                       setTimeout(() => {
                         const el = document.getElementById('contato');
-                        const lenis = (window as any).lenis;
-                        if (lenis && el) {
-                          lenis.scrollTo(el, { duration: 1, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-                        } else if (el) {
+                        if (el) {
                           el.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         }
                       }, 300);
