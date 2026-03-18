@@ -41,10 +41,16 @@ export type Language = 'pt-br' | 'pt-pt' | 'en' | 'es';
  * Detecta o país do usuário usando uma API de geolocalização por IP
  */
 export async function detectCountryCode(): Promise<string | null> {
+  // Tentar recuperar do localStorage primeiro para carregamento instantâneo
+  try {
+    const cached = localStorage.getItem('detected_country_code');
+    if (cached) return cached;
+  } catch (e) {}
+
   try {
     // 1. Tentar ipapi.co (gratuita, 1000 requisições/dia)
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 3000);
+    const timeoutId = setTimeout(() => controller.abort(), 1500); // Reduzido para 1.5s
 
     const response = await fetch('https://ipapi.co/json/', {
       method: 'GET',
@@ -55,7 +61,11 @@ export async function detectCountryCode(): Promise<string | null> {
 
     if (response.ok) {
       const data = await response.json();
-      if (data.country_code) return data.country_code.toUpperCase();
+      if (data.country_code) {
+        const code = data.country_code.toUpperCase();
+        try { localStorage.setItem('detected_country_code', code); } catch (e) {}
+        return code;
+      }
     }
   } catch (error) {
     console.warn('ipapi.co failed, trying next service...');
@@ -66,7 +76,11 @@ export async function detectCountryCode(): Promise<string | null> {
     const response = await fetch('https://freeipapi.com/api/json', { method: 'GET' });
     if (response.ok) {
       const data = await response.json();
-      if (data.countryCode) return data.countryCode.toUpperCase();
+      if (data.countryCode) {
+        const code = data.countryCode.toUpperCase();
+        try { localStorage.setItem('detected_country_code', code); } catch (e) {}
+        return code;
+      }
     }
   } catch (error) {
     console.warn('freeipapi.com failed, trying next service...');
@@ -77,7 +91,12 @@ export async function detectCountryCode(): Promise<string | null> {
     const response = await fetch('https://api.country.is', { method: 'GET' });
     if (response.ok) {
       const data = await response.json();
-      return data.country ? data.country.toUpperCase() : null;
+      if (data.country) {
+        const code = data.country.toUpperCase();
+        try { localStorage.setItem('detected_country_code', code); } catch (e) {}
+        return code;
+      }
+      return null;
     }
   } catch (e) {
     console.warn('All geolocation services failed.');
@@ -86,31 +105,6 @@ export async function detectCountryCode(): Promise<string | null> {
   return null;
 }
 
-/**
- * Detecta o idioma baseado na localização (usando o código do país)
- * Retorna 'pt-pt' se o país for Portugal, 'pt-br' se for outro país lusófono, 'en' caso contrário
- */
-async function detectLanguageByLocation(): Promise<Language> {
-  const countryCode = await detectCountryCode();
-
-  if (countryCode) {
-    const upperCode = countryCode.toUpperCase();
-    // Portugal recebe pt-pt
-    if (upperCode === 'PT') {
-      return 'pt-pt';
-    }
-    // Outros países lusófonos recebem pt-br
-    if (PORTUGUESE_SPEAKING_COUNTRIES.includes(upperCode)) {
-      return 'pt-br';
-    }
-    // Países hispanofalantes recebem es
-    if (SPANISH_SPEAKING_COUNTRIES.includes(upperCode)) {
-      return 'es';
-    }
-  }
-
-  return 'en';
-}
 
 /**
  * Detecta o idioma preferido do navegador

@@ -579,6 +579,7 @@ export function Header() {
                         href="#"
                         data-custom-handler="true"
                         onClick={(e) => {
+                          e.preventDefault();
                           setIsOpen(false);
                         }}
                         className="sidebar-blur-animate text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors cursor-pointer"

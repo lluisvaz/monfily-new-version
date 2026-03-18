@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useLanguage } from '@/hooks/use-language';
 
 export function LoadingScreen() {
-  const [progress, setProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const [isFadingOut, setIsFadingOut] = useState(false);
   const { isReady } = useLanguage();
@@ -10,69 +9,24 @@ export function LoadingScreen() {
   useEffect(() => {
     // Bloqueia o scroll enquanto o loading está visível
     document.body.style.overflow = 'hidden';
-
-    const images = Array.from(document.querySelectorAll('img'));
-    const totalResources = images.length + 1; // Imagens + Window Load
-    let loadedResources = 0;
-
-    const updateProgress = () => {
-      loadedResources++;
-      const newProgress = Math.max(5, Math.min((loadedResources / totalResources) * 100, 100));
-      setProgress(newProgress);
-    };
-
-    // Incrementa progresso com imagens
-    if (images.length === 0) {
-      updateProgress();
-    } else {
-      images.forEach((img) => {
-        if (img.complete) {
-          updateProgress();
-        } else {
-          img.addEventListener('load', updateProgress);
-          img.addEventListener('error', updateProgress);
-        }
-      });
-    }
-
-    // Incrementa progresso com window load
-    const handleWindowLoad = () => {
-      setProgress(100);
-    };
-
-    if (document.readyState === 'complete') {
-      handleWindowLoad();
-    } else {
-      window.addEventListener('load', handleWindowLoad);
-    }
-
-    // Timer de fallback para garantir que a tela suma mesmo se algo travar
-    const fallbackTimer = setTimeout(() => {
-      setProgress(100);
-    }, 5000);
-
     return () => {
-      window.removeEventListener('load', handleWindowLoad);
-      clearTimeout(fallbackTimer);
-      images.forEach((img) => {
-        img.removeEventListener('load', updateProgress);
-        img.removeEventListener('error', updateProgress);
-      });
+      document.body.style.overflow = '';
     };
   }, []);
 
   useEffect(() => {
-    if (progress >= 100 && isReady) {
+    if (isReady) {
+      // Pequeno delay para garantir que o layout renderizou
       const timer = setTimeout(() => {
         setIsFadingOut(true);
         setTimeout(() => {
           setIsVisible(false);
           document.body.style.overflow = '';
-        }, 500); // Tempo da transição de opacidade
-      }, 500); // Delay após chegar em 100%
+        }, 300); // Tempo da transição de opacidade
+      }, 200); 
       return () => clearTimeout(timer);
     }
-  }, [progress, isReady]);
+  }, [isReady]);
 
   if (!isVisible) return null;
 
@@ -90,61 +44,29 @@ export function LoadingScreen() {
           justify-content: center;
           align-items: center;
           z-index: 99999;
-          transition: opacity 0.5s ease-in-out;
+          transition: opacity 0.3s ease-in-out;
         }
 
         .loading-container {
           text-align: center;
-          position: relative;
-          padding: 40px; 
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
-        .project-logo {
-          width: 60px;
-          height: auto;
-          margin: -15px auto 25px auto;
-          display: block;
-          position: relative;
-          z-index: 2;
-        }
 
-        /* O trilho cinza */
-        .progress-track {
-          width: 200px;
-          height: 4px;
-          background-color: #f0f0f0; /* Cinza bem claro */
-          border-radius: 4px;
-          position: relative;
-          margin: 0 auto;
-        }
-
-        /* A barra azul */
-        .progress-bar {
-          height: 100%;
-          background-color: #306ED7;
-          border-radius: 4px;
-          position: relative;
-          z-index: 1;
-          transition: width 0.4s cubic-bezier(0.1, 0.7, 1.0, 0.1);
-        }
-
-        /* O brilho sutil na ponta */
-        .progress-bar::after {
-          content: '';
-          position: absolute;
-          top: 50%;
-          right: 0;
-          width: 4px; 
-          height: 4px;
-          background: transparent;
-          transform: translateY(-50%);
+        .spinner {
+          width: 28px;
+          height: 28px;
+          border: 3px solid #f3f3f3;
+          border-top: 3px solid #306ED7;
           border-radius: 50%;
-          
-          box-shadow: 
-            0 0 15px 5px rgba(0, 153, 255, 0.3), 
-            0 0 40px 20px rgba(0, 153, 255, 0.08); 
-          
-          z-index: -1;
+          animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
         }
 
         .fade-out {
@@ -155,19 +77,7 @@ export function LoadingScreen() {
 
       <div className={`loading-overlay ${isFadingOut ? 'fade-out' : ''}`}>
         <div className="loading-container">
-          <img
-            src="https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_120/v1763574787/monfily-black-nobg_risk6t.png"
-            alt="Monfily"
-            className="project-logo"
-            draggable="false"
-          />
-
-          <div className="progress-track">
-            <div
-              className="progress-bar"
-              style={{ width: `${progress}%` }}
-            ></div>
-          </div>
+          <div className="spinner"></div>
         </div>
       </div>
     </>

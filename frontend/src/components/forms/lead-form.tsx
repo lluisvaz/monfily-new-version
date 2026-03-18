@@ -1,9 +1,8 @@
 import { useMemo, useState, useEffect, useRef } from 'react';
 import { useLanguage } from '@/hooks/use-language';
-import type { Language } from '@/lib/translations';
 import { ArrowRight, ArrowLeft, Check, SystemRestart, WarningCircle, NavArrowDown, Search } from 'iconoir-react';
 import { detectCountryCode } from '@/lib/geo-location';
-import { getCurrencyForCountry, getCurrencySymbol, formatCurrency, convertFromBRL } from '@shared/currencies';
+import { getCurrencyForCountry, formatCurrency, convertFromBRL } from '@shared/currencies';
 import { SpotlightButton } from '@/components/ui/spotlight-button';
 import { AsYouType, getExampleNumber, type CountryCode } from 'libphonenumber-js';
 import examples from 'libphonenumber-js/examples.mobile.json';
