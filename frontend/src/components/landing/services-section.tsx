@@ -1500,124 +1500,12 @@ const FooterSection = () => {
   }, []);
 
   return (
-    <SectionLayout showStripes={false} showTopBorder={false} className="pt-24 pb-12 px-6 md:px-16 lg:px-28" id="footer">
-      {/* Main footer content */}
-      <div ref={sectionRef} className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24 mb-24">
-        {/* Logo Column */}
-        <div
-          className={`md:col-span-3 flex items-start ${isVisible ? 'services-blur-animate' : ''}`}
-          style={{ opacity: 0 }}
-        >
-          <div className="flex items-center gap-8 md:gap-12 w-full">
-            <a
-              href={`/${language}`}
-              onClick={(e) => {
-                e.preventDefault();
-                window.location.href = `/${language}`;
-              }}
-              className="flex items-center gap-2 cursor-pointer flex-shrink-0"
-            >
-              <img
-                src="https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_80/v1763574787/monfily-black-nobg_risk6t.png"
-                alt="Monfily"
-                className="h-10 w-auto select-none"
-                draggable="false"
-                onContextMenu={(e) => e.preventDefault()}
-                onDragStart={(e) => e.preventDefault()}
-              />
-            </a>
-            <div className="hidden md:block w-[0.5px] h-32 bg-[#E2E7F1]"></div>
-          </div>
-        </div>
-
-        {/* Links Columns */}
-        <div className="md:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 md:gap-24">
-          {/* Account */}
-          <div
-            className={`flex flex-col space-y-6 ${isVisible ? 'services-blur-animate' : ''}`}
-            style={{ animationDelay: '0.1s', opacity: 0 }}
-          >
-            <h4 className="text-[#1C1C1E] text-lg" style={{ fontFamily: 'Fustat-Bold, sans-serif' }}>
-              {t.footer.columns.account.title}
-            </h4>
-            <ul className="flex flex-col space-y-4">
-              <li>
-                <a href="#" className="text-[#6B7280] hover:text-[#1C1C1E] transition-colors text-lg">
-                  {t.footer.columns.account.signup}
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-[#6B7280] hover:text-[#1C1C1E] transition-colors text-lg">
-                  {t.footer.columns.account.login}
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Support */}
-          <div
-            className={`flex flex-col space-y-6 ${isVisible ? 'services-blur-animate' : ''}`}
-            style={{ animationDelay: '0.2s', opacity: 0 }}
-          >
-            <h4 className="text-[#1C1C1E] text-lg" style={{ fontFamily: 'Fustat-Bold, sans-serif' }}>
-              {t.footer.columns.support.title}
-            </h4>
-            <ul className="flex flex-col space-y-4">
-              <li>
-                <a href={`mailto:${t.footer.columns.support.email}`} className="text-[#6B7280] hover:text-[#1C1C1E] transition-colors text-lg break-all">
-                  {t.footer.columns.support.email}
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-[#6B7280] hover:text-[#1C1C1E] transition-colors text-lg">
-                  {t.footer.columns.support.talkToSupport}
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-[#6B7280] hover:text-[#1C1C1E] transition-colors text-lg">
-                  {t.footer.columns.support.joinDiscord}
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Website */}
-          <div
-            className={`flex flex-col space-y-6 ${isVisible ? 'services-blur-animate' : ''}`}
-            style={{ animationDelay: '0.3s', opacity: 0 }}
-          >
-            <h4 className="text-[#1C1C1E] text-lg" style={{ fontFamily: 'Fustat-Bold, sans-serif' }}>
-              {t.footer.columns.website.title}
-            </h4>
-            <ul className="flex flex-col space-y-4">
-              <li><a href="#" className="text-[#6B7280] hover:text-[#1C1C1E] transition-colors text-lg">{t.footer.columns.website.products}</a></li>
-              <li><a href="#" className="text-[#6B7280] hover:text-[#1C1C1E] transition-colors text-lg">{t.footer.columns.website.fees}</a></li>
-              <li><a href="#" className="text-[#6B7280] hover:text-[#1C1C1E] transition-colors text-lg">{t.footer.columns.website.privacy}</a></li>
-              <li><a href="#" className="text-[#6B7280] hover:text-[#1C1C1E] transition-colors text-lg">{t.footer.columns.website.terms}</a></li>
-              <li><a href="#" className="text-[#6B7280] hover:text-[#1C1C1E] transition-colors text-lg">{t.footer.columns.website.status}</a></li>
-            </ul>
-          </div>
-
-          {/* A.I */}
-          <div
-            className={`flex flex-col space-y-6 ${isVisible ? 'services-blur-animate' : ''}`}
-            style={{ animationDelay: '0.4s', opacity: 0 }}
-          >
-            <h4 className="text-[#1C1C1E] text-lg" style={{ fontFamily: 'Fustat-Bold, sans-serif' }}>
-              {t.footer.columns.ai.title}
-            </h4>
-            <ul className="flex flex-col space-y-4">
-              <li><a href="#" className="text-[#6B7280] hover:text-[#1C1C1E] transition-colors text-lg">{t.footer.columns.ai.chat}</a></li>
-              <li><a href="#" className="text-[#6B7280] hover:text-[#1C1C1E] transition-colors text-lg">{t.footer.columns.ai.llms}</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      {/* Dotted Divider & Bottom Bar */}
+    <SectionLayout showStripes={false} showTopBorder={false} className="pt-12 pb-12 px-6 md:px-16 lg:px-28" id="footer">
+      {/* Bottom Bar */}
       <div
-        className={`w-full border-t border-dotted border-[#E2E7F1] pt-12 flex flex-col md:flex-row items-center justify-between gap-8 ${isVisible ? 'services-blur-animate' : ''}`}
-        style={{ animationDelay: '0.5s', opacity: 0 }}
+        ref={sectionRef}
+        className={`w-full flex flex-col-reverse md:flex-row items-center justify-between gap-8 ${isVisible ? 'services-blur-animate' : ''}`}
+        style={{ animationDelay: '0.1s', opacity: 0 }}
       >
         <p className="text-[#6B7280] text-lg text-center md:text-left leading-relaxed max-w-4xl">
           {t.footer.copyright}
