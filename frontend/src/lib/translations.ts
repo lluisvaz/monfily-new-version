@@ -1,6 +1,7 @@
 export type Language = 'pt-br' | 'pt-pt' | 'en' | 'es';
 
 export interface Translations {
+  whatsappNumber: string;
   // SEO Meta Tags
   seo: {
     title: string;
@@ -29,6 +30,7 @@ export interface Translations {
       spanish: string;
     };
     cta: string;
+    ctaMobile: string;
   };
 
   // Hero Section
@@ -192,6 +194,7 @@ export interface Translations {
 
 export const translations: Record<Language, Translations> = {
   'pt-br': {
+    whatsappNumber: '5511978267321',
     seo: {
       title: 'Criação de Sites, Softwares e Automações com IA | Monfily',
       description: 'Desenvolvemos sites rápidos, sistemas sob medida e automações com IA para empresas que precisam de eficiência operacional e presença digital profissional.',
@@ -213,15 +216,16 @@ export const translations: Record<Language, Translations> = {
       languages: {
         portugueseBrazil: 'Português (Brasil)',
         portuguesePortugal: 'Português (Portugal)',
-        english: 'Inglês (Estados Unidos)',
+        english: 'Inglês (Reino Unido)',
         spanish: 'Espanhol',
       },
       cta: 'Falar com Especialista',
+      ctaMobile: 'Contato',
     },
     hero: {
       badge: {
         chosenBy: 'Escolhido por ',
-        clients: '+50 Clientes em ',
+        clients: '+560 Clientes em ',
         in: '',
       },
       rotatingTexts: [
@@ -298,7 +302,7 @@ export const translations: Record<Language, Translations> = {
         viewPrices: 'Ver Portfólio',
         scheduleNow: 'Agendar Reunião',
       },
-      trust: 'Mais de 50 empresas atendidas',
+      trust: 'Mais de 560 empresas atendidas',
     },
     expertise: {
       label: 'Nossa Expertise',
@@ -398,6 +402,7 @@ export const translations: Record<Language, Translations> = {
     },
   },
   'pt-pt': {
+    whatsappNumber: '351927327279',
     seo: {
       title: 'Criação de Websites, Software e Automações com IA | Monfily',
       description: 'Desenvolvemos websites rápidos, sistemas à medida e automações com IA para empresas que precisam de eficiência operacional e presença digital profissional.',
@@ -419,15 +424,16 @@ export const translations: Record<Language, Translations> = {
       languages: {
         portugueseBrazil: 'Português (Brasil)',
         portuguesePortugal: 'Português (Portugal)',
-        english: 'Inglês (Estados Unidos)',
+        english: 'Inglês (Reino Unido)',
         spanish: 'Espanhol',
       },
       cta: 'Falar com Especialista',
+      ctaMobile: 'Contacto',
     },
     hero: {
       badge: {
         chosenBy: 'Escolhido por ',
-        clients: '+50 Clientes em ',
+        clients: '+560 Clientes em ',
         in: '',
       },
       rotatingTexts: [
@@ -504,7 +510,7 @@ export const translations: Record<Language, Translations> = {
         viewPrices: 'Ver Portfólio',
         scheduleNow: 'Agendar Reunião',
       },
-      trust: 'Mais de 50 empresas atendidas',
+      trust: 'Mais de 560 empresas atendidas',
     },
     expertise: {
       label: 'A Nossa Expertise',
@@ -604,6 +610,7 @@ export const translations: Record<Language, Translations> = {
     },
   },
   en: {
+    whatsappNumber: '447888865199',
     seo: {
       title: 'Website Creation, Software & AI Automation | Monfily',
       description: 'We develop fast websites, custom systems, and AI automations for companies looking for operational efficiency and a professional digital presence.',
@@ -625,15 +632,16 @@ export const translations: Record<Language, Translations> = {
       languages: {
         portugueseBrazil: 'Portuguese (Brazil)',
         portuguesePortugal: 'Portuguese (Portugal)',
-        english: 'English (United States)',
+        english: 'English (United Kingdom)',
         spanish: 'Spanish',
       },
       cta: 'Talk to an Expert',
+      ctaMobile: 'Contact',
     },
     hero: {
       badge: {
         chosenBy: 'Chosen by ',
-        clients: '+50 Clients in ',
+        clients: '+560 Clients in ',
         in: '',
       },
       rotatingTexts: [
@@ -710,7 +718,7 @@ export const translations: Record<Language, Translations> = {
         viewPrices: 'View Portfolio',
         scheduleNow: 'Book a Meeting',
       },
-      trust: 'More than 50 companies served',
+      trust: 'More than 560 companies served',
     },
     expertise: {
       label: 'Our Expertise',
@@ -810,6 +818,7 @@ export const translations: Record<Language, Translations> = {
     },
   },
   es: {
+    whatsappNumber: '34613588340',
     seo: {
       title: 'Creación de Sitios Web, Software y Automatizaciones con IA | Monfily',
       description: 'Desarrollamos sitios rápidos, sistemas a medida y automatizaciones con IA para empresas que necesitan eficiencia operativa y presencia digital profesional.',
@@ -831,15 +840,16 @@ export const translations: Record<Language, Translations> = {
       languages: {
         portugueseBrazil: 'Portugués (Brasil)',
         portuguesePortugal: 'Portugués (Portugal)',
-        english: 'Inglés (Estados Unidos)',
+        english: 'Inglés (Reino Unido)',
         spanish: 'Español',
       },
       cta: 'Hablar con Especialista',
+      ctaMobile: 'Contacto',
     },
     hero: {
       badge: {
         chosenBy: 'Elegido por ',
-        clients: '+50 Clientes en ',
+        clients: '+560 Clientes en ',
         in: '',
       },
       rotatingTexts: [
@@ -877,7 +887,7 @@ export const translations: Record<Language, Translations> = {
       title: 'Soluciones digitales para diferentes mercados.',
       metrics: {
         projectsDelivered: 'Proyectos entregados',
-        nichesServed: 'Segmentos atendidos',
+        nichesServed: 'Sectores atendidos',
       },
       items: {
         webDesign: {
@@ -916,7 +926,7 @@ export const translations: Record<Language, Translations> = {
         viewPrices: 'Ver Portfolio',
         scheduleNow: 'Agendar Reunión',
       },
-      trust: 'Más de 50 empresas atendidas',
+      trust: 'Más de 560 empresas atendidas',
     },
     expertise: {
       label: 'Nuestra Expertise',

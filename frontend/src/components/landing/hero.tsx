@@ -172,10 +172,7 @@ export function Hero() {
         >
           <SpotlightButton
             onClick={() => {
-              const el = document.getElementById('contato');
-              if (el) {
-                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              }
+              window.open(`https://wa.me/${t.whatsappNumber}`, '_blank');
             }}
             className="group bg-[#2869D6] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer w-full sm:w-auto"
           >

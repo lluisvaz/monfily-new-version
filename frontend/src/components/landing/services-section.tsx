@@ -7,7 +7,6 @@ import { ArrowRight, Plus, Instagram, Mail, Whatsapp } from "iconoir-react";
 import { WindowIcon, CommandLineIcon, CpuChipIcon, ChartBarIcon } from "@heroicons/react/24/outline";
 import SpotlightCard from "@/components/ui/spotlight-card";
 import { SpotlightButton } from "@/components/ui/spotlight-button";
-import LeadForm from "@/components/forms/lead-form";
 
 const GridDecoration = ({ className }: { className?: string }) => (
   <div className={`absolute w-6 h-6 flex items-center justify-center pointer-events-none ${className}`} style={{ zIndex: 'var(--section-grid-z, 9990)' }}>
@@ -345,7 +344,7 @@ export function ServicesSection() {
                       fontWeight: 'normal'
                     }}
                   >
-                    <span className="text-[#2869D6]">+</span> 50
+                    <span className="text-[#2869D6]">+</span> 560
                   </div>
                   <div className="text-base text-[#6B7280] mt-1 whitespace-nowrap">
                     {t.services.metrics.projectsDelivered}
@@ -487,7 +486,7 @@ export function ServicesSection() {
                     fontWeight: 'normal'
                   }}
                 >
-                  <span className="text-[#2869D6]">+</span> 50
+                  <span className="text-[#2869D6]">+</span> 560
                 </div>
                 <div className="text-base md:text-lg text-[#6B7280] mt-2">
                   {t.services.metrics.projectsDelivered}
@@ -1384,13 +1383,12 @@ const FinalCTASection = () => {
     <SectionLayout id="contato" showStripes={false} showTopBorder={false} className="py-24 px-6 md:px-16 lg:px-28">
       <div
         ref={sectionRef}
-        className={`relative flex flex-col md:flex-row items-start justify-between gap-12 ${isVisible ? 'services-blur-animate' : ''}`}
+        className={`relative flex flex-col items-center text-center gap-10 ${isVisible ? 'services-blur-animate' : ''}`}
         style={{ opacity: 0 }}
       >
-        {/* Content Side */}
-        <div className="flex flex-col space-y-8 z-10 w-full md:w-2/5">
+        <div className="flex flex-col items-center space-y-6 z-10 w-full max-w-2xl">
           <h2
-            className="text-4xl md:text-5xl text-[#1C1C1E] leading-none max-w-md md:max-w-lg"
+            className="text-4xl md:text-5xl text-[#1C1C1E] leading-none"
             style={{
               fontFamily: 'Fustat-Bold, sans-serif',
               fontWeight: 'normal',
@@ -1400,68 +1398,18 @@ const FinalCTASection = () => {
           >
             {t.finalCTA.heading}
           </h2>
-          <p className="text-[#1C1C1E] text-base md:text-lg max-w-md leading-tight">
+          <p className="text-[#1C1C1E] text-base md:text-lg leading-tight max-w-lg">
             {t.finalCTA.description}
           </p>
-
-        </div>
-
-        {/* Lead Form Side */}
-        <div className="w-full md:w-3/5">
-          <LeadForm />
-        </div>
-
-        {/* Illustration Side */}
-        <div className="hidden">
-          <div className="relative w-full max-w-[500px] h-[300px] md:h-[400px]">
-            {/* 
-                Since we don't have the original asset, we'll use a stylized representation 
-                that matches the spirit of the illustration in the image 
-            */}
-            <svg viewBox="0 0 500 400" className="w-full h-full drop-shadow-xl" preserveAspectRatio="xMidYMid meet">
-              {/* Giant Arrow */}
-              <path
-                d="M50,350 Q100,320 180,250 T450,50"
-                fill="none"
-                stroke="#1C1C1E"
-                strokeWidth="15"
-                strokeLinecap="round"
-              />
-              <path
-                d="M450,50 L420,50 L455,40 L460,75 Z"
-                fill="#1C1C1E"
-                stroke="#1C1C1E"
-                strokeWidth="5"
-                strokeLinejoin="round"
-              />
-
-              {/* Flying Character Stylized */}
-              <g transform="translate(280, 160) rotate(-35)">
-                {/* Hair */}
-                <path d="M-50,-20 Q-70,0 -50,40 Q-30,60 0,40" fill="#1C1C1E" />
-                {/* Body/Shirt */}
-                <path d="M-30,0 L30,0 L20,60 L-20,60 Z" fill="white" stroke="#1C1C1E" strokeWidth="3" />
-                {/* Pants */}
-                <path d="M-20,60 L20,60 L30,120 L10,120 L0,80 L-10,120 L-30,120 Z" fill="#1C1C1E" />
-                {/* Head */}
-                <circle cx="0" cy="-20" r="22" fill="#FFE4E6" stroke="#1C1C1E" strokeWidth="3" />
-                {/* Money in hand */}
-                <g transform="translate(30, 20) rotate(10)">
-                  <rect width="40" height="25" fill="#4ADE80" stroke="#1C1C1E" strokeWidth="2" rx="2" />
-                  <rect x="5" y="5" width="40" height="25" fill="#4ADE80" stroke="#1C1C1E" strokeWidth="2" rx="2" />
-                  <path d="M10,10 L30,10 M10,15 L35,15" stroke="#1C1C1E" strokeWidth="1" opacity="0.5" />
-                </g>
-              </g>
-
-              {/* Decorative Floating Money */}
-              <g transform="translate(150, 100) rotate(-20)">
-                <rect width="25" height="15" fill="#4ADE80" stroke="#1C1C1E" strokeWidth="1.5" rx="1" />
-              </g>
-              <g transform="translate(80, 200) rotate(15)">
-                <rect width="25" height="15" fill="#4ADE80" stroke="#1C1C1E" strokeWidth="1.5" rx="1" />
-              </g>
-            </svg>
-          </div>
+          
+          <SpotlightButton
+            onClick={() => {
+              window.open(`https://wa.me/${t.whatsappNumber}`, '_blank');
+            }}
+            className="bg-[#2869D6] text-white h-12 px-10 rounded-full font-medium flex items-center justify-center cursor-pointer mt-4"
+          >
+            {t.finalCTA.cta}
+          </SpotlightButton>
         </div>
       </div>
     </SectionLayout>
@@ -1520,7 +1468,7 @@ const FooterSection = () => {
             <a href="mailto:monfilydigital@gmail.com" className="text-[#1C1C1E] hover:text-[#2869D6] transition-colors" aria-label="Enviar e-mail para Monfily">
               <Mail className="w-5 h-5" />
             </a>
-            <a href="https://wa.me/5511978267321" target="_blank" rel="noopener noreferrer" className="text-[#1C1C1E] hover:text-[#2869D6] transition-colors" aria-label="WhatsApp da Monfily">
+            <a href={`https://wa.me/${t.whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="text-[#1C1C1E] hover:text-[#2869D6] transition-colors" aria-label="WhatsApp da Monfily">
               <Whatsapp className="w-5 h-5" />
             </a>
           </div>

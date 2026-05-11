@@ -1,55 +1,23 @@
 import { useLocation } from "wouter";
-import { useState, useEffect } from "react";
 import { SectionLayout } from "./section-layout";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetClose,
-  SheetTitle,
-  SheetDescription,
-} from "@/components/ui/sheet";
-import * as VisuallyHiddenPrimitive from "@radix-ui/react-visually-hidden";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
 import { NavArrowDown } from "iconoir-react";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
 import { SpotlightButton } from "@/components/ui/spotlight-button";
 
 export function Header() {
-  const [isOpen, setIsOpen] = useState(false);
   const { language } = useLanguage();
   const [location] = useLocation();
   const t = translations[language];
 
-  const navItems = [
-    t.header.nav.solutions,
-    t.header.nav.support,
-    t.header.nav.insights,
-  ];
-  const navItemsWithDropdown = [t.header.nav.solutions];
-
-  // Adicionar/remover classe no body quando sidebar abre/fecha
-  useEffect(() => {
-    if (isOpen) {
-      document.body.classList.add('sidebar-open');
-    } else {
-      document.body.classList.remove('sidebar-open');
-    }
-    return () => {
-      document.body.classList.remove('sidebar-open');
-    };
-  }, [isOpen]);
+  const navItems = [];
+  const navItemsWithDropdown = [];
 
   const handleLanguageChange = (lang: 'pt-br' | 'pt-pt' | 'en' | 'es') => {
     // Remove current language prefix from path
@@ -166,7 +134,7 @@ export function Header() {
                 style={{ animationDelay: `${0.3 + navItems.length * 0.05}s`, opacity: 0 }}
               >
                 <img
-                  src={`https://flagcdn.com/w20/${language === 'pt-br' ? 'br' : language === 'pt-pt' ? 'pt' : language === 'es' ? 'es' : 'us'}.png`}
+                  src={`https://flagcdn.com/w20/${language === 'pt-br' ? 'br' : language === 'pt-pt' ? 'pt' : language === 'es' ? 'es' : 'gb'}.png`}
                   alt={language}
                   className="w-5 h-auto rounded-sm flex-shrink-0"
                 />
@@ -189,7 +157,7 @@ export function Header() {
                 className={`flex items-center gap-2 cursor-pointer ${language === 'en' ? 'font-medium bg-slate-50' : ''}`}
                 onClick={() => handleLanguageChange('en')}
               >
-                <img src="https://flagcdn.com/w20/us.png" alt="US" className="w-4 h-auto rounded-sm" />
+                <img src="https://flagcdn.com/w20/gb.png" alt="GB" className="w-4 h-auto rounded-sm" />
                 <span className={language === 'en' ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{t.header.languages.english}</span>
               </DropdownMenuItem>
               <DropdownMenuItem
@@ -210,10 +178,7 @@ export function Header() {
           </DropdownMenu>
           <SpotlightButton
             onClick={() => {
-              const el = document.getElementById('contato');
-              if (el) {
-                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              }
+              window.open(`https://wa.me/${t.whatsappNumber}`, '_blank');
             }}
             className="bg-[#2869D6] text-white h-10 px-6 rounded-full font-medium header-blur-animate flex items-center justify-center cursor-pointer"
             style={{ animationDelay: `${0.35 + navItems.length * 0.05}s`, opacity: 0 }}
@@ -232,7 +197,7 @@ export function Header() {
               style={{ animationDelay: '0.15s', opacity: 0 }}
             >
               <img
-                src={`https://flagcdn.com/w20/${language === 'pt-br' ? 'br' : language === 'pt-pt' ? 'pt' : language === 'es' ? 'es' : 'us'}.png`}
+                src={`https://flagcdn.com/w20/${language === 'pt-br' ? 'br' : language === 'pt-pt' ? 'pt' : language === 'es' ? 'es' : 'gb'}.png`}
                 alt={language}
                 className="w-5 h-auto rounded-sm flex-shrink-0"
               />
@@ -255,7 +220,7 @@ export function Header() {
               className={`flex items-center gap-2 cursor-pointer ${language === 'en' ? 'font-medium bg-slate-50' : ''}`}
               onClick={() => handleLanguageChange('en')}
             >
-              <img src="https://flagcdn.com/w20/us.png" alt="US" className="w-4 h-auto rounded-sm" />
+              <img src="https://flagcdn.com/w20/gb.png" alt="GB" className="w-4 h-auto rounded-sm" />
               <span className={language === 'en' ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{t.header.languages.english}</span>
             </DropdownMenuItem>
             <DropdownMenuItem
@@ -275,419 +240,15 @@ export function Header() {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild>
-            <button
-              className="group flex items-center justify-center h-10 w-10 rounded-full hover:bg-slate-50 transition-colors flex-shrink-0 header-blur-animate focus:outline-none focus-visible:outline-none cursor-pointer"
-              style={{ animationDelay: '0.2s', opacity: 0 }}
-              aria-label="Abrir menu de navegação"
-            >
-              <div className="w-6 h-6 flex flex-col justify-center items-end gap-1.5">
-                <div className="w-6 h-[2px] bg-current rounded-full transition-all duration-300" />
-                <div className="w-4 h-[2px] bg-current rounded-full transition-all duration-300 group-hover:w-6" />
-              </div>
-            </button>
-          </SheetTrigger>
-          <SheetContent
-            side="right"
-            className="w-full sm:w-[400px] p-0 bg-white overflow-y-auto [&>button]:!hidden !z-[9999]"
-          >
-            <VisuallyHiddenPrimitive.Root>
-              <SheetTitle>{t.header.nav.menu}</SheetTitle>
-              <SheetDescription>
-                {t.header.nav.menuDescription}
-              </SheetDescription>
-            </VisuallyHiddenPrimitive.Root>
-            <style>{`
-              @keyframes blurText {
-                0% {
-                  filter: blur(10px);
-                  opacity: 0;
-                }
-                100% {
-                  filter: blur(0px);
-                  opacity: 1;
-                }
-              }
-              .sidebar-blur-animate {
-                animation: blurText 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-              }
-              @keyframes slideInRight {
-                from {
-                  transform: translateX(100%);
-                  opacity: 0;
-                }
-                to {
-                  transform: translateX(0);
-                  opacity: 1;
-                }
-              }
-              @keyframes slideOutRight {
-                from {
-                  transform: translateX(0);
-                  opacity: 1;
-                }
-                to {
-                  transform: translateX(100%);
-                  opacity: 0;
-                }
-              }
-              @keyframes fadeInUp {
-                from {
-                  opacity: 0;
-                  transform: translateY(10px);
-                }
-                to {
-                  opacity: 1;
-                  transform: translateY(0);
-                }
-              }
-              @keyframes slideDown {
-                from {
-                  opacity: 0;
-                  transform: translateY(-8px);
-                  max-height: 0;
-                  padding-top: 0;
-                  padding-bottom: 0;
-                }
-                to {
-                  opacity: 1;
-                  transform: translateY(0);
-                  max-height: 200px;
-                  padding-top: 0.5rem;
-                  padding-bottom: 0.5rem;
-                }
-              }
-              @keyframes slideUp {
-                from {
-                  opacity: 1;
-                  transform: translateY(0);
-                  max-height: 200px;
-                  padding-top: 0.5rem;
-                  padding-bottom: 0.5rem;
-                }
-                to {
-                  opacity: 0;
-                  transform: translateY(-8px);
-                  max-height: 0;
-                  padding-top: 0;
-                  padding-bottom: 0;
-                }
-              }
-              @keyframes fadeInSubmenuItem {
-                from {
-                  opacity: 0;
-                  transform: translateX(-6px);
-                }
-                to {
-                  opacity: 1;
-                  transform: translateX(0);
-                }
-              }
-              /* Animação suave para CollapsibleContent */
-              [data-radix-collapsible-content][data-state="open"] {
-                animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-              }
-              [data-radix-collapsible-content][data-state="closed"] {
-                animation: slideUp 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-              }
-              .nav-item {
-                animation: fadeInUp 0.4s ease-out forwards;
-                opacity: 0;
-              }
-              .nav-item:nth-child(1) { animation-delay: 0.1s; }
-              .nav-item:nth-child(2) { animation-delay: 0.15s; }
-              .nav-item:nth-child(3) { animation-delay: 0.2s; }
-              .nav-item:nth-child(4) { animation-delay: 0.25s; }
-              .nav-item:nth-child(5) { animation-delay: 0.3s; }
-              .nav-item:nth-child(6) { animation-delay: 0.35s; }
-              .nav-item:nth-child(7) { animation-delay: 0.4s; }
-              .nav-item:nth-child(8) { animation-delay: 0.45s; }
-              /* Overlay com blur claro ao invés de escuro */
-              [data-radix-dialog-overlay] {
-                background: rgba(255, 255, 255, 0.3) !important;
-                backdrop-filter: blur(12px) saturate(180%) !important;
-                -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
-                z-index: 9998 !important;
-              }
-              /* Reduzir z-index das linhas laterais e grid quando sidebar aberto */
-              [data-radix-dialog-overlay][data-state="open"] ~ * [id="section-main-content"],
-              [data-radix-dialog-overlay][data-state="open"] ~ * [style*="z-index"] {
-                --section-border-z: 1 !important;
-                --section-grid-z: 1 !important;
-              }
-              /* Aplicar z-index reduzido globalmente quando sidebar está aberto */
-              body.sidebar-open {
-                --section-border-z: 1 !important;
-                --section-grid-z: 1 !important;
-              }
-              [data-radix-dialog-content] {
-                z-index: 9999 !important;
-                position: fixed !important;
-              }
-              /* Animação minimalista de fechamento */
-              [data-radix-dialog-content][data-state="closed"] {
-                animation: slideOutRight 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
-              }
-              [data-radix-dialog-content][data-state="open"] {
-                animation: slideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
-              }
-              /* Garantir que o SheetPortal renderize acima de tudo */
-              [data-radix-portal] {
-                z-index: 9999 !important;
-              }
-              /* Esconder o botão X padrão do SheetContent */
-              [data-radix-dialog-content] > button[data-radix-dialog-close] {
-                display: none !important;
-              }
-            `}</style>
-
-            {/* Sidebar Layout with Margins and Grid Decoration */}
-            <div className="w-full h-full flex flex-row relative">
-              {/* Top border line */}
-              <div className="absolute top-0 left-0 right-0 h-[0.5px] bg-[#E2E7F1]" style={{ zIndex: 10 }}></div>
-
-              {/* Header Bottom Border Line - Infinite line that extends through margins and passes through grid decorations */}
-              <div className="absolute left-0 right-0 h-[0.5px] bg-[#E2E7F1] pointer-events-none" style={{ top: '96px', zIndex: 1000 }}></div>
-
-              {/* Left Margin */}
-              <div className="flex-1 min-w-[1rem] md:min-w-[2rem] bg-white"></div>
-
-              {/* Main Content */}
-              <div className="relative w-full min-w-0 bg-white flex flex-col">
-                {/* Left border line */}
-                <div className="absolute top-0 bottom-0 left-0 w-[0.5px] bg-[#E2E7F1] pointer-events-none" style={{ zIndex: 1000 }}></div>
-
-                {/* Right border line */}
-                <div className="absolute top-0 bottom-0 right-0 w-[0.5px] bg-[#E2E7F1] pointer-events-none" style={{ zIndex: 1000 }}></div>
-
-                {/* Grid Decorations at Header Bottom Corners (where vertical lines meet header bottom border) */}
-                <div className="absolute pointer-events-none" style={{ top: '96px', left: 0, right: 0, zIndex: 9995 }}>
-                  {/* Left grid decoration */}
-                  <div className="absolute w-6 h-6 flex items-center justify-center pointer-events-none" style={{ left: '-12px', top: '-12px', zIndex: 9995 }}>
-                    <div className="absolute w-4 h-4 bg-white rounded-full" />
-                    <svg viewBox="0 0 24 24" className="w-full h-full fill-[#E2E7F1] relative z-10">
-                      <path d="M12 2C12 2 14 10 22 12C14 14 12 22 12 22C12 22 10 14 2 12C10 10 12 2 12 2Z" />
-                    </svg>
-                  </div>
-                  {/* Right grid decoration */}
-                  <div className="absolute w-6 h-6 flex items-center justify-center pointer-events-none" style={{ right: '-12px', top: '-12px', zIndex: 9995 }}>
-                    <div className="absolute w-4 h-4 bg-white rounded-full" />
-                    <svg viewBox="0 0 24 24" className="w-full h-full fill-[#E2E7F1] relative z-10">
-                      <path d="M12 2C12 2 14 10 22 12C14 14 12 22 12 22C12 22 10 14 2 12C10 10 12 2 12 2Z" />
-                    </svg>
-                  </div>
-                </div>
-
-                {/* Header do Menu */}
-                <div className="flex items-center justify-between px-4 h-24">
-                  <a
-                    href={`/${language}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setIsOpen(false);
-                      window.location.href = `/${language}`;
-                    }}
-                    className="flex items-center gap-2 cursor-pointer flex-shrink-0 sidebar-blur-animate"
-                    style={{ animationDelay: '0.1s', opacity: 0 }}
-                  >
-                    <img
-                      src="https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_120/v1763574787/monfily-black-nobg_risk6t.png"
-                      alt="Monfily"
-                      className="h-10 w-auto select-none"
-                      draggable="false"
-                      onContextMenu={(e) => e.preventDefault()}
-                      onDragStart={(e) => e.preventDefault()}
-                    />
-                  </a>
-                  <SheetClose asChild>
-                    <button
-                      className="group flex items-center justify-center h-10 w-10 rounded-full hover:bg-slate-50 transition-colors flex-shrink-0 sidebar-blur-animate focus:outline-none focus-visible:outline-none cursor-pointer"
-                      style={{ animationDelay: '0.15s', opacity: 0 }}
-                    >
-                      <div className="relative w-6 h-6 flex items-center justify-center">
-                        <div className="absolute w-6 h-[2px] bg-current rounded-full rotate-45 transition-all duration-300 group-hover:rotate-90" />
-                        <div className="absolute w-6 h-[2px] bg-current rounded-full -rotate-45 transition-all duration-300 group-hover:rotate-0" />
-                      </div>
-                    </button>
-                  </SheetClose>
-                </div>
-
-                {/* Navigation Links */}
-                <nav className="flex flex-col px-6 py-4 flex-1 overflow-y-auto">
-
-                  {navItemsWithDropdown.map((item, index) => (
-                    <Collapsible key={item} className="sidebar-blur-animate" style={{ animationDelay: `${0.2 + index * 0.05}s`, opacity: 0 }}>
-                      <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group cursor-pointer">
-                        <span>{item}</span>
-                        <NavArrowDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
-                      </CollapsibleTrigger>
-                      <CollapsibleContent
-                        className="pl-4 pb-2 overflow-hidden"
-                      >
-                        <div className="flex flex-col gap-2">
-                          <a
-                            href="#"
-                            onClick={() => setIsOpen(false)}
-                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1 cursor-pointer"
-                            style={{
-                              animation: 'fadeInSubmenuItem 0.3s ease-out 0.1s both'
-                            }}
-                          >
-                            {t.header.solutionsDropdown.websiteCreation}
-                          </a>
-                          <a
-                            href="#"
-                            onClick={() => setIsOpen(false)}
-                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1 cursor-pointer"
-                            style={{
-                              animation: 'fadeInSubmenuItem 0.3s ease-out 0.15s both'
-                            }}
-                          >
-                            {t.header.solutionsDropdown.softwareDevelopment}
-                          </a>
-                          <a
-                            href="#"
-                            onClick={() => setIsOpen(false)}
-                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1 cursor-pointer"
-                            style={{
-                              animation: 'fadeInSubmenuItem 0.3s ease-out 0.2s both'
-                            }}
-                          >
-                            {t.header.solutionsDropdown.artificialIntelligence}
-                          </a>
-                          <a
-                            href="#"
-                            onClick={() => setIsOpen(false)}
-                            className="text-sm text-[#1C1C1E]/70 hover:text-[#1C1C1E] py-1 transition-all duration-200 hover:translate-x-1 cursor-pointer"
-                            style={{
-                              animation: 'fadeInSubmenuItem 0.3s ease-out 0.25s both'
-                            }}
-                          >
-                            {t.header.solutionsDropdown.technicalSEO}
-                          </a>
-                        </div>
-                      </CollapsibleContent>
-                    </Collapsible>
-                  ))}
-
-                  {navItems.filter(item => !navItemsWithDropdown.includes(item)).map((item, index) => {
-                    const dropdownCount = navItemsWithDropdown.length;
-                    return (
-                      <a
-                        key={item}
-                        href="#"
-                        data-custom-handler="true"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setIsOpen(false);
-                        }}
-                        className="sidebar-blur-animate text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors cursor-pointer"
-                        style={{ animationDelay: `${0.2 + dropdownCount * 0.05 + index * 0.05}s`, opacity: 0 }}
-                      >
-                        {item}
-                      </a>
-                    );
-                  })}
-
-                  {/* Separator */}
-                  <div
-                    className="h-px bg-[#E2E7F1] my-4 sidebar-blur-animate"
-                    style={{ animationDelay: `${0.2 + navItems.length * 0.05}s`, opacity: 0 }}
-                  ></div>
-
-                  {/* Language Selector */}
-                  <Collapsible
-                    className="sidebar-blur-animate"
-                    style={{ animationDelay: `${0.25 + navItems.length * 0.05}s`, opacity: 0 }}
-                  >
-                    <CollapsibleTrigger className="flex items-center justify-between w-full text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-base py-3 transition-colors group cursor-pointer">
-                      <div className="flex items-center gap-2">
-                        <img
-                            src={`https://flagcdn.com/w20/${language === 'pt-br' ? 'br' : language === 'pt-pt' ? 'pt' : language === 'es' ? 'es' : 'us'}.png`}
-                            alt={language}
-                            className="w-5 h-auto rounded-sm"
-                          />
-                          <span>{language === 'pt-br' ? t.header.languages.portugueseBrazil : language === 'pt-pt' ? t.header.languages.portuguesePortugal : language === 'es' ? t.header.languages.spanish : t.header.languages.english}</span>
-                      </div>
-                      <NavArrowDown className="h-4 w-4 transition-all duration-300 ease-out data-[state=open]:rotate-180 data-[state=open]:text-[#2869D6]" />
-                    </CollapsibleTrigger>
-                    <CollapsibleContent
-                      className="pl-4 pb-2 overflow-hidden"
-                    >
-                      <div className="flex flex-col gap-2">
-                        <a
-                          href="#"
-                          onClick={(e) => { e.preventDefault(); handleLanguageChange('pt-br'); setIsOpen(false); }}
-                          className={`text-sm py-2 px-2 rounded transition-all duration-200 hover:translate-x-1 cursor-pointer flex items-center gap-2 ${language === 'pt-br' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
-                          style={{
-                            animation: 'fadeInSubmenuItem 0.3s ease-out 0.1s both'
-                          }}
-                        >
-                          <img src="https://flagcdn.com/w20/br.png" alt="BR" className="w-4 h-auto rounded-sm" />
-                          {t.header.languages.portugueseBrazil}
-                        </a>
-                        <a
-                          href="#"
-                          onClick={(e) => { e.preventDefault(); handleLanguageChange('en'); setIsOpen(false); }}
-                          className={`text-sm py-2 px-2 rounded transition-all duration-200 hover:translate-x-1 cursor-pointer flex items-center gap-2 ${language === 'en' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
-                          style={{
-                            animation: 'fadeInSubmenuItem 0.3s ease-out 0.15s both'
-                          }}
-                        >
-                          <img src="https://flagcdn.com/w20/us.png" alt="US" className="w-4 h-auto rounded-sm" />
-                          {t.header.languages.english}
-                        </a>
-                        <a
-                          href="#"
-                          onClick={(e) => { e.preventDefault(); handleLanguageChange('pt-pt'); setIsOpen(false); }}
-                          className={`text-sm py-2 px-2 rounded transition-all duration-200 hover:translate-x-1 cursor-pointer flex items-center gap-2 ${language === 'pt-pt' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
-                          style={{
-                            animation: 'fadeInSubmenuItem 0.3s ease-out 0.2s both'
-                          }}
-                        >
-                          <img src="https://flagcdn.com/w20/pt.png" alt="PT" className="w-4 h-auto rounded-sm" />
-                          {t.header.languages.portuguesePortugal}
-                        </a>
-                        <a
-                          href="#"
-                          onClick={(e) => { e.preventDefault(); handleLanguageChange('es'); setIsOpen(false); }}
-                          className={`text-sm py-2 px-2 rounded transition-all duration-200 hover:translate-x-1 cursor-pointer flex items-center gap-2 ${language === 'es' ? 'text-[#1C1C1E] font-medium bg-slate-50' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}`}
-                          style={{
-                            animation: 'fadeInSubmenuItem 0.3s ease-out 0.25s both'
-                          }}
-                        >
-                          <img src="https://flagcdn.com/w20/es.png" alt="ES" className="w-4 h-auto rounded-sm" />
-                          {t.header.languages.spanish}
-                        </a>
-                      </div>
-                    </CollapsibleContent>
-                  </Collapsible>
-
-                  {/* Falar com Especialista Button */}
-                  <SpotlightButton
-                    onClick={() => {
-                      setIsOpen(false);
-                      setTimeout(() => {
-                        const el = document.getElementById('contato');
-                        if (el) {
-                          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        }
-                      }, 300);
-                    }}
-                    className="bg-[#2869D6] text-white py-4 rounded-full font-medium sidebar-blur-animate mt-4 w-full flex items-center justify-center cursor-pointer"
-                    style={{ animationDelay: `${0.3 + navItems.length * 0.05}s`, opacity: 0 }}
-                  >
-                    {t.header.cta}
-                  </SpotlightButton>
-                </nav>
-              </div>
-
-              {/* Right Margin */}
-              <div className="flex-1 min-w-[1rem] md:min-w-[2rem] bg-white"></div>
-            </div>
-          </SheetContent>
-        </Sheet>
+        <SpotlightButton
+          onClick={() => {
+            window.open(`https://wa.me/${t.whatsappNumber}`, '_blank');
+          }}
+          className="bg-[#2869D6] text-white h-10 px-5 rounded-full font-medium header-blur-animate flex items-center justify-center cursor-pointer text-sm"
+          style={{ animationDelay: '0.2s', opacity: 0 }}
+        >
+          {t.header.ctaMobile}
+        </SpotlightButton>
       </div>
     </SectionLayout>
   );
