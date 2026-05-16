@@ -2,6 +2,26 @@ import { useEffect } from 'react';
 import { useLanguage } from '@/hooks/use-language';
 import { translations } from '@/lib/translations';
 
+const HTML_LANG_BY_LANGUAGE = {
+  'pt-br': 'pt-BR',
+  'pt-pt': 'pt-PT',
+  en: 'en-US',
+  es: 'es-ES',
+  it: 'it-IT',
+  sg: 'en-SG',
+  he: 'he-IL',
+} as const;
+
+const OG_LOCALE_BY_LANGUAGE = {
+  'pt-br': 'pt_BR',
+  'pt-pt': 'pt_PT',
+  en: 'en_US',
+  es: 'es_ES',
+  it: 'it_IT',
+  sg: 'en_SG',
+  he: 'he_IL',
+} as const;
+
 export function SEOHead() {
   const { language } = useLanguage();
   const t = translations[language];
@@ -28,12 +48,13 @@ export function SEOHead() {
     updateMetaTag('description', t.seo.description);
 
     // Update html lang attribute
-    document.documentElement.lang = language === 'pt-br' ? 'pt-BR' : language === 'pt-pt' ? 'pt-PT' : 'en-US';
+    document.documentElement.lang = HTML_LANG_BY_LANGUAGE[language];
+    document.documentElement.dir = 'ltr';
 
     // Update Open Graph tags
     updateMetaTag('og:title', t.seo.title, 'property');
     updateMetaTag('og:description', t.seo.description, 'property');
-    updateMetaTag('og:locale', language === 'pt-br' ? 'pt_BR' : language === 'pt-pt' ? 'pt_PT' : 'en_US', 'property');
+    updateMetaTag('og:locale', OG_LOCALE_BY_LANGUAGE[language], 'property');
 
     // Update Twitter Card tags
     updateMetaTag('twitter:title', t.seo.title);

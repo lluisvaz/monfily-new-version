@@ -8,55 +8,41 @@ import Home from "@/pages/home";
 import { LoadingScreen } from "@/components/ui/loading-screen";
 import { useEffect } from "react";
 
-function RedirectToLast() {
-  const [location, setLocation] = useLocation();
+function RedirectToRoot() {
+  const [, setLocation] = useLocation();
 
   useEffect(() => {
-    const lastPath = localStorage.getItem("last_path") || "/";
-    // Evita loop infinito se já estivermos no destino
-    if (location !== lastPath) {
-      setLocation(lastPath, { replace: true });
-    }
-  }, [location, setLocation]);
+    setLocation("/", { replace: true });
+  }, [setLocation]);
 
   return null;
 }
 
 function Router() {
-  const [location] = useLocation();
-
-  useEffect(() => {
-    // Lista de rotas válidas (baseado no que está no Switch abaixo)
-    const validPaths = ["/", "/pt-br", "/pt-pt", "/en", "/es"];
-    if (validPaths.includes(location)) {
-      localStorage.setItem("last_path", location);
-    }
-  }, [location]);
-
   return (
     <Switch>
       <Route path="/pt-br" component={Home} />
       <Route path="/pt-pt" component={Home} />
       <Route path="/en" component={Home} />
       <Route path="/es" component={Home} />
+      <Route path="/it" component={Home} />
+      <Route path="/sg" component={Home} />
+      <Route path="/he" component={Home} />
       <Route path="/" component={Home} />
-      <Route component={RedirectToLast} />
+      <Route component={RedirectToRoot} />
     </Switch>
   );
 }
 
 function App() {
   useEffect(() => {
-    // Intercepta cliques em links âncora e faz scroll sem atualizar a URL
-    // Mas não interfere com links que têm handler customizado (marcados com data-custom-handler)
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const link = target.closest('a[href^="#"]') as HTMLAnchorElement;
 
       if (link && link.getAttribute('href')?.startsWith('#')) {
-        // Não intercepta se o link tem um handler customizado
         if (link.getAttribute('data-custom-handler') === 'true') {
-          return; // Deixa o onClick customizado funcionar
+          return;
         }
 
         const href = link.getAttribute('href');
@@ -67,10 +53,8 @@ function App() {
           const element = document.getElementById(id);
 
           if (element) {
-            // Scroll nativo suave
             element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-            // Atualiza a URL sem o hash usando replaceState
             if (window.history.replaceState) {
               window.history.replaceState(null, '', window.location.pathname + window.location.search);
             }

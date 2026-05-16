@@ -27,7 +27,19 @@ export function WebsiteMockupMobile() {
   }, []);
 
   const formatTime = (date: Date) => {
-    const locale = language === 'pt-br' ? 'pt-BR' : language === 'pt-pt' ? 'pt-PT' : 'en-US';
+    const locale = language === 'pt-br'
+      ? 'pt-BR'
+      : language === 'pt-pt'
+        ? 'pt-PT'
+        : language === 'es'
+          ? 'es-ES'
+          : language === 'it'
+            ? 'it-IT'
+            : language === 'sg'
+              ? 'en-SG'
+              : language === 'he'
+                ? 'he-IL'
+                : 'en-US';
     return date.toLocaleTimeString(locale, {
       hour: '2-digit',
       minute: '2-digit',

@@ -154,7 +154,7 @@ export function Hero() {
               <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Inteligencia Artificial (IA)</strong> y{' '}
               <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>SEO Técnico</strong> para generar ingresos y eficiencia.
             </>
-          ) : (
+          ) : (language === 'en' || language === 'sg') ? (
             <>
               Complete digital infrastructure for your business. We combine high-performance{' '}
               <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Website Creation</strong> design,{' '}
@@ -162,6 +162,8 @@ export function Hero() {
               <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Artificial Intelligence (AI)</strong>, and{' '}
               <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Technical SEO</strong> to generate revenue and efficiency.
             </>
+          ) : (
+            t.hero.description
           )}
         </p>
 

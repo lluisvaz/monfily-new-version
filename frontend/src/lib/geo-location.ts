@@ -1,69 +1,74 @@
-// Lista de países lusófonos (excluindo Portugal que terá tratamento especial)
 const PORTUGUESE_SPEAKING_COUNTRIES = [
-  'AO', // Angola
-  'BR', // Brasil
-  'CV', // Cabo Verde
-  'GW', // Guiné-Bissau
-  'GQ', // Guiné Equatorial
-  'MZ', // Moçambique
-  'ST', // São Tomé e Príncipe
-  'TL', // Timor-Leste
+  'AO',
+  'BR',
+  'CV',
+  'GW',
+  'GQ',
+  'MZ',
+  'ST',
+  'TL',
 ];
 
-// Lista de países hispanofalantes
 const SPANISH_SPEAKING_COUNTRIES = [
-  'ES', // España
-  'MX', // México
-  'AR', // Argentina
-  'CO', // Colombia
-  'PE', // Perú
-  'VE', // Venezuela
-  'CL', // Chile
-  'EC', // Ecuador
-  'GT', // Guatemala
-  'CU', // Cuba
-  'BO', // Bolivia
-  'DO', // República Dominicana
-  'HN', // Honduras
-  'PY', // Paraguay
-  'SV', // El Salvador
-  'NI', // Nicaragua
-  'CR', // Costa Rica
-  'PA', // Panamá
-  'UY', // Uruguay
-  'PR', // Puerto Rico
-  'GQ', // Guinea Ecuatorial (también portugués)
+  'ES',
+  'MX',
+  'AR',
+  'CO',
+  'PE',
+  'VE',
+  'CL',
+  'EC',
+  'GT',
+  'CU',
+  'BO',
+  'DO',
+  'HN',
+  'PY',
+  'SV',
+  'NI',
+  'CR',
+  'PA',
+  'UY',
+  'PR',
+  'GQ',
 ];
 
-export type Language = 'pt-br' | 'pt-pt' | 'en' | 'es';
+export type Language = 'pt-br' | 'pt-pt' | 'en' | 'es' | 'it' | 'sg' | 'he';
 
-/**
- * Detecta o país do usuário usando uma API de geolocalização por IP
- */
+function normalizeCountryCode(value?: string | null): string | null {
+  const code = value?.trim().toUpperCase();
+  return code && /^[A-Z]{2}$/.test(code) ? code : null;
+}
+
+export function getLanguageForCountry(countryCode?: string | null): Language {
+  const upperCode = normalizeCountryCode(countryCode);
+
+  if (upperCode === 'IT') return 'it';
+  if (upperCode === 'SG') return 'sg';
+  if (upperCode === 'IL') return 'he';
+  if (upperCode === 'PT') return 'pt-pt';
+  if (upperCode && PORTUGUESE_SPEAKING_COUNTRIES.includes(upperCode)) return 'pt-br';
+  if (upperCode && SPANISH_SPEAKING_COUNTRIES.includes(upperCode)) return 'es';
+
+  return 'en';
+}
+
 export async function detectCountryCode(): Promise<string | null> {
-  // Tentar recuperar do localStorage primeiro para carregamento instantâneo
   try {
-    const cached = localStorage.getItem('detected_country_code');
-    if (cached) return cached;
-  } catch (e) {}
-
-  try {
-    // 1. Tentar ipapi.co (gratuita, 1000 requisições/dia)
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 1500); // Reduzido para 1.5s
+    const timeoutId = setTimeout(() => controller.abort(), 1500);
 
     const response = await fetch('https://ipapi.co/json/', {
       method: 'GET',
-      headers: { 'Accept': 'application/json' },
+      headers: { Accept: 'application/json' },
       signal: controller.signal,
     });
     clearTimeout(timeoutId);
 
     if (response.ok) {
       const data = await response.json();
-      if (data.country_code) {
-        const code = data.country_code.toUpperCase();
-        try { localStorage.setItem('detected_country_code', code); } catch (e) {}
+      const code = normalizeCountryCode(data.country_code);
+      if (code) {
         return code;
       }
     }
@@ -72,13 +77,11 @@ export async function detectCountryCode(): Promise<string | null> {
   }
 
   try {
-    // 2. Tentar freeipapi.com (gratuito, HTTPS)
     const response = await fetch('https://freeipapi.com/api/json', { method: 'GET' });
     if (response.ok) {
       const data = await response.json();
-      if (data.countryCode) {
-        const code = data.countryCode.toUpperCase();
-        try { localStorage.setItem('detected_country_code', code); } catch (e) {}
+      const code = normalizeCountryCode(data.countryCode);
+      if (code) {
         return code;
       }
     }
@@ -87,16 +90,13 @@ export async function detectCountryCode(): Promise<string | null> {
   }
 
   try {
-    // 3. Tentar api.country.is
     const response = await fetch('https://api.country.is', { method: 'GET' });
     if (response.ok) {
       const data = await response.json();
-      if (data.country) {
-        const code = data.country.toUpperCase();
-        try { localStorage.setItem('detected_country_code', code); } catch (e) {}
+      const code = normalizeCountryCode(data.country);
+      if (code) {
         return code;
       }
-      return null;
     }
   } catch (e) {
     console.warn('All geolocation services failed.');
@@ -105,78 +105,74 @@ export async function detectCountryCode(): Promise<string | null> {
   return null;
 }
 
+function detectCountryFromBrowserLocale(): string | null {
+  if (typeof navigator === 'undefined') return null;
 
-/**
- * Detecta o idioma preferido do navegador
- * Útil como fallback se a API de IP falhar
- */
+  const locales = [
+    navigator.language,
+    ...(Array.isArray(navigator.languages) ? navigator.languages : []),
+  ].filter(Boolean);
+
+  for (const locale of locales) {
+    try {
+      const region = typeof Intl.Locale === 'function'
+        ? new Intl.Locale(locale).region
+        : locale.split('-')[1];
+      const code = normalizeCountryCode(region);
+      if (code) return code;
+    } catch (e) {}
+  }
+
+  return null;
+}
+
 export function detectLanguageFromBrowser(): Language {
   if (typeof window === 'undefined') return 'pt-br';
+
+  const browserCountry = detectCountryFromBrowserLocale();
+  if (browserCountry) return getLanguageForCountry(browserCountry);
 
   const browserLang = navigator.language || (navigator as any).userLanguage;
 
   if (browserLang) {
     const lang = browserLang.toLowerCase();
-    // pt-PT ou pt (sem região) -> Português Portugal
-    if (lang === 'pt-pt' || lang === 'pt') {
-      return 'pt-pt';
-    }
-    // pt-BR -> Português Brasil
-    if (lang.startsWith('pt')) {
-      return 'pt-br';
-    }
-    // Espanhol -> es
-    if (lang.startsWith('es')) {
-      return 'es';
-    }
+    if (lang === 'pt-pt' || lang === 'pt') return 'pt-pt';
+    if (lang.startsWith('pt')) return 'pt-br';
+    if (lang.startsWith('es')) return 'es';
+    if (lang.startsWith('it')) return 'it';
+    if (lang.startsWith('he') || lang.startsWith('iw')) return 'he';
+    if (lang === 'en-sg') return 'sg';
   }
 
   return 'en';
 }
 
-/**
- * Função principal que detecta o idioma e o país baseado na localização
- * Tenta primeiro pela API de IP, depois pelo navegador
- */
 export async function detectLocationData(): Promise<{ language: Language; country: string | null }> {
   try {
     const countryCode = await detectCountryCode();
 
     if (countryCode) {
-      const upperCode = countryCode.toUpperCase();
-      let language: Language = 'en';
-
-      // Portugal recebe pt-pt
-      if (upperCode === 'PT') {
-        language = 'pt-pt';
-      }
-      // Outros países lusófonos recebem pt-br
-      else if (PORTUGUESE_SPEAKING_COUNTRIES.includes(upperCode)) {
-        language = 'pt-br';
-      }
-      // Países hispanofalantes recebem es
-      else if (SPANISH_SPEAKING_COUNTRIES.includes(upperCode)) {
-        language = 'es';
-      }
-
-      return { language, country: upperCode };
+      return { language: getLanguageForCountry(countryCode), country: countryCode };
     }
   } catch (error) {
     console.warn('IP geolocation failed, using browser language as fallback:', error);
   }
 
-  // Fallback para detecção pelo navegador
+  const browserCountry = detectCountryFromBrowserLocale();
+  if (browserCountry) {
+    return {
+      language: getLanguageForCountry(browserCountry),
+      country: browserCountry,
+    };
+  }
+
   return {
     language: detectLanguageFromBrowser(),
-    country: null
+    country: null,
   };
 }
 
-/**
- * Função legado para manter compatibilidade, se necessário
- */
 export async function detectLanguage(): Promise<Language> {
   const { language } = await detectLocationData();
   return language;
 }
-

@@ -8,26 +8,63 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { NavArrowDown } from "iconoir-react";
 import { useLanguage } from "@/hooks/use-language";
-import { translations } from "@/lib/translations";
+import { translations, type Language } from "@/lib/translations";
 import { SpotlightButton } from "@/components/ui/spotlight-button";
+
+function SplitEnglishFlag({ className = "w-5 h-4" }: { className?: string }) {
+  return (
+    <span className={`relative inline-flex overflow-hidden rounded-sm border border-[#E2E7F1] bg-white ${className}`}>
+      <img src="https://flagcdn.com/w20/us.png" alt="US" className="absolute left-0 top-0 h-full w-1/2 object-cover object-left" />
+      <img src="https://flagcdn.com/w20/gb.png" alt="GB" className="absolute right-0 top-0 h-full w-1/2 object-cover object-right" />
+    </span>
+  );
+}
+
+function LanguageFlag({ language, className = "w-5 h-auto" }: { language: Language; className?: string }) {
+  if (language === 'en') return <SplitEnglishFlag className={className.includes('h-') ? className : `${className} h-4`} />;
+
+  const country = {
+    'pt-br': 'br',
+    'pt-pt': 'pt',
+    es: 'es',
+    it: 'it',
+    sg: 'sg',
+    he: 'il',
+  }[language];
+
+  return <img src={`https://flagcdn.com/w20/${country}.png`} alt={language} className={`${className} rounded-sm flex-shrink-0`} />;
+}
 
 export function Header() {
   const { language } = useLanguage();
   const [location] = useLocation();
   const t = translations[language];
 
-  const navItems = [];
-  const navItemsWithDropdown = [];
+  const navItems: string[] = [];
+  const navItemsWithDropdown: string[] = [];
 
-  const handleLanguageChange = (lang: 'pt-br' | 'pt-pt' | 'en' | 'es') => {
+  const languageOptions: Array<{ code: Language; label: string }> = [
+    { code: 'pt-br', label: t.header.languages.portugueseBrazil },
+    { code: 'en', label: t.header.languages.english },
+    { code: 'pt-pt', label: t.header.languages.portuguesePortugal },
+    { code: 'es', label: t.header.languages.spanish },
+    { code: 'it', label: t.header.languages.italian ?? 'Italiano' },
+    { code: 'sg', label: t.header.languages.singapore ?? 'English (Singapore)' },
+    { code: 'he', label: t.header.languages.hebrew ?? 'Hebrew (Israel)' },
+  ];
+
+  const handleLanguageChange = (lang: Language) => {
     // Remove current language prefix from path
-    const currentPath = location.replace(/^\/(pt-br|pt-pt|en|es)/, '') || '/';
+    const currentPath = location.replace(/^\/(pt-br|pt-pt|en|es|it|sg|he)/, '') || '/';
     let newPath: string;
     switch (lang) {
       case 'pt-br': newPath = `/pt-br${currentPath === '/' ? '' : currentPath}`; break;
       case 'pt-pt': newPath = `/pt-pt${currentPath === '/' ? '' : currentPath}`; break;
       case 'en': newPath = `/en${currentPath === '/' ? '' : currentPath}`; break;
       case 'es': newPath = `/es${currentPath === '/' ? '' : currentPath}`; break;
+      case 'it': newPath = `/it${currentPath === '/' ? '' : currentPath}`; break;
+      case 'sg': newPath = `/sg${currentPath === '/' ? '' : currentPath}`; break;
+      case 'he': newPath = `/he${currentPath === '/' ? '' : currentPath}`; break;
     }
     // Reload page for better optimization
     window.location.href = newPath;
@@ -133,11 +170,7 @@ export function Header() {
                 className="flex items-center justify-center h-10 px-3 rounded-full border border-[#E2E7F1] hover:bg-slate-50 transition-colors focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
                 style={{ animationDelay: `${0.3 + navItems.length * 0.05}s`, opacity: 0 }}
               >
-                <img
-                  src={`https://flagcdn.com/w20/${language === 'pt-br' ? 'br' : language === 'pt-pt' ? 'pt' : language === 'es' ? 'es' : 'gb'}.png`}
-                  alt={language}
-                  className="w-5 h-auto rounded-sm flex-shrink-0"
-                />
+                <LanguageFlag language={language} className="w-5 h-4" />
                 <NavArrowDown className="w-3 h-3 ml-1 text-[#1C1C1E]" />
               </button>
             </DropdownMenuTrigger>
@@ -146,34 +179,16 @@ export function Header() {
               sideOffset={20}
               className="min-w-[200px] border border-[#E2E7F1] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.08)] rounded-lg data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-2"
             >
-              <DropdownMenuItem
-                className={`flex items-center gap-2 cursor-pointer ${language === 'pt-br' ? 'font-medium bg-slate-50' : ''}`}
-                onClick={() => handleLanguageChange('pt-br')}
-              >
-                <img src="https://flagcdn.com/w20/br.png" alt="BR" className="w-4 h-auto rounded-sm" />
-                <span className={language === 'pt-br' ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{t.header.languages.portugueseBrazil}</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                className={`flex items-center gap-2 cursor-pointer ${language === 'en' ? 'font-medium bg-slate-50' : ''}`}
-                onClick={() => handleLanguageChange('en')}
-              >
-                <img src="https://flagcdn.com/w20/gb.png" alt="GB" className="w-4 h-auto rounded-sm" />
-                <span className={language === 'en' ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{t.header.languages.english}</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                className={`flex items-center gap-2 cursor-pointer ${language === 'pt-pt' ? 'font-medium bg-slate-50' : ''}`}
-                onClick={() => handleLanguageChange('pt-pt')}
-              >
-                <img src="https://flagcdn.com/w20/pt.png" alt="PT" className="w-4 h-auto rounded-sm" />
-                <span className={language === 'pt-pt' ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{t.header.languages.portuguesePortugal}</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                className={`flex items-center gap-2 cursor-pointer ${language === 'es' ? 'font-medium bg-slate-50' : ''}`}
-                onClick={() => handleLanguageChange('es')}
-              >
-                <img src="https://flagcdn.com/w20/es.png" alt="ES" className="w-4 h-auto rounded-sm" />
-                <span className={language === 'es' ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{t.header.languages.spanish}</span>
-              </DropdownMenuItem>
+              {languageOptions.map((option) => (
+                <DropdownMenuItem
+                  key={option.code}
+                  className={`flex items-center gap-2 cursor-pointer ${language === option.code ? 'font-medium bg-slate-50' : ''}`}
+                  onClick={() => handleLanguageChange(option.code)}
+                >
+                  <LanguageFlag language={option.code} className="w-4 h-3" />
+                  <span className={language === option.code ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{option.label}</span>
+                </DropdownMenuItem>
+              ))}
             </DropdownMenuContent>
           </DropdownMenu>
           <SpotlightButton
@@ -196,11 +211,7 @@ export function Header() {
               className="flex items-center justify-center h-10 px-3 rounded-full border border-[#E2E7F1] hover:bg-slate-50 transition-colors focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
               style={{ animationDelay: '0.15s', opacity: 0 }}
             >
-              <img
-                src={`https://flagcdn.com/w20/${language === 'pt-br' ? 'br' : language === 'pt-pt' ? 'pt' : language === 'es' ? 'es' : 'gb'}.png`}
-                alt={language}
-                className="w-5 h-auto rounded-sm flex-shrink-0"
-              />
+              <LanguageFlag language={language} className="w-5 h-4" />
               <NavArrowDown className="w-3 h-3 ml-1 text-[#1C1C1E]" />
             </button>
           </DropdownMenuTrigger>
@@ -209,34 +220,16 @@ export function Header() {
             sideOffset={20}
             className="min-w-[200px] border border-[#E2E7F1] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.08)] rounded-lg data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-2"
           >
-            <DropdownMenuItem
-              className={`flex items-center gap-2 cursor-pointer ${language === 'pt-br' ? 'font-medium bg-slate-50' : ''}`}
-              onClick={() => handleLanguageChange('pt-br')}
-            >
-              <img src="https://flagcdn.com/w20/br.png" alt="BR" className="w-4 h-auto rounded-sm" />
-              <span className={language === 'pt-br' ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{t.header.languages.portugueseBrazil}</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              className={`flex items-center gap-2 cursor-pointer ${language === 'en' ? 'font-medium bg-slate-50' : ''}`}
-              onClick={() => handleLanguageChange('en')}
-            >
-              <img src="https://flagcdn.com/w20/gb.png" alt="GB" className="w-4 h-auto rounded-sm" />
-              <span className={language === 'en' ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{t.header.languages.english}</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              className={`flex items-center gap-2 cursor-pointer ${language === 'pt-pt' ? 'font-medium bg-slate-50' : ''}`}
-              onClick={() => handleLanguageChange('pt-pt')}
-            >
-              <img src="https://flagcdn.com/w20/pt.png" alt="PT" className="w-4 h-auto rounded-sm" />
-              <span className={language === 'pt-pt' ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{t.header.languages.portuguesePortugal}</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              className={`flex items-center gap-2 cursor-pointer ${language === 'es' ? 'font-medium bg-slate-50' : ''}`}
-              onClick={() => handleLanguageChange('es')}
-            >
-              <img src="https://flagcdn.com/w20/es.png" alt="ES" className="w-4 h-auto rounded-sm" />
-              <span className={language === 'es' ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{t.header.languages.spanish}</span>
-            </DropdownMenuItem>
+            {languageOptions.map((option) => (
+              <DropdownMenuItem
+                key={option.code}
+                className={`flex items-center gap-2 cursor-pointer ${language === option.code ? 'font-medium bg-slate-50' : ''}`}
+                onClick={() => handleLanguageChange(option.code)}
+              >
+                <LanguageFlag language={option.code} className="w-4 h-3" />
+                <span className={language === option.code ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{option.label}</span>
+              </DropdownMenuItem>
+            ))}
           </DropdownMenuContent>
         </DropdownMenu>
 

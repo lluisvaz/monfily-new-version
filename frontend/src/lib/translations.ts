@@ -1,4 +1,12 @@
-export type Language = 'pt-br' | 'pt-pt' | 'en' | 'es';
+export type Language = 'pt-br' | 'pt-pt' | 'en' | 'es' | 'it' | 'sg' | 'he';
+type BaseLanguage = 'pt-br' | 'pt-pt' | 'en' | 'es';
+type DeepPartial<T> = {
+  [K in keyof T]?: T[K] extends Array<infer U>
+    ? U[]
+    : T[K] extends object
+      ? DeepPartial<T[K]>
+      : T[K];
+};
 
 export interface Translations {
   whatsappNumber: string;
@@ -28,6 +36,9 @@ export interface Translations {
       portuguesePortugal: string;
       english: string;
       spanish: string;
+      italian?: string;
+      singapore?: string;
+      hebrew?: string;
     };
     cta: string;
     ctaMobile: string;
@@ -192,7 +203,7 @@ export interface Translations {
   };
 }
 
-export const translations: Record<Language, Translations> = {
+const baseTranslations: Record<BaseLanguage, Translations> = {
   'pt-br': {
     whatsappNumber: '5511978267321',
     seo: {
@@ -216,7 +227,7 @@ export const translations: Record<Language, Translations> = {
       languages: {
         portugueseBrazil: 'Português (Brasil)',
         portuguesePortugal: 'Português (Portugal)',
-        english: 'Inglês (Reino Unido)',
+        english: 'Ingles',
         spanish: 'Espanhol',
       },
       cta: 'Falar com Especialista',
@@ -424,7 +435,7 @@ export const translations: Record<Language, Translations> = {
       languages: {
         portugueseBrazil: 'Português (Brasil)',
         portuguesePortugal: 'Português (Portugal)',
-        english: 'Inglês (Reino Unido)',
+        english: 'Ingles',
         spanish: 'Espanhol',
       },
       cta: 'Falar com Especialista',
@@ -632,7 +643,7 @@ export const translations: Record<Language, Translations> = {
       languages: {
         portugueseBrazil: 'Portuguese (Brazil)',
         portuguesePortugal: 'Portuguese (Portugal)',
-        english: 'English (United Kingdom)',
+        english: 'English',
         spanish: 'Spanish',
       },
       cta: 'Talk to an Expert',
@@ -840,7 +851,7 @@ export const translations: Record<Language, Translations> = {
       languages: {
         portugueseBrazil: 'Portugués (Brasil)',
         portuguesePortugal: 'Portugués (Portugal)',
-        english: 'Inglés (Reino Unido)',
+        english: 'Ingles',
         spanish: 'Español',
       },
       cta: 'Hablar con Especialista',
@@ -1027,3 +1038,451 @@ export const translations: Record<Language, Translations> = {
   },
 };
 
+const DEFAULT_WHATSAPP_NUMBERS: Record<Language, string> = {
+  'pt-br': '5511978267321',
+  'pt-pt': '351927327279',
+  en: '447888865199',
+  es: '34613588340',
+  it: '390000000000',
+  sg: '6500000000',
+  he: '972000000000',
+};
+
+const WHATSAPP_ENV_BY_LANGUAGE: Record<Language, string | undefined> = {
+  'pt-br': import.meta.env.VITE_WHATSAPP_PHONE_BR,
+  'pt-pt': import.meta.env.VITE_WHATSAPP_PHONE_PT,
+  en: import.meta.env.VITE_WHATSAPP_PHONE_EN,
+  es: import.meta.env.VITE_WHATSAPP_PHONE_ES,
+  it: import.meta.env.VITE_WHATSAPP_PHONE_IT,
+  sg: import.meta.env.VITE_WHATSAPP_PHONE_SG,
+  he: import.meta.env.VITE_WHATSAPP_PHONE_IL,
+};
+
+function sanitizeWhatsAppNumber(value?: string): string | null {
+  const digits = value?.replace(/\D/g, '') ?? '';
+  return digits.length >= 8 ? digits : null;
+}
+
+export function getWhatsAppNumber(language: Language): string {
+  return sanitizeWhatsAppNumber(WHATSAPP_ENV_BY_LANGUAGE[language]) ?? DEFAULT_WHATSAPP_NUMBERS[language];
+}
+
+function mergeDeep<T extends Record<string, any>>(base: T, override: DeepPartial<T>): T {
+  const result: Record<string, any> = { ...base };
+
+  for (const [key, value] of Object.entries(override)) {
+    if (value === undefined) continue;
+
+    const baseValue = result[key];
+    if (
+      value &&
+      baseValue &&
+      typeof value === 'object' &&
+      typeof baseValue === 'object' &&
+      !Array.isArray(value) &&
+      !Array.isArray(baseValue)
+    ) {
+      result[key] = mergeDeep(baseValue, value as Record<string, any>);
+    } else {
+      result[key] = value;
+    }
+  }
+
+  return result as T;
+}
+
+const italianTranslation: DeepPartial<Translations> = {
+  seo: {
+    title: 'Creazione di Siti Web, Software e Automazioni AI | Monfily',
+    description: 'Sviluppiamo siti web veloci, sistemi su misura e automazioni AI per aziende che cercano efficienza operativa e una presenza digitale professionale.',
+  },
+  header: {
+    languages: {
+      portugueseBrazil: 'Portoghese (Brasile)',
+      portuguesePortugal: 'Portoghese (Portogallo)',
+      english: 'Inglese',
+      spanish: 'Spagnolo',
+      italian: 'Italiano',
+      singapore: 'Inglese (Singapore)',
+      hebrew: 'Ebraico (Israele)',
+    },
+    cta: 'Parla con un esperto',
+    ctaMobile: 'Contatto',
+  },
+  hero: {
+    badge: {
+      chosenBy: 'Scelto da ',
+      clients: '+560 clienti in ',
+      in: '',
+    },
+    rotatingTexts: ['Retail & E-commerce', 'Salute & Cliniche', 'Immobiliare & Costruzioni', 'Legale & Consulenza', 'Servizi & Startup'],
+    heading: {
+      line1: 'Codice Puro.',
+      line2: 'Risultati ',
+      line3: 'Reali.',
+    },
+    description: 'Infrastruttura digitale completa per la tua azienda. Uniamo siti web ad alte prestazioni, ingegneria software, intelligenza artificiale e SEO tecnico per generare ricavi ed efficienza.',
+    cta: {
+      primary: 'Avvia il mio progetto',
+      secondary: 'Perche noi?',
+    },
+    features: {
+      performance: {
+        title: 'Performance',
+        description: 'Siti veloci che convertono.',
+      },
+      optimized: {
+        title: 'Ottimizzato',
+        description: 'Struttura pronta per la SEO.',
+      },
+    },
+  },
+  trustedBy: {
+    label: 'Usiamo le migliori tecnologie:',
+  },
+  services: {
+    title: 'Soluzioni digitali per mercati diversi.',
+    metrics: {
+      projectsDelivered: 'Progetti consegnati',
+      nichesServed: 'Settori serviti',
+    },
+    items: {
+      webDesign: {
+        title: 'Creazione di Siti Web',
+        description: 'Siti veloci e mobile-friendly. Puntiamo su informazioni chiare per facilitare il contatto dei clienti.',
+      },
+      customSoftware: {
+        title: 'Sistemi su Misura',
+        description: 'Sviluppiamo strumenti per organizzare processi interni o creare nuovi prodotti digitali, con attenzione a sicurezza e usabilita.',
+      },
+      aiAutomation: {
+        title: 'Automazione AI',
+        description: 'Integriamo assistenti intelligenti per assistenza e flussi di lavoro, riducendo il tempo speso in attivita manuali.',
+      },
+      seoGrowth: {
+        title: 'SEO Tecnico',
+        description: 'Ottimizziamo la struttura tecnica del sito per migliorare il posizionamento organico sui motori di ricerca.',
+      },
+    },
+  },
+  mockup: {
+    navigation: {
+      services: 'Servizi',
+      benefits: 'Vantaggi',
+      projects: 'Portfolio',
+      prices: 'Preventivo',
+      clients: 'Clienti',
+    },
+    badge: 'Disponibile per nuovi progetti',
+    heading: {
+      line1: 'Sviluppo Software',
+      line2: ' per Aziende e Startup',
+    },
+    description: 'Consegniamo tecnologia in modo chiaro, con scadenze realistiche e supporto continuo per la crescita digitale.',
+    cta: {
+      viewPrices: 'Vedi Portfolio',
+      scheduleNow: 'Prenota una riunione',
+    },
+    trust: 'Oltre 560 aziende servite',
+  },
+  expertise: {
+    label: 'La nostra esperienza',
+    heading: {
+      line1: 'Sviluppo tecnico',
+      line2: 'orientato all utilita.',
+    },
+    description: 'Non creiamo solo schermate. Costruiamo la logica dietro il tuo business, affinche ogni riga di codice abbia uno scopo pratico.',
+    cta: 'Parla con un esperto',
+  },
+  solutionsSuite: {
+    heading: 'Tecnologia che organizza la tua operazione.',
+    description: 'Oltre al sito, consegniamo strumenti che aiutano a gestire e far crescere il business.',
+    items: {
+      antiFraud: {
+        title: 'Sicurezza dei Dati',
+        description: 'Implementiamo protocolli di sicurezza per proteggere le informazioni della tua azienda e dei tuoi clienti.',
+      },
+      checkout: {
+        title: 'Integrazioni',
+        description: 'Colleghiamo sito o sistema agli strumenti che usi gia, come CRM, pagamenti ed ERP.',
+      },
+      subscriptions: {
+        title: 'Scalabilita',
+        description: 'Sviluppiamo sistemi pronti a gestire piu traffico e dati senza perdere velocita.',
+        badge: '',
+      },
+    },
+  },
+  faq: {
+    heading: 'Domande frequenti',
+    description: 'Risposte dirette su come lavoriamo e cosa puoi aspettarti dai nostri servizi.',
+    items: [
+      { question: 'Come funziona il processo di creazione?', answer: 'Il processo si divide in quattro fasi: comprensione delle esigenze, design della soluzione, sviluppo del codice e consegna finale con formazione se necessaria.' },
+      { question: 'Cosa devo inviare per iniziare?', answer: 'Servono le informazioni sui tuoi servizi, il logo e l accesso al dominio se ne hai gia uno.' },
+      { question: 'Offrite supporto dopo la consegna?', answer: 'Si. Offriamo supporto tecnico per correzioni e aggiornamenti, assicurando che la piattaforma continui a funzionare senza interruzioni.' },
+      { question: 'Il sito sara ottimizzato per mobile?', answer: 'Si. Tutti i nostri progetti sono responsive e funzionano correttamente su smartphone, tablet e computer.' },
+      { question: 'Vi occupate dell hosting?', answer: 'Ti aiutiamo a scegliere e configurare il miglior hosting, ma il servizio viene contratto direttamente da te per mantenere piena autonomia.' },
+      { question: 'Create identita visiva o loghi?', answer: 'Ci concentriamo sullo sviluppo digitale. Se non hai un identita visiva, possiamo indicare partner di design o lavorare con cio che hai gia.' },
+      { question: 'Come avviene la comunicazione durante il progetto?', answer: 'Usiamo canali diretti come WhatsApp e riunioni programmate per farti seguire ogni fase dello sviluppo.' },
+    ],
+  },
+  finalCTA: {
+    heading: 'Pronto a dare vita al tuo progetto?',
+    description: 'Parla con uno dei nostri esperti e ricevi un analisi tecnica preliminare per la tua azienda.',
+    cta: 'Parla con un esperto',
+  },
+  footer: {
+    columns: {
+      support: {
+        title: 'Contatto',
+        email: 'contact@monfily.com',
+        talkToSupport: 'Parla con un esperto',
+        joinDiscord: 'Prenota una riunione',
+      },
+      website: {
+        title: 'Risorse',
+        products: 'Insight',
+        fees: 'Portfolio',
+        privacy: 'Privacy',
+        terms: 'Termini e condizioni',
+        status: 'FAQ',
+      },
+    },
+    copyright: `© ${new Date().getFullYear()} Monfily Digital. Tutti i diritti riservati.`,
+  },
+};
+
+const singaporeTranslation: DeepPartial<Translations> = {
+  header: {
+    languages: {
+      portugueseBrazil: 'Portuguese (Brazil)',
+      portuguesePortugal: 'Portuguese (Portugal)',
+      english: 'English',
+      spanish: 'Spanish',
+      italian: 'Italian',
+      singapore: 'English (Singapore)',
+      hebrew: 'Hebrew (Israel)',
+    },
+  },
+  seo: {
+    title: 'Website Creation, Software & AI Automation in Singapore | Monfily',
+    description: 'We build fast websites, custom systems and AI automations for Singapore companies that need operational efficiency and a professional digital presence.',
+  },
+};
+
+const hebrewTranslation: DeepPartial<Translations> = {
+  seo: {
+    title: 'בניית אתרים, תוכנה ואוטומציות AI | Monfily',
+    description: 'אנחנו מפתחים אתרים מהירים, מערכות מותאמות ואוטומציות AI לעסקים שצריכים יעילות תפעולית ונוכחות דיגיטלית מקצועית.',
+  },
+  header: {
+    languages: {
+      portugueseBrazil: 'פורטוגזית (ברזיל)',
+      portuguesePortugal: 'פורטוגזית (פורטוגל)',
+      english: 'אנגלית',
+      spanish: 'ספרדית',
+      italian: 'איטלקית',
+      singapore: 'אנגלית (סינגפור)',
+      hebrew: 'עברית (ישראל)',
+    },
+    cta: 'דברו עם מומחה',
+    ctaMobile: 'יצירת קשר',
+  },
+  hero: {
+    badge: {
+      chosenBy: 'נבחר על ידי ',
+      clients: '+560 לקוחות ב',
+      in: '',
+    },
+    rotatingTexts: ['קמעונאות ומסחר', 'בריאות ומרפאות', 'נדלן ובניה', 'משפט וייעוץ', 'שירותים וסטארטאפים'],
+    heading: {
+      line1: 'קוד נקי.',
+      line2: 'תוצאות ',
+      line3: 'אמיתיות.',
+    },
+    description: 'תשתית דיגיטלית מלאה לעסק שלך. אנחנו משלבים אתרים מהירים, הנדסת תוכנה, בינה מלאכותית ו-SEO טכני כדי לייצר הכנסות ויעילות.',
+    cta: {
+      primary: 'להתחלת הפרויקט',
+      secondary: 'למה אנחנו?',
+    },
+    features: {
+      performance: {
+        title: 'ביצועים',
+        description: 'אתרים מהירים שממירים.',
+      },
+      optimized: {
+        title: 'מותאם',
+        description: 'מבנה מוכן ל-SEO.',
+      },
+    },
+  },
+  trustedBy: {
+    label: 'אנחנו משתמשים בטכנולוגיות הטובות ביותר:',
+  },
+  services: {
+    title: 'פתרונות דיגיטליים לשווקים שונים.',
+    metrics: {
+      projectsDelivered: 'פרויקטים שנמסרו',
+      nichesServed: 'תחומים שטופלו',
+    },
+    items: {
+      webDesign: {
+        title: 'בניית אתרים',
+        description: 'אתרים מהירים ומותאמים למובייל. אנחנו מתמקדים במידע ברור שמקל על לקוחות ליצור קשר.',
+      },
+      customSoftware: {
+        title: 'מערכות מותאמות',
+        description: 'אנחנו מפתחים כלים לארגון תהליכים פנימיים או יצירת מוצרים דיגיטליים חדשים, עם דגש על אבטחה ושימושיות.',
+      },
+      aiAutomation: {
+        title: 'אוטומציה עם AI',
+        description: 'שילוב עוזרים חכמים לשירות לקוחות ותהליכי עבודה, כדי לצמצם משימות ידניות וחזרתיות.',
+      },
+      seoGrowth: {
+        title: 'SEO טכני',
+        description: 'אופטימיזציה של המבנה הטכני של האתר לשיפור הדירוג האורגני במנועי חיפוש.',
+      },
+    },
+  },
+  mockup: {
+    navigation: {
+      services: 'שירותים',
+      benefits: 'יתרונות',
+      projects: 'פורטפוליו',
+      prices: 'הצעת מחיר',
+      clients: 'לקוחות',
+    },
+    badge: 'זמין לפרויקטים חדשים',
+    heading: {
+      line1: 'פיתוח תוכנה',
+      line2: ' לחברות וסטארטאפים',
+    },
+    description: 'אנחנו מספקים טכנולוגיה בצורה ברורה, עם לוחות זמנים מציאותיים ותמיכה מתמשכת לצמיחה הדיגיטלית שלך.',
+    cta: {
+      viewPrices: 'צפיה בפורטפוליו',
+      scheduleNow: 'קביעת פגישה',
+    },
+    trust: 'יותר מ-560 חברות קיבלו שירות',
+  },
+  expertise: {
+    label: 'המומחיות שלנו',
+    heading: {
+      line1: 'פיתוח טכני',
+      line2: 'שממוקד בתועלת.',
+    },
+    description: 'אנחנו לא יוצרים רק מסכים. אנחנו בונים את ההיגיון שמאחורי העסק שלך, כך שלכל שורת קוד יש מטרה מעשית.',
+    cta: 'דברו עם מומחה',
+  },
+  solutionsSuite: {
+    heading: 'טכנולוגיה שמארגנת את הפעילות שלך.',
+    description: 'מעבר לאתר, אנחנו מספקים כלים שעוזרים לנהל ולהצמיח את העסק.',
+    items: {
+      antiFraud: {
+        title: 'אבטחת מידע',
+        description: 'אנחנו מיישמים פרוטוקולי אבטחה להגנה על המידע של החברה ושל הלקוחות.',
+      },
+      checkout: {
+        title: 'אינטגרציות',
+        description: 'אנחנו מחברים את האתר או המערכת לכלים שכבר בשימוש, כמו CRM, תשלומים ו-ERP.',
+      },
+      subscriptions: {
+        title: 'סקיילביליות',
+        description: 'אנחנו מפתחים מערכות שמוכנות ליותר תנועה ונתונים בלי לאבד מהירות.',
+        badge: '',
+      },
+    },
+  },
+  faq: {
+    heading: 'שאלות נפוצות',
+    description: 'תשובות ישירות על הדרך שבה אנחנו עובדים ומה אפשר לצפות מהשירותים שלנו.',
+    items: [
+      { question: 'איך עובד תהליך הבניה?', answer: 'התהליך מחולק לארבעה שלבים: הבנת הצרכים, עיצוב הפתרון, פיתוח הקוד ומסירה סופית עם הדרכה במידת הצורך.' },
+      { question: 'מה צריך לשלוח כדי להתחיל?', answer: 'בעיקר מידע על השירותים שלך, לוגו וגישה לדומיין אם כבר יש לך אחד.' },
+      { question: 'האם יש תמיכה אחרי המסירה?', answer: 'כן. אנחנו מספקים תמיכה טכנית לתיקונים ועדכונים כדי שהפלטפורמה תמשיך לעבוד בצורה יציבה.' },
+      { question: 'האתר יהיה מותאם למובייל?', answer: 'כן. כל הפרויקטים שלנו נבנים בצורה רספונסיבית ועובדים היטב בסמארטפונים, טאבלטים ומחשבים.' },
+      { question: 'אתם מטפלים באחסון האתר?', answer: 'אנחנו עוזרים לבחור ולהגדיר את האחסון המתאים, אבל השירות נרכש ישירות על ידך כדי לשמור על שליטה מלאה.' },
+      { question: 'אתם יוצרים מיתוג או לוגו?', answer: 'אנחנו מתמקדים בפיתוח דיגיטלי. אם אין לך זהות חזותית, נוכל להפנות לשותפי עיצוב או לעבוד עם מה שכבר קיים.' },
+      { question: 'איך מתנהלת התקשורת במהלך הפרויקט?', answer: 'אנחנו משתמשים בערוצים ישירים כמו WhatsApp ופגישות מתואמות כדי שתהיה לך שקיפות בכל שלב.' },
+    ],
+  },
+  finalCTA: {
+    heading: 'מוכנים להוציא את הפרויקט לדרך?',
+    description: 'דברו עם אחד המומחים שלנו וקבלו ניתוח טכני ראשוני לעסק שלכם.',
+    cta: 'דברו עם מומחה',
+  },
+  footer: {
+    columns: {
+      account: {
+        title: 'פתרונות',
+        signup: 'בניית אתרים',
+        login: 'פיתוח תוכנה',
+      },
+      support: {
+        title: 'יצירת קשר',
+        email: 'contact@monfily.com',
+        talkToSupport: 'דברו עם מומחה',
+        joinDiscord: 'קביעת פגישה',
+      },
+      website: {
+        title: 'משאבים',
+        products: 'תובנות',
+        fees: 'פורטפוליו',
+        privacy: 'פרטיות',
+        terms: 'תנאים והגבלות',
+        status: 'FAQ',
+      },
+      ai: {
+        title: 'AI',
+        chat: 'עוזר AI',
+        llms: 'מודלים ו-LLMs',
+      },
+    },
+    copyright: `© ${new Date().getFullYear()} Monfily Digital. כל הזכויות שמורות.`,
+  },
+};
+
+export const translations: Record<Language, Translations> = {
+  'pt-br': mergeDeep({ ...baseTranslations['pt-br'], whatsappNumber: getWhatsAppNumber('pt-br') }, {
+    header: {
+      languages: {
+        english: 'Ingles',
+        italian: 'Italiano',
+        singapore: 'Ingles (Singapura)',
+        hebrew: 'Hebraico (Israel)',
+      },
+    },
+  }),
+  'pt-pt': mergeDeep({ ...baseTranslations['pt-pt'], whatsappNumber: getWhatsAppNumber('pt-pt') }, {
+    header: {
+      languages: {
+        english: 'Ingles',
+        italian: 'Italiano',
+        singapore: 'Ingles (Singapura)',
+        hebrew: 'Hebraico (Israel)',
+      },
+    },
+  }),
+  en: mergeDeep({ ...baseTranslations.en, whatsappNumber: getWhatsAppNumber('en') }, {
+    header: {
+      languages: {
+        english: 'English',
+        italian: 'Italian',
+        singapore: 'English (Singapore)',
+        hebrew: 'Hebrew (Israel)',
+      },
+    },
+  }),
+  es: mergeDeep({ ...baseTranslations.es, whatsappNumber: getWhatsAppNumber('es') }, {
+    header: {
+      languages: {
+        english: 'Ingles',
+        italian: 'Italiano',
+        singapore: 'Ingles (Singapur)',
+        hebrew: 'Hebreo (Israel)',
+      },
+    },
+  }),
+  it: mergeDeep({ ...baseTranslations.en, whatsappNumber: getWhatsAppNumber('it') }, italianTranslation),
+  sg: mergeDeep({ ...baseTranslations.en, whatsappNumber: getWhatsAppNumber('sg') }, singaporeTranslation),
+  he: mergeDeep({ ...baseTranslations.en, whatsappNumber: getWhatsAppNumber('he') }, hebrewTranslation),
+};
