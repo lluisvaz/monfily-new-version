@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/hooks/use-language";
 import Home from "@/pages/home";
+import LandingPage from "@/pages/landingpage";
 import { LoadingScreen } from "@/components/ui/loading-screen";
 import { useEffect } from "react";
 
@@ -21,6 +22,7 @@ function RedirectToRoot() {
 function Router() {
   return (
     <Switch>
+      <Route path="/landingpage" component={LandingPage} />
       <Route path="/pt-br" component={Home} />
       <Route path="/pt-pt" component={Home} />
       <Route path="/en" component={Home} />

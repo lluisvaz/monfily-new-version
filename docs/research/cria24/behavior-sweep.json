@@ -1,0 +1,152 @@
+[
+  {
+    "scrollY": 0,
+    "header": null,
+    "visible": [
+      {
+        "tag": "SECTION",
+        "id": "hero",
+        "cls": "relative w-full bg-[#F7F7F3] pb-12 md:pb-20",
+        "text": "CRIA24\nSua landing page profi ional pronta em 24 hora .\n\nBriefing rápido, página entregue. Seu negócio online com cara d"
+      }
+    ]
+  },
+  {
+    "scrollY": 150,
+    "header": null,
+    "visible": [
+      {
+        "tag": "SECTION",
+        "id": "hero",
+        "cls": "relative w-full bg-[#F7F7F3] pb-12 md:pb-20",
+        "text": "CRIA24\nSua landing page profi ional pronta em 24 hora .\n\nBriefing rápido, página entregue. Seu negócio online com cara d"
+      }
+    ]
+  },
+  {
+    "scrollY": 600,
+    "header": null,
+    "visible": [
+      {
+        "tag": "SECTION",
+        "id": "hero",
+        "cls": "relative w-full bg-[#F7F7F3] pb-12 md:pb-20",
+        "text": "CRIA24\nSua landing page profi ional pronta em 24 hora .\n\nBriefing rápido, página entregue. Seu negócio online com cara d"
+      }
+    ]
+  },
+  {
+    "scrollY": 1200,
+    "header": null,
+    "visible": [
+      {
+        "tag": "SECTION",
+        "id": "hero",
+        "cls": "relative w-full bg-[#F7F7F3] pb-12 md:pb-20",
+        "text": "CRIA24\nSua landing page profi ional pronta em 24 hora .\n\nBriefing rápido, página entregue. Seu negócio online com cara d"
+      },
+      {
+        "tag": "SECTION",
+        "id": "solucao",
+        "cls": "relative w-full bg-[#F7F7F3] pt-6 md:pt-10 pb-24 md:pb-32 overflow-hidden",
+        "text": "01\nCOMO\nFUNCIONA\nA gente re olve i o em 3 pa o , em meno  de 1 dia.\n\nCan ado de pagar de R$ 1.500 a R$ 3.000 por uma lan"
+      }
+    ]
+  },
+  {
+    "scrollY": 2200,
+    "header": null,
+    "visible": [
+      {
+        "tag": "SECTION",
+        "id": "solucao",
+        "cls": "relative w-full bg-[#F7F7F3] pt-6 md:pt-10 pb-24 md:pb-32 overflow-hidden",
+        "text": "01\nCOMO\nFUNCIONA\nA gente re olve i o em 3 pa o , em meno  de 1 dia.\n\nCan ado de pagar de R$ 1.500 a R$ 3.000 por uma lan"
+      },
+      {
+        "tag": "SECTION",
+        "id": "portfolio",
+        "cls": "relative w-full bg-[#F7F6F3] py-24 md:py-32 overflow-hidden border-t border-[rgb",
+        "text": "02\nPORTFÓLIO\nVeja projeto  que já entregamo .\n\nPágina  reai , cliente  reai , re ultado  reai . Toque para navegar.\n\nP i"
+      }
+    ]
+  },
+  {
+    "scrollY": 3600,
+    "header": null,
+    "visible": [
+      {
+        "tag": "SECTION",
+        "id": "portfolio",
+        "cls": "relative w-full bg-[#F7F6F3] py-24 md:py-32 overflow-hidden border-t border-[rgb",
+        "text": "02\nPORTFÓLIO\nVeja projeto  que já entregamo .\n\nPágina  reai , cliente  reai , re ultado  reai . Toque para navegar.\n\nP i"
+      },
+      {
+        "tag": "SECTION",
+        "id": "lucas",
+        "cls": "relative w-full bg-[#F5F2EE] py-24 md:py-40 overflow-hidden border-t border-[rgb",
+        "text": "03\nQUEM\nENTREGA\nLuca  Vitale\nDe igner e E trategi ta\n\nEm 8 ano  de mercado, criei mai  de 200 landing page  para empre a"
+      },
+      {
+        "tag": "SECTION",
+        "id": "depoimentos",
+        "cls": "relative w-full bg-[#F5F2EE] py-24 md:py-32 overflow-hidden border-t border-[rgb",
+        "text": "04\nDEPOIMENTOS\nO que cliente  e tão dizendo.\n\nMai  de 200 negócio  atendido . Hi tória  reai  de empreendedore  que deco"
+      }
+    ]
+  },
+  {
+    "scrollY": 5200,
+    "header": null,
+    "visible": [
+      {
+        "tag": "SECTION",
+        "id": "depoimentos",
+        "cls": "relative w-full bg-[#F5F2EE] py-24 md:py-32 overflow-hidden border-t border-[rgb",
+        "text": "04\nDEPOIMENTOS\nO que cliente  e tão dizendo.\n\nMai  de 200 negócio  atendido . Hi tória  reai  de empreendedore  que deco"
+      },
+      {
+        "tag": "SECTION",
+        "id": "value-stack",
+        "cls": "relative w-full bg-[#F7F6F3] py-24 md:py-32 overflow-hidden border-t border-[rgb",
+        "text": "05\nO\nQUE\nESTÁ\nINCLUSO\nVamo  fazer a conta. Quanto cu taria fazer i o tudo  eparado?\n\nPara você ter ideia do valor real d"
+      }
+    ]
+  },
+  {
+    "scrollY": 7200,
+    "header": null,
+    "visible": [
+      {
+        "tag": "SECTION",
+        "id": "value-stack",
+        "cls": "relative w-full bg-[#F7F6F3] py-24 md:py-32 overflow-hidden border-t border-[rgb",
+        "text": "05\nO\nQUE\nESTÁ\nINCLUSO\nVamo  fazer a conta. Quanto cu taria fazer i o tudo  eparado?\n\nPara você ter ideia do valor real d"
+      },
+      {
+        "tag": "SECTION",
+        "id": "planos",
+        "cls": "relative w-full bg-[#F7F6F3] py-20 md:py-28 overflow-hidden border-t border-[rgb",
+        "text": "06\nINVESTIMENTO\nPronto para ter  ua página no ar?\n\nApena  3 vaga  Expre  di ponívei  hoje pra manter a entrega em 24h. P"
+      }
+    ]
+  },
+  {
+    "scrollY": 9200,
+    "header": null,
+    "visible": [
+      {
+        "tag": "SECTION",
+        "id": "planos",
+        "cls": "relative w-full bg-[#F7F6F3] py-20 md:py-28 overflow-hidden border-t border-[rgb",
+        "text": "06\nINVESTIMENTO\nPronto para ter  ua página no ar?\n\nApena  3 vaga  Expre  di ponívei  hoje pra manter a entrega em 24h. P"
+      },
+      {
+        "tag": "SECTION",
+        "id": "garantia",
+        "cls": "relative w-full bg-[#F5F2EE] py-24 md:py-32 overflow-hidden border-t border-[rgb",
+        "text": "07\nGARANTIA\nSem letra miúda. Sem ri co para você.\n\nGarantia de  ati fação de 7 dia . Se você não amar o re ultado, a gen"
+      }
+    ]
+  }
+]

@@ -62,6 +62,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
     // Se ainda não estamos prontos, fazemos a detecção completa (IP + Idioma)
     if (!isReady) {
+      if (!pathLang && location !== '/') {
+        setIsReady(true);
+        return;
+      }
+
       detectLocationData().then(({ language: detectedLang, country }) => {
         if (country) {
           const upperCode = country.toUpperCase();
