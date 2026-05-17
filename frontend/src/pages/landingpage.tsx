@@ -16,12 +16,19 @@ type Copy = {
   formTitle: string;
   formSubtitle: string;
   name: string;
+  company: string;
   email: string;
   phone: string;
   back: string;
   submit: string;
   footer: string;
   reserved: string;
+};
+
+type SeoCopy = {
+  title: string;
+  description: string;
+  ogLocale: string;
 };
 
 const MARKET_BY_COUNTRY: Record<string, MarketKey> = {
@@ -34,6 +41,49 @@ const MARKET_BY_COUNTRY: Record<string, MarketKey> = {
   GB: "GB",
   UK: "GB",
   US: "US",
+};
+
+const SEO_BY_MARKET: Record<MarketKey, SeoCopy> = {
+  PT: {
+    title: "Landing page premium para vender online | Monfily",
+    description: "Criação de landing page premium para produtos, serviços e negócios em Portugal. Responda ao quiz e receba uma proposta para vender mais online.",
+    ogLocale: "pt_PT",
+  },
+  IT: {
+    title: "Landing page premium per vendere online | Monfily",
+    description: "Creazione di landing page premium per prodotti, servizi e business in Italia. Rispondi al quiz e ricevi una proposta per vendere di più online.",
+    ogLocale: "it_IT",
+  },
+  ES: {
+    title: "Landing page premium para vender online | Monfily",
+    description: "Creación de landing page premium para productos, servicios y negocios en España. Responde al quiz y recibe una propuesta para vender más online.",
+    ogLocale: "es_ES",
+  },
+  IL: {
+    title: "דף נחיתה פרימיום למכירה באינטרנט | Monfily",
+    description: "יצירת דף נחיתה פרימיום למוצרים, שירותים ועסקים בישראל. ענו על השאלון וקבלו הצעה שתעזור לכם למכור יותר באינטרנט.",
+    ogLocale: "he_IL",
+  },
+  SG: {
+    title: "Premium landing page to sell online | Monfily",
+    description: "Premium landing page creation for products, services and businesses in Singapore. Answer the quiz and get a proposal to sell more online.",
+    ogLocale: "en_SG",
+  },
+  BR: {
+    title: "Landing page premium para vender online | Monfily",
+    description: "Criação de landing page premium para produtos, serviços e negócios no Brasil. Responda ao quiz e receba uma proposta para vender mais pela internet.",
+    ogLocale: "pt_BR",
+  },
+  GB: {
+    title: "Premium landing page to sell online | Monfily",
+    description: "Premium landing page creation for products, services and businesses in the United Kingdom. Answer the quiz and get a proposal to sell more online.",
+    ogLocale: "en_GB",
+  },
+  US: {
+    title: "Premium landing page to sell online | Monfily",
+    description: "Premium landing page creation for products, services and businesses in the United States. Answer the quiz and get a proposal to sell more online.",
+    ogLocale: "en_US",
+  },
 };
 
 const MARKETS: Record<MarketKey, {
@@ -62,6 +112,7 @@ const MARKETS: Record<MarketKey, {
       formTitle: "Agora deixe os seus dados",
       formSubtitle: "Vamos analisar o seu momento e contactar pelo canal correto.",
       name: "Nome",
+      company: "Nome da empresa",
       email: "Email",
       phone: "Telefone",
       back: "Voltar",
@@ -88,6 +139,7 @@ const MARKETS: Record<MarketKey, {
       formTitle: "Ora lascia i tuoi dati",
       formSubtitle: "Analizzeremo il tuo momento e ti contatteremo dal canale giusto.",
       name: "Nome",
+      company: "Nome dell'azienda",
       email: "Email",
       phone: "Telefono",
       back: "Indietro",
@@ -114,6 +166,7 @@ const MARKETS: Record<MarketKey, {
       formTitle: "Ahora deja tus datos",
       formSubtitle: "Analizaremos tu momento y te contactaremos por el canal correcto.",
       name: "Nombre",
+      company: "Nombre de la empresa",
       email: "Email",
       phone: "Teléfono",
       back: "Volver",
@@ -140,6 +193,7 @@ const MARKETS: Record<MarketKey, {
       formTitle: "עכשיו השאר פרטים",
       formSubtitle: "נבדוק את הצורך שלך ונחזור אליך בערוץ המתאים.",
       name: "שם",
+      company: "שם החברה",
       email: "אימייל",
       phone: "טלפון",
       back: "חזרה",
@@ -166,6 +220,7 @@ const MARKETS: Record<MarketKey, {
       formTitle: "Now leave your details",
       formSubtitle: "We will review your stage and contact you through the right channel.",
       name: "Name",
+      company: "Company name",
       email: "Email",
       phone: "Phone",
       back: "Back",
@@ -192,6 +247,7 @@ const MARKETS: Record<MarketKey, {
       formTitle: "Agora deixe seus dados",
       formSubtitle: "Vamos entender seu momento e chamar você pelo canal certo.",
       name: "Nome",
+      company: "Nome da empresa",
       email: "Email",
       phone: "Telefone",
       back: "Voltar",
@@ -218,6 +274,7 @@ const MARKETS: Record<MarketKey, {
       formTitle: "Now leave your details",
       formSubtitle: "We will review your stage and contact you through the right channel.",
       name: "Name",
+      company: "Company name",
       email: "Email",
       phone: "Phone",
       back: "Back",
@@ -244,6 +301,7 @@ const MARKETS: Record<MarketKey, {
       formTitle: "Now leave your details",
       formSubtitle: "We will review your stage and contact you through the right channel.",
       name: "Name",
+      company: "Company name",
       email: "Email",
       phone: "Phone",
       back: "Back",
@@ -326,20 +384,42 @@ function normalizePhoneValue(value: string, marketKey: MarketKey): string {
   return `${market.phonePrefix}${formatLocalPhoneDigits(marketKey, localDigits)}`;
 }
 
+function updateMetaTag(name: string, content: string, attribute: "name" | "property" = "name") {
+  let meta = document.querySelector(`meta[${attribute}="${name}"]`);
+
+  if (!meta) {
+    meta = document.createElement("meta");
+    meta.setAttribute(attribute, name);
+    document.head.appendChild(meta);
+  }
+
+  meta.setAttribute("content", content);
+}
+
 export default function LandingPage() {
   const [marketKey, setMarketKey] = useState<MarketKey>("US");
   const [step, setStep] = useState<1 | 2>(1);
   const [selectedOption, setSelectedOption] = useState("");
-  const [form, setForm] = useState({ name: "", email: "", phone: MARKETS.US.phonePrefix });
+  const [form, setForm] = useState({ name: "", company: "", email: "", phone: MARKETS.US.phonePrefix });
   const market = MARKETS[marketKey];
   const copy = market.copy;
+  const seo = SEO_BY_MARKET[marketKey];
   const textDirection = market.locale === "he-IL" ? "rtl" : "ltr";
+  const localPhoneDigits = form.phone.replace(/\D/g, "").slice(market.phonePrefix.replace(/\D/g, "").length);
+  const isFormComplete =
+    form.name.trim().length > 0 &&
+    form.company.trim().length > 0 &&
+    form.email.trim().length > 0 &&
+    localPhoneDigits.length === market.phoneDigits;
 
   const handleSubmit = () => {
+    if (!isFormComplete) return;
+
     const message = [
       `${copy.titlePrefix} - ${market.price}`,
       `${copy.question}: ${selectedOption}`,
       `${copy.name}: ${form.name}`,
+      `${copy.company}: ${form.company}`,
       `${copy.email}: ${form.email}`,
       `${copy.phone}: ${form.phone}`,
     ].join("\n");
@@ -364,6 +444,20 @@ export default function LandingPage() {
       cancelled = true;
     };
   }, []);
+
+  useEffect(() => {
+    document.title = seo.title;
+    document.documentElement.lang = market.locale;
+    document.documentElement.dir = "ltr";
+
+    updateMetaTag("title", seo.title);
+    updateMetaTag("description", seo.description);
+    updateMetaTag("og:title", seo.title, "property");
+    updateMetaTag("og:description", seo.description, "property");
+    updateMetaTag("og:locale", seo.ogLocale, "property");
+    updateMetaTag("twitter:title", seo.title);
+    updateMetaTag("twitter:description", seo.description);
+  }, [market.locale, seo]);
 
   const progress = useMemo(() => (step === 1 ? 50 : 100), [step]);
 
@@ -458,6 +552,18 @@ export default function LandingPage() {
                 </label>
 
                 <label className="elevate-field">
+                  <span>{copy.company}</span>
+                  <input
+                    type="text"
+                    name="company"
+                    autoComplete="organization"
+                    required
+                    value={form.company}
+                    onChange={(event) => setForm((current) => ({ ...current, company: event.target.value }))}
+                  />
+                </label>
+
+                <label className="elevate-field">
                   <span>{copy.email}</span>
                   <input
                     type="email"
@@ -502,7 +608,7 @@ export default function LandingPage() {
                   <button type="button" className="elevate-back" onClick={() => setStep(1)}>
                     {copy.back}
                   </button>
-                  <button type="submit" className="elevate-cta">
+                  <button type="submit" className="elevate-cta" disabled={!isFormComplete}>
                     <span className="elevate-cta__shine" aria-hidden="true" />
                     <span>{copy.submit}</span>
                   </button>
