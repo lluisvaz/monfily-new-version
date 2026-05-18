@@ -344,7 +344,7 @@ export function ServicesSection() {
                       fontWeight: 'normal'
                     }}
                   >
-                    <span className="text-[#2869D6]">+</span> 560
+                    <span className="text-[#2869D6]">+</span> 150
                   </div>
                   <div className="text-base text-[#6B7280] mt-1 whitespace-nowrap">
                     {t.services.metrics.projectsDelivered}
@@ -486,7 +486,7 @@ export function ServicesSection() {
                     fontWeight: 'normal'
                   }}
                 >
-                  <span className="text-[#2869D6]">+</span> 560
+                  <span className="text-[#2869D6]">+</span> 150
                 </div>
                 <div className="text-base md:text-lg text-[#6B7280] mt-2">
                   {t.services.metrics.projectsDelivered}

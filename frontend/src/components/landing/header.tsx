@@ -11,21 +11,26 @@ import { useLanguage } from "@/hooks/use-language";
 import { translations, type Language } from "@/lib/translations";
 import { SpotlightButton } from "@/components/ui/spotlight-button";
 
-function SplitEnglishFlag({ className = "w-5 h-4" }: { className?: string }) {
-  return (
-    <span className={`relative inline-flex overflow-hidden rounded-sm border border-[#E2E7F1] bg-white ${className}`}>
-      <img src="https://flagcdn.com/w20/us.png" alt="US" className="absolute left-0 top-0 h-full w-1/2 object-cover object-left" />
-      <img src="https://flagcdn.com/w20/gb.png" alt="GB" className="absolute right-0 top-0 h-full w-1/2 object-cover object-right" />
-    </span>
-  );
+function getEnglishFlagCountry(detectedCountry: string) {
+  const country = detectedCountry.toUpperCase();
+  if (country === "GB" || country === "UK") return "gb";
+  if (country === "SG") return "sg";
+  return "us";
 }
 
-function LanguageFlag({ language, className = "w-5 h-auto" }: { language: Language; className?: string }) {
-  if (language === 'en') return <SplitEnglishFlag className={className.includes('h-') ? className : `${className} h-4`} />;
-
+function LanguageFlag({
+  language,
+  detectedCountry = "",
+  className = "w-5 h-auto",
+}: {
+  language: Language;
+  detectedCountry?: string;
+  className?: string;
+}) {
   const country = {
     'pt-br': 'br',
     'pt-pt': 'pt',
+    en: getEnglishFlagCountry(detectedCountry),
     es: 'es',
     it: 'it',
     sg: 'sg',
@@ -36,20 +41,21 @@ function LanguageFlag({ language, className = "w-5 h-auto" }: { language: Langua
 }
 
 export function Header() {
-  const { language } = useLanguage();
+  const { language, detectedCountry } = useLanguage();
   const [location] = useLocation();
   const t = translations[language];
 
   const navItems: string[] = [];
   const navItemsWithDropdown: string[] = [];
 
-  const languageOptions: Array<{ code: Language; label: string }> = [
-    { code: 'pt-br', label: t.header.languages.portugueseBrazil },
-    { code: 'en', label: t.header.languages.english },
-    { code: 'pt-pt', label: t.header.languages.portuguesePortugal },
+  const portugueseCode: Language = detectedCountry === 'PT' || language === 'pt-pt' ? 'pt-pt' : 'pt-br';
+  const portugueseLabel = t.header.languages.portugueseBrazil.replace(/\s*\(.+\)\s*$/, '');
+  const englishCode: Language = language === 'sg' || detectedCountry === 'SG' ? 'sg' : 'en';
+  const languageOptions: Array<{ code: Language; label: string; activeCodes?: Language[] }> = [
+    { code: portugueseCode, label: portugueseLabel, activeCodes: ['pt-br', 'pt-pt'] },
+    { code: englishCode, label: t.header.languages.english, activeCodes: ['en', 'sg'] },
     { code: 'es', label: t.header.languages.spanish },
     { code: 'it', label: t.header.languages.italian ?? 'Italiano' },
-    { code: 'sg', label: t.header.languages.singapore ?? 'English (Singapore)' },
     { code: 'he', label: t.header.languages.hebrew ?? 'Hebrew (Israel)' },
   ];
 
@@ -170,7 +176,7 @@ export function Header() {
                 className="flex items-center justify-center h-10 px-3 rounded-full border border-[#E2E7F1] hover:bg-slate-50 transition-colors focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
                 style={{ animationDelay: `${0.3 + navItems.length * 0.05}s`, opacity: 0 }}
               >
-                <LanguageFlag language={language} className="w-5 h-4" />
+                <LanguageFlag language={language} detectedCountry={detectedCountry} className="w-5 h-4" />
                 <NavArrowDown className="w-3 h-3 ml-1 text-[#1C1C1E]" />
               </button>
             </DropdownMenuTrigger>
@@ -179,16 +185,19 @@ export function Header() {
               sideOffset={20}
               className="min-w-[200px] border border-[#E2E7F1] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.08)] rounded-lg data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-2"
             >
-              {languageOptions.map((option) => (
+              {languageOptions.map((option) => {
+                const isActive = option.activeCodes?.includes(language) ?? language === option.code;
+                return (
                 <DropdownMenuItem
                   key={option.code}
-                  className={`flex items-center gap-2 cursor-pointer ${language === option.code ? 'font-medium bg-slate-50' : ''}`}
+                  className={`flex items-center gap-2 cursor-pointer ${isActive ? 'font-medium bg-slate-50' : ''}`}
                   onClick={() => handleLanguageChange(option.code)}
                 >
-                  <LanguageFlag language={option.code} className="w-4 h-3" />
-                  <span className={language === option.code ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{option.label}</span>
+                  <LanguageFlag language={option.code} detectedCountry={detectedCountry} className="w-4 h-3" />
+                  <span className={isActive ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{option.label}</span>
                 </DropdownMenuItem>
-              ))}
+                );
+              })}
             </DropdownMenuContent>
           </DropdownMenu>
           <SpotlightButton
@@ -211,7 +220,7 @@ export function Header() {
               className="flex items-center justify-center h-10 px-3 rounded-full border border-[#E2E7F1] hover:bg-slate-50 transition-colors focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
               style={{ animationDelay: '0.15s', opacity: 0 }}
             >
-              <LanguageFlag language={language} className="w-5 h-4" />
+              <LanguageFlag language={language} detectedCountry={detectedCountry} className="w-5 h-4" />
               <NavArrowDown className="w-3 h-3 ml-1 text-[#1C1C1E]" />
             </button>
           </DropdownMenuTrigger>
@@ -220,16 +229,19 @@ export function Header() {
             sideOffset={20}
             className="min-w-[200px] border border-[#E2E7F1] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.08)] rounded-lg data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-2"
           >
-            {languageOptions.map((option) => (
+            {languageOptions.map((option) => {
+              const isActive = option.activeCodes?.includes(language) ?? language === option.code;
+              return (
               <DropdownMenuItem
                 key={option.code}
-                className={`flex items-center gap-2 cursor-pointer ${language === option.code ? 'font-medium bg-slate-50' : ''}`}
+                className={`flex items-center gap-2 cursor-pointer ${isActive ? 'font-medium bg-slate-50' : ''}`}
                 onClick={() => handleLanguageChange(option.code)}
               >
-                <LanguageFlag language={option.code} className="w-4 h-3" />
-                <span className={language === option.code ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{option.label}</span>
+                <LanguageFlag language={option.code} detectedCountry={detectedCountry} className="w-4 h-3" />
+                <span className={isActive ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{option.label}</span>
               </DropdownMenuItem>
-            ))}
+              );
+            })}
           </DropdownMenuContent>
         </DropdownMenu>
 

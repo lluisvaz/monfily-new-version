@@ -227,7 +227,7 @@ const baseTranslations: Record<BaseLanguage, Translations> = {
       languages: {
         portugueseBrazil: 'Português (Brasil)',
         portuguesePortugal: 'Português (Portugal)',
-        english: 'Ingles',
+        english: 'Inglês',
         spanish: 'Espanhol',
       },
       cta: 'Falar com Especialista',
@@ -236,7 +236,7 @@ const baseTranslations: Record<BaseLanguage, Translations> = {
     hero: {
       badge: {
         chosenBy: 'Escolhido por ',
-        clients: '+560 Clientes em ',
+        clients: '+150 Clientes em ',
         in: '',
       },
       rotatingTexts: [
@@ -313,7 +313,7 @@ const baseTranslations: Record<BaseLanguage, Translations> = {
         viewPrices: 'Ver Portfólio',
         scheduleNow: 'Agendar Reunião',
       },
-      trust: 'Mais de 560 empresas atendidas',
+      trust: 'Mais de 150 empresas atendidas',
     },
     expertise: {
       label: 'Nossa Expertise',
@@ -435,7 +435,7 @@ const baseTranslations: Record<BaseLanguage, Translations> = {
       languages: {
         portugueseBrazil: 'Português (Brasil)',
         portuguesePortugal: 'Português (Portugal)',
-        english: 'Ingles',
+        english: 'Inglês',
         spanish: 'Espanhol',
       },
       cta: 'Falar com Especialista',
@@ -444,7 +444,7 @@ const baseTranslations: Record<BaseLanguage, Translations> = {
     hero: {
       badge: {
         chosenBy: 'Escolhido por ',
-        clients: '+560 Clientes em ',
+        clients: '+150 Clientes em ',
         in: '',
       },
       rotatingTexts: [
@@ -521,7 +521,7 @@ const baseTranslations: Record<BaseLanguage, Translations> = {
         viewPrices: 'Ver Portfólio',
         scheduleNow: 'Agendar Reunião',
       },
-      trust: 'Mais de 560 empresas atendidas',
+      trust: 'Mais de 150 empresas atendidas',
     },
     expertise: {
       label: 'A Nossa Expertise',
@@ -652,7 +652,7 @@ const baseTranslations: Record<BaseLanguage, Translations> = {
     hero: {
       badge: {
         chosenBy: 'Chosen by ',
-        clients: '+560 Clients in ',
+        clients: '+150 Clients in ',
         in: '',
       },
       rotatingTexts: [
@@ -729,7 +729,7 @@ const baseTranslations: Record<BaseLanguage, Translations> = {
         viewPrices: 'View Portfolio',
         scheduleNow: 'Book a Meeting',
       },
-      trust: 'More than 560 companies served',
+      trust: 'More than 150 companies served',
     },
     expertise: {
       label: 'Our Expertise',
@@ -851,7 +851,7 @@ const baseTranslations: Record<BaseLanguage, Translations> = {
       languages: {
         portugueseBrazil: 'Portugués (Brasil)',
         portuguesePortugal: 'Portugués (Portugal)',
-        english: 'Ingles',
+        english: 'Inglés',
         spanish: 'Español',
       },
       cta: 'Hablar con Especialista',
@@ -860,7 +860,7 @@ const baseTranslations: Record<BaseLanguage, Translations> = {
     hero: {
       badge: {
         chosenBy: 'Elegido por ',
-        clients: '+560 Clientes en ',
+        clients: '+150 Clientes en ',
         in: '',
       },
       rotatingTexts: [
@@ -937,7 +937,7 @@ const baseTranslations: Record<BaseLanguage, Translations> = {
         viewPrices: 'Ver Portfolio',
         scheduleNow: 'Agendar Reunión',
       },
-      trust: 'Más de 560 empresas atendidas',
+      trust: 'Más de 150 empresas atendidas',
     },
     expertise: {
       label: 'Nuestra Expertise',
@@ -1112,7 +1112,7 @@ const italianTranslation: DeepPartial<Translations> = {
   hero: {
     badge: {
       chosenBy: 'Scelto da ',
-      clients: '+560 clienti in ',
+      clients: '+150 clienti in ',
       in: '',
     },
     rotatingTexts: ['Retail & E-commerce', 'Salute & Cliniche', 'Immobiliare & Costruzioni', 'Legale & Consulenza', 'Servizi & Startup'],
@@ -1183,7 +1183,7 @@ const italianTranslation: DeepPartial<Translations> = {
       viewPrices: 'Vedi Portfolio',
       scheduleNow: 'Prenota una riunione',
     },
-    trust: 'Oltre 560 aziende servite',
+    trust: 'Oltre 150 aziende servite',
   },
   expertise: {
     label: 'La nostra esperienza',
@@ -1291,7 +1291,7 @@ const hebrewTranslation: DeepPartial<Translations> = {
   hero: {
     badge: {
       chosenBy: 'נבחר על ידי ',
-      clients: '+560 לקוחות ב',
+      clients: '+150 לקוחות ב',
       in: '',
     },
     rotatingTexts: ['קמעונאות ומסחר', 'בריאות ומרפאות', 'נדלן ובניה', 'משפט וייעוץ', 'שירותים וסטארטאפים'],
@@ -1362,7 +1362,7 @@ const hebrewTranslation: DeepPartial<Translations> = {
       viewPrices: 'צפיה בפורטפוליו',
       scheduleNow: 'קביעת פגישה',
     },
-    trust: 'יותר מ-560 חברות קיבלו שירות',
+    trust: 'יותר מ-150 חברות קיבלו שירות',
   },
   expertise: {
     label: 'המומחיות שלנו',
@@ -1445,9 +1445,9 @@ export const translations: Record<Language, Translations> = {
   'pt-br': mergeDeep({ ...baseTranslations['pt-br'], whatsappNumber: getWhatsAppNumber('pt-br') }, {
     header: {
       languages: {
-        english: 'Ingles',
+        english: 'Inglês',
         italian: 'Italiano',
-        singapore: 'Ingles (Singapura)',
+        singapore: 'Inglês (Singapura)',
         hebrew: 'Hebraico (Israel)',
       },
     },
@@ -1455,9 +1455,9 @@ export const translations: Record<Language, Translations> = {
   'pt-pt': mergeDeep({ ...baseTranslations['pt-pt'], whatsappNumber: getWhatsAppNumber('pt-pt') }, {
     header: {
       languages: {
-        english: 'Ingles',
+        english: 'Inglês',
         italian: 'Italiano',
-        singapore: 'Ingles (Singapura)',
+        singapore: 'Inglês (Singapura)',
         hebrew: 'Hebraico (Israel)',
       },
     },
@@ -1475,9 +1475,9 @@ export const translations: Record<Language, Translations> = {
   es: mergeDeep({ ...baseTranslations.es, whatsappNumber: getWhatsAppNumber('es') }, {
     header: {
       languages: {
-        english: 'Ingles',
+        english: 'Inglés',
         italian: 'Italiano',
-        singapore: 'Ingles (Singapur)',
+        singapore: 'Inglés (Singapur)',
         hebrew: 'Hebreo (Israel)',
       },
     },
