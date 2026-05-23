@@ -23,6 +23,7 @@ const landingPurchaseSchema = z.object({
   email: z.string().email(),
   instagram: z.string().min(1).max(30).regex(/^[A-Za-z0-9._]+$/),
   phone: z.string().min(1),
+  pageUrl: z.string().url().optional(),
 });
 
 type LandingPurchaseData = z.infer<typeof landingPurchaseSchema>;
@@ -157,6 +158,156 @@ function envFlag(env: Env, name: string, fallback = false) {
   const value = env[name];
   if (value == null) return fallback;
   return ["1", "true", "yes", "on"].includes(value.toLowerCase());
+}
+
+function removeUndefined<T extends Record<string, unknown>>(value: T) {
+  return Object.fromEntries(Object.entries(value).filter(([, entry]) => entry !== undefined && entry !== "")) as Partial<T>;
+}
+
+function getMetaEnvPrefixes(marketKey: MarketKey) {
+  return marketKey === "GB" ? ["GB", "UK"] : [marketKey];
+}
+
+function getMetaPixelConfig(env: Env, marketKey: MarketKey) {
+  for (const prefix of getMetaEnvPrefixes(marketKey)) {
+    const pixelId = env[`META_PIXEL_${prefix}_ID`] || env[`VITE_META_PIXEL_${prefix}_IDS`]?.split(/[,\s]+/)[0];
+    const accessToken = env[`META_PIXEL_${prefix}_ACCESS_TOKEN`];
+
+    if (pixelId && accessToken) {
+      return {
+        pixelId,
+        accessToken,
+        graphVersion: env.META_PIXEL_GRAPH_VERSION || "v21.0",
+      };
+    }
+  }
+
+  return null;
+}
+
+async function sha256(value?: string) {
+  const normalized = value?.trim().toLowerCase();
+  if (!normalized) return undefined;
+
+  const hashBuffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(normalized));
+  return Array.from(new Uint8Array(hashBuffer))
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+function getCookie(request: Request, name: string) {
+  const cookie = request.headers.get("Cookie") || "";
+  const match = cookie
+    .split(";")
+    .map((entry) => entry.trim())
+    .find((entry) => entry.startsWith(`${name}=`));
+
+  if (!match) return undefined;
+
+  try {
+    return decodeURIComponent(match.slice(name.length + 1));
+  } catch {
+    return match.slice(name.length + 1);
+  }
+}
+
+function getClientIp(request: Request) {
+  return (
+    request.headers.get("CF-Connecting-IP") ||
+    request.headers.get("X-Forwarded-For")?.split(",")[0]?.trim() ||
+    undefined
+  );
+}
+
+function getEventSourceUrl(request: Request, data: LandingPurchaseData) {
+  return data.pageUrl || request.headers.get("Referer") || request.url;
+}
+
+function getFbc(request: Request, eventSourceUrl: string) {
+  const fbc = getCookie(request, "_fbc");
+  if (fbc) return fbc;
+
+  try {
+    const fbclid = new URL(eventSourceUrl).searchParams.get("fbclid");
+    return fbclid ? `fb.1.${Date.now()}.${fbclid}` : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+async function sendMetaLeadEvent(
+  request: Request,
+  env: Env,
+  data: LandingPurchaseData,
+  purchase: { value: number; currency: string },
+  eventId: string
+) {
+  const config = getMetaPixelConfig(env, data.marketKey);
+  if (!config) {
+    return { skipped: true, reason: "Meta pixel ID or access token is not configured for this market" };
+  }
+
+  const eventSourceUrl = getEventSourceUrl(request, data);
+  const firstName = data.name.trim().split(/\s+/)[0];
+  const hashedEmail = await sha256(data.email);
+  const hashedPhone = await sha256(normalizePhoneForWhatsapp(data.phone));
+  const hashedFirstName = await sha256(firstName);
+  const userData = removeUndefined({
+    em: hashedEmail ? [hashedEmail] : undefined,
+    ph: hashedPhone ? [hashedPhone] : undefined,
+    fn: hashedFirstName ? [hashedFirstName] : undefined,
+    client_ip_address: getClientIp(request),
+    client_user_agent: request.headers.get("User-Agent") || undefined,
+    fbp: getCookie(request, "_fbp"),
+    fbc: getFbc(request, eventSourceUrl),
+  });
+
+  const payload: Record<string, unknown> = {
+    data: [
+      {
+        event_name: "Lead",
+        event_time: Math.floor(Date.now() / 1000),
+        event_id: eventId,
+        action_source: "website",
+        event_source_url: eventSourceUrl,
+        user_data: userData,
+        custom_data: {
+          content_name: "Monfily landing page WhatsApp lead",
+          content_category: "landing_page",
+          lead_type: "whatsapp_form_submit",
+          value: purchase.value,
+          currency: purchase.currency,
+        },
+      },
+    ],
+  };
+
+  if (env.META_PIXEL_TEST_EVENT_CODE) {
+    payload.test_event_code = env.META_PIXEL_TEST_EVENT_CODE;
+  }
+
+  try {
+    const response = await fetch(`https://graph.facebook.com/${config.graphVersion}/${config.pixelId}/events`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${config.accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const provider = await response.json().catch(async () => ({ text: await response.text().catch(() => "") }));
+
+    if (!response.ok) {
+      console.error("Meta Conversions API lead failed:", provider);
+      return { sent: false, provider };
+    }
+
+    return { sent: true, provider };
+  } catch (error) {
+    console.error("Meta Conversions API lead failed:", error);
+    return { sent: false, error: error instanceof Error ? error.message : "Unknown error" };
+  }
 }
 
 function getEvolutionDelivery(env: Env, marketKey: MarketKey) {
@@ -483,14 +634,15 @@ export async function handleLandingPurchase(request: Request, env: Env): Promise
   const data = result.data;
   const copy = CUSTOMER_COPY_BY_MARKET[data.marketKey] || CUSTOMER_COPY_BY_MARKET.US;
   const purchase = PURCHASE_BY_MARKET[data.marketKey];
-  const eventId = `landingpage_purchase_${Date.now()}_${crypto.randomUUID()}`;
+  const eventId = `landingpage_lead_${Date.now()}_${crypto.randomUUID()}`;
 
   try {
-    const [emailResult, whatsappResult, reportEmailResult, reportWhatsappResult] = await Promise.all([
+    const [emailResult, whatsappResult, reportEmailResult, reportWhatsappResult, metaResult] = await Promise.all([
       sendCustomerEmail(env, data, copy),
       postWhatsappReminder(env, data, copy, eventId),
       sendLeadReportEmail(env, data, purchase),
       sendLeadReportWhatsapp(env, data, purchase),
+      sendMetaLeadEvent(request, env, data, purchase, eventId),
     ]);
 
     return jsonResponse({
@@ -502,6 +654,7 @@ export async function handleLandingPurchase(request: Request, env: Env): Promise
         email: { sent: true, provider: reportEmailResult },
         whatsapp: { sent: true, provider: reportWhatsappResult },
       },
+      meta: metaResult,
       purchase,
     });
   } catch (error) {

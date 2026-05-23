@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
-import { trackMetaLead } from "@/lib/meta-pixel";
 import {
   buildWhatsAppUrl,
   getWhatsAppCtaMessage,
@@ -44,8 +43,8 @@ export function useWhatsAppNumber(market: MarketKey, fallback: string): string {
 
 /**
  * Site-wide WhatsApp CTA used by the Home page buttons (header/hero/services).
- * Resolves the country number + a translated opener message, fires the Meta
- * Lead pixel and opens WhatsApp.
+ * Resolves the country number + a translated opener message and opens WhatsApp.
+ * Meta lead events are intentionally limited to the landing page submit button.
  */
 export function useWhatsAppCta() {
   const { language, detectedCountry } = useLanguage();
@@ -54,9 +53,8 @@ export function useWhatsAppCta() {
   const number = useWhatsAppNumber(market, fallback);
 
   const open = useCallback(() => {
-    trackMetaLead({ marketKey: market });
     window.open(buildWhatsAppUrl(number, getWhatsAppCtaMessage(language)), "_blank");
-  }, [number, market, language]);
+  }, [number, language]);
 
   return { number, market, open };
 }

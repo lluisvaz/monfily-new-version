@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocation } from "wouter";
 import { SectionLayout } from "@/components/landing/section-layout";
 import { detectLocationData } from "@/lib/geo-location";
-import { trackMetaPurchase } from "@/lib/meta-pixel";
+import { trackMetaLandingLead } from "@/lib/meta-pixel";
 import { getWhatsAppNumber, type Language } from "@/lib/translations";
 import { useWhatsAppNumber } from "@/hooks/use-whatsapp";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
@@ -512,6 +512,7 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
           email: form.email.trim(),
           instagram: form.instagram.trim(),
           phone: form.phone,
+          pageUrl: window.location.href,
         }),
       });
       const result = (await response.json().catch(() => null)) as LandingPurchaseResult | null;
@@ -527,7 +528,7 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
         throw new Error(result?.message || "Landing page purchase request failed");
       }
 
-      trackMetaPurchase({
+      trackMetaLandingLead({
         marketKey,
         eventId: result.eventId,
         value: purchase.value,
