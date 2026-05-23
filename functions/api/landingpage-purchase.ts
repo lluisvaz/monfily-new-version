@@ -56,40 +56,40 @@ const PURCHASE_BY_MARKET: Record<MarketKey, { value: number; currency: string; e
 
 const CUSTOMER_COPY_BY_MARKET: Record<MarketKey, CustomerCopy> = {
   BR: {
-    subject: "Sua pagina esta sendo preparada - Monfily",
-    preview: "Em ate 24 horas voce recebe uma versao pronta para visualizar e sugerir melhorias.",
-    greeting: "Ola!",
-    body: "Sua pagina esta sendo preparada com foco em apresentar seu negocio de forma clara, profissional e pronta para gerar mais oportunidades.",
-    assetRequest: "Em ate 24 horas vamos enviar uma versao pronta para visualizacao e sugestoes de melhoria. Se quiser ajudar a deixar o resultado ainda mais fiel ao seu negocio, pode nos enviar sua logo, fotos, videos, referencias visuais e qualquer material que represente sua marca.",
+    subject: "Sua página está sendo preparada - Monfily",
+    preview: "Em até 24 horas você recebe uma versão pronta para visualizar e sugerir melhorias.",
+    greeting: "Olá!",
+    body: "Sua página está sendo preparada com foco em apresentar seu negócio de forma clara, profissional e pronta para gerar mais oportunidades.",
+    assetRequest: "Em até 24 horas vamos enviar uma versão pronta para visualização e sugestões de melhoria. Se quiser ajudar a deixar o resultado ainda mais fiel ao seu negócio, pode nos enviar sua logo, fotos, vídeos, referências visuais e qualquer material que represente sua marca.",
     footer: "Monfily Digital. Todos os direitos reservados.",
-    whatsapp: "Ola! Sua pagina ja esta em preparacao. Em ate 24 horas vamos enviar uma versao pronta para voce visualizar e sugerir melhorias. Se quiser ajudar, pode mandar sua logo, fotos, videos, referencias e materiais do seu negocio por aqui.",
+    whatsapp: "Olá! Sua página já está em preparação. Em até 24 horas vamos enviar uma versão pronta para você visualizar e sugerir melhorias. Se quiser ajudar, pode mandar sua logo, fotos, vídeos, referências e materiais do seu negócio por aqui.",
   },
   PT: {
-    subject: "A sua pagina esta a ser preparada - Monfily",
-    preview: "Em ate 24 horas recebe uma versao pronta para visualizar e sugerir melhorias.",
-    greeting: "Ola!",
-    body: "A sua pagina esta a ser preparada com foco em apresentar o seu negocio de forma clara, profissional e pronta para gerar mais oportunidades.",
-    assetRequest: "Em ate 24 horas vamos enviar uma versao pronta para visualizacao e sugestoes de melhoria. Se quiser ajudar a deixar o resultado ainda mais fiel ao seu negocio, pode enviar a sua logo, fotos, videos, referencias visuais e qualquer material que represente a sua marca.",
+    subject: "A sua página está a ser preparada - Monfily",
+    preview: "Em até 24 horas recebe uma versão pronta para visualizar e sugerir melhorias.",
+    greeting: "Olá!",
+    body: "A sua página está a ser preparada com foco em apresentar o seu negócio de forma clara, profissional e pronta para gerar mais oportunidades.",
+    assetRequest: "Em até 24 horas vamos enviar uma versão pronta para visualização e sugestões de melhoria. Se quiser ajudar a deixar o resultado ainda mais fiel ao seu negócio, pode enviar a sua logo, fotos, vídeos, referências visuais e qualquer material que represente a sua marca.",
     footer: "Monfily Digital. Todos os direitos reservados.",
-    whatsapp: "Ola! A sua pagina ja esta a ser preparada. Em ate 24 horas vamos enviar uma versao pronta para visualizar e sugerir melhorias. Se quiser ajudar, pode enviar a sua logo, fotos, videos, referencias e materiais do seu negocio por aqui.",
+    whatsapp: "Olá! A sua página já está a ser preparada. Em até 24 horas vamos enviar uma versão pronta para visualizar e sugerir melhorias. Se quiser ajudar, pode enviar a sua logo, fotos, vídeos, referências e materiais do seu negócio por aqui.",
   },
   ES: {
-    subject: "Tu pagina esta en preparacion - Monfily",
-    preview: "En hasta 24 horas recibiras una version lista para revisar y sugerir mejoras.",
-    greeting: "Hola!",
-    body: "Tu pagina esta en preparacion para presentar tu negocio de forma clara, profesional y lista para generar mas oportunidades.",
-    assetRequest: "En hasta 24 horas enviaremos una version lista para que puedas revisarla y sugerir mejoras. Si quieres ayudar a que el resultado represente mejor tu negocio, puedes enviarnos tu logo, fotos, videos, referencias visuales y cualquier material de tu marca.",
+    subject: "Tu página está en preparación - Monfily",
+    preview: "En hasta 24 horas recibirás una versión lista para revisar y sugerir mejoras.",
+    greeting: "¡Hola!",
+    body: "Tu página está en preparación para presentar tu negocio de forma clara, profesional y lista para generar más oportunidades.",
+    assetRequest: "En hasta 24 horas enviaremos una versión lista para que puedas revisarla y sugerir mejoras. Si quieres ayudar a que el resultado represente mejor tu negocio, puedes enviarnos tu logo, fotos, vídeos, referencias visuales y cualquier material de tu marca.",
     footer: "Monfily Digital. Todos los derechos reservados.",
-    whatsapp: "Hola! Tu pagina ya esta en preparacion. En hasta 24 horas enviaremos una version lista para que puedas revisarla y sugerir mejoras. Si quieres ayudar, puedes enviar tu logo, fotos, videos, referencias y materiales de tu negocio por aqui.",
+    whatsapp: "¡Hola! Tu página ya está en preparación. En hasta 24 horas enviaremos una versión lista para que puedas revisarla y sugerir mejoras. Si quieres ayudar, puedes enviar tu logo, fotos, vídeos, referencias y materiales de tu negocio por aquí.",
   },
   IT: {
-    subject: "La tua pagina e in preparazione - Monfily",
+    subject: "La tua pagina è in preparazione - Monfily",
     preview: "Entro 24 ore riceverai una versione pronta da visualizzare e migliorare.",
     greeting: "Ciao!",
-    body: "La tua pagina e in preparazione per presentare la tua attivita in modo chiaro, professionale e pronto a generare piu opportunita.",
-    assetRequest: "Entro 24 ore invieremo una versione pronta da visualizzare e su cui suggerire miglioramenti. Se vuoi aiutarci a rendere il risultato piu fedele alla tua attivita, puoi inviarci logo, foto, video, riferimenti visivi e qualsiasi materiale del brand.",
+    body: "La tua pagina è in preparazione per presentare la tua attività in modo chiaro, professionale e pronto a generare più opportunità.",
+    assetRequest: "Entro 24 ore invieremo una versione pronta da visualizzare e su cui suggerire miglioramenti. Se vuoi aiutarci a rendere il risultato più fedele alla tua attività, puoi inviarci logo, foto, video, riferimenti visivi e qualsiasi materiale del brand.",
     footer: "Monfily Digital. Tutti i diritti riservati.",
-    whatsapp: "Ciao! La tua pagina e gia in preparazione. Entro 24 ore invieremo una versione pronta da visualizzare e su cui suggerire miglioramenti. Se vuoi aiutarci, puoi inviare logo, foto, video, riferimenti e materiali della tua attivita qui.",
+    whatsapp: "Ciao! La tua pagina è già in preparazione. Entro 24 ore invieremo una versione pronta da visualizzare e su cui suggerire miglioramenti. Se vuoi aiutarci, puoi inviare logo, foto, video, riferimenti e materiali della tua attività qui.",
   },
   IL: {
     subject: "Your page is being prepared - Monfily",
@@ -264,32 +264,28 @@ async function sendCustomerEmail(env: Env, data: LandingPurchaseData, copy: Cust
   return response.json();
 }
 
-function getLeadReportText(data: LandingPurchaseData, purchase: { value: number; currency: string }, eventId: string) {
+function getLeadReportText(data: LandingPurchaseData, purchase: { value: number; currency: string }) {
   return [
     "Novo lead Monfily - Landing page",
     "",
-    `Evento: ${eventId}`,
     `Mercado: ${data.marketKey}`,
-    `Locale: ${data.locale}`,
     `Oferta: ${purchase.value} ${purchase.currency}`,
     `Resposta: ${data.selectedOption}`,
     `Nome: ${data.name}`,
-    `Negocio: ${data.company}`,
+    `Negócio: ${data.company}`,
     `Email: ${data.email}`,
     `Instagram: https://instagram.com/${data.instagram}`,
     `Telefone: ${data.phone}`,
   ].join("\n");
 }
 
-function getLeadReportEmailHtml(data: LandingPurchaseData, purchase: { value: number; currency: string }, eventId: string) {
+function getLeadReportEmailHtml(data: LandingPurchaseData, purchase: { value: number; currency: string }) {
   const rows = [
-    ["Evento", eventId],
     ["Mercado", data.marketKey],
-    ["Locale", data.locale],
     ["Oferta", `${purchase.value} ${purchase.currency}`],
     ["Resposta", data.selectedOption],
     ["Nome", data.name],
-    ["Negocio", data.company],
+    ["Negócio", data.company],
     ["Email", data.email],
     ["Instagram", `https://instagram.com/${data.instagram}`],
     ["Telefone", data.phone],
@@ -310,7 +306,7 @@ function getLeadReportEmailHtml(data: LandingPurchaseData, purchase: { value: nu
             <tr>
               <td style="padding:28px 32px;border-bottom:1px solid #E2E7F1;">
                 <div style="font-size:22px;font-weight:700;color:#2869D6;">Novo lead Monfily</div>
-                <div style="margin-top:8px;font-size:14px;color:#6B7280;">Respostas registradas no formulario de landing page.</div>
+                <div style="margin-top:8px;font-size:14px;color:#6B7280;">Respostas registradas no formulário de landing page.</div>
               </td>
             </tr>
             <tr>
@@ -338,8 +334,7 @@ function getLeadReportEmailHtml(data: LandingPurchaseData, purchase: { value: nu
 async function sendLeadReportEmail(
   env: Env,
   data: LandingPurchaseData,
-  purchase: { value: number; currency: string },
-  eventId: string
+  purchase: { value: number; currency: string }
 ) {
   const apiKey = env.RESEND_API_KEY;
   const fromEmail = env.RESEND_FROM_EMAIL || "notification@monfily.com";
@@ -360,8 +355,8 @@ async function sendLeadReportEmail(
       from: `${fromName} <${fromEmail}>`,
       to: [reportEmail],
       subject: `Novo lead Monfily - ${data.marketKey}`,
-      html: getLeadReportEmailHtml(data, purchase, eventId),
-      text: getLeadReportText(data, purchase, eventId),
+      html: getLeadReportEmailHtml(data, purchase),
+      text: getLeadReportText(data, purchase),
     }),
   });
 
@@ -381,8 +376,7 @@ function resolveReportSenderMarket(value?: string): MarketKey {
 async function sendLeadReportWhatsapp(
   env: Env,
   data: LandingPurchaseData,
-  purchase: { value: number; currency: string },
-  eventId: string
+  purchase: { value: number; currency: string }
 ) {
   const to = normalizePhoneForWhatsapp(env.LEAD_REPORT_WHATSAPP_NUMBER || "5511945645232");
   const senderMarket = resolveReportSenderMarket(env.LEAD_REPORT_WHATSAPP_SENDER_MARKET);
@@ -401,7 +395,7 @@ async function sendLeadReportWhatsapp(
     },
     body: JSON.stringify({
       number: to,
-      text: getLeadReportText(data, purchase, eventId),
+      text: getLeadReportText(data, purchase),
       delay: delivery.delayMs,
       linkPreview: false,
     }),
@@ -495,8 +489,8 @@ export async function handleLandingPurchase(request: Request, env: Env): Promise
     const [emailResult, whatsappResult, reportEmailResult, reportWhatsappResult] = await Promise.all([
       sendCustomerEmail(env, data, copy),
       postWhatsappReminder(env, data, copy, eventId),
-      sendLeadReportEmail(env, data, purchase, eventId),
-      sendLeadReportWhatsapp(env, data, purchase, eventId),
+      sendLeadReportEmail(env, data, purchase),
+      sendLeadReportWhatsapp(env, data, purchase),
     ]);
 
     return jsonResponse({

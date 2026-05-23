@@ -41,10 +41,10 @@ export default function LandingPageThankYou() {
 
           <section className="elevate-card" aria-labelledby="thank-you-title">
             <h2 id="thank-you-title" className="elevate-card__question">
-              Sua pagina ja esta na fila de preparacao.
+              Sua página já está na fila de preparação.
             </h2>
             <p className="elevate-card__helper">
-              Em ate 24 horas voce recebe uma versao pronta para visualizar e sugerir melhorias.
+              Em até 24 horas você recebe uma versão pronta para visualizar e sugerir melhorias.
             </p>
           </section>
         </div>

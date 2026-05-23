@@ -103,14 +103,14 @@ const SEO_BY_MARKET: Record<MarketKey, SeoCopy> = {
 };
 
 const CLIENT_WHATSAPP_MESSAGE_BY_MARKET: Record<MarketKey, string> = {
-  BR: "Ola! Gostaria de um site para o meu negocio.",
-  PT: "Ola! Gostaria de um site para o meu negocio.",
-  ES: "Hola! Me gustaria tener un sitio web para mi negocio.",
-  IT: "Ciao! Vorrei un sito web per la mia attivita.",
-  IL: "Hello! I would like a website for my business.",
-  SG: "Hello! I would like a website for my business.",
-  GB: "Hello! I would like a website for my business.",
-  US: "Hello! I would like a website for my business.",
+  BR: "Olá! Gostaria de criar um site profissional para o meu negócio e entender como a Monfily pode me ajudar.",
+  PT: "Olá! Gostaria de criar um site profissional para o meu negócio e perceber como a Monfily me pode ajudar.",
+  ES: "¡Hola! Me gustaría crear un sitio web profesional para mi negocio y entender cómo Monfily puede ayudarme.",
+  IT: "Ciao! Vorrei creare un sito web professionale per la mia attività e capire come Monfily può aiutarmi.",
+  IL: "Hello! I would like to create a professional website for my business and understand how Monfily can help me.",
+  SG: "Hello! I would like to create a professional website for my business and understand how Monfily can help me.",
+  GB: "Hello! I would like to create a professional website for my business and understand how Monfily can help me.",
+  US: "Hello! I would like to create a professional website for my business and understand how Monfily can help me.",
 };
 
 const MARKETS: Record<MarketKey, {
