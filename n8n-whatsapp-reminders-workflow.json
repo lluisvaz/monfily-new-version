@@ -1,0 +1,120 @@
+{
+  "name": "Monfily - WhatsApp Reminders",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "monfily-whatsapp-reminders",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "9e1bfef2-7a39-41ab-a54d-2b9b1f5a8b8d",
+      "name": "Webhook Monfily",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -620,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const payload = $json.body ?? $json;\nconst headers = $json.headers ?? {};\nconst expectedSecret = typeof $env !== 'undefined' ? $env.N8N_WHATSAPP_REMINDER_WEBHOOK_SECRET : '';\nconst receivedSecret = headers['x-monfily-webhook-secret'] || headers['X-Monfily-Webhook-Secret'];\nif (expectedSecret && receivedSecret !== expectedSecret) throw new Error('Invalid webhook secret.');\n\nconst to = payload.to || payload.variables?.whatsappTo;\nconst rawMessage = payload.reminder?.message || payload.variables?.message;\nconst message = String(rawMessage || '').normalize('NFC');\nconst evolution = payload.delivery?.evolution;\nconst requestedWaitSeconds = Number(payload.reminder?.sendAfterSeconds);\nconst requestedDelayMs = Number(payload.reminder?.delayMs);\nconst waitSeconds = Number.isFinite(requestedWaitSeconds)\n  ? Math.max(0, requestedWaitSeconds)\n  : Math.max(0, Math.round((Number.isFinite(requestedDelayMs) ? requestedDelayMs : 480000) / 1000));\n\nif (!to) throw new Error('Missing WhatsApp destination number.');\nif (!message) throw new Error('Missing WhatsApp message.');\nif (!evolution?.apiUrl || !evolution?.instanceName || !evolution?.apiKey) {\n  throw new Error('Missing Evolution delivery config. Configure EVOLUTION_API_URL and the country-specific EVOLUTION_*_INSTANCE_NAME / EVOLUTION_*_INSTANCE_TOKEN values in the Monfily API .env.');\n}\n\nconst apiUrl = String(evolution.apiUrl).replace(/\\/+$/, '');\nconst hostMatch = /^https?:\\/\\/([^/?#]+)/i.exec(apiUrl);\nconst host = hostMatch ? hostMatch[1].toLowerCase() : '';\nif (!host || host === 'sua-evolution.com' || host === 'example.com' || host.includes('seudominio') || host.includes('seu-dominio')) {\n  throw new Error('Invalid EVOLUTION_API_URL: replace the documentation placeholder with the real Evolution API URL in the Monfily API .env.');\n}\n\nconst instanceName = encodeURIComponent(String(evolution.instanceName));\nconst delayMs = Number.isFinite(Number(evolution.delayMs)) ? Number(evolution.delayMs) : 1200;\n\nreturn [{\n  json: {\n    to,\n    message,\n    waitSeconds,\n    evolutionUrl: `${apiUrl}/message/sendText/${instanceName}`,\n    evolutionApiKey: String(evolution.apiKey),\n    evolutionDelayMs: delayMs,\n    idempotencyKey: payload.idempotencyKey,\n    language: payload.language,\n    marketKey: payload.marketKey,\n    reminderKind: payload.reminder?.kind,\n    payload\n  }\n}];"
+      },
+      "id": "f7a07127-6c58-4958-a089-3f74f47c1f5d",
+      "name": "Preparar mensagem",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -340,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "resume": "timeInterval",
+        "amount": "={{ Number($json.waitSeconds || 480) }}",
+        "unit": "seconds",
+        "options": {}
+      },
+      "id": "f1a34f54-c734-4718-99d7-7ca4a0974c40",
+      "name": "Aguardar 8 minutos",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -60,
+        0
+      ],
+      "webhookId": "ea0c9bc3-1f95-4d4c-9b08-4c7643383d5c"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.evolutionUrl }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $json.evolutionApiKey }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { number: $json.to, text: $json.message, delay: Number($json.evolutionDelayMs || 1200), linkPreview: true } }}",
+        "options": {}
+      },
+      "id": "3ad54fe9-431b-4565-85cb-40f8d85cc647",
+      "name": "Enviar Evolution API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Monfily": {
+      "main": [
+        [
+          {
+            "node": "Preparar mensagem",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar mensagem": {
+      "main": [
+        [
+          {
+            "node": "Aguardar 8 minutos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aguardar 8 minutos": {
+      "main": [
+        [
+          {
+            "node": "Enviar Evolution API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
+import { SectionLayout } from "@/components/landing/section-layout";
 import { detectLocationData } from "@/lib/geo-location";
+import { trackMetaPurchase } from "@/lib/meta-pixel";
 import { getWhatsAppNumber, type Language } from "@/lib/translations";
 
-type MarketKey = "PT" | "IT" | "ES" | "IL" | "SG" | "BR" | "GB" | "US";
+export type MarketKey = "PT" | "IT" | "ES" | "IL" | "SG" | "BR" | "GB" | "US";
 
 type Copy = {
   eyebrow: string;
@@ -19,6 +21,8 @@ type Copy = {
   company: string;
   email: string;
   phone: string;
+  instagram: string;
+  instagramPlaceholder: string;
   back: string;
   submit: string;
   footer: string;
@@ -29,6 +33,15 @@ type SeoCopy = {
   title: string;
   description: string;
   ogLocale: string;
+};
+
+type LandingPurchaseResult = {
+  eventId?: string;
+  message?: string;
+  purchase?: {
+    value?: number;
+    currency?: string;
+  };
 };
 
 const MARKET_BY_COUNTRY: Record<string, MarketKey> = {
@@ -114,6 +127,8 @@ const MARKETS: Record<MarketKey, {
       name: "Nome",
       company: "Nome da empresa",
       email: "Email",
+      instagram: "Instagram do seu negócio",
+      instagramPlaceholder: "seu_usuario",
       phone: "Telefone",
       back: "Voltar",
       submit: "FALAR NO WHATSAPP AGORA",
@@ -141,6 +156,8 @@ const MARKETS: Record<MarketKey, {
       name: "Nome",
       company: "Nome dell'azienda",
       email: "Email",
+      instagram: "Instagram della tua attività",
+      instagramPlaceholder: "tuo_utente",
       phone: "Telefono",
       back: "Indietro",
       submit: "PARLA SU WHATSAPP ORA",
@@ -168,6 +185,8 @@ const MARKETS: Record<MarketKey, {
       name: "Nombre",
       company: "Nombre de la empresa",
       email: "Email",
+      instagram: "Instagram de tu negocio",
+      instagramPlaceholder: "tu_usuario",
       phone: "Teléfono",
       back: "Volver",
       submit: "HABLAR POR WHATSAPP AHORA",
@@ -195,6 +214,8 @@ const MARKETS: Record<MarketKey, {
       name: "שם",
       company: "שם החברה",
       email: "אימייל",
+      instagram: "האינסטגרם של העסק שלך",
+      instagramPlaceholder: "שם_משתמש",
       phone: "טלפון",
       back: "חזרה",
       submit: "דברו איתי בוואטסאפ",
@@ -222,6 +243,8 @@ const MARKETS: Record<MarketKey, {
       name: "Name",
       company: "Company name",
       email: "Email",
+      instagram: "Your business Instagram",
+      instagramPlaceholder: "your_username",
       phone: "Phone",
       back: "Back",
       submit: "TALK ON WHATSAPP NOW",
@@ -249,6 +272,8 @@ const MARKETS: Record<MarketKey, {
       name: "Nome",
       company: "Nome da empresa",
       email: "Email",
+      instagram: "Instagram do seu negócio",
+      instagramPlaceholder: "seu_usuario",
       phone: "Telefone",
       back: "Voltar",
       submit: "FALAR NO WHATSAPP AGORA",
@@ -276,6 +301,8 @@ const MARKETS: Record<MarketKey, {
       name: "Name",
       company: "Company name",
       email: "Email",
+      instagram: "Your business Instagram",
+      instagramPlaceholder: "your_username",
       phone: "Phone",
       back: "Back",
       submit: "TALK ON WHATSAPP NOW",
@@ -303,6 +330,8 @@ const MARKETS: Record<MarketKey, {
       name: "Name",
       company: "Company name",
       email: "Email",
+      instagram: "Your business Instagram",
+      instagramPlaceholder: "your_username",
       phone: "Phone",
       back: "Back",
       submit: "TALK ON WHATSAPP NOW",
@@ -384,6 +413,20 @@ function normalizePhoneValue(value: string, marketKey: MarketKey): string {
   return `${market.phonePrefix}${formatLocalPhoneDigits(marketKey, localDigits)}`;
 }
 
+const INSTAGRAM_PREFIX = "instagram.com/";
+const INSTAGRAM_HANDLE_MAX_LENGTH = 30;
+
+function normalizeInstagramHandle(value: string): string {
+  return value
+    .replace(/^https?:\/\/(www\.)?instagram\.com\//i, "")
+    .replace(/^www\.instagram\.com\//i, "")
+    .replace(/^instagram\.com\//i, "")
+    .replace(/^@+/, "")
+    .replace(/\s/g, "")
+    .replace(/[^A-Za-z0-9._]/g, "")
+    .slice(0, INSTAGRAM_HANDLE_MAX_LENGTH);
+}
+
 function updateMetaTag(name: string, content: string, attribute: "name" | "property" = "name") {
   let meta = document.querySelector(`meta[${attribute}="${name}"]`);
 
@@ -396,11 +439,21 @@ function updateMetaTag(name: string, content: string, attribute: "name" | "prope
   meta.setAttribute("content", content);
 }
 
-export default function LandingPage() {
-  const [marketKey, setMarketKey] = useState<MarketKey>("US");
+type LandingPageProps = {
+  fixedMarketKey?: MarketKey;
+};
+
+function isDefaultPhoneValue(value: string) {
+  return Object.values(MARKETS).some((market) => value === market.phonePrefix);
+}
+
+export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
+  const initialMarketKey = fixedMarketKey ?? "US";
+  const [marketKey, setMarketKey] = useState<MarketKey>(initialMarketKey);
   const [step, setStep] = useState<1 | 2>(1);
   const [selectedOption, setSelectedOption] = useState("");
-  const [form, setForm] = useState({ name: "", company: "", email: "", phone: MARKETS.US.phonePrefix });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [form, setForm] = useState({ name: "", company: "", email: "", instagram: "", phone: MARKETS[initialMarketKey].phonePrefix });
   const market = MARKETS[marketKey];
   const copy = market.copy;
   const seo = SEO_BY_MARKET[marketKey];
@@ -410,10 +463,11 @@ export default function LandingPage() {
     form.name.trim().length > 0 &&
     form.company.trim().length > 0 &&
     form.email.trim().length > 0 &&
+    form.instagram.length > 0 &&
     localPhoneDigits.length === market.phoneDigits;
 
-  const handleSubmit = () => {
-    if (!isFormComplete) return;
+  const handleSubmit = async () => {
+    if (!isFormComplete || isSubmitting) return;
 
     const message = [
       `${copy.titlePrefix} - ${market.price}`,
@@ -421,13 +475,74 @@ export default function LandingPage() {
       `${copy.name}: ${form.name}`,
       `${copy.company}: ${form.company}`,
       `${copy.email}: ${form.email}`,
+      `${copy.instagram}: ${INSTAGRAM_PREFIX}${form.instagram}`,
       `${copy.phone}: ${form.phone}`,
     ].join("\n");
     const whatsappNumber = getWhatsAppNumber(getLanguageForMarket(marketKey));
-    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+    setIsSubmitting(true);
+    const whatsappWindow = window.open(whatsappUrl, "_blank");
+
+    try {
+      const response = await fetch("/api/landingpage-purchase", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          marketKey,
+          locale: market.locale,
+          selectedOption,
+          name: form.name.trim(),
+          company: form.company.trim(),
+          email: form.email.trim(),
+          instagram: form.instagram.trim(),
+          phone: form.phone,
+        }),
+      });
+      const result = (await response.json().catch(() => null)) as LandingPurchaseResult | null;
+      const purchase = result?.purchase;
+
+      if (
+        !response.ok ||
+        !result?.eventId ||
+        !purchase ||
+        typeof purchase.value !== "number" ||
+        typeof purchase.currency !== "string"
+      ) {
+        throw new Error(result?.message || "Landing page purchase request failed");
+      }
+
+      trackMetaPurchase({
+        marketKey,
+        eventId: result.eventId,
+        value: purchase.value,
+        currency: purchase.currency,
+      });
+
+      if (!whatsappWindow) {
+        window.open(whatsappUrl, "_blank");
+      }
+    } catch (error) {
+      console.error("Landing page purchase failed:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   useEffect(() => {
+    if (fixedMarketKey) {
+      setMarketKey(fixedMarketKey);
+      setForm((current) => ({
+        ...current,
+        phone: isDefaultPhoneValue(current.phone)
+          ? MARKETS[fixedMarketKey].phonePrefix
+          : normalizePhoneValue(current.phone, fixedMarketKey),
+      }));
+      return;
+    }
+
     let cancelled = false;
 
     detectLocationData().then(({ country }) => {
@@ -443,7 +558,7 @@ export default function LandingPage() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [fixedMarketKey]);
 
   useEffect(() => {
     document.title = seo.title;
@@ -463,8 +578,10 @@ export default function LandingPage() {
 
   return (
     <main className="elevate-page" aria-label="Monfily landing page" lang={market.locale} dir="ltr" data-text-direction={textDirection}>
-      <div className="elevate-page__inner">
-        <header className="elevate-hero">
+      <SectionLayout showStripes={false} className="elevate-page__frame" containerClassName="elevate-page__section">
+        <div className="elevate-page__inner">
+          <span className="elevate-line-marker elevate-line-marker--divider-top" aria-hidden="true" />
+          <header className="elevate-hero">
           <img
             src="https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_180/v1763574787/monfily-black-nobg_risk6t.png"
             alt="Monfily"
@@ -477,9 +594,11 @@ export default function LandingPage() {
             <span className="elevate-hero__title-price">{copy.titlePriceConnector} {market.price}</span>
           </h1>
           <p className="elevate-hero__subtitle">{copy.subtitle}</p>
-        </header>
+          </header>
 
-        <section className="elevate-card" aria-labelledby="elevate-question">
+          <section className="elevate-card" aria-labelledby="elevate-question">
+          <span className="elevate-line-marker elevate-line-marker--progress-left" aria-hidden="true" />
+          <span className="elevate-line-marker elevate-line-marker--progress-right" aria-hidden="true" />
           <div className="elevate-progress" aria-label={`${copy.step} ${step} de 2`}>
             <span>{copy.step} {step}/2</span>
             <div>
@@ -577,6 +696,35 @@ export default function LandingPage() {
                 </label>
 
                 <label className="elevate-field">
+                  <span>{copy.instagram}</span>
+                  <div className="elevate-instagram-input">
+                    <span aria-hidden="true">{INSTAGRAM_PREFIX}</span>
+                    <input
+                      type="text"
+                      name="instagram"
+                      autoComplete="off"
+                      inputMode="text"
+                      maxLength={INSTAGRAM_HANDLE_MAX_LENGTH}
+                      required
+                      aria-label={`${copy.instagram} ${INSTAGRAM_PREFIX}`}
+                      placeholder={copy.instagramPlaceholder}
+                      value={form.instagram}
+                      onChange={(event) => {
+                        setForm((current) => ({
+                          ...current,
+                          instagram: normalizeInstagramHandle(event.target.value),
+                        }));
+                      }}
+                      onKeyDown={(event) => {
+                        if (event.key === " ") {
+                          event.preventDefault();
+                        }
+                      }}
+                    />
+                  </div>
+                </label>
+
+                <label className="elevate-field">
                   <span>{copy.phone}</span>
                   <input
                     type="tel"
@@ -608,7 +756,7 @@ export default function LandingPage() {
                   <button type="button" className="elevate-back" onClick={() => setStep(1)}>
                     {copy.back}
                   </button>
-                  <button type="submit" className="elevate-cta" disabled={!isFormComplete}>
+                  <button type="submit" className="elevate-cta" disabled={!isFormComplete || isSubmitting}>
                     <span className="elevate-cta__shine" aria-hidden="true" />
                     <span>{copy.submit}</span>
                   </button>
@@ -616,17 +764,14 @@ export default function LandingPage() {
               </form>
             </>
           )}
-        </section>
+          </section>
 
-        <footer className="elevate-footer">
-          <div className="elevate-separator" />
+          <footer className="elevate-footer">
+            <span className="elevate-line-marker elevate-line-marker--footer-left" aria-hidden="true" />
+            <span className="elevate-line-marker elevate-line-marker--footer-divider" aria-hidden="true" />
+            <span className="elevate-line-marker elevate-line-marker--footer-right" aria-hidden="true" />
+            <div className="elevate-separator" />
           <div className="elevate-footer__content">
-            <img
-              src="https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_180/v1763574787/monfily-black-nobg_risk6t.png"
-              alt="Monfily"
-              className="elevate-footer__logo"
-              draggable={false}
-            />
             <p className="elevate-footer__copy">
               {copy.footer}
               <br />
@@ -634,8 +779,9 @@ export default function LandingPage() {
             </p>
           </div>
           <div className="elevate-separator elevate-separator--bottom" />
-        </footer>
-      </div>
+          </footer>
+        </div>
+      </SectionLayout>
     </main>
   );
 }

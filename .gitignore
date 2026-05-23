@@ -11,10 +11,16 @@ coverage/
 # Production builds
 dist/
 public/
+!frontend/public/
+frontend/public/*
+!frontend/public/_headers
+!frontend/public/_redirects
 build/
 *.tsbuildinfo
 
 # Environment variables
+.env
+.dev.vars
 .env.development.local
 .env.test.local
 .env.production.local
@@ -64,5 +70,5 @@ backend/migrations/
 # Old directories (to be removed)
 client/
 server/
-.vercel
+.wrangler/
 .env*.local
