@@ -27,15 +27,14 @@ const landingPurchaseSchema = z.object({
 
 type LandingPurchaseData = z.infer<typeof landingPurchaseSchema>;
 
-type MessageCopy = {
+type CustomerCopy = {
   subject: string;
   preview: string;
-  greeting: (name: string) => string;
-  companyLabel: string;
-  instagramLabel: string;
+  greeting: string;
   body: string;
+  assetRequest: string;
   footer: string;
-  whatsapp: (name: string) => string;
+  whatsapp: string;
 };
 
 export const corsHeaders = {
@@ -55,86 +54,78 @@ const PURCHASE_BY_MARKET: Record<MarketKey, { value: number; currency: string; e
   US: { value: 497, currency: "USD", envPrefix: "US" },
 };
 
-const COPY_BY_MARKET: Record<MarketKey, MessageCopy> = {
+const CUSTOMER_COPY_BY_MARKET: Record<MarketKey, CustomerCopy> = {
   BR: {
-    subject: "Recebemos suas informações - Monfily",
-    preview: "Vamos entregar o link da sua página pronta dentro de 24 horas.",
-    greeting: (name) => `Olá, ${name}!`,
-    companyLabel: "Negócio",
-    instagramLabel: "Instagram",
-    body: "Recebemos as informações e iremos entregar o link da página pronta dentro de 24 horas.",
+    subject: "Sua pagina esta sendo preparada - Monfily",
+    preview: "Em ate 24 horas voce recebe uma versao pronta para visualizar e sugerir melhorias.",
+    greeting: "Ola!",
+    body: "Sua pagina esta sendo preparada com foco em apresentar seu negocio de forma clara, profissional e pronta para gerar mais oportunidades.",
+    assetRequest: "Em ate 24 horas vamos enviar uma versao pronta para visualizacao e sugestoes de melhoria. Se quiser ajudar a deixar o resultado ainda mais fiel ao seu negocio, pode nos enviar sua logo, fotos, videos, referencias visuais e qualquer material que represente sua marca.",
     footer: "Monfily Digital. Todos os direitos reservados.",
-    whatsapp: (name) => `Olá, ${name}! Recebemos as informações e iremos entregar o link da página pronta dentro de 24 horas.`,
+    whatsapp: "Ola! Sua pagina ja esta em preparacao. Em ate 24 horas vamos enviar uma versao pronta para voce visualizar e sugerir melhorias. Se quiser ajudar, pode mandar sua logo, fotos, videos, referencias e materiais do seu negocio por aqui.",
   },
   PT: {
-    subject: "Recebemos as suas informações - Monfily",
-    preview: "Vamos entregar o link da sua página pronta dentro de 24 horas.",
-    greeting: (name) => `Olá, ${name}!`,
-    companyLabel: "Negócio",
-    instagramLabel: "Instagram",
-    body: "Recebemos as suas informações e iremos entregar o link da página pronta dentro de 24 horas.",
+    subject: "A sua pagina esta a ser preparada - Monfily",
+    preview: "Em ate 24 horas recebe uma versao pronta para visualizar e sugerir melhorias.",
+    greeting: "Ola!",
+    body: "A sua pagina esta a ser preparada com foco em apresentar o seu negocio de forma clara, profissional e pronta para gerar mais oportunidades.",
+    assetRequest: "Em ate 24 horas vamos enviar uma versao pronta para visualizacao e sugestoes de melhoria. Se quiser ajudar a deixar o resultado ainda mais fiel ao seu negocio, pode enviar a sua logo, fotos, videos, referencias visuais e qualquer material que represente a sua marca.",
     footer: "Monfily Digital. Todos os direitos reservados.",
-    whatsapp: (name) => `Olá, ${name}! Recebemos as suas informações e iremos entregar o link da página pronta dentro de 24 horas.`,
+    whatsapp: "Ola! A sua pagina ja esta a ser preparada. Em ate 24 horas vamos enviar uma versao pronta para visualizar e sugerir melhorias. Se quiser ajudar, pode enviar a sua logo, fotos, videos, referencias e materiais do seu negocio por aqui.",
   },
   ES: {
-    subject: "Hemos recibido tu información - Monfily",
-    preview: "Entregaremos el enlace de tu página lista en 24 horas.",
-    greeting: (name) => `¡Hola, ${name}!`,
-    companyLabel: "Negocio",
-    instagramLabel: "Instagram",
-    body: "Hemos recibido tu información y entregaremos el enlace de tu página lista en un plazo de 24 horas.",
+    subject: "Tu pagina esta en preparacion - Monfily",
+    preview: "En hasta 24 horas recibiras una version lista para revisar y sugerir mejoras.",
+    greeting: "Hola!",
+    body: "Tu pagina esta en preparacion para presentar tu negocio de forma clara, profesional y lista para generar mas oportunidades.",
+    assetRequest: "En hasta 24 horas enviaremos una version lista para que puedas revisarla y sugerir mejoras. Si quieres ayudar a que el resultado represente mejor tu negocio, puedes enviarnos tu logo, fotos, videos, referencias visuales y cualquier material de tu marca.",
     footer: "Monfily Digital. Todos los derechos reservados.",
-    whatsapp: (name) => `¡Hola, ${name}! Hemos recibido tu información y entregaremos el enlace de tu página lista en un plazo de 24 horas.`,
+    whatsapp: "Hola! Tu pagina ya esta en preparacion. En hasta 24 horas enviaremos una version lista para que puedas revisarla y sugerir mejoras. Si quieres ayudar, puedes enviar tu logo, fotos, videos, referencias y materiales de tu negocio por aqui.",
   },
   IT: {
-    subject: "Abbiamo ricevuto le tue informazioni - Monfily",
-    preview: "Consegneremo il link della tua pagina pronta entro 24 ore.",
-    greeting: (name) => `Ciao, ${name}!`,
-    companyLabel: "Attività",
-    instagramLabel: "Instagram",
-    body: "Abbiamo ricevuto le tue informazioni e consegneremo il link della pagina pronta entro 24 ore.",
+    subject: "La tua pagina e in preparazione - Monfily",
+    preview: "Entro 24 ore riceverai una versione pronta da visualizzare e migliorare.",
+    greeting: "Ciao!",
+    body: "La tua pagina e in preparazione per presentare la tua attivita in modo chiaro, professionale e pronto a generare piu opportunita.",
+    assetRequest: "Entro 24 ore invieremo una versione pronta da visualizzare e su cui suggerire miglioramenti. Se vuoi aiutarci a rendere il risultato piu fedele alla tua attivita, puoi inviarci logo, foto, video, riferimenti visivi e qualsiasi materiale del brand.",
     footer: "Monfily Digital. Tutti i diritti riservati.",
-    whatsapp: (name) => `Ciao, ${name}! Abbiamo ricevuto le tue informazioni e consegneremo il link della pagina pronta entro 24 ore.`,
+    whatsapp: "Ciao! La tua pagina e gia in preparazione. Entro 24 ore invieremo una versione pronta da visualizzare e su cui suggerire miglioramenti. Se vuoi aiutarci, puoi inviare logo, foto, video, riferimenti e materiali della tua attivita qui.",
   },
   IL: {
-    subject: "קיבלנו את הפרטים שלך - Monfily",
-    preview: "נשלח את הקישור לעמוד המוכן בתוך 24 שעות.",
-    greeting: (name) => `שלום, ${name}!`,
-    companyLabel: "העסק",
-    instagramLabel: "אינסטגרם",
-    body: "קיבלנו את הפרטים שלך ונשלח את הקישור לעמוד המוכן בתוך 24 שעות.",
-    footer: "Monfily Digital. כל הזכויות שמורות.",
-    whatsapp: (name) => `שלום, ${name}! קיבלנו את הפרטים שלך ונשלח את הקישור לעמוד המוכן בתוך 24 שעות.`,
+    subject: "Your page is being prepared - Monfily",
+    preview: "Within 24 hours you will receive a ready version to review and suggest improvements.",
+    greeting: "Hello!",
+    body: "Your page is being prepared to present your business clearly, professionally, and in a way that can generate more opportunities.",
+    assetRequest: "Within 24 hours we will send a ready version for review and improvement suggestions. If you want to help us make it closer to your brand, you can send your logo, photos, videos, visual references, and any business materials.",
+    footer: "Monfily Digital. All rights reserved.",
+    whatsapp: "Hello! Your page is already being prepared. Within 24 hours we will send a ready version for you to review and suggest improvements. If you want to help, you can send your logo, photos, videos, references, and business materials here.",
   },
   SG: {
-    subject: "We received your information - Monfily",
-    preview: "We will deliver the ready page link within 24 hours.",
-    greeting: (name) => `Hello, ${name}!`,
-    companyLabel: "Business",
-    instagramLabel: "Instagram",
-    body: "We received your information and will deliver the ready page link within 24 hours.",
+    subject: "Your page is being prepared - Monfily",
+    preview: "Within 24 hours you will receive a ready version to review and suggest improvements.",
+    greeting: "Hello!",
+    body: "Your page is being prepared to present your business clearly, professionally, and in a way that can generate more opportunities.",
+    assetRequest: "Within 24 hours we will send a ready version for review and improvement suggestions. If you want to help us make it closer to your brand, you can send your logo, photos, videos, visual references, and any business materials.",
     footer: "Monfily Digital. All rights reserved.",
-    whatsapp: (name) => `Hello, ${name}! We received your information and will deliver the ready page link within 24 hours.`,
+    whatsapp: "Hello! Your page is already being prepared. Within 24 hours we will send a ready version for you to review and suggest improvements. If you want to help, you can send your logo, photos, videos, references, and business materials here.",
   },
   GB: {
-    subject: "We received your information - Monfily",
-    preview: "We will deliver the ready page link within 24 hours.",
-    greeting: (name) => `Hello, ${name}!`,
-    companyLabel: "Business",
-    instagramLabel: "Instagram",
-    body: "We received your information and will deliver the ready page link within 24 hours.",
+    subject: "Your page is being prepared - Monfily",
+    preview: "Within 24 hours you will receive a ready version to review and suggest improvements.",
+    greeting: "Hello!",
+    body: "Your page is being prepared to present your business clearly, professionally, and in a way that can generate more opportunities.",
+    assetRequest: "Within 24 hours we will send a ready version for review and improvement suggestions. If you want to help us make it closer to your brand, you can send your logo, photos, videos, visual references, and any business materials.",
     footer: "Monfily Digital. All rights reserved.",
-    whatsapp: (name) => `Hello, ${name}! We received your information and will deliver the ready page link within 24 hours.`,
+    whatsapp: "Hello! Your page is already being prepared. Within 24 hours we will send a ready version for you to review and suggest improvements. If you want to help, you can send your logo, photos, videos, references, and business materials here.",
   },
   US: {
-    subject: "We received your information - Monfily",
-    preview: "We will deliver the ready page link within 24 hours.",
-    greeting: (name) => `Hello, ${name}!`,
-    companyLabel: "Business",
-    instagramLabel: "Instagram",
-    body: "We received your information and will deliver the ready page link within 24 hours.",
+    subject: "Your page is being prepared - Monfily",
+    preview: "Within 24 hours you will receive a ready version to review and suggest improvements.",
+    greeting: "Hello!",
+    body: "Your page is being prepared to present your business clearly, professionally, and in a way that can generate more opportunities.",
+    assetRequest: "Within 24 hours we will send a ready version for review and improvement suggestions. If you want to help us make it closer to your brand, you can send your logo, photos, videos, visual references, and any business materials.",
     footer: "Monfily Digital. All rights reserved.",
-    whatsapp: (name) => `Hello, ${name}! We received your information and will deliver the ready page link within 24 hours.`,
+    whatsapp: "Hello! Your page is already being prepared. Within 24 hours we will send a ready version for you to review and suggest improvements. If you want to help, you can send your logo, photos, videos, references, and business materials here.",
   },
 };
 
@@ -202,13 +193,9 @@ function getEvolutionDelivery(env: Env, marketKey: MarketKey) {
   };
 }
 
-function getEmailHtml(data: LandingPurchaseData, copy: MessageCopy) {
-  const name = data.name.trim();
-  const safeCompany = escapeHtml(data.company.trim());
-  const safeInstagram = escapeHtml(data.instagram.trim());
-
+function getCustomerEmailHtml(locale: string, copy: CustomerCopy) {
   return `<!doctype html>
-<html lang="${escapeHtml(data.locale)}">
+<html lang="${escapeHtml(locale)}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -227,12 +214,9 @@ function getEmailHtml(data: LandingPurchaseData, copy: MessageCopy) {
             </tr>
             <tr>
               <td style="padding:32px;">
-                <h1 style="margin:0 0 18px;font-size:26px;line-height:1.1;color:#1C1C1E;">${escapeHtml(copy.greeting(name))}</h1>
+                <h1 style="margin:0 0 18px;font-size:26px;line-height:1.1;color:#1C1C1E;">${escapeHtml(copy.greeting)}</h1>
                 <p style="margin:0 0 26px;font-size:16px;line-height:1.6;color:#374151;">${escapeHtml(copy.body)}</p>
-                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-top:1px solid #E2E7F1;padding-top:18px;">
-                  <tr><td style="padding:6px 0;font-size:14px;color:#6B7280;"><strong style="color:#1C1C1E;">${escapeHtml(copy.companyLabel)}:</strong> ${safeCompany}</td></tr>
-                  <tr><td style="padding:6px 0;font-size:14px;color:#6B7280;"><strong style="color:#1C1C1E;">${escapeHtml(copy.instagramLabel)}:</strong> instagram.com/${safeInstagram}</td></tr>
-                </table>
+                <p style="margin:0;font-size:16px;line-height:1.6;color:#374151;">${escapeHtml(copy.assetRequest)}</p>
               </td>
             </tr>
             <tr>
@@ -248,7 +232,7 @@ function getEmailHtml(data: LandingPurchaseData, copy: MessageCopy) {
 </html>`;
 }
 
-async function sendResendEmail(env: Env, data: LandingPurchaseData, copy: MessageCopy) {
+async function sendCustomerEmail(env: Env, data: LandingPurchaseData, copy: CustomerCopy) {
   const apiKey = env.RESEND_API_KEY;
   const fromEmail = env.RESEND_FROM_EMAIL || "notification@monfily.com";
   const fromName = env.RESEND_FROM_NAME || "Monfily";
@@ -267,8 +251,8 @@ async function sendResendEmail(env: Env, data: LandingPurchaseData, copy: Messag
       from: `${fromName} <${fromEmail}>`,
       to: [data.email],
       subject: copy.subject,
-      html: getEmailHtml(data, copy),
-      text: `${copy.greeting(data.name)}\n\n${copy.body}`,
+      html: getCustomerEmailHtml(data.locale, copy),
+      text: `${copy.greeting}\n\n${copy.body}\n\n${copy.assetRequest}`,
     }),
   });
 
@@ -280,7 +264,158 @@ async function sendResendEmail(env: Env, data: LandingPurchaseData, copy: Messag
   return response.json();
 }
 
-async function postWhatsappReminder(env: Env, data: LandingPurchaseData, copy: MessageCopy, eventId: string) {
+function getLeadReportText(data: LandingPurchaseData, purchase: { value: number; currency: string }, eventId: string) {
+  return [
+    "Novo lead Monfily - Landing page",
+    "",
+    `Evento: ${eventId}`,
+    `Mercado: ${data.marketKey}`,
+    `Locale: ${data.locale}`,
+    `Oferta: ${purchase.value} ${purchase.currency}`,
+    `Resposta: ${data.selectedOption}`,
+    `Nome: ${data.name}`,
+    `Negocio: ${data.company}`,
+    `Email: ${data.email}`,
+    `Instagram: https://instagram.com/${data.instagram}`,
+    `Telefone: ${data.phone}`,
+  ].join("\n");
+}
+
+function getLeadReportEmailHtml(data: LandingPurchaseData, purchase: { value: number; currency: string }, eventId: string) {
+  const rows = [
+    ["Evento", eventId],
+    ["Mercado", data.marketKey],
+    ["Locale", data.locale],
+    ["Oferta", `${purchase.value} ${purchase.currency}`],
+    ["Resposta", data.selectedOption],
+    ["Nome", data.name],
+    ["Negocio", data.company],
+    ["Email", data.email],
+    ["Instagram", `https://instagram.com/${data.instagram}`],
+    ["Telefone", data.phone],
+  ];
+
+  return `<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo lead Monfily</title>
+  </head>
+  <body style="margin:0;padding:0;background:#f8fafc;font-family:Arial,Helvetica,sans-serif;color:#1C1C1E;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f8fafc;padding:32px 16px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:680px;background:#ffffff;border:1px solid #E2E7F1;">
+            <tr>
+              <td style="padding:28px 32px;border-bottom:1px solid #E2E7F1;">
+                <div style="font-size:22px;font-weight:700;color:#2869D6;">Novo lead Monfily</div>
+                <div style="margin-top:8px;font-size:14px;color:#6B7280;">Respostas registradas no formulario de landing page.</div>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:26px 32px;">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+                  ${rows
+                    .map(
+                      ([label, value]) => `<tr>
+                    <td style="width:145px;padding:10px 12px;border-bottom:1px solid #E2E7F1;font-size:13px;font-weight:700;color:#1C1C1E;">${escapeHtml(label)}</td>
+                    <td style="padding:10px 12px;border-bottom:1px solid #E2E7F1;font-size:14px;color:#374151;">${escapeHtml(value)}</td>
+                  </tr>`
+                    )
+                    .join("")}
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`;
+}
+
+async function sendLeadReportEmail(
+  env: Env,
+  data: LandingPurchaseData,
+  purchase: { value: number; currency: string },
+  eventId: string
+) {
+  const apiKey = env.RESEND_API_KEY;
+  const fromEmail = env.RESEND_FROM_EMAIL || "notification@monfily.com";
+  const fromName = env.RESEND_FROM_NAME || "Monfily";
+  const reportEmail = env.LEAD_REPORT_EMAIL || "lipevaz.lfv@gmail.com";
+
+  if (!apiKey) {
+    throw new Error("Missing RESEND_API_KEY");
+  }
+
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: `${fromName} <${fromEmail}>`,
+      to: [reportEmail],
+      subject: `Novo lead Monfily - ${data.marketKey}`,
+      html: getLeadReportEmailHtml(data, purchase, eventId),
+      text: getLeadReportText(data, purchase, eventId),
+    }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Resend report email failed: ${response.status} ${errorText}`);
+  }
+
+  return response.json();
+}
+
+function resolveReportSenderMarket(value?: string): MarketKey {
+  const upper = value?.toUpperCase();
+  return upper && upper in PURCHASE_BY_MARKET ? (upper as MarketKey) : "PT";
+}
+
+async function sendLeadReportWhatsapp(
+  env: Env,
+  data: LandingPurchaseData,
+  purchase: { value: number; currency: string },
+  eventId: string
+) {
+  const to = normalizePhoneForWhatsapp(env.LEAD_REPORT_WHATSAPP_NUMBER || "5511945645232");
+  const senderMarket = resolveReportSenderMarket(env.LEAD_REPORT_WHATSAPP_SENDER_MARKET);
+  const delivery = getEvolutionDelivery(env, senderMarket);
+  const apiUrl = delivery.apiUrl.replace(/\/+$/, "");
+
+  if (!to) {
+    throw new Error("Missing LEAD_REPORT_WHATSAPP_NUMBER");
+  }
+
+  const response = await fetch(`${apiUrl}/message/sendText/${encodeURIComponent(delivery.instanceName)}`, {
+    method: "POST",
+    headers: {
+      apikey: delivery.apiKey,
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify({
+      number: to,
+      text: getLeadReportText(data, purchase, eventId),
+      delay: delivery.delayMs,
+      linkPreview: false,
+    }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Evolution report WhatsApp failed: ${response.status} ${errorText}`);
+  }
+
+  return response.json().catch(() => ({ ok: true }));
+}
+
+async function postWhatsappReminder(env: Env, data: LandingPurchaseData, copy: CustomerCopy, eventId: string) {
   if (!envFlag(env, "N8N_WHATSAPP_REMINDERS_ENABLED", false)) {
     return { skipped: true };
   }
@@ -308,16 +443,11 @@ async function postWhatsappReminder(env: Env, data: LandingPurchaseData, copy: M
         marketKey: data.marketKey,
         to: normalizePhoneForWhatsapp(data.phone),
         variables: {
-          name: data.name,
-          company: data.company,
-          email: data.email,
-          instagram: `instagram.com/${data.instagram}`,
-          whatsappTo: normalizePhoneForWhatsapp(data.phone),
-          message: copy.whatsapp(data.name),
+          message: copy.whatsapp,
         },
         reminder: {
           kind: "landingpage_purchase_delivery_notice",
-          message: copy.whatsapp(data.name),
+          message: copy.whatsapp,
           delayMs,
           sendAfterSeconds: Math.round(delayMs / 1000),
         },
@@ -357,14 +487,16 @@ export async function handleLandingPurchase(request: Request, env: Env): Promise
   }
 
   const data = result.data;
-  const copy = COPY_BY_MARKET[data.marketKey] || COPY_BY_MARKET.US;
+  const copy = CUSTOMER_COPY_BY_MARKET[data.marketKey] || CUSTOMER_COPY_BY_MARKET.US;
   const purchase = PURCHASE_BY_MARKET[data.marketKey];
   const eventId = `landingpage_purchase_${Date.now()}_${crypto.randomUUID()}`;
 
   try {
-    const [emailResult, whatsappResult] = await Promise.all([
-      sendResendEmail(env, data, copy),
+    const [emailResult, whatsappResult, reportEmailResult, reportWhatsappResult] = await Promise.all([
+      sendCustomerEmail(env, data, copy),
       postWhatsappReminder(env, data, copy, eventId),
+      sendLeadReportEmail(env, data, purchase, eventId),
+      sendLeadReportWhatsapp(env, data, purchase, eventId),
     ]);
 
     return jsonResponse({
@@ -372,6 +504,10 @@ export async function handleLandingPurchase(request: Request, env: Env): Promise
       eventId,
       email: { sent: true, provider: emailResult },
       whatsapp: { scheduled: true, provider: whatsappResult },
+      report: {
+        email: { sent: true, provider: reportEmailResult },
+        whatsapp: { sent: true, provider: reportWhatsappResult },
+      },
       purchase,
     });
   } catch (error) {

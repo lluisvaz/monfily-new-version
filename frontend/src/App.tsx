@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/hooks/use-language";
 import Home from "@/pages/home";
 import LandingPage, { type MarketKey } from "@/pages/landingpage";
+import LandingPageThankYou from "@/pages/landingpage-thank-you";
 import { LoadingScreen } from "@/components/ui/loading-screen";
 import { useEffect } from "react";
 import { detectLocationData } from "@/lib/geo-location";
@@ -87,6 +88,16 @@ function RedirectToRoot() {
 function Router() {
   return (
     <Switch>
+      <Route path="/pt-br/landingpage/obrigado" component={LandingPageThankYou} />
+      <Route path="/pt-pt/landingpage/obrigado" component={LandingPageThankYou} />
+      <Route path="/es/landingpage/obrigado" component={LandingPageThankYou} />
+      <Route path="/it/landingpage/obrigado" component={LandingPageThankYou} />
+      <Route path="/he/landingpage/obrigado" component={LandingPageThankYou} />
+      <Route path="/sg/landingpage/obrigado" component={LandingPageThankYou} />
+      <Route path="/en-gb/landingpage/obrigado" component={LandingPageThankYou} />
+      <Route path="/en-us/landingpage/obrigado" component={LandingPageThankYou} />
+      <Route path="/en/landingpage/obrigado" component={LandingPageThankYou} />
+      <Route path="/landingpage/obrigado" component={LandingPageThankYou} />
       <Route path="/pt-br/landingpage" component={LandingPageBR} />
       <Route path="/pt-pt/landingpage" component={LandingPagePT} />
       <Route path="/es/landingpage" component={LandingPageES} />

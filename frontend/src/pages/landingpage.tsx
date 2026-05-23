@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
+import { useLocation } from "wouter";
 import { SectionLayout } from "@/components/landing/section-layout";
 import { detectLocationData } from "@/lib/geo-location";
 import { trackMetaPurchase } from "@/lib/meta-pixel";
 import { getWhatsAppNumber, type Language } from "@/lib/translations";
 import { useWhatsAppNumber } from "@/hooks/use-whatsapp";
+import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 export type MarketKey = "PT" | "IT" | "ES" | "IL" | "SG" | "BR" | "GB" | "US";
 
@@ -98,6 +100,17 @@ const SEO_BY_MARKET: Record<MarketKey, SeoCopy> = {
     description: "Premium landing page creation for products, services and businesses in the United States. Answer the quiz and get a proposal to sell more online.",
     ogLocale: "en_US",
   },
+};
+
+const CLIENT_WHATSAPP_MESSAGE_BY_MARKET: Record<MarketKey, string> = {
+  BR: "Ola! Gostaria de um site para o meu negocio.",
+  PT: "Ola! Gostaria de um site para o meu negocio.",
+  ES: "Hola! Me gustaria tener un sitio web para mi negocio.",
+  IT: "Ciao! Vorrei un sito web per la mia attivita.",
+  IL: "Hello! I would like a website for my business.",
+  SG: "Hello! I would like a website for my business.",
+  GB: "Hello! I would like a website for my business.",
+  US: "Hello! I would like a website for my business.",
 };
 
 const MARKETS: Record<MarketKey, {
@@ -448,7 +461,13 @@ function isDefaultPhoneValue(value: string) {
   return Object.values(MARKETS).some((market) => value === market.phonePrefix);
 }
 
+function getThankYouPath(pathname: string) {
+  const current = pathname.replace(/\/$/, "");
+  return current.endsWith("/landingpage") ? `${current}/obrigado` : "/landingpage/obrigado";
+}
+
 export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
+  const [, setLocation] = useLocation();
   const initialMarketKey = fixedMarketKey ?? "US";
   const [marketKey, setMarketKey] = useState<MarketKey>(initialMarketKey);
   const [step, setStep] = useState<1 | 2>(1);
@@ -474,19 +493,9 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
   const handleSubmit = async () => {
     if (!isFormComplete || isSubmitting) return;
 
-    const message = [
-      `${copy.titlePrefix} - ${market.price}`,
-      `${copy.question}: ${selectedOption}`,
-      `${copy.name}: ${form.name}`,
-      `${copy.company}: ${form.company}`,
-      `${copy.email}: ${form.email}`,
-      `${copy.instagram}: ${INSTAGRAM_PREFIX}${form.instagram}`,
-      `${copy.phone}: ${form.phone}`,
-    ].join("\n");
-    const whatsappUrl = `https://wa.me/${destinationNumber}?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = buildWhatsAppUrl(destinationNumber, CLIENT_WHATSAPP_MESSAGE_BY_MARKET[marketKey]);
 
     setIsSubmitting(true);
-    const whatsappWindow = window.open(whatsappUrl, "_blank");
 
     try {
       const response = await fetch("/api/landingpage-purchase", {
@@ -525,9 +534,8 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
         currency: purchase.currency,
       });
 
-      if (!whatsappWindow) {
-        window.open(whatsappUrl, "_blank");
-      }
+      const params = new URLSearchParams({ redirect: whatsappUrl });
+      setLocation(`${getThankYouPath(window.location.pathname)}?${params.toString()}`);
     } catch (error) {
       console.error("Landing page purchase failed:", error);
     } finally {
