@@ -38,7 +38,7 @@ type MessageCopy = {
   whatsapp: (name: string) => string;
 };
 
-const corsHeaders = {
+export const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type",
@@ -342,7 +342,7 @@ async function postWhatsappReminder(env: Env, data: LandingPurchaseData, copy: M
 
 export const onRequestOptions: PagesFunction<Env> = () => new Response(null, { status: 204, headers: corsHeaders });
 
-export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
+export async function handleLandingPurchase(request: Request, env: Env): Promise<Response> {
   let body: unknown;
 
   try {
@@ -384,4 +384,6 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       { status: 500 }
     );
   }
-};
+}
+
+export const onRequestPost: PagesFunction<Env> = ({ request, env }) => handleLandingPurchase(request, env);

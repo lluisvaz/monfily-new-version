@@ -1,13 +1,4 @@
-type PagesFunctionContext<Env extends Record<string, string | undefined>> = {
-  request: Request;
-  env: Env;
-};
-
-type PagesFunction<Env extends Record<string, string | undefined>> = (
-  context: PagesFunctionContext<Env>
-) => Response | Promise<Response>;
-
-type Env = Record<string, string | undefined>;
+export type Env = Record<string, string | undefined>;
 
 type MarketKey = "PT" | "IT" | "ES" | "IL" | "SG" | "BR" | "GB" | "US";
 
@@ -23,7 +14,7 @@ const ENV_PREFIX_BY_MARKET: Record<MarketKey, string> = {
   US: "US",
 };
 
-const corsHeaders = {
+export const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type",
@@ -46,10 +37,7 @@ function sanitizeNumber(value?: string): string | null {
   return digits.length >= 8 ? digits : null;
 }
 
-export const onRequestOptions: PagesFunction<Env> = () =>
-  new Response(null, { status: 204, headers: corsHeaders });
-
-export const onRequestGet: PagesFunction<Env> = ({ request, env }) => {
+export function handleWhatsappNumber(request: Request, env: Env): Response {
   const market = new URL(request.url).searchParams.get("market")?.toUpperCase();
 
   if (!market || !(market in ENV_PREFIX_BY_MARKET)) {
@@ -60,4 +48,4 @@ export const onRequestGet: PagesFunction<Env> = ({ request, env }) => {
   const number = sanitizeNumber(env[`EVOLUTION_${prefix}_NUMBER`]);
 
   return jsonResponse({ market, number });
-};
+}

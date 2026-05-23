@@ -1,3 +1,12 @@
 name = "monfily-new-version"
+main = "worker/index.ts"
 compatibility_date = "2026-05-22"
-pages_build_output_dir = "dist"
+workers_dev = true
+preview_urls = true
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+# /api/* sempre passa pelo Worker; o resto é servido como asset estático (SPA fallback).
+run_worker_first = ["/api/*"]
