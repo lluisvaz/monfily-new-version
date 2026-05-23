@@ -151,6 +151,10 @@ function fireMetaEvent(
   return { fired: true, pixelIds };
 }
 
+export function trackMetaPageView(marketKey: MetaPixelMarketKey): TrackMetaEventResult {
+  return fireMetaEvent(marketKey, "PageView", {}, crypto.randomUUID());
+}
+
 export function trackMetaLandingLead({
   marketKey,
   eventId,

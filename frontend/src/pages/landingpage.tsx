@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { SectionLayout } from "@/components/landing/section-layout";
 import { detectLocationData } from "@/lib/geo-location";
-import { trackMetaLandingLead } from "@/lib/meta-pixel";
+import { trackMetaLandingLead, trackMetaPageView } from "@/lib/meta-pixel";
 import { getWhatsAppNumber, type Language } from "@/lib/translations";
 import { useWhatsAppNumber } from "@/hooks/use-whatsapp";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
@@ -482,6 +482,7 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
   const copy = market.copy;
   const seo = SEO_BY_MARKET[marketKey];
   const textDirection = market.locale === "he-IL" ? "rtl" : "ltr";
+  const pageViewFired = useRef(false);
   const localPhoneDigits = form.phone.replace(/\D/g, "").slice(market.phonePrefix.replace(/\D/g, "").length);
   const isFormComplete =
     form.name.trim().length > 0 &&
@@ -543,6 +544,12 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
       setIsSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    if (pageViewFired.current) return;
+    pageViewFired.current = true;
+    trackMetaPageView(marketKey);
+  }, [marketKey]);
 
   useEffect(() => {
     if (fixedMarketKey) {
