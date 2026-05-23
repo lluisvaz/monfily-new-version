@@ -1,6 +1,7 @@
 import { SectionLayout } from "./section-layout";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
+import { useWhatsAppCta } from "@/hooks/use-whatsapp";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Plus, Instagram, Mail, Whatsapp } from "iconoir-react";
@@ -1354,6 +1355,7 @@ const FAQSection = () => {
 const FinalCTASection = () => {
   const { language } = useLanguage();
   const t = translations[language];
+  const { open: openWhatsApp } = useWhatsAppCta();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -1403,9 +1405,7 @@ const FinalCTASection = () => {
           </p>
           
           <SpotlightButton
-            onClick={() => {
-              window.open(`https://wa.me/${t.whatsappNumber}`, '_blank');
-            }}
+            onClick={openWhatsApp}
             className="bg-[#2869D6] text-white h-12 px-10 rounded-full font-medium flex items-center justify-center cursor-pointer mt-4"
           >
             {t.finalCTA.cta}

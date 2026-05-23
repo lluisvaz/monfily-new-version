@@ -118,12 +118,12 @@ function loadMetaPixelScript() {
   return pixelScriptPromise;
 }
 
-export function trackMetaPurchase({
-  marketKey,
-  eventId,
-  value,
-  currency,
-}: TrackMetaPurchaseOptions): TrackMetaPurchaseResult {
+function fireMetaEvent(
+  marketKey: MetaPixelMarketKey,
+  eventName: string,
+  params: Record<string, unknown>,
+  eventId: string
+): TrackMetaPurchaseResult {
   if (typeof window === "undefined" || typeof document === "undefined") {
     return { fired: false, pixelIds: [] };
   }
@@ -141,18 +141,7 @@ export function trackMetaPurchase({
       initializedPixelIds.add(pixelId);
     }
 
-    fbq(
-      "trackSingle",
-      pixelId,
-      "Purchase",
-      {
-        value,
-        currency,
-        content_name: "Monfily landing page premium",
-        content_category: "landing_page",
-      },
-      { eventID: eventId }
-    );
+    fbq("trackSingle", pixelId, eventName, params, { eventID: eventId });
   });
 
   loadMetaPixelScript().catch((error) => {
@@ -160,4 +149,42 @@ export function trackMetaPurchase({
   });
 
   return { fired: true, pixelIds };
+}
+
+export function trackMetaPurchase({
+  marketKey,
+  eventId,
+  value,
+  currency,
+}: TrackMetaPurchaseOptions): TrackMetaPurchaseResult {
+  return fireMetaEvent(
+    marketKey,
+    "Purchase",
+    {
+      value,
+      currency,
+      content_name: "Monfily landing page premium",
+      content_category: "landing_page",
+    },
+    eventId
+  );
+}
+
+type TrackMetaLeadOptions = {
+  marketKey: MetaPixelMarketKey;
+  eventId?: string;
+};
+
+/** Fired by the site-wide WhatsApp CTA buttons (no purchase value available). */
+export function trackMetaLead({ marketKey, eventId }: TrackMetaLeadOptions): TrackMetaPurchaseResult {
+  const id = eventId ?? `whatsapp_lead_${Date.now()}_${crypto.randomUUID()}`;
+  return fireMetaEvent(
+    marketKey,
+    "Lead",
+    {
+      content_name: "Monfily WhatsApp CTA",
+      content_category: "site_cta",
+    },
+    id
+  );
 }

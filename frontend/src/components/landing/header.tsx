@@ -9,6 +9,7 @@ import {
 import { NavArrowDown } from "iconoir-react";
 import { useLanguage } from "@/hooks/use-language";
 import { translations, type Language } from "@/lib/translations";
+import { useWhatsAppCta } from "@/hooks/use-whatsapp";
 import { SpotlightButton } from "@/components/ui/spotlight-button";
 
 function getEnglishFlagCountry(detectedCountry: string) {
@@ -44,6 +45,7 @@ export function Header() {
   const { language, detectedCountry } = useLanguage();
   const [location] = useLocation();
   const t = translations[language];
+  const { open: openWhatsApp } = useWhatsAppCta();
 
   const navItems: string[] = [];
   const navItemsWithDropdown: string[] = [];
@@ -201,9 +203,7 @@ export function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
           <SpotlightButton
-            onClick={() => {
-              window.open(`https://wa.me/${t.whatsappNumber}`, '_blank');
-            }}
+            onClick={openWhatsApp}
             className="bg-[#2869D6] text-white h-10 px-6 rounded-full font-medium header-blur-animate flex items-center justify-center cursor-pointer"
             style={{ animationDelay: `${0.35 + navItems.length * 0.05}s`, opacity: 0 }}
           >
@@ -246,9 +246,7 @@ export function Header() {
         </DropdownMenu>
 
         <SpotlightButton
-          onClick={() => {
-            window.open(`https://wa.me/${t.whatsappNumber}`, '_blank');
-          }}
+          onClick={openWhatsApp}
           className="bg-[#2869D6] text-white h-10 px-5 rounded-full font-medium header-blur-animate flex items-center justify-center cursor-pointer text-sm"
           style={{ animationDelay: '0.2s', opacity: 0 }}
         >

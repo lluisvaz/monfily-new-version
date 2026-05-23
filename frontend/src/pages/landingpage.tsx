@@ -3,6 +3,7 @@ import { SectionLayout } from "@/components/landing/section-layout";
 import { detectLocationData } from "@/lib/geo-location";
 import { trackMetaPurchase } from "@/lib/meta-pixel";
 import { getWhatsAppNumber, type Language } from "@/lib/translations";
+import { useWhatsAppNumber } from "@/hooks/use-whatsapp";
 
 export type MarketKey = "PT" | "IT" | "ES" | "IL" | "SG" | "BR" | "GB" | "US";
 
@@ -455,6 +456,10 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({ name: "", company: "", email: "", instagram: "", phone: MARKETS[initialMarketKey].phonePrefix });
   const market = MARKETS[marketKey];
+  const destinationNumber = useWhatsAppNumber(
+    marketKey,
+    getWhatsAppNumber(getLanguageForMarket(marketKey))
+  );
   const copy = market.copy;
   const seo = SEO_BY_MARKET[marketKey];
   const textDirection = market.locale === "he-IL" ? "rtl" : "ltr";
@@ -478,8 +483,7 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
       `${copy.instagram}: ${INSTAGRAM_PREFIX}${form.instagram}`,
       `${copy.phone}: ${form.phone}`,
     ].join("\n");
-    const whatsappNumber = getWhatsAppNumber(getLanguageForMarket(marketKey));
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/${destinationNumber}?text=${encodeURIComponent(message)}`;
 
     setIsSubmitting(true);
     const whatsappWindow = window.open(whatsappUrl, "_blank");

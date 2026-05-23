@@ -8,12 +8,14 @@ import { WebsiteMockupMobile } from "./website-mockup-mobile";
 import { Iphone16Pro } from "@/components/ui/iphone-16-pro";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
+import { useWhatsAppCta } from "@/hooks/use-whatsapp";
 
 import { SpotlightButton } from "@/components/ui/spotlight-button";
 
 export function Hero() {
   const { language } = useLanguage();
   const t = translations[language];
+  const { open: openWhatsApp } = useWhatsAppCta();
   return (
     <SectionLayout
       showStripes={false}
@@ -173,9 +175,7 @@ export function Hero() {
           style={{ animationDelay: '0.4s' }}
         >
           <SpotlightButton
-            onClick={() => {
-              window.open(`https://wa.me/${t.whatsappNumber}`, '_blank');
-            }}
+            onClick={openWhatsApp}
             className="group bg-[#2869D6] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer w-full sm:w-auto"
           >
             {t.hero.cta.primary}
