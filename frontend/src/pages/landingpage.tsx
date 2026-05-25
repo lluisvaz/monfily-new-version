@@ -139,6 +139,7 @@ const MARKETS: Record<MarketKey, {
   phonePrefix: string;
   phonePlaceholder: string;
   phoneDigits: number;
+  mobilePattern: RegExp;
   copy: Copy;
 }> = {
   PT: {
@@ -147,6 +148,7 @@ const MARKETS: Record<MarketKey, {
     phonePrefix: "+351 ",
     phonePlaceholder: "+351 912 345 678",
     phoneDigits: 9,
+    mobilePattern: /^9\d{8}$/,
     copy: {
       eyebrow: "RESPOSTA RÁPIDA",
       titlePrefix: "Site profissional e moderno",
@@ -200,6 +202,7 @@ const MARKETS: Record<MarketKey, {
     phonePrefix: "+39 ",
     phonePlaceholder: "+39 312 345 6789",
     phoneDigits: 10,
+    mobilePattern: /^3\d{9}$/,
     copy: {
       eyebrow: "RISPOSTA RAPIDA",
       titlePrefix: "Sito professionale e moderno",
@@ -253,6 +256,7 @@ const MARKETS: Record<MarketKey, {
     phonePrefix: "+34 ",
     phonePlaceholder: "+34 612 345 678",
     phoneDigits: 9,
+    mobilePattern: /^[67]\d{8}$/,
     copy: {
       eyebrow: "RESPUESTA RÁPIDA",
       titlePrefix: "Sitio profesional y moderno",
@@ -306,6 +310,7 @@ const MARKETS: Record<MarketKey, {
     phonePrefix: "+972 ",
     phonePlaceholder: "+972 50 123 4567",
     phoneDigits: 9,
+    mobilePattern: /^5\d{8}$/,
     copy: {
       eyebrow: "תשובה מהירה",
       titlePrefix: "אתר מקצועי ומודרני",
@@ -359,6 +364,7 @@ const MARKETS: Record<MarketKey, {
     phonePrefix: "+65 ",
     phonePlaceholder: "+65 8123 4567",
     phoneDigits: 8,
+    mobilePattern: /^[89]\d{7}$/,
     copy: {
       eyebrow: "FAST REPLY",
       titlePrefix: "Professional & modern website",
@@ -412,6 +418,7 @@ const MARKETS: Record<MarketKey, {
     phonePrefix: "+55 ",
     phonePlaceholder: "+55 11 91234-5678",
     phoneDigits: 11,
+    mobilePattern: /^\d{2}9\d{8}$/,
     copy: {
       eyebrow: "RESPOSTA RÁPIDA",
       titlePrefix: "Site profissional e moderno",
@@ -465,6 +472,7 @@ const MARKETS: Record<MarketKey, {
     phonePrefix: "+44 ",
     phonePlaceholder: "+44 7400 123456",
     phoneDigits: 10,
+    mobilePattern: /^7\d{9}$/,
     copy: {
       eyebrow: "FAST REPLY",
       titlePrefix: "Professional & modern website",
@@ -518,6 +526,7 @@ const MARKETS: Record<MarketKey, {
     phonePrefix: "+1 ",
     phonePlaceholder: "+1 (415) 555-0198",
     phoneDigits: 10,
+    mobilePattern: /^\d{10}$/,
     copy: {
       eyebrow: "FAST REPLY",
       titlePrefix: "Professional & modern website",
@@ -641,6 +650,7 @@ function normalizePhoneValue(value: string, marketKey: MarketKey): string {
 
 const INSTAGRAM_PREFIX = "instagram.com/";
 const INSTAGRAM_HANDLE_MAX_LENGTH = 30;
+const WEBSITE_PREFIX = "https://";
 
 function normalizeInstagramHandle(value: string): string {
   return value
@@ -650,7 +660,15 @@ function normalizeInstagramHandle(value: string): string {
     .replace(/^@+/, "")
     .replace(/\s/g, "")
     .replace(/[^A-Za-z0-9._]/g, "")
+    .toLowerCase()
     .slice(0, INSTAGRAM_HANDLE_MAX_LENGTH);
+}
+
+function normalizeWebsiteHandle(value: string): string {
+  return value
+    .replace(/^https?:\/\//i, "")
+    .replace(/\s/g, "")
+    .toLowerCase();
 }
 
 function updateMetaTag(name: string, content: string, attribute: "name" | "property" = "name") {
@@ -707,7 +725,7 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
     form.company.trim().length > 0 &&
     form.email.trim().length > 0 &&
     form.instagram.length > 0 &&
-    localPhoneDigits.length === market.phoneDigits;
+    market.mobilePattern.test(localPhoneDigits);
 
   const handleSubmit = async () => {
     if (isSubmitting) return;
@@ -735,7 +753,7 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
           company: form.company.trim(),
           email: form.email.trim(),
           instagram: form.instagram.trim(),
-          currentSiteUrl: form.currentSite.trim() || undefined,
+          currentSiteUrl: form.currentSite.trim() ? `${WEBSITE_PREFIX}${form.currentSite.trim()}` : undefined,
           phone: form.phone,
           pageUrl: window.location.href,
         }),
@@ -977,15 +995,24 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
                 {selectedOption === copy.options[1] && (
                   <label className="elevate-field">
                     <span>{copy.currentSite}</span>
-                    <input
-                      type="url"
-                      name="currentSite"
-                      autoComplete="url"
-                      inputMode="url"
-                      placeholder="https://"
-                      value={form.currentSite}
-                      onChange={(event) => setForm((current) => ({ ...current, currentSite: event.target.value }))}
-                    />
+                    <div className="elevate-instagram-input">
+                      <span aria-hidden="true">{WEBSITE_PREFIX}</span>
+                      <input
+                        type="text"
+                        name="currentSite"
+                        autoComplete="off"
+                        inputMode="url"
+                        aria-label={`${copy.currentSite} ${WEBSITE_PREFIX}`}
+                        placeholder="example.com"
+                        value={form.currentSite}
+                        onChange={(event) => setForm((current) => ({ ...current, currentSite: normalizeWebsiteHandle(event.target.value) }))}
+                        onKeyDown={(event) => {
+                          if (event.key === " ") {
+                            event.preventDefault();
+                          }
+                        }}
+                      />
+                    </div>
                   </label>
                 )}
 

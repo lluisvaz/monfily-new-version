@@ -422,6 +422,34 @@ async function sendCustomerEmail(env: Env, data: LandingPurchaseData, copy: Cust
   return response.json();
 }
 
+// WhatsApp-formatted lead report (uses *bold* / _italic_ markdown supported by WhatsApp).
+function getLeadReportWhatsappText(data: LandingPurchaseData, purchase: { value: number; currency: string }) {
+  const divider = "━━━━━━━━━━━━━";
+  const lines = [
+    "🔔 *NOVO LEAD MONFILY*",
+    "_Formulário da landing page_",
+    "",
+    divider,
+    "👤 *DADOS DO CLIENTE*",
+    `*Nome:* ${data.name}`,
+    `*Negócio:* ${data.company}`,
+    `*Email:* ${data.email}`,
+    `*Telefone:* ${data.phone}`,
+    `*Instagram:* instagram.com/${data.instagram}`,
+  ];
+  if (data.currentSiteUrl) lines.push(`*Site atual:* ${data.currentSiteUrl}`);
+
+  lines.push("", divider, "📋 *RESPOSTAS DO QUIZ*", `*Interesse:* ${data.selectedOption}`);
+  if (data.domainAnswer) lines.push(`*Domínio próprio:* ${data.domainAnswer}`);
+  if (data.logoAnswer) lines.push(`*Logo / identidade:* ${data.logoAnswer}`);
+  if (data.budgetAnswer) lines.push(`*Pronto para investir:* ${data.budgetAnswer}`);
+  if (data.timelineAnswer) lines.push(`*Prazo desejado:* ${data.timelineAnswer}`);
+  if (data.focusAnswers?.length) lines.push(`*Foco do site:* ${data.focusAnswers.join(", ")}`);
+
+  lines.push("", divider, `🌍 *Mercado:* ${data.marketKey}`, `💰 *Oferta:* ${purchase.value} ${purchase.currency}`);
+  return lines.join("\n");
+}
+
 function getLeadReportText(data: LandingPurchaseData, purchase: { value: number; currency: string }) {
   const lines = [
     "Novo lead Monfily - Landing page",
@@ -566,7 +594,7 @@ async function sendLeadReportWhatsapp(
     },
     body: JSON.stringify({
       number: to,
-      text: getLeadReportText(data, purchase),
+      text: getLeadReportWhatsappText(data, purchase),
       delay: delivery.delayMs,
       linkPreview: false,
     }),
