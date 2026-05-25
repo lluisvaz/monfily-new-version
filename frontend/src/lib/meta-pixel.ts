@@ -137,6 +137,7 @@ function fireMetaEvent(
 
   pixelIds.forEach((pixelId) => {
     if (!initializedPixelIds.has(pixelId)) {
+      fbq("set", "autoConfig", false, pixelId);
       fbq("init", pixelId);
       initializedPixelIds.add(pixelId);
     }
