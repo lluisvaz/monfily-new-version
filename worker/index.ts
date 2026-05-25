@@ -19,13 +19,13 @@ function preflight(headers: HeadersInit): Response {
  *  - anything else -> static assets from `dist` (with SPA fallback to index.html)
  */
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: { waitUntil: (promise: Promise<unknown>) => void }): Promise<Response> {
     const url = new URL(request.url);
     const apiEnv = env as unknown as ApiEnv;
 
     if (url.pathname === "/api/landingpage-purchase") {
       if (request.method === "OPTIONS") return preflight(purchaseCors);
-      if (request.method === "POST") return handleLandingPurchase(request, apiEnv);
+      if (request.method === "POST") return handleLandingPurchase(request, apiEnv, ctx);
       return new Response("Method Not Allowed", { status: 405 });
     }
 

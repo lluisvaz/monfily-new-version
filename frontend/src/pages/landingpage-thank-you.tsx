@@ -44,7 +44,7 @@ export default function LandingPageThankYou() {
               Sua página já está na fila de preparação.
             </h2>
             <p className="elevate-card__helper">
-              Em até 24 horas você recebe uma versão pronta para visualizar e sugerir melhorias.
+              Em até 72 horas você recebe uma versão pronta para visualizar e sugerir melhorias.
             </p>
           </section>
         </div>

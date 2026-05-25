@@ -14,6 +14,10 @@ type Copy = {
   titlePrefix: string;
   titlePriceConnector: string;
   subtitle: string;
+  features: string[];
+  cardHeadline: string;
+  qualifierLabel: string;
+  benefits: string[];
   step: string;
   question: string;
   options: string[];
@@ -26,10 +30,26 @@ type Copy = {
   phone: string;
   instagram: string;
   instagramPlaceholder: string;
+  currentSite: string;
   back: string;
   submit: string;
   footer: string;
   reserved: string;
+  advance: string;
+  domainQuestion: string;
+  domainHint: string;
+  domainOptions: string[];
+  domainExplanation: string;
+  logoQuestion: string;
+  logoOptions: string[];
+  budgetQuestion: string;
+  budgetOptions: string[];
+  timelineQuestion: string;
+  timelineOptions: string[];
+  focusQuestion: string;
+  focusHint: string;
+  focusOptions: string[];
+  send: string;
 };
 
 type SeoCopy = {
@@ -129,12 +149,20 @@ const MARKETS: Record<MarketKey, {
     phoneDigits: 9,
     copy: {
       eyebrow: "RESPOSTA RÁPIDA",
-      titlePrefix: "Landing page premium",
+      titlePrefix: "Site profissional e moderno",
       titlePriceConnector: "por apenas",
-      subtitle: "Responda a duas perguntas rápidas e entramos em contacto consigo.",
+      subtitle: "Pronto em até 72h, sem mensalidades obrigatórias e sem complicação.",
+      features: ["Entrega em até 72 horas", "Sem mensalidades obrigatórias", "Site profissional e moderno", "100% otimizado para mobile"],
+      cardHeadline: "Precisa de um site profissional para o seu negócio?",
+      qualifierLabel: "Uma pergunta rápida para percebermos melhor o seu momento:",
+      benefits: [
+        "Design personalizado para a identidade visual da sua marca",
+        "100% responsivo e otimizado para aparecer no Google",
+        "Suporte direto pelo WhatsApp durante todo o processo",
+      ],
       step: "Etapa",
       question: "Você já tem um produto, serviço ou negócio que quer vender pela internet?",
-      options: ["Sim, já tenho e quero vender mais", "Ainda estou a começar e quero estruturar"],
+      options: ["Sim, ainda não tenho um site profissional", "Tenho um site mas quero melhorá-lo"],
       next: "Continuar",
       formTitle: "Agora deixe os seus dados",
       formSubtitle: "Vamos analisar o seu momento e contactar pelo canal correto.",
@@ -143,11 +171,27 @@ const MARKETS: Record<MarketKey, {
       email: "Email",
       instagram: "Instagram do seu negócio",
       instagramPlaceholder: "seu_usuario",
+      currentSite: "Site atual do seu negócio",
       phone: "Telefone",
       back: "Voltar",
       submit: "FALAR NO WHATSAPP AGORA",
       footer: "Monfily Digital",
       reserved: "Todos os Direitos Reservados",
+      advance: "Avançar",
+      domainQuestion: "Você já possui um domínio próprio?",
+      domainHint: "Exemplos: meusite.pt, minhaempresa.com",
+      domainOptions: ["Sim, já tenho", "Não tenho", "Não sei o que é domínio"],
+      domainExplanation: "Domínio é o endereço do seu site na internet. Por exemplo: minhaempresa.pt. Pode registar um novo por cerca de 10 a 20 euros por ano.",
+      logoQuestion: "Já possui logótipo ou identidade visual?",
+      logoOptions: ["Sim, tenho tudo pronto", "Não tenho nada", "Tenho apenas redes sociais"],
+      budgetQuestion: "Está pronto para investir no seu site profissional?",
+      budgetOptions: ["Sim, estou pronto", "Preciso de mais informação"],
+      timelineQuestion: "Quando gostaria de ter o seu site pronto?",
+      timelineOptions: ["O mais rápido possível", "Esta semana", "Este mês", "Ainda estou a pesquisar"],
+      focusQuestion: "Para finalizar, qual o foco do seu site?",
+      focusHint: "Pode selecionar mais de uma opção",
+      focusOptions: ["Apresentação institucional", "Captação de leads / clientes", "Loja online / e-commerce", "Portefólio de trabalhos", "Página única (landing page)"],
+      send: "ENVIAR",
     },
   },
   IT: {
@@ -158,12 +202,20 @@ const MARKETS: Record<MarketKey, {
     phoneDigits: 10,
     copy: {
       eyebrow: "RISPOSTA RAPIDA",
-      titlePrefix: "Landing page premium",
+      titlePrefix: "Sito professionale e moderno",
       titlePriceConnector: "a soli",
-      subtitle: "Rispondi a due domande rapide e ti contatteremo subito.",
+      subtitle: "Pronto in 72h, senza canone mensile obbligatorio e senza complicazioni.",
+      features: ["Consegna in 72 ore", "Senza abbonamento obbligatorio", "Sito professionale e moderno", "100% ottimizzato per mobile"],
+      cardHeadline: "Hai bisogno di un sito professionale per la tua attività?",
+      qualifierLabel: "Una domanda veloce per capire meglio la tua situazione:",
+      benefits: [
+        "Design personalizzato per l'identità visiva del tuo brand",
+        "100% responsive e ottimizzato per apparire su Google",
+        "Supporto diretto su WhatsApp durante tutto il processo",
+      ],
       step: "Passo",
       question: "Hai già un prodotto, servizio o business che vuoi vendere online?",
-      options: ["Sì, ce l'ho già e voglio vendere di più", "Sto iniziando e voglio strutturarlo"],
+      options: ["Sì, non ho ancora un sito professionale", "Ho un sito ma voglio migliorarlo"],
       next: "Continua",
       formTitle: "Ora lascia i tuoi dati",
       formSubtitle: "Analizzeremo il tuo momento e ti contatteremo dal canale giusto.",
@@ -172,11 +224,27 @@ const MARKETS: Record<MarketKey, {
       email: "Email",
       instagram: "Instagram della tua attività",
       instagramPlaceholder: "tuo_utente",
+      currentSite: "Sito web attuale della tua attività",
       phone: "Telefono",
       back: "Indietro",
       submit: "PARLA SU WHATSAPP ORA",
       footer: "Monfily Digital",
       reserved: "Tutti i diritti riservati",
+      advance: "Avanti",
+      domainQuestion: "Hai già un tuo dominio?",
+      domainHint: "Esempi: miosito.it, miazienda.com",
+      domainOptions: ["Sì, ce l'ho già", "Non ce l'ho", "Non so cos'è un dominio"],
+      domainExplanation: "Il dominio è l'indirizzo del tuo sito su internet. Esempio: miazienda.it. Puoi registrarne uno nuovo per circa 10-20 euro all'anno.",
+      logoQuestion: "Hai già un logotipo o un'identità visiva?",
+      logoOptions: ["Sì, ho tutto pronto", "Non ho nulla", "Ho solo i social media"],
+      budgetQuestion: "Sei pronto a investire nel tuo sito professionale?",
+      budgetOptions: ["Sì, sono pronto", "Ho bisogno di più informazioni"],
+      timelineQuestion: "Quando vorresti avere il tuo sito pronto?",
+      timelineOptions: ["Il prima possibile", "Questa settimana", "Questo mese", "Sto ancora valutando"],
+      focusQuestion: "Per concludere, qual è il focus del tuo sito?",
+      focusHint: "Puoi selezionare più opzioni",
+      focusOptions: ["Presentazione istituzionale", "Acquisizione di lead / clienti", "Negozio online / e-commerce", "Portfolio di lavori", "Pagina singola (landing page)"],
+      send: "INVIA",
     },
   },
   ES: {
@@ -187,12 +255,20 @@ const MARKETS: Record<MarketKey, {
     phoneDigits: 9,
     copy: {
       eyebrow: "RESPUESTA RÁPIDA",
-      titlePrefix: "Landing page premium",
+      titlePrefix: "Sitio profesional y moderno",
       titlePriceConnector: "por solo",
-      subtitle: "Responde dos preguntas rápidas y te contactamos enseguida.",
+      subtitle: "Listo en 72h, sin mensualidades obligatorias y sin complicaciones.",
+      features: ["Entrega en 72 horas", "Sin mensualidades obligatorias", "Sitio profesional y moderno", "100% optimizado para móvil"],
+      cardHeadline: "¿Necesitas un sitio profesional para tu negocio?",
+      qualifierLabel: "Una pregunta rápida para entenderte mejor:",
+      benefits: [
+        "Diseño personalizado para la identidad visual de tu marca",
+        "100% responsive y optimizado para aparecer en Google",
+        "Soporte directo por WhatsApp durante todo el proceso",
+      ],
       step: "Paso",
       question: "¿Ya tienes un producto, servicio o negocio que quieres vender por internet?",
-      options: ["Sí, ya lo tengo y quiero vender más", "Estoy empezando y quiero estructurarlo"],
+      options: ["Sí, aún no tengo un sitio profesional", "Tengo un sitio pero quiero mejorarlo"],
       next: "Continuar",
       formTitle: "Ahora deja tus datos",
       formSubtitle: "Analizaremos tu momento y te contactaremos por el canal correcto.",
@@ -201,11 +277,27 @@ const MARKETS: Record<MarketKey, {
       email: "Email",
       instagram: "Instagram de tu negocio",
       instagramPlaceholder: "tu_usuario",
+      currentSite: "Sitio web actual de tu negocio",
       phone: "Teléfono",
       back: "Volver",
       submit: "HABLAR POR WHATSAPP AHORA",
       footer: "Monfily Digital",
       reserved: "Todos los derechos reservados",
+      advance: "Avanzar",
+      domainQuestion: "¿Ya tienes tu propio dominio?",
+      domainHint: "Ejemplos: miempresa.com, misitioweb.es",
+      domainOptions: ["Sí, ya lo tengo", "No lo tengo", "No sé qué es un dominio"],
+      domainExplanation: "El dominio es la dirección de tu sitio web en internet. Ejemplo: miempresa.es. Puedes registrar uno nuevo por unos 10-20 euros al año.",
+      logoQuestion: "¿Ya tienes logotipo o identidad visual?",
+      logoOptions: ["Sí, tengo todo listo", "No tengo nada", "Solo tengo redes sociales"],
+      budgetQuestion: "¿Estás listo para invertir en tu sitio profesional?",
+      budgetOptions: ["Sí, estoy listo", "Necesito más información"],
+      timelineQuestion: "¿Cuándo te gustaría tener tu sitio listo?",
+      timelineOptions: ["Lo antes posible", "Esta semana", "Este mes", "Todavía estoy investigando"],
+      focusQuestion: "Para finalizar, ¿cuál es el enfoque de tu sitio?",
+      focusHint: "Puedes seleccionar más de una opción",
+      focusOptions: ["Presentación institucional", "Captación de leads / clientes", "Tienda online / e-commerce", "Portafolio de trabajos", "Página única (landing page)"],
+      send: "ENVIAR",
     },
   },
   IL: {
@@ -216,12 +308,20 @@ const MARKETS: Record<MarketKey, {
     phoneDigits: 9,
     copy: {
       eyebrow: "תשובה מהירה",
-      titlePrefix: "דף נחיתה פרימיום",
+      titlePrefix: "אתר מקצועי ומודרני",
       titlePriceConnector: "במחיר",
-      subtitle: "ענה על שתי שאלות קצרות וניצור איתך קשר מיד.",
+      subtitle: "מוכן תוך 72 שעות, ללא דמי מנוי חובה וללא סיבוכים.",
+      features: ["מסירה תוך 72 שעות", "ללא דמי מנוי חובה", "אתר מקצועי ומודרני", "מותאם 100% למובייל"],
+      cardHeadline: "צריך אתר מקצועי לעסק שלך?",
+      qualifierLabel: "שאלה אחת מהירה כדי שנוכל להבין אותך טוב יותר:",
+      benefits: [
+        "עיצוב מותאם לזהות הוויזואלית של המותג שלך",
+        "100% רספונסיבי ומותאם לדירוג בגוגל",
+        "תמיכה ישירה בוואטסאפ לאורך כל התהליך",
+      ],
       step: "שלב",
       question: "כבר יש לך מוצר, שירות או עסק שברצונך למכור באינטרנט?",
-      options: ["כן, יש לי ואני רוצה למכור יותר", "אני רק מתחיל ורוצה לבנות את זה נכון"],
+      options: ["כן, עדיין אין לי אתר מקצועי", "יש לי אתר אבל אני רוצה לשדרג אותו"],
       next: "המשך",
       formTitle: "עכשיו השאר פרטים",
       formSubtitle: "נבדוק את הצורך שלך ונחזור אליך בערוץ המתאים.",
@@ -230,11 +330,27 @@ const MARKETS: Record<MarketKey, {
       email: "אימייל",
       instagram: "האינסטגרם של העסק שלך",
       instagramPlaceholder: "שם_משתמש",
+      currentSite: "האתר הנוכחי של העסק שלך",
       phone: "טלפון",
       back: "חזרה",
       submit: "דברו איתי בוואטסאפ",
       footer: "Monfily Digital",
       reserved: "כל הזכויות שמורות",
+      advance: "המשך",
+      domainQuestion: "כבר יש לך דומיין משלך?",
+      domainHint: "דוגמאות: haeshev.co.il, hashev.com",
+      domainOptions: ["כן, כבר יש לי", "אין לי", "לא יודע מה זה דומיין"],
+      domainExplanation: "דומיין הוא כתובת האתר שלך באינטרנט. לדוגמה: haeshev.co.il. ניתן לרשום דומיין חדש בכ-30 עד 50 שקל לשנה.",
+      logoQuestion: "כבר יש לך לוגו או זהות ויזואלית?",
+      logoOptions: ["כן, יש לי הכל מוכן", "אין לי כלום", "יש לי רק רשתות חברתיות"],
+      budgetQuestion: "מוכן להשקיע באתר המקצועי שלך?",
+      budgetOptions: ["כן, אני מוכן", "אני צריך יותר מידע"],
+      timelineQuestion: "מתי היית רוצה שהאתר שלך יהיה מוכן?",
+      timelineOptions: ["בהקדם האפשרי", "השבוע", "החודש הזה", "עדיין חוקר"],
+      focusQuestion: "לסיום, מה המיקוד של האתר שלך?",
+      focusHint: "ניתן לבחור יותר מאפשרות אחת",
+      focusOptions: ["מצגת עסקית", "לכידת לידים / לקוחות", "חנות אונליין / איקומרס", "תיק עבודות", "עמוד בודד (דף נחיתה)"],
+      send: "שלח",
     },
   },
   SG: {
@@ -245,12 +361,20 @@ const MARKETS: Record<MarketKey, {
     phoneDigits: 8,
     copy: {
       eyebrow: "FAST REPLY",
-      titlePrefix: "Premium landing page",
+      titlePrefix: "Professional & modern website",
       titlePriceConnector: "for only",
-      subtitle: "Answer two quick questions and we will contact you right away.",
+      subtitle: "Delivered in 72h, with no mandatory monthly fees and no hassle.",
+      features: ["Delivery in 72 hours", "No mandatory monthly fees", "Professional & modern site", "100% mobile optimized"],
+      cardHeadline: "Need a professional website for your business?",
+      qualifierLabel: "One quick question to better understand your situation:",
+      benefits: [
+        "Custom design tailored to your brand identity",
+        "100% responsive and optimised to rank on Google",
+        "Direct WhatsApp support throughout the entire process",
+      ],
       step: "Step",
       question: "Do you already have a product, service, or business you want to sell online?",
-      options: ["Yes, I already have one and want to sell more", "I am starting and want to structure it"],
+      options: ["Yes, I don't have a professional website yet", "I have a website but want to upgrade it"],
       next: "Continue",
       formTitle: "Now leave your details",
       formSubtitle: "We will review your stage and contact you through the right channel.",
@@ -259,11 +383,27 @@ const MARKETS: Record<MarketKey, {
       email: "Email",
       instagram: "Your business Instagram",
       instagramPlaceholder: "your_username",
+      currentSite: "Your current business website",
       phone: "Phone",
       back: "Back",
       submit: "TALK ON WHATSAPP NOW",
       footer: "Monfily Digital",
       reserved: "All Rights Reserved",
+      advance: "Next",
+      domainQuestion: "Do you already have your own domain?",
+      domainHint: "Examples: mybusiness.com, mysite.co",
+      domainOptions: ["Yes, I already have one", "No, I don't", "I'm not sure what a domain is"],
+      domainExplanation: "A domain is your website's address on the internet. For example: mybusiness.com. You can register a new one for around S$15-30 per year.",
+      logoQuestion: "Do you already have a logo or brand identity?",
+      logoOptions: ["Yes, I have everything ready", "No, I don't have anything", "I only have social media"],
+      budgetQuestion: "Are you ready to invest in your professional website?",
+      budgetOptions: ["Yes, I'm ready", "I need more information"],
+      timelineQuestion: "When would you like your website to be ready?",
+      timelineOptions: ["As soon as possible", "This week", "This month", "I'm still researching"],
+      focusQuestion: "To finish, what is the focus of your website?",
+      focusHint: "You can select more than one option",
+      focusOptions: ["Institutional presentation", "Lead / client generation", "Online store / e-commerce", "Work portfolio", "Single page (landing page)"],
+      send: "SUBMIT",
     },
   },
   BR: {
@@ -274,12 +414,20 @@ const MARKETS: Record<MarketKey, {
     phoneDigits: 11,
     copy: {
       eyebrow: "RESPOSTA RÁPIDA",
-      titlePrefix: "Landing page premium",
+      titlePrefix: "Site profissional e moderno",
       titlePriceConnector: "por apenas",
-      subtitle: "Responda duas perguntas rápidas e te chamo no WhatsApp agora.",
+      subtitle: "Pronto em até 72h, sem mensalidades obrigatórias e sem complicação.",
+      features: ["Entrega em até 72 horas", "Sem mensalidades obrigatórias", "Site profissional e moderno", "100% otimizado para mobile"],
+      cardHeadline: "Precisa de um site profissional para o seu negócio?",
+      qualifierLabel: "Uma pergunta rápida para entendermos você melhor:",
+      benefits: [
+        "Design personalizado para a identidade visual da sua marca",
+        "100% responsivo e otimizado para aparecer no Google",
+        "Suporte direto pelo WhatsApp durante todo o processo",
+      ],
       step: "Etapa",
       question: "Você já tem um produto, serviço ou negócio que quer vender pela internet?",
-      options: ["Sim, já tenho e quero vender mais", "Ainda estou começando e quero estruturar"],
+      options: ["Sim, ainda não tenho um site profissional", "Tenho um site mas quero melhorá-lo"],
       next: "Continuar",
       formTitle: "Agora deixe seus dados",
       formSubtitle: "Vamos entender seu momento e chamar você pelo canal certo.",
@@ -288,11 +436,27 @@ const MARKETS: Record<MarketKey, {
       email: "Email",
       instagram: "Instagram do seu negócio",
       instagramPlaceholder: "seu_usuario",
+      currentSite: "Site atual do seu negócio",
       phone: "Telefone",
       back: "Voltar",
       submit: "FALAR NO WHATSAPP AGORA",
       footer: "Monfily Digital",
       reserved: "Todos os Direitos Reservados",
+      advance: "Avançar",
+      domainQuestion: "Você já possui domínio próprio?",
+      domainHint: "Exemplos: meusite.com.br, minhaempresa.com",
+      domainOptions: ["Sim, já tenho", "Não tenho", "Não sei o que é domínio"],
+      domainExplanation: "Domínio é o endereço do seu site na internet. Por exemplo: minhaempresa.com.br. Você pode registrar um novo por cerca de R$ 40 a R$ 80 por ano.",
+      logoQuestion: "Já possui logotipo ou identidade visual?",
+      logoOptions: ["Sim, tenho tudo pronto", "Não tenho nada", "Tenho apenas redes sociais"],
+      budgetQuestion: "Está pronto para investir no seu site profissional?",
+      budgetOptions: ["Sim, estou pronto", "Preciso entender melhor"],
+      timelineQuestion: "Quando gostaria de ter o seu site pronto?",
+      timelineOptions: ["O mais rápido possível", "Esta semana", "Este mês", "Ainda estou pesquisando"],
+      focusQuestion: "Para finalizar, qual o foco do seu site?",
+      focusHint: "Pode selecionar mais de uma opção",
+      focusOptions: ["Apresentação institucional", "Captação de leads / clientes", "Loja online / e-commerce", "Portfólio de trabalhos", "Página única (landing page)"],
+      send: "ENVIAR",
     },
   },
   GB: {
@@ -303,12 +467,20 @@ const MARKETS: Record<MarketKey, {
     phoneDigits: 10,
     copy: {
       eyebrow: "FAST REPLY",
-      titlePrefix: "Premium landing page",
+      titlePrefix: "Professional & modern website",
       titlePriceConnector: "for only",
-      subtitle: "Answer two quick questions and we will contact you right away.",
+      subtitle: "Delivered in 72h, with no mandatory monthly fees and no hassle.",
+      features: ["Delivery in 72 hours", "No mandatory monthly fees", "Professional & modern site", "100% mobile optimized"],
+      cardHeadline: "Need a professional website for your business?",
+      qualifierLabel: "One quick question to better understand your situation:",
+      benefits: [
+        "Custom design tailored to your brand identity",
+        "100% responsive and optimised to rank on Google",
+        "Direct WhatsApp support throughout the entire process",
+      ],
       step: "Step",
       question: "Do you already have a product, service, or business you want to sell online?",
-      options: ["Yes, I already have one and want to sell more", "I am starting and want to structure it"],
+      options: ["Yes, I don't have a professional website yet", "I have a website but want to upgrade it"],
       next: "Continue",
       formTitle: "Now leave your details",
       formSubtitle: "We will review your stage and contact you through the right channel.",
@@ -317,11 +489,27 @@ const MARKETS: Record<MarketKey, {
       email: "Email",
       instagram: "Your business Instagram",
       instagramPlaceholder: "your_username",
+      currentSite: "Your current business website",
       phone: "Phone",
       back: "Back",
       submit: "TALK ON WHATSAPP NOW",
       footer: "Monfily Digital",
       reserved: "All Rights Reserved",
+      advance: "Next",
+      domainQuestion: "Do you already have your own domain?",
+      domainHint: "Examples: mybusiness.com, mysite.co",
+      domainOptions: ["Yes, I already have one", "No, I don't", "I'm not sure what a domain is"],
+      domainExplanation: "A domain is your website's address on the internet. For example: mybusiness.co.uk. You can register a new one for around £10-15 per year.",
+      logoQuestion: "Do you already have a logo or brand identity?",
+      logoOptions: ["Yes, I have everything ready", "No, I don't have anything", "I only have social media"],
+      budgetQuestion: "Are you ready to invest in your professional website?",
+      budgetOptions: ["Yes, I'm ready", "I need more information"],
+      timelineQuestion: "When would you like your website to be ready?",
+      timelineOptions: ["As soon as possible", "This week", "This month", "I'm still researching"],
+      focusQuestion: "To finish, what is the focus of your website?",
+      focusHint: "You can select more than one option",
+      focusOptions: ["Institutional presentation", "Lead / client generation", "Online store / e-commerce", "Work portfolio", "Single page (landing page)"],
+      send: "SUBMIT",
     },
   },
   US: {
@@ -332,12 +520,20 @@ const MARKETS: Record<MarketKey, {
     phoneDigits: 10,
     copy: {
       eyebrow: "FAST REPLY",
-      titlePrefix: "Premium landing page",
+      titlePrefix: "Professional & modern website",
       titlePriceConnector: "for only",
-      subtitle: "Answer two quick questions and we will contact you right away.",
+      subtitle: "Delivered in 72h, with no mandatory monthly fees and no hassle.",
+      features: ["Delivery in 72 hours", "No mandatory monthly fees", "Professional & modern site", "100% mobile optimized"],
+      cardHeadline: "Need a professional website for your business?",
+      qualifierLabel: "One quick question to better understand your situation:",
+      benefits: [
+        "Custom design tailored to your brand identity",
+        "100% responsive and optimised to rank on Google",
+        "Direct WhatsApp support throughout the entire process",
+      ],
       step: "Step",
       question: "Do you already have a product, service, or business you want to sell online?",
-      options: ["Yes, I already have one and want to sell more", "I am starting and want to structure it"],
+      options: ["Yes, I don't have a professional website yet", "I have a website but want to upgrade it"],
       next: "Continue",
       formTitle: "Now leave your details",
       formSubtitle: "We will review your stage and contact you through the right channel.",
@@ -346,11 +542,27 @@ const MARKETS: Record<MarketKey, {
       email: "Email",
       instagram: "Your business Instagram",
       instagramPlaceholder: "your_username",
+      currentSite: "Your current business website",
       phone: "Phone",
       back: "Back",
       submit: "TALK ON WHATSAPP NOW",
       footer: "Monfily Digital",
       reserved: "All Rights Reserved",
+      advance: "Next",
+      domainQuestion: "Do you already have your own domain?",
+      domainHint: "Examples: mybusiness.com, mysite.co",
+      domainOptions: ["Yes, I already have one", "No, I don't", "I'm not sure what a domain is"],
+      domainExplanation: "A domain is your website's address on the internet. For example: mybusiness.com. You can register a new one for around $10-20 per year.",
+      logoQuestion: "Do you already have a logo or brand identity?",
+      logoOptions: ["Yes, I have everything ready", "No, I don't have anything", "I only have social media"],
+      budgetQuestion: "Are you ready to invest in your professional website?",
+      budgetOptions: ["Yes, I'm ready", "I need more information"],
+      timelineQuestion: "When would you like your website to be ready?",
+      timelineOptions: ["As soon as possible", "This week", "This month", "I'm still researching"],
+      focusQuestion: "To finish, what is the focus of your website?",
+      focusHint: "You can select more than one option",
+      focusOptions: ["Institutional presentation", "Lead / client generation", "Online store / e-commerce", "Work portfolio", "Single page (landing page)"],
+      send: "SUBMIT",
     },
   },
 };
@@ -453,6 +665,7 @@ function updateMetaTag(name: string, content: string, attribute: "name" | "prope
   meta.setAttribute("content", content);
 }
 
+
 type LandingPageProps = {
   fixedMarketKey?: MarketKey;
 };
@@ -470,10 +683,15 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
   const [, setLocation] = useLocation();
   const initialMarketKey = fixedMarketKey ?? "US";
   const [marketKey, setMarketKey] = useState<MarketKey>(initialMarketKey);
-  const [step, setStep] = useState<1 | 2>(1);
+  const [step, setStep] = useState(1);
   const [selectedOption, setSelectedOption] = useState("");
+  const [domainOption, setDomainOption] = useState("");
+  const [logoOption, setLogoOption] = useState("");
+  const [budgetOption, setBudgetOption] = useState("");
+  const [timelineOption, setTimelineOption] = useState("");
+  const [focusOptions, setFocusOptions] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [form, setForm] = useState({ name: "", company: "", email: "", instagram: "", phone: MARKETS[initialMarketKey].phonePrefix });
+  const [form, setForm] = useState({ name: "", company: "", email: "", instagram: "", currentSite: "", phone: MARKETS[initialMarketKey].phonePrefix });
   const market = MARKETS[marketKey];
   const destinationNumber = useWhatsAppNumber(
     marketKey,
@@ -492,7 +710,7 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
     localPhoneDigits.length === market.phoneDigits;
 
   const handleSubmit = async () => {
-    if (!isFormComplete || isSubmitting) return;
+    if (isSubmitting) return;
 
     const whatsappUrl = buildWhatsAppUrl(destinationNumber, CLIENT_WHATSAPP_MESSAGE_BY_MARKET[marketKey]);
 
@@ -508,10 +726,16 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
           marketKey,
           locale: market.locale,
           selectedOption,
+          domainAnswer: domainOption,
+          logoAnswer: logoOption,
+          budgetAnswer: budgetOption,
+          timelineAnswer: timelineOption,
+          focusAnswers: focusOptions,
           name: form.name.trim(),
           company: form.company.trim(),
           email: form.email.trim(),
           instagram: form.instagram.trim(),
+          currentSiteUrl: form.currentSite.trim() || undefined,
           phone: form.phone,
           pageUrl: window.location.href,
         }),
@@ -594,7 +818,7 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
     updateMetaTag("twitter:description", seo.description);
   }, [market.locale, seo]);
 
-  const progress = useMemo(() => (step === 1 ? 50 : 100), [step]);
+  const progress = useMemo(() => Math.round((step / 7) * 100), [step]);
 
   return (
     <main className="elevate-page" aria-label="Monfily landing page" lang={market.locale} dir="ltr" data-text-direction={textDirection}>
@@ -619,8 +843,8 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
           <section className="elevate-card" aria-labelledby="elevate-question">
           <span className="elevate-line-marker elevate-line-marker--progress-left" aria-hidden="true" />
           <span className="elevate-line-marker elevate-line-marker--progress-right" aria-hidden="true" />
-          <div className="elevate-progress" aria-label={`${copy.step} ${step} de 2`}>
-            <span>{copy.step} {step}/2</span>
+          <div className="elevate-progress" aria-label={`${copy.step} ${step} / 7`}>
+            <span>{copy.step} {step}/7</span>
             <div>
               <i style={{ width: `${progress}%` }} />
             </div>
@@ -629,8 +853,14 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
           {step === 1 ? (
             <>
               <h2 id="elevate-question" className="elevate-card__question">
-                {copy.question}
+                {copy.cardHeadline}
               </h2>
+
+              <div className="elevate-card__perks">
+                {[...copy.features, ...copy.benefits].map((item, index) => (
+                  <div key={index} className="elevate-card__perk">{item}</div>
+                ))}
+              </div>
 
               <div className="elevate-form">
                 <fieldset className="elevate-form__options">
@@ -664,7 +894,7 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
                 </button>
               </div>
             </>
-          ) : (
+          ) : step === 2 ? (
             <>
               <h2 id="elevate-question" className="elevate-card__question">
                 {copy.formTitle}
@@ -675,7 +905,7 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
                 className="elevate-form"
                 onSubmit={(event) => {
                   event.preventDefault();
-                  handleSubmit();
+                  if (isFormComplete) setStep(3);
                 }}
               >
                 <label className="elevate-field">
@@ -744,6 +974,21 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
                   </div>
                 </label>
 
+                {selectedOption === copy.options[1] && (
+                  <label className="elevate-field">
+                    <span>{copy.currentSite}</span>
+                    <input
+                      type="url"
+                      name="currentSite"
+                      autoComplete="url"
+                      inputMode="url"
+                      placeholder="https://"
+                      value={form.currentSite}
+                      onChange={(event) => setForm((current) => ({ ...current, currentSite: event.target.value }))}
+                    />
+                  </label>
+                )}
+
                 <label className="elevate-field">
                   <span>{copy.phone}</span>
                   <input
@@ -776,14 +1021,159 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
                   <button type="button" className="elevate-back" onClick={() => setStep(1)}>
                     {copy.back}
                   </button>
-                  <button type="submit" className="elevate-cta" disabled={!isFormComplete || isSubmitting}>
+                  <button type="submit" className="elevate-cta" disabled={!isFormComplete}>
                     <span className="elevate-cta__shine" aria-hidden="true" />
-                    <span>{copy.submit}</span>
+                    <span>{copy.advance}</span>
                   </button>
                 </div>
               </form>
             </>
-          )}
+          ) : step === 3 ? (
+            <>
+              <h2 id="elevate-question" className="elevate-card__question">{copy.domainQuestion}</h2>
+              {copy.domainHint && <p className="elevate-card__helper">{copy.domainHint}</p>}
+              <div className="elevate-form">
+                <fieldset className="elevate-form__options">
+                  <legend className="sr-only">{copy.domainQuestion}</legend>
+                  {copy.domainOptions.map((option, i) => (
+                    <label key={option} className="elevate-option" data-selected={domainOption === option}>
+                      <input type="radio" className="sr-only" name="domain" value={option} checked={domainOption === option} onChange={() => setDomainOption(option)} />
+                      <span className="elevate-option__letter" aria-hidden="true">{String.fromCharCode(65 + i)}</span>
+                      <span>{option}</span>
+                    </label>
+                  ))}
+                </fieldset>
+                {domainOption === copy.domainOptions[2] && (
+                  <div className="elevate-info-card" role="note">
+                    <svg className="elevate-info-card__icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="12" y1="8" x2="12" y2="12" />
+                      <line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
+                    <p>{copy.domainExplanation}</p>
+                  </div>
+                )}
+                <div className="elevate-actions">
+                  <button type="button" className="elevate-back" onClick={() => setStep(2)}>{copy.back}</button>
+                  <button type="button" className="elevate-cta" disabled={!domainOption} onClick={() => setStep(4)}>
+                    <span className="elevate-cta__shine" aria-hidden="true" />
+                    <span>{copy.advance}</span>
+                  </button>
+                </div>
+              </div>
+            </>
+          ) : step === 4 ? (
+            <>
+              <h2 id="elevate-question" className="elevate-card__question">{copy.logoQuestion}</h2>
+              <div className="elevate-form">
+                <fieldset className="elevate-form__options">
+                  <legend className="sr-only">{copy.logoQuestion}</legend>
+                  {copy.logoOptions.map((option, i) => (
+                    <label key={option} className="elevate-option" data-selected={logoOption === option}>
+                      <input type="radio" className="sr-only" name="logo" value={option} checked={logoOption === option} onChange={() => setLogoOption(option)} />
+                      <span className="elevate-option__letter" aria-hidden="true">{String.fromCharCode(65 + i)}</span>
+                      <span>{option}</span>
+                    </label>
+                  ))}
+                </fieldset>
+                <div className="elevate-actions">
+                  <button type="button" className="elevate-back" onClick={() => setStep(3)}>{copy.back}</button>
+                  <button type="button" className="elevate-cta" disabled={!logoOption} onClick={() => setStep(5)}>
+                    <span className="elevate-cta__shine" aria-hidden="true" />
+                    <span>{copy.advance}</span>
+                  </button>
+                </div>
+              </div>
+            </>
+          ) : step === 5 ? (
+            <>
+              <h2 id="elevate-question" className="elevate-card__question">{copy.budgetQuestion}</h2>
+              <div className="elevate-form">
+                <fieldset className="elevate-form__options">
+                  <legend className="sr-only">{copy.budgetQuestion}</legend>
+                  {copy.budgetOptions.map((option, i) => (
+                    <label key={option} className="elevate-option" data-selected={budgetOption === option}>
+                      <input type="radio" className="sr-only" name="budget" value={option} checked={budgetOption === option} onChange={() => setBudgetOption(option)} />
+                      <span className="elevate-option__letter" aria-hidden="true">{String.fromCharCode(65 + i)}</span>
+                      <span>{option}</span>
+                    </label>
+                  ))}
+                </fieldset>
+                <div className="elevate-actions">
+                  <button type="button" className="elevate-back" onClick={() => setStep(4)}>{copy.back}</button>
+                  <button type="button" className="elevate-cta" disabled={!budgetOption} onClick={() => setStep(6)}>
+                    <span className="elevate-cta__shine" aria-hidden="true" />
+                    <span>{copy.advance}</span>
+                  </button>
+                </div>
+              </div>
+            </>
+          ) : step === 6 ? (
+            <>
+              <h2 id="elevate-question" className="elevate-card__question">{copy.timelineQuestion}</h2>
+              <div className="elevate-form">
+                <fieldset className="elevate-form__options">
+                  <legend className="sr-only">{copy.timelineQuestion}</legend>
+                  {copy.timelineOptions.map((option, i) => (
+                    <label key={option} className="elevate-option" data-selected={timelineOption === option}>
+                      <input type="radio" className="sr-only" name="timeline" value={option} checked={timelineOption === option} onChange={() => setTimelineOption(option)} />
+                      <span className="elevate-option__letter" aria-hidden="true">{String.fromCharCode(65 + i)}</span>
+                      <span>{option}</span>
+                    </label>
+                  ))}
+                </fieldset>
+                <div className="elevate-actions">
+                  <button type="button" className="elevate-back" onClick={() => setStep(5)}>{copy.back}</button>
+                  <button type="button" className="elevate-cta" disabled={!timelineOption} onClick={() => setStep(7)}>
+                    <span className="elevate-cta__shine" aria-hidden="true" />
+                    <span>{copy.advance}</span>
+                  </button>
+                </div>
+              </div>
+            </>
+          ) : step === 7 ? (
+            <>
+              <h2 id="elevate-question" className="elevate-card__question">{copy.focusQuestion}</h2>
+              {copy.focusHint && <p className="elevate-card__helper">{copy.focusHint}</p>}
+              <div className="elevate-form">
+                <fieldset className="elevate-form__options">
+                  <legend className="sr-only">{copy.focusQuestion}</legend>
+                  {copy.focusOptions.map((option) => (
+                    <label key={option} className="elevate-option" data-selected={focusOptions.includes(option)}>
+                      <input
+                        type="checkbox"
+                        className="sr-only"
+                        name="focus"
+                        value={option}
+                        checked={focusOptions.includes(option)}
+                        onChange={(e) => setFocusOptions((prev) => e.target.checked ? [...prev, option] : prev.filter((o) => o !== option))}
+                      />
+                      <span className="elevate-option__check" aria-hidden="true">
+                        {focusOptions.includes(option) && (
+                          <svg width="11" height="9" viewBox="0 0 11 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 4L4 7.5L10 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        )}
+                      </span>
+                      <span>{option}</span>
+                    </label>
+                  ))}
+                </fieldset>
+                <div className="elevate-actions">
+                  <button type="button" className="elevate-back" onClick={() => setStep(6)}>{copy.back}</button>
+                  <button
+                    type="button"
+                    className="elevate-cta"
+                    disabled={focusOptions.length === 0 || isSubmitting}
+                    onClick={handleSubmit}
+                  >
+                    <span className="elevate-cta__shine" aria-hidden="true" />
+                    <span>{copy.send}</span>
+                  </button>
+                </div>
+              </div>
+            </>
+          ) : null}
           </section>
 
           <footer className="elevate-footer">

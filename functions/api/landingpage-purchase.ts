@@ -3,6 +3,7 @@ import { z } from "zod";
 type PagesFunctionContext<Env extends Record<string, string | undefined>> = {
   request: Request;
   env: Env;
+  waitUntil: (promise: Promise<unknown>) => void;
 };
 
 type PagesFunction<Env extends Record<string, string | undefined>> = (
@@ -18,6 +19,12 @@ const landingPurchaseSchema = z.object({
   marketKey: marketSchema,
   locale: z.string().min(2),
   selectedOption: z.string().min(1),
+  domainAnswer: z.string().optional(),
+  logoAnswer: z.string().optional(),
+  budgetAnswer: z.string().optional(),
+  timelineAnswer: z.string().optional(),
+  focusAnswers: z.array(z.string()).optional(),
+  currentSiteUrl: z.string().optional(),
   name: z.string().min(1),
   company: z.string().min(1),
   email: z.string().email(),
@@ -58,75 +65,75 @@ const PURCHASE_BY_MARKET: Record<MarketKey, { value: number; currency: string; e
 const CUSTOMER_COPY_BY_MARKET: Record<MarketKey, CustomerCopy> = {
   BR: {
     subject: "Sua página está sendo preparada - Monfily",
-    preview: "Em até 24 horas você recebe uma versão pronta para visualizar e sugerir melhorias.",
+    preview: "Em até 72 horas você recebe uma versão pronta para visualizar e sugerir melhorias.",
     greeting: "Olá!",
     body: "Sua página está sendo preparada com foco em apresentar seu negócio de forma clara, profissional e pronta para gerar mais oportunidades.",
-    assetRequest: "Em até 24 horas vamos enviar uma versão pronta para visualização e sugestões de melhoria. Se quiser ajudar a deixar o resultado ainda mais fiel ao seu negócio, pode nos enviar sua logo, fotos, vídeos, referências visuais e qualquer material que represente sua marca.",
+    assetRequest: "Em até 72 horas vamos enviar uma versão pronta para visualização e sugestões de melhoria. Se quiser ajudar a deixar o resultado ainda mais fiel ao seu negócio, pode nos enviar sua logo, fotos, vídeos, referências visuais e qualquer material que represente sua marca.",
     footer: "Monfily Digital. Todos os direitos reservados.",
-    whatsapp: "Olá! Sua página já está em preparação. Em até 24 horas vamos enviar uma versão pronta para você visualizar e sugerir melhorias. Se quiser ajudar, pode mandar sua logo, fotos, vídeos, referências e materiais do seu negócio por aqui.",
+    whatsapp: "Olá! Sua página já está em preparação. Em até 72 horas vamos enviar uma versão pronta para você visualizar e sugerir melhorias. Se quiser ajudar, pode mandar sua logo, fotos, vídeos, referências e materiais do seu negócio por aqui.",
   },
   PT: {
     subject: "A sua página está a ser preparada - Monfily",
-    preview: "Em até 24 horas recebe uma versão pronta para visualizar e sugerir melhorias.",
+    preview: "Em até 72 horas recebe uma versão pronta para visualizar e sugerir melhorias.",
     greeting: "Olá!",
     body: "A sua página está a ser preparada com foco em apresentar o seu negócio de forma clara, profissional e pronta para gerar mais oportunidades.",
-    assetRequest: "Em até 24 horas vamos enviar uma versão pronta para visualização e sugestões de melhoria. Se quiser ajudar a deixar o resultado ainda mais fiel ao seu negócio, pode enviar a sua logo, fotos, vídeos, referências visuais e qualquer material que represente a sua marca.",
+    assetRequest: "Em até 72 horas vamos enviar uma versão pronta para visualização e sugestões de melhoria. Se quiser ajudar a deixar o resultado ainda mais fiel ao seu negócio, pode enviar a sua logo, fotos, vídeos, referências visuais e qualquer material que represente a sua marca.",
     footer: "Monfily Digital. Todos os direitos reservados.",
-    whatsapp: "Olá! A sua página já está a ser preparada. Em até 24 horas vamos enviar uma versão pronta para visualizar e sugerir melhorias. Se quiser ajudar, pode enviar a sua logo, fotos, vídeos, referências e materiais do seu negócio por aqui.",
+    whatsapp: "Olá! A sua página já está a ser preparada. Em até 72 horas vamos enviar uma versão pronta para visualizar e sugerir melhorias. Se quiser ajudar, pode enviar a sua logo, fotos, vídeos, referências e materiais do seu negócio por aqui.",
   },
   ES: {
     subject: "Tu página está en preparación - Monfily",
-    preview: "En hasta 24 horas recibirás una versión lista para revisar y sugerir mejoras.",
+    preview: "En hasta 72 horas recibirás una versión lista para revisar y sugerir mejoras.",
     greeting: "¡Hola!",
     body: "Tu página está en preparación para presentar tu negocio de forma clara, profesional y lista para generar más oportunidades.",
-    assetRequest: "En hasta 24 horas enviaremos una versión lista para que puedas revisarla y sugerir mejoras. Si quieres ayudar a que el resultado represente mejor tu negocio, puedes enviarnos tu logo, fotos, vídeos, referencias visuales y cualquier material de tu marca.",
+    assetRequest: "En hasta 72 horas enviaremos una versión lista para que puedas revisarla y sugerir mejoras. Si quieres ayudar a que el resultado represente mejor tu negocio, puedes enviarnos tu logo, fotos, vídeos, referencias visuales y cualquier material de tu marca.",
     footer: "Monfily Digital. Todos los derechos reservados.",
-    whatsapp: "¡Hola! Tu página ya está en preparación. En hasta 24 horas enviaremos una versión lista para que puedas revisarla y sugerir mejoras. Si quieres ayudar, puedes enviar tu logo, fotos, vídeos, referencias y materiales de tu negocio por aquí.",
+    whatsapp: "¡Hola! Tu página ya está en preparación. En hasta 72 horas enviaremos una versión lista para que puedas revisarla y sugerir mejoras. Si quieres ayudar, puedes enviar tu logo, fotos, vídeos, referencias y materiales de tu negocio por aquí.",
   },
   IT: {
     subject: "La tua pagina è in preparazione - Monfily",
-    preview: "Entro 24 ore riceverai una versione pronta da visualizzare e migliorare.",
+    preview: "Entro 72 ore riceverai una versione pronta da visualizzare e migliorare.",
     greeting: "Ciao!",
     body: "La tua pagina è in preparazione per presentare la tua attività in modo chiaro, professionale e pronto a generare più opportunità.",
-    assetRequest: "Entro 24 ore invieremo una versione pronta da visualizzare e su cui suggerire miglioramenti. Se vuoi aiutarci a rendere il risultato più fedele alla tua attività, puoi inviarci logo, foto, video, riferimenti visivi e qualsiasi materiale del brand.",
+    assetRequest: "Entro 72 ore invieremo una versione pronta da visualizzare e su cui suggerire miglioramenti. Se vuoi aiutarci a rendere il risultato più fedele alla tua attività, puoi inviarci logo, foto, video, riferimenti visivi e qualsiasi materiale del brand.",
     footer: "Monfily Digital. Tutti i diritti riservati.",
-    whatsapp: "Ciao! La tua pagina è già in preparazione. Entro 24 ore invieremo una versione pronta da visualizzare e su cui suggerire miglioramenti. Se vuoi aiutarci, puoi inviare logo, foto, video, riferimenti e materiali della tua attività qui.",
+    whatsapp: "Ciao! La tua pagina è già in preparazione. Entro 72 ore invieremo una versione pronta da visualizzare e su cui suggerire miglioramenti. Se vuoi aiutarci, puoi inviare logo, foto, video, riferimenti e materiali della tua attività qui.",
   },
   IL: {
     subject: "Your page is being prepared - Monfily",
-    preview: "Within 24 hours you will receive a ready version to review and suggest improvements.",
+    preview: "Within 72 hours you will receive a ready version to review and suggest improvements.",
     greeting: "Hello!",
     body: "Your page is being prepared to present your business clearly, professionally, and in a way that can generate more opportunities.",
-    assetRequest: "Within 24 hours we will send a ready version for review and improvement suggestions. If you want to help us make it closer to your brand, you can send your logo, photos, videos, visual references, and any business materials.",
+    assetRequest: "Within 72 hours we will send a ready version for review and improvement suggestions. If you want to help us make it closer to your brand, you can send your logo, photos, videos, visual references, and any business materials.",
     footer: "Monfily Digital. All rights reserved.",
-    whatsapp: "Hello! Your page is already being prepared. Within 24 hours we will send a ready version for you to review and suggest improvements. If you want to help, you can send your logo, photos, videos, references, and business materials here.",
+    whatsapp: "Hello! Your page is already being prepared. Within 72 hours we will send a ready version for you to review and suggest improvements. If you want to help, you can send your logo, photos, videos, references, and business materials here.",
   },
   SG: {
     subject: "Your page is being prepared - Monfily",
-    preview: "Within 24 hours you will receive a ready version to review and suggest improvements.",
+    preview: "Within 72 hours you will receive a ready version to review and suggest improvements.",
     greeting: "Hello!",
     body: "Your page is being prepared to present your business clearly, professionally, and in a way that can generate more opportunities.",
-    assetRequest: "Within 24 hours we will send a ready version for review and improvement suggestions. If you want to help us make it closer to your brand, you can send your logo, photos, videos, visual references, and any business materials.",
+    assetRequest: "Within 72 hours we will send a ready version for review and improvement suggestions. If you want to help us make it closer to your brand, you can send your logo, photos, videos, visual references, and any business materials.",
     footer: "Monfily Digital. All rights reserved.",
-    whatsapp: "Hello! Your page is already being prepared. Within 24 hours we will send a ready version for you to review and suggest improvements. If you want to help, you can send your logo, photos, videos, references, and business materials here.",
+    whatsapp: "Hello! Your page is already being prepared. Within 72 hours we will send a ready version for you to review and suggest improvements. If you want to help, you can send your logo, photos, videos, references, and business materials here.",
   },
   GB: {
     subject: "Your page is being prepared - Monfily",
-    preview: "Within 24 hours you will receive a ready version to review and suggest improvements.",
+    preview: "Within 72 hours you will receive a ready version to review and suggest improvements.",
     greeting: "Hello!",
     body: "Your page is being prepared to present your business clearly, professionally, and in a way that can generate more opportunities.",
-    assetRequest: "Within 24 hours we will send a ready version for review and improvement suggestions. If you want to help us make it closer to your brand, you can send your logo, photos, videos, visual references, and any business materials.",
+    assetRequest: "Within 72 hours we will send a ready version for review and improvement suggestions. If you want to help us make it closer to your brand, you can send your logo, photos, videos, visual references, and any business materials.",
     footer: "Monfily Digital. All rights reserved.",
-    whatsapp: "Hello! Your page is already being prepared. Within 24 hours we will send a ready version for you to review and suggest improvements. If you want to help, you can send your logo, photos, videos, references, and business materials here.",
+    whatsapp: "Hello! Your page is already being prepared. Within 72 hours we will send a ready version for you to review and suggest improvements. If you want to help, you can send your logo, photos, videos, references, and business materials here.",
   },
   US: {
     subject: "Your page is being prepared - Monfily",
-    preview: "Within 24 hours you will receive a ready version to review and suggest improvements.",
+    preview: "Within 72 hours you will receive a ready version to review and suggest improvements.",
     greeting: "Hello!",
     body: "Your page is being prepared to present your business clearly, professionally, and in a way that can generate more opportunities.",
-    assetRequest: "Within 24 hours we will send a ready version for review and improvement suggestions. If you want to help us make it closer to your brand, you can send your logo, photos, videos, visual references, and any business materials.",
+    assetRequest: "Within 72 hours we will send a ready version for review and improvement suggestions. If you want to help us make it closer to your brand, you can send your logo, photos, videos, visual references, and any business materials.",
     footer: "Monfily Digital. All rights reserved.",
-    whatsapp: "Hello! Your page is already being prepared. Within 24 hours we will send a ready version for you to review and suggest improvements. If you want to help, you can send your logo, photos, videos, references, and business materials here.",
+    whatsapp: "Hello! Your page is already being prepared. Within 72 hours we will send a ready version for you to review and suggest improvements. If you want to help, you can send your logo, photos, videos, references, and business materials here.",
   },
 };
 
@@ -416,7 +423,7 @@ async function sendCustomerEmail(env: Env, data: LandingPurchaseData, copy: Cust
 }
 
 function getLeadReportText(data: LandingPurchaseData, purchase: { value: number; currency: string }) {
-  return [
+  const lines = [
     "Novo lead Monfily - Landing page",
     "",
     `Mercado: ${data.marketKey}`,
@@ -427,11 +434,18 @@ function getLeadReportText(data: LandingPurchaseData, purchase: { value: number;
     `Email: ${data.email}`,
     `Instagram: https://instagram.com/${data.instagram}`,
     `Telefone: ${data.phone}`,
-  ].join("\n");
+  ];
+  if (data.currentSiteUrl) lines.push(`Site atual: ${data.currentSiteUrl}`);
+  if (data.domainAnswer) lines.push(`Domínio: ${data.domainAnswer}`);
+  if (data.logoAnswer) lines.push(`Logo: ${data.logoAnswer}`);
+  if (data.budgetAnswer) lines.push(`Orçamento: ${data.budgetAnswer}`);
+  if (data.timelineAnswer) lines.push(`Prazo: ${data.timelineAnswer}`);
+  if (data.focusAnswers?.length) lines.push(`Foco do site: ${data.focusAnswers.join(", ")}`);
+  return lines.join("\n");
 }
 
 function getLeadReportEmailHtml(data: LandingPurchaseData, purchase: { value: number; currency: string }) {
-  const rows = [
+  const rows: [string, string][] = [
     ["Mercado", data.marketKey],
     ["Oferta", `${purchase.value} ${purchase.currency}`],
     ["Resposta", data.selectedOption],
@@ -441,6 +455,12 @@ function getLeadReportEmailHtml(data: LandingPurchaseData, purchase: { value: nu
     ["Instagram", `https://instagram.com/${data.instagram}`],
     ["Telefone", data.phone],
   ];
+  if (data.currentSiteUrl) rows.push(["Site atual", data.currentSiteUrl]);
+  if (data.domainAnswer) rows.push(["Domínio", data.domainAnswer]);
+  if (data.logoAnswer) rows.push(["Logo", data.logoAnswer]);
+  if (data.budgetAnswer) rows.push(["Orçamento", data.budgetAnswer]);
+  if (data.timelineAnswer) rows.push(["Prazo", data.timelineAnswer]);
+  if (data.focusAnswers?.length) rows.push(["Foco do site", data.focusAnswers.join(", ")]);
 
   return `<!doctype html>
 <html lang="pt-BR">
@@ -561,17 +581,13 @@ async function sendLeadReportWhatsapp(
 }
 
 async function postWhatsappReminder(env: Env, data: LandingPurchaseData, copy: CustomerCopy, eventId: string) {
-  if (!envFlag(env, "N8N_WHATSAPP_REMINDERS_ENABLED", false)) {
-    return { skipped: true };
-  }
-
   const webhookUrl = env.N8N_WHATSAPP_REMINDER_WEBHOOK_URL;
   if (!webhookUrl) {
     throw new Error("Missing N8N_WHATSAPP_REMINDER_WEBHOOK_URL");
   }
 
   const timeoutMs = Number(env.N8N_WHATSAPP_REMINDER_TIMEOUT_MS || "10000");
-  const delayMs = Number(env.N8N_WHATSAPP_REMINDER_DELAY_MS || "480000");
+  const delayMs = 0; // delay is handled upstream via ctx.waitUntil before this is called
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
@@ -617,7 +633,19 @@ async function postWhatsappReminder(env: Env, data: LandingPurchaseData, copy: C
 
 export const onRequestOptions: PagesFunction<Env> = () => new Response(null, { status: 204, headers: corsHeaders });
 
-export async function handleLandingPurchase(request: Request, env: Env): Promise<Response> {
+type WaitUntilContext = { waitUntil: (promise: Promise<unknown>) => void };
+
+async function scheduleWhatsappReminder(env: Env, data: LandingPurchaseData, copy: CustomerCopy, eventId: string) {
+  const delayMs = Number(env.N8N_WHATSAPP_REMINDER_DELAY_MS || "300000");
+  await new Promise<void>(resolve => setTimeout(resolve, delayMs));
+  try {
+    await postWhatsappReminder(env, data, copy, eventId);
+  } catch (error) {
+    console.error("Scheduled WhatsApp reminder failed:", error);
+  }
+}
+
+export async function handleLandingPurchase(request: Request, env: Env, ctx: WaitUntilContext): Promise<Response> {
   let body: unknown;
 
   try {
@@ -636,37 +664,32 @@ export async function handleLandingPurchase(request: Request, env: Env): Promise
   const purchase = PURCHASE_BY_MARKET[data.marketKey];
   const eventId = `landingpage_lead_${Date.now()}_${crypto.randomUUID()}`;
 
-  try {
-    const [emailResult, whatsappResult, reportEmailResult, reportWhatsappResult, metaResult] = await Promise.all([
-      sendCustomerEmail(env, data, copy),
-      postWhatsappReminder(env, data, copy, eventId),
-      sendLeadReportEmail(env, data, purchase),
-      sendLeadReportWhatsapp(env, data, purchase),
-      sendMetaLeadEvent(request, env, data, purchase, eventId),
-    ]);
+  const [emailResult, reportEmailResult, reportWhatsappResult, metaResult] = await Promise.allSettled([
+    sendCustomerEmail(env, data, copy),
+    sendLeadReportEmail(env, data, purchase),
+    sendLeadReportWhatsapp(env, data, purchase),
+    sendMetaLeadEvent(request, env, data, purchase, eventId),
+  ]);
 
-    return jsonResponse({
-      ok: true,
-      eventId,
-      email: { sent: true, provider: emailResult },
-      whatsapp: { scheduled: true, provider: whatsappResult },
-      report: {
-        email: { sent: true, provider: reportEmailResult },
-        whatsapp: { sent: true, provider: reportWhatsappResult },
-      },
-      meta: metaResult,
-      purchase,
-    });
-  } catch (error) {
-    console.error("Landing page purchase failed:", error);
-    return jsonResponse(
-      {
-        message: "Failed to process landing page purchase",
-        error: error instanceof Error ? error.message : "Unknown error",
-      },
-      { status: 500 }
-    );
-  }
+  if (emailResult.status === "rejected") console.error("Customer email failed:", emailResult.reason);
+  if (reportEmailResult.status === "rejected") console.error("Report email failed:", reportEmailResult.reason);
+  if (reportWhatsappResult.status === "rejected") console.error("Report WhatsApp failed:", reportWhatsappResult.reason);
+  if (metaResult.status === "rejected") console.error("Meta event failed:", metaResult.reason);
+
+  ctx.waitUntil(scheduleWhatsappReminder(env, data, copy, eventId));
+
+  return jsonResponse({
+    ok: true,
+    eventId,
+    email: { sent: emailResult.status === "fulfilled" },
+    whatsapp: { scheduled: true },
+    report: {
+      email: { sent: reportEmailResult.status === "fulfilled" },
+      whatsapp: { sent: reportWhatsappResult.status === "fulfilled" },
+    },
+    meta: metaResult.status === "fulfilled" ? metaResult.value : null,
+    purchase,
+  });
 }
 
-export const onRequestPost: PagesFunction<Env> = ({ request, env }) => handleLandingPurchase(request, env);
+export const onRequestPost: PagesFunction<Env> = (ctx) => handleLandingPurchase(ctx.request, ctx.env, ctx);
