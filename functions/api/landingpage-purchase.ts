@@ -33,7 +33,7 @@ const landingPurchaseSchema = z.object({
   pageUrl: z.string().url().optional(),
 });
 
-type LandingPurchaseData = z.infer<typeof landingPurchaseSchema>;
+export type LandingPurchaseData = z.infer<typeof landingPurchaseSchema>;
 
 type CustomerCopy = {
   subject: string;
@@ -580,72 +580,55 @@ async function sendLeadReportWhatsapp(
   return response.json().catch(() => ({ ok: true }));
 }
 
-async function postWhatsappReminder(env: Env, data: LandingPurchaseData, copy: CustomerCopy, eventId: string) {
-  const webhookUrl = env.N8N_WHATSAPP_REMINDER_WEBHOOK_URL;
-  if (!webhookUrl) {
-    throw new Error("Missing N8N_WHATSAPP_REMINDER_WEBHOOK_URL");
+// Sends the delivery-notice WhatsApp directly to the customer via Evolution API,
+// using the same proven path as the lead report. Called from the Durable Object
+// alarm 5 minutes after the form is submitted.
+export async function sendCustomerWhatsapp(env: Env, data: LandingPurchaseData) {
+  const copy = CUSTOMER_COPY_BY_MARKET[data.marketKey] || CUSTOMER_COPY_BY_MARKET.US;
+  const to = normalizePhoneForWhatsapp(data.phone);
+  if (!to) {
+    throw new Error("Missing customer phone number");
   }
 
-  const timeoutMs = Number(env.N8N_WHATSAPP_REMINDER_TIMEOUT_MS || "10000");
-  const delayMs = 0; // delay is handled upstream via ctx.waitUntil before this is called
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  const delivery = getEvolutionDelivery(env, data.marketKey);
+  const apiUrl = delivery.apiUrl.replace(/\/+$/, "");
 
-  try {
-    const response = await fetch(webhookUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-monfily-webhook-secret": env.N8N_WHATSAPP_REMINDER_WEBHOOK_SECRET || "",
-      },
-      body: JSON.stringify({
-        idempotencyKey: eventId,
-        language: data.locale,
-        marketKey: data.marketKey,
-        to: normalizePhoneForWhatsapp(data.phone),
-        variables: {
-          message: copy.whatsapp,
-        },
-        reminder: {
-          kind: "landingpage_purchase_delivery_notice",
-          message: copy.whatsapp,
-          delayMs,
-          sendAfterSeconds: Math.round(delayMs / 1000),
-        },
-        delivery: {
-          provider: "evolution",
-          evolution: getEvolutionDelivery(env, data.marketKey),
-        },
-      }),
-      signal: controller.signal,
-    });
+  const response = await fetch(`${apiUrl}/message/sendText/${encodeURIComponent(delivery.instanceName)}`, {
+    method: "POST",
+    headers: {
+      apikey: delivery.apiKey,
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify({
+      number: to,
+      text: copy.whatsapp,
+      delay: delivery.delayMs,
+      linkPreview: false,
+    }),
+  });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`n8n WhatsApp reminder failed: ${response.status} ${errorText}`);
-    }
-
-    return response.json().catch(() => ({ ok: true }));
-  } finally {
-    clearTimeout(timeout);
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Evolution customer WhatsApp failed: ${response.status} ${errorText}`);
   }
+
+  return response.json().catch(() => ({ ok: true }));
 }
 
 export const onRequestOptions: PagesFunction<Env> = () => new Response(null, { status: 204, headers: corsHeaders });
 
-type WaitUntilContext = { waitUntil: (promise: Promise<unknown>) => void };
+// Minimal shape of a Durable Object namespace binding used to schedule the
+// delayed customer WhatsApp. The concrete implementation lives in worker/index.ts.
+type ReminderSchedulerNamespace = {
+  idFromName(name: string): unknown;
+  get(id: unknown): { fetch(input: string, init?: RequestInit): Promise<Response> };
+};
 
-async function scheduleWhatsappReminder(env: Env, data: LandingPurchaseData, copy: CustomerCopy, eventId: string) {
-  const delayMs = Number(env.N8N_WHATSAPP_REMINDER_DELAY_MS || "300000");
-  await new Promise<void>(resolve => setTimeout(resolve, delayMs));
-  try {
-    await postWhatsappReminder(env, data, copy, eventId);
-  } catch (error) {
-    console.error("Scheduled WhatsApp reminder failed:", error);
-  }
-}
-
-export async function handleLandingPurchase(request: Request, env: Env, ctx: WaitUntilContext): Promise<Response> {
+export async function handleLandingPurchase(
+  request: Request,
+  env: Env,
+  scheduler?: ReminderSchedulerNamespace
+): Promise<Response> {
   let body: unknown;
 
   try {
@@ -676,13 +659,29 @@ export async function handleLandingPurchase(request: Request, env: Env, ctx: Wai
   if (reportWhatsappResult.status === "rejected") console.error("Report WhatsApp failed:", reportWhatsappResult.reason);
   if (metaResult.status === "rejected") console.error("Meta event failed:", metaResult.reason);
 
-  ctx.waitUntil(scheduleWhatsappReminder(env, data, copy, eventId));
+  // Schedule the customer WhatsApp for 5 minutes later via a Durable Object alarm.
+  let whatsappScheduled = false;
+  if (scheduler) {
+    try {
+      const id = scheduler.idFromName(eventId);
+      const stub = scheduler.get(id);
+      const scheduleResponse = await stub.fetch("https://scheduler.internal/schedule", {
+        method: "POST",
+        body: JSON.stringify({ data }),
+      });
+      whatsappScheduled = scheduleResponse.ok;
+    } catch (error) {
+      console.error("Failed to schedule customer WhatsApp:", error);
+    }
+  } else {
+    console.error("Reminder scheduler binding unavailable; customer WhatsApp not scheduled");
+  }
 
   return jsonResponse({
     ok: true,
     eventId,
     email: { sent: emailResult.status === "fulfilled" },
-    whatsapp: { scheduled: true },
+    whatsapp: { scheduled: whatsappScheduled },
     report: {
       email: { sent: reportEmailResult.status === "fulfilled" },
       whatsapp: { sent: reportWhatsappResult.status === "fulfilled" },
@@ -692,4 +691,4 @@ export async function handleLandingPurchase(request: Request, env: Env, ctx: Wai
   });
 }
 
-export const onRequestPost: PagesFunction<Env> = (ctx) => handleLandingPurchase(ctx.request, ctx.env, ctx);
+export const onRequestPost: PagesFunction<Env> = (ctx) => handleLandingPurchase(ctx.request, ctx.env);
