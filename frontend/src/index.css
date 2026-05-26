@@ -1085,6 +1085,9 @@
 }
 
 .elevate-page .elevate-card__perk {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
   padding: 12px 18px;
   font-family: "Fustat", sans-serif;
   font-size: 15px;
@@ -1096,6 +1099,53 @@
 
 .elevate-page .elevate-card__perk:last-child {
   border-bottom: none;
+}
+
+.elevate-page .elevate-card__perk-check {
+  position: relative;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #4a8bff 0%, #2869D6 60%, #1f53b0 100%);
+  box-shadow: 0 2px 6px rgba(40, 105, 214, 0.4);
+  overflow: hidden;
+}
+
+.elevate-page .elevate-card__perk-check svg {
+  position: relative;
+  z-index: 1;
+}
+
+.elevate-page .elevate-card__perk-check::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -130%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.9) 50%, transparent 100%);
+  transform: skewX(-20deg);
+  animation: elevate-perk-shine 3.4s ease-in-out infinite;
+}
+
+@keyframes elevate-perk-shine {
+  0%, 55% {
+    left: -130%;
+  }
+  100% {
+    left: 140%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .elevate-page .elevate-card__perk-check::after {
+    animation: none;
+  }
 }
 
 .elevate-page .elevate-option__letter {

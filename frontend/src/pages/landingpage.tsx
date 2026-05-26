@@ -154,11 +154,17 @@ const MARKETS: Record<MarketKey, {
       titlePrefix: "Site profissional e moderno",
       titlePriceConnector: "por apenas",
       subtitle: "Pronto em até 72h, sem mensalidades obrigatórias e sem complicação.",
-      features: ["Entrega em até 72 horas", "Sem mensalidades obrigatórias", "Site profissional e moderno", "100% otimizado para mobile"],
+      features: [
+        "Só paga se aprovar o resultado final, risco zero para si",
+        "Domínio próprio durante 1 ano totalmente por nossa conta, já incluído",
+        "Otimização do Perfil de Empresa no Google incluída no valor",
+        "Entrega rápida em até 72 horas, sem longas esperas",
+      ],
       cardHeadline: "Precisa de um site profissional para o seu negócio?",
       qualifierLabel: "Uma pergunta rápida para percebermos melhor o seu momento:",
       benefits: [
-        "Design personalizado para a identidade visual da sua marca",
+        "Sem mensalidades obrigatórias para manter o site online",
+        "Design profissional e personalizado para a identidade da sua marca",
         "100% responsivo e otimizado para aparecer no Google",
         "Suporte direto pelo WhatsApp durante todo o processo",
       ],
@@ -208,11 +214,17 @@ const MARKETS: Record<MarketKey, {
       titlePrefix: "Sito professionale e moderno",
       titlePriceConnector: "a soli",
       subtitle: "Pronto in 72h, senza canone mensile obbligatorio e senza complicazioni.",
-      features: ["Consegna in 72 ore", "Senza abbonamento obbligatorio", "Sito professionale e moderno", "100% ottimizzato per mobile"],
+      features: [
+        "Paghi solo se approvi il risultato finale, rischio zero",
+        "Dominio personale per 1 anno intero completamente offerto da noi, già incluso",
+        "Ottimizzazione del Profilo dell'attività su Google inclusa nel prezzo",
+        "Consegna rapida entro 72 ore, senza lunghe attese",
+      ],
       cardHeadline: "Hai bisogno di un sito professionale per la tua attività?",
       qualifierLabel: "Una domanda veloce per capire meglio la tua situazione:",
       benefits: [
-        "Design personalizzato per l'identità visiva del tuo brand",
+        "Senza abbonamenti obbligatori per mantenere il sito online",
+        "Design professionale e personalizzato per l'identità del tuo brand",
         "100% responsive e ottimizzato per apparire su Google",
         "Supporto diretto su WhatsApp durante tutto il processo",
       ],
@@ -262,11 +274,17 @@ const MARKETS: Record<MarketKey, {
       titlePrefix: "Sitio profesional y moderno",
       titlePriceConnector: "por solo",
       subtitle: "Listo en 72h, sin mensualidades obligatorias y sin complicaciones.",
-      features: ["Entrega en 72 horas", "Sin mensualidades obligatorias", "Sitio profesional y moderno", "100% optimizado para móvil"],
+      features: [
+        "Solo pagas si apruebas el resultado final, riesgo cero",
+        "Dominio propio durante 1 año completo totalmente por nuestra cuenta, ya incluido",
+        "Optimización del Perfil de Empresa en Google incluida en el precio",
+        "Entrega rápida en hasta 72 horas, sin largas esperas",
+      ],
       cardHeadline: "¿Necesitas un sitio profesional para tu negocio?",
       qualifierLabel: "Una pregunta rápida para entenderte mejor:",
       benefits: [
-        "Diseño personalizado para la identidad visual de tu marca",
+        "Sin mensualidades obligatorias para mantener el sitio online",
+        "Diseño profesional y personalizado para la identidad de tu marca",
         "100% responsive y optimizado para aparecer en Google",
         "Soporte directo por WhatsApp durante todo el proceso",
       ],
@@ -316,12 +334,18 @@ const MARKETS: Record<MarketKey, {
       titlePrefix: "אתר מקצועי ומודרני",
       titlePriceConnector: "במחיר",
       subtitle: "מוכן תוך 72 שעות, ללא דמי מנוי חובה וללא סיבוכים.",
-      features: ["מסירה תוך 72 שעות", "ללא דמי מנוי חובה", "אתר מקצועי ומודרני", "מותאם 100% למובייל"],
+      features: [
+        "משלמים רק אם תאשרו את התוצאה הסופית, אפס סיכון",
+        "דומיין אישי לשנה שלמה על חשבוננו, כבר כלול במחיר",
+        "אופטימיזציה של פרופיל העסק בגוגל כלולה במחיר",
+        "מסירה מהירה תוך 72 שעות, ללא המתנה ארוכה",
+      ],
       cardHeadline: "צריך אתר מקצועי לעסק שלך?",
       qualifierLabel: "שאלה אחת מהירה כדי שנוכל להבין אותך טוב יותר:",
       benefits: [
-        "עיצוב מותאם לזהות הוויזואלית של המותג שלך",
-        "100% רספונסיבי ומותאם לדירוג בגוגל",
+        "ללא דמי מנוי חובה לתחזוקת האתר",
+        "עיצוב מקצועי ומותאם אישית לזהות המותג שלך",
+        "100% רספונסיבי ומותאם להופעה בגוגל",
         "תמיכה ישירה בוואטסאפ לאורך כל התהליך",
       ],
       step: "שלב",
@@ -370,11 +394,17 @@ const MARKETS: Record<MarketKey, {
       titlePrefix: "Professional & modern website",
       titlePriceConnector: "for only",
       subtitle: "Delivered in 72h, with no mandatory monthly fees and no hassle.",
-      features: ["Delivery in 72 hours", "No mandatory monthly fees", "Professional & modern site", "100% mobile optimized"],
+      features: [
+        "You only pay if you approve the final result, zero risk",
+        "Your own domain for 1 full year completely on us, already included",
+        "Google Business Profile optimisation included in the price",
+        "Fast delivery within 72 hours, no long waits",
+      ],
       cardHeadline: "Need a professional website for your business?",
       qualifierLabel: "One quick question to better understand your situation:",
       benefits: [
-        "Custom design tailored to your brand identity",
+        "No mandatory monthly fees to keep your site online",
+        "Professional design tailored to your brand identity",
         "100% responsive and optimised to rank on Google",
         "Direct WhatsApp support throughout the entire process",
       ],
@@ -424,11 +454,17 @@ const MARKETS: Record<MarketKey, {
       titlePrefix: "Site profissional e moderno",
       titlePriceConnector: "por apenas",
       subtitle: "Pronto em até 72h, sem mensalidades obrigatórias e sem complicação.",
-      features: ["Entrega em até 72 horas", "Sem mensalidades obrigatórias", "Site profissional e moderno", "100% otimizado para mobile"],
+      features: [
+        "Você só paga se aprovar o resultado final, risco zero",
+        "Domínio próprio por 1 ano totalmente por nossa conta, já incluso",
+        "Otimização do Google Meu Negócio incluída no valor",
+        "Entrega rápida em até 72 horas, sem longas esperas",
+      ],
       cardHeadline: "Precisa de um site profissional para o seu negócio?",
       qualifierLabel: "Uma pergunta rápida para entendermos você melhor:",
       benefits: [
-        "Design personalizado para a identidade visual da sua marca",
+        "Sem mensalidades obrigatórias para manter o site no ar",
+        "Design profissional e personalizado para a identidade da sua marca",
         "100% responsivo e otimizado para aparecer no Google",
         "Suporte direto pelo WhatsApp durante todo o processo",
       ],
@@ -478,11 +514,17 @@ const MARKETS: Record<MarketKey, {
       titlePrefix: "Professional & modern website",
       titlePriceConnector: "for only",
       subtitle: "Delivered in 72h, with no mandatory monthly fees and no hassle.",
-      features: ["Delivery in 72 hours", "No mandatory monthly fees", "Professional & modern site", "100% mobile optimized"],
+      features: [
+        "You only pay if you approve the final result, zero risk",
+        "Your own domain for 1 full year completely on us, already included",
+        "Google Business Profile optimisation included in the price",
+        "Fast delivery within 72 hours, no long waits",
+      ],
       cardHeadline: "Need a professional website for your business?",
       qualifierLabel: "One quick question to better understand your situation:",
       benefits: [
-        "Custom design tailored to your brand identity",
+        "No mandatory monthly fees to keep your site online",
+        "Professional design tailored to your brand identity",
         "100% responsive and optimised to rank on Google",
         "Direct WhatsApp support throughout the entire process",
       ],
@@ -532,11 +574,17 @@ const MARKETS: Record<MarketKey, {
       titlePrefix: "Professional & modern website",
       titlePriceConnector: "for only",
       subtitle: "Delivered in 72h, with no mandatory monthly fees and no hassle.",
-      features: ["Delivery in 72 hours", "No mandatory monthly fees", "Professional & modern site", "100% mobile optimized"],
+      features: [
+        "You only pay if you approve the final result, zero risk",
+        "Your own domain for 1 full year completely on us, already included",
+        "Google Business Profile optimisation included in the price",
+        "Fast delivery within 72 hours, no long waits",
+      ],
       cardHeadline: "Need a professional website for your business?",
       qualifierLabel: "One quick question to better understand your situation:",
       benefits: [
-        "Custom design tailored to your brand identity",
+        "No mandatory monthly fees to keep your site online",
+        "Professional design tailored to your brand identity",
         "100% responsive and optimised to rank on Google",
         "Direct WhatsApp support throughout the entire process",
       ],
@@ -876,7 +924,14 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
 
               <div className="elevate-card__perks">
                 {[...copy.features, ...copy.benefits].map((item, index) => (
-                  <div key={index} className="elevate-card__perk">{item}</div>
+                  <div key={index} className="elevate-card__perk">
+                    <span className="elevate-card__perk-check" aria-hidden="true">
+                      <svg width="12" height="12" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 5.5L5 9.5L13 1.5" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                    <span>{item}</span>
+                  </div>
                 ))}
               </div>
 
