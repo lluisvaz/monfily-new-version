@@ -44,10 +44,6 @@ type Copy = {
   budgetOptions: string[];
   timelineQuestion: string;
   timelineOptions: string[];
-  focusQuestion: string;
-  focusHint: string;
-  focusOptions: string[];
-  send: string;
 };
 
 type SeoCopy = {
@@ -170,8 +166,8 @@ const MARKETS: Record<MarketKey, {
       question: "Você já tem um produto, serviço ou negócio que quer vender pela internet?",
       options: ["Sim, ainda não tenho um site profissional", "Tenho um site mas quero melhorá-lo"],
       next: "Continuar",
-      formTitle: "Agora deixe os seus dados",
-      formSubtitle: "Vamos analisar o seu momento e contactar pelo canal correto.",
+      formTitle: "Vamos continuar pelo WhatsApp?",
+      formSubtitle: "Deixe o seu nome e telefone para abrirmos a conversa com o contexto certo.",
       name: "Nome",
       instagram: "Instagram do seu negócio",
       instagramPlaceholder: "seu_usuario",
@@ -192,10 +188,6 @@ const MARKETS: Record<MarketKey, {
       budgetOptions: ["Sim, estou pronto", "Preciso de mais informação"],
       timelineQuestion: "Quando gostaria de ter o seu site pronto?",
       timelineOptions: ["O mais rápido possível", "Esta semana", "Este mês", "Ainda estou a pesquisar"],
-      focusQuestion: "Para finalizar, qual o foco do seu site?",
-      focusHint: "Pode selecionar mais de uma opção",
-      focusOptions: ["Apresentação institucional", "Captação de leads / clientes", "Loja online / e-commerce", "Portefólio de trabalhos", "Página única (landing page)"],
-      send: "ENVIAR",
     },
   },
   IT: {
@@ -228,8 +220,8 @@ const MARKETS: Record<MarketKey, {
       question: "Hai già un prodotto, servizio o business che vuoi vendere online?",
       options: ["Sì, non ho ancora un sito professionale", "Ho un sito ma voglio migliorarlo"],
       next: "Continua",
-      formTitle: "Ora lascia i tuoi dati",
-      formSubtitle: "Analizzeremo il tuo momento e ti contatteremo dal canale giusto.",
+      formTitle: "Continuiamo su WhatsApp?",
+      formSubtitle: "Lascia nome e telefono per aprire la conversazione con il contesto giusto.",
       name: "Nome",
       instagram: "Instagram della tua attività",
       instagramPlaceholder: "tuo_utente",
@@ -250,10 +242,6 @@ const MARKETS: Record<MarketKey, {
       budgetOptions: ["Sì, sono pronto", "Ho bisogno di più informazioni"],
       timelineQuestion: "Quando vorresti avere il tuo sito pronto?",
       timelineOptions: ["Il prima possibile", "Questa settimana", "Questo mese", "Sto ancora valutando"],
-      focusQuestion: "Per concludere, qual è il focus del tuo sito?",
-      focusHint: "Puoi selezionare più opzioni",
-      focusOptions: ["Presentazione istituzionale", "Acquisizione di lead / clienti", "Negozio online / e-commerce", "Portfolio di lavori", "Pagina singola (landing page)"],
-      send: "INVIA",
     },
   },
   ES: {
@@ -286,8 +274,8 @@ const MARKETS: Record<MarketKey, {
       question: "¿Ya tienes un producto, servicio o negocio que quieres vender por internet?",
       options: ["Sí, aún no tengo un sitio profesional", "Tengo un sitio pero quiero mejorarlo"],
       next: "Continuar",
-      formTitle: "Ahora deja tus datos",
-      formSubtitle: "Analizaremos tu momento y te contactaremos por el canal correcto.",
+      formTitle: "¿Seguimos por WhatsApp?",
+      formSubtitle: "Deja tu nombre y teléfono para abrir la conversación con el contexto correcto.",
       name: "Nombre",
       instagram: "Instagram de tu negocio",
       instagramPlaceholder: "tu_usuario",
@@ -308,10 +296,6 @@ const MARKETS: Record<MarketKey, {
       budgetOptions: ["Sí, estoy listo", "Necesito más información"],
       timelineQuestion: "¿Cuándo te gustaría tener tu sitio listo?",
       timelineOptions: ["Lo antes posible", "Esta semana", "Este mes", "Todavía estoy investigando"],
-      focusQuestion: "Para finalizar, ¿cuál es el enfoque de tu sitio?",
-      focusHint: "Puedes seleccionar más de una opción",
-      focusOptions: ["Presentación institucional", "Captación de leads / clientes", "Tienda online / e-commerce", "Portafolio de trabajos", "Página única (landing page)"],
-      send: "ENVIAR",
     },
   },
   IL: {
@@ -344,8 +328,8 @@ const MARKETS: Record<MarketKey, {
       question: "כבר יש לך מוצר, שירות או עסק שברצונך למכור באינטרנט?",
       options: ["כן, עדיין אין לי אתר מקצועי", "יש לי אתר אבל אני רוצה לשדרג אותו"],
       next: "המשך",
-      formTitle: "עכשיו השאר פרטים",
-      formSubtitle: "נבדוק את הצורך שלך ונחזור אליך בערוץ המתאים.",
+      formTitle: "נמשיך בוואטסאפ?",
+      formSubtitle: "השאירו שם וטלפון כדי שנפתח את השיחה עם ההקשר הנכון.",
       name: "שם",
       instagram: "האינסטגרם של העסק שלך",
       instagramPlaceholder: "שם_משתמש",
@@ -366,10 +350,6 @@ const MARKETS: Record<MarketKey, {
       budgetOptions: ["כן, אני מוכן", "אני צריך יותר מידע"],
       timelineQuestion: "מתי היית רוצה שהאתר שלך יהיה מוכן?",
       timelineOptions: ["בהקדם האפשרי", "השבוע", "החודש הזה", "עדיין חוקר"],
-      focusQuestion: "לסיום, מה המיקוד של האתר שלך?",
-      focusHint: "ניתן לבחור יותר מאפשרות אחת",
-      focusOptions: ["מצגת עסקית", "לכידת לידים / לקוחות", "חנות אונליין / איקומרס", "תיק עבודות", "עמוד בודד (דף נחיתה)"],
-      send: "שלח",
     },
   },
   SG: {
@@ -402,8 +382,8 @@ const MARKETS: Record<MarketKey, {
       question: "Do you already have a product, service, or business you want to sell online?",
       options: ["Yes, I don't have a professional website yet", "I have a website but want to upgrade it"],
       next: "Continue",
-      formTitle: "Now leave your details",
-      formSubtitle: "We will review your stage and contact you through the right channel.",
+      formTitle: "Continue on WhatsApp?",
+      formSubtitle: "Leave your name and phone so we can start the conversation with the right context.",
       name: "Name",
       instagram: "Your business Instagram",
       instagramPlaceholder: "your_username",
@@ -424,10 +404,6 @@ const MARKETS: Record<MarketKey, {
       budgetOptions: ["Yes, I'm ready", "I need more information"],
       timelineQuestion: "When would you like your website to be ready?",
       timelineOptions: ["As soon as possible", "This week", "This month", "I'm still researching"],
-      focusQuestion: "To finish, what is the focus of your website?",
-      focusHint: "You can select more than one option",
-      focusOptions: ["Institutional presentation", "Lead / client generation", "Online store / e-commerce", "Work portfolio", "Single page (landing page)"],
-      send: "SUBMIT",
     },
   },
   BR: {
@@ -460,8 +436,8 @@ const MARKETS: Record<MarketKey, {
       question: "Você já tem um produto, serviço ou negócio que quer vender pela internet?",
       options: ["Sim, ainda não tenho um site profissional", "Tenho um site mas quero melhorá-lo"],
       next: "Continuar",
-      formTitle: "Agora deixe seus dados",
-      formSubtitle: "Vamos entender seu momento e chamar você pelo canal certo.",
+      formTitle: "Vamos continuar pelo WhatsApp?",
+      formSubtitle: "Deixe seu nome e telefone para abrirmos a conversa com o contexto certo.",
       name: "Nome",
       instagram: "Instagram do seu negócio",
       instagramPlaceholder: "seu_usuario",
@@ -482,10 +458,6 @@ const MARKETS: Record<MarketKey, {
       budgetOptions: ["Sim, estou pronto", "Preciso entender melhor"],
       timelineQuestion: "Quando gostaria de ter o seu site pronto?",
       timelineOptions: ["O mais rápido possível", "Esta semana", "Este mês", "Ainda estou pesquisando"],
-      focusQuestion: "Para finalizar, qual o foco do seu site?",
-      focusHint: "Pode selecionar mais de uma opção",
-      focusOptions: ["Apresentação institucional", "Captação de leads / clientes", "Loja online / e-commerce", "Portfólio de trabalhos", "Página única (landing page)"],
-      send: "ENVIAR",
     },
   },
   GB: {
@@ -518,8 +490,8 @@ const MARKETS: Record<MarketKey, {
       question: "Do you already have a product, service, or business you want to sell online?",
       options: ["Yes, I don't have a professional website yet", "I have a website but want to upgrade it"],
       next: "Continue",
-      formTitle: "Now leave your details",
-      formSubtitle: "We will review your stage and contact you through the right channel.",
+      formTitle: "Continue on WhatsApp?",
+      formSubtitle: "Leave your name and phone so we can start the conversation with the right context.",
       name: "Name",
       instagram: "Your business Instagram",
       instagramPlaceholder: "your_username",
@@ -540,10 +512,6 @@ const MARKETS: Record<MarketKey, {
       budgetOptions: ["Yes, I'm ready", "I need more information"],
       timelineQuestion: "When would you like your website to be ready?",
       timelineOptions: ["As soon as possible", "This week", "This month", "I'm still researching"],
-      focusQuestion: "To finish, what is the focus of your website?",
-      focusHint: "You can select more than one option",
-      focusOptions: ["Institutional presentation", "Lead / client generation", "Online store / e-commerce", "Work portfolio", "Single page (landing page)"],
-      send: "SUBMIT",
     },
   },
   US: {
@@ -576,8 +544,8 @@ const MARKETS: Record<MarketKey, {
       question: "Do you already have a product, service, or business you want to sell online?",
       options: ["Yes, I don't have a professional website yet", "I have a website but want to upgrade it"],
       next: "Continue",
-      formTitle: "Now leave your details",
-      formSubtitle: "We will review your stage and contact you through the right channel.",
+      formTitle: "Continue on WhatsApp?",
+      formSubtitle: "Leave your name and phone so we can start the conversation with the right context.",
       name: "Name",
       instagram: "Your business Instagram",
       instagramPlaceholder: "your_username",
@@ -598,10 +566,6 @@ const MARKETS: Record<MarketKey, {
       budgetOptions: ["Yes, I'm ready", "I need more information"],
       timelineQuestion: "When would you like your website to be ready?",
       timelineOptions: ["As soon as possible", "This week", "This month", "I'm still researching"],
-      focusQuestion: "To finish, what is the focus of your website?",
-      focusHint: "You can select more than one option",
-      focusOptions: ["Institutional presentation", "Lead / client generation", "Online store / e-commerce", "Work portfolio", "Single page (landing page)"],
-      send: "SUBMIT",
     },
   },
 };
@@ -681,6 +645,7 @@ function normalizePhoneValue(value: string, marketKey: MarketKey): string {
 const INSTAGRAM_PREFIX = "instagram.com/";
 const INSTAGRAM_HANDLE_MAX_LENGTH = 30;
 const WEBSITE_PREFIX = "https://";
+const LANDING_TOTAL_STEPS = 6;
 
 function normalizeInstagramHandle(value: string): string {
   return value
@@ -737,7 +702,6 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
   const [logoOption, setLogoOption] = useState("");
   const [budgetOption, setBudgetOption] = useState("");
   const [timelineOption, setTimelineOption] = useState("");
-  const [focusOptions, setFocusOptions] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({ name: "", instagram: "", currentSite: "", phone: MARKETS[initialMarketKey].phonePrefix });
   const market = MARKETS[marketKey];
@@ -775,7 +739,6 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
           logoAnswer: logoOption,
           budgetAnswer: budgetOption,
           timelineAnswer: timelineOption,
-          focusAnswers: focusOptions,
           name: form.name.trim(),
           instagram: form.instagram.trim(),
           currentSiteUrl: form.currentSite.trim() ? `${WEBSITE_PREFIX}${form.currentSite.trim()}` : undefined,
@@ -855,8 +818,8 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
     updateMetaTag("twitter:description", seo.description);
   }, [market.locale, seo]);
 
-  const displayedStep = step === 2 ? 7 : step > 2 ? step - 1 : step;
-  const progress = useMemo(() => Math.round((displayedStep / 7) * 100), [displayedStep]);
+  const displayedStep = step === 2 ? LANDING_TOTAL_STEPS : step > 2 ? step - 1 : step;
+  const progress = useMemo(() => Math.round((displayedStep / LANDING_TOTAL_STEPS) * 100), [displayedStep]);
 
   return (
     <main className="elevate-page" aria-label="Monfily landing page" lang={market.locale} dir="ltr" data-text-direction={textDirection}>
@@ -881,8 +844,8 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
           <section className="elevate-card" aria-labelledby="elevate-question">
           <span className="elevate-line-marker elevate-line-marker--progress-left" aria-hidden="true" />
           <span className="elevate-line-marker elevate-line-marker--progress-right" aria-hidden="true" />
-          <div className="elevate-progress" aria-label={`${copy.step} ${displayedStep} / 7`}>
-            <span>{copy.step} {displayedStep}/7</span>
+          <div className="elevate-progress" aria-label={`${copy.step} ${displayedStep} / ${LANDING_TOTAL_STEPS}`}>
+            <span>{copy.step} {displayedStep}/{LANDING_TOTAL_STEPS}</span>
             <div>
               <i style={{ width: `${progress}%` }} />
             </div>
@@ -1047,7 +1010,7 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
                 )}
 
                 <div className="elevate-actions">
-                  <button type="button" className="elevate-back" onClick={() => setStep(7)}>
+                  <button type="button" className="elevate-back" onClick={() => setStep(6)}>
                     {copy.back}
                   </button>
                   <button type="submit" className="elevate-cta" disabled={!isFormComplete || isSubmitting}>
@@ -1153,49 +1116,7 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
                 </fieldset>
                 <div className="elevate-actions">
                   <button type="button" className="elevate-back" onClick={() => setStep(5)}>{copy.back}</button>
-                  <button type="button" className="elevate-cta" disabled={!timelineOption} onClick={() => setStep(7)}>
-                    <span className="elevate-cta__shine" aria-hidden="true" />
-                    <span>{copy.advance}</span>
-                  </button>
-                </div>
-              </div>
-            </>
-          ) : step === 7 ? (
-            <>
-              <h2 id="elevate-question" className="elevate-card__question">{copy.focusQuestion}</h2>
-              {copy.focusHint && <p className="elevate-card__helper">{copy.focusHint}</p>}
-              <div className="elevate-form">
-                <fieldset className="elevate-form__options">
-                  <legend className="sr-only">{copy.focusQuestion}</legend>
-                  {copy.focusOptions.map((option) => (
-                    <label key={option} className="elevate-option" data-selected={focusOptions.includes(option)}>
-                      <input
-                        type="checkbox"
-                        className="sr-only"
-                        name="focus"
-                        value={option}
-                        checked={focusOptions.includes(option)}
-                        onChange={(e) => setFocusOptions((prev) => e.target.checked ? [...prev, option] : prev.filter((o) => o !== option))}
-                      />
-                      <span className="elevate-option__check" aria-hidden="true">
-                        {focusOptions.includes(option) && (
-                          <svg width="11" height="9" viewBox="0 0 11 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 4L4 7.5L10 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
-                        )}
-                      </span>
-                      <span>{option}</span>
-                    </label>
-                  ))}
-                </fieldset>
-                <div className="elevate-actions">
-                  <button type="button" className="elevate-back" onClick={() => setStep(6)}>{copy.back}</button>
-                  <button
-                    type="button"
-                    className="elevate-cta"
-                    disabled={focusOptions.length === 0}
-                    onClick={() => setStep(2)}
-                  >
+                  <button type="button" className="elevate-cta" disabled={!timelineOption} onClick={() => setStep(2)}>
                     <span className="elevate-cta__shine" aria-hidden="true" />
                     <span>{copy.advance}</span>
                   </button>

@@ -23,7 +23,6 @@ const landingPurchaseSchema = z.object({
   logoAnswer: z.string().optional(),
   budgetAnswer: z.string().optional(),
   timelineAnswer: z.string().optional(),
-  focusAnswers: z.array(z.string()).optional(),
   currentSiteUrl: z.string().optional(),
   name: z.string().min(1),
   company: z.string().min(1).optional(),
@@ -451,7 +450,6 @@ function getLeadReportWhatsappText(data: LandingPurchaseData, purchase: { value:
   if (data.logoAnswer) lines.push(`*Logo / identidade:* ${data.logoAnswer}`);
   if (data.budgetAnswer) lines.push(`*Pronto para investir:* ${data.budgetAnswer}`);
   if (data.timelineAnswer) lines.push(`*Prazo desejado:* ${data.timelineAnswer}`);
-  if (data.focusAnswers?.length) lines.push(`*Foco do site:* ${data.focusAnswers.join(", ")}`);
 
   lines.push("", divider, `🌍 *Mercado:* ${data.marketKey}`, `💰 *Oferta:* ${purchase.value} ${purchase.currency}`);
   return lines.join("\n");
@@ -475,7 +473,6 @@ function getLeadReportText(data: LandingPurchaseData, purchase: { value: number;
   if (data.logoAnswer) lines.push(`Logo: ${data.logoAnswer}`);
   if (data.budgetAnswer) lines.push(`Orçamento: ${data.budgetAnswer}`);
   if (data.timelineAnswer) lines.push(`Prazo: ${data.timelineAnswer}`);
-  if (data.focusAnswers?.length) lines.push(`Foco do site: ${data.focusAnswers.join(", ")}`);
   return lines.join("\n");
 }
 
@@ -495,7 +492,6 @@ function getLeadReportEmailHtml(data: LandingPurchaseData, purchase: { value: nu
   if (data.logoAnswer) rows.push(["Logo", data.logoAnswer]);
   if (data.budgetAnswer) rows.push(["Orçamento", data.budgetAnswer]);
   if (data.timelineAnswer) rows.push(["Prazo", data.timelineAnswer]);
-  if (data.focusAnswers?.length) rows.push(["Foco do site", data.focusAnswers.join(", ")]);
 
   return `<!doctype html>
 <html lang="pt-BR">
