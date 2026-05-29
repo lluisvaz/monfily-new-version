@@ -21,6 +21,10 @@ type TrackMetaEventResult = {
   pixelIds: string[];
 };
 
+type InitializedMetaPixel = TrackMetaEventResult & {
+  fbq?: MetaFbq;
+};
+
 declare global {
   interface Window {
     fbq?: MetaFbq;
@@ -120,12 +124,7 @@ function loadMetaPixelScript() {
   return pixelScriptPromise;
 }
 
-function fireMetaEvent(
-  marketKey: MetaPixelMarketKey,
-  eventName: string,
-  params: Record<string, unknown>,
-  eventId: string
-): TrackMetaEventResult {
+function initializePixelIds(marketKey: MetaPixelMarketKey): InitializedMetaPixel {
   if (typeof window === "undefined" || typeof document === "undefined") {
     return { fired: false, pixelIds: [] };
   }
@@ -143,12 +142,33 @@ function fireMetaEvent(
       fbq("init", pixelId);
       initializedPixelIds.add(pixelId);
     }
-
-    fbq("trackSingle", pixelId, eventName, params, { eventID: eventId });
   });
 
   loadMetaPixelScript().catch((error) => {
     console.error("Failed to load Meta Pixel script:", error);
+  });
+
+  return { fired: true, pixelIds, fbq };
+}
+
+export function initializeMetaPixel(marketKey: MetaPixelMarketKey): TrackMetaEventResult {
+  const { fired, pixelIds } = initializePixelIds(marketKey);
+  return { fired, pixelIds };
+}
+
+function fireMetaEvent(
+  marketKey: MetaPixelMarketKey,
+  eventName: string,
+  params: Record<string, unknown>,
+  eventId: string
+): TrackMetaEventResult {
+  const { fired, pixelIds, fbq } = initializePixelIds(marketKey);
+  if (!fired || !fbq) {
+    return { fired: false, pixelIds };
+  }
+
+  pixelIds.forEach((pixelId) => {
+    fbq("trackSingle", pixelId, eventName, params, { eventID: eventId });
   });
 
   return { fired: true, pixelIds };

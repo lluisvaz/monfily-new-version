@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocation } from "wouter";
 import { SectionLayout } from "@/components/landing/section-layout";
 import { detectLocationData } from "@/lib/geo-location";
-import { trackMetaLandingLead } from "@/lib/meta-pixel";
+import { initializeMetaPixel, trackMetaLandingLead } from "@/lib/meta-pixel";
 import { getWhatsAppNumber, type Language } from "@/lib/translations";
 import { useWhatsAppNumber } from "@/hooks/use-whatsapp";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
@@ -774,6 +774,10 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
       setIsSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    initializeMetaPixel(marketKey);
+  }, [marketKey]);
 
   useEffect(() => {
     if (fixedMarketKey) {
