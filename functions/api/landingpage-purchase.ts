@@ -26,8 +26,8 @@ const landingPurchaseSchema = z.object({
   focusAnswers: z.array(z.string()).optional(),
   currentSiteUrl: z.string().optional(),
   name: z.string().min(1),
-  company: z.string().min(1),
-  email: z.string().email(),
+  company: z.string().min(1).optional(),
+  email: z.string().email().optional(),
   instagram: z.string().min(1).max(30).regex(/^[A-Za-z0-9._]+$/),
   phone: z.string().min(1),
   pageUrl: z.string().url().optional(),
@@ -172,7 +172,8 @@ function removeUndefined<T extends Record<string, unknown>>(value: T) {
 }
 
 function getMetaEnvPrefixes(marketKey: MarketKey) {
-  return marketKey === "GB" ? ["GB", "UK"] : [marketKey];
+  const marketPrefixes = marketKey === "GB" ? ["GB", "UK"] : [marketKey];
+  return Array.from(new Set([...marketPrefixes, "DEFAULT", "BR"]));
 }
 
 function getMetaPixelConfig(env: Env, marketKey: MarketKey) {
@@ -251,7 +252,7 @@ async function sendMetaLeadEvent(
 ) {
   const config = getMetaPixelConfig(env, data.marketKey);
   if (!config) {
-    return { skipped: true, reason: "Meta pixel ID or access token is not configured for this market" };
+    throw new Error(`Meta pixel ID or access token is not configured for ${data.marketKey}`);
   }
 
   const eventSourceUrl = getEventSourceUrl(request, data);
@@ -294,26 +295,28 @@ async function sendMetaLeadEvent(
   }
 
   try {
-    const response = await fetch(`https://graph.facebook.com/${config.graphVersion}/${config.pixelId}/events`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${config.accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
+    const response = await fetch(
+      `https://graph.facebook.com/${config.graphVersion}/${config.pixelId}/events?access_token=${encodeURIComponent(config.accessToken)}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      }
+    );
 
     const provider = await response.json().catch(async () => ({ text: await response.text().catch(() => "") }));
 
     if (!response.ok) {
       console.error("Meta Conversions API lead failed:", provider);
-      return { sent: false, provider };
+      throw new Error(`Meta Conversions API lead failed: ${response.status}`);
     }
 
     return { sent: true, provider };
   } catch (error) {
     console.error("Meta Conversions API lead failed:", error);
-    return { sent: false, error: error instanceof Error ? error.message : "Unknown error" };
+    throw error;
   }
 }
 
@@ -395,6 +398,10 @@ async function sendCustomerEmail(env: Env, data: LandingPurchaseData, copy: Cust
   const fromEmail = env.RESEND_FROM_EMAIL || "notification@monfily.com";
   const fromName = env.RESEND_FROM_NAME || "Monfily";
 
+  if (!data.email) {
+    return { skipped: true, reason: "Customer email was not collected" };
+  }
+
   if (!apiKey) {
     throw new Error("Missing RESEND_API_KEY");
   }
@@ -432,11 +439,11 @@ function getLeadReportWhatsappText(data: LandingPurchaseData, purchase: { value:
     divider,
     "👤 *DADOS DO CLIENTE*",
     `*Nome:* ${data.name}`,
-    `*Negócio:* ${data.company}`,
-    `*Email:* ${data.email}`,
     `*Telefone:* ${data.phone}`,
     `*Instagram:* instagram.com/${data.instagram}`,
   ];
+  if (data.company) lines.push(`*Negócio:* ${data.company}`);
+  if (data.email) lines.push(`*Email:* ${data.email}`);
   if (data.currentSiteUrl) lines.push(`*Site atual:* ${data.currentSiteUrl}`);
 
   lines.push("", divider, "📋 *RESPOSTAS DO QUIZ*", `*Interesse:* ${data.selectedOption}`);
@@ -458,11 +465,11 @@ function getLeadReportText(data: LandingPurchaseData, purchase: { value: number;
     `Oferta: ${purchase.value} ${purchase.currency}`,
     `Resposta: ${data.selectedOption}`,
     `Nome: ${data.name}`,
-    `Negócio: ${data.company}`,
-    `Email: ${data.email}`,
     `Instagram: https://instagram.com/${data.instagram}`,
     `Telefone: ${data.phone}`,
   ];
+  if (data.company) lines.push(`Negócio: ${data.company}`);
+  if (data.email) lines.push(`Email: ${data.email}`);
   if (data.currentSiteUrl) lines.push(`Site atual: ${data.currentSiteUrl}`);
   if (data.domainAnswer) lines.push(`Domínio: ${data.domainAnswer}`);
   if (data.logoAnswer) lines.push(`Logo: ${data.logoAnswer}`);
@@ -478,11 +485,11 @@ function getLeadReportEmailHtml(data: LandingPurchaseData, purchase: { value: nu
     ["Oferta", `${purchase.value} ${purchase.currency}`],
     ["Resposta", data.selectedOption],
     ["Nome", data.name],
-    ["Negócio", data.company],
-    ["Email", data.email],
     ["Instagram", `https://instagram.com/${data.instagram}`],
     ["Telefone", data.phone],
   ];
+  if (data.company) rows.push(["Negócio", data.company]);
+  if (data.email) rows.push(["Email", data.email]);
   if (data.currentSiteUrl) rows.push(["Site atual", data.currentSiteUrl]);
   if (data.domainAnswer) rows.push(["Domínio", data.domainAnswer]);
   if (data.logoAnswer) rows.push(["Logo", data.logoAnswer]);
@@ -671,52 +678,52 @@ export async function handleLandingPurchase(
   }
 
   const data = result.data;
-  const copy = CUSTOMER_COPY_BY_MARKET[data.marketKey] || CUSTOMER_COPY_BY_MARKET.US;
   const purchase = PURCHASE_BY_MARKET[data.marketKey];
   const eventId = `landingpage_lead_${Date.now()}_${crypto.randomUUID()}`;
 
-  const [emailResult, reportEmailResult, reportWhatsappResult, metaResult] = await Promise.allSettled([
-    sendCustomerEmail(env, data, copy),
-    sendLeadReportEmail(env, data, purchase),
-    sendLeadReportWhatsapp(env, data, purchase),
-    sendMetaLeadEvent(request, env, data, purchase, eventId),
-  ]);
+  try {
+    if (!scheduler) {
+      throw new Error("Reminder scheduler binding unavailable");
+    }
 
-  if (emailResult.status === "rejected") console.error("Customer email failed:", emailResult.reason);
-  if (reportEmailResult.status === "rejected") console.error("Report email failed:", reportEmailResult.reason);
-  if (reportWhatsappResult.status === "rejected") console.error("Report WhatsApp failed:", reportWhatsappResult.reason);
-  if (metaResult.status === "rejected") console.error("Meta event failed:", metaResult.reason);
-
-  // Schedule the customer WhatsApp for 5 minutes later via a Durable Object alarm.
-  let whatsappScheduled = false;
-  if (scheduler) {
-    try {
-      const id = scheduler.idFromName(eventId);
-      const stub = scheduler.get(id);
-      const scheduleResponse = await stub.fetch("https://scheduler.internal/schedule", {
+    const id = scheduler.idFromName(eventId);
+    const stub = scheduler.get(id);
+    const [reportEmailResult, reportWhatsappResult, metaResult, scheduleResponse] = await Promise.all([
+      sendLeadReportEmail(env, data, purchase),
+      sendLeadReportWhatsapp(env, data, purchase),
+      sendMetaLeadEvent(request, env, data, purchase, eventId),
+      stub.fetch("https://scheduler.internal/schedule", {
         method: "POST",
         body: JSON.stringify({ data }),
-      });
-      whatsappScheduled = scheduleResponse.ok;
-    } catch (error) {
-      console.error("Failed to schedule customer WhatsApp:", error);
-    }
-  } else {
-    console.error("Reminder scheduler binding unavailable; customer WhatsApp not scheduled");
-  }
+      }),
+    ]);
 
-  return jsonResponse({
-    ok: true,
-    eventId,
-    email: { sent: emailResult.status === "fulfilled" },
-    whatsapp: { scheduled: whatsappScheduled },
-    report: {
-      email: { sent: reportEmailResult.status === "fulfilled" },
-      whatsapp: { sent: reportWhatsappResult.status === "fulfilled" },
-    },
-    meta: metaResult.status === "fulfilled" ? metaResult.value : null,
-    purchase,
-  });
+    if (!scheduleResponse.ok) {
+      throw new Error(`Failed to schedule customer WhatsApp: ${scheduleResponse.status}`);
+    }
+
+    return jsonResponse({
+      ok: true,
+      eventId,
+      whatsapp: { scheduled: true },
+      report: {
+        email: { sent: true, provider: reportEmailResult },
+        whatsapp: { sent: true, provider: reportWhatsappResult },
+      },
+      meta: metaResult,
+      purchase,
+    });
+  } catch (error) {
+    console.error("Landing page lead delivery failed:", error);
+    return jsonResponse(
+      {
+        ok: false,
+        message: "Failed to process landing page lead",
+        error: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 502 }
+    );
+  }
 }
 
 export const onRequestPost: PagesFunction<Env> = (ctx) => handleLandingPurchase(ctx.request, ctx.env);

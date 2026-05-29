@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLocation } from "wouter";
 import { SectionLayout } from "@/components/landing/section-layout";
 import { detectLocationData } from "@/lib/geo-location";
-import { trackMetaLandingLead, trackMetaPageView } from "@/lib/meta-pixel";
+import { trackMetaLandingLead } from "@/lib/meta-pixel";
 import { getWhatsAppNumber, type Language } from "@/lib/translations";
 import { useWhatsAppNumber } from "@/hooks/use-whatsapp";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
@@ -25,8 +25,6 @@ type Copy = {
   formTitle: string;
   formSubtitle: string;
   name: string;
-  company: string;
-  email: string;
   phone: string;
   instagram: string;
   instagramPlaceholder: string;
@@ -175,8 +173,6 @@ const MARKETS: Record<MarketKey, {
       formTitle: "Agora deixe os seus dados",
       formSubtitle: "Vamos analisar o seu momento e contactar pelo canal correto.",
       name: "Nome",
-      company: "Nome da empresa",
-      email: "Email",
       instagram: "Instagram do seu negócio",
       instagramPlaceholder: "seu_usuario",
       currentSite: "Site atual do seu negócio",
@@ -235,8 +231,6 @@ const MARKETS: Record<MarketKey, {
       formTitle: "Ora lascia i tuoi dati",
       formSubtitle: "Analizzeremo il tuo momento e ti contatteremo dal canale giusto.",
       name: "Nome",
-      company: "Nome dell'azienda",
-      email: "Email",
       instagram: "Instagram della tua attività",
       instagramPlaceholder: "tuo_utente",
       currentSite: "Sito web attuale della tua attività",
@@ -295,8 +289,6 @@ const MARKETS: Record<MarketKey, {
       formTitle: "Ahora deja tus datos",
       formSubtitle: "Analizaremos tu momento y te contactaremos por el canal correcto.",
       name: "Nombre",
-      company: "Nombre de la empresa",
-      email: "Email",
       instagram: "Instagram de tu negocio",
       instagramPlaceholder: "tu_usuario",
       currentSite: "Sitio web actual de tu negocio",
@@ -355,8 +347,6 @@ const MARKETS: Record<MarketKey, {
       formTitle: "עכשיו השאר פרטים",
       formSubtitle: "נבדוק את הצורך שלך ונחזור אליך בערוץ המתאים.",
       name: "שם",
-      company: "שם החברה",
-      email: "אימייל",
       instagram: "האינסטגרם של העסק שלך",
       instagramPlaceholder: "שם_משתמש",
       currentSite: "האתר הנוכחי של העסק שלך",
@@ -415,8 +405,6 @@ const MARKETS: Record<MarketKey, {
       formTitle: "Now leave your details",
       formSubtitle: "We will review your stage and contact you through the right channel.",
       name: "Name",
-      company: "Company name",
-      email: "Email",
       instagram: "Your business Instagram",
       instagramPlaceholder: "your_username",
       currentSite: "Your current business website",
@@ -475,8 +463,6 @@ const MARKETS: Record<MarketKey, {
       formTitle: "Agora deixe seus dados",
       formSubtitle: "Vamos entender seu momento e chamar você pelo canal certo.",
       name: "Nome",
-      company: "Nome da empresa",
-      email: "Email",
       instagram: "Instagram do seu negócio",
       instagramPlaceholder: "seu_usuario",
       currentSite: "Site atual do seu negócio",
@@ -535,8 +521,6 @@ const MARKETS: Record<MarketKey, {
       formTitle: "Now leave your details",
       formSubtitle: "We will review your stage and contact you through the right channel.",
       name: "Name",
-      company: "Company name",
-      email: "Email",
       instagram: "Your business Instagram",
       instagramPlaceholder: "your_username",
       currentSite: "Your current business website",
@@ -595,8 +579,6 @@ const MARKETS: Record<MarketKey, {
       formTitle: "Now leave your details",
       formSubtitle: "We will review your stage and contact you through the right channel.",
       name: "Name",
-      company: "Company name",
-      email: "Email",
       instagram: "Your business Instagram",
       instagramPlaceholder: "your_username",
       currentSite: "Your current business website",
@@ -757,7 +739,7 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
   const [timelineOption, setTimelineOption] = useState("");
   const [focusOptions, setFocusOptions] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [form, setForm] = useState({ name: "", company: "", email: "", instagram: "", currentSite: "", phone: MARKETS[initialMarketKey].phonePrefix });
+  const [form, setForm] = useState({ name: "", instagram: "", currentSite: "", phone: MARKETS[initialMarketKey].phonePrefix });
   const market = MARKETS[marketKey];
   const destinationNumber = useWhatsAppNumber(
     marketKey,
@@ -766,12 +748,9 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
   const copy = market.copy;
   const seo = SEO_BY_MARKET[marketKey];
   const textDirection = market.locale === "he-IL" ? "rtl" : "ltr";
-  const pageViewFired = useRef(false);
   const localPhoneDigits = form.phone.replace(/\D/g, "").slice(market.phonePrefix.replace(/\D/g, "").length);
   const isFormComplete =
     form.name.trim().length > 0 &&
-    form.company.trim().length > 0 &&
-    form.email.trim().length > 0 &&
     form.instagram.length > 0 &&
     market.mobilePattern.test(localPhoneDigits);
 
@@ -798,8 +777,6 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
           timelineAnswer: timelineOption,
           focusAnswers: focusOptions,
           name: form.name.trim(),
-          company: form.company.trim(),
-          email: form.email.trim(),
           instagram: form.instagram.trim(),
           currentSiteUrl: form.currentSite.trim() ? `${WEBSITE_PREFIX}${form.currentSite.trim()}` : undefined,
           phone: form.phone,
@@ -834,12 +811,6 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
       setIsSubmitting(false);
     }
   };
-
-  useEffect(() => {
-    if (pageViewFired.current) return;
-    pageViewFired.current = true;
-    trackMetaPageView(marketKey);
-  }, [marketKey]);
 
   useEffect(() => {
     if (fixedMarketKey) {
@@ -884,7 +855,8 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
     updateMetaTag("twitter:description", seo.description);
   }, [market.locale, seo]);
 
-  const progress = useMemo(() => Math.round((step / 7) * 100), [step]);
+  const displayedStep = step === 2 ? 7 : step > 2 ? step - 1 : step;
+  const progress = useMemo(() => Math.round((displayedStep / 7) * 100), [displayedStep]);
 
   return (
     <main className="elevate-page" aria-label="Monfily landing page" lang={market.locale} dir="ltr" data-text-direction={textDirection}>
@@ -909,8 +881,8 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
           <section className="elevate-card" aria-labelledby="elevate-question">
           <span className="elevate-line-marker elevate-line-marker--progress-left" aria-hidden="true" />
           <span className="elevate-line-marker elevate-line-marker--progress-right" aria-hidden="true" />
-          <div className="elevate-progress" aria-label={`${copy.step} ${step} / 7`}>
-            <span>{copy.step} {step}/7</span>
+          <div className="elevate-progress" aria-label={`${copy.step} ${displayedStep} / 7`}>
+            <span>{copy.step} {displayedStep}/7</span>
             <div>
               <i style={{ width: `${progress}%` }} />
             </div>
@@ -960,7 +932,7 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
                   type="button"
                   className="elevate-cta"
                   disabled={!selectedOption}
-                  onClick={() => setStep(2)}
+                  onClick={() => setStep(3)}
                 >
                   <span className="elevate-cta__shine" aria-hidden="true" />
                   <span>{copy.next}</span>
@@ -978,7 +950,7 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
                 className="elevate-form"
                 onSubmit={(event) => {
                   event.preventDefault();
-                  if (isFormComplete) setStep(3);
+                  if (isFormComplete) void handleSubmit();
                 }}
               >
                 <label className="elevate-field">
@@ -994,27 +966,30 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
                 </label>
 
                 <label className="elevate-field">
-                  <span>{copy.company}</span>
+                  <span>{copy.phone}</span>
                   <input
-                    type="text"
-                    name="company"
-                    autoComplete="organization"
+                    type="tel"
+                    name="phone"
+                    autoComplete="tel"
+                    inputMode="tel"
                     required
-                    value={form.company}
-                    onChange={(event) => setForm((current) => ({ ...current, company: event.target.value }))}
-                  />
-                </label>
-
-                <label className="elevate-field">
-                  <span>{copy.email}</span>
-                  <input
-                    type="email"
-                    name="email"
-                    autoComplete="email"
-                    inputMode="email"
-                    required
-                    value={form.email}
-                    onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
+                    placeholder={market.phonePlaceholder}
+                    value={form.phone}
+                    onChange={(event) => setForm((current) => ({ ...current, phone: normalizePhoneValue(event.target.value, marketKey) }))}
+                    onKeyDown={(event) => {
+                      const input = event.currentTarget;
+                      const selectionStartsInPrefix = (input.selectionStart ?? 0) <= market.phonePrefix.length;
+                      const selectionEndsInPrefix = (input.selectionEnd ?? 0) <= market.phonePrefix.length;
+                      if ((event.key === "Backspace" && selectionStartsInPrefix) || (event.key === "Delete" && selectionEndsInPrefix)) {
+                        event.preventDefault();
+                      }
+                    }}
+                    onFocus={() => {
+                      setForm((current) => ({
+                        ...current,
+                        phone: current.phone.startsWith(market.phonePrefix) ? current.phone : market.phonePrefix,
+                      }));
+                    }}
                   />
                 </label>
 
@@ -1071,41 +1046,13 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
                   </label>
                 )}
 
-                <label className="elevate-field">
-                  <span>{copy.phone}</span>
-                  <input
-                    type="tel"
-                    name="phone"
-                    autoComplete="tel"
-                    inputMode="tel"
-                    required
-                    placeholder={market.phonePlaceholder}
-                    value={form.phone}
-                    onChange={(event) => setForm((current) => ({ ...current, phone: normalizePhoneValue(event.target.value, marketKey) }))}
-                    onKeyDown={(event) => {
-                      const input = event.currentTarget;
-                      const selectionStartsInPrefix = (input.selectionStart ?? 0) <= market.phonePrefix.length;
-                      const selectionEndsInPrefix = (input.selectionEnd ?? 0) <= market.phonePrefix.length;
-                      if ((event.key === "Backspace" && selectionStartsInPrefix) || (event.key === "Delete" && selectionEndsInPrefix)) {
-                        event.preventDefault();
-                      }
-                    }}
-                    onFocus={() => {
-                      setForm((current) => ({
-                        ...current,
-                        phone: current.phone.startsWith(market.phonePrefix) ? current.phone : market.phonePrefix,
-                      }));
-                    }}
-                  />
-                </label>
-
                 <div className="elevate-actions">
-                  <button type="button" className="elevate-back" onClick={() => setStep(1)}>
+                  <button type="button" className="elevate-back" onClick={() => setStep(7)}>
                     {copy.back}
                   </button>
-                  <button type="submit" className="elevate-cta" disabled={!isFormComplete}>
+                  <button type="submit" className="elevate-cta" disabled={!isFormComplete || isSubmitting}>
                     <span className="elevate-cta__shine" aria-hidden="true" />
-                    <span>{copy.advance}</span>
+                    <span>{copy.submit}</span>
                   </button>
                 </div>
               </form>
@@ -1136,7 +1083,7 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
                   </div>
                 )}
                 <div className="elevate-actions">
-                  <button type="button" className="elevate-back" onClick={() => setStep(2)}>{copy.back}</button>
+                  <button type="button" className="elevate-back" onClick={() => setStep(1)}>{copy.back}</button>
                   <button type="button" className="elevate-cta" disabled={!domainOption} onClick={() => setStep(4)}>
                     <span className="elevate-cta__shine" aria-hidden="true" />
                     <span>{copy.advance}</span>
@@ -1246,11 +1193,11 @@ export default function LandingPage({ fixedMarketKey }: LandingPageProps = {}) {
                   <button
                     type="button"
                     className="elevate-cta"
-                    disabled={focusOptions.length === 0 || isSubmitting}
-                    onClick={handleSubmit}
+                    disabled={focusOptions.length === 0}
+                    onClick={() => setStep(2)}
                   >
                     <span className="elevate-cta__shine" aria-hidden="true" />
-                    <span>{copy.send}</span>
+                    <span>{copy.advance}</span>
                   </button>
                 </div>
               </div>

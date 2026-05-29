@@ -43,6 +43,7 @@ const PIXEL_IDS_BY_MARKET: Record<MetaPixelMarketKey, string | undefined> = {
   GB: [import.meta.env.VITE_META_PIXEL_GB_IDS, import.meta.env.VITE_META_PIXEL_UK_IDS].filter(Boolean).join(","),
   US: import.meta.env.VITE_META_PIXEL_US_IDS,
 };
+const DEFAULT_PIXEL_IDS = import.meta.env.VITE_META_PIXEL_DEFAULT_IDS || import.meta.env.VITE_META_PIXEL_BR_IDS;
 
 function parsePixelIds(value?: string) {
   return Array.from(
@@ -56,7 +57,8 @@ function parsePixelIds(value?: string) {
 }
 
 function getPixelIdsForMarket(marketKey: MetaPixelMarketKey) {
-  return parsePixelIds(PIXEL_IDS_BY_MARKET[marketKey]);
+  const marketPixelIds = parsePixelIds(PIXEL_IDS_BY_MARKET[marketKey]);
+  return marketPixelIds.length > 0 ? marketPixelIds : parsePixelIds(DEFAULT_PIXEL_IDS);
 }
 
 function installFbqStub() {
@@ -150,10 +152,6 @@ function fireMetaEvent(
   });
 
   return { fired: true, pixelIds };
-}
-
-export function trackMetaPageView(marketKey: MetaPixelMarketKey): TrackMetaEventResult {
-  return fireMetaEvent(marketKey, "PageView", {}, crypto.randomUUID());
 }
 
 export function trackMetaLandingLead({
