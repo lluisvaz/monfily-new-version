@@ -68,9 +68,9 @@ function getPixelIdsForMarket(marketKey: MetaPixelMarketKey) {
 function installFbqStub() {
   if (window.fbq) return window.fbq;
 
-  const fbq = ((...args: unknown[]) => {
+  const fbq = (function (...args: unknown[]) {
     if (fbq.callMethod) {
-      fbq.callMethod(...args);
+      fbq.callMethod.apply(fbq, args);
       return;
     }
 
@@ -138,7 +138,6 @@ function initializePixelIds(marketKey: MetaPixelMarketKey): InitializedMetaPixel
 
   pixelIds.forEach((pixelId) => {
     if (!initializedPixelIds.has(pixelId)) {
-      fbq("set", "autoConfig", false, pixelId);
       fbq("init", pixelId);
       initializedPixelIds.add(pixelId);
     }
@@ -169,6 +168,30 @@ function fireMetaEvent(
 
   pixelIds.forEach((pixelId) => {
     fbq("trackSingle", pixelId, eventName, params, { eventID: eventId });
+  });
+
+  return { fired: true, pixelIds };
+}
+
+export function trackMetaPageView(marketKey: MetaPixelMarketKey): TrackMetaEventResult {
+  const { fired, pixelIds, fbq } = initializePixelIds(marketKey);
+  if (!fired || !fbq) {
+    return { fired: false, pixelIds };
+  }
+
+  fbq("track", "PageView");
+  pixelIds.forEach((pixelId) => {
+    const marker = `meta-pageview-${pixelId}`;
+    if (document.querySelector(`img[data-meta-pixel-pageview="${marker}"]`)) return;
+
+    const image = document.createElement("img");
+    image.dataset.metaPixelPageview = marker;
+    image.height = 1;
+    image.width = 1;
+    image.alt = "";
+    image.style.display = "none";
+    image.src = `https://www.facebook.com/tr?id=${encodeURIComponent(pixelId)}&ev=PageView&noscript=1`;
+    document.body.appendChild(image);
   });
 
   return { fired: true, pixelIds };
