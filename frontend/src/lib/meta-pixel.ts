@@ -37,17 +37,7 @@ const META_PIXEL_SCRIPT_SRC = "https://connect.facebook.net/en_US/fbevents.js";
 const initializedPixelIds = new Set<string>();
 let pixelScriptPromise: Promise<void> | null = null;
 
-const PIXEL_IDS_BY_MARKET: Record<MetaPixelMarketKey, string | undefined> = {
-  BR: import.meta.env.VITE_META_PIXEL_BR_IDS,
-  PT: import.meta.env.VITE_META_PIXEL_PT_IDS,
-  ES: import.meta.env.VITE_META_PIXEL_ES_IDS,
-  IT: import.meta.env.VITE_META_PIXEL_IT_IDS,
-  IL: import.meta.env.VITE_META_PIXEL_IL_IDS,
-  SG: import.meta.env.VITE_META_PIXEL_SG_IDS,
-  GB: [import.meta.env.VITE_META_PIXEL_GB_IDS, import.meta.env.VITE_META_PIXEL_UK_IDS].filter(Boolean).join(","),
-  US: import.meta.env.VITE_META_PIXEL_US_IDS,
-};
-const DEFAULT_PIXEL_IDS = import.meta.env.VITE_META_PIXEL_DEFAULT_IDS || import.meta.env.VITE_META_PIXEL_BR_IDS;
+const UNIVERSAL_PIXEL_IDS = import.meta.env.VITE_META_PIXEL_BR_IDS;
 
 function parsePixelIds(value?: string) {
   return Array.from(
@@ -60,9 +50,8 @@ function parsePixelIds(value?: string) {
   );
 }
 
-function getPixelIdsForMarket(marketKey: MetaPixelMarketKey) {
-  const marketPixelIds = parsePixelIds(PIXEL_IDS_BY_MARKET[marketKey]);
-  return marketPixelIds.length > 0 ? marketPixelIds : parsePixelIds(DEFAULT_PIXEL_IDS);
+function getUniversalPixelIds() {
+  return parsePixelIds(UNIVERSAL_PIXEL_IDS);
 }
 
 function installFbqStub() {
@@ -124,12 +113,12 @@ function loadMetaPixelScript() {
   return pixelScriptPromise;
 }
 
-function initializePixelIds(marketKey: MetaPixelMarketKey): InitializedMetaPixel {
+function initializePixelIds(_marketKey: MetaPixelMarketKey): InitializedMetaPixel {
   if (typeof window === "undefined" || typeof document === "undefined") {
     return { fired: false, pixelIds: [] };
   }
 
-  const pixelIds = getPixelIdsForMarket(marketKey);
+  const pixelIds = getUniversalPixelIds();
   if (pixelIds.length === 0) {
     return { fired: false, pixelIds: [] };
   }

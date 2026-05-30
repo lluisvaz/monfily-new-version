@@ -170,26 +170,19 @@ function removeUndefined<T extends Record<string, unknown>>(value: T) {
   return Object.fromEntries(Object.entries(value).filter(([, entry]) => entry !== undefined && entry !== "")) as Partial<T>;
 }
 
-function getMetaEnvPrefixes(marketKey: MarketKey) {
-  const marketPrefixes = marketKey === "GB" ? ["GB", "UK"] : [marketKey];
-  return Array.from(new Set([...marketPrefixes, "DEFAULT", "BR"]));
-}
+function getMetaPixelConfig(env: Env) {
+  const pixelId = env.META_PIXEL_BR_ID || env.VITE_META_PIXEL_BR_IDS?.split(/[,\s]+/)[0];
+  const accessToken = env.META_PIXEL_BR_ACCESS_TOKEN;
 
-function getMetaPixelConfig(env: Env, marketKey: MarketKey) {
-  for (const prefix of getMetaEnvPrefixes(marketKey)) {
-    const pixelId = env[`META_PIXEL_${prefix}_ID`] || env[`VITE_META_PIXEL_${prefix}_IDS`]?.split(/[,\s]+/)[0];
-    const accessToken = env[`META_PIXEL_${prefix}_ACCESS_TOKEN`];
-
-    if (pixelId && accessToken) {
-      return {
-        pixelId,
-        accessToken,
-        graphVersion: env.META_PIXEL_GRAPH_VERSION || "v21.0",
-      };
-    }
+  if (!pixelId || !accessToken) {
+    return null;
   }
 
-  return null;
+  return {
+    pixelId,
+    accessToken,
+    graphVersion: env.META_PIXEL_GRAPH_VERSION || "v21.0",
+  };
 }
 
 async function sha256(value?: string) {
@@ -249,9 +242,9 @@ async function sendMetaLeadEvent(
   purchase: { value: number; currency: string },
   eventId: string
 ) {
-  const config = getMetaPixelConfig(env, data.marketKey);
+  const config = getMetaPixelConfig(env);
   if (!config) {
-    throw new Error(`Meta pixel ID or access token is not configured for ${data.marketKey}`);
+    throw new Error("Meta pixel ID or access token is not configured");
   }
 
   const eventSourceUrl = getEventSourceUrl(request, data);
