@@ -197,8 +197,9 @@ const MonfilyWordmarkDivider = () => (
     role="img"
     aria-label="Monfily"
   >
-    <div className="relative isolate mx-auto h-[clamp(170px,24vw,365px)] w-full max-w-[1500px] overflow-hidden border-x border-[#393942] sm:border-[#2A2A2F]">
+    <div className="relative isolate mx-auto h-[145px] w-full max-w-[1500px] overflow-hidden border-x border-[#393942] sm:h-[clamp(170px,24vw,365px)] sm:border-[#2A2A2F]">
       <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_60%_75%_at_50%_100%,rgba(40,105,214,.11),transparent_72%)]" />
+      <div className="pointer-events-none absolute inset-0 z-30 border border-[#555560] sm:hidden" />
 
       {[20, 40, 60, 80].map((position) => (
         <div
@@ -211,7 +212,7 @@ const MonfilyWordmarkDivider = () => (
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 z-10 whitespace-nowrap text-center text-[25vw] [transform:translate(-50%,-50%)_scaleX(1.08)_scaleY(2.4)] sm:left-[48%] sm:top-[58%] sm:text-[clamp(92px,24vw,360px)] sm:[transform:translate(-50%,-50%)_scaleX(1.15)_scaleY(1.46)]"
+        className="pointer-events-none absolute left-1/2 top-[60%] z-10 whitespace-nowrap text-center text-[25vw] [transform:translate(-50%,-50%)_scaleX(1.08)_scaleY(2.05)] sm:left-[48%] sm:top-[58%] sm:text-[clamp(92px,24vw,360px)] sm:[transform:translate(-50%,-50%)_scaleX(1.15)_scaleY(1.46)]"
         style={{
           fontFamily: 'Fustat-Bold, sans-serif',
           fontWeight: 'normal',
