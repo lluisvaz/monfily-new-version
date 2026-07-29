@@ -193,21 +193,12 @@ const LargeStripedDivider = () => {
 
 const MonfilyWordmarkDivider = () => (
   <div
-    className="relative w-full overflow-hidden bg-[#0B0B0D] bg-[image:repeating-linear-gradient(75deg,rgba(255,255,255,.065)_0px,rgba(255,255,255,.065)_1px,transparent_1px,transparent_9px)] sm:border-y sm:border-[#2A2A2F]"
+    className="relative w-full overflow-hidden bg-[#0B0B0D] sm:border-y sm:border-[#2A2A2F]"
     role="img"
     aria-label="Monfily"
   >
-    <div className="relative isolate mx-4 h-[145px] w-[calc(100%-2rem)] max-w-[1500px] overflow-hidden border border-[#303038] sm:mx-auto sm:h-[clamp(170px,24vw,365px)] sm:w-full sm:border-x sm:border-y-0 sm:border-[#2A2A2F]">
+    <div className="relative isolate mx-4 h-[145px] w-[calc(100%-2rem)] max-w-[1500px] overflow-hidden border border-[#303038] bg-[image:repeating-linear-gradient(75deg,rgba(255,255,255,.065)_0px,rgba(255,255,255,.065)_1px,transparent_1px,transparent_9px)] sm:mx-auto sm:h-[clamp(170px,24vw,365px)] sm:w-full sm:border-x sm:border-y-0 sm:border-[#2A2A2F]">
       <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_60%_75%_at_50%_100%,rgba(40,105,214,.11),transparent_72%)]" />
-
-      {[20, 40, 60, 80].map((position) => (
-        <div
-          key={position}
-          className="pointer-events-none absolute bottom-0 top-0 z-0 w-px bg-[#303038]/60 sm:bg-[#2A2A2F]/45"
-          style={{ left: `${position}%` }}
-        />
-      ))}
-      <div className="pointer-events-none absolute left-0 right-0 top-[18%] z-0 h-px bg-[#303038]/60 sm:bg-[#2A2A2F]/55" />
 
       <div
         aria-hidden="true"
@@ -227,17 +218,6 @@ const MonfilyWordmarkDivider = () => (
         MONFILY
       </div>
 
-      {[
-        'left-0 top-0 -translate-x-1/2 -translate-y-1/2',
-        'right-0 top-0 translate-x-1/2 -translate-y-1/2',
-        'bottom-0 left-0 -translate-x-1/2 translate-y-1/2',
-        'bottom-0 right-0 translate-x-1/2 translate-y-1/2'
-      ].map((position) => (
-        <div
-          key={position}
-          className={`absolute z-20 h-2.5 w-2.5 border border-[#34343B] bg-[#0B0B0D] ${position}`}
-        />
-      ))}
     </div>
   </div>
 );
@@ -1466,16 +1446,16 @@ const FooterSection = () => {
       {/* Bottom Bar */}
       <div
         ref={sectionRef}
-        className={`w-full flex flex-col-reverse md:flex-row items-center justify-between gap-8 ${isVisible ? 'services-blur-animate' : ''}`}
+        className={`flex w-full flex-row items-center justify-between gap-4 ${isVisible ? 'services-blur-animate' : ''}`}
         style={{ animationDelay: '0.1s', opacity: 0 }}
       >
-        <p className="text-[#9A9AA3] text-lg text-center md:text-left leading-relaxed max-w-4xl">
+        <p className="whitespace-nowrap text-left text-sm leading-none text-[#9A9AA3] sm:text-base md:text-lg">
           {t.footer.copyright}
         </p>
         <div className="flex items-center gap-8">
           <div className="hidden md:block w-px h-6 bg-[#2A2A2F]"></div>
           {/* Social Icons */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 md:gap-6">
             <a href="https://www.instagram.com/monfilydigital/" target="_blank" rel="noopener noreferrer" className="text-[#F5F7FA] hover:text-[#2869D6] transition-colors" aria-label="Instagram da Monfily">
               <Instagram className="w-5 h-5" />
             </a>

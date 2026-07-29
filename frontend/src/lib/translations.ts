@@ -336,7 +336,7 @@ const english: TranslationCopy = {
     cta: "Get your growth plan",
   },
   footer: {
-    copyright: `© ${year} Monfily Digital. Google-first marketing for U.S. home services.`,
+    copyright: `© ${year} Monfily Digital.`,
   },
 };
 
@@ -527,7 +527,7 @@ const portugueseBrazil: TranslationCopy = {
     cta: "Receber plano de crescimento",
   },
   footer: {
-    copyright: `© ${year} Monfily Digital. Marketing focado em Google para home services nos EUA.`,
+    copyright: `© ${year} Monfily Digital.`,
   },
 };
 
@@ -581,7 +581,7 @@ const portuguesePortugal: TranslationCopy = {
     cta: "Receber plano de crescimento",
   },
   footer: {
-    copyright: `© ${year} Monfily Digital. Marketing orientado para o Google para home services nos EUA.`,
+    copyright: `© ${year} Monfily Digital.`,
   },
 };
 
@@ -772,7 +772,7 @@ const spanish: TranslationCopy = {
     cta: "Recibir plan de crecimiento",
   },
   footer: {
-    copyright: `© ${year} Monfily Digital. Marketing Google-first para home services en EE. UU.`,
+    copyright: `© ${year} Monfily Digital.`,
   },
 };
 
@@ -963,7 +963,7 @@ const italian: TranslationCopy = {
     cta: "Ricevi il piano di crescita",
   },
   footer: {
-    copyright: `© ${year} Monfily Digital. Marketing Google-first per home services negli USA.`,
+    copyright: `© ${year} Monfily Digital.`,
   },
 };
 
