@@ -1,4 +1,3 @@
-﻿import { ArrowRight } from "iconoir-react";
 import { BoltIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
 import { SectionLayout } from "./section-layout";
 import ShinyText from "@/components/ui/shiny-text";
@@ -8,6 +7,7 @@ import { Iphone16Pro } from "@/components/ui/iphone-16-pro";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
 import { useWhatsAppCta } from "@/hooks/use-whatsapp";
+import { ProjectCtaButton } from "@/components/ui/project-cta-button";
 
 export function Hero() {
   const { language } = useLanguage();
@@ -31,32 +31,6 @@ export function Hero() {
         }
         .hero-blur-animate {
           animation: blurText 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
-        }
-        .hero-project-cta__label {
-          left: 3px;
-          right: 56px;
-        }
-        .hero-project-cta__arrow {
-          left: calc(100% - 53px);
-        }
-        .hero-project-cta__arrow-icon {
-          color: #FFFFFF;
-          transform: rotate(180deg);
-        }
-        .hero-project-cta:hover .hero-project-cta__label {
-          left: 56px;
-          right: 3px;
-          background-color: #101013;
-          color: #74A7FA;
-        }
-        .hero-project-cta:hover .hero-project-cta__arrow {
-          left: 3px;
-          background-color: #101013;
-          color: #2869D6;
-        }
-        .hero-project-cta:hover .hero-project-cta__arrow-icon {
-          color: #2869D6;
-          transform: rotate(360deg);
         }
       `}</style>
       {/* Gradient Effect - Desktop Only */}
@@ -157,21 +131,12 @@ export function Hero() {
           className="flex flex-col xl:flex-row items-center gap-6 pt-2 w-full hero-blur-animate"
           style={{ animationDelay: '0.4s' }}
         >
-          <button
-            type="button"
+          <ProjectCtaButton
             onClick={openWhatsApp}
-            className="hero-project-cta group relative h-[58px] w-full max-w-[340px] cursor-pointer overflow-hidden rounded-full border border-white/25 bg-[#151519] text-base font-normal transition-[border-color,background-color,box-shadow,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-[#2869D6]/70 hover:bg-[#0B0B0D] hover:shadow-[0_0_0_1px_rgba(40,105,214,0.10),0_12px_32px_rgba(0,0,0,0.28)] active:scale-[0.985] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2869D6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0D] xl:w-[260px]"
+            className="xl:w-[260px]"
           >
-            <span className="hero-project-cta__label absolute bottom-[3px] top-[3px] z-10 flex items-center justify-center whitespace-nowrap rounded-full bg-[#2869D6] px-3 text-center text-white transition-[left,right,background-color,color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">
-              {t.hero.cta.primary}
-            </span>
-            <span
-              aria-hidden="true"
-              className="hero-project-cta__arrow absolute bottom-[3px] top-[3px] z-10 grid w-[50px] place-items-center rounded-full bg-[#4A86E6] text-white transition-[left,background-color,color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
-            >
-              <ArrowRight className="hero-project-cta__arrow-icon h-5 w-5 transition-[transform,color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]" strokeWidth={1.8} />
-            </span>
-          </button>
+            {t.hero.cta.primary}
+          </ProjectCtaButton>
 
           <a
             href="#servicos"

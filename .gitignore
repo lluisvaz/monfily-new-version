@@ -18,6 +18,8 @@ frontend/public/*
 !frontend/public/hvac-hero.webp
 !frontend/public/grain-texture-final.png
 !frontend/public/og.png
+!frontend/public/google-products/
+!frontend/public/google-products/*
 build/
 *.tsbuildinfo
 

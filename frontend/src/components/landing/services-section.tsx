@@ -3,11 +3,11 @@ import { useLanguage } from "@/hooks/use-language";
 import { translations, type Language } from "@/lib/translations";
 import { useWhatsAppCta } from "@/hooks/use-whatsapp";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Plus, Instagram, Mail } from "iconoir-react";
+import { Plus, Instagram, Mail } from "iconoir-react";
 import { BeakerIcon, CursorArrowRaysIcon, MapPinIcon, MegaphoneIcon } from "@heroicons/react/24/outline";
 import SpotlightCard from "@/components/ui/spotlight-card";
-import { SpotlightButton } from "@/components/ui/spotlight-button";
 import { GoogleProductIcon, type GoogleProduct } from "@/components/ui/google-product-icon";
+import { ProjectCtaButton } from "@/components/ui/project-cta-button";
 
 const googleExpertiseProducts: Array<{ id: GoogleProduct; label: string }> = [
   { id: "business-profile", label: "Business Profile" },
@@ -718,27 +718,24 @@ const ExpertiseSection = () => {
                 className="flex min-w-0 items-center gap-2 rounded-xl border border-[#2A2A2F] bg-white/[0.025] px-3 py-2.5"
               >
                 <GoogleProductIcon product={product.id} className="h-6 w-6" />
-                <span className="text-xs font-semibold leading-tight text-[#F5F7FA]">{product.label}</span>
+                <span className="text-xs font-normal leading-tight text-[#F5F7FA]">{product.label}</span>
               </div>
             ))}
           </div>
 
           {/* CTA Button */}
-          <SpotlightButton
+          <ProjectCtaButton
             onClick={() => {
               const el = document.getElementById('contato');
               if (el) {
                 el.scrollIntoView({ behavior: 'smooth', block: 'center' });
               }
             }}
-            className={`group bg-[#2869D6] text-white text-base font-normal py-4 px-8 rounded-full transition-all flex items-center justify-start gap-3 cursor-pointer w-auto relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`relative z-10 md:w-[300px] ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.4s', opacity: isVisible ? 0 : 0 }}
           >
             {t.expertise.cta}
-            <div className="bg-[#0B0B0D] rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
-              <ArrowRight className="w-3 h-3 text-[#2869D6]" />
-            </div>
-          </SpotlightButton>
+          </ProjectCtaButton>
         </div>
 
         {/* Desktop Layout */}
@@ -792,21 +789,18 @@ const ExpertiseSection = () => {
           </p>
 
           {/* CTA Button */}
-          <SpotlightButton
+          <ProjectCtaButton
             onClick={() => {
               const el = document.getElementById('contato');
               if (el) {
                 el.scrollIntoView({ behavior: 'smooth', block: 'center' });
               }
             }}
-            className={`group bg-[#2869D6] text-white text-base font-normal py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`relative z-10 md:w-[300px] ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.4s', opacity: isVisible ? 0 : 0 }}
           >
             {t.expertise.cta}
-            <div className="bg-[#0B0B0D] rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
-              <ArrowRight className="w-3 h-3 text-[#2869D6]" />
-            </div>
-          </SpotlightButton>
+          </ProjectCtaButton>
         </div>
       </div>
     </SectionLayout>
@@ -1374,12 +1368,12 @@ const FinalCTASection = () => {
             {t.finalCTA.description}
           </p>
           
-          <SpotlightButton
+          <ProjectCtaButton
             onClick={openWhatsApp}
-            className="bg-[#2869D6] text-white h-12 px-10 rounded-full font-normal flex items-center justify-center cursor-pointer mt-4"
+            className="mt-4 md:w-[300px]"
           >
             {t.finalCTA.cta}
-          </SpotlightButton>
+          </ProjectCtaButton>
         </div>
       </div>
     </SectionLayout>
@@ -1491,7 +1485,7 @@ const FloatingIcon = ({
         style={{
           fontSize: '20px',
           color: '#F5F7FA',
-          fontFamily: 'Fustat-Bold, sans-serif',
+          fontFamily: 'Fustat, sans-serif',
           fontWeight: 'normal',
           userSelect: 'none',
           WebkitUserSelect: 'none'

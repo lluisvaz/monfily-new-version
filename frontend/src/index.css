@@ -185,6 +185,38 @@ body::before {
   opacity: 1;
 }
 
+.project-cta__label {
+  left: 3px;
+  right: 56px;
+}
+
+.project-cta__arrow {
+  left: calc(100% - 53px);
+}
+
+.project-cta__arrow-icon {
+  color: #fff;
+  transform: rotate(180deg);
+}
+
+.project-cta:hover .project-cta__label {
+  left: 56px;
+  right: 3px;
+  background-color: #101013;
+  color: #74a7fa;
+}
+
+.project-cta:hover .project-cta__arrow {
+  left: 3px;
+  background-color: #101013;
+  color: #2869d6;
+}
+
+.project-cta:hover .project-cta__arrow-icon {
+  color: #2869d6;
+  transform: rotate(360deg);
+}
+
 @media (max-width: 1023px), (pointer: coarse) {
   .smooth-cursor-dot {
     display: none !important;
