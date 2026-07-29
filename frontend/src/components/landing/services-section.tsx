@@ -197,41 +197,36 @@ const MonfilyWordmarkDivider = () => (
     role="img"
     aria-label="Monfily"
   >
-    <div className="relative mx-auto h-[clamp(170px,24vw,365px)] w-full max-w-[1500px] overflow-hidden border-x border-[#2A2A2F]">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_75%_at_50%_100%,rgba(40,105,214,.11),transparent_72%)]" />
+    <div className="relative isolate mx-auto h-[clamp(170px,24vw,365px)] w-full max-w-[1500px] overflow-hidden border-x border-[#2A2A2F]">
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_60%_75%_at_50%_100%,rgba(40,105,214,.11),transparent_72%)]" />
 
       {[20, 40, 60, 80].map((position) => (
         <div
           key={position}
-          className="pointer-events-none absolute bottom-0 top-0 w-px bg-[#2A2A2F]/45"
+          className="pointer-events-none absolute bottom-0 top-0 z-0 w-px bg-[#2A2A2F]/45"
           style={{ left: `${position}%` }}
         />
       ))}
-      <div className="pointer-events-none absolute left-0 right-0 top-[18%] h-px bg-[#2A2A2F]/55" />
-
-      {[22, 50, 78].map((position, index) => (
-        <div
-          key={position}
-          className="absolute top-0 -translate-x-1/2 -translate-y-px border border-[#2A2A2F] bg-[#0B0B0D]"
-          style={{
-            left: `${position}%`,
-            width: index === 1 ? 'clamp(34px, 4vw, 60px)' : 'clamp(48px, 6vw, 90px)',
-            height: 'clamp(18px, 2.2vw, 32px)'
-          }}
-        />
-      ))}
+      <div className="pointer-events-none absolute left-0 right-0 top-[18%] z-0 h-px bg-[#2A2A2F]/55" />
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[43%] whitespace-nowrap text-center text-[#0E0E11]"
+        className="pointer-events-none absolute z-10 whitespace-nowrap text-center"
         style={{
+          left: '50%',
+          top: '50%',
           fontFamily: 'Fustat-Bold, sans-serif',
           fontSize: 'clamp(92px, 24vw, 360px)',
           fontWeight: 'normal',
           lineHeight: 0.72,
           letterSpacing: '-0.085em',
+          color: '#0B0B0D',
+          WebkitTextFillColor: '#0B0B0D',
           WebkitTextStroke: '1px #28282E',
-          textShadow: '0 0 28px rgba(0,0,0,.32)'
+          paintOrder: 'stroke fill',
+          textShadow: '0 0 28px rgba(0,0,0,.32)',
+          transform: 'translate(-50%, -50%) scaleX(1.15) scaleY(1.46)',
+          transformOrigin: 'center'
         }}
       >
         MONFILY
