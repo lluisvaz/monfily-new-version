@@ -6,7 +6,7 @@ export function WebsiteMockup() {
 
   return (
     <div
-      className="relative h-full min-h-[430px] w-[118%] max-w-[118%] ml-20 overflow-hidden rounded-[22px] border border-white/15 bg-[#101013] shadow-[0_32px_100px_rgba(0,0,0,0.55)] select-none"
+      className="relative h-full min-h-[520px] w-[118%] max-w-[118%] ml-20 overflow-hidden rounded-[22px] border border-white/15 bg-[#101013] shadow-[0_32px_100px_rgba(0,0,0,0.55)] select-none"
       style={{ pointerEvents: "none" }}
     >
       <header className="relative z-20 flex items-center justify-between border-b border-white/10 bg-[#101013]/90 px-7 py-5 backdrop-blur-xl">
@@ -31,7 +31,7 @@ export function WebsiteMockup() {
         </div>
       </header>
 
-      <div className="relative grid min-h-[365px] grid-cols-[1.03fr_.97fr] overflow-hidden">
+      <div className="relative grid min-h-[447px] grid-cols-[1.03fr_.97fr] overflow-hidden">
         <div className="relative z-10 flex flex-col justify-center px-8 py-8">
           <div className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-[#FF6B35]/25 bg-[#FF6B35]/10 px-3 py-1.5">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#FF6B35]" />
@@ -84,7 +84,7 @@ export function WebsiteMockup() {
           </div>
         </div>
 
-        <div className="relative min-h-[365px] overflow-hidden">
+        <div className="relative min-h-[447px] overflow-hidden">
           <img
             src="/hvac-hero.webp"
             alt="HVAC technician servicing a residential air-conditioning system"

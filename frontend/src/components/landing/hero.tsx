@@ -191,7 +191,7 @@ export function Hero() {
 
       {/* Right Content (Website Mockup) */}
       <div
-        className="relative hidden lg:block h-full min-h-[400px] hero-blur-animate"
+        className="relative hidden h-full min-h-[500px] lg:block hero-blur-animate"
         style={{ zIndex: 1, animationDelay: '0.6s' }}
       >
         {/* Website Mockup */}
@@ -221,7 +221,7 @@ export function Hero() {
 
       {/* Mobile Mockups - Visible only on mobile, positioned at bottom */}
       <div
-        className="absolute bottom-6 left-0 right-0 flex w-screen items-end justify-center overflow-hidden pointer-events-none hero-blur-animate lg:hidden md:bottom-8"
+        className="absolute bottom-0 left-0 right-0 flex w-screen items-end justify-center overflow-hidden pointer-events-none hero-blur-animate lg:hidden"
         style={{ zIndex: 1, left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw', animationDelay: '0.6s' }}
       >
         <div className="relative" style={{ transform: 'scale(0.55)', transformOrigin: 'bottom center', pointerEvents: 'none', userSelect: 'none' }}>
