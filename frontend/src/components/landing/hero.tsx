@@ -63,7 +63,7 @@ export function Hero() {
             <div className="flex -space-x-2 overflow-hidden">
               {/* Avatars */}
               <img
-                src="https://framerusercontent.com/images/E3vzjdpFuSWiVeurdyPGMrSWk.png?scale-down-to=64"
+                src="https://res.cloudinary.com/dopp0v9eq/image/upload/v1785362137/t3_uvsylp.png"
                 alt=""
                 className="inline-block h-4 w-4 rounded-full object-cover ring-2 ring-[#0B0B0D] select-none sm:h-5 sm:w-5"
                 draggable="false"
@@ -72,7 +72,7 @@ export function Hero() {
                 style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
               />
               <img
-                src="https://framerusercontent.com/images/jC7KwluILkhO0KHxk6qWEttOxhE.png?scale-down-to=64"
+                src="https://res.cloudinary.com/dopp0v9eq/image/upload/v1785362137/t1_wrij3h.png"
                 alt=""
                 className="inline-block h-4 w-4 rounded-full object-cover ring-2 ring-[#0B0B0D] select-none sm:h-5 sm:w-5"
                 draggable="false"
@@ -81,7 +81,7 @@ export function Hero() {
                 style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
               />
               <img
-                src="https://framerusercontent.com/images/cFl24iPInxckRrL32eRgadp9ZJM.png?scale-down-to=64"
+                src="https://res.cloudinary.com/dopp0v9eq/image/upload/v1785362139/t2_tkgpsi.png"
                 alt=""
                 className="inline-block h-4 w-4 rounded-full object-cover ring-2 ring-[#0B0B0D] select-none sm:h-5 sm:w-5"
                 draggable="false"
