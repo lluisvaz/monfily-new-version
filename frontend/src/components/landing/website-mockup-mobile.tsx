@@ -34,7 +34,7 @@ export function WebsiteMockupMobile() {
 
       <header className="flex h-[42px] flex-none items-center justify-between border-b border-white/10 bg-[#101013]/95 px-3">
         <div className="flex items-center gap-1.5">
-          <span className="grid h-5 w-5 place-items-center rounded-full bg-[#FF6B35] text-[7px] font-black text-[#0B0B0D]">
+          <span className="grid h-5 w-5 place-items-center rounded-full bg-[#2869D6] text-[7px] font-black text-[#0B0B0D]">
             NA
           </span>
           <div>
@@ -43,7 +43,7 @@ export function WebsiteMockupMobile() {
           </div>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="rounded-full bg-[#FF6B35] px-2 py-1 text-[5.5px] font-bold text-[#0B0B0D]">(305) 555</span>
+          <span className="rounded-full bg-[#2869D6] px-2 py-1 text-[5.5px] font-bold text-[#0B0B0D]">(305) 555</span>
           <Menu className="h-3.5 w-3.5 text-white/70" />
         </div>
       </header>
@@ -56,8 +56,8 @@ export function WebsiteMockupMobile() {
           draggable="false"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#101013]/85 via-transparent to-black/15" />
-        <div className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full border border-[#FF6B35]/30 bg-[#101013]/80 px-2 py-1 text-[5.5px] font-semibold text-[#FFC4AD] backdrop-blur">
-          <span className="h-1 w-1 rounded-full bg-[#FF6B35]" />
+        <div className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full border border-[#2869D6]/30 bg-[#101013]/80 px-2 py-1 text-[5.5px] font-semibold text-[#AFCBFF] backdrop-blur">
+          <span className="h-1 w-1 rounded-full bg-[#2869D6]" />
           <span>{t.mockup.badge}</span>
         </div>
       </div>
@@ -71,14 +71,14 @@ export function WebsiteMockupMobile() {
           <p className="mt-1 line-clamp-2 text-[7px] leading-[1.25] text-white/52">{t.mockup.description}</p>
 
           <div className="mt-1.5 flex gap-1">
-            <div className="flex flex-1 items-center justify-between rounded-full bg-[#FF6B35] py-1 pl-2.5 pr-1 text-[7.5px] font-normal text-[#0B0B0D]">
+            <div className="flex flex-1 items-center justify-between rounded-full bg-[#2869D6] py-1 pl-2.5 pr-1 text-[7.5px] font-normal text-[#0B0B0D]">
               {t.mockup.cta.viewPrices}
               <span className="grid h-[18px] w-[18px] place-items-center rounded-full bg-[#101013]">
-                <ArrowRight className="h-2.5 w-2.5 text-[#FF6B35]" />
+                <ArrowRight className="h-2.5 w-2.5 text-[#2869D6]" />
               </span>
             </div>
             <div className="flex items-center gap-1 rounded-full border border-white/15 bg-[#101013]/5 px-2 py-1 text-[7.5px] font-normal">
-              <Phone className="h-2.5 w-2.5 text-[#FF6B35]" />
+              <Phone className="h-2.5 w-2.5 text-[#2869D6]" />
               {t.mockup.cta.scheduleNow}
             </div>
           </div>
@@ -95,7 +95,7 @@ export function WebsiteMockupMobile() {
           <div>
             <div className="flex gap-px">
               {Array.from({ length: 5 }).map((_, index) => (
-                <Star key={index} className="h-2 w-2 fill-[#FF6B35] text-[#FF6B35]" />
+                <Star key={index} className="h-2 w-2 fill-[#2869D6] text-[#2869D6]" />
               ))}
             </div>
             <span className="block text-[5px] leading-none text-white/40">{t.mockup.trust}</span>
@@ -104,11 +104,11 @@ export function WebsiteMockupMobile() {
 
         <div className="mt-2 grid grid-cols-[1.3fr_.7fr] gap-1.5">
           <div className="rounded-lg border border-white/15 bg-[#18181C] px-2 py-1.5">
-            <CheckCircle className="mb-1 h-2.5 w-2.5 text-[#FF6B35]" />
+            <CheckCircle className="mb-1 h-2.5 w-2.5 text-[#2869D6]" />
             <div className="text-[6px] font-bold text-white">Same-day service</div>
             <div className="mt-0.5 text-[5px] text-white/45">Licensed &amp; insured</div>
           </div>
-          <div className="rounded-lg border border-[#FF6B35] bg-[#FF6B35] px-2 py-1.5">
+          <div className="rounded-lg border border-[#2869D6] bg-[#2869D6] px-2 py-1.5">
             <div className="text-[14px] font-black leading-none text-[#101013]">4.9</div>
             <div className="mt-1 text-[5px] font-bold text-[#101013]/65">Google rating</div>
           </div>

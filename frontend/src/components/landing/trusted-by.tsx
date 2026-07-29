@@ -2,16 +2,19 @@ import { useEffect, useRef } from "react";
 import { SectionLayout } from "./section-layout";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
-import { GoogleProductIcon, type GoogleProduct } from "@/components/ui/google-product-icon";
 
-const googleProducts = [
-  { id: "business-profile", label: "Google Business Profile" },
-  { id: "ads", label: "Google Ads" },
-  { id: "maps", label: "Google Maps" },
-  { id: "local-services", label: "Local Services Ads" },
-  { id: "analytics", label: "Google Analytics" },
-  { id: "search-console", label: "Search Console" },
-] satisfies Array<{ id: GoogleProduct; label: string }>;
+const clientLogos = [
+  "https://res.cloudinary.com/dopp0v9eq/image/upload/v1785361061/4_sgobb4.png",
+  "https://res.cloudinary.com/dopp0v9eq/image/upload/v1785361061/8_rbwwd0.png",
+  "https://res.cloudinary.com/dopp0v9eq/image/upload/v1785361061/6_o83roe.png",
+  "https://res.cloudinary.com/dopp0v9eq/image/upload/v1785361061/7_dich2m.png",
+  "https://res.cloudinary.com/dopp0v9eq/image/upload/v1785361060/1_ld8ufy.png",
+  "https://res.cloudinary.com/dopp0v9eq/image/upload/v1785361060/5_vp0rf3.png",
+  "https://res.cloudinary.com/dopp0v9eq/image/upload/v1785361060/2_ahmf4t.png",
+  "https://res.cloudinary.com/dopp0v9eq/image/upload/v1785361060/3_dk1ztg.png",
+  "https://res.cloudinary.com/dopp0v9eq/image/upload/v1785361060/9_nnj7tf.png",
+  "https://res.cloudinary.com/dopp0v9eq/image/upload/v1785361060/10_mmzbez.png",
+];
 
 function ProductRail() {
   const railRef = useRef<HTMLDivElement>(null);
@@ -38,7 +41,7 @@ function ProductRail() {
     return () => cancelAnimationFrame(frame);
   }, []);
 
-  const repeated = [...googleProducts, ...googleProducts];
+  const repeated = [...clientLogos, ...clientLogos];
 
   return (
     <div
@@ -48,15 +51,15 @@ function ProductRail() {
         WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
       }}
     >
-      <div ref={railRef} className="flex w-max items-center gap-3 px-4 will-change-transform">
-        {repeated.map((product, index) => (
-          <div
-            key={`${product.id}-${index}`}
-            className="flex h-12 flex-shrink-0 items-center gap-2 rounded-full border border-white/10 bg-white/[0.035] px-5 text-sm text-white/70"
-          >
-            <GoogleProductIcon product={product.id} className="h-5 w-5" />
-            {product.label}
-          </div>
+      <div ref={railRef} className="flex w-max items-center gap-10 px-6 will-change-transform md:gap-14 md:px-8">
+        {repeated.map((src, index) => (
+          <img
+            key={`${src}-${index}`}
+            src={src}
+            alt={`Client logo ${(index % clientLogos.length) + 1}`}
+            className="h-10 w-auto max-w-[132px] flex-shrink-0 object-contain md:h-12 md:max-w-[160px]"
+            draggable="false"
+          />
         ))}
       </div>
     </div>

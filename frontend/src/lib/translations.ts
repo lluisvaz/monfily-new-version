@@ -203,7 +203,7 @@ const english: TranslationCopy = {
     },
   },
   trustedBy: {
-    label: "One Google-first growth system across:",
+    label: "Satisfied clients.",
   },
   services: {
     title: "Everything a home service brand needs to dominate locally.",
@@ -394,7 +394,7 @@ const portugueseBrazil: TranslationCopy = {
     },
   },
   trustedBy: {
-    label: "Um único sistema de crescimento em todo o Google:",
+    label: "Clientes satisfeitos.",
   },
   services: {
     title: "Tudo o que uma empresa de home services precisa para dominar sua região.",
@@ -555,7 +555,7 @@ const portuguesePortugal: TranslationCopy = {
       "Sistemas de crescimento orientados para o Google para empresas de home services nos EUA. Transformamos pesquisas locais em chamadas e pedidos de orçamento através de landing pages, SEO local, Google Ads, branding e testes reais de conversão.",
   },
   trustedBy: {
-    label: "Um único sistema de crescimento em todo o ecossistema Google:",
+    label: "Clientes satisfeitos.",
   },
   services: {
     ...portugueseBrazil.services,
@@ -639,7 +639,7 @@ const spanish: TranslationCopy = {
     },
   },
   trustedBy: {
-    label: "Un sistema de crecimiento en todo Google:",
+    label: "Clientes satisfechos.",
   },
   services: {
     title: "Todo lo que una marca de home services necesita para dominar su zona.",
@@ -830,7 +830,7 @@ const italian: TranslationCopy = {
     },
   },
   trustedBy: {
-    label: "Un unico sistema di crescita in tutto Google:",
+    label: "Clienti soddisfatti.",
   },
   services: {
     title: "Tutto ciò che un brand di home services necessita per dominare localmente.",
