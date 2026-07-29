@@ -205,14 +205,18 @@ const MonfilyWordmarkDivider = () => (
         className="pointer-events-none absolute left-1/2 top-[60%] z-10 whitespace-nowrap text-center text-[25vw] [transform:translate(-50%,-50%)_scaleX(1.08)_scaleY(2.05)] sm:left-[48%] sm:top-[58%] sm:text-[clamp(92px,24vw,360px)] sm:[transform:translate(-50%,-50%)_scaleX(1.15)_scaleY(1.46)]"
         style={{
           fontFamily: 'Fustat-Bold, sans-serif',
+          fontStyle: 'normal',
           fontWeight: 'normal',
+          fontVariationSettings: '"slnt" 0',
+          fontSynthesis: 'none',
           lineHeight: 0.72,
           letterSpacing: '-0.085em',
           color: '#0B0B0D',
           WebkitTextFillColor: '#0B0B0D',
           WebkitTextStroke: '1px #353640',
           paintOrder: 'stroke fill',
-          textShadow: '0 0 28px rgba(0,0,0,.32)'
+          textShadow: '0 0 28px rgba(0,0,0,.32)',
+          rotate: '0deg'
         }}
       >
         MONFILY
