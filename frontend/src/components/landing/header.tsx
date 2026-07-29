@@ -34,7 +34,6 @@ function LanguageFlag({
     es: 'es',
     it: 'it',
     sg: 'sg',
-    he: 'il',
   }[language];
 
   return <img src={`https://flagcdn.com/w20/${country}.png`} alt={language} className={`${className} rounded-sm flex-shrink-0`} />;
@@ -57,12 +56,11 @@ export function Header() {
     { code: englishCode, label: t.header.languages.english, activeCodes: ['en', 'sg'] },
     { code: 'es', label: t.header.languages.spanish },
     { code: 'it', label: t.header.languages.italian ?? 'Italiano' },
-    { code: 'he', label: t.header.languages.hebrew ?? 'Hebrew (Israel)' },
   ];
 
   const handleLanguageChange = (lang: Language) => {
     // Remove current language prefix from path
-    const currentPath = location.replace(/^\/(pt-br|pt-pt|en|es|it|sg|he)/, '') || '/';
+    const currentPath = location.replace(/^\/(pt-br|pt-pt|en|es|it|sg)/, '') || '/';
     let newPath: string;
     switch (lang) {
       case 'pt-br': newPath = `/pt-br${currentPath === '/' ? '' : currentPath}`; break;
@@ -71,7 +69,6 @@ export function Header() {
       case 'es': newPath = `/es${currentPath === '/' ? '' : currentPath}`; break;
       case 'it': newPath = `/it${currentPath === '/' ? '' : currentPath}`; break;
       case 'sg': newPath = `/sg${currentPath === '/' ? '' : currentPath}`; break;
-      case 'he': newPath = `/he${currentPath === '/' ? '' : currentPath}`; break;
     }
     // Reload page for better optimization
     window.location.href = newPath;

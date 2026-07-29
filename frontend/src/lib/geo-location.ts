@@ -33,7 +33,7 @@ const SPANISH_SPEAKING_COUNTRIES = [
   'GQ',
 ];
 
-export type Language = 'pt-br' | 'pt-pt' | 'en' | 'es' | 'it' | 'sg' | 'he';
+export type Language = 'pt-br' | 'pt-pt' | 'en' | 'es' | 'it' | 'sg';
 
 function normalizeCountryCode(value?: string | null): string | null {
   const code = value?.trim().toUpperCase();
@@ -45,7 +45,6 @@ export function getLanguageForCountry(countryCode?: string | null): Language {
 
   if (upperCode === 'IT') return 'it';
   if (upperCode === 'SG') return 'sg';
-  if (upperCode === 'IL') return 'he';
   if (upperCode === 'PT') return 'pt-pt';
   if (upperCode && PORTUGUESE_SPEAKING_COUNTRIES.includes(upperCode)) return 'pt-br';
   if (upperCode && SPANISH_SPEAKING_COUNTRIES.includes(upperCode)) return 'es';
@@ -134,7 +133,6 @@ export function detectLanguageFromBrowser(): Language {
     if (lang.startsWith('pt')) return 'pt-br';
     if (lang.startsWith('es')) return 'es';
     if (lang.startsWith('it')) return 'it';
-    if (lang.startsWith('he') || lang.startsWith('iw')) return 'he';
     if (lang === 'en-sg') return 'sg';
   }
 

@@ -193,22 +193,21 @@ const LargeStripedDivider = () => {
 
 const MonfilyWordmarkDivider = () => (
   <div
-    className="relative w-full overflow-hidden border-y border-[#393942] bg-[#0B0B0D] bg-[image:repeating-linear-gradient(105deg,rgba(255,255,255,.065)_0px,rgba(255,255,255,.065)_1px,transparent_1px,transparent_13px)] sm:border-[#2A2A2F]"
+    className="relative w-full overflow-hidden bg-[#0B0B0D] bg-[image:repeating-linear-gradient(105deg,rgba(255,255,255,.065)_0px,rgba(255,255,255,.065)_1px,transparent_1px,transparent_13px)] sm:border-y sm:border-[#2A2A2F]"
     role="img"
     aria-label="Monfily"
   >
-    <div className="relative isolate mx-auto h-[145px] w-full max-w-[1500px] overflow-hidden border-x border-[#393942] sm:h-[clamp(170px,24vw,365px)] sm:border-[#2A2A2F]">
+    <div className="relative isolate mx-4 h-[145px] w-[calc(100%-2rem)] max-w-[1500px] overflow-hidden border border-[#303038] sm:mx-auto sm:h-[clamp(170px,24vw,365px)] sm:w-full sm:border-x sm:border-y-0 sm:border-[#2A2A2F]">
       <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_60%_75%_at_50%_100%,rgba(40,105,214,.11),transparent_72%)]" />
-      <div className="pointer-events-none absolute inset-0 z-30 border border-[#555560] sm:hidden" />
 
       {[20, 40, 60, 80].map((position) => (
         <div
           key={position}
-          className="pointer-events-none absolute bottom-0 top-0 z-0 w-px bg-[#3B3B45]/80 sm:bg-[#2A2A2F]/45"
+          className="pointer-events-none absolute bottom-0 top-0 z-0 w-px bg-[#303038]/60 sm:bg-[#2A2A2F]/45"
           style={{ left: `${position}%` }}
         />
       ))}
-      <div className="pointer-events-none absolute left-0 right-0 top-[18%] z-0 h-px bg-[#3B3B45]/80 sm:bg-[#2A2A2F]/55" />
+      <div className="pointer-events-none absolute left-0 right-0 top-[18%] z-0 h-px bg-[#303038]/60 sm:bg-[#2A2A2F]/55" />
 
       <div
         aria-hidden="true"
@@ -220,7 +219,7 @@ const MonfilyWordmarkDivider = () => (
           letterSpacing: '-0.085em',
           color: '#0B0B0D',
           WebkitTextFillColor: '#0B0B0D',
-          WebkitTextStroke: '1.25px #41434D',
+          WebkitTextStroke: '1px #353640',
           paintOrder: 'stroke fill',
           textShadow: '0 0 28px rgba(0,0,0,.32)'
         }}
@@ -897,7 +896,6 @@ const SolutionsSuiteSection = () => {
       es: 'crecimiento',
       it: 'crescita',
       sg: 'growth',
-      he: 'צמיחה',
     };
     const target = highlightedWord[language] ?? 'growth';
     const parts = heading.split(target);

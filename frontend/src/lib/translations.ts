@@ -1,4 +1,4 @@
-export type Language = "pt-br" | "pt-pt" | "en" | "es" | "it" | "sg" | "he";
+export type Language = "pt-br" | "pt-pt" | "en" | "es" | "it" | "sg";
 
 export interface Translations {
   whatsappNumber: string;
@@ -20,7 +20,6 @@ export interface Translations {
       spanish: string;
       italian: string;
       singapore: string;
-      hebrew: string;
     };
     cta: string;
     ctaMobile: string;
@@ -170,7 +169,6 @@ const english: TranslationCopy = {
       spanish: "Spanish",
       italian: "Italian",
       singapore: "English (Singapore)",
-      hebrew: "Hebrew (Israel)",
     },
     cta: "Get a growth plan",
     ctaMobile: "Let's talk",
@@ -362,7 +360,6 @@ const portugueseBrazil: TranslationCopy = {
       spanish: "Espanhol",
       italian: "Italiano",
       singapore: "Inglês (Singapura)",
-      hebrew: "Hebraico (Israel)",
     },
     cta: "Receber plano de crescimento",
     ctaMobile: "Falar agora",
@@ -608,7 +605,6 @@ const spanish: TranslationCopy = {
       spanish: "Español",
       italian: "Italiano",
       singapore: "Inglés (Singapur)",
-      hebrew: "Hebreo (Israel)",
     },
     cta: "Recibir plan de crecimiento",
     ctaMobile: "Hablemos",
@@ -800,7 +796,6 @@ const italian: TranslationCopy = {
       spanish: "Spagnolo",
       italian: "Italiano",
       singapore: "Inglese (Singapore)",
-      hebrew: "Ebraico (Israele)",
     },
     cta: "Ricevi il piano di crescita",
     ctaMobile: "Parliamone",
@@ -972,197 +967,6 @@ const italian: TranslationCopy = {
   },
 };
 
-const hebrew: TranslationCopy = {
-  seo: {
-    title: "שיווק לעסקי שירותי בית בארה״ב | Monfily",
-    description:
-      "שיווק ממוקד Google לעסקי שירותי בית בארה״ב: דפי נחיתה, מיתוג, לידים, SEO מקומי, פרופיל עסקי, Google Ads ובדיקות המרה.",
-  },
-  header: {
-    solutionsDropdown: {
-      websiteCreation: "דפי נחיתה ומיתוג",
-      softwareDevelopment: "פרופיל העסק ב-Google",
-      artificialIntelligence: "Google Ads ולידים איכותיים",
-      technicalSEO: "SEO מקומי ואופטימיזציה",
-    },
-    languages: {
-      portugueseBrazil: "פורטוגזית (ברזיל)",
-      portuguesePortugal: "פורטוגזית (פורטוגל)",
-      english: "אנגלית",
-      spanish: "ספרדית",
-      italian: "איטלקית",
-      singapore: "אנגלית (סינגפור)",
-      hebrew: "עברית (ישראל)",
-    },
-    cta: "קבלת תוכנית צמיחה",
-    ctaMobile: "בואו נדבר",
-  },
-  hero: {
-    badge: {
-      chosenBy: "שיווק ל-Home Services בארה״ב",
-      clients: " — ",
-      in: "",
-    },
-    rotatingTexts: ["HVAC", "Roofing", "Plumbing", "Electrical", "Landscaping"],
-    heading: {
-      line1: "שלטו באזור שלכם.",
-      line2: "זכו ביותר ",
-      line3: "לקוחות מקומיים.",
-    },
-    description:
-      "מערכות צמיחה ממוקדות Google לעסקי שירותי בית בארה״ב. אנחנו הופכים חיפושים מקומיים לשיחות ולהצעות מחיר באמצעות דפי נחיתה, SEO מקומי, Google Ads, מיתוג ובדיקות המרה.",
-    cta: {
-      primary: "מתחילים עכשיו",
-      secondary: "הכירו את השיטה",
-    },
-    features: {
-      performance: {
-        title: "נבנה להמרה",
-        description: "דפים מהירים הממוקדים בשיחות ובהצעות מחיר.",
-      },
-      optimized: {
-        title: "מומחי Google",
-        description: "נראות מקומית ב-Search, Maps ו-Ads.",
-      },
-    },
-  },
-  trustedBy: {
-    label: "מערכת צמיחה אחת בכל Google:",
-  },
-  services: {
-    title: "כל מה שמותג שירותי בית צריך כדי להוביל באזור שלו.",
-    metrics: {
-      projectsDelivered: "פרויקטי צמיחה שנמסרו",
-      nichesServed: "תחומי שירותי בית",
-    },
-    items: {
-      webDesign: {
-        title: "דפי נחיתה ומיתוג",
-        description:
-          "מיצוב ברור, זהות בלתי נשכחת ודפי נחיתה mobile-first שהופכים תנועה איכותית לשיחות ולבקשות הצעת מחיר.",
-      },
-      customSoftware: {
-        title: "פרופיל עסקי ו-SEO מקומי",
-        description:
-          "אופטימיזציית פרופיל, אסטרטגיית אזורי שירות, דפים מקומיים, אזכורים וביקורות לצמיחה ב-Google Search ו-Maps.",
-      },
-      aiAutomation: {
-        title: "Google Ads ולידים איכותיים",
-        description:
-          "קמפיינים ב-Search, Local Services ורימרקטינג עם מדידה מדויקת, מילות חיפוש בעלות כוונה ובקרת איכות.",
-      },
-      seoGrowth: {
-        title: "בדיקות משתמשים והמרה",
-        description:
-          "משוב ממשתמשים אמיתיים, ניתוח מסלול הפנייה ואופטימיזציה רציפה להגדלת מספר העבודות המוזמנות.",
-      },
-    },
-  },
-  mockup: {
-    navigation: {
-      services: "שירותים",
-      benefits: "למה אנחנו",
-      projects: "ביקורות",
-      prices: "מימון",
-      clients: "אזורי שירות",
-    },
-    badge: "שירות HVAC חירום 24/7",
-    heading: {
-      line1: "הנוחות חזרה.",
-      line2: " מהיר, הוגן ומקומי.",
-    },
-    description:
-      "מומחי HVAC מורשים לתיקונים, תחזוקה והתקנות. מחיר שקוף וזמינות באותו היום.",
-    cta: {
-      viewPrices: "הזמנת שירות",
-      scheduleNow: "התקשרו עכשיו",
-    },
-    trust: "ציון 4.9 מלקוחות מקומיים",
-  },
-  expertise: {
-    label: "המומחיות שלנו ב-Google",
-    heading: {
-      line1: "הופיעו בדיוק ברגע",
-      line2: "שבו הלקוחות צריכים אתכם.",
-    },
-    description:
-      "אנחנו מחברים פרופיל עסקי, Search, Maps, Ads, Analytics ומעקב שיחות למערכת מדידה אחת המתמקדת בעבודות שהוזמנו, לא במדדי ראווה.",
-    cta: "שיחה עם אסטרטג צמיחה",
-  },
-  solutionsSuite: {
-    heading: "מנוע צמיחה מקומי מלא.",
-    description:
-      "כל חלק עובד יחד כדי שהעסק יימצא, יעורר אמון וייבחר לאורך כל מסע הלקוח.",
-    items: {
-      antiFraud: {
-        title: "סמכות מקומית",
-        description:
-          "תוכן לפי אזורי שירות, אסטרטגיית מוניטין ואותות עקביים שבונים אמון אצל Google ואצל הלקוחות.",
-      },
-      checkout: {
-        title: "מודיעין לידים",
-        description:
-          "מעקב אחר שיחות, טפסים וקמפיינים שמראה אילו חיפושים מייצרים הזדמנויות איכותיות, ולא רק קליקים.",
-      },
-      subscriptions: {
-        title: "אופטימיזציה רציפה",
-        description:
-          "בדיקות חודשיות של דפים, הצעות, מילות חיפוש וקהלים להפחתת עלויות ולהגדלת מספר העבודות.",
-      },
-    },
-  },
-  faq: {
-    heading: "שאלות נפוצות",
-    description:
-      "תשובות ברורות על צמיחת עסק שירותי בית באמצעות מערכת שיווק ממוקדת Google.",
-    items: [
-      {
-        question: "עם אילו תחומי שירותי בית אתם עובדים?",
-        answer:
-          "אנחנו מתמחים ב-HVAC, גגות, אינסטלציה, חשמל, גינון, שיפוצים, ניקיון, הדברה ושירותים מקומיים נוספים ברחבי ארה״ב.",
-      },
-      {
-        question: "האם אתם מנהלים פרופיל עסקי ב-Google?",
-        answer:
-          "כן. אנחנו משפרים קטגוריות, שירותים, אזורים, תמונות, פוסטים, שאלות, ביקורות ורלוונטיות מקומית בהתאם להנחיות Google.",
-      },
-      {
-        question: "האם הלידים בלעדיים?",
-        answer:
-          "כן. הלידים שנוצרים דרך הדפים, הקמפיינים והנוכחות המקומית שלכם שייכים לעסק שלכם. המיקוד הוא איכות, מדידה ופוטנציאל להזמנה.",
-      },
-      {
-        question: "האם אתם יוצרים דפי נחיתה ומיתוג?",
-        answer:
-          "כן. אנחנו יוצרים מיצוב, שפה חזותית, קופי ודפים רספונסיביים שמחזקים אמינות וממירים תנועה.",
-      },
-      {
-        question: "איך אתם מודדים תוצאות?",
-        answer:
-          "אנחנו מודדים שיחות איכותיות, טפסים, הצעות מחיר, מקור הליד ועלות רכישה באמצעות Analytics, Ads ומעקב שיחות.",
-      },
-      {
-        question: "האם אתם עובדים עם חברה אחת בכל אזור?",
-        answer:
-          "אנחנו בוחנים את אזורי השירות מראש ונמנעים מעימות ישיר כאשר בלעדיות היא חלק מתוכנית הצמיחה.",
-      },
-      {
-        question: "מתי אפשר להתחיל?",
-        answer:
-          "לאחר שיחת ההיכרות וקבלת הגישות, נתחיל מיד בביקורת ונכין מפת דרכים מתועדפת להשקה.",
-      },
-    ],
-  },
-  finalCTA: {
-    heading: "מוכנים לזכות ביותר עבודות מקומיות?",
-    description:
-      "ספרו לנו על התחום ואזור השירות. נמפה את הדרך המהירה ביותר ב-Google ליותר שיחות איכותיות והצעות מחיר.",
-    cta: "קבלת תוכנית צמיחה",
-  },
-  footer: {
-    copyright: `© ${year} Monfily Digital. שיווק ממוקד Google לעסקי שירותי בית בארה״ב.`,
-  },
-};
 
 const defaultWhatsAppNumbers: Record<Language, string> = {
   "pt-br": "5511978267321",
@@ -1171,7 +975,6 @@ const defaultWhatsAppNumbers: Record<Language, string> = {
   es: "34613484139",
   it: "393511740751",
   sg: "6591366447",
-  he: "972559673136",
 };
 
 const envWhatsAppNumbers: Partial<Record<Language, string | undefined>> = {
@@ -1181,7 +984,6 @@ const envWhatsAppNumbers: Partial<Record<Language, string | undefined>> = {
   es: import.meta.env.VITE_WHATSAPP_PHONE_ES,
   it: import.meta.env.VITE_WHATSAPP_PHONE_IT,
   sg: import.meta.env.VITE_WHATSAPP_PHONE_SG,
-  he: import.meta.env.VITE_WHATSAPP_PHONE_IL,
 };
 
 function withNumber(language: Language, copy: TranslationCopy): Translations {
@@ -1198,5 +1000,4 @@ export const translations: Record<Language, Translations> = {
   es: withNumber("es", spanish),
   it: withNumber("it", italian),
   sg: withNumber("sg", english),
-  he: withNumber("he", hebrew),
 };

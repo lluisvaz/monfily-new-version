@@ -22,7 +22,6 @@ function getLanguageFromPath(path: string): Language | null {
   if (path.startsWith('/es')) return 'es';
   if (path.startsWith('/it')) return 'it';
   if (path.startsWith('/sg')) return 'sg';
-  if (path.startsWith('/he')) return 'he';
   return null;
 }
 
@@ -37,7 +36,6 @@ function getRoutePrefix(lang: Language): string {
     case 'es': return '/es';
     case 'it': return '/it';
     case 'sg': return '/sg';
-    case 'he': return '/he';
   }
 }
 
@@ -104,7 +102,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const setLanguage = (lang: Language) => {
     // Remove current language prefix from path
-    const currentPath = location.replace(/^\/(pt-pt|pt-br|en|es|it|sg|he)/, '') || '/';
+    const currentPath = location.replace(/^\/(pt-pt|pt-br|en|es|it|sg)/, '') || '/';
     const newPath = `${getRoutePrefix(lang)}${currentPath === '/' ? '' : currentPath}`;
     setLocation(newPath);
     setLanguageState(lang);

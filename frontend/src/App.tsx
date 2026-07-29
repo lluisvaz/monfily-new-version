@@ -25,7 +25,6 @@ function Router() {
       <Route path="/es" component={Home} />
       <Route path="/it" component={Home} />
       <Route path="/sg" component={Home} />
-      <Route path="/he" component={Home} />
       <Route path="/" component={Home} />
       <Route component={RedirectToRoot} />
     </Switch>

@@ -9,7 +9,6 @@ const HTML_LANG_BY_LANGUAGE = {
   es: 'es-ES',
   it: 'it-IT',
   sg: 'en-SG',
-  he: 'he-IL',
 } as const;
 
 const OG_LOCALE_BY_LANGUAGE = {
@@ -19,7 +18,6 @@ const OG_LOCALE_BY_LANGUAGE = {
   es: 'es_ES',
   it: 'it_IT',
   sg: 'en_SG',
-  he: 'he_IL',
 } as const;
 
 export function SEOHead() {
@@ -49,7 +47,7 @@ export function SEOHead() {
 
     // Update html lang attribute
     document.documentElement.lang = HTML_LANG_BY_LANGUAGE[language];
-    document.documentElement.dir = language === 'he' ? 'rtl' : 'ltr';
+    document.documentElement.dir = 'ltr';
 
     // Update Open Graph tags
     const socialImageUrl = new URL('/og.png', window.location.origin).toString();

@@ -1,13 +1,12 @@
 import type { Language } from "@/lib/translations";
 
-export type MarketKey = "PT" | "IT" | "ES" | "IL" | "SG" | "BR" | "GB" | "US";
+export type MarketKey = "PT" | "IT" | "ES" | "SG" | "BR" | "GB" | "US";
 
 /** ISO country code -> contact market. */
 export const MARKET_BY_COUNTRY: Record<string, MarketKey> = {
   PT: "PT",
   IT: "IT",
   ES: "ES",
-  IL: "IL",
   SG: "SG",
   BR: "BR",
   GB: "GB",
@@ -28,8 +27,6 @@ export function marketForLanguage(language: Language): MarketKey {
       return "IT";
     case "sg":
       return "SG";
-    case "he":
-      return "IL";
     case "en":
     default:
       return "GB";
@@ -51,7 +48,6 @@ export const WHATSAPP_CTA_BY_LANGUAGE: Record<Language, string> = {
   es: "¡Hola! Vengo del sitio de Monfily y me gustaría saber más.",
   it: "Ciao! Vengo dal sito di Monfily e vorrei saperne di più.",
   sg: "Hi! I came from the Monfily website and would like to know more.",
-  he: "שלום! הגעתי מאתר Monfily ואשמח לקבל פרטים נוספים.",
 };
 
 export function getWhatsAppCtaMessage(language: Language): string {
