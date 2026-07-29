@@ -193,7 +193,7 @@ const LargeStripedDivider = () => {
 
 const MonfilyWordmarkDivider = () => (
   <div
-    className="relative w-full overflow-hidden bg-[#0B0B0D] bg-[image:repeating-linear-gradient(105deg,rgba(255,255,255,.065)_0px,rgba(255,255,255,.065)_1px,transparent_1px,transparent_13px)] sm:border-y sm:border-[#2A2A2F]"
+    className="relative w-full overflow-hidden bg-[#0B0B0D] bg-[image:repeating-linear-gradient(75deg,rgba(255,255,255,.065)_0px,rgba(255,255,255,.065)_1px,transparent_1px,transparent_9px)] sm:border-y sm:border-[#2A2A2F]"
     role="img"
     aria-label="Monfily"
   >
