@@ -125,7 +125,6 @@ export interface Translations {
       subscriptions: {
         title: string;
         description: string;
-        badge: string;
       };
     };
   };
@@ -178,7 +177,7 @@ const english: TranslationCopy = {
   },
   hero: {
     badge: {
-      chosenBy: "Marketing for U.S. Home Services companies",
+      chosenBy: "Marketing for U.S. Home Services",
       clients: " — ",
       in: "",
     },
@@ -287,7 +286,6 @@ const english: TranslationCopy = {
         title: "Continuous Optimization",
         description:
           "Monthly testing across pages, offers, keywords and audiences to lower acquisition costs and keep job volume growing.",
-        badge: "Always improving",
       },
     },
   },
@@ -371,7 +369,7 @@ const portugueseBrazil: TranslationCopy = {
   },
   hero: {
     badge: {
-      chosenBy: "Marketing para empresas de Home Services nos EUA",
+      chosenBy: "Marketing para Home Services nos EUA",
       clients: " — ",
       in: "",
     },
@@ -480,7 +478,6 @@ const portugueseBrazil: TranslationCopy = {
         title: "Otimização Contínua",
         description:
           "Testes mensais em páginas, ofertas, palavras-chave e públicos para reduzir o custo de aquisição e aumentar o volume de serviços.",
-        badge: "Sempre evoluindo",
       },
     },
   },
@@ -618,7 +615,7 @@ const spanish: TranslationCopy = {
   },
   hero: {
     badge: {
-      chosenBy: "Marketing para empresas de Home Services en EE. UU.",
+      chosenBy: "Marketing para Home Services en EE. UU.",
       clients: " — ",
       in: "",
     },
@@ -727,7 +724,6 @@ const spanish: TranslationCopy = {
         title: "Optimización Continua",
         description:
           "Pruebas mensuales de páginas, ofertas, keywords y audiencias para reducir costes y aumentar el volumen de trabajos.",
-        badge: "Siempre mejorando",
       },
     },
   },
@@ -811,7 +807,7 @@ const italian: TranslationCopy = {
   },
   hero: {
     badge: {
-      chosenBy: "Marketing per aziende di Home Services negli USA",
+      chosenBy: "Marketing per Home Services negli USA",
       clients: " — ",
       in: "",
     },
@@ -920,7 +916,6 @@ const italian: TranslationCopy = {
         title: "Ottimizzazione Continua",
         description:
           "Test mensili su pagine, offerte, keyword e pubblici per ridurre i costi di acquisizione e aumentare i lavori.",
-        badge: "Sempre in crescita",
       },
     },
   },
@@ -1004,7 +999,7 @@ const hebrew: TranslationCopy = {
   },
   hero: {
     badge: {
-      chosenBy: "שיווק לעסקי Home Services בארה״ב",
+      chosenBy: "שיווק ל-Home Services בארה״ב",
       clients: " — ",
       in: "",
     },
@@ -1113,7 +1108,6 @@ const hebrew: TranslationCopy = {
         title: "אופטימיזציה רציפה",
         description:
           "בדיקות חודשיות של דפים, הצעות, מילות חיפוש וקהלים להפחתת עלויות ולהגדלת מספר העבודות.",
-        badge: "משתפרים תמיד",
       },
     },
   },

@@ -43,7 +43,6 @@ export function Hero() {
             background: 'radial-gradient(ellipse 80% 110% at bottom right, rgba(40,105,214,.32) 0%, rgba(40,105,214,.14) 28%, rgba(40,105,214,.04) 52%, rgba(11,11,13,0) 74%)'
           }}
         ></div>
-        <div className="absolute bottom-6 right-6 w-3 h-3 bg-[#2869D6] rounded-full"></div>
       </div>
 
       {/* Gradient Effect - Mobile Only (Bottom Center) */}
@@ -54,10 +53,9 @@ export function Hero() {
             background: 'radial-gradient(ellipse 120% 85% at bottom center, rgba(40,105,214,.28) 0%, rgba(40,105,214,.10) 38%, rgba(11,11,13,0) 72%)'
           }}
         ></div>
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#2869D6] rounded-full"></div>
       </div>
       {/* Left Content */}
-      <div className="flex flex-col justify-center items-start space-y-6 md:space-y-8 w-full relative lg:pb-0 pb-[240px] md:pb-[280px]" style={{ zIndex: 1 }}>
+      <div className="relative flex w-full flex-col items-start justify-center space-y-6 pb-[340px] md:space-y-8 md:pb-[380px] lg:pb-0" style={{ zIndex: 1 }}>
         {/* Badge */}
         <div
           className="inline-flex max-w-full items-center gap-2 rounded-full border border-[#2A2A2F] py-1 pl-1 pr-3 hero-blur-animate"
@@ -207,7 +205,7 @@ export function Hero() {
           <Iphone16Pro
             width={220}
             height={420}
-            showIsland={true}
+            showIsland={false}
             islandWidth={90}
             islandHeight={20}
             showCamera={false}
@@ -225,7 +223,7 @@ export function Hero() {
 
       {/* Mobile Mockups - Visible only on mobile, positioned at bottom */}
       <div
-        className="lg:hidden absolute bottom-0 left-0 right-0 w-screen flex justify-center items-end overflow-hidden pointer-events-none hero-blur-animate"
+        className="absolute bottom-6 left-0 right-0 flex w-screen items-end justify-center overflow-hidden pointer-events-none hero-blur-animate lg:hidden md:bottom-8"
         style={{ zIndex: 1, left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw', animationDelay: '0.6s' }}
       >
         <div className="relative" style={{ transform: 'scale(0.55)', transformOrigin: 'bottom center', pointerEvents: 'none', userSelect: 'none' }}>
@@ -238,7 +236,7 @@ export function Hero() {
             <Iphone16Pro
               width={220}
               height={420}
-              showIsland={true}
+              showIsland={false}
               islandWidth={90}
               islandHeight={20}
               showCamera={false}

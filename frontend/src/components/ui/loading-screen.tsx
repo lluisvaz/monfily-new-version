@@ -14,15 +14,13 @@ export function LoadingScreen() {
   }, []);
 
   useEffect(() => {
-    if (!isReady) return;
-
     const startFade = window.setTimeout(() => {
       setIsFadingOut(true);
       window.setTimeout(() => {
         setIsVisible(false);
         document.body.style.overflow = "";
       }, 300);
-    }, 160);
+    }, isReady ? 160 : 1800);
 
     return () => window.clearTimeout(startFade);
   }, [isReady]);

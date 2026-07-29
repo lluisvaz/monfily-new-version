@@ -32,7 +32,7 @@ export function SectionLayout({
   const noStripeClass = "bg-[#0B0B0D]";
 
   return (
-    <div className={`w-full flex flex-row relative ${containerClassName}`} id={id}>
+    <div className={`w-full flex flex-row relative ${containerClassName}`} id={id} data-motion-section>
       {/* Top border line - very thin */}
       {showTopBorder && (
         <div className="absolute top-0 left-0 right-0 h-[0.5px] bg-[#2A2A2F]" style={{ zIndex: 10 }}></div>
@@ -42,7 +42,7 @@ export function SectionLayout({
       <div className={`flex-1 min-w-[1rem] md:min-w-[2rem] ${showStripes ? stripeClass : noStripeClass}`}></div>
 
       {/* Main Content */}
-      <div className={`relative w-full min-w-0 max-w-[1500px] mx-auto bg-[#0B0B0D] ${className}`} id="section-main-content">
+      <div className={`relative w-full min-w-0 max-w-[1500px] mx-auto bg-[#0B0B0D] ${className}`} data-motion-content>
         {/* Left border line */}
         <div className="absolute top-0 bottom-0 left-0 w-[0.5px] bg-[#2A2A2F] pointer-events-none" style={{ zIndex: 'var(--section-border-z, 1000)' }}></div>
         

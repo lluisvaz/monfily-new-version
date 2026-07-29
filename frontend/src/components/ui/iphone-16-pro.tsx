@@ -1,4 +1,4 @@
-import { SVGProps, forwardRef, CSSProperties, ReactNode } from "react";
+import { SVGProps, forwardRef, CSSProperties, ReactNode, useId } from "react";
 
 export interface Iphone16ProProps extends SVGProps<SVGSVGElement> {
     /** Frame width */
@@ -67,6 +67,12 @@ export const Iphone16Pro = forwardRef<SVGSVGElement, Iphone16ProProps>(
         }: Iphone16ProProps,
         ref
     ) => {
+        const screenClipId = useId().replace(/:/g, "");
+        const gradientId = `${screenClipId}-gradient`;
+        const screenInset = 5;
+        const screenSizeOffset = screenInset * 2;
+        const innerRadius = Math.max(screenRadius - screenInset, 0);
+
         return (
             <svg
                 ref={ref}
@@ -83,62 +89,59 @@ export const Iphone16Pro = forwardRef<SVGSVGElement, Iphone16ProProps>(
             >
                 {/* Outer frame */}
                 <rect
-                    x="1"
-                    y="1"
-                    width={width - 2}
-                    height={height - 2}
+                    x="0.5"
+                    y="0.5"
+                    width={width - 1}
+                    height={height - 1}
                     rx={rounded ? screenRadius : 0}
                     fill={frameColor}
                     stroke="rgba(255, 255, 255, 0.15)"
                     strokeWidth="1"
                 />
 
-                {/* Inner bezel */}
-                <rect
-                    x="12"
-                    y="12"
-                    width={width - 24}
-                    height={height - 24}
-                    rx={rounded ? screenRadius : 0}
-                    fill={bezelColor}
-                    stroke="rgba(255, 255, 255, 0.08)"
-                    strokeWidth="0.5"
-                />
-
                 {/* Screen area */}
-                <clipPath id="screen">
+                <clipPath id={screenClipId}>
                     <rect
-                        x="13"
-                        y="13"
-                        width={width - 26}
-                        height={height - 26}
-                        rx={screenRadius}
-                        ry={screenRadius}
+                        x={screenInset}
+                        y={screenInset}
+                        width={width - screenSizeOffset}
+                        height={height - screenSizeOffset}
+                        rx={innerRadius}
+                        ry={innerRadius}
                     />
                 </clipPath>
 
+                <rect
+                    x={screenInset}
+                    y={screenInset}
+                    width={width - screenSizeOffset}
+                    height={height - screenSizeOffset}
+                    rx={innerRadius}
+                    fill={bezelColor}
+                />
+
                 {screenGradient && (
                     <rect
-                        x="13"
-                        y="13"
-                        width={width - 26}
-                        height={height - 26}
-                        rx={screenRadius}
-                        ry={screenRadius}
-                        fill={`url(#gradient)`}
-                        clipPath="url(#screen)"
+                        x={screenInset}
+                        y={screenInset}
+                        width={width - screenSizeOffset}
+                        height={height - screenSizeOffset}
+                        rx={innerRadius}
+                        ry={innerRadius}
+                        fill={`url(#${gradientId})`}
+                        clipPath={`url(#${screenClipId})`}
                     />
                 )}
 
                 {src && (
                     <image
                         href={src}
-                        x="13"
-                        y="13"
-                        width={width - 26}
-                        height={height - 26}
+                        x={screenInset}
+                        y={screenInset}
+                        width={width - screenSizeOffset}
+                        height={height - screenSizeOffset}
                         preserveAspectRatio="xMidYMid slice"
-                        clipPath="url(#screen)"
+                        clipPath={`url(#${screenClipId})`}
                         className={contentClassName}
                         style={contentStyle}
                     />
@@ -146,15 +149,15 @@ export const Iphone16Pro = forwardRef<SVGSVGElement, Iphone16ProProps>(
 
                 {videoSrc && (
                     <foreignObject
-                        x="13"
-                        y="13"
-                        width={width - 26}
-                        height={height - 26}
-                        clipPath="url(#screen)"
+                        x={screenInset}
+                        y={screenInset}
+                        width={width - screenSizeOffset}
+                        height={height - screenSizeOffset}
+                        clipPath={`url(#${screenClipId})`}
                     >
                         <video
                             className={`w-full h-full object-cover ${contentClassName}`}
-                            style={{ borderRadius: `${screenRadius}px`, ...contentStyle }}
+                            style={{ borderRadius: `${innerRadius}px`, ...contentStyle }}
                             src={videoSrc}
                             autoPlay
                             loop
@@ -166,15 +169,15 @@ export const Iphone16Pro = forwardRef<SVGSVGElement, Iphone16ProProps>(
 
                 {children && !src && !videoSrc && (
                     <foreignObject
-                        x="13"
-                        y="13"
-                        width={width - 26}
-                        height={height - 26}
-                        clipPath="url(#screen)"
+                        x={screenInset}
+                        y={screenInset}
+                        width={width - screenSizeOffset}
+                        height={height - screenSizeOffset}
+                        clipPath={`url(#${screenClipId})`}
                     >
                         <div 
                             className={`w-full h-full overflow-hidden ${contentClassName}`}
-                            style={{ borderRadius: `${screenRadius}px`, ...contentStyle }}
+                            style={{ borderRadius: `${innerRadius}px`, ...contentStyle }}
                         >
                             {children}
                         </div>
@@ -206,7 +209,7 @@ export const Iphone16Pro = forwardRef<SVGSVGElement, Iphone16ProProps>(
                 {/* Optional gradient definition */}
                 {screenGradient && (
                     <defs>
-                        <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="1">
+                        <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
                             <stop offset="0%" stopColor={screenGradient.split(",")[0]} />
                             <stop offset="100%" stopColor={screenGradient.split(",")[1] || screenGradient.split(",")[0]} />
                         </linearGradient>

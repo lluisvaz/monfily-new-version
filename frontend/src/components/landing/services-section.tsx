@@ -3,7 +3,7 @@ import { useLanguage } from "@/hooks/use-language";
 import { translations, type Language } from "@/lib/translations";
 import { useWhatsAppCta } from "@/hooks/use-whatsapp";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Plus, Instagram, Mail, Whatsapp } from "iconoir-react";
+import { ArrowRight, Plus, Instagram, Mail } from "iconoir-react";
 import { BeakerIcon, CursorArrowRaysIcon, MapPinIcon, MegaphoneIcon } from "@heroicons/react/24/outline";
 import SpotlightCard from "@/components/ui/spotlight-card";
 import { SpotlightButton } from "@/components/ui/spotlight-button";
@@ -893,7 +893,7 @@ const SolutionsSuiteSection = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
               style={{
-                filter: 'drop-shadow(0 0 6px rgba(186, 255, 102, 0.45))'
+                filter: 'drop-shadow(0 0 6px rgba(40, 105, 214, 0.45))'
               }}
             >
               <path d="M62.83 43.5L55.93 36.5601L36.64 17.12L22 14.96L2 12.02V42.3301C2 54.9201 5.26 68.2501 11.8 82.3301C18.33 96.4201 26.61 107.8 36.64 116.49C43.88 118.58 50.21 118.21 55.62 115.38C57.71 114.29 59.66 112.84 61.48 111.02C62.48 110.02 63.41 108.94 64.24 107.8C68.94 101.48 71.28 92.9901 71.28 82.3301V52.02L62.83 43.5ZM49.63 94.1801L41.57 89.52L23.65 79.1801V54.3301L25.41 55.34L27.98 56.8301V51.87C27.98 49.13 28.83 47.2801 30.52 46.3201C32.22 45.3501 34.26 45.5501 36.64 46.9301C37.51 47.4301 38.34 48.04 39.12 48.76C39.69 49.27 40.22 49.8301 40.73 50.4501C41.46 51.3201 42.13 52.3 42.76 53.38C43.09 53.95 43.39 54.53 43.65 55.09C44.75 57.41 45.3 59.67 45.3 61.87V66.8301L49.63 69.3301V94.1801Z" stroke="#2869D6" strokeWidth="1.5" />
@@ -924,7 +924,7 @@ const SolutionsSuiteSection = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
               style={{
-                filter: 'drop-shadow(0 0 6px rgba(186, 255, 102, 0.45))'
+                filter: 'drop-shadow(0 0 6px rgba(40, 105, 214, 0.45))'
               }}
             >
               <path d="M61.2599 87.6301V92.1601L53.3599 87.6001L60.3299 84.1201C60.9499 85.3001 61.2599 86.4701 61.2599 87.6301Z" stroke="#2869D6" strokeWidth="1.5" />
@@ -954,7 +954,6 @@ const SolutionsSuiteSection = () => {
     {
       title: t.solutionsSuite.items.subscriptions.title,
       description: t.solutionsSuite.items.subscriptions.description,
-      badge: t.solutionsSuite.items.subscriptions.badge,
       icon: (
         <div className="relative w-full h-full flex items-center justify-center">
           <div className="service-float relative z-10">
@@ -966,7 +965,7 @@ const SolutionsSuiteSection = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
               style={{
-                filter: 'drop-shadow(0 0 6px rgba(186, 255, 102, 0.45))'
+                filter: 'drop-shadow(0 0 6px rgba(40, 105, 214, 0.45))'
               }}
             >
               <path d="M99.7433 16.5999L79.7433 26.5999L75.4532 24.12L57.7032 13.87L56.5732 13.22L57.1533 12.93L76.5732 3.21997L99.7433 16.5999Z" stroke="#2869D6" strokeWidth="1.5" />
@@ -1193,14 +1192,6 @@ const SolutionsSuiteSection = () => {
                         backgroundPosition: 'center center'
                       }}
                     />
-
-                    {index === 2 && card.badge && (
-                      <div className="absolute top-4 right-4 z-20">
-                        <span className="px-3 py-1 bg-[#2869D6]/20 text-[#8AB4F8] text-xs font-semibold rounded-full border border-[#2869D6]/30">
-                          {card.badge}
-                        </span>
-                      </div>
-                    )}
 
                     <div className="absolute inset-0 flex items-center justify-center">
                       {card.icon}
@@ -1446,9 +1437,6 @@ const FooterSection = () => {
             </a>
             <a href="mailto:monfilydigital@gmail.com" className="text-[#F5F7FA] hover:text-[#2869D6] transition-colors" aria-label="Enviar e-mail para Monfily">
               <Mail className="w-5 h-5" />
-            </a>
-            <a href={`https://wa.me/${t.whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="text-[#F5F7FA] hover:text-[#2869D6] transition-colors" aria-label="WhatsApp da Monfily">
-              <Whatsapp className="w-5 h-5" />
             </a>
           </div>
         </div>

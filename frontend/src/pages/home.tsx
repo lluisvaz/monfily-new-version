@@ -3,11 +3,15 @@ import { Hero } from "@/components/landing/hero";
 import { TrustedBy } from "@/components/landing/trusted-by";
 import { ServicesSection } from "@/components/landing/services-section";
 import { SEOHead } from "@/components/seo-head";
+import { SectionMotion } from "@/components/ui/section-motion";
+import { SmoothCursor } from "@/components/ui/smooth-cursor";
 
 export default function Home() {
   return (
     <div className="site-shell min-h-screen bg-[#0B0B0D] font-sans text-[#F5F7FA]">
       <SEOHead />
+      <SectionMotion />
+      <SmoothCursor />
       <section>
         <Header />
       </section>
