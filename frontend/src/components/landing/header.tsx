@@ -1,4 +1,4 @@
-import { useLocation } from "wouter";
+﻿import { useLocation } from "wouter";
 import { SectionLayout } from "./section-layout";
 import {
   DropdownMenu,
@@ -18,7 +18,6 @@ function getEnglishFlagCountry(detectedCountry: string) {
   if (country === "SG") return "sg";
   return "us";
 }
-
 function LanguageFlag({
   language,
   detectedCountry = "",
@@ -108,7 +107,7 @@ export function Header() {
         <img
           src="https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_120/v1763574787/monfily-black-nobg_risk6t.png"
           alt="Monfily"
-          className="h-10 w-auto select-none"
+          className="h-10 w-auto select-none brightness-0 invert"
           draggable="false"
           onContextMenu={(e) => e.preventDefault()}
           onDragStart={(e) => e.preventDefault()}
@@ -125,7 +124,7 @@ export function Header() {
                 <DropdownMenu key={item}>
                   <DropdownMenuTrigger asChild>
                     <button
-                      className="flex items-center gap-1 text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
+                      className="flex items-center gap-1 text-[#F5F7FA] hover:text-[#F5F7FA] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-white/5 rounded-full whitespace-nowrap focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
                       style={{ animationDelay: `${0.2 + index * 0.05}s`, opacity: 0 }}
                     >
                       {item}
@@ -135,19 +134,19 @@ export function Header() {
                   <DropdownMenuContent
                     align="start"
                     sideOffset={8}
-                    className="min-w-[220px] border border-[#E2E7F1] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.08)] rounded-lg data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-2"
+                    className="min-w-[220px] border border-[#2A2A2F] bg-[#0B0B0D] shadow-[0_4px_12px_rgba(0,0,0,0.08)] rounded-lg data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-2"
                   >
                     <DropdownMenuItem className="cursor-pointer">
-                      <span className="text-[#1C1C1E] hover:text-[#1C1C1E]">{t.header.solutionsDropdown.websiteCreation}</span>
+                      <span className="text-[#F5F7FA] hover:text-[#F5F7FA]">{t.header.solutionsDropdown.websiteCreation}</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="cursor-pointer">
-                      <span className="text-[#1C1C1E] hover:text-[#1C1C1E]">{t.header.solutionsDropdown.softwareDevelopment}</span>
+                      <span className="text-[#F5F7FA] hover:text-[#F5F7FA]">{t.header.solutionsDropdown.softwareDevelopment}</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="cursor-pointer">
-                      <span className="text-[#1C1C1E] hover:text-[#1C1C1E]">{t.header.solutionsDropdown.artificialIntelligence}</span>
+                      <span className="text-[#F5F7FA] hover:text-[#F5F7FA]">{t.header.solutionsDropdown.artificialIntelligence}</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="cursor-pointer">
-                      <span className="text-[#1C1C1E] hover:text-[#1C1C1E]">{t.header.solutionsDropdown.technicalSEO}</span>
+                      <span className="text-[#F5F7FA] hover:text-[#F5F7FA]">{t.header.solutionsDropdown.technicalSEO}</span>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -157,7 +156,7 @@ export function Header() {
               <a
                 key={item}
                 href="#"
-                className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-slate-50 rounded-full whitespace-nowrap header-blur-animate cursor-pointer"
+                className="text-[#F5F7FA] hover:text-[#F5F7FA] font-medium text-[16px] py-2 px-4 transition-colors hover:bg-white/5 rounded-full whitespace-nowrap header-blur-animate cursor-pointer"
                 style={{ animationDelay: `${0.2 + index * 0.05}s`, opacity: 0 }}
               >
                 {item}
@@ -175,28 +174,28 @@ export function Header() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button
-                className="flex items-center justify-center h-10 px-3 rounded-full border border-[#E2E7F1] hover:bg-slate-50 transition-colors focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
+                className="flex items-center justify-center h-10 px-3 rounded-full border border-[#2A2A2F] hover:bg-white/5 transition-colors focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
                 style={{ animationDelay: `${0.3 + navItems.length * 0.05}s`, opacity: 0 }}
               >
                 <LanguageFlag language={language} detectedCountry={detectedCountry} className="w-5 h-4" />
-                <NavArrowDown className="w-3 h-3 ml-1 text-[#1C1C1E]" />
+                <NavArrowDown className="w-3 h-3 ml-1 text-[#F5F7FA]" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="end"
               sideOffset={20}
-              className="min-w-[200px] border border-[#E2E7F1] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.08)] rounded-lg data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-2"
+              className="min-w-[200px] border border-[#2A2A2F] bg-[#0B0B0D] shadow-[0_4px_12px_rgba(0,0,0,0.08)] rounded-lg data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-2"
             >
               {languageOptions.map((option) => {
                 const isActive = option.activeCodes?.includes(language) ?? language === option.code;
                 return (
                 <DropdownMenuItem
                   key={option.code}
-                  className={`flex items-center gap-2 cursor-pointer ${isActive ? 'font-medium bg-slate-50' : ''}`}
+                  className={`flex items-center gap-2 cursor-pointer ${isActive ? 'font-medium bg-white/5' : ''}`}
                   onClick={() => handleLanguageChange(option.code)}
                 >
                   <LanguageFlag language={option.code} detectedCountry={detectedCountry} className="w-4 h-3" />
-                  <span className={isActive ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{option.label}</span>
+                  <span className={isActive ? 'text-[#F5F7FA]' : 'text-[#F5F7FA]/70 hover:text-[#F5F7FA]'}>{option.label}</span>
                 </DropdownMenuItem>
                 );
               })}
@@ -204,7 +203,7 @@ export function Header() {
           </DropdownMenu>
           <SpotlightButton
             onClick={openWhatsApp}
-            className="bg-[#2869D6] text-white h-10 px-6 rounded-full font-medium header-blur-animate flex items-center justify-center cursor-pointer"
+            className="bg-[#2869D6] text-white h-10 px-6 rounded-full font-semibold header-blur-animate flex items-center justify-center cursor-pointer"
             style={{ animationDelay: `${0.35 + navItems.length * 0.05}s`, opacity: 0 }}
           >
             {t.header.cta}
@@ -217,28 +216,28 @@ export function Header() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button
-              className="flex items-center justify-center h-10 px-3 rounded-full border border-[#E2E7F1] hover:bg-slate-50 transition-colors focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
+              className="flex items-center justify-center h-10 px-3 rounded-full border border-[#2A2A2F] hover:bg-white/5 transition-colors focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
               style={{ animationDelay: '0.15s', opacity: 0 }}
             >
               <LanguageFlag language={language} detectedCountry={detectedCountry} className="w-5 h-4" />
-              <NavArrowDown className="w-3 h-3 ml-1 text-[#1C1C1E]" />
+              <NavArrowDown className="w-3 h-3 ml-1 text-[#F5F7FA]" />
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
             align="end"
             sideOffset={20}
-            className="min-w-[200px] border border-[#E2E7F1] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.08)] rounded-lg data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-2"
+            className="min-w-[200px] border border-[#2A2A2F] bg-[#0B0B0D] shadow-[0_4px_12px_rgba(0,0,0,0.08)] rounded-lg data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-top-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-2"
           >
             {languageOptions.map((option) => {
               const isActive = option.activeCodes?.includes(language) ?? language === option.code;
               return (
               <DropdownMenuItem
                 key={option.code}
-                className={`flex items-center gap-2 cursor-pointer ${isActive ? 'font-medium bg-slate-50' : ''}`}
+                className={`flex items-center gap-2 cursor-pointer ${isActive ? 'font-medium bg-white/5' : ''}`}
                 onClick={() => handleLanguageChange(option.code)}
               >
                 <LanguageFlag language={option.code} detectedCountry={detectedCountry} className="w-4 h-3" />
-                <span className={isActive ? 'text-[#1C1C1E]' : 'text-[#1C1C1E]/70 hover:text-[#1C1C1E]'}>{option.label}</span>
+                <span className={isActive ? 'text-[#F5F7FA]' : 'text-[#F5F7FA]/70 hover:text-[#F5F7FA]'}>{option.label}</span>
               </DropdownMenuItem>
               );
             })}
@@ -247,7 +246,7 @@ export function Header() {
 
         <SpotlightButton
           onClick={openWhatsApp}
-          className="bg-[#2869D6] text-white h-10 px-5 rounded-full font-medium header-blur-animate flex items-center justify-center cursor-pointer text-sm"
+          className="bg-[#2869D6] text-white h-10 px-5 rounded-full font-semibold header-blur-animate flex items-center justify-center cursor-pointer text-sm"
           style={{ animationDelay: '0.2s', opacity: 0 }}
         >
           {t.header.ctaMobile}

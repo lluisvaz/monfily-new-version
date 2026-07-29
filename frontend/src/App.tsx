@@ -1,79 +1,8 @@
 import { Switch, Route, useLocation } from "wouter";
-import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/hooks/use-language";
 import Home from "@/pages/home";
-import LandingPage, { type MarketKey } from "@/pages/landingpage";
-import LandingPageThankYou from "@/pages/landingpage-thank-you";
 import { LoadingScreen } from "@/components/ui/loading-screen";
 import { useEffect } from "react";
-import { detectLocationData } from "@/lib/geo-location";
-
-const LANDING_ROUTE_BY_MARKET: Record<MarketKey, string> = {
-  BR: "/pt-br/landingpage",
-  PT: "/pt-pt/landingpage",
-  ES: "/es/landingpage",
-  IT: "/it/landingpage",
-  IL: "/he/landingpage",
-  SG: "/sg/landingpage",
-  GB: "/en-gb/landingpage",
-  US: "/en-us/landingpage",
-};
-
-const MARKET_BY_COUNTRY: Record<string, MarketKey> = {
-  BR: "BR",
-  PT: "PT",
-  ES: "ES",
-  IT: "IT",
-  IL: "IL",
-  SG: "SG",
-  GB: "GB",
-  UK: "GB",
-  US: "US",
-};
-
-function resolveMarket(country?: string | null): MarketKey {
-  const upper = country?.toUpperCase();
-  if (upper && MARKET_BY_COUNTRY[upper]) return MARKET_BY_COUNTRY[upper];
-  return "US";
-}
-
-function LandingPageRedirect() {
-  const [, setLocation] = useLocation();
-
-  useEffect(() => {
-    let cancelled = false;
-
-    detectLocationData()
-      .then(({ country }) => {
-        if (!cancelled) {
-          setLocation(LANDING_ROUTE_BY_MARKET[resolveMarket(country)], { replace: true });
-        }
-      })
-      .catch(() => {
-        if (!cancelled) {
-          setLocation(LANDING_ROUTE_BY_MARKET.US, { replace: true });
-        }
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [setLocation]);
-
-  return null;
-}
-
-const LandingPageBR = () => <LandingPage fixedMarketKey="BR" />;
-const LandingPagePT = () => <LandingPage fixedMarketKey="PT" />;
-const LandingPageES = () => <LandingPage fixedMarketKey="ES" />;
-const LandingPageIT = () => <LandingPage fixedMarketKey="IT" />;
-const LandingPageIL = () => <LandingPage fixedMarketKey="IL" />;
-const LandingPageSG = () => <LandingPage fixedMarketKey="SG" />;
-const LandingPageGB = () => <LandingPage fixedMarketKey="GB" />;
-const LandingPageUS = () => <LandingPage fixedMarketKey="US" />;
 
 function RedirectToRoot() {
   const [, setLocation] = useLocation();
@@ -88,26 +17,6 @@ function RedirectToRoot() {
 function Router() {
   return (
     <Switch>
-      <Route path="/pt-br/landingpage/obrigado" component={LandingPageThankYou} />
-      <Route path="/pt-pt/landingpage/obrigado" component={LandingPageThankYou} />
-      <Route path="/es/landingpage/obrigado" component={LandingPageThankYou} />
-      <Route path="/it/landingpage/obrigado" component={LandingPageThankYou} />
-      <Route path="/he/landingpage/obrigado" component={LandingPageThankYou} />
-      <Route path="/sg/landingpage/obrigado" component={LandingPageThankYou} />
-      <Route path="/en-gb/landingpage/obrigado" component={LandingPageThankYou} />
-      <Route path="/en-us/landingpage/obrigado" component={LandingPageThankYou} />
-      <Route path="/en/landingpage/obrigado" component={LandingPageThankYou} />
-      <Route path="/landingpage/obrigado" component={LandingPageThankYou} />
-      <Route path="/pt-br/landingpage" component={LandingPageBR} />
-      <Route path="/pt-pt/landingpage" component={LandingPagePT} />
-      <Route path="/es/landingpage" component={LandingPageES} />
-      <Route path="/it/landingpage" component={LandingPageIT} />
-      <Route path="/he/landingpage" component={LandingPageIL} />
-      <Route path="/sg/landingpage" component={LandingPageSG} />
-      <Route path="/en-gb/landingpage" component={LandingPageGB} />
-      <Route path="/en-us/landingpage" component={LandingPageUS} />
-      <Route path="/en/landingpage" component={LandingPageRedirect} />
-      <Route path="/landingpage" component={LandingPageRedirect} />
       <Route path="/pt-br" component={Home} />
       <Route path="/pt-pt" component={Home} />
       <Route path="/en-us" component={Home} />
@@ -160,15 +69,10 @@ function App() {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <LanguageProvider>
-        <TooltipProvider>
-          <LoadingScreen />
-          <Toaster />
-          <Router />
-        </TooltipProvider>
-      </LanguageProvider>
-    </QueryClientProvider>
+    <LanguageProvider>
+      <LoadingScreen />
+      <Router />
+    </LanguageProvider>
   );
 }
 

@@ -1,284 +1,96 @@
-import { ArrowRight, Phone, Star, Wifi, Menu } from "iconoir-react";
-import { useState, useEffect } from "react";
-import { useLanguage } from "@/hooks/use-language";
+﻿import { ArrowRight, Menu, Phone, Star } from "iconoir-react";
 import { translations } from "@/lib/translations";
 
-const imageUrls = [
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_200/v1763726833/imagem1_gokahh.jpg',
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_200/v1763726833/imagem2_c6lkic.jpg',
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_200/v1763726833/imagem3_s0n4gs.jpg',
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_200/v1763726834/imagem4_ayub82.jpg',
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_200/v1763726834/imagem5_manctr.jpg',
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_200/v1763726833/imagem6_wdflq9.jpg',
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_200/v1763726834/imagem7_n4u7u6.jpg'
-];
+function MobileStatusIcons() {
+  return (
+    <span className="flex items-center gap-1 text-white/65" aria-hidden="true">
+      <svg viewBox="0 0 12 8" className="h-2 w-3" fill="currentColor">
+        <rect x="0" y="5" width="1.5" height="3" rx=".5" />
+        <rect x="3" y="3.5" width="1.5" height="4.5" rx=".5" />
+        <rect x="6" y="2" width="1.5" height="6" rx=".5" />
+        <rect x="9" y=".5" width="1.5" height="7.5" rx=".5" />
+      </svg>
+      <svg viewBox="0 0 12 8" className="h-2 w-3" fill="none" stroke="currentColor" strokeLinecap="round">
+        <path d="M1 2.7a7.2 7.2 0 0 1 10 0M3 4.7a4.4 4.4 0 0 1 6 0M5.2 6.6a1.2 1.2 0 0 1 1.6 0" strokeWidth="1.1" />
+      </svg>
+      <svg viewBox="0 0 16 8" className="h-2 w-4">
+        <rect x=".5" y=".5" width="13" height="7" rx="1.7" fill="none" stroke="currentColor" />
+        <rect x="2" y="2" width="9" height="4" rx=".8" fill="currentColor" />
+        <rect x="14.2" y="2.3" width="1.3" height="3.4" rx=".6" fill="currentColor" />
+      </svg>
+    </span>
+  );
+}
 
 export function WebsiteMockupMobile() {
-  const { language } = useLanguage();
-  const t = translations[language];
-  const [currentTime, setCurrentTime] = useState(new Date());
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const formatTime = (date: Date) => {
-    const locale = language === 'pt-br'
-      ? 'pt-BR'
-      : language === 'pt-pt'
-        ? 'pt-PT'
-        : language === 'es'
-          ? 'es-ES'
-          : language === 'it'
-            ? 'it-IT'
-            : language === 'sg'
-              ? 'en-SG'
-              : language === 'he'
-                ? 'he-IL'
-                : 'en-US';
-    return date.toLocaleTimeString(locale, {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false
-    });
-  };
+  const t = translations.en;
 
   return (
-    <>
-      <style>{`
-        @keyframes scrollLeft {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-        @keyframes scrollRight {
-          0% {
-            transform: translateX(-50%);
-          }
-          100% {
-            transform: translateX(0);
-          }
-        }
-      `}</style>
-      <div className="w-full h-full bg-white flex flex-col overflow-hidden" style={{ userSelect: 'none', pointerEvents: 'none', WebkitUserSelect: 'none', MozUserSelect: 'none', msUserSelect: 'none', borderRadius: '40px' }}>
-        {/* Status Bar */}
-        <div className="px-4 py-1 flex items-center justify-between" style={{ backgroundColor: '#F0F0F0', paddingLeft: '20px', paddingRight: '20px' }}>
-          <span className="text-[9px] font-semibold text-gray-900 leading-none">
-            {formatTime(currentTime)}
+    <div
+      className="flex h-full w-full flex-col overflow-hidden bg-[#101013] text-white select-none"
+      style={{ pointerEvents: "none", borderRadius: "40px" }}
+    >
+      <div className="flex items-center justify-between px-4 pb-1 pt-2 text-[8px] text-white/70">
+        <span>9:41</span>
+        <MobileStatusIcons />
+      </div>
+
+      <header className="flex items-center justify-between border-b border-white/10 px-3 py-2">
+        <div className="flex items-center gap-1.5">
+          <span className="grid h-5 w-5 place-items-center rounded-full bg-[#FF6B35] text-[7px] font-black text-[#0B0B0D]">
+            NA
           </span>
-          <div className="flex items-center gap-1">
-            <Wifi className="w-3 h-3 text-gray-900" />
-            {/* Battery Icon */}
-            <svg className="w-3 h-3 text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="2" y="7" width="16" height="10" rx="2" ry="2" />
-              {/* Battery fill - 50% */}
-              <rect x="4" y="9" width="7" height="6" rx="1" fill="#22c55e" stroke="none" />
-              <line x1="18" y1="10" x2="20" y2="10" strokeLinecap="round" />
-            </svg>
+          <div>
+            <div className="text-[8px] font-bold leading-none">NORTHSTAR AIR</div>
+            <div className="mt-0.5 text-[5px] uppercase tracking-[0.16em] text-white/40">Heating &amp; Cooling</div>
           </div>
         </div>
+        <Menu className="h-3.5 w-3.5 text-white/70" />
+      </header>
 
-        {/* Header */}
-        <header className="px-2 py-1.5 flex items-center justify-between border-b border-gray-200" style={{ backgroundColor: '#F0F0F0' }}>
-          {/* Logo */}
-          <div className="flex items-center gap-1">
-            <div className="w-3 h-3 bg-black rounded flex items-center justify-center">
-              <div className="w-1.5 h-1.5 bg-white rounded-sm"></div>
-            </div>
-            <span className="text-[10px] font-bold text-gray-900 leading-none">FORMIX</span>
-          </div>
-          {/* Hamburger Menu */}
-          <Menu className="w-3 h-3 text-gray-900" />
-        </header>
-
-        {/* Hero Section */}
-        <div className="flex-1 px-2 pt-5 pb-2 flex flex-col gap-1 overflow-y-auto" style={{ backgroundColor: '#F0F0F0' }}>
-          {/* Badge */}
-          <div className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 w-fit" style={{ backgroundColor: '#1E2939' }}>
-            <div className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-pulse"></div>
-            <span className="text-[10px] font-medium text-white leading-none">{t.mockup.badge}</span>
-          </div>
-
-          {/* Heading */}
-          <h1
-            className="text-xl text-gray-900"
-            style={{
-              fontFamily: 'Fustat-Bold, sans-serif',
-              fontWeight: 'normal',
-              lineHeight: '0.9',
-              letterSpacing: '-0.06em'
-            }}
-          >
-            {t.mockup.heading.line1}<span className="text-gray-600">{t.mockup.heading.line2}</span>
-          </h1>
-
-          {/* Description */}
-          <p className="text-[10px] text-gray-600 leading-tight">
-            {t.mockup.description}
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-col gap-1">
-            <div className="bg-orange-500 text-white text-[10px] px-2 py-1 rounded-xl flex items-center justify-between">
-              <span className="leading-none">{t.mockup.cta.viewPrices}</span>
-              <div className="w-3 h-3 rounded-full flex items-center justify-center" style={{ backgroundColor: '#1E2939' }}>
-                <ArrowRight className="w-1.5 h-1.5 text-orange-500" />
-              </div>
-            </div>
-            <div className="text-white text-[10px] px-2 py-1 rounded-xl flex items-center justify-between" style={{ backgroundColor: '#1E2939' }}>
-              <span className="leading-none">{t.mockup.cta.scheduleNow}</span>
-              <div className="w-3 h-3 rounded-full bg-orange-500 flex items-center justify-center">
-                <Phone className="w-1.5 h-1.5 text-white" />
-              </div>
-            </div>
-          </div>
-
-          {/* Trust Indicators */}
-          <div className="flex items-center gap-1 pt-0.5">
-            <div className="flex -space-x-1.5">
-              <div className="w-4 h-4 rounded-lg border border-[1px] shadow-sm overflow-hidden" style={{ transform: 'rotate(-3deg)', borderColor: '#1E2939' }}>
-                <img
-                  src="https://framerusercontent.com/images/E3vzjdpFuSWiVeurdyPGMrSWk.png?scale-down-to=64"
-                  alt="Person 1"
-                  className="w-full h-full object-cover select-none"
-                  draggable="false"
-                  onContextMenu={(e) => e.preventDefault()}
-                  onDragStart={(e) => e.preventDefault()}
-                  style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
-                />
-              </div>
-              <div className="w-4 h-4 rounded-lg border border-[1px] shadow-sm overflow-hidden" style={{ transform: 'rotate(2deg)', borderColor: '#1E2939' }}>
-                <img
-                  src="https://framerusercontent.com/images/jC7KwluILkhO0KHxk6qWEttOxhE.png?scale-down-to=64"
-                  alt="Person 2"
-                  className="w-full h-full object-cover select-none"
-                  draggable="false"
-                  onContextMenu={(e) => e.preventDefault()}
-                  onDragStart={(e) => e.preventDefault()}
-                  style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
-                />
-              </div>
-              <div className="w-4 h-4 rounded-lg border border-[1px] shadow-sm overflow-hidden" style={{ transform: 'rotate(-2deg)', borderColor: '#1E2939' }}>
-                <img
-                  src="https://framerusercontent.com/images/cFl24iPInxckRrL32eRgadp9ZJM.png?scale-down-to=64"
-                  alt="Person 3"
-                  className="w-full h-full object-cover select-none"
-                  draggable="false"
-                  onContextMenu={(e) => e.preventDefault()}
-                  onDragStart={(e) => e.preventDefault()}
-                  style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
-                />
-              </div>
-              <div className="w-4 h-4 rounded-lg border border-[1px] shadow-sm flex items-center justify-center overflow-hidden" style={{ transform: 'rotate(3deg)', borderColor: '#1E2939', backgroundColor: '#1E2939' }}>
-                <span className="text-white text-[8px] font-bold leading-none">50+</span>
-              </div>
-            </div>
-            <div className="flex flex-col gap-0.5">
-              <div className="flex gap-0.5">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-1.5 h-1.5 fill-orange-500 text-orange-500" />
-                ))}
-              </div>
-              <span className="text-[8px] text-gray-600 leading-none">{t.mockup.trust}</span>
-            </div>
-          </div>
-
-          {/* Image Carousels - Horizontal */}
-          <div className="flex flex-col gap-1 overflow-hidden mt-1">
-            {/* Carousel going left */}
-            <div className="relative flex flex-row gap-1 overflow-hidden" style={{ height: '60px' }}>
-              {/* Left fade gradient */}
-              <div
-                className="absolute left-0 top-0 bottom-0 w-12 z-10 pointer-events-none"
-                style={{ background: 'linear-gradient(to right, #F0F0F0 0%, rgba(240,240,240,0.85) 40%, transparent 100%)' }}
-              ></div>
-              {/* Right fade gradient */}
-              <div
-                className="absolute right-0 top-0 bottom-0 w-12 z-10 pointer-events-none"
-                style={{ background: 'linear-gradient(to left, #F0F0F0 0%, rgba(240,240,240,0.85) 40%, transparent 100%)' }}
-              ></div>
-              <div
-                className="flex flex-row gap-1"
-                style={{
-                  animation: 'scrollLeft 40s linear infinite'
-                }}
-              >
-                {[...Array(7)].map((_, i) => (
-                  <div key={`left-${i}`} className="w-20 h-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0">
-                    <img
-                      src={imageUrls[i]}
-                      alt="Mockup de desenvolvimento de website responsivo e software personalizado para desktop e mobile"
-                      className="w-full h-full object-cover"
-                      style={{ pointerEvents: 'none', userSelect: 'none' }}
-                    />
-                  </div>
-                ))}
-                {/* Duplicate for seamless loop */}
-                {[...Array(7)].map((_, i) => (
-                  <div key={`left-dup-${i}`} className="w-20 h-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0">
-                    <img
-                      src={imageUrls[i]}
-                      alt="Mockup de desenvolvimento de website responsivo e software personalizado para desktop e mobile"
-                      className="w-full h-full object-cover"
-                      style={{ pointerEvents: 'none', userSelect: 'none' }}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Carousel going right */}
-            <div className="relative flex flex-row gap-1 overflow-hidden" style={{ height: '60px' }}>
-              {/* Left fade gradient */}
-              <div
-                className="absolute left-0 top-0 bottom-0 w-12 z-10 pointer-events-none"
-                style={{ background: 'linear-gradient(to right, #F0F0F0 0%, rgba(240,240,240,0.85) 40%, transparent 100%)' }}
-              ></div>
-              {/* Right fade gradient */}
-              <div
-                className="absolute right-0 top-0 bottom-0 w-12 z-10 pointer-events-none"
-                style={{ background: 'linear-gradient(to left, #F0F0F0 0%, rgba(240,240,240,0.85) 40%, transparent 100%)' }}
-              ></div>
-              <div
-                className="flex flex-row gap-1"
-                style={{
-                  animation: 'scrollRight 40s linear infinite'
-                }}
-              >
-                {[...Array(7)].map((_, i) => (
-                  <div key={`right-${i}`} className="w-20 h-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0">
-                    <img
-                      src={imageUrls[6 - i]}
-                      alt="Mockup de desenvolvimento de website responsivo e software personalizado para desktop e mobile"
-                      className="w-full h-full object-cover"
-                      style={{ pointerEvents: 'none', userSelect: 'none' }}
-                    />
-                  </div>
-                ))}
-                {/* Duplicate for seamless loop */}
-                {[...Array(7)].map((_, i) => (
-                  <div key={`right-dup-${i}`} className="w-20 h-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0">
-                    <img
-                      src={imageUrls[6 - i]}
-                      alt="Mockup de desenvolvimento de website responsivo e software personalizado para desktop e mobile"
-                      className="w-full h-full object-cover"
-                      style={{ pointerEvents: 'none', userSelect: 'none' }}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+      <div className="relative h-[125px] overflow-hidden">
+        <img
+          src="/hvac-hero.webp"
+          alt="HVAC technician servicing a residential system"
+          className="h-full w-full object-cover"
+          draggable="false"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#101013] via-transparent to-transparent" />
+        <div className="absolute bottom-2 left-2 rounded-full border border-[#FF6B35]/30 bg-[#101013]/75 px-2 py-1 text-[6px] font-semibold text-[#FFC4AD] backdrop-blur">
+          {t.mockup.badge}
         </div>
       </div>
-    </>
+
+      <div className="flex flex-1 flex-col px-3 pb-3 pt-2">
+        <h2
+          className="text-[19px] leading-[0.9] tracking-[-0.06em]"
+          style={{ fontFamily: "Fustat-Bold, sans-serif" }}
+        >
+          {t.mockup.heading.line1}
+          <span className="text-white/48">{t.mockup.heading.line2}</span>
+        </h2>
+        <p className="mt-2 line-clamp-3 text-[7px] leading-[1.3] text-white/52">{t.mockup.description}</p>
+
+        <div className="mt-2 flex gap-1">
+          <div className="flex flex-1 items-center justify-between rounded-full bg-[#FF6B35] px-2 py-1.5 text-[7px] font-bold text-[#0B0B0D]">
+            {t.mockup.cta.viewPrices}
+            <ArrowRight className="h-2.5 w-2.5" />
+          </div>
+          <div className="grid h-6 w-6 place-items-center rounded-full border border-white/15 bg-[#0B0B0D]/5">
+            <Phone className="h-2.5 w-2.5 text-[#FF6B35]" />
+          </div>
+        </div>
+
+        <div className="mt-auto flex items-center justify-between pt-2">
+          <div className="flex gap-0.5">
+            {Array.from({ length: 5 }).map((_, index) => (
+              <Star key={index} className="h-2 w-2 fill-[#FF6B35] text-[#FF6B35]" />
+            ))}
+          </div>
+          <span className="text-[6px] text-white/40">{t.mockup.trust}</span>
+        </div>
+      </div>
+    </div>
   );
 }
 

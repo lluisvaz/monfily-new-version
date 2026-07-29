@@ -15,6 +15,9 @@ public/
 frontend/public/*
 !frontend/public/_headers
 !frontend/public/_redirects
+!frontend/public/hvac-hero.webp
+!frontend/public/grain-texture-final.png
+!frontend/public/og.png
 build/
 *.tsbuildinfo
 

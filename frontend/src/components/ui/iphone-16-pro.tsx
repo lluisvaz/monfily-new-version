@@ -53,7 +53,7 @@ export const Iphone16Pro = forwardRef<SVGSVGElement, Iphone16ProProps>(
             islandHeight = 40,
             frameColor = "white",
             frameDarkColor = "black",
-            bezelColor = "neutral-100",
+            bezelColor = "#101013",
             screenRadius = 55,
             shadow = true,
             rounded = true,
@@ -89,8 +89,8 @@ export const Iphone16Pro = forwardRef<SVGSVGElement, Iphone16ProProps>(
                     height={height - 2}
                     rx={rounded ? screenRadius : 0}
                     fill={frameColor}
-                    stroke="rgb(229, 231, 235)"
-                    strokeWidth="0.5"
+                    stroke="rgba(255, 255, 255, 0.15)"
+                    strokeWidth="1"
                 />
 
                 {/* Inner bezel */}
@@ -100,8 +100,8 @@ export const Iphone16Pro = forwardRef<SVGSVGElement, Iphone16ProProps>(
                     width={width - 24}
                     height={height - 24}
                     rx={rounded ? screenRadius : 0}
-                    fill="rgb(245, 245, 245)"
-                    stroke="rgba(212, 212, 212, 0.4)"
+                    fill={bezelColor}
+                    stroke="rgba(255, 255, 255, 0.08)"
                     strokeWidth="0.5"
                 />
 
@@ -189,7 +189,7 @@ export const Iphone16Pro = forwardRef<SVGSVGElement, Iphone16ProProps>(
                         width={islandWidth}
                         height={islandHeight}
                         rx={5}
-                        fill="rgb(255, 255, 255)"
+                        fill="#050506"
                     />
                 )}
 

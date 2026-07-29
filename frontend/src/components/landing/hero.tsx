@@ -1,8 +1,7 @@
-import { ArrowRight } from "iconoir-react";
+﻿import { ArrowRight } from "iconoir-react";
 import { BoltIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
 import { SectionLayout } from "./section-layout";
 import ShinyText from "@/components/ui/shiny-text";
-import TextType from "@/components/ui/text-type";
 import { WebsiteMockup } from "./website-mockup";
 import { WebsiteMockupMobile } from "./website-mockup-mobile";
 import { Iphone16Pro } from "@/components/ui/iphone-16-pro";
@@ -41,7 +40,7 @@ export function Hero() {
         <div
           className="absolute bottom-0 right-0 w-full h-full"
           style={{
-            background: 'radial-gradient(ellipse 100% 150% at bottom right, #2869D6 0%, #2869D6 20%, rgba(40, 105, 214, 0.9) 30%, rgba(40, 105, 214, 0.7) 40%, rgba(40, 105, 214, 0.5) 48%, rgba(40, 105, 214, 0.3) 55%, rgba(40, 105, 214, 0.15) 62%, rgba(255, 255, 255, 0.8) 70%, white 80%, white 100%)'
+            background: 'radial-gradient(ellipse 80% 110% at bottom right, rgba(40,105,214,.32) 0%, rgba(40,105,214,.14) 28%, rgba(40,105,214,.04) 52%, rgba(11,11,13,0) 74%)'
           }}
         ></div>
         <div className="absolute bottom-6 right-6 w-3 h-3 bg-[#2869D6] rounded-full"></div>
@@ -52,7 +51,7 @@ export function Hero() {
         <div
           className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-full"
           style={{
-            background: 'radial-gradient(ellipse 120% 100% at bottom center, #2869D6 0%, #2869D6 20%, rgba(40, 105, 214, 0.9) 30%, rgba(40, 105, 214, 0.7) 40%, rgba(40, 105, 214, 0.5) 48%, rgba(40, 105, 214, 0.3) 55%, rgba(40, 105, 214, 0.15) 62%, rgba(255, 255, 255, 0.8) 70%, white 80%, white 100%)'
+            background: 'radial-gradient(ellipse 120% 85% at bottom center, rgba(40,105,214,.28) 0%, rgba(40,105,214,.10) 38%, rgba(11,11,13,0) 72%)'
           }}
         ></div>
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#2869D6] rounded-full"></div>
@@ -61,16 +60,16 @@ export function Hero() {
       <div className="flex flex-col justify-center items-start space-y-6 md:space-y-8 w-full relative lg:pb-0 pb-[240px] md:pb-[280px]" style={{ zIndex: 1 }}>
         {/* Badge */}
         <div
-          className="inline-flex items-center gap-2 rounded-full pl-1 pr-4 py-1 border border-[#E2E7F1] hero-blur-animate"
+          className="inline-flex max-w-full items-center gap-2 rounded-full border border-[#2A2A2F] py-1 pl-1 pr-3 hero-blur-animate"
           style={{ animationDelay: '0.1s' }}
         >
-          <div className="rounded-full p-1 border border-[#E2E7F1]">
+          <div className="rounded-full p-1 border border-[#2A2A2F]">
             <div className="flex -space-x-2 overflow-hidden">
               {/* Avatars */}
               <img
                 src="https://framerusercontent.com/images/E3vzjdpFuSWiVeurdyPGMrSWk.png?scale-down-to=64"
-                alt="Founder 1"
-                className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover select-none"
+                alt=""
+                className="inline-block h-4 w-4 rounded-full object-cover ring-2 ring-[#0B0B0D] select-none sm:h-5 sm:w-5"
                 draggable="false"
                 onContextMenu={(e) => e.preventDefault()}
                 onDragStart={(e) => e.preventDefault()}
@@ -78,8 +77,8 @@ export function Hero() {
               />
               <img
                 src="https://framerusercontent.com/images/jC7KwluILkhO0KHxk6qWEttOxhE.png?scale-down-to=64"
-                alt="Founder 2"
-                className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover select-none"
+                alt=""
+                className="inline-block h-4 w-4 rounded-full object-cover ring-2 ring-[#0B0B0D] select-none sm:h-5 sm:w-5"
                 draggable="false"
                 onContextMenu={(e) => e.preventDefault()}
                 onDragStart={(e) => e.preventDefault()}
@@ -87,8 +86,8 @@ export function Hero() {
               />
               <img
                 src="https://framerusercontent.com/images/cFl24iPInxckRrL32eRgadp9ZJM.png?scale-down-to=64"
-                alt="Founder 3"
-                className="inline-block h-5 w-5 rounded-full ring-2 ring-white object-cover select-none"
+                alt=""
+                className="inline-block h-4 w-4 rounded-full object-cover ring-2 ring-[#0B0B0D] select-none sm:h-5 sm:w-5"
                 draggable="false"
                 onContextMenu={(e) => e.preventDefault()}
                 onDragStart={(e) => e.preventDefault()}
@@ -97,31 +96,19 @@ export function Hero() {
             </div>
           </div>
           <span
-            className="text-xs text-[#1C1C1E]"
+            className="min-w-0 text-[10px] leading-tight text-[#F5F7FA] sm:text-xs"
             style={{
               fontFamily: 'Fustat-Bold, sans-serif',
               fontWeight: 'normal'
             }}
           >
-            <span className="hidden lg:inline">{t.hero.badge.chosenBy}</span>{t.hero.badge.clients}
-            <TextType
-              text={t.hero.rotatingTexts}
-              typingSpeed={75}
-              pauseDuration={1500}
-              showCursor={true}
-              cursorCharacter="|"
-              as="span"
-              style={{
-                fontFamily: 'Fustat-Bold, sans-serif',
-                fontWeight: 'normal'
-              }}
-            />
+            {t.hero.badge.chosenBy}
           </span>
         </div>
 
         {/* Heading */}
         <h1
-          className="text-[48px] md:text-7xl leading-none text-[#1C1C1E] hero-blur-animate"
+          className="text-[48px] md:text-7xl leading-none text-[#F5F7FA] hero-blur-animate"
           style={{
             animationDelay: '0.2s',
             fontFamily: 'Fustat-Bold, sans-serif',
@@ -131,42 +118,16 @@ export function Hero() {
           }}
         >
           {t.hero.heading.line1} <br />
-          <span className="text-[#1C1C1E]" style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>{t.hero.heading.line2}</span>
-          <ShinyText text={t.hero.heading.line3} speed={3} className="text-[#1C1C1E]" style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }} />
+          <span className="text-[#F5F7FA]" style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>{t.hero.heading.line2}</span>
+          <ShinyText text={t.hero.heading.line3} speed={3} className="text-[#F5F7FA]" style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }} />
         </h1>
 
         {/* Description */}
         <p
-          className="text-base md:text-lg text-[#1C1C1E] max-w-md leading-tight hero-blur-animate"
+          className="text-base md:text-lg text-[#F5F7FA] max-w-md leading-tight hero-blur-animate"
           style={{ animationDelay: '0.3s' }}
         >
-          {(language === 'pt-br' || language === 'pt-pt') ? (
-            <>
-              A infraestrutura digital completa para o seu negócio. Unimos design de{' '}
-              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Criação de Sites de Alta Performance</strong>,{' '}
-              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Engenharia de Software</strong>,{' '}
-              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Inteligência Artificial (IA)</strong> e{' '}
-              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>SEO Técnico</strong> para gerar receita e eficiência.
-            </>
-          ) : language === 'es' ? (
-            <>
-              La infraestructura digital completa para tu negocio. Unimos diseño de{' '}
-              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Creación de Sitios de Alto Rendimiento</strong>,{' '}
-              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Ingeniería de Software</strong>,{' '}
-              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Inteligencia Artificial (IA)</strong> y{' '}
-              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>SEO Técnico</strong> para generar ingresos y eficiencia.
-            </>
-          ) : (language === 'en' || language === 'sg') ? (
-            <>
-              Complete digital infrastructure for your business. We combine high-performance{' '}
-              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Website Creation</strong> design,{' '}
-              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Software Engineering</strong>,{' '}
-              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Artificial Intelligence (AI)</strong>, and{' '}
-              <strong style={{ fontFamily: 'Fustat-Bold, sans-serif', fontWeight: 'normal' }}>Technical SEO</strong> to generate revenue and efficiency.
-            </>
-          ) : (
-            t.hero.description
-          )}
+          {t.hero.description}
         </p>
 
         {/* CTAs */}
@@ -176,15 +137,15 @@ export function Hero() {
         >
           <SpotlightButton
             onClick={openWhatsApp}
-            className="group bg-[#2869D6] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer w-full sm:w-auto"
+            className="group bg-[#2869D6] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer w-full sm:w-auto font-semibold"
           >
             {t.hero.cta.primary}
-            <div className="bg-white rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
+            <div className="bg-[#0B0B0D] rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
               <ArrowRight className="w-3 h-3 text-[#2869D6]" />
             </div>
           </SpotlightButton>
 
-          <a href="#servicos" className="text-[#1C1C1E] hover:text-[#1C1C1E] font-medium transition-colors w-full sm:w-auto text-center sm:text-left">
+          <a href="#servicos" className="text-[#F5F7FA] hover:text-[#F5F7FA] font-medium transition-colors w-full sm:w-auto text-center sm:text-left">
             {t.hero.cta.secondary}
           </a>
         </div>
@@ -200,7 +161,7 @@ export function Hero() {
             </div>
             <div>
               <h3
-                className="text-[#1C1C1E] text-sm"
+                className="text-[#F5F7FA] text-sm"
                 style={{
                   fontFamily: 'Fustat-Bold, sans-serif',
                   fontWeight: 'normal'
@@ -208,7 +169,7 @@ export function Hero() {
               >
                 {t.hero.features.performance.title}
               </h3>
-              <p className="text-[#1C1C1E] text-xs mt-1">{t.hero.features.performance.description}</p>
+              <p className="text-[#F5F7FA] text-xs mt-1">{t.hero.features.performance.description}</p>
             </div>
           </div>
 
@@ -218,7 +179,7 @@ export function Hero() {
             </div>
             <div>
               <h3
-                className="text-[#1C1C1E] text-sm"
+                className="text-[#F5F7FA] text-sm"
                 style={{
                   fontFamily: 'Fustat-Bold, sans-serif',
                   fontWeight: 'normal'
@@ -226,7 +187,7 @@ export function Hero() {
               >
                 {t.hero.features.optimized.title}
               </h3>
-              <p className="text-[#1C1C1E] text-xs mt-1">{t.hero.features.optimized.description}</p>
+              <p className="text-[#F5F7FA] text-xs mt-1">{t.hero.features.optimized.description}</p>
             </div>
           </div>
         </div>
@@ -252,6 +213,8 @@ export function Hero() {
             showCamera={false}
             shadow={true}
             rounded={true}
+            frameColor="#17171B"
+            bezelColor="#101013"
             screenRadius={40}
             hoverAnimation={false}
           >
@@ -281,6 +244,8 @@ export function Hero() {
               showCamera={false}
               shadow={true}
               rounded={true}
+              frameColor="#17171B"
+              bezelColor="#101013"
               screenRadius={40}
               hoverAnimation={false}
             >

@@ -2,7 +2,7 @@ export type Env = Record<string, string | undefined>;
 
 type MarketKey = "PT" | "IT" | "ES" | "IL" | "SG" | "BR" | "GB" | "US";
 
-// Market -> EVOLUTION env prefix (GB uses the UK instance, matching landingpage-purchase.ts).
+// Market -> EVOLUTION environment prefix (GB uses the UK instance).
 const ENV_PREFIX_BY_MARKET: Record<MarketKey, string> = {
   BR: "BR",
   PT: "PT",

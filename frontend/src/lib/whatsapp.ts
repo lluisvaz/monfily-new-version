@@ -2,7 +2,7 @@ import type { Language } from "@/lib/translations";
 
 export type MarketKey = "PT" | "IT" | "ES" | "IL" | "SG" | "BR" | "GB" | "US";
 
-/** ISO country code -> market. Mirrors the mapping used on the landing page. */
+/** ISO country code -> contact market. */
 export const MARKET_BY_COUNTRY: Record<string, MarketKey> = {
   PT: "PT",
   IT: "IT",

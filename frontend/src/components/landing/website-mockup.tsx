@@ -1,240 +1,111 @@
-import { ArrowRight, Phone, Star } from "iconoir-react";
-import { useLanguage } from "@/hooks/use-language";
+﻿import { ArrowRight, CheckCircle, Phone, Star } from "iconoir-react";
 import { translations } from "@/lib/translations";
 
-const imageUrls = [
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_250/v1763726833/imagem1_gokahh.jpg',
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_250/v1763726833/imagem2_c6lkic.jpg',
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_250/v1763726833/imagem3_s0n4gs.jpg',
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_250/v1763726834/imagem4_ayub82.jpg',
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_250/v1763726834/imagem5_manctr.jpg',
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_250/v1763726833/imagem6_wdflq9.jpg',
-  'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_250/v1763726834/imagem7_n4u7u6.jpg'
-];
-
 export function WebsiteMockup() {
-  const { language } = useLanguage();
-  const t = translations[language];
+  const t = translations.en;
 
   return (
-    <>
-      <style>{`
-        @keyframes scrollUp {
-          0% {
-            transform: translateY(0);
-          }
-          100% {
-            transform: translateY(-50%);
-          }
-        }
-        @keyframes scrollDown {
-          0% {
-            transform: translateY(-50%);
-          }
-          100% {
-            transform: translateY(0);
-          }
-        }
-      `}</style>
-      <div className="h-full rounded-2xl border-4 overflow-hidden flex flex-col px-6 ml-24"
-        style={{
-          backgroundColor: '#F0F0F0',
-          borderColor: '#FFFFFF',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
-          width: '120%',
-          maxWidth: '120%',
-          userSelect: 'none',
-          pointerEvents: 'none',
-          WebkitUserSelect: 'none',
-          MozUserSelect: 'none',
-          msUserSelect: 'none'
-        }}
-      >
-        {/* Header */}
-        <header className="px-8 py-5 flex items-center justify-between border-l border-r border-gray-300" style={{ backgroundColor: '#F0F0F0' }}>
-          {/* Logo */}
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 bg-black rounded flex items-center justify-center">
-              <div className="w-4 h-4 bg-white rounded-sm"></div>
-            </div>
-            <span className="text-base font-bold text-gray-900 leading-none">FORMIX</span>
+    <div
+      className="relative h-full min-h-[430px] w-[118%] max-w-[118%] ml-20 overflow-hidden rounded-[22px] border border-white/15 bg-[#101013] shadow-[0_32px_100px_rgba(0,0,0,0.55)] select-none"
+      style={{ pointerEvents: "none" }}
+    >
+      <header className="relative z-20 flex items-center justify-between border-b border-white/10 bg-[#101013]/90 px-7 py-5 backdrop-blur-xl">
+        <div className="flex items-center gap-2.5">
+          <div className="grid h-8 w-8 place-items-center rounded-full bg-[#FF6B35] text-[11px] font-black text-[#0B0B0D]">
+            NA
+          </div>
+          <div>
+            <div className="text-sm font-bold tracking-[-0.02em] text-white">NORTHSTAR AIR</div>
+            <div className="text-[9px] uppercase tracking-[0.18em] text-white/45">Heating &amp; Cooling</div>
+          </div>
+        </div>
+        <nav className="hidden items-center gap-5 sm:flex">
+          {Object.values(t.mockup.navigation).slice(0, 4).map((item) => (
+            <span key={item} className="text-xs text-white/55">
+              {item}
+            </span>
+          ))}
+        </nav>
+        <div className="rounded-full bg-[#FF6B35] px-3 py-2 text-[11px] font-bold text-[#0B0B0D]">
+          (305) 555-0147
+        </div>
+      </header>
+
+      <div className="relative grid min-h-[365px] grid-cols-[1.03fr_.97fr] overflow-hidden">
+        <div className="relative z-10 flex flex-col justify-center px-8 py-8">
+          <div className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-[#FF6B35]/25 bg-[#FF6B35]/10 px-3 py-1.5">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#FF6B35]" />
+            <span className="text-[11px] font-semibold text-[#FFC4AD]">{t.mockup.badge}</span>
           </div>
 
-          {/* Navigation */}
-          <nav className="hidden sm:flex items-center gap-4 ml-auto">
-            <span className="text-sm text-gray-600 leading-none">{t.mockup.navigation.services}</span>
-            <span className="text-sm text-gray-600 leading-none">{t.mockup.navigation.benefits}</span>
-            <span className="text-sm text-gray-600 leading-none">{t.mockup.navigation.projects}</span>
-            <span className="text-sm text-gray-600 leading-none">{t.mockup.navigation.prices}</span>
-            <span className="text-sm text-gray-600 leading-none">{t.mockup.navigation.clients}</span>
-          </nav>
-        </header>
-        <div className="border-b border-gray-300" style={{ marginLeft: '-3.5rem', marginRight: '-3.5rem', width: 'calc(100% + 7rem)' }}></div>
+          <h2
+            className="max-w-[390px] text-[38px] leading-[0.92] tracking-[-0.06em] text-white"
+            style={{ fontFamily: "Fustat-Bold, sans-serif" }}
+          >
+            {t.mockup.heading.line1}
+            <span className="text-white/52">{t.mockup.heading.line2}</span>
+          </h2>
 
-        {/* Hero Section */}
-        <div className="flex-1 px-8 py-8 flex items-center gap-6 border-l border-r border-gray-300 relative overflow-hidden" style={{ backgroundColor: '#F0F0F0', maxHeight: '500px', minHeight: '400px' }}>
-          {/* Left Content */}
-          <div className="flex flex-col justify-center z-10 flex-shrink-0">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 w-fit mb-5" style={{ backgroundColor: '#1E2939' }}>
-              <div className="w-2.5 h-2.5 bg-orange-500 rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-white leading-none">{t.mockup.badge}</span>
+          <p className="mt-5 max-w-[360px] text-sm leading-[1.35] text-white/58">{t.mockup.description}</p>
+
+          <div className="mt-6 flex items-center gap-2">
+            <div className="flex items-center gap-2 rounded-full bg-[#FF6B35] py-2 pl-4 pr-2 text-xs font-bold text-[#0B0B0D]">
+              {t.mockup.cta.viewPrices}
+              <span className="grid h-6 w-6 place-items-center rounded-full bg-[#0B0B0D]">
+                <ArrowRight className="h-3 w-3 text-[#FF6B35]" />
+              </span>
             </div>
-
-            {/* Heading */}
-            <h1
-              className="text-3xl sm:text-4xl text-gray-900 mb-4 max-w-[320px]"
-              style={{
-                fontFamily: 'Fustat-Bold, sans-serif',
-                fontWeight: 'normal',
-                lineHeight: '0.9',
-                letterSpacing: '-0.06em'
-              }}
-            >
-              {t.mockup.heading.line1}<span className="text-gray-600">{t.mockup.heading.line2}</span>
-            </h1>
-
-            {/* Description */}
-            <p className="text-base text-gray-600 mb-7 max-w-[340px] leading-none">
-              {t.mockup.description}
-            </p>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-start gap-2 mb-7">
-              <div className="bg-orange-500 text-white text-sm px-3 py-2 rounded-3xl flex items-center gap-2">
-                <span className="leading-none">{t.mockup.cta.viewPrices}</span>
-                <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#1E2939' }}>
-                  <ArrowRight className="w-3 h-3 text-orange-500" />
-                </div>
-              </div>
-              <div className="text-white text-sm px-3 py-2 rounded-3xl flex items-center gap-2" style={{ backgroundColor: '#1E2939' }}>
-                <span className="leading-none">{t.mockup.cta.scheduleNow}</span>
-                <div className="w-6 h-6 rounded-full bg-orange-500 flex items-center justify-center">
-                  <Phone className="w-3 h-3 text-white" />
-                </div>
-              </div>
-            </div>
-
-            {/* Trust Indicators */}
-            <div className="flex items-center gap-3">
-              <div className="flex -space-x-3">
-                <div className="w-8 h-8 rounded-lg border-2 shadow-sm overflow-hidden" style={{ transform: 'rotate(-3deg)', borderColor: '#1E2939' }}>
-                  <img
-                    src="https://framerusercontent.com/images/E3vzjdpFuSWiVeurdyPGMrSWk.png?scale-down-to=64"
-                    alt="Person 1"
-                    className="w-full h-full object-cover select-none"
-                    draggable="false"
-                    onContextMenu={(e) => e.preventDefault()}
-                    onDragStart={(e) => e.preventDefault()}
-                    style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
-                  />
-                </div>
-                <div className="w-8 h-8 rounded-lg border-2 shadow-sm overflow-hidden" style={{ transform: 'rotate(2deg)', borderColor: '#1E2939' }}>
-                  <img
-                    src="https://framerusercontent.com/images/jC7KwluILkhO0KHxk6qWEttOxhE.png?scale-down-to=64"
-                    alt="Person 2"
-                    className="w-full h-full object-cover select-none"
-                    draggable="false"
-                    onContextMenu={(e) => e.preventDefault()}
-                    onDragStart={(e) => e.preventDefault()}
-                    style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
-                  />
-                </div>
-                <div className="w-8 h-8 rounded-lg border-2 shadow-sm overflow-hidden" style={{ transform: 'rotate(-2deg)', borderColor: '#1E2939' }}>
-                  <img
-                    src="https://framerusercontent.com/images/cFl24iPInxckRrL32eRgadp9ZJM.png?scale-down-to=64"
-                    alt="Person 3"
-                    className="w-full h-full object-cover select-none"
-                    draggable="false"
-                    onContextMenu={(e) => e.preventDefault()}
-                    onDragStart={(e) => e.preventDefault()}
-                    style={{ userSelect: 'none', WebkitUserSelect: 'none', pointerEvents: 'none' }}
-                  />
-                </div>
-                <div className="w-8 h-8 rounded-lg border-2 shadow-sm flex items-center justify-center overflow-hidden" style={{ transform: 'rotate(3deg)', borderColor: '#1E2939', backgroundColor: '#1E2939' }}>
-                  <span className="text-white text-xs font-bold leading-none z-10">50+</span>
-                </div>
-              </div>
-              <div className="flex flex-col gap-1">
-                <div className="flex gap-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3 h-3 fill-orange-500 text-orange-500" />
-                  ))}
-                </div>
-                <span className="text-xs text-gray-600 leading-none">{t.mockup.trust}</span>
-              </div>
+            <div className="flex items-center gap-2 rounded-full border border-white/15 bg-[#0B0B0D]/5 px-4 py-2 text-xs font-semibold text-white">
+              <Phone className="h-3.5 w-3.5 text-[#FF6B35]" />
+              {t.mockup.cta.scheduleNow}
             </div>
           </div>
 
-          {/* Right Content - Image Carousels */}
-          <div className="absolute right-8 top-0 bottom-0 flex gap-1.5 overflow-hidden" style={{ width: '240px' }}>
-            {/* Carousel going up */}
-            <div className="flex-1 flex flex-col gap-1 overflow-hidden h-full">
-              <div
-                className="flex flex-col gap-1"
-                style={{
-                  animation: 'scrollUp 40s linear infinite'
-                }}
-              >
-                {[...Array(7)].map((_, i) => (
-                  <div key={`up-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
-                    <img
-                      src={imageUrls[i]}
-                      alt="Mockup de desenvolvimento de website responsivo e software personalizado para desktop e mobile"
-                      className="w-full h-full object-cover"
-                      style={{ pointerEvents: 'none', userSelect: 'none' }}
-                    />
-                  </div>
-                ))}
-                {/* Duplicate for seamless loop */}
-                {[...Array(7)].map((_, i) => (
-                  <div key={`up-dup-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
-                    <img
-                      src={imageUrls[i]}
-                      alt="Mockup de desenvolvimento de website responsivo e software personalizado para desktop e mobile"
-                      className="w-full h-full object-cover"
-                      style={{ pointerEvents: 'none', userSelect: 'none' }}
-                    />
-                  </div>
-                ))}
-              </div>
+          <div className="mt-6 flex items-center gap-3">
+            <div className="flex -space-x-2">
+              {["J", "M", "A"].map((initial, index) => (
+                <span
+                  key={initial}
+                  className="grid h-7 w-7 place-items-center rounded-full border-2 border-[#101013] bg-[#26262C] text-[9px] font-bold text-white"
+                  style={{ transform: `rotate(${index % 2 === 0 ? -3 : 3}deg)` }}
+                >
+                  {initial}
+                </span>
+              ))}
             </div>
-
-            {/* Carousel going down */}
-            <div className="flex-1 flex flex-col gap-1 overflow-hidden h-full">
-              <div
-                className="flex flex-col gap-1"
-                style={{
-                  animation: 'scrollDown 40s linear infinite'
-                }}
-              >
-                {[...Array(7)].map((_, i) => (
-                  <div key={`down-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
-                    <img
-                      src={imageUrls[6 - i]}
-                      alt="Mockup de desenvolvimento de website responsivo e software personalizado para desktop e mobile"
-                      className="w-full h-full object-cover"
-                      style={{ pointerEvents: 'none', userSelect: 'none' }}
-                    />
-                  </div>
-                ))}
-                {/* Duplicate for seamless loop */}
-                {[...Array(7)].map((_, i) => (
-                  <div key={`down-dup-${i}`} className="w-full rounded-lg overflow-hidden bg-gray-800 flex-shrink-0" style={{ height: '150px' }}>
-                    <img
-                      src={imageUrls[6 - i]}
-                      alt="Mockup de desenvolvimento de website responsivo e software personalizado para desktop e mobile"
-                      className="w-full h-full object-cover"
-                      style={{ pointerEvents: 'none', userSelect: 'none' }}
-                    />
-                  </div>
+            <div>
+              <div className="flex gap-0.5">
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <Star key={index} className="h-3 w-3 fill-[#FF6B35] text-[#FF6B35]" />
                 ))}
               </div>
+              <span className="text-[10px] text-white/45">{t.mockup.trust}</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative min-h-[365px] overflow-hidden">
+          <img
+            src="/hvac-hero.webp"
+            alt="HVAC technician servicing a residential air-conditioning system"
+            className="absolute inset-0 h-full w-full object-cover"
+            draggable="false"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#101013] via-[#101013]/10 to-transparent" />
+          <div className="absolute inset-x-4 bottom-4 grid grid-cols-2 gap-2">
+            <div className="rounded-xl border border-white/15 bg-[#0B0B0D]/80 p-3 backdrop-blur-xl">
+              <CheckCircle className="mb-2 h-4 w-4 text-[#FF6B35]" />
+              <div className="text-[10px] font-bold text-white">Same-day service</div>
+              <div className="mt-0.5 text-[9px] text-white/45">Licensed &amp; insured</div>
+            </div>
+            <div className="rounded-xl border border-white/15 bg-[#FF6B35] p-3">
+              <div className="text-[22px] font-black leading-none text-[#0B0B0D]">4.9</div>
+              <div className="mt-1 text-[9px] font-bold text-[#0B0B0D]/65">Google rating</div>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

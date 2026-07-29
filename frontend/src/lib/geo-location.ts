@@ -72,9 +72,7 @@ export async function detectCountryCode(): Promise<string | null> {
         return code;
       }
     }
-  } catch (error) {
-    console.warn('ipapi.co failed, trying next service...');
-  }
+  } catch {}
 
   try {
     const response = await fetch('https://freeipapi.com/api/json', { method: 'GET' });
@@ -85,9 +83,7 @@ export async function detectCountryCode(): Promise<string | null> {
         return code;
       }
     }
-  } catch (error) {
-    console.warn('freeipapi.com failed, trying next service...');
-  }
+  } catch {}
 
   try {
     const response = await fetch('https://api.country.is', { method: 'GET' });
@@ -98,9 +94,7 @@ export async function detectCountryCode(): Promise<string | null> {
         return code;
       }
     }
-  } catch (e) {
-    console.warn('All geolocation services failed.');
-  }
+  } catch {}
 
   return null;
 }
@@ -154,9 +148,7 @@ export async function detectLocationData(): Promise<{ language: Language; countr
     if (countryCode) {
       return { language: getLanguageForCountry(countryCode), country: countryCode };
     }
-  } catch (error) {
-    console.warn('IP geolocation failed, using browser language as fallback:', error);
-  }
+  } catch {}
 
   const browserCountry = detectCountryFromBrowserLocale();
   if (browserCountry) {

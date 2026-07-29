@@ -1,30 +1,12 @@
-export type Language = 'pt-br' | 'pt-pt' | 'en' | 'es' | 'it' | 'sg' | 'he';
-type BaseLanguage = 'pt-br' | 'pt-pt' | 'en' | 'es';
-type DeepPartial<T> = {
-  [K in keyof T]?: T[K] extends Array<infer U>
-    ? U[]
-    : T[K] extends object
-      ? DeepPartial<T[K]>
-      : T[K];
-};
+export type Language = "pt-br" | "pt-pt" | "en" | "es" | "it" | "sg" | "he";
 
 export interface Translations {
   whatsappNumber: string;
-  // SEO Meta Tags
   seo: {
     title: string;
     description: string;
   };
-
-  // Header
   header: {
-    nav: {
-      solutions: string;
-      support: string;
-      insights: string;
-      menu: string;
-      menuDescription: string;
-    };
     solutionsDropdown: {
       websiteCreation: string;
       softwareDevelopment: string;
@@ -36,15 +18,13 @@ export interface Translations {
       portuguesePortugal: string;
       english: string;
       spanish: string;
-      italian?: string;
-      singapore?: string;
-      hebrew?: string;
+      italian: string;
+      singapore: string;
+      hebrew: string;
     };
     cta: string;
     ctaMobile: string;
   };
-
-  // Hero Section
   hero: {
     badge: {
       chosenBy: string;
@@ -73,13 +53,9 @@ export interface Translations {
       };
     };
   };
-
-  // Trusted By Section
   trustedBy: {
     label: string;
   };
-
-  // Services Section
   services: {
     title: string;
     metrics: {
@@ -105,8 +81,6 @@ export interface Translations {
       };
     };
   };
-
-  // Website Mockups
   mockup: {
     navigation: {
       services: string;
@@ -127,8 +101,6 @@ export interface Translations {
     };
     trust: string;
   };
-
-  // Expertise Section
   expertise: {
     label: string;
     heading: {
@@ -138,8 +110,6 @@ export interface Translations {
     description: string;
     cta: string;
   };
-
-  // Solutions Suite Section
   solutionsSuite: {
     heading: string;
     description: string;
@@ -162,10 +132,10 @@ export interface Translations {
   faq: {
     heading: string;
     description: string;
-    items: {
+    items: Array<{
       question: string;
       answer: string;
-    }[];
+    }>;
   };
   finalCTA: {
     heading: string;
@@ -173,1316 +143,1066 @@ export interface Translations {
     cta: string;
   };
   footer: {
-    columns: {
-      account: {
-        title: string;
-        signup: string;
-        login: string;
-      };
-      support: {
-        title: string;
-        email: string;
-        talkToSupport: string;
-        joinDiscord: string;
-      };
-      website: {
-        title: string;
-        products: string;
-        fees: string;
-        privacy: string;
-        terms: string;
-        status: string;
-      };
-      ai: {
-        title: string;
-        chat: string;
-        llms: string;
-      };
-    };
     copyright: string;
   };
 }
 
-const baseTranslations: Record<BaseLanguage, Translations> = {
-  'pt-br': {
-    whatsappNumber: '5511978267321',
-    seo: {
-      title: 'Criação de Sites, Softwares e Automações com IA | Monfily',
-      description: 'Desenvolvemos sites rápidos, sistemas sob medida e automações com IA para empresas que precisam de eficiência operacional e presença digital profissional.',
+type TranslationCopy = Omit<Translations, "whatsappNumber">;
+
+const year = new Date().getFullYear();
+
+const english: TranslationCopy = {
+  seo: {
+    title: "Home Services Marketing Agency in the USA | Monfily",
+    description:
+      "Google-first marketing for U.S. home service companies: landing pages, branding, qualified leads, local SEO, Google Business Profile, Google Ads and conversion testing.",
+  },
+  header: {
+    solutionsDropdown: {
+      websiteCreation: "Landing pages & branding",
+      softwareDevelopment: "Google Business Profile",
+      artificialIntelligence: "Google Ads & qualified leads",
+      technicalSEO: "Local SEO & conversion testing",
     },
-    header: {
-      nav: {
-        solutions: 'Soluções',
-        support: 'Suporte',
-        insights: 'Insights',
-        menu: 'Menu de Navegação',
-        menuDescription: 'Menu principal de navegação do site',
-      },
-      solutionsDropdown: {
-        websiteCreation: 'Criação de Sites',
-        softwareDevelopment: 'Desenvolvimento de Software',
-        artificialIntelligence: 'Inteligência Artificial',
-        technicalSEO: 'SEO Técnico',
-      },
-      languages: {
-        portugueseBrazil: 'Português (Brasil)',
-        portuguesePortugal: 'Português (Portugal)',
-        english: 'Inglês',
-        spanish: 'Espanhol',
-      },
-      cta: 'Falar com Especialista',
-      ctaMobile: 'Contato',
+    languages: {
+      portugueseBrazil: "Portuguese (Brazil)",
+      portuguesePortugal: "Portuguese (Portugal)",
+      english: "English",
+      spanish: "Spanish",
+      italian: "Italian",
+      singapore: "English (Singapore)",
+      hebrew: "Hebrew (Israel)",
     },
-    hero: {
-      badge: {
-        chosenBy: 'Escolhido por ',
-        clients: '+150 Clientes em ',
-        in: '',
-      },
-      rotatingTexts: [
-        'Varejo & E-commerce',
-        'Saúde & Clínicas',
-        'Imobiliária & Construção',
-        'Advocacia & Consultoria',
-        'Serviços & Startups',
-      ],
-      heading: {
-        line1: 'Código Puro.',
-        line2: 'Resultados ',
-        line3: 'Reais.',
-      },
-      description: 'A infraestrutura digital completa para o seu negócio. Unimos design de Criação de Sites de alta performance, engenharia de Software, Inteligência Artificial (IA) e SEO técnico para gerar receita e eficiência.',
-      cta: {
-        primary: 'Iniciar Meu Projeto',
-        secondary: 'Por que nós?',
-      },
-      features: {
-        performance: {
-          title: 'Performance',
-          description: 'Sites rápidos que convertem.',
-        },
-        optimized: {
-          title: 'Otimizado',
-          description: 'Estrutura preparada para SEO.',
-        },
-      },
+    cta: "Get a growth plan",
+    ctaMobile: "Let's talk",
+  },
+  hero: {
+    badge: {
+      chosenBy: "Marketing for U.S. Home Services companies",
+      clients: " — ",
+      in: "",
     },
-    trustedBy: {
-      label: 'Utilizamos as melhores tecnologias:',
+    rotatingTexts: ["HVAC", "Roofing", "Plumbing", "Electrical", "Landscaping"],
+    heading: {
+      line1: "Own your market.",
+      line2: "Win more ",
+      line3: "local jobs.",
     },
-    services: {
-      title: 'Soluções digitais para diferentes mercados.',
-      metrics: {
-        projectsDelivered: 'Projetos entregues',
-        nichesServed: 'Segmentos atendidos',
-      },
-      items: {
-        webDesign: {
-          title: 'Criação de Sites',
-          description: 'Sites rápidos e adaptados para dispositivos móveis. Focamos na clareza das informações para facilitar o contato do seu cliente.',
-        },
-        customSoftware: {
-          title: 'Sistemas Sob Medida',
-          description: 'Desenvolvemos ferramentas para organizar processos internos ou criar novos produtos digitais, com foco em segurança e usabilidade.',
-        },
-        aiAutomation: {
-          title: 'Automação com IA',
-          description: 'Integração de assistentes inteligentes para atendimento e fluxos de trabalho, reduzindo o tempo gasto em tarefas manuais e repetitivas.',
-        },
-        seoGrowth: {
-          title: 'SEO Técnico',
-          description: 'Otimização da estrutura técnica do site para melhorar o posicionamento nos motores de busca de forma orgânica.',
-        },
-      },
+    description:
+      "Google-first growth systems for U.S. home service companies. We turn local searches into booked calls with high-converting pages, local SEO, Google Ads, branding and rigorous user testing.",
+    cta: {
+      primary: "Get your growth plan",
+      secondary: "Explore our system",
     },
-    mockup: {
-      navigation: {
-        services: 'Serviços',
-        benefits: 'Vantagens',
-        projects: 'Portfólio',
-        prices: 'Orçamento',
-        clients: 'Clientes',
+    features: {
+      performance: {
+        title: "Built to convert",
+        description: "Fast pages focused on calls and estimates.",
       },
-      badge: 'Disponível para novos projetos',
-      heading: {
-        line1: 'Desenvolvimento de Software',
-        line2: 'Para Empresas e Startups',
+      optimized: {
+        title: "Google-first",
+        description: "Local visibility across Search, Maps and Ads.",
       },
-      description: 'Entregamos tecnologia de forma clara, com prazos reais e suporte contínuo para o seu crescimento digital.',
-      cta: {
-        viewPrices: 'Ver Portfólio',
-        scheduleNow: 'Agendar Reunião',
-      },
-      trust: 'Mais de 150 empresas atendidas',
-    },
-    expertise: {
-      label: 'Nossa Expertise',
-      heading: {
-        line1: 'Desenvolvimento técnico',
-        line2: 'focado em utilidade.',
-      },
-      description: 'Não criamos apenas telas. Construímos a lógica por trás do seu negócio, garantindo que cada linha de código tenha um propósito prático para sua empresa.',
-      cta: 'Falar com Especialista',
-    },
-    solutionsSuite: {
-      heading: 'Tecnologia que organiza sua operação.',
-      description: 'Mais do que um site, entregamos ferramentas que ajudam na gestão e no crescimento do seu negócio.',
-      items: {
-        antiFraud: {
-          title: 'Segurança de Dados',
-          description: 'Implementamos protocolos de segurança para proteger as informações da sua empresa e dos seus clientes.',
-        },
-        checkout: {
-          title: 'Integrações',
-          description: 'Conectamos seu site ou sistema com as ferramentas que você já usa, como CRMs, meios de pagamento e ERPs.',
-        },
-        subscriptions: {
-          title: 'Escalabilidade',
-          description: 'Desenvolvemos sistemas preparados para suportar o aumento de acessos e dados sem perda de velocidade.',
-          badge: '',
-        },
-      },
-    },
-    faq: {
-      heading: 'Dúvidas Frequentes',
-      description: 'Respostas diretas sobre como trabalhamos e o que você pode esperar de nossos serviços.',
-      items: [
-        {
-          question: 'Como funciona o processo de criação?',
-          answer: 'O processo é dividido em quatro etapas: entendimento das necessidades, desenho da solução (design), desenvolvimento do código e entrega final com treinamento, se necessário.',
-        },
-        {
-          question: 'O que eu preciso enviar para começar o projeto?',
-          answer: 'Basicamente as informações sobre seus serviços, sua logomarca e o acesso ao seu domínio, caso já possua um.',
-        },
-        {
-          question: 'Vocês oferecem suporte após a entrega?',
-          answer: 'Sim. Oferecemos suporte técnico para correções e atualizações, garantindo que sua plataforma continue funcionando sem interrupções.',
-        },
-        {
-          question: 'O site será otimizado para celulares?',
-          answer: 'Sim. Todos os nossos projetos são desenvolvidos com tecnologia responsiva, garantindo que funcionem perfeitamente em smartphones, tablets e computadores.',
-        },
-        {
-          question: 'Vocês cuidam da hospedagem do site?',
-          answer: 'Nós auxiliamos na escolha e configuração da melhor hospedagem para o seu projeto, mas a contratação do serviço é feita diretamente por você para garantir total autonomia.',
-        },
-        {
-          question: 'Vocês fazem a identidade visual/logotipo?',
-          answer: 'Focamos no desenvolvimento digital (sites e sistemas). Caso você não tenha uma identidade visual, podemos indicar parceiros de design ou trabalhar com o que você já possui.',
-        },
-        {
-          question: 'Como é feita a comunicação durante o projeto?',
-          answer: 'Utilizamos canais diretos como WhatsApp e reuniões agendadas para garantir que você acompanhe cada evolução do desenvolvimento.',
-        },
-      ],
-    },
-    finalCTA: {
-      heading: 'Pronto para tirar seu projeto do papel?',
-      description: 'Fale com um de nossos especialistas e receba uma análise técnica preliminar para o seu negócio.',
-      cta: 'Falar com Especialista',
-    },
-    footer: {
-      columns: {
-        account: {
-          title: 'Soluções',
-          signup: 'Criação de Sites',
-          login: 'Desenvolvimento de Software',
-        },
-        support: {
-          title: 'Contato',
-          email: 'contato@monfily.com',
-          talkToSupport: 'Falar com especialista',
-          joinDiscord: 'Agendar reunião',
-        },
-        website: {
-          title: 'Recursos',
-          products: 'Insights',
-          fees: 'Portfólio',
-          privacy: 'Privacidade',
-          terms: 'Termos e condições',
-          status: 'FAQ',
-        },
-        ai: {
-          title: 'IA',
-          chat: 'Assistente IA',
-          llms: 'Modelos e LLMs',
-        },
-      },
-      copyright: `© ${new Date().getFullYear()} Monfily Digital. Todos os direitos reservados.`,
     },
   },
-  'pt-pt': {
-    whatsappNumber: '351927327279',
-    seo: {
-      title: 'Criação de Websites, Software e Automações com IA | Monfily',
-      description: 'Desenvolvemos websites rápidos, sistemas à medida e automações com IA para empresas que precisam de eficiência operacional e presença digital profissional.',
+  trustedBy: {
+    label: "One Google-first growth system across:",
+  },
+  services: {
+    title: "Everything a home service brand needs to dominate locally.",
+    metrics: {
+      projectsDelivered: "growth projects delivered",
+      nichesServed: "home service verticals served",
     },
-    header: {
-      nav: {
-        solutions: 'Soluções',
-        support: 'Suporte',
-        insights: 'Insights',
-        menu: 'Menu de Navegação',
-        menuDescription: 'Menu principal de navegação do site',
+    items: {
+      webDesign: {
+        title: "Landing Pages & Branding",
+        description:
+          "Clear positioning, memorable identity and mobile-first landing pages engineered to turn high-intent traffic into calls and estimate requests.",
       },
-      solutionsDropdown: {
-        websiteCreation: 'Criação de Websites',
-        softwareDevelopment: 'Desenvolvimento de Software',
-        artificialIntelligence: 'Inteligência Artificial',
-        technicalSEO: 'SEO Técnico',
+      customSoftware: {
+        title: "Google Business Profile & Local SEO",
+        description:
+          "Profile optimization, service-area strategy, local pages, citations and review systems that improve visibility in Google Search and Maps.",
       },
-      languages: {
-        portugueseBrazil: 'Português (Brasil)',
-        portuguesePortugal: 'Português (Portugal)',
-        english: 'Inglês',
-        spanish: 'Espanhol',
+      aiAutomation: {
+        title: "Google Ads & Qualified Leads",
+        description:
+          "Search, Local Services and remarketing campaigns with accurate tracking, intent-led keywords and lead quality controls.",
       },
-      cta: 'Falar com Especialista',
-      ctaMobile: 'Contacto',
-    },
-    hero: {
-      badge: {
-        chosenBy: 'Escolhido por ',
-        clients: '+150 Clientes em ',
-        in: '',
+      seoGrowth: {
+        title: "User Testing & Conversion",
+        description:
+          "Real-user feedback, call-path analysis and continuous testing to remove friction and increase booked jobs from every channel.",
       },
-      rotatingTexts: [
-        'Retalho & E-commerce',
-        'Saúde & Clínicas',
-        'Imobiliário & Construção',
-        'Advocacia & Consultoria',
-        'Serviços & Startups',
-      ],
-      heading: {
-        line1: 'Código Puro.',
-        line2: 'Resultados ',
-        line3: 'Reais.',
-      },
-      description: 'A infraestrutura digital completa para o seu negócio. Combinamos design de Criação de Websites de alta performance, engenharia de Software, Inteligência Artificial (IA) e SEO técnico para gerar receita e eficiência.',
-      cta: {
-        primary: 'Iniciar o Meu Projeto',
-        secondary: 'Porquê nós?',
-      },
-      features: {
-        performance: {
-          title: 'Performance',
-          description: 'Websites rápidos que convertem.',
-        },
-        optimized: {
-          title: 'Otimizado',
-          description: 'Estrutura preparada para SEO.',
-        },
-      },
-    },
-    trustedBy: {
-      label: 'Utilizamos as melhores tecnologias:',
-    },
-    services: {
-      title: 'Soluções digitais para diferentes mercados.',
-      metrics: {
-        projectsDelivered: 'Projetos entregues',
-        nichesServed: 'Segmentos atendidos',
-      },
-      items: {
-        webDesign: {
-          title: 'Criação de Websites',
-          description: 'Websites rápidos e adaptados para dispositivos móveis. Focamos na clareza das informações para facilitar o contacto do seu cliente.',
-        },
-        customSoftware: {
-          title: 'Sistemas à Medida',
-          description: 'Desenvolvemos ferramentas para organizar processos internos ou criar novos produtos digitais, com foco em segurança e usabilidade.',
-        },
-        aiAutomation: {
-          title: 'Automação com IA',
-          description: 'Integração de assistentes inteligentes para atendimento e fluxos de trabalho, reduzindo o tempo gasto em tarefas manuais e repetitivas.',
-        },
-        seoGrowth: {
-          title: 'SEO Técnico',
-          description: 'Otimização da estrutura técnica do website para melhorar o posicionamento nos motores de busca de forma orgânica.',
-        },
-      },
-    },
-    mockup: {
-      navigation: {
-        services: 'Serviços',
-        benefits: 'Vantagens',
-        projects: 'Portfólio',
-        prices: 'Orçamento',
-        clients: 'Clientes',
-      },
-      badge: 'Disponível para novos projetos',
-      heading: {
-        line1: 'Desenvolvimento de Software',
-        line2: 'Para Empresas e Startups',
-      },
-      description: 'Entregamos tecnologia de forma clara, com prazos reais e suporte contínuo para o seu crescimento digital.',
-      cta: {
-        viewPrices: 'Ver Portfólio',
-        scheduleNow: 'Agendar Reunião',
-      },
-      trust: 'Mais de 150 empresas atendidas',
-    },
-    expertise: {
-      label: 'A Nossa Expertise',
-      heading: {
-        line1: 'Desenvolvimento técnico',
-        line2: 'focado em utilidade.',
-      },
-      description: 'Não criamos apenas ecrãs. Construímos a lógica por trás do seu negócio, garantindo que cada linha de código tenha um propósito prático para a sua empresa.',
-      cta: 'Falar com Especialista',
-    },
-    solutionsSuite: {
-      heading: 'Tecnologia que organiza a sua operação.',
-      description: 'Mais do que um website, entregamos ferramentas que ajudam na gestão e no crescimento do seu negócio.',
-      items: {
-        antiFraud: {
-          title: 'Segurança de Dados',
-          description: 'Implementamos protocolos de segurança para proteger as informações da sua empresa e dos seus clientes.',
-        },
-        checkout: {
-          title: 'Integrações',
-          description: 'Ligamos o seu website ou sistema às ferramentas que já utiliza, como CRMs, meios de pagamento e ERPs.',
-        },
-        subscriptions: {
-          title: 'Escalabilidade',
-          description: 'Desenvolvemos sistemas preparados para suportar o aumento de acessos e dados sem perda de velocidade.',
-          badge: '',
-        },
-      },
-    },
-    faq: {
-      heading: 'Perguntas Frequentes',
-      description: 'Respostas diretas sobre como trabalhamos e o que pode esperar dos nossos serviços.',
-      items: [
-        {
-          question: 'Como funciona o processo de criação?',
-          answer: 'O processo divide-se em quatro etapas: compreensão das necessidades, desenho da solução (design), desenvolvimento do código e entrega final com formação, se necessário.',
-        },
-        {
-          question: 'O que preciso de enviar para começar o projeto?',
-          answer: 'Basicamente as informações sobre os seus serviços, o seu logótipo e o acesso ao seu domínio, caso já possua um.',
-        },
-        {
-          question: 'Oferecem suporte após a entrega?',
-          answer: 'Sim. Oferecemos suporte técnico para correções e atualizações, garantindo que a sua plataforma continue a funcionar sem interrupções.',
-        },
-        {
-          question: 'O website será otimizado para telemóveis?',
-          answer: 'Sim. Todos os nossos projetos são desenvolvidos com tecnologia responsiva, garantindo que funcionem perfeitamente em smartphones, tablets e computadores.',
-        },
-        {
-          question: 'Tratam do alojamento do website?',
-          answer: 'Auxiliamos na escolha e configuração do melhor alojamento para o seu projeto, mas a contratação do serviço é feita diretamente por si para garantir total autonomia.',
-        },
-        {
-          question: 'Fazem a identidade visual/logótipo?',
-          answer: 'Focamo-nos no desenvolvimento digital (websites e sistemas). Caso não tenha uma identidade visual, podemos indicar parceiros de design ou trabalhar com o que já possui.',
-        },
-        {
-          question: 'Como é feita a comunicação durante o projeto?',
-          answer: 'Utilizamos canais diretos como WhatsApp e reuniões agendadas para garantir que acompanha cada evolução do desenvolvimento.',
-        },
-      ],
-    },
-    finalCTA: {
-      heading: 'Pronto para tirar o seu projeto do papel?',
-      description: 'Fale com um dos nossos especialistas e receba uma análise técnica preliminar para o seu negócio.',
-      cta: 'Falar com Especialista',
-    },
-    footer: {
-      columns: {
-        account: {
-          title: 'Soluções',
-          signup: 'Criação de Websites',
-          login: 'Desenvolvimento de Software',
-        },
-        support: {
-          title: 'Contacto',
-          email: 'contacto@monfily.com',
-          talkToSupport: 'Falar com especialista',
-          joinDiscord: 'Agendar reunião',
-        },
-        website: {
-          title: 'Recursos',
-          products: 'Insights',
-          fees: 'Portfólio',
-          privacy: 'Privacidade',
-          terms: 'Termos e condições',
-          status: 'FAQ',
-        },
-        ai: {
-          title: 'IA',
-          chat: 'Assistente IA',
-          llms: 'Modelos e LLMs',
-        },
-      },
-      copyright: `© ${new Date().getFullYear()} Monfily Digital. Todos os direitos reservados.`,
     },
   },
-  en: {
-    whatsappNumber: '447888865199',
-    seo: {
-      title: 'Website Creation, Software & AI Automation | Monfily',
-      description: 'We develop fast websites, custom systems, and AI automations for companies looking for operational efficiency and a professional digital presence.',
+  mockup: {
+    navigation: {
+      services: "Services",
+      benefits: "Why us",
+      projects: "Reviews",
+      prices: "Financing",
+      clients: "Service areas",
     },
-    header: {
-      nav: {
-        solutions: 'Solutions',
-        support: 'Support',
-        insights: 'Insights',
-        menu: 'Navigation Menu',
-        menuDescription: 'Main site navigation menu',
-      },
-      solutionsDropdown: {
-        websiteCreation: 'Website Creation',
-        softwareDevelopment: 'Software Development',
-        artificialIntelligence: 'Artificial Intelligence',
-        technicalSEO: 'Technical SEO',
-      },
-      languages: {
-        portugueseBrazil: 'Portuguese (Brazil)',
-        portuguesePortugal: 'Portuguese (Portugal)',
-        english: 'English',
-        spanish: 'Spanish',
-      },
-      cta: 'Talk to an Expert',
-      ctaMobile: 'Contact',
+    badge: "24/7 emergency HVAC service",
+    heading: {
+      line1: "Comfort restored.",
+      line2: " Fast, honest, local.",
     },
-    hero: {
-      badge: {
-        chosenBy: 'Chosen by ',
-        clients: '+150 Clients in ',
-        in: '',
-      },
-      rotatingTexts: [
-        'Retail & E-commerce',
-        'Healthcare & Clinics',
-        'Real Estate & Construction',
-        'Law & Consulting',
-        'Services & Startups',
-      ],
-      heading: {
-        line1: 'Pure Code.',
-        line2: 'Real ',
-        line3: 'Results.',
-      },
-      description: 'Complete digital infrastructure for your business. We combine high-performance Website Creation design, Software engineering, Artificial Intelligence (IA), and technical SEO to generate revenue and efficiency.',
-      cta: {
-        primary: 'Start My Project',
-        secondary: 'Why us?',
-      },
-      features: {
-        performance: {
-          title: 'Performance',
-          description: 'Fast sites that convert.',
-        },
-        optimized: {
-          title: 'Optimized',
-          description: 'SEO-ready structure.',
-        },
-      },
+    description:
+      "Licensed HVAC experts for repairs, tune-ups and installations. Upfront pricing and same-day availability.",
+    cta: {
+      viewPrices: "Request service",
+      scheduleNow: "Call now",
     },
-    trustedBy: {
-      label: 'We use the best technologies:',
+    trust: "4.9 from local homeowners",
+  },
+  expertise: {
+    label: "Our Google expertise",
+    heading: {
+      line1: "Be visible at the exact moment",
+      line2: "homeowners need your service.",
     },
-    services: {
-      title: 'Digital solutions for different markets.',
-      metrics: {
-        projectsDelivered: 'Projects delivered',
-        nichesServed: 'Industries served',
+    description:
+      "We connect Google Business Profile, Search, Maps, Ads, Analytics and call tracking into one measurable system built around booked jobs—not vanity metrics.",
+    cta: "Talk to a growth strategist",
+  },
+  solutionsSuite: {
+    heading: "A complete local growth engine.",
+    description:
+      "Each part works together so your brand is found, trusted and chosen across the entire homeowner journey.",
+    items: {
+      antiFraud: {
+        title: "Local Authority",
+        description:
+          "Service-area content, reputation strategy and consistent business signals that help Google and homeowners trust your company.",
       },
-      items: {
-        webDesign: {
-          title: 'Website Creation',
-          description: 'Fast, mobile-friendly websites. We focus on clear information to make it easier for customers to reach you.',
-        },
-        customSoftware: {
-          title: 'Custom Systems',
-          description: 'We develop tools to organize internal processes or create new digital products, focusing on security and usability.',
-        },
-        aiAutomation: {
-          title: 'AI Automation',
-          description: 'Integration of intelligent assistants for customer service and workflows, reducing time spent on manual tasks.',
-        },
-        seoGrowth: {
-          title: 'Technical SEO',
-          description: 'Optimizing the technical structure of the site to improve organic search engine rankings.',
-        },
+      checkout: {
+        title: "Lead Intelligence",
+        description:
+          "Call, form and campaign tracking that shows which searches generate qualified opportunities—not just clicks.",
       },
-    },
-    mockup: {
-      navigation: {
-        services: 'Services',
-        benefits: 'Advantages',
-        projects: 'Portfolio',
-        prices: 'Quote',
-        clients: 'Clients',
+      subscriptions: {
+        title: "Continuous Optimization",
+        description:
+          "Monthly testing across pages, offers, keywords and audiences to lower acquisition costs and keep job volume growing.",
+        badge: "Always improving",
       },
-      badge: 'Available for new projects',
-      heading: {
-        line1: 'Software Development',
-        line2: 'For Companies and Startups',
-      },
-      description: 'We deliver technology clearly, with realistic deadlines and continuous support for your digital growth.',
-      cta: {
-        viewPrices: 'View Portfolio',
-        scheduleNow: 'Book a Meeting',
-      },
-      trust: 'More than 150 companies served',
-    },
-    expertise: {
-      label: 'Our Expertise',
-      heading: {
-        line1: 'Technical development',
-        line2: 'focused on utility.',
-      },
-      description: 'We don\'t just create screens. We build the logic behind your business, ensuring every line of code has a practical purpose for your company.',
-      cta: 'Talk to an Expert',
-    },
-    solutionsSuite: {
-      heading: 'Technology that organizes your operation.',
-      description: 'More than just a website, we deliver tools that help manage and grow your business.',
-      items: {
-        antiFraud: {
-          title: 'Data Security',
-          description: 'We implement security protocols to protect your company\'s and your clients\' information.',
-        },
-        checkout: {
-          title: 'Integrations',
-          description: 'We connect your site or system with the tools you already use, such as CRMs, payment gateways, and ERPs.',
-        },
-        subscriptions: {
-          title: 'Scalability',
-          description: 'We develop systems prepared to handle increased traffic and data without losing speed.',
-          badge: '',
-        },
-      },
-    },
-    faq: {
-      heading: 'Frequently Asked Questions',
-      description: 'Straight answers about how we work and what you can expect from our services.',
-      items: [
-        {
-          question: 'How does the creation process work?',
-          answer: 'The process is divided into four stages: understanding needs, solution design, code development, and final delivery with training if necessary.',
-        },
-        {
-          question: 'What do I need to send to start the project?',
-          answer: 'Basically, information about your services, your logo, and access to your domain if you already have one.',
-        },
-        {
-          question: 'Do you offer support after delivery?',
-          answer: 'Yes. We offer technical support for fixes and updates, ensuring your platform continues to run smoothly.',
-        },
-        {
-          question: 'Will the website be mobile-friendly?',
-          answer: 'Yes. All our projects are developed with responsive technology, ensuring they work perfectly on smartphones, tablets, and computers.',
-        },
-        {
-          question: 'Do you handle website hosting?',
-          answer: 'We assist in choosing and configuring the best hosting for your project, but the service is contracted directly by you to ensure total autonomy.',
-        },
-        {
-          question: 'Do you create visual identities or logos?',
-          answer: 'We focus on digital development (websites and systems). If you don\'t have a visual identity, we can recommend design partners or work with what you already have.',
-        },
-        {
-          question: 'How is communication handled during the project?',
-          answer: 'We use direct channels like WhatsApp and scheduled meetings to ensure you follow every stage of the development evolution.',
-        },
-      ],
-    },
-    finalCTA: {
-      heading: 'Ready to bring your project to life?',
-      description: 'Talk to one of our experts and receive a preliminary technical analysis for your business.',
-      cta: 'Talk to an Expert',
-    },
-    footer: {
-      columns: {
-        account: {
-          title: 'Solutions',
-          signup: 'Website Creation',
-          login: 'Software Development',
-        },
-        support: {
-          title: 'Contact',
-          email: 'contact@monfily.com',
-          talkToSupport: 'Talk to an expert',
-          joinDiscord: 'Book a meeting',
-        },
-        website: {
-          title: 'Resources',
-          products: 'Insights',
-          fees: 'Portfolio',
-          privacy: 'Privacy',
-          terms: 'Terms & Conditions',
-          status: 'FAQ',
-        },
-        ai: {
-          title: 'AI',
-          chat: 'AI Assistant',
-          llms: 'Models & LLMs',
-        },
-      },
-      copyright: `© ${new Date().getFullYear()} Monfily Digital. All rights reserved.`,
     },
   },
-  es: {
-    whatsappNumber: '34613588340',
-    seo: {
-      title: 'Creación de Sitios Web, Software y Automatizaciones con IA | Monfily',
-      description: 'Desarrollamos sitios rápidos, sistemas a medida y automatizaciones con IA para empresas que necesitan eficiencia operativa y presencia digital profesional.',
-    },
-    header: {
-      nav: {
-        solutions: 'Soluciones',
-        support: 'Soporte',
-        insights: 'Insights',
-        menu: 'Menú de Navegación',
-        menuDescription: 'Menú principal de navegación del sitio',
+  faq: {
+    heading: "Frequently asked questions",
+    description:
+      "Straight answers about growing a home service company with a Google-first marketing system.",
+    items: [
+      {
+        question: "Which home service niches do you work with?",
+        answer:
+          "We specialize in HVAC, roofing, plumbing, electrical, landscaping, remodeling, cleaning, pest control and other local service businesses across the United States.",
       },
-      solutionsDropdown: {
-        websiteCreation: 'Creación de Sitios Web',
-        softwareDevelopment: 'Desarrollo de Software',
-        artificialIntelligence: 'Inteligencia Artificial',
-        technicalSEO: 'SEO Técnico',
+      {
+        question: "Do you manage Google Business Profile?",
+        answer:
+          "Yes. We optimize categories, services, service areas, photos, posts, Q&A, reviews and local relevance while keeping the profile compliant with Google guidelines.",
       },
-      languages: {
-        portugueseBrazil: 'Portugués (Brasil)',
-        portuguesePortugal: 'Portugués (Portugal)',
-        english: 'Inglés',
-        spanish: 'Español',
+      {
+        question: "Can you generate exclusive leads?",
+        answer:
+          "Yes. Leads generated through your landing pages, Google Ads and local presence belong to your business. We focus on quality, tracking and booked-job potential.",
       },
-      cta: 'Hablar con Especialista',
-      ctaMobile: 'Contacto',
-    },
-    hero: {
-      badge: {
-        chosenBy: 'Elegido por ',
-        clients: '+150 Clientes en ',
-        in: '',
+      {
+        question: "Do you build landing pages and branding?",
+        answer:
+          "Yes. We create the positioning, visual direction, copy and responsive landing pages needed to make your company look credible and convert traffic.",
       },
-      rotatingTexts: [
-        'Retail y E-commerce',
-        'Salud y Clínicas',
-        'Inmobiliaria y Construcción',
-        'Abogacía y Consultoría',
-        'Servicios y Startups',
-      ],
-      heading: {
-        line1: 'Código Puro.',
-        line2: 'Resultados ',
-        line3: 'Reales.',
+      {
+        question: "How do you measure results?",
+        answer:
+          "We track qualified calls, forms, booked estimates, lead source and acquisition cost using Google Analytics, Ads data and call tracking.",
       },
-      description: 'La infraestructura digital completa para tu negocio. Unimos diseño de creación de sitios de alto rendimiento, ingeniería de software, inteligencia artificial (IA) y SEO técnico para generar ingresos y eficiencia.',
-      cta: {
-        primary: 'Iniciar Mi Proyecto',
-        secondary: '¿Por qué nosotros?',
+      {
+        question: "Do you work with one company per market?",
+        answer:
+          "We review service areas before engagement and avoid direct conflicts whenever exclusivity is part of the agreed growth plan.",
       },
-      features: {
-        performance: {
-          title: 'Rendimiento',
-          description: 'Sitios rápidos que convierten.',
-        },
-        optimized: {
-          title: 'Optimizado',
-          description: 'Estructura preparada para SEO.',
-        },
+      {
+        question: "How soon can we start?",
+        answer:
+          "After the discovery call and access handoff, we can begin the audit immediately and deliver a prioritized launch roadmap.",
       },
-    },
-    trustedBy: {
-      label: 'Utilizamos las mejores tecnologías:',
-    },
-    services: {
-      title: 'Soluciones digitales para diferentes mercados.',
-      metrics: {
-        projectsDelivered: 'Proyectos entregados',
-        nichesServed: 'Sectores atendidos',
-      },
-      items: {
-        webDesign: {
-          title: 'Creación de Sitios Web',
-          description: 'Sitios rápidos y adaptados para dispositivos móviles. Nos enfocamos en la claridad de la información para facilitar el contacto de tu cliente.',
-        },
-        customSoftware: {
-          title: 'Sistemas a Medida',
-          description: 'Desarrollamos herramientas para organizar procesos internos o crear nuevos productos digitales, con enfoque en seguridad y usabilidad.',
-        },
-        aiAutomation: {
-          title: 'Automatización con IA',
-          description: 'Integración de asistentes inteligentes para atención y flujos de trabajo, reduciendo el tiempo dedicado a tareas manuales y repetitivas.',
-        },
-        seoGrowth: {
-          title: 'SEO Técnico',
-          description: 'Optimización de la estructura técnica del sitio para mejorar el posicionamiento en los motores de búsqueda de forma orgánica.',
-        },
-      },
-    },
-    mockup: {
-      navigation: {
-        services: 'Servicios',
-        benefits: 'Ventajas',
-        projects: 'Portfolio',
-        prices: 'Presupuesto',
-        clients: 'Clientes',
-      },
-      badge: 'Disponible para nuevos proyectos',
-      heading: {
-        line1: 'Desarrollo de Software',
-        line2: 'Para Empresas y Startups',
-      },
-      description: 'Entregamos tecnología de forma clara, con plazos reales y soporte continuo para tu crecimiento digital.',
-      cta: {
-        viewPrices: 'Ver Portfolio',
-        scheduleNow: 'Agendar Reunión',
-      },
-      trust: 'Más de 150 empresas atendidas',
-    },
-    expertise: {
-      label: 'Nuestra Expertise',
-      heading: {
-        line1: 'Desarrollo técnico',
-        line2: 'enfocado en utilidad.',
-      },
-      description: 'No creamos solo pantallas. Construimos la lógica detrás de tu negocio, garantizando que cada línea de código tenga un propósito práctico para tu empresa.',
-      cta: 'Hablar con Especialista',
-    },
-    solutionsSuite: {
-      heading: 'Tecnología que organiza tu operación.',
-      description: 'Más que un sitio, entregamos herramientas que ayudan en la gestión y el crecimiento de tu negocio.',
-      items: {
-        antiFraud: {
-          title: 'Seguridad de Datos',
-          description: 'Implementamos protocolos de seguridad para proteger la información de tu empresa y de tus clientes.',
-        },
-        checkout: {
-          title: 'Integraciones',
-          description: 'Conectamos tu sitio o sistema con las herramientas que ya usas, como CRMs, medios de pago y ERPs.',
-        },
-        subscriptions: {
-          title: 'Escalabilidad',
-          description: 'Desarrollamos sistemas preparados para soportar el aumento de accesos y datos sin pérdida de velocidad.',
-          badge: '',
-        },
-      },
-    },
-    faq: {
-      heading: 'Preguntas Frecuentes',
-      description: 'Respuestas directas sobre cómo trabajamos y qué puedes esperar de nuestros servicios.',
-      items: [
-        {
-          question: '¿Cómo funciona el proceso de creación?',
-          answer: 'El proceso se divide en cuatro etapas: entendimiento de las necesidades, diseño de la solución, desarrollo del código y entrega final con capacitación, si es necesario.',
-        },
-        {
-          question: '¿Qué necesito enviar para comenzar el proyecto?',
-          answer: 'Básicamente la información sobre tus servicios, tu logotipo y el acceso a tu dominio, si ya tienes uno.',
-        },
-        {
-          question: '¿Ofrecen soporte después de la entrega?',
-          answer: 'Sí. Ofrecemos soporte técnico para correcciones y actualizaciones, garantizando que tu plataforma continúe funcionando sin interrupciones.',
-        },
-        {
-          question: '¿El sitio estará optimizado para celulares?',
-          answer: 'Sí. Todos nuestros proyectos se desarrollan con tecnología responsive, garantizando que funcionen perfectamente en smartphones, tablets y computadoras.',
-        },
-        {
-          question: '¿Se encargan del hosting del sitio?',
-          answer: 'Ayudamos en la elección y configuración del mejor hosting para tu proyecto, pero la contratación del servicio se hace directamente por ti para garantizar total autonomía.',
-        },
-        {
-          question: '¿Hacen la identidad visual/logotipo?',
-          answer: 'Nos enfocamos en el desarrollo digital (sitios y sistemas). Si no tienes una identidad visual, podemos indicar socios de diseño o trabajar con lo que ya tienes.',
-        },
-        {
-          question: '¿Cómo es la comunicación durante el proyecto?',
-          answer: 'Utilizamos canales directos como WhatsApp y reuniones agendadas para garantizar que acompañes cada evolución del desarrollo.',
-        },
-      ],
-    },
-    finalCTA: {
-      heading: '¿Listo para sacar tu proyecto del papel?',
-      description: 'Habla con uno de nuestros especialistas y recibe un análisis técnico preliminar para tu negocio.',
-      cta: 'Hablar con Especialista',
-    },
-    footer: {
-      columns: {
-        account: {
-          title: 'Soluciones',
-          signup: 'Creación de Sitios Web',
-          login: 'Desarrollo de Software',
-        },
-        support: {
-          title: 'Contacto',
-          email: 'contacto@monfily.com',
-          talkToSupport: 'Hablar con especialista',
-          joinDiscord: 'Agendar reunión',
-        },
-        website: {
-          title: 'Recursos',
-          products: 'Insights',
-          fees: 'Portfolio',
-          privacy: 'Privacidad',
-          terms: 'Términos y condiciones',
-          status: 'FAQ',
-        },
-        ai: {
-          title: 'IA',
-          chat: 'Asistente IA',
-          llms: 'Modelos y LLMs',
-        },
-      },
-      copyright: `© ${new Date().getFullYear()} Monfily Digital. Todos los derechos reservados.`,
-    },
+    ],
+  },
+  finalCTA: {
+    heading: "Ready to win more local jobs?",
+    description:
+      "Tell us your trade and service area. We will map the fastest Google-first path to more qualified calls and booked estimates.",
+    cta: "Get your growth plan",
+  },
+  footer: {
+    copyright: `© ${year} Monfily Digital. Google-first marketing for U.S. home services.`,
   },
 };
 
-const DEFAULT_WHATSAPP_NUMBERS: Record<Language, string> = {
-  'pt-br': '5511978267321',
-  'pt-pt': '351927327279',
-  en: '447888865199',
-  es: '34613588340',
-  it: '390000000000',
-  sg: '6500000000',
-  he: '972000000000',
+const portugueseBrazil: TranslationCopy = {
+  seo: {
+    title: "Marketing para Home Services nos EUA | Monfily",
+    description:
+      "Marketing focado em Google para empresas de home services nos EUA: landing pages, branding, leads, SEO local, Google Meu Negócio, Google Ads e testes de conversão.",
+  },
+  header: {
+    solutionsDropdown: {
+      websiteCreation: "Landing pages e branding",
+      softwareDevelopment: "Google Meu Negócio",
+      artificialIntelligence: "Google Ads e leads qualificados",
+      technicalSEO: "SEO local e testes de conversão",
+    },
+    languages: {
+      portugueseBrazil: "Português (Brasil)",
+      portuguesePortugal: "Português (Portugal)",
+      english: "Inglês",
+      spanish: "Espanhol",
+      italian: "Italiano",
+      singapore: "Inglês (Singapura)",
+      hebrew: "Hebraico (Israel)",
+    },
+    cta: "Receber plano de crescimento",
+    ctaMobile: "Falar agora",
+  },
+  hero: {
+    badge: {
+      chosenBy: "Marketing para empresas de Home Services nos EUA",
+      clients: " — ",
+      in: "",
+    },
+    rotatingTexts: ["HVAC", "Roofing", "Plumbing", "Electrical", "Landscaping"],
+    heading: {
+      line1: "Domine sua região.",
+      line2: "Conquiste mais ",
+      line3: "clientes locais.",
+    },
+    description:
+      "Sistemas de crescimento focados em Google para empresas de home services nos EUA. Transformamos buscas locais em ligações e orçamentos com landing pages, SEO local, Google Ads, branding e testes reais de conversão.",
+    cta: {
+      primary: "Receber plano de crescimento",
+      secondary: "Conhecer nosso método",
+    },
+    features: {
+      performance: {
+        title: "Feito para converter",
+        description: "Páginas rápidas focadas em ligações e orçamentos.",
+      },
+      optimized: {
+        title: "Especialistas em Google",
+        description: "Presença local em Search, Maps e Ads.",
+      },
+    },
+  },
+  trustedBy: {
+    label: "Um único sistema de crescimento em todo o Google:",
+  },
+  services: {
+    title: "Tudo o que uma empresa de home services precisa para dominar sua região.",
+    metrics: {
+      projectsDelivered: "projetos de crescimento entregues",
+      nichesServed: "nichos de home services atendidos",
+    },
+    items: {
+      webDesign: {
+        title: "Landing Pages e Branding",
+        description:
+          "Posicionamento claro, identidade memorável e landing pages mobile-first criadas para transformar tráfego de alta intenção em ligações e pedidos de orçamento.",
+      },
+      customSoftware: {
+        title: "Google Meu Negócio e SEO Local",
+        description:
+          "Otimização de perfil, estratégia por área de atendimento, páginas locais, citações e avaliações para crescer no Google Search e Maps.",
+      },
+      aiAutomation: {
+        title: "Google Ads e Leads Qualificados",
+        description:
+          "Campanhas de Search, Local Services e remarketing com rastreamento preciso, palavras-chave de intenção e controle de qualidade dos leads.",
+      },
+      seoGrowth: {
+        title: "User Testing e Conversão",
+        description:
+          "Testes com usuários reais, análise da jornada de contato e otimização contínua para aumentar os serviços agendados em cada canal.",
+      },
+    },
+  },
+  mockup: {
+    navigation: {
+      services: "Serviços",
+      benefits: "Por que nós",
+      projects: "Avaliações",
+      prices: "Financiamento",
+      clients: "Áreas atendidas",
+    },
+    badge: "Atendimento HVAC de emergência 24/7",
+    heading: {
+      line1: "Conforto restaurado.",
+      line2: " Rápido, honesto e local.",
+    },
+    description:
+      "Especialistas licenciados em HVAC para reparos, manutenção e instalação. Preço transparente e atendimento no mesmo dia.",
+    cta: {
+      viewPrices: "Solicitar serviço",
+      scheduleNow: "Ligar agora",
+    },
+    trust: "Nota 4,9 entre clientes locais",
+  },
+  expertise: {
+    label: "Nossa especialidade em Google",
+    heading: {
+      line1: "Apareça no momento exato",
+      line2: "em que o cliente precisa de você.",
+    },
+    description:
+      "Conectamos Google Meu Negócio, Search, Maps, Ads, Analytics e call tracking em um sistema mensurável focado em serviços agendados — não em métricas de vaidade.",
+    cta: "Falar com um estrategista",
+  },
+  solutionsSuite: {
+    heading: "Um motor completo de crescimento local.",
+    description:
+      "Cada parte trabalha em conjunto para sua empresa ser encontrada, transmitir confiança e ser escolhida em toda a jornada do cliente.",
+    items: {
+      antiFraud: {
+        title: "Autoridade Local",
+        description:
+          "Conteúdo por área de serviço, estratégia de reputação e sinais consistentes que aumentam a confiança do Google e dos clientes.",
+      },
+      checkout: {
+        title: "Inteligência de Leads",
+        description:
+          "Rastreamento de ligações, formulários e campanhas para descobrir quais buscas geram oportunidades qualificadas — não apenas cliques.",
+      },
+      subscriptions: {
+        title: "Otimização Contínua",
+        description:
+          "Testes mensais em páginas, ofertas, palavras-chave e públicos para reduzir o custo de aquisição e aumentar o volume de serviços.",
+        badge: "Sempre evoluindo",
+      },
+    },
+  },
+  faq: {
+    heading: "Perguntas frequentes",
+    description:
+      "Respostas diretas sobre como crescer uma empresa de home services com marketing focado em Google.",
+    items: [
+      {
+        question: "Quais nichos de home services vocês atendem?",
+        answer:
+          "Somos especializados em HVAC, roofing, plumbing, elétrica, landscaping, reformas, limpeza, controle de pragas e outros serviços locais nos Estados Unidos.",
+      },
+      {
+        question: "Vocês gerenciam o Google Meu Negócio?",
+        answer:
+          "Sim. Otimizamos categorias, serviços, áreas atendidas, fotos, posts, perguntas, avaliações e relevância local seguindo as diretrizes do Google.",
+      },
+      {
+        question: "Os leads são exclusivos para minha empresa?",
+        answer:
+          "Sim. Os leads gerados pelas suas páginas, campanhas e presença local pertencem à sua empresa. Nosso foco é qualidade, rastreamento e potencial de agendamento.",
+      },
+      {
+        question: "Vocês criam landing pages e branding?",
+        answer:
+          "Sim. Criamos posicionamento, identidade visual, copy e páginas responsivas para sua empresa transmitir credibilidade e converter tráfego.",
+      },
+      {
+        question: "Como os resultados são medidos?",
+        answer:
+          "Rastreamos ligações qualificadas, formulários, orçamentos agendados, origem do lead e custo de aquisição com Analytics, Ads e call tracking.",
+      },
+      {
+        question: "Vocês trabalham com uma empresa por região?",
+        answer:
+          "Analisamos as áreas de atendimento antes do início e evitamos conflitos diretos quando a exclusividade faz parte do plano contratado.",
+      },
+      {
+        question: "Em quanto tempo podemos começar?",
+        answer:
+          "Após a reunião inicial e liberação dos acessos, iniciamos a auditoria e entregamos um plano priorizado de lançamento.",
+      },
+    ],
+  },
+  finalCTA: {
+    heading: "Pronto para conquistar mais serviços locais?",
+    description:
+      "Conte seu nicho e área de atendimento. Vamos mapear o caminho mais rápido no Google para gerar ligações qualificadas e mais orçamentos.",
+    cta: "Receber plano de crescimento",
+  },
+  footer: {
+    copyright: `© ${year} Monfily Digital. Marketing focado em Google para home services nos EUA.`,
+  },
 };
 
-const WHATSAPP_ENV_BY_LANGUAGE: Record<Language, string | undefined> = {
-  'pt-br': import.meta.env.VITE_WHATSAPP_PHONE_BR,
-  'pt-pt': import.meta.env.VITE_WHATSAPP_PHONE_PT,
-  en: import.meta.env.VITE_WHATSAPP_PHONE_EN,
+const portuguesePortugal: TranslationCopy = {
+  ...portugueseBrazil,
+  seo: {
+    title: "Marketing para Home Services nos EUA | Monfily",
+    description:
+      "Marketing orientado para o Google para empresas de home services nos EUA: landing pages, branding, leads, SEO local, Perfil da Empresa no Google, Google Ads e testes de conversão.",
+  },
+  header: {
+    ...portugueseBrazil.header,
+    solutionsDropdown: {
+      websiteCreation: "Landing pages e branding",
+      softwareDevelopment: "Perfil da Empresa no Google",
+      artificialIntelligence: "Google Ads e leads qualificados",
+      technicalSEO: "SEO local e testes de conversão",
+    },
+    cta: "Receber plano de crescimento",
+    ctaMobile: "Falar agora",
+  },
+  hero: {
+    ...portugueseBrazil.hero,
+    description:
+      "Sistemas de crescimento orientados para o Google para empresas de home services nos EUA. Transformamos pesquisas locais em chamadas e pedidos de orçamento através de landing pages, SEO local, Google Ads, branding e testes reais de conversão.",
+  },
+  trustedBy: {
+    label: "Um único sistema de crescimento em todo o ecossistema Google:",
+  },
+  services: {
+    ...portugueseBrazil.services,
+    title: "Tudo o que uma empresa de home services precisa para liderar a sua região.",
+    items: {
+      ...portugueseBrazil.services.items,
+      customSoftware: {
+        title: "Perfil da Empresa no Google e SEO Local",
+        description:
+          "Otimização do perfil, estratégia por área de serviço, páginas locais, citações e avaliações para crescer no Google Search e Maps.",
+      },
+    },
+  },
+  expertise: {
+    ...portugueseBrazil.expertise,
+    description:
+      "Ligamos o Perfil da Empresa no Google, Search, Maps, Ads, Analytics e call tracking num sistema mensurável focado em serviços marcados — não em métricas de vaidade.",
+  },
+  finalCTA: {
+    heading: "Preparado para conquistar mais serviços locais?",
+    description:
+      "Partilhe o seu nicho e área de serviço. Vamos mapear o caminho mais rápido no Google para gerar chamadas qualificadas e mais orçamentos.",
+    cta: "Receber plano de crescimento",
+  },
+  footer: {
+    copyright: `© ${year} Monfily Digital. Marketing orientado para o Google para home services nos EUA.`,
+  },
+};
+
+const spanish: TranslationCopy = {
+  seo: {
+    title: "Marketing para Home Services en EE. UU. | Monfily",
+    description:
+      "Marketing centrado en Google para empresas de servicios para el hogar en EE. UU.: landing pages, branding, leads, SEO local, Perfil de Empresa, Google Ads y testing.",
+  },
+  header: {
+    solutionsDropdown: {
+      websiteCreation: "Landing pages y branding",
+      softwareDevelopment: "Perfil de Empresa en Google",
+      artificialIntelligence: "Google Ads y leads cualificados",
+      technicalSEO: "SEO local y optimización",
+    },
+    languages: {
+      portugueseBrazil: "Portugués (Brasil)",
+      portuguesePortugal: "Portugués (Portugal)",
+      english: "Inglés",
+      spanish: "Español",
+      italian: "Italiano",
+      singapore: "Inglés (Singapur)",
+      hebrew: "Hebreo (Israel)",
+    },
+    cta: "Recibir plan de crecimiento",
+    ctaMobile: "Hablemos",
+  },
+  hero: {
+    badge: {
+      chosenBy: "Marketing para empresas de Home Services en EE. UU.",
+      clients: " — ",
+      in: "",
+    },
+    rotatingTexts: ["HVAC", "Roofing", "Plumbing", "Electrical", "Landscaping"],
+    heading: {
+      line1: "Domina tu zona.",
+      line2: "Consigue más ",
+      line3: "clientes locales.",
+    },
+    description:
+      "Sistemas de crecimiento centrados en Google para empresas de servicios del hogar en EE. UU. Convertimos búsquedas locales en llamadas y presupuestos con landing pages, SEO local, Google Ads, branding y pruebas de conversión.",
+    cta: {
+      primary: "Recibir plan de crecimiento",
+      secondary: "Conocer el sistema",
+    },
+    features: {
+      performance: {
+        title: "Diseñado para convertir",
+        description: "Páginas rápidas enfocadas en llamadas y presupuestos.",
+      },
+      optimized: {
+        title: "Especialistas en Google",
+        description: "Visibilidad local en Search, Maps y Ads.",
+      },
+    },
+  },
+  trustedBy: {
+    label: "Un sistema de crecimiento en todo Google:",
+  },
+  services: {
+    title: "Todo lo que una marca de home services necesita para dominar su zona.",
+    metrics: {
+      projectsDelivered: "proyectos de crecimiento entregados",
+      nichesServed: "nichos de servicios atendidos",
+    },
+    items: {
+      webDesign: {
+        title: "Landing Pages y Branding",
+        description:
+          "Posicionamiento claro, identidad memorable y páginas mobile-first creadas para convertir tráfico de alta intención en llamadas y presupuestos.",
+      },
+      customSoftware: {
+        title: "Perfil de Empresa y SEO Local",
+        description:
+          "Optimización del perfil, estrategia por zona, páginas locales, citaciones y reseñas para crecer en Google Search y Maps.",
+      },
+      aiAutomation: {
+        title: "Google Ads y Leads Cualificados",
+        description:
+          "Campañas de Search, Local Services y remarketing con medición precisa, keywords de intención y control de calidad.",
+      },
+      seoGrowth: {
+        title: "User Testing y Conversión",
+        description:
+          "Pruebas con usuarios reales, análisis de la ruta de contacto y optimización continua para aumentar los trabajos reservados.",
+      },
+    },
+  },
+  mockup: {
+    navigation: {
+      services: "Servicios",
+      benefits: "Por qué nosotros",
+      projects: "Reseñas",
+      prices: "Financiación",
+      clients: "Zonas de servicio",
+    },
+    badge: "Servicio HVAC de emergencia 24/7",
+    heading: {
+      line1: "Confort restaurado.",
+      line2: " Rápido, honesto y local.",
+    },
+    description:
+      "Expertos certificados en HVAC para reparaciones, mantenimiento e instalación. Precios claros y servicio el mismo día.",
+    cta: {
+      viewPrices: "Solicitar servicio",
+      scheduleNow: "Llamar ahora",
+    },
+    trust: "4,9 según clientes locales",
+  },
+  expertise: {
+    label: "Nuestra experiencia en Google",
+    heading: {
+      line1: "Aparece en el momento exacto",
+      line2: "en que el cliente te necesita.",
+    },
+    description:
+      "Conectamos Perfil de Empresa, Search, Maps, Ads, Analytics y call tracking en un sistema medible centrado en trabajos reservados, no en métricas vacías.",
+    cta: "Hablar con un estratega",
+  },
+  solutionsSuite: {
+    heading: "Un motor completo de crecimiento local.",
+    description:
+      "Cada pieza trabaja en conjunto para que tu empresa sea encontrada, genere confianza y sea elegida durante todo el recorrido del cliente.",
+    items: {
+      antiFraud: {
+        title: "Autoridad Local",
+        description:
+          "Contenido por zona, estrategia de reputación y señales consistentes que aumentan la confianza de Google y de los clientes.",
+      },
+      checkout: {
+        title: "Inteligencia de Leads",
+        description:
+          "Medición de llamadas, formularios y campañas para identificar qué búsquedas generan oportunidades cualificadas, no solo clics.",
+      },
+      subscriptions: {
+        title: "Optimización Continua",
+        description:
+          "Pruebas mensuales de páginas, ofertas, keywords y audiencias para reducir costes y aumentar el volumen de trabajos.",
+        badge: "Siempre mejorando",
+      },
+    },
+  },
+  faq: {
+    heading: "Preguntas frecuentes",
+    description:
+      "Respuestas claras sobre cómo hacer crecer una empresa de home services con un sistema centrado en Google.",
+    items: [
+      {
+        question: "¿Con qué nichos de home services trabajáis?",
+        answer:
+          "Nos especializamos en HVAC, roofing, plumbing, electricidad, landscaping, reformas, limpieza, control de plagas y otros servicios locales en Estados Unidos.",
+      },
+      {
+        question: "¿Gestionáis el Perfil de Empresa en Google?",
+        answer:
+          "Sí. Optimizamos categorías, servicios, zonas, fotos, publicaciones, preguntas, reseñas y relevancia local siguiendo las directrices de Google.",
+      },
+      {
+        question: "¿Los leads son exclusivos?",
+        answer:
+          "Sí. Los leads generados por tus páginas, campañas y presencia local pertenecen a tu empresa. Priorizamos calidad, trazabilidad y potencial de reserva.",
+      },
+      {
+        question: "¿Creáis landing pages y branding?",
+        answer:
+          "Sí. Creamos posicionamiento, identidad visual, copy y páginas responsive para transmitir credibilidad y convertir el tráfico.",
+      },
+      {
+        question: "¿Cómo medís los resultados?",
+        answer:
+          "Medimos llamadas cualificadas, formularios, presupuestos reservados, origen del lead y coste de adquisición con Analytics, Ads y call tracking.",
+      },
+      {
+        question: "¿Trabajáis con una empresa por zona?",
+        answer:
+          "Revisamos las áreas de servicio antes de empezar y evitamos conflictos directos cuando la exclusividad forma parte del plan acordado.",
+      },
+      {
+        question: "¿Cuándo podemos empezar?",
+        answer:
+          "Tras la reunión inicial y el acceso a las cuentas, iniciamos la auditoría y entregamos una hoja de ruta priorizada.",
+      },
+    ],
+  },
+  finalCTA: {
+    heading: "¿Listo para conseguir más trabajos locales?",
+    description:
+      "Cuéntanos tu especialidad y zona. Trazaremos la ruta más rápida en Google para generar llamadas cualificadas y más presupuestos.",
+    cta: "Recibir plan de crecimiento",
+  },
+  footer: {
+    copyright: `© ${year} Monfily Digital. Marketing Google-first para home services en EE. UU.`,
+  },
+};
+
+const italian: TranslationCopy = {
+  seo: {
+    title: "Marketing per Home Services negli USA | Monfily",
+    description:
+      "Marketing Google-first per aziende di servizi per la casa negli USA: landing page, branding, lead, SEO locale, Profilo dell'attività, Google Ads e user testing.",
+  },
+  header: {
+    solutionsDropdown: {
+      websiteCreation: "Landing page e branding",
+      softwareDevelopment: "Profilo dell'attività su Google",
+      artificialIntelligence: "Google Ads e lead qualificati",
+      technicalSEO: "SEO locale e conversione",
+    },
+    languages: {
+      portugueseBrazil: "Portoghese (Brasile)",
+      portuguesePortugal: "Portoghese (Portogallo)",
+      english: "Inglese",
+      spanish: "Spagnolo",
+      italian: "Italiano",
+      singapore: "Inglese (Singapore)",
+      hebrew: "Ebraico (Israele)",
+    },
+    cta: "Ricevi il piano di crescita",
+    ctaMobile: "Parliamone",
+  },
+  hero: {
+    badge: {
+      chosenBy: "Marketing per aziende di Home Services negli USA",
+      clients: " — ",
+      in: "",
+    },
+    rotatingTexts: ["HVAC", "Roofing", "Plumbing", "Electrical", "Landscaping"],
+    heading: {
+      line1: "Domina la tua zona.",
+      line2: "Ottieni più ",
+      line3: "clienti locali.",
+    },
+    description:
+      "Sistemi di crescita Google-first per aziende di servizi per la casa negli USA. Trasformiamo le ricerche locali in chiamate e preventivi con landing page, SEO locale, Google Ads, branding e test di conversione.",
+    cta: {
+      primary: "Ricevi il piano di crescita",
+      secondary: "Scopri il sistema",
+    },
+    features: {
+      performance: {
+        title: "Progettato per convertire",
+        description: "Pagine veloci focalizzate su chiamate e preventivi.",
+      },
+      optimized: {
+        title: "Specialisti Google",
+        description: "Visibilità locale su Search, Maps e Ads.",
+      },
+    },
+  },
+  trustedBy: {
+    label: "Un unico sistema di crescita in tutto Google:",
+  },
+  services: {
+    title: "Tutto ciò che un brand di home services necessita per dominare localmente.",
+    metrics: {
+      projectsDelivered: "progetti di crescita consegnati",
+      nichesServed: "settori home services serviti",
+    },
+    items: {
+      webDesign: {
+        title: "Landing Page e Branding",
+        description:
+          "Posizionamento chiaro, identità memorabile e landing page mobile-first create per trasformare il traffico ad alta intenzione in chiamate e preventivi.",
+      },
+      customSoftware: {
+        title: "Profilo Google e SEO Locale",
+        description:
+          "Ottimizzazione del profilo, strategia per area, pagine locali, citazioni e recensioni per crescere su Google Search e Maps.",
+      },
+      aiAutomation: {
+        title: "Google Ads e Lead Qualificati",
+        description:
+          "Campagne Search, Local Services e remarketing con tracking preciso, keyword ad alta intenzione e controllo qualità dei lead.",
+      },
+      seoGrowth: {
+        title: "User Testing e Conversione",
+        description:
+          "Test con utenti reali, analisi del percorso di contatto e ottimizzazione continua per aumentare i lavori prenotati.",
+      },
+    },
+  },
+  mockup: {
+    navigation: {
+      services: "Servizi",
+      benefits: "Perché noi",
+      projects: "Recensioni",
+      prices: "Finanziamenti",
+      clients: "Aree servite",
+    },
+    badge: "Assistenza HVAC di emergenza 24/7",
+    heading: {
+      line1: "Comfort ripristinato.",
+      line2: " Rapido, onesto, locale.",
+    },
+    description:
+      "Tecnici HVAC certificati per riparazioni, manutenzione e installazioni. Prezzi trasparenti e disponibilità in giornata.",
+    cta: {
+      viewPrices: "Richiedi assistenza",
+      scheduleNow: "Chiama ora",
+    },
+    trust: "4,9 dai clienti locali",
+  },
+  expertise: {
+    label: "La nostra esperienza Google",
+    heading: {
+      line1: "Fatti trovare nel momento esatto",
+      line2: "in cui il cliente ha bisogno di te.",
+    },
+    description:
+      "Colleghiamo Profilo dell'attività, Search, Maps, Ads, Analytics e call tracking in un sistema misurabile focalizzato sui lavori prenotati, non sulle vanity metrics.",
+    cta: "Parla con uno strategist",
+  },
+  solutionsSuite: {
+    heading: "Un motore completo di crescita locale.",
+    description:
+      "Ogni elemento lavora insieme affinché la tua azienda venga trovata, ispiri fiducia e venga scelta lungo tutto il percorso del cliente.",
+    items: {
+      antiFraud: {
+        title: "Autorità Locale",
+        description:
+          "Contenuti per area, strategia di reputazione e segnali coerenti che aumentano la fiducia di Google e dei clienti.",
+      },
+      checkout: {
+        title: "Lead Intelligence",
+        description:
+          "Tracking di chiamate, moduli e campagne per capire quali ricerche generano opportunità qualificate, non solo clic.",
+      },
+      subscriptions: {
+        title: "Ottimizzazione Continua",
+        description:
+          "Test mensili su pagine, offerte, keyword e pubblici per ridurre i costi di acquisizione e aumentare i lavori.",
+        badge: "Sempre in crescita",
+      },
+    },
+  },
+  faq: {
+    heading: "Domande frequenti",
+    description:
+      "Risposte chiare su come far crescere un'azienda di home services con un sistema Google-first.",
+    items: [
+      {
+        question: "Con quali settori home services lavorate?",
+        answer:
+          "Siamo specializzati in HVAC, roofing, plumbing, elettricità, landscaping, ristrutturazioni, pulizie, pest control e altri servizi locali negli USA.",
+      },
+      {
+        question: "Gestite il Profilo dell'attività su Google?",
+        answer:
+          "Sì. Ottimizziamo categorie, servizi, aree, foto, post, Q&A, recensioni e rilevanza locale nel rispetto delle linee guida Google.",
+      },
+      {
+        question: "I lead sono esclusivi?",
+        answer:
+          "Sì. I lead generati dalle tue pagine, campagne e presenza locale appartengono alla tua azienda. Puntiamo su qualità, tracking e potenziale di prenotazione.",
+      },
+      {
+        question: "Create landing page e branding?",
+        answer:
+          "Sì. Creiamo posizionamento, identità visiva, copy e pagine responsive per comunicare autorevolezza e convertire il traffico.",
+      },
+      {
+        question: "Come misurate i risultati?",
+        answer:
+          "Monitoriamo chiamate qualificate, moduli, preventivi prenotati, origine del lead e costo di acquisizione con Analytics, Ads e call tracking.",
+      },
+      {
+        question: "Lavorate con una sola azienda per zona?",
+        answer:
+          "Valutiamo le aree di servizio prima dell'incarico ed evitiamo conflitti diretti quando l'esclusività fa parte del piano concordato.",
+      },
+      {
+        question: "Quando possiamo iniziare?",
+        answer:
+          "Dopo la call iniziale e la consegna degli accessi, avviamo subito l'audit e prepariamo una roadmap di lancio prioritaria.",
+      },
+    ],
+  },
+  finalCTA: {
+    heading: "Pronto a conquistare più lavori locali?",
+    description:
+      "Indicaci il tuo settore e l'area servita. Tracceremo il percorso più rapido su Google per ottenere chiamate qualificate e preventivi.",
+    cta: "Ricevi il piano di crescita",
+  },
+  footer: {
+    copyright: `© ${year} Monfily Digital. Marketing Google-first per home services negli USA.`,
+  },
+};
+
+const hebrew: TranslationCopy = {
+  seo: {
+    title: "שיווק לעסקי שירותי בית בארה״ב | Monfily",
+    description:
+      "שיווק ממוקד Google לעסקי שירותי בית בארה״ב: דפי נחיתה, מיתוג, לידים, SEO מקומי, פרופיל עסקי, Google Ads ובדיקות המרה.",
+  },
+  header: {
+    solutionsDropdown: {
+      websiteCreation: "דפי נחיתה ומיתוג",
+      softwareDevelopment: "פרופיל העסק ב-Google",
+      artificialIntelligence: "Google Ads ולידים איכותיים",
+      technicalSEO: "SEO מקומי ואופטימיזציה",
+    },
+    languages: {
+      portugueseBrazil: "פורטוגזית (ברזיל)",
+      portuguesePortugal: "פורטוגזית (פורטוגל)",
+      english: "אנגלית",
+      spanish: "ספרדית",
+      italian: "איטלקית",
+      singapore: "אנגלית (סינגפור)",
+      hebrew: "עברית (ישראל)",
+    },
+    cta: "קבלת תוכנית צמיחה",
+    ctaMobile: "בואו נדבר",
+  },
+  hero: {
+    badge: {
+      chosenBy: "שיווק לעסקי Home Services בארה״ב",
+      clients: " — ",
+      in: "",
+    },
+    rotatingTexts: ["HVAC", "Roofing", "Plumbing", "Electrical", "Landscaping"],
+    heading: {
+      line1: "שלטו באזור שלכם.",
+      line2: "זכו ביותר ",
+      line3: "לקוחות מקומיים.",
+    },
+    description:
+      "מערכות צמיחה ממוקדות Google לעסקי שירותי בית בארה״ב. אנחנו הופכים חיפושים מקומיים לשיחות ולהצעות מחיר באמצעות דפי נחיתה, SEO מקומי, Google Ads, מיתוג ובדיקות המרה.",
+    cta: {
+      primary: "קבלת תוכנית צמיחה",
+      secondary: "הכירו את השיטה",
+    },
+    features: {
+      performance: {
+        title: "נבנה להמרה",
+        description: "דפים מהירים הממוקדים בשיחות ובהצעות מחיר.",
+      },
+      optimized: {
+        title: "מומחי Google",
+        description: "נראות מקומית ב-Search, Maps ו-Ads.",
+      },
+    },
+  },
+  trustedBy: {
+    label: "מערכת צמיחה אחת בכל Google:",
+  },
+  services: {
+    title: "כל מה שמותג שירותי בית צריך כדי להוביל באזור שלו.",
+    metrics: {
+      projectsDelivered: "פרויקטי צמיחה שנמסרו",
+      nichesServed: "תחומי שירותי בית",
+    },
+    items: {
+      webDesign: {
+        title: "דפי נחיתה ומיתוג",
+        description:
+          "מיצוב ברור, זהות בלתי נשכחת ודפי נחיתה mobile-first שהופכים תנועה איכותית לשיחות ולבקשות הצעת מחיר.",
+      },
+      customSoftware: {
+        title: "פרופיל עסקי ו-SEO מקומי",
+        description:
+          "אופטימיזציית פרופיל, אסטרטגיית אזורי שירות, דפים מקומיים, אזכורים וביקורות לצמיחה ב-Google Search ו-Maps.",
+      },
+      aiAutomation: {
+        title: "Google Ads ולידים איכותיים",
+        description:
+          "קמפיינים ב-Search, Local Services ורימרקטינג עם מדידה מדויקת, מילות חיפוש בעלות כוונה ובקרת איכות.",
+      },
+      seoGrowth: {
+        title: "בדיקות משתמשים והמרה",
+        description:
+          "משוב ממשתמשים אמיתיים, ניתוח מסלול הפנייה ואופטימיזציה רציפה להגדלת מספר העבודות המוזמנות.",
+      },
+    },
+  },
+  mockup: {
+    navigation: {
+      services: "שירותים",
+      benefits: "למה אנחנו",
+      projects: "ביקורות",
+      prices: "מימון",
+      clients: "אזורי שירות",
+    },
+    badge: "שירות HVAC חירום 24/7",
+    heading: {
+      line1: "הנוחות חזרה.",
+      line2: " מהיר, הוגן ומקומי.",
+    },
+    description:
+      "מומחי HVAC מורשים לתיקונים, תחזוקה והתקנות. מחיר שקוף וזמינות באותו היום.",
+    cta: {
+      viewPrices: "הזמנת שירות",
+      scheduleNow: "התקשרו עכשיו",
+    },
+    trust: "ציון 4.9 מלקוחות מקומיים",
+  },
+  expertise: {
+    label: "המומחיות שלנו ב-Google",
+    heading: {
+      line1: "הופיעו בדיוק ברגע",
+      line2: "שבו הלקוחות צריכים אתכם.",
+    },
+    description:
+      "אנחנו מחברים פרופיל עסקי, Search, Maps, Ads, Analytics ומעקב שיחות למערכת מדידה אחת המתמקדת בעבודות שהוזמנו, לא במדדי ראווה.",
+    cta: "שיחה עם אסטרטג צמיחה",
+  },
+  solutionsSuite: {
+    heading: "מנוע צמיחה מקומי מלא.",
+    description:
+      "כל חלק עובד יחד כדי שהעסק יימצא, יעורר אמון וייבחר לאורך כל מסע הלקוח.",
+    items: {
+      antiFraud: {
+        title: "סמכות מקומית",
+        description:
+          "תוכן לפי אזורי שירות, אסטרטגיית מוניטין ואותות עקביים שבונים אמון אצל Google ואצל הלקוחות.",
+      },
+      checkout: {
+        title: "מודיעין לידים",
+        description:
+          "מעקב אחר שיחות, טפסים וקמפיינים שמראה אילו חיפושים מייצרים הזדמנויות איכותיות, ולא רק קליקים.",
+      },
+      subscriptions: {
+        title: "אופטימיזציה רציפה",
+        description:
+          "בדיקות חודשיות של דפים, הצעות, מילות חיפוש וקהלים להפחתת עלויות ולהגדלת מספר העבודות.",
+        badge: "משתפרים תמיד",
+      },
+    },
+  },
+  faq: {
+    heading: "שאלות נפוצות",
+    description:
+      "תשובות ברורות על צמיחת עסק שירותי בית באמצעות מערכת שיווק ממוקדת Google.",
+    items: [
+      {
+        question: "עם אילו תחומי שירותי בית אתם עובדים?",
+        answer:
+          "אנחנו מתמחים ב-HVAC, גגות, אינסטלציה, חשמל, גינון, שיפוצים, ניקיון, הדברה ושירותים מקומיים נוספים ברחבי ארה״ב.",
+      },
+      {
+        question: "האם אתם מנהלים פרופיל עסקי ב-Google?",
+        answer:
+          "כן. אנחנו משפרים קטגוריות, שירותים, אזורים, תמונות, פוסטים, שאלות, ביקורות ורלוונטיות מקומית בהתאם להנחיות Google.",
+      },
+      {
+        question: "האם הלידים בלעדיים?",
+        answer:
+          "כן. הלידים שנוצרים דרך הדפים, הקמפיינים והנוכחות המקומית שלכם שייכים לעסק שלכם. המיקוד הוא איכות, מדידה ופוטנציאל להזמנה.",
+      },
+      {
+        question: "האם אתם יוצרים דפי נחיתה ומיתוג?",
+        answer:
+          "כן. אנחנו יוצרים מיצוב, שפה חזותית, קופי ודפים רספונסיביים שמחזקים אמינות וממירים תנועה.",
+      },
+      {
+        question: "איך אתם מודדים תוצאות?",
+        answer:
+          "אנחנו מודדים שיחות איכותיות, טפסים, הצעות מחיר, מקור הליד ועלות רכישה באמצעות Analytics, Ads ומעקב שיחות.",
+      },
+      {
+        question: "האם אתם עובדים עם חברה אחת בכל אזור?",
+        answer:
+          "אנחנו בוחנים את אזורי השירות מראש ונמנעים מעימות ישיר כאשר בלעדיות היא חלק מתוכנית הצמיחה.",
+      },
+      {
+        question: "מתי אפשר להתחיל?",
+        answer:
+          "לאחר שיחת ההיכרות וקבלת הגישות, נתחיל מיד בביקורת ונכין מפת דרכים מתועדפת להשקה.",
+      },
+    ],
+  },
+  finalCTA: {
+    heading: "מוכנים לזכות ביותר עבודות מקומיות?",
+    description:
+      "ספרו לנו על התחום ואזור השירות. נמפה את הדרך המהירה ביותר ב-Google ליותר שיחות איכותיות והצעות מחיר.",
+    cta: "קבלת תוכנית צמיחה",
+  },
+  footer: {
+    copyright: `© ${year} Monfily Digital. שיווק ממוקד Google לעסקי שירותי בית בארה״ב.`,
+  },
+};
+
+const defaultWhatsAppNumbers: Record<Language, string> = {
+  "pt-br": "5511978267321",
+  "pt-pt": "351927327279",
+  en: "13057918189",
+  es: "34613484139",
+  it: "393511740751",
+  sg: "6591366447",
+  he: "972559673136",
+};
+
+const envWhatsAppNumbers: Partial<Record<Language, string | undefined>> = {
+  "pt-br": import.meta.env.VITE_WHATSAPP_PHONE_BR,
+  "pt-pt": import.meta.env.VITE_WHATSAPP_PHONE_PT,
+  en: import.meta.env.VITE_WHATSAPP_PHONE_US,
   es: import.meta.env.VITE_WHATSAPP_PHONE_ES,
   it: import.meta.env.VITE_WHATSAPP_PHONE_IT,
   sg: import.meta.env.VITE_WHATSAPP_PHONE_SG,
   he: import.meta.env.VITE_WHATSAPP_PHONE_IL,
 };
 
-function sanitizeWhatsAppNumber(value?: string): string | null {
-  const digits = value?.replace(/\D/g, '') ?? '';
-  return digits.length >= 8 ? digits : null;
+function withNumber(language: Language, copy: TranslationCopy): Translations {
+  return {
+    ...copy,
+    whatsappNumber: envWhatsAppNumbers[language] || defaultWhatsAppNumbers[language],
+  };
 }
-
-export function getWhatsAppNumber(language: Language): string {
-  return sanitizeWhatsAppNumber(WHATSAPP_ENV_BY_LANGUAGE[language]) ?? DEFAULT_WHATSAPP_NUMBERS[language];
-}
-
-function mergeDeep<T extends Record<string, any>>(base: T, override: DeepPartial<T>): T {
-  const result: Record<string, any> = { ...base };
-
-  for (const [key, value] of Object.entries(override)) {
-    if (value === undefined) continue;
-
-    const baseValue = result[key];
-    if (
-      value &&
-      baseValue &&
-      typeof value === 'object' &&
-      typeof baseValue === 'object' &&
-      !Array.isArray(value) &&
-      !Array.isArray(baseValue)
-    ) {
-      result[key] = mergeDeep(baseValue, value as Record<string, any>);
-    } else {
-      result[key] = value;
-    }
-  }
-
-  return result as T;
-}
-
-const italianTranslation: DeepPartial<Translations> = {
-  seo: {
-    title: 'Creazione di Siti Web, Software e Automazioni AI | Monfily',
-    description: 'Sviluppiamo siti web veloci, sistemi su misura e automazioni AI per aziende che cercano efficienza operativa e una presenza digitale professionale.',
-  },
-  header: {
-    languages: {
-      portugueseBrazil: 'Portoghese (Brasile)',
-      portuguesePortugal: 'Portoghese (Portogallo)',
-      english: 'Inglese',
-      spanish: 'Spagnolo',
-      italian: 'Italiano',
-      singapore: 'Inglese (Singapore)',
-      hebrew: 'Ebraico (Israele)',
-    },
-    cta: 'Parla con un esperto',
-    ctaMobile: 'Contatto',
-  },
-  hero: {
-    badge: {
-      chosenBy: 'Scelto da ',
-      clients: '+150 clienti in ',
-      in: '',
-    },
-    rotatingTexts: ['Retail & E-commerce', 'Salute & Cliniche', 'Immobiliare & Costruzioni', 'Legale & Consulenza', 'Servizi & Startup'],
-    heading: {
-      line1: 'Codice Puro.',
-      line2: 'Risultati ',
-      line3: 'Reali.',
-    },
-    description: 'Infrastruttura digitale completa per la tua azienda. Uniamo siti web ad alte prestazioni, ingegneria software, intelligenza artificiale e SEO tecnico per generare ricavi ed efficienza.',
-    cta: {
-      primary: 'Avvia il mio progetto',
-      secondary: 'Perche noi?',
-    },
-    features: {
-      performance: {
-        title: 'Performance',
-        description: 'Siti veloci che convertono.',
-      },
-      optimized: {
-        title: 'Ottimizzato',
-        description: 'Struttura pronta per la SEO.',
-      },
-    },
-  },
-  trustedBy: {
-    label: 'Usiamo le migliori tecnologie:',
-  },
-  services: {
-    title: 'Soluzioni digitali per mercati diversi.',
-    metrics: {
-      projectsDelivered: 'Progetti consegnati',
-      nichesServed: 'Settori serviti',
-    },
-    items: {
-      webDesign: {
-        title: 'Creazione di Siti Web',
-        description: 'Siti veloci e mobile-friendly. Puntiamo su informazioni chiare per facilitare il contatto dei clienti.',
-      },
-      customSoftware: {
-        title: 'Sistemi su Misura',
-        description: 'Sviluppiamo strumenti per organizzare processi interni o creare nuovi prodotti digitali, con attenzione a sicurezza e usabilita.',
-      },
-      aiAutomation: {
-        title: 'Automazione AI',
-        description: 'Integriamo assistenti intelligenti per assistenza e flussi di lavoro, riducendo il tempo speso in attivita manuali.',
-      },
-      seoGrowth: {
-        title: 'SEO Tecnico',
-        description: 'Ottimizziamo la struttura tecnica del sito per migliorare il posizionamento organico sui motori di ricerca.',
-      },
-    },
-  },
-  mockup: {
-    navigation: {
-      services: 'Servizi',
-      benefits: 'Vantaggi',
-      projects: 'Portfolio',
-      prices: 'Preventivo',
-      clients: 'Clienti',
-    },
-    badge: 'Disponibile per nuovi progetti',
-    heading: {
-      line1: 'Sviluppo Software',
-      line2: ' per Aziende e Startup',
-    },
-    description: 'Consegniamo tecnologia in modo chiaro, con scadenze realistiche e supporto continuo per la crescita digitale.',
-    cta: {
-      viewPrices: 'Vedi Portfolio',
-      scheduleNow: 'Prenota una riunione',
-    },
-    trust: 'Oltre 150 aziende servite',
-  },
-  expertise: {
-    label: 'La nostra esperienza',
-    heading: {
-      line1: 'Sviluppo tecnico',
-      line2: 'orientato all utilita.',
-    },
-    description: 'Non creiamo solo schermate. Costruiamo la logica dietro il tuo business, affinche ogni riga di codice abbia uno scopo pratico.',
-    cta: 'Parla con un esperto',
-  },
-  solutionsSuite: {
-    heading: 'Tecnologia che organizza la tua operazione.',
-    description: 'Oltre al sito, consegniamo strumenti che aiutano a gestire e far crescere il business.',
-    items: {
-      antiFraud: {
-        title: 'Sicurezza dei Dati',
-        description: 'Implementiamo protocolli di sicurezza per proteggere le informazioni della tua azienda e dei tuoi clienti.',
-      },
-      checkout: {
-        title: 'Integrazioni',
-        description: 'Colleghiamo sito o sistema agli strumenti che usi gia, come CRM, pagamenti ed ERP.',
-      },
-      subscriptions: {
-        title: 'Scalabilita',
-        description: 'Sviluppiamo sistemi pronti a gestire piu traffico e dati senza perdere velocita.',
-        badge: '',
-      },
-    },
-  },
-  faq: {
-    heading: 'Domande frequenti',
-    description: 'Risposte dirette su come lavoriamo e cosa puoi aspettarti dai nostri servizi.',
-    items: [
-      { question: 'Come funziona il processo di creazione?', answer: 'Il processo si divide in quattro fasi: comprensione delle esigenze, design della soluzione, sviluppo del codice e consegna finale con formazione se necessaria.' },
-      { question: 'Cosa devo inviare per iniziare?', answer: 'Servono le informazioni sui tuoi servizi, il logo e l accesso al dominio se ne hai gia uno.' },
-      { question: 'Offrite supporto dopo la consegna?', answer: 'Si. Offriamo supporto tecnico per correzioni e aggiornamenti, assicurando che la piattaforma continui a funzionare senza interruzioni.' },
-      { question: 'Il sito sara ottimizzato per mobile?', answer: 'Si. Tutti i nostri progetti sono responsive e funzionano correttamente su smartphone, tablet e computer.' },
-      { question: 'Vi occupate dell hosting?', answer: 'Ti aiutiamo a scegliere e configurare il miglior hosting, ma il servizio viene contratto direttamente da te per mantenere piena autonomia.' },
-      { question: 'Create identita visiva o loghi?', answer: 'Ci concentriamo sullo sviluppo digitale. Se non hai un identita visiva, possiamo indicare partner di design o lavorare con cio che hai gia.' },
-      { question: 'Come avviene la comunicazione durante il progetto?', answer: 'Usiamo canali diretti come WhatsApp e riunioni programmate per farti seguire ogni fase dello sviluppo.' },
-    ],
-  },
-  finalCTA: {
-    heading: 'Pronto a dare vita al tuo progetto?',
-    description: 'Parla con uno dei nostri esperti e ricevi un analisi tecnica preliminare per la tua azienda.',
-    cta: 'Parla con un esperto',
-  },
-  footer: {
-    columns: {
-      support: {
-        title: 'Contatto',
-        email: 'contact@monfily.com',
-        talkToSupport: 'Parla con un esperto',
-        joinDiscord: 'Prenota una riunione',
-      },
-      website: {
-        title: 'Risorse',
-        products: 'Insight',
-        fees: 'Portfolio',
-        privacy: 'Privacy',
-        terms: 'Termini e condizioni',
-        status: 'FAQ',
-      },
-    },
-    copyright: `© ${new Date().getFullYear()} Monfily Digital. Tutti i diritti riservati.`,
-  },
-};
-
-const singaporeTranslation: DeepPartial<Translations> = {
-  header: {
-    languages: {
-      portugueseBrazil: 'Portuguese (Brazil)',
-      portuguesePortugal: 'Portuguese (Portugal)',
-      english: 'English',
-      spanish: 'Spanish',
-      italian: 'Italian',
-      singapore: 'English (Singapore)',
-      hebrew: 'Hebrew (Israel)',
-    },
-  },
-  seo: {
-    title: 'Website Creation, Software & AI Automation in Singapore | Monfily',
-    description: 'We build fast websites, custom systems and AI automations for Singapore companies that need operational efficiency and a professional digital presence.',
-  },
-};
-
-const hebrewTranslation: DeepPartial<Translations> = {
-  seo: {
-    title: 'בניית אתרים, תוכנה ואוטומציות AI | Monfily',
-    description: 'אנחנו מפתחים אתרים מהירים, מערכות מותאמות ואוטומציות AI לעסקים שצריכים יעילות תפעולית ונוכחות דיגיטלית מקצועית.',
-  },
-  header: {
-    languages: {
-      portugueseBrazil: 'פורטוגזית (ברזיל)',
-      portuguesePortugal: 'פורטוגזית (פורטוגל)',
-      english: 'אנגלית',
-      spanish: 'ספרדית',
-      italian: 'איטלקית',
-      singapore: 'אנגלית (סינגפור)',
-      hebrew: 'עברית (ישראל)',
-    },
-    cta: 'דברו עם מומחה',
-    ctaMobile: 'יצירת קשר',
-  },
-  hero: {
-    badge: {
-      chosenBy: 'נבחר על ידי ',
-      clients: '+150 לקוחות ב',
-      in: '',
-    },
-    rotatingTexts: ['קמעונאות ומסחר', 'בריאות ומרפאות', 'נדלן ובניה', 'משפט וייעוץ', 'שירותים וסטארטאפים'],
-    heading: {
-      line1: 'קוד נקי.',
-      line2: 'תוצאות ',
-      line3: 'אמיתיות.',
-    },
-    description: 'תשתית דיגיטלית מלאה לעסק שלך. אנחנו משלבים אתרים מהירים, הנדסת תוכנה, בינה מלאכותית ו-SEO טכני כדי לייצר הכנסות ויעילות.',
-    cta: {
-      primary: 'להתחלת הפרויקט',
-      secondary: 'למה אנחנו?',
-    },
-    features: {
-      performance: {
-        title: 'ביצועים',
-        description: 'אתרים מהירים שממירים.',
-      },
-      optimized: {
-        title: 'מותאם',
-        description: 'מבנה מוכן ל-SEO.',
-      },
-    },
-  },
-  trustedBy: {
-    label: 'אנחנו משתמשים בטכנולוגיות הטובות ביותר:',
-  },
-  services: {
-    title: 'פתרונות דיגיטליים לשווקים שונים.',
-    metrics: {
-      projectsDelivered: 'פרויקטים שנמסרו',
-      nichesServed: 'תחומים שטופלו',
-    },
-    items: {
-      webDesign: {
-        title: 'בניית אתרים',
-        description: 'אתרים מהירים ומותאמים למובייל. אנחנו מתמקדים במידע ברור שמקל על לקוחות ליצור קשר.',
-      },
-      customSoftware: {
-        title: 'מערכות מותאמות',
-        description: 'אנחנו מפתחים כלים לארגון תהליכים פנימיים או יצירת מוצרים דיגיטליים חדשים, עם דגש על אבטחה ושימושיות.',
-      },
-      aiAutomation: {
-        title: 'אוטומציה עם AI',
-        description: 'שילוב עוזרים חכמים לשירות לקוחות ותהליכי עבודה, כדי לצמצם משימות ידניות וחזרתיות.',
-      },
-      seoGrowth: {
-        title: 'SEO טכני',
-        description: 'אופטימיזציה של המבנה הטכני של האתר לשיפור הדירוג האורגני במנועי חיפוש.',
-      },
-    },
-  },
-  mockup: {
-    navigation: {
-      services: 'שירותים',
-      benefits: 'יתרונות',
-      projects: 'פורטפוליו',
-      prices: 'הצעת מחיר',
-      clients: 'לקוחות',
-    },
-    badge: 'זמין לפרויקטים חדשים',
-    heading: {
-      line1: 'פיתוח תוכנה',
-      line2: ' לחברות וסטארטאפים',
-    },
-    description: 'אנחנו מספקים טכנולוגיה בצורה ברורה, עם לוחות זמנים מציאותיים ותמיכה מתמשכת לצמיחה הדיגיטלית שלך.',
-    cta: {
-      viewPrices: 'צפיה בפורטפוליו',
-      scheduleNow: 'קביעת פגישה',
-    },
-    trust: 'יותר מ-150 חברות קיבלו שירות',
-  },
-  expertise: {
-    label: 'המומחיות שלנו',
-    heading: {
-      line1: 'פיתוח טכני',
-      line2: 'שממוקד בתועלת.',
-    },
-    description: 'אנחנו לא יוצרים רק מסכים. אנחנו בונים את ההיגיון שמאחורי העסק שלך, כך שלכל שורת קוד יש מטרה מעשית.',
-    cta: 'דברו עם מומחה',
-  },
-  solutionsSuite: {
-    heading: 'טכנולוגיה שמארגנת את הפעילות שלך.',
-    description: 'מעבר לאתר, אנחנו מספקים כלים שעוזרים לנהל ולהצמיח את העסק.',
-    items: {
-      antiFraud: {
-        title: 'אבטחת מידע',
-        description: 'אנחנו מיישמים פרוטוקולי אבטחה להגנה על המידע של החברה ושל הלקוחות.',
-      },
-      checkout: {
-        title: 'אינטגרציות',
-        description: 'אנחנו מחברים את האתר או המערכת לכלים שכבר בשימוש, כמו CRM, תשלומים ו-ERP.',
-      },
-      subscriptions: {
-        title: 'סקיילביליות',
-        description: 'אנחנו מפתחים מערכות שמוכנות ליותר תנועה ונתונים בלי לאבד מהירות.',
-        badge: '',
-      },
-    },
-  },
-  faq: {
-    heading: 'שאלות נפוצות',
-    description: 'תשובות ישירות על הדרך שבה אנחנו עובדים ומה אפשר לצפות מהשירותים שלנו.',
-    items: [
-      { question: 'איך עובד תהליך הבניה?', answer: 'התהליך מחולק לארבעה שלבים: הבנת הצרכים, עיצוב הפתרון, פיתוח הקוד ומסירה סופית עם הדרכה במידת הצורך.' },
-      { question: 'מה צריך לשלוח כדי להתחיל?', answer: 'בעיקר מידע על השירותים שלך, לוגו וגישה לדומיין אם כבר יש לך אחד.' },
-      { question: 'האם יש תמיכה אחרי המסירה?', answer: 'כן. אנחנו מספקים תמיכה טכנית לתיקונים ועדכונים כדי שהפלטפורמה תמשיך לעבוד בצורה יציבה.' },
-      { question: 'האתר יהיה מותאם למובייל?', answer: 'כן. כל הפרויקטים שלנו נבנים בצורה רספונסיבית ועובדים היטב בסמארטפונים, טאבלטים ומחשבים.' },
-      { question: 'אתם מטפלים באחסון האתר?', answer: 'אנחנו עוזרים לבחור ולהגדיר את האחסון המתאים, אבל השירות נרכש ישירות על ידך כדי לשמור על שליטה מלאה.' },
-      { question: 'אתם יוצרים מיתוג או לוגו?', answer: 'אנחנו מתמקדים בפיתוח דיגיטלי. אם אין לך זהות חזותית, נוכל להפנות לשותפי עיצוב או לעבוד עם מה שכבר קיים.' },
-      { question: 'איך מתנהלת התקשורת במהלך הפרויקט?', answer: 'אנחנו משתמשים בערוצים ישירים כמו WhatsApp ופגישות מתואמות כדי שתהיה לך שקיפות בכל שלב.' },
-    ],
-  },
-  finalCTA: {
-    heading: 'מוכנים להוציא את הפרויקט לדרך?',
-    description: 'דברו עם אחד המומחים שלנו וקבלו ניתוח טכני ראשוני לעסק שלכם.',
-    cta: 'דברו עם מומחה',
-  },
-  footer: {
-    columns: {
-      account: {
-        title: 'פתרונות',
-        signup: 'בניית אתרים',
-        login: 'פיתוח תוכנה',
-      },
-      support: {
-        title: 'יצירת קשר',
-        email: 'contact@monfily.com',
-        talkToSupport: 'דברו עם מומחה',
-        joinDiscord: 'קביעת פגישה',
-      },
-      website: {
-        title: 'משאבים',
-        products: 'תובנות',
-        fees: 'פורטפוליו',
-        privacy: 'פרטיות',
-        terms: 'תנאים והגבלות',
-        status: 'FAQ',
-      },
-      ai: {
-        title: 'AI',
-        chat: 'עוזר AI',
-        llms: 'מודלים ו-LLMs',
-      },
-    },
-    copyright: `© ${new Date().getFullYear()} Monfily Digital. כל הזכויות שמורות.`,
-  },
-};
 
 export const translations: Record<Language, Translations> = {
-  'pt-br': mergeDeep({ ...baseTranslations['pt-br'], whatsappNumber: getWhatsAppNumber('pt-br') }, {
-    header: {
-      languages: {
-        english: 'Inglês',
-        italian: 'Italiano',
-        singapore: 'Inglês (Singapura)',
-        hebrew: 'Hebraico (Israel)',
-      },
-    },
-  }),
-  'pt-pt': mergeDeep({ ...baseTranslations['pt-pt'], whatsappNumber: getWhatsAppNumber('pt-pt') }, {
-    header: {
-      languages: {
-        english: 'Inglês',
-        italian: 'Italiano',
-        singapore: 'Inglês (Singapura)',
-        hebrew: 'Hebraico (Israel)',
-      },
-    },
-  }),
-  en: mergeDeep({ ...baseTranslations.en, whatsappNumber: getWhatsAppNumber('en') }, {
-    header: {
-      languages: {
-        english: 'English',
-        italian: 'Italian',
-        singapore: 'English (Singapore)',
-        hebrew: 'Hebrew (Israel)',
-      },
-    },
-  }),
-  es: mergeDeep({ ...baseTranslations.es, whatsappNumber: getWhatsAppNumber('es') }, {
-    header: {
-      languages: {
-        english: 'Inglés',
-        italian: 'Italiano',
-        singapore: 'Inglés (Singapur)',
-        hebrew: 'Hebreo (Israel)',
-      },
-    },
-  }),
-  it: mergeDeep({ ...baseTranslations.en, whatsappNumber: getWhatsAppNumber('it') }, italianTranslation),
-  sg: mergeDeep({ ...baseTranslations.en, whatsappNumber: getWhatsAppNumber('sg') }, singaporeTranslation),
-  he: mergeDeep({ ...baseTranslations.en, whatsappNumber: getWhatsAppNumber('he') }, hebrewTranslation),
+  "pt-br": withNumber("pt-br", portugueseBrazil),
+  "pt-pt": withNumber("pt-pt", portuguesePortugal),
+  en: withNumber("en", english),
+  es: withNumber("es", spanish),
+  it: withNumber("it", italian),
+  sg: withNumber("sg", english),
+  he: withNumber("he", hebrew),
 };

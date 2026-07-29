@@ -1,216 +1,82 @@
-import { SectionLayout } from "./section-layout";
 import { useEffect, useRef } from "react";
+import { SectionLayout } from "./section-layout";
 import { useLanguage } from "@/hooks/use-language";
 import { translations } from "@/lib/translations";
+import { GoogleProductIcon, type GoogleProduct } from "@/components/ui/google-product-icon";
 
-const BoneDivider = () => (
-  <div className="relative w-px h-auto bg-[#E2E7F1] hidden md:block mx-0 shrink-0 self-stretch">
-    {/* Top Flare */}
-    <svg
-      viewBox="0 0 20 10"
-      className="absolute -top-[0px] left-1/2 -translate-x-1/2 w-7 h-[14px] fill-[#E2E7F1] pointer-events-none"
-      preserveAspectRatio="none"
-      style={{ zIndex: 9990 }}
-    >
-      <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
-    </svg>
+const googleProducts = [
+  { id: "business-profile", label: "Google Business Profile" },
+  { id: "ads", label: "Google Ads" },
+  { id: "maps", label: "Google Maps" },
+  { id: "local-services", label: "Local Services Ads" },
+  { id: "analytics", label: "Google Analytics" },
+  { id: "search-console", label: "Search Console" },
+] satisfies Array<{ id: GoogleProduct; label: string }>;
 
-    {/* Bottom Flare */}
-    <svg
-      viewBox="0 0 20 10"
-      className="absolute -bottom-[0px] left-1/2 -translate-x-1/2 w-7 h-[14px] fill-[#E2E7F1] pointer-events-none rotate-180"
-      preserveAspectRatio="none"
-      style={{ zIndex: 9990 }}
-    >
-      <path d="M0 0 Q 9.5 0 9.5 10 L 10.5 10 Q 10.5 0 20 0 Z" />
-    </svg>
-  </div>
-);
-
-const logoUrls = [
-  "https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,h_96/v1763560672/docker_logo_tezv1k.png",
-  "https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,h_96/v1763560672/terraform_logo_zpfnxm.png",
-  "https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,h_96/v1763560672/datadog_logo_llg8kx.png",
-  "https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,h_96/v1763560672/digitalocean_logo_e8sdqh.png",
-  "https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,h_96/v1763560672/aws_amazon_web_services_logo_wcepsv.png",
-  "https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,h_96/v1763560672/azure_logo_pcpoq8.png",
-  "https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,h_96/v1763560672/dynatrace_logo_ab5ntw.png"
-];
-
-const LogoCarousel = () => {
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
+function ProductRail() {
+  const railRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const carousel = carouselRef.current;
-    const scroll = scrollRef.current;
+    const rail = railRef.current;
+    if (!rail) return;
 
-    if (!carousel || !scroll) return;
-
-    // Clone logos for infinite scroll
-    const logos = Array.from(scroll.children);
-    logos.forEach(logo => {
-      const clone = logo.cloneNode(true) as HTMLElement;
-      scroll.appendChild(clone);
-    });
-
+    let frame = 0;
     let position = 0;
-    const speed = 30; // 30px per second
-    const fps = 60;
-    const interval = 1000 / fps;
-    const pixelsPerFrame = speed / fps;
+    let previousTime = performance.now();
 
-    const animate = () => {
-      position -= pixelsPerFrame;
-
-      // Reset position when first set of logos completely scrolls out
-      const scrollWidth = scroll.scrollWidth / 2;
-      if (Math.abs(position) >= scrollWidth) {
-        position = 0;
-      }
-
-      scroll.style.transform = `translateX(${position}px)`;
+    const animate = (time: number) => {
+      const delta = Math.min(time - previousTime, 32);
+      previousTime = time;
+      position -= delta * 0.025;
+      const half = rail.scrollWidth / 2;
+      if (Math.abs(position) >= half) position = 0;
+      rail.style.transform = `translate3d(${position}px,0,0)`;
+      frame = requestAnimationFrame(animate);
     };
 
-    const animationId = setInterval(animate, interval);
-
-    return () => clearInterval(animationId);
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
   }, []);
+
+  const repeated = [...googleProducts, ...googleProducts];
 
   return (
     <div
-      ref={carouselRef}
-      className="relative overflow-hidden w-full max-w-full select-none trusted-blur-animate"
+      className="w-full overflow-hidden"
       style={{
-        maskImage: 'linear-gradient(to right, transparent 0%, white 12%, white 88%, transparent 100%)',
-        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, white 12%, white 88%, transparent 100%)',
-        userSelect: 'none',
-        WebkitUserSelect: 'none',
-        MozUserSelect: 'none',
-        msUserSelect: 'none',
-        animationDelay: '1.1s',
-        opacity: 0
+        maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+        WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
       }}
-      onContextMenu={(e) => e.preventDefault()}
-      onDragStart={(e) => e.preventDefault()}
     >
-      <div
-        ref={scrollRef}
-        className="flex items-center whitespace-nowrap select-none"
-        style={{
-          transform: 'translateX(0px)',
-          padding: '0 2rem',
-          userSelect: 'none',
-          WebkitUserSelect: 'none',
-          MozUserSelect: 'none',
-          msUserSelect: 'none'
-        }}
-        onContextMenu={(e) => e.preventDefault()}
-        onDragStart={(e) => e.preventDefault()}
-      >
-        {logoUrls.map((url, index) => (
+      <div ref={railRef} className="flex w-max items-center gap-3 px-4 will-change-transform">
+        {repeated.map((product, index) => (
           <div
-            key={index}
-            className="flex items-center justify-center px-6 flex-shrink-0 select-none"
-            style={{
-              userSelect: 'none',
-              WebkitUserSelect: 'none',
-              MozUserSelect: 'none',
-              msUserSelect: 'none'
-            }}
-            onContextMenu={(e) => e.preventDefault()}
-            onDragStart={(e) => e.preventDefault()}
+            key={`${product.id}-${index}`}
+            className="flex h-12 flex-shrink-0 items-center gap-2 rounded-full border border-white/10 bg-white/[0.035] px-5 text-sm text-white/70"
           >
-            <img
-              src={url}
-              alt={`Logo ${index + 1}`}
-              className="h-12 max-h-12 object-contain w-auto select-none pointer-events-none"
-              style={{
-                maxWidth: '120px',
-                height: '48px',
-                userSelect: 'none',
-                WebkitUserSelect: 'none',
-                MozUserSelect: 'none',
-                msUserSelect: 'none',
-                pointerEvents: 'none'
-              }}
-              loading="lazy"
-              draggable="false"
-              onContextMenu={(e) => e.preventDefault()}
-              onDragStart={(e) => e.preventDefault()}
-            />
+            <GoogleProductIcon product={product.id} className="h-5 w-5" />
+            {product.label}
           </div>
         ))}
       </div>
     </div>
   );
-};
+}
 
 export function TrustedBy() {
   const { language } = useLanguage();
   const t = translations[language];
 
   return (
-    <>
-      <style>{`
-        @keyframes blurText {
-          0% {
-            filter: blur(10px);
-            opacity: 0;
-          }
-          100% {
-            filter: blur(0px);
-            opacity: 1;
-          }
-        }
-        .trusted-blur-animate {
-          animation: blurText 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-      `}</style>
-      {/* Mobile Section */}
-      <SectionLayout className="flex flex-col md:hidden px-6 py-[24px]">
-        <div className="flex flex-col w-full">
-          {/* Text Label */}
-          <div
-            className="mb-6 flex items-center justify-center trusted-blur-animate"
-            style={{ animationDelay: '0.9s', opacity: 0 }}
-          >
-            <p className="text-[#1C1C1E] text-base text-center">
-              {t.trustedBy.label}
-            </p>
-          </div>
-
-          {/* Logo Carousel */}
-          <div className="flex items-center justify-center overflow-hidden">
-            <div className="w-full max-w-full">
-              <LogoCarousel />
-            </div>
-          </div>
-        </div>
-      </SectionLayout>
-
-      {/* Desktop Section */}
-      <SectionLayout className="hidden md:flex flex-col md:flex-row items-stretch">
-        {/* Left Side: Text Label */}
-        <div
-          className="w-full md:w-[220px] p-[24px] md:p-[32px] border-b md:border-b-0 border-[#E2E7F1] flex items-center justify-center trusted-blur-animate"
-          style={{ animationDelay: '0.9s', opacity: 0 }}
-        >
-          <p className="text-[#1C1C1E] font-medium text-sm max-w-[150px] md:max-w-[200px] text-center">
-            {t.trustedBy.label}
-          </p>
-        </div>
-
-        {/* Custom Divider for Desktop */}
-        <BoneDivider />
-
-        {/* Right Side: Logo Carousel */}
-        <div className="flex-1 p-[24px] md:p-[32px] flex items-center justify-center overflow-hidden">
-          <div className="w-full max-w-full">
-            <LogoCarousel />
-          </div>
-        </div>
-      </SectionLayout>
-    </>
+    <SectionLayout className="flex flex-col items-stretch py-7 md:flex-row md:py-0">
+      <div className="flex items-center justify-center border-b border-[#2A2A2F] px-6 pb-6 md:w-[260px] md:border-b-0 md:border-r md:py-8">
+        <p className="max-w-[220px] text-center text-sm font-medium leading-tight text-white/65">
+          {t.trustedBy.label}
+        </p>
+      </div>
+      <div className="flex min-w-0 flex-1 items-center overflow-hidden pt-6 md:py-7">
+        <ProductRail />
+      </div>
+    </SectionLayout>
   );
 }

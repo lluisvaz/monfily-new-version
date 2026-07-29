@@ -49,16 +49,25 @@ export function SEOHead() {
 
     // Update html lang attribute
     document.documentElement.lang = HTML_LANG_BY_LANGUAGE[language];
-    document.documentElement.dir = 'ltr';
+    document.documentElement.dir = language === 'he' ? 'rtl' : 'ltr';
 
     // Update Open Graph tags
+    const socialImageUrl = new URL('/og.png', window.location.origin).toString();
     updateMetaTag('og:title', t.seo.title, 'property');
     updateMetaTag('og:description', t.seo.description, 'property');
     updateMetaTag('og:locale', OG_LOCALE_BY_LANGUAGE[language], 'property');
+    updateMetaTag('og:type', 'website', 'property');
+    updateMetaTag('og:url', window.location.href, 'property');
+    updateMetaTag('og:image', socialImageUrl, 'property');
+    updateMetaTag('og:image:width', '1200', 'property');
+    updateMetaTag('og:image:height', '630', 'property');
+    updateMetaTag('og:image:alt', 'Monfily — Google-first growth for U.S. home services', 'property');
 
     // Update Twitter Card tags
+    updateMetaTag('twitter:card', 'summary_large_image');
     updateMetaTag('twitter:title', t.seo.title);
     updateMetaTag('twitter:description', t.seo.description);
+    updateMetaTag('twitter:image', socialImageUrl);
 
     // Disable Google Translate automatic translation
     updateMetaTag('google', 'notranslate');

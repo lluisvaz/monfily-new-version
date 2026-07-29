@@ -1,21 +1,30 @@
-import { SectionLayout } from "./section-layout";
+﻿import { SectionLayout } from "./section-layout";
 import { useLanguage } from "@/hooks/use-language";
-import { translations } from "@/lib/translations";
+import { translations, type Language } from "@/lib/translations";
 import { useWhatsAppCta } from "@/hooks/use-whatsapp";
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 import { ArrowRight, Plus, Instagram, Mail, Whatsapp } from "iconoir-react";
-import { WindowIcon, CommandLineIcon, CpuChipIcon, ChartBarIcon } from "@heroicons/react/24/outline";
+import { BeakerIcon, CursorArrowRaysIcon, MapPinIcon, MegaphoneIcon } from "@heroicons/react/24/outline";
 import SpotlightCard from "@/components/ui/spotlight-card";
 import { SpotlightButton } from "@/components/ui/spotlight-button";
+import { GoogleProductIcon, type GoogleProduct } from "@/components/ui/google-product-icon";
+
+const googleExpertiseProducts: Array<{ id: GoogleProduct; label: string }> = [
+  { id: "business-profile", label: "Business Profile" },
+  { id: "maps", label: "Google Maps" },
+  { id: "ads", label: "Google Ads" },
+  { id: "search-console", label: "Search Console" },
+  { id: "analytics", label: "Google Analytics" },
+  { id: "local-services", label: "Local Services Ads" },
+];
 
 const GridDecoration = ({ className }: { className?: string }) => (
   <div className={`absolute w-6 h-6 flex items-center justify-center pointer-events-none ${className}`} style={{ zIndex: 'var(--section-grid-z, 9990)' }}>
     {/* White background to mask the lines crossing behind it for a cleaner look */}
-    <div className="absolute w-4 h-4 bg-white rounded-full" />
+    <div className="absolute w-4 h-4 bg-[#0B0B0D] rounded-full" />
 
-    {/* Minimalist Star/Cross Shape in border color #E2E7F1 */}
-    <svg viewBox="0 0 24 24" className="w-full h-full fill-[#E2E7F1] relative z-10">
+    {/* Minimalist Star/Cross Shape in border color #2A2A2F */}
+    <svg viewBox="0 0 24 24" className="w-full h-full fill-[#2A2A2F] relative z-10">
       <path d="M12 2C12 2 14 10 22 12C14 14 12 22 12 22C12 22 10 14 2 12C10 10 12 2 12 2Z" />
     </svg>
   </div>
@@ -25,11 +34,11 @@ const HorizontalBoneDivider = () => (
   <div className="relative my-4" style={{ marginLeft: '-24px', marginRight: '-24px' }}>
     <div className="relative w-full" style={{ height: '1px' }}>
       {/* Line that ends exactly at left:0 and right:0 (borders of section-main-content) */}
-      <div className="absolute left-0 right-0 bg-[#E2E7F1]" style={{ height: '0.5px', top: '50%', transform: 'translateY(-50%)' }}></div>
+      <div className="absolute left-0 right-0 bg-[#2A2A2F]" style={{ height: '0.5px', top: '50%', transform: 'translateY(-50%)' }}></div>
       {/* Left Flare - positioned slightly inside to avoid overflow, same size as GridDecoration */}
       <svg
         viewBox="0 0 20 10"
-        className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none"
+        className="absolute w-6 h-[12px] fill-[#2A2A2F] pointer-events-none"
         preserveAspectRatio="none"
         style={{
           left: '6px',
@@ -43,7 +52,7 @@ const HorizontalBoneDivider = () => (
       {/* Right Flare - positioned slightly inside to avoid overflow, same size as GridDecoration */}
       <svg
         viewBox="0 0 20 10"
-        className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none"
+        className="absolute w-6 h-[12px] fill-[#2A2A2F] pointer-events-none"
         preserveAspectRatio="none"
         style={{
           right: '6px',
@@ -58,29 +67,29 @@ const HorizontalBoneDivider = () => (
 );
 
 const LargeStripedDivider = () => {
-  const stripeClass = "bg-slate-50/30 bg-[image:repeating-linear-gradient(45deg,#E2E7F1_0px,#E2E7F1_1px,transparent_1px,transparent_12px)]";
+  const stripeClass = "bg-[#0B0B0D] bg-[image:repeating-linear-gradient(45deg,rgba(255,255,255,.055)_0px,rgba(255,255,255,.055)_1px,transparent_1px,transparent_12px)]";
 
   return (
     <div className="w-full flex flex-row relative" style={{ marginTop: 0, paddingTop: 0, marginBottom: 0 }}>
       {/* Top horizontal line - spans full width including margins */}
-      <div className="absolute top-0 left-0 right-0 h-[0.5px] bg-[#E2E7F1]" style={{ zIndex: 10 }}></div>
+      <div className="absolute top-0 left-0 right-0 h-[0.5px] bg-[#2A2A2F]" style={{ zIndex: 10 }}></div>
 
       {/* Bottom horizontal line - spans full width including margins */}
-      <div className="absolute" style={{ top: '70.5px', left: 0, right: 0, height: '0.5px', backgroundColor: '#E2E7F1', zIndex: 10 }}></div>
+      <div className="absolute" style={{ top: '70.5px', left: 0, right: 0, height: '0.5px', backgroundColor: '#2A2A2F', zIndex: 10 }}></div>
 
       {/* Left margin - white */}
-      <div className="flex-1 min-w-[1rem] md:min-w-[2rem] bg-white"></div>
+      <div className="flex-1 min-w-[1rem] md:min-w-[2rem] bg-[#0B0B0D]"></div>
 
       {/* Main Content Area */}
-      <div className="relative w-full min-w-0 max-w-[1500px] mx-auto bg-white">
+      <div className="relative w-full min-w-0 max-w-[1500px] mx-auto bg-[#0B0B0D]">
         {/* Left border line */}
-        <div className="absolute top-0 bottom-0 left-0 w-[0.5px] bg-[#E2E7F1] pointer-events-none"></div>
+        <div className="absolute top-0 bottom-0 left-0 w-[0.5px] bg-[#2A2A2F] pointer-events-none"></div>
 
         {/* Vertical lines crossing - faint */}
-        <div className="absolute top-0 bottom-0 left-[20%] w-[0.5px] bg-[#E2E7F1] pointer-events-none opacity-20"></div>
-        <div className="absolute top-0 bottom-0 left-[40%] w-[0.5px] bg-[#E2E7F1] pointer-events-none opacity-20"></div>
-        <div className="absolute top-0 bottom-0 left-[60%] w-[0.5px] bg-[#E2E7F1] pointer-events-none opacity-20"></div>
-        <div className="absolute top-0 bottom-0 left-[80%] w-[0.5px] bg-[#E2E7F1] pointer-events-none opacity-20"></div>
+        <div className="absolute top-0 bottom-0 left-[20%] w-[0.5px] bg-[#2A2A2F] pointer-events-none opacity-20"></div>
+        <div className="absolute top-0 bottom-0 left-[40%] w-[0.5px] bg-[#2A2A2F] pointer-events-none opacity-20"></div>
+        <div className="absolute top-0 bottom-0 left-[60%] w-[0.5px] bg-[#2A2A2F] pointer-events-none opacity-20"></div>
+        <div className="absolute top-0 bottom-0 left-[80%] w-[0.5px] bg-[#2A2A2F] pointer-events-none opacity-20"></div>
 
         {/* Divider Structure - larger height */}
         <div className="relative w-full" style={{ height: '71px' }}>
@@ -98,7 +107,7 @@ const LargeStripedDivider = () => {
           {/* Top left */}
           <svg
             viewBox="0 0 24 24"
-            className="absolute w-3 h-3 fill-[#E2E7F1] pointer-events-none opacity-40"
+            className="absolute w-3 h-3 fill-[#2A2A2F] pointer-events-none opacity-40"
             style={{
               left: '0',
               top: '0',
@@ -111,7 +120,7 @@ const LargeStripedDivider = () => {
           {/* Top right */}
           <svg
             viewBox="0 0 24 24"
-            className="absolute w-3 h-3 fill-[#E2E7F1] pointer-events-none opacity-40"
+            className="absolute w-3 h-3 fill-[#2A2A2F] pointer-events-none opacity-40"
             style={{
               right: '0',
               top: '0',
@@ -124,7 +133,7 @@ const LargeStripedDivider = () => {
           {/* Bottom left */}
           <svg
             viewBox="0 0 24 24"
-            className="absolute w-3 h-3 fill-[#E2E7F1] pointer-events-none opacity-40"
+            className="absolute w-3 h-3 fill-[#2A2A2F] pointer-events-none opacity-40"
             style={{
               left: '0',
               top: '70.5px',
@@ -137,7 +146,7 @@ const LargeStripedDivider = () => {
           {/* Bottom right */}
           <svg
             viewBox="0 0 24 24"
-            className="absolute w-3 h-3 fill-[#E2E7F1] pointer-events-none opacity-40"
+            className="absolute w-3 h-3 fill-[#2A2A2F] pointer-events-none opacity-40"
             style={{
               right: '0',
               top: '70.5px',
@@ -149,11 +158,11 @@ const LargeStripedDivider = () => {
         </div>
 
         {/* Right border line */}
-        <div className="absolute top-0 bottom-0 right-0 w-[0.5px] bg-[#E2E7F1] pointer-events-none"></div>
+        <div className="absolute top-0 bottom-0 right-0 w-[0.5px] bg-[#2A2A2F] pointer-events-none"></div>
       </div>
 
       {/* Right margin - white */}
-      <div className="flex-1 min-w-[1rem] md:min-w-[2rem] bg-white"></div>
+      <div className="flex-1 min-w-[1rem] md:min-w-[2rem] bg-[#0B0B0D]"></div>
 
       {/* Grid Decorations at Top (this is the bottom line of services section) */}
       <div className="absolute left-0 right-0 pointer-events-none" style={{ top: 0, zIndex: 'var(--section-grid-z, 99999)' }}>
@@ -216,38 +225,22 @@ export function ServicesSection() {
 
   const services = [
     {
-      icon: null,
-      isFigma: true,
-      isCodeXml: false,
-      isBrain: false,
-      isChart: false,
+      Icon: CursorArrowRaysIcon,
       title: t.services.items.webDesign.title,
       description: t.services.items.webDesign.description
     },
     {
-      icon: null,
-      isFigma: false,
-      isCodeXml: true,
-      isBrain: false,
-      isChart: false,
+      Icon: MapPinIcon,
       title: t.services.items.customSoftware.title,
       description: t.services.items.customSoftware.description
     },
     {
-      icon: null,
-      isFigma: false,
-      isCodeXml: false,
-      isBrain: true,
-      isChart: false,
+      Icon: MegaphoneIcon,
       title: t.services.items.aiAutomation.title,
       description: t.services.items.aiAutomation.description
     },
     {
-      icon: null,
-      isFigma: false,
-      isCodeXml: false,
-      isBrain: false,
-      isChart: true,
+      Icon: BeakerIcon,
       title: t.services.items.seoGrowth.title,
       description: t.services.items.seoGrowth.description
     }
@@ -279,6 +272,13 @@ export function ServicesSection() {
         .animate-pulse-slow-1 {
           animation: pulse-slow-1 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
+        @keyframes serviceFloat {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-15px); }
+        }
+        .service-float {
+          animation: serviceFloat 4s ease-in-out infinite;
+        }
       `}</style>
       <div ref={sectionRef} id="servicos">
         {/* Mobile Section */}
@@ -295,8 +295,8 @@ export function ServicesSection() {
                   right: '-24px',
                   height: 'calc(100% + 64px)',
                   backgroundImage: `
-                  linear-gradient(#CBD5E1 1px, transparent 1px),
-                  linear-gradient(90deg, #CBD5E1 1px, transparent 1px)
+                  linear-gradient(#303038 1px, transparent 1px),
+                  linear-gradient(90deg, #303038 1px, transparent 1px)
                 `,
                   backgroundSize: '24px 24px',
                   backgroundPosition: '0 0'
@@ -311,13 +311,13 @@ export function ServicesSection() {
                   right: '-24px',
                   height: 'calc(100% + 64px)',
                   background: `
-                  linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 8%, rgba(255, 255, 255, 0.6) 15%, rgba(255, 255, 255, 0.3) 25%, transparent 40%),
-                  linear-gradient(to left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 8%, rgba(255, 255, 255, 0.6) 15%, rgba(255, 255, 255, 0.3) 25%, transparent 40%)
+                  linear-gradient(to right, rgba(11, 11, 13, 1) 0%, rgba(11, 11, 13, 0.9) 8%, rgba(11, 11, 13, 0.6) 15%, rgba(11, 11, 13, 0.3) 25%, transparent 40%),
+                  linear-gradient(to left, rgba(11, 11, 13, 1) 0%, rgba(11, 11, 13, 0.9) 8%, rgba(11, 11, 13, 0.6) 15%, rgba(11, 11, 13, 0.3) 25%, transparent 40%)
                 `
                 }}
               />
               <h2
-                className={`text-[#1C1C1E] leading-none relative z-20 text-center ${isVisible ? 'services-blur-animate' : ''}`}
+                className={`text-[#F5F7FA] leading-none relative z-20 text-center ${isVisible ? 'services-blur-animate' : ''}`}
                 style={{
                   fontSize: '36px',
                   animationDelay: '0.1s',
@@ -333,12 +333,12 @@ export function ServicesSection() {
 
               {/* Metrics */}
               <div
-                className={`flex flex-row gap-6 mt-8 relative z-20 items-center justify-center ${isVisible ? 'services-blur-animate' : ''}`}
+                className={`grid w-full grid-cols-2 gap-4 mt-8 relative z-20 items-start ${isVisible ? 'services-blur-animate' : ''}`}
                 style={{ animationDelay: '0.2s', opacity: isVisible ? 0 : 0 }}
               >
-                <div className="flex-1 flex flex-col items-center text-center">
+                <div className="flex min-w-0 flex-col items-center text-center">
                   <div
-                    className="text-[#1C1C1E] whitespace-nowrap"
+                    className="text-[#F5F7FA] whitespace-nowrap"
                     style={{
                       fontSize: '32px',
                       fontFamily: 'Fustat-Bold, sans-serif',
@@ -347,14 +347,14 @@ export function ServicesSection() {
                   >
                     <span className="text-[#2869D6]">+</span> 150
                   </div>
-                  <div className="text-base text-[#6B7280] mt-1 whitespace-nowrap">
+                  <div className="mt-1 max-w-[130px] text-sm leading-tight text-[#9A9AA3]">
                     {t.services.metrics.projectsDelivered}
                   </div>
                 </div>
 
-                <div className="flex-1 flex flex-col items-center text-center">
+                <div className="flex min-w-0 flex-col items-center text-center">
                   <div
-                    className="text-[#1C1C1E] whitespace-nowrap"
+                    className="text-[#F5F7FA] whitespace-nowrap"
                     style={{
                       fontSize: '32px',
                       fontFamily: 'Fustat-Bold, sans-serif',
@@ -363,7 +363,7 @@ export function ServicesSection() {
                   >
                     <span className="text-[#2869D6]">+</span> 10
                   </div>
-                  <div className="text-base text-[#6B7280] mt-1 whitespace-nowrap">
+                  <div className="mt-1 max-w-[130px] text-sm leading-tight text-[#9A9AA3]">
                     {t.services.metrics.nichesServed}
                   </div>
                 </div>
@@ -379,7 +379,7 @@ export function ServicesSection() {
                 return (
                   <div
                     key={index}
-                    className={`flex gap-4 relative ${isVisible ? 'services-blur-animate' : ''} ${index > 0 ? 'border-t border-dashed border-[#E2E7F1] pt-8' : ''}`}
+                    className={`flex gap-4 relative ${isVisible ? 'services-blur-animate' : ''} ${index > 0 ? 'border-t border-dashed border-[#2A2A2F] pt-8' : ''}`}
                     style={{
                       ...(index > 0 ? { borderTopWidth: '0.5px' } : {}),
                       animationDelay: `${0.3 + index * 0.1}s`,
@@ -387,17 +387,9 @@ export function ServicesSection() {
                     }}
                   >
                     <div className="flex-1 flex flex-col gap-3">
-                      {service.isFigma ? (
-                        <WindowIcon className="w-5 h-5 text-[#1C1C1E] self-start" />
-                      ) : service.isCodeXml ? (
-                        <CommandLineIcon className="w-5 h-5 text-[#1C1C1E] self-start" />
-                      ) : service.isBrain ? (
-                        <CpuChipIcon className="w-5 h-5 text-[#1C1C1E] self-start" />
-                      ) : service.isChart ? (
-                        <ChartBarIcon className="w-5 h-5 text-[#1C1C1E] self-start" />
-                      ) : null}
+                      <service.Icon className="w-5 h-5 text-[#2869D6] self-start" />
                       <h3
-                        className="text-lg text-[#1C1C1E]"
+                        className="text-lg text-[#F5F7FA]"
                         style={{
                           fontFamily: 'Fustat-Bold, sans-serif',
                           fontWeight: 'normal'
@@ -405,7 +397,7 @@ export function ServicesSection() {
                       >
                         {service.title}
                       </h3>
-                      <p className="text-sm text-[#6B7280] leading-relaxed">
+                      <p className="text-sm text-[#9A9AA3] leading-relaxed">
                         {service.description}
                       </p>
                     </div>
@@ -430,8 +422,8 @@ export function ServicesSection() {
                 left: '50%',
                 zIndex: 0,
                 backgroundImage: `
-                linear-gradient(#CBD5E1 1px, transparent 1px),
-                linear-gradient(90deg, #CBD5E1 1px, transparent 1px)
+                linear-gradient(#303038 1px, transparent 1px),
+                linear-gradient(90deg, #303038 1px, transparent 1px)
               `,
                 backgroundSize: '24px 24px',
                 backgroundPosition: '0 0'
@@ -447,11 +439,11 @@ export function ServicesSection() {
                 left: '50%',
                 zIndex: 0,
                 background: `
-                radial-gradient(circle at center, transparent 0%, rgba(255, 255, 255, 0.2) 40%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0.7) 80%),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 0%, transparent 30%),
-                linear-gradient(to top, rgba(255, 255, 255, 0.6) 0%, transparent 30%),
-                linear-gradient(to right, rgba(255, 255, 255, 0.6) 0%, transparent 30%),
-                linear-gradient(to left, rgba(255, 255, 255, 0.6) 0%, transparent 30%)
+                radial-gradient(circle at center, transparent 0%, rgba(11, 11, 13, 0.2) 40%, rgba(11, 11, 13, 0.5) 60%, rgba(11, 11, 13, 0.8) 80%),
+                linear-gradient(to bottom, rgba(11, 11, 13, 0.7) 0%, transparent 30%),
+                linear-gradient(to top, rgba(11, 11, 13, 0.7) 0%, transparent 30%),
+                linear-gradient(to right, rgba(11, 11, 13, 0.7) 0%, transparent 30%),
+                linear-gradient(to left, rgba(11, 11, 13, 0.7) 0%, transparent 30%)
               `
               }}
             />
@@ -462,7 +454,7 @@ export function ServicesSection() {
               style={{ animationDelay: '0.1s', opacity: isVisible ? 0 : 0 }}
             >
               <h2
-                className="text-4xl md:text-5xl text-[#1C1C1E] leading-none"
+                className="text-4xl md:text-5xl text-[#F5F7FA] leading-none"
                 style={{
                   fontFamily: 'Fustat-Bold, sans-serif',
                   fontWeight: 'normal',
@@ -481,7 +473,7 @@ export function ServicesSection() {
             >
               <div className="min-w-[140px] py-4">
                 <div
-                  className="text-6xl md:text-7xl text-[#1C1C1E]"
+                  className="text-6xl md:text-7xl text-[#F5F7FA]"
                   style={{
                     fontFamily: 'Fustat-Bold, sans-serif',
                     fontWeight: 'normal'
@@ -489,14 +481,14 @@ export function ServicesSection() {
                 >
                   <span className="text-[#2869D6]">+</span> 150
                 </div>
-                <div className="text-base md:text-lg text-[#6B7280] mt-2">
+                <div className="text-base md:text-lg text-[#9A9AA3] mt-2">
                   {t.services.metrics.projectsDelivered}
                 </div>
               </div>
 
               <div className="min-w-[140px] py-4">
                 <div
-                  className="text-6xl md:text-7xl text-[#1C1C1E]"
+                  className="text-6xl md:text-7xl text-[#F5F7FA]"
                   style={{
                     fontFamily: 'Fustat-Bold, sans-serif',
                     fontWeight: 'normal'
@@ -504,7 +496,7 @@ export function ServicesSection() {
                 >
                   <span className="text-[#2869D6]">+</span> 10
                 </div>
-                <div className="text-base md:text-lg text-[#6B7280] mt-2">
+                <div className="text-base md:text-lg text-[#9A9AA3] mt-2">
                   {t.services.metrics.nichesServed}
                 </div>
               </div>
@@ -515,11 +507,11 @@ export function ServicesSection() {
           {/* Top border line for Services Grid with flares */}
           <div className="relative" style={{ height: '1px' }}>
             {/* Line that spans the full width of section-main-content */}
-            <div className="absolute left-0 right-0 bg-[#E2E7F1]" style={{ height: '0.5px', top: '50%', transform: 'translateY(-50%)' }}></div>
+            <div className="absolute left-0 right-0 bg-[#2A2A2F]" style={{ height: '0.5px', top: '50%', transform: 'translateY(-50%)' }}></div>
             {/* Left Flare */}
             <svg
               viewBox="0 0 20 10"
-              className="absolute w-7 h-[14px] fill-[#E2E7F1] pointer-events-none"
+              className="absolute w-7 h-[14px] fill-[#2A2A2F] pointer-events-none"
               preserveAspectRatio="none"
               style={{
                 left: '7px',
@@ -534,7 +526,7 @@ export function ServicesSection() {
             {/* Right Flare */}
             <svg
               viewBox="0 0 20 10"
-              className="absolute w-7 h-[14px] fill-[#E2E7F1] pointer-events-none"
+              className="absolute w-7 h-[14px] fill-[#2A2A2F] pointer-events-none"
               preserveAspectRatio="none"
               style={{
                 right: '7px',
@@ -552,7 +544,7 @@ export function ServicesSection() {
               return (
                 <div
                   key={index}
-                  className={`flex flex-col px-6 md:px-8 py-8 relative ${isVisible ? 'services-blur-animate' : ''} ${index > 0 ? 'border-l border-dashed border-[#E2E7F1]' : ''}`}
+                  className={`flex flex-col px-6 md:px-8 py-8 relative ${isVisible ? 'services-blur-animate' : ''} ${index > 0 ? 'border-l border-dashed border-[#2A2A2F]' : ''}`}
                   style={{
                     ...(index > 0 ? { borderLeftWidth: '0.5px' } : {}),
                     animationDelay: `${0.3 + index * 0.1}s`,
@@ -560,17 +552,9 @@ export function ServicesSection() {
                   }}
                 >
                   <div className="flex flex-col gap-4">
-                    {service.isFigma ? (
-                      <WindowIcon className="w-6 h-6 text-[#1C1C1E] self-start" />
-                    ) : service.isCodeXml ? (
-                      <CommandLineIcon className="w-6 h-6 text-[#1C1C1E] self-start" />
-                    ) : service.isBrain ? (
-                      <CpuChipIcon className="w-6 h-6 text-[#1C1C1E] self-start" />
-                    ) : service.isChart ? (
-                      <ChartBarIcon className="w-6 h-6 text-[#1C1C1E] self-start" />
-                    ) : null}
+                    <service.Icon className="w-6 h-6 text-[#2869D6] self-start" />
                     <h3
-                      className="text-lg text-[#1C1C1E]"
+                      className="text-lg text-[#F5F7FA]"
                       style={{
                         fontFamily: 'Fustat-Bold, sans-serif',
                         fontWeight: 'normal'
@@ -578,7 +562,7 @@ export function ServicesSection() {
                     >
                       {service.title}
                     </h3>
-                    <p className="text-sm text-[#6B7280] leading-relaxed">
+                    <p className="text-sm text-[#9A9AA3] leading-relaxed">
                       {service.description}
                     </p>
                   </div>
@@ -667,8 +651,8 @@ const ExpertiseSection = () => {
             opacity: 0,
             animationDelay: '0.05s',
             backgroundImage: `
-              linear-gradient(#CBD5E1 1px, transparent 1px),
-              linear-gradient(90deg, #CBD5E1 1px, transparent 1px)
+              linear-gradient(#303038 1px, transparent 1px),
+              linear-gradient(90deg, #303038 1px, transparent 1px)
             `,
             backgroundSize: '24px 24px',
             backgroundPosition: '0 0'
@@ -683,7 +667,7 @@ const ExpertiseSection = () => {
             opacity: 0,
             animationDelay: '0.1s',
             background: `
-              radial-gradient(circle at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 20%, rgba(255, 255, 255, 0.7) 40%, rgba(255, 255, 255, 0.4) 60%, rgba(255, 255, 255, 0.1) 80%, transparent 95%)
+              radial-gradient(circle at center, rgba(11, 11, 13, 1) 0%, rgba(11, 11, 13, 0.9) 20%, rgba(11, 11, 13, 0.7) 40%, rgba(11, 11, 13, 0.4) 60%, rgba(11, 11, 13, 0.1) 80%, transparent 95%)
             `
           }}
         />
@@ -692,7 +676,7 @@ const ExpertiseSection = () => {
         <div className={`flex flex-col md:hidden items-start text-left space-y-6 pt-[64px] pb-[64px] relative ${isVisible ? 'services-blur-animate' : ''}`} style={{ opacity: 0, animationDelay: '0.15s' }}>
           {/* Label Pill */}
           <div
-            className={`inline-flex items-center px-3 py-1 rounded-full border border-[#E2E7F1] text-[#1C1C1E] text-xs relative z-10 bg-white ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`inline-flex items-center px-3 py-1 rounded-full border border-[#2A2A2F] text-[#F5F7FA] text-xs relative z-10 bg-[#0B0B0D] ${isVisible ? 'services-blur-animate' : ''}`}
             style={{
               animationDelay: '0.1s',
               opacity: isVisible ? 0 : 0,
@@ -705,7 +689,7 @@ const ExpertiseSection = () => {
 
           {/* Heading */}
           <h2
-            className={`text-[#1C1C1E] leading-none relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`text-[#F5F7FA] leading-none relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{
               animationDelay: '0.2s',
               opacity: isVisible ? 0 : 0,
@@ -721,11 +705,23 @@ const ExpertiseSection = () => {
 
           {/* Description */}
           <p
-            className={`text-base md:text-lg text-[#1C1C1E] max-w-md leading-tight relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`text-base md:text-lg text-[#F5F7FA] max-w-md leading-tight relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.3s', opacity: isVisible ? 0 : 0 }}
           >
             {t.expertise.description}
           </p>
+
+          <div className="relative z-10 grid w-full grid-cols-2 gap-2">
+            {googleExpertiseProducts.map((product) => (
+              <div
+                key={product.id}
+                className="flex min-w-0 items-center gap-2 rounded-xl border border-[#2A2A2F] bg-white/[0.025] px-3 py-2.5"
+              >
+                <GoogleProductIcon product={product.id} className="h-6 w-6" />
+                <span className="text-xs font-semibold leading-tight text-[#F5F7FA]">{product.label}</span>
+              </div>
+            ))}
+          </div>
 
           {/* CTA Button */}
           <SpotlightButton
@@ -735,11 +731,11 @@ const ExpertiseSection = () => {
                 el.scrollIntoView({ behavior: 'smooth', block: 'center' });
               }
             }}
-            className={`group bg-[#2869D6] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-start gap-3 cursor-pointer w-auto relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`group bg-[#2869D6] text-white text-base font-semibold py-4 px-8 rounded-full transition-all flex items-center justify-start gap-3 cursor-pointer w-auto relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.4s', opacity: isVisible ? 0 : 0 }}
           >
             {t.expertise.cta}
-            <div className="bg-white rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
+            <div className="bg-[#0B0B0D] rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
               <ArrowRight className="w-3 h-3 text-[#2869D6]" />
             </div>
           </SpotlightButton>
@@ -749,17 +745,17 @@ const ExpertiseSection = () => {
         <div className={`hidden md:flex flex-col items-center text-center space-y-8 relative pt-[140px] pb-[140px] ${isVisible ? 'services-blur-animate' : ''}`} style={{ opacity: 0, animationDelay: '0.2s' }}>
           {/* Floating Icons - Desktop */}
           <div className={`absolute inset-0 pointer-events-none ${isVisible ? 'services-blur-animate' : ''}`} style={{ opacity: 0, animationDelay: '0.25s' }}>
-            <FloatingIcon name="python" position={{ top: '22%', left: '5%' }} delay={0.5} isVisible={isVisible} />
-            <FloatingIcon name="n8n" position={{ top: '52%', left: '0%' }} delay={0.6} isVisible={isVisible} />
-            <FloatingIcon name="react" position={{ top: '22%', right: '8%' }} delay={0.7} isVisible={isVisible} />
-            <FloatingIcon name="nodejs" position={{ top: '52%', right: '0%' }} delay={0.75} isVisible={isVisible} />
-            <FloatingIcon name="chatgpt" position={{ top: '82%', left: '6%' }} delay={0.8} isVisible={isVisible} />
-            <FloatingIcon name="claude" position={{ top: '82%', right: '5%' }} delay={0.9} isVisible={isVisible} />
+            <FloatingIcon name="business-profile" position={{ top: '22%', left: '5%' }} delay={0.5} isVisible={isVisible} />
+            <FloatingIcon name="maps" position={{ top: '52%', left: '0%' }} delay={0.6} isVisible={isVisible} />
+            <FloatingIcon name="ads" position={{ top: '22%', right: '8%' }} delay={0.7} isVisible={isVisible} />
+            <FloatingIcon name="search-console" position={{ top: '52%', right: '0%' }} delay={0.75} isVisible={isVisible} />
+            <FloatingIcon name="analytics" position={{ top: '82%', left: '6%' }} delay={0.8} isVisible={isVisible} />
+            <FloatingIcon name="local-services" position={{ top: '82%', right: '5%' }} delay={0.9} isVisible={isVisible} />
           </div>
 
           {/* Label Pill */}
           <div
-            className={`inline-flex items-center px-4 py-1.5 rounded-full border border-[#E2E7F1] text-[#1C1C1E] text-sm relative z-10 bg-white ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`inline-flex items-center px-4 py-1.5 rounded-full border border-[#2A2A2F] text-[#F5F7FA] text-sm relative z-10 bg-[#0B0B0D] ${isVisible ? 'services-blur-animate' : ''}`}
             style={{
               animationDelay: '0.1s',
               opacity: isVisible ? 0 : 0,
@@ -772,7 +768,7 @@ const ExpertiseSection = () => {
 
           {/* Heading */}
           <h2
-            className={`text-4xl md:text-5xl text-[#1C1C1E] leading-none max-w-4xl relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`text-4xl md:text-5xl text-[#F5F7FA] leading-none max-w-4xl relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{
               animationDelay: '0.2s',
               opacity: isVisible ? 0 : 0,
@@ -789,7 +785,7 @@ const ExpertiseSection = () => {
 
           {/* Description */}
           <p
-            className={`text-base md:text-lg text-[#1C1C1E] max-w-xl leading-tight relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`text-base md:text-lg text-[#F5F7FA] max-w-xl leading-tight relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.3s', opacity: isVisible ? 0 : 0 }}
           >
             {t.expertise.description}
@@ -803,11 +799,11 @@ const ExpertiseSection = () => {
                 el.scrollIntoView({ behavior: 'smooth', block: 'center' });
               }
             }}
-            className={`group bg-[#2869D6] text-white text-base py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`group bg-[#2869D6] text-white text-base font-semibold py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.4s', opacity: isVisible ? 0 : 0 }}
           >
             {t.expertise.cta}
-            <div className="bg-white rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
+            <div className="bg-[#0B0B0D] rounded-full p-1 flex items-center justify-center transition-transform group-hover:translate-x-1">
               <ArrowRight className="w-3 h-3 text-[#2869D6]" />
             </div>
           </SpotlightButton>
@@ -848,7 +844,16 @@ const SolutionsSuiteSection = () => {
 
   const renderHeading = () => {
     const heading = t.solutionsSuite.heading;
-    const target = (language === 'pt-br' || language === 'pt-pt') ? 'soluções' : language === 'es' ? 'soluciones' : 'solutions';
+    const highlightedWord: Partial<Record<Language, string>> = {
+      'pt-br': 'crescimento',
+      'pt-pt': 'crescimento',
+      en: 'growth',
+      es: 'crecimiento',
+      it: 'crescita',
+      sg: 'growth',
+      he: 'צמיחה',
+    };
+    const target = highlightedWord[language] ?? 'growth';
     const parts = heading.split(target);
 
     if (parts.length === 2) {
@@ -858,14 +863,11 @@ const SolutionsSuiteSection = () => {
           <span className="relative inline-block">
             {target}
             <svg viewBox="0 0 100 40" className="absolute -left-4 -right-4 -top-2 -bottom-2 w-[calc(100%+32px)] h-[calc(100%+16px)] pointer-events-none" preserveAspectRatio="none">
-              <motion.path
+              <path
                 d="M5,20 Q5,5 50,5 Q95,5 95,20 Q95,35 50,35 Q5,35 5,20"
                 fill="none"
                 stroke="#2869D6"
                 strokeWidth="1.5"
-                initial={{ pathLength: 0 }}
-                animate={isVisible ? { pathLength: 1 } : { pathLength: 0 }}
-                transition={{ duration: 1, ease: "easeInOut", delay: 0.5 }}
               />
             </svg>
           </span>
@@ -882,16 +884,7 @@ const SolutionsSuiteSection = () => {
       description: t.solutionsSuite.items.antiFraud.description,
       icon: (
         <div className="relative w-full h-full flex items-center justify-center">
-          <motion.div
-            className="relative z-10"
-            initial={{ y: 0 }}
-            animate={{ y: [0, -15, 0] }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          >
+          <div className="service-float relative z-10">
             <svg
               className="w-24 h-32 md:w-[140px] md:h-[180px]"
               viewBox="0 0 94 120"
@@ -900,7 +893,7 @@ const SolutionsSuiteSection = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
               style={{
-                filter: 'drop-shadow(0 0 6px rgba(40, 105, 214, 0.8))'
+                filter: 'drop-shadow(0 0 6px rgba(186, 255, 102, 0.45))'
               }}
             >
               <path d="M62.83 43.5L55.93 36.5601L36.64 17.12L22 14.96L2 12.02V42.3301C2 54.9201 5.26 68.2501 11.8 82.3301C18.33 96.4201 26.61 107.8 36.64 116.49C43.88 118.58 50.21 118.21 55.62 115.38C57.71 114.29 59.66 112.84 61.48 111.02C62.48 110.02 63.41 108.94 64.24 107.8C68.94 101.48 71.28 92.9901 71.28 82.3301V52.02L62.83 43.5ZM49.63 94.1801L41.57 89.52L23.65 79.1801V54.3301L25.41 55.34L27.98 56.8301V51.87C27.98 49.13 28.83 47.2801 30.52 46.3201C32.22 45.3501 34.26 45.5501 36.64 46.9301C37.51 47.4301 38.34 48.04 39.12 48.76C39.69 49.27 40.22 49.8301 40.73 50.4501C41.46 51.3201 42.13 52.3 42.76 53.38C43.09 53.95 43.39 54.53 43.65 55.09C44.75 57.41 45.3 59.67 45.3 61.87V66.8301L49.63 69.3301V94.1801Z" stroke="#2869D6" strokeWidth="1.5" />
@@ -913,7 +906,7 @@ const SolutionsSuiteSection = () => {
               <path d="M91.2799 42.02L71.2799 52.02L62.8299 43.5L55.9299 36.5601L36.6399 17.12L56.6399 7.12L91.2799 42.02Z" stroke="#2869D6" strokeWidth="1.5" />
               <path d="M56.64 7.12L36.64 17.12L22 14.96L2 12.02L22 2.02002L56.64 7.12Z" stroke="#2869D6" strokeWidth="1.5" />
             </svg>
-          </motion.div>
+          </div>
         </div>
       )
     },
@@ -922,16 +915,7 @@ const SolutionsSuiteSection = () => {
       description: t.solutionsSuite.items.checkout.description,
       icon: (
         <div className="relative w-full h-full flex items-center justify-center">
-          <motion.div
-            className="relative z-10"
-            initial={{ y: 0 }}
-            animate={{ y: [0, -15, 0] }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          >
+          <div className="service-float relative z-10">
             <svg
               className="w-24 h-32 md:w-[135px] md:h-[180px]"
               viewBox="0 0 92 122"
@@ -940,7 +924,7 @@ const SolutionsSuiteSection = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
               style={{
-                filter: 'drop-shadow(0 0 6px rgba(40, 105, 214, 0.8))'
+                filter: 'drop-shadow(0 0 6px rgba(186, 255, 102, 0.45))'
               }}
             >
               <path d="M61.2599 87.6301V92.1601L53.3599 87.6001L60.3299 84.1201C60.9499 85.3001 61.2599 86.4701 61.2599 87.6301Z" stroke="#2869D6" strokeWidth="1.5" />
@@ -963,7 +947,7 @@ const SolutionsSuiteSection = () => {
               <path d="M49.41 81.0701V85.3201L45.46 83.0401L49.41 81.0701Z" stroke="#2869D6" strokeWidth="1.5" />
               <path d="M85.2102 79.91V84.44L65.4602 94.32L65.2102 94.44V89.91C65.2102 87.58 64.5402 85.17 63.1802 82.69C63.0902 82.51 62.9902 82.34 62.8902 82.16C61.5202 79.8 59.9102 77.99 58.0502 76.74C57.8102 76.58 57.5602 76.42 57.3102 76.28C55.3602 75.15 53.6702 74.89 52.2202 75.48L62.6202 70.28L65.2102 71.77L69.4802 69.64L76.7702 65.99C76.9402 66.08 77.1202 66.18 77.3002 66.28C79.4702 67.53 81.3302 69.49 82.8802 72.16C84.4302 74.83 85.2002 77.41 85.2002 79.91H85.2102Z" stroke="#2869D6" strokeWidth="1.5" />
             </svg>
-          </motion.div>
+          </div>
         </div>
       )
     },
@@ -973,16 +957,7 @@ const SolutionsSuiteSection = () => {
       badge: t.solutionsSuite.items.subscriptions.badge,
       icon: (
         <div className="relative w-full h-full flex items-center justify-center">
-          <motion.div
-            className="relative z-10"
-            initial={{ y: 0 }}
-            animate={{ y: [0, -15, 0] }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          >
+          <div className="service-float relative z-10">
             <svg
               className="w-40 h-24 md:w-[200px] md:h-[110px]"
               viewBox="0 0 102 56"
@@ -991,7 +966,7 @@ const SolutionsSuiteSection = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
               style={{
-                filter: 'drop-shadow(0 0 6px rgba(40, 105, 214, 0.8))'
+                filter: 'drop-shadow(0 0 6px rgba(186, 255, 102, 0.45))'
               }}
             >
               <path d="M99.7433 16.5999L79.7433 26.5999L75.4532 24.12L57.7032 13.87L56.5732 13.22L57.1533 12.93L76.5732 3.21997L99.7433 16.5999Z" stroke="#2869D6" strokeWidth="1.5" />
@@ -1001,7 +976,7 @@ const SolutionsSuiteSection = () => {
               <path d="M99.7441 16.5999V43.1899L79.7441 53.1899V26.5999L99.7441 16.5999Z" stroke="#2869D6" strokeWidth="1.5" />
               <path d="M66.0138 28.21L60.4838 31.31L46.5338 39.11L37.2037 23.02L31.7638 13.6299L31.0938 12.47L51.0938 2.46997L57.1538 12.93L56.5737 13.22V22.09L65.4237 27.19L66.0138 28.21Z" stroke="#2869D6" strokeWidth="1.5" />
             </svg>
-          </motion.div>
+          </div>
         </div>
       )
     }
@@ -1013,7 +988,7 @@ const SolutionsSuiteSection = () => {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start mb-16 md:mb-24 gap-8 px-6 md:px-16 lg:px-28">
           <h2
-            className={`text-4xl md:text-5xl text-[#1C1C1E] max-w-xl ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`text-4xl md:text-5xl text-[#F5F7FA] max-w-xl ${isVisible ? 'services-blur-animate' : ''}`}
             style={{
               fontFamily: 'Fustat-Bold, sans-serif',
               fontWeight: 'normal',
@@ -1025,7 +1000,7 @@ const SolutionsSuiteSection = () => {
             {renderHeading()}
           </h2>
           <p
-            className={`text-base md:text-lg text-[#1C1C1E] max-w-xl leading-tight ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`text-base md:text-lg text-[#F5F7FA] max-w-xl leading-tight ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.2s', opacity: 0 }}
           >
             {t.solutionsSuite.description}
@@ -1035,18 +1010,18 @@ const SolutionsSuiteSection = () => {
         {/* Cards Grid */}
         <div className="relative">
           {/* Grid Lines - Desktop */}
-          <div className="absolute top-0 left-0 right-0 h-[0.5px] bg-[#E2E7F1] z-20"></div>
-          <div className="absolute hidden md:block left-0 right-0 h-[0.5px] bg-[#E2E7F1] z-20" style={{ top: '320px' }}></div>
-          <div className="absolute bottom-0 left-0 right-0 h-[0.5px] bg-[#E2E7F1] z-20"></div>
+          <div className="absolute top-0 left-0 right-0 h-[0.5px] bg-[#2A2A2F] z-20"></div>
+          <div className="absolute hidden md:block left-0 right-0 h-[0.5px] bg-[#2A2A2F] z-20" style={{ top: '320px' }}></div>
+          <div className="absolute bottom-0 left-0 right-0 h-[0.5px] bg-[#2A2A2F] z-20"></div>
 
-          <div className="absolute hidden md:block top-0 bottom-0 left-[33.333%] w-[0.5px] bg-[#E2E7F1] z-20"></div>
-          <div className="absolute hidden md:block top-0 bottom-0 left-[66.666%] w-[0.5px] bg-[#E2E7F1] z-20"></div>
+          <div className="absolute hidden md:block top-0 bottom-0 left-[33.333%] w-[0.5px] bg-[#2A2A2F] z-20"></div>
+          <div className="absolute hidden md:block top-0 bottom-0 left-[66.666%] w-[0.5px] bg-[#2A2A2F] z-20"></div>
 
           {/* Grid Decorations - Top Row */}
           {/* Left Flare */}
           <svg
             viewBox="0 0 20 10"
-            className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none"
+            className="absolute w-6 h-[12px] fill-[#2A2A2F] pointer-events-none"
             preserveAspectRatio="none"
             style={{
               left: '6px',
@@ -1061,7 +1036,7 @@ const SolutionsSuiteSection = () => {
           {/* Middle Flares (pointing down) */}
           <svg
             viewBox="0 0 20 10"
-            className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none hidden md:block"
+            className="absolute w-6 h-[12px] fill-[#2A2A2F] pointer-events-none hidden md:block"
             preserveAspectRatio="none"
             style={{
               left: '33.333%',
@@ -1075,7 +1050,7 @@ const SolutionsSuiteSection = () => {
 
           <svg
             viewBox="0 0 20 10"
-            className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none hidden md:block"
+            className="absolute w-6 h-[12px] fill-[#2A2A2F] pointer-events-none hidden md:block"
             preserveAspectRatio="none"
             style={{
               left: '66.666%',
@@ -1090,7 +1065,7 @@ const SolutionsSuiteSection = () => {
           {/* Right Flare */}
           <svg
             viewBox="0 0 20 10"
-            className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none"
+            className="absolute w-6 h-[12px] fill-[#2A2A2F] pointer-events-none"
             preserveAspectRatio="none"
             style={{
               right: '6px',
@@ -1105,7 +1080,7 @@ const SolutionsSuiteSection = () => {
           {/* Grid Decorations - Middle Row */}
           <svg
             viewBox="0 0 20 10"
-            className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none hidden md:block"
+            className="absolute w-6 h-[12px] fill-[#2A2A2F] pointer-events-none hidden md:block"
             preserveAspectRatio="none"
             style={{
               left: '6px',
@@ -1122,7 +1097,7 @@ const SolutionsSuiteSection = () => {
 
           <svg
             viewBox="0 0 20 10"
-            className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none hidden md:block"
+            className="absolute w-6 h-[12px] fill-[#2A2A2F] pointer-events-none hidden md:block"
             preserveAspectRatio="none"
             style={{
               right: '6px',
@@ -1139,7 +1114,7 @@ const SolutionsSuiteSection = () => {
           {/* Middle Flares (pointing up) */}
           <svg
             viewBox="0 0 20 10"
-            className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none hidden md:block"
+            className="absolute w-6 h-[12px] fill-[#2A2A2F] pointer-events-none hidden md:block"
             preserveAspectRatio="none"
             style={{
               left: '33.333%',
@@ -1152,7 +1127,7 @@ const SolutionsSuiteSection = () => {
           </svg>
           <svg
             viewBox="0 0 20 10"
-            className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none hidden md:block"
+            className="absolute w-6 h-[12px] fill-[#2A2A2F] pointer-events-none hidden md:block"
             preserveAspectRatio="none"
             style={{
               left: '66.666%',
@@ -1165,7 +1140,7 @@ const SolutionsSuiteSection = () => {
           </svg>
           <GridDecoration className="hidden md:flex -bottom-[12px] -right-[12px]" />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 bg-white">
+          <div className="grid grid-cols-1 md:grid-cols-3 bg-[#0B0B0D]">
             {cards.map((card, index) => (
               <div key={index} className="relative flex flex-col">
                 {/* Mobile flares for stacked cards */}
@@ -1173,7 +1148,7 @@ const SolutionsSuiteSection = () => {
                   <>
                     <svg
                       viewBox="0 0 20 10"
-                      className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none md:hidden"
+                      className="absolute w-6 h-[12px] fill-[#2A2A2F] pointer-events-none md:hidden"
                       preserveAspectRatio="none"
                       style={{
                         left: '6px',
@@ -1186,7 +1161,7 @@ const SolutionsSuiteSection = () => {
                     </svg>
                     <svg
                       viewBox="0 0 20 10"
-                      className="absolute w-6 h-[12px] fill-[#E2E7F1] pointer-events-none md:hidden"
+                      className="absolute w-6 h-[12px] fill-[#2A2A2F] pointer-events-none md:hidden"
                       preserveAspectRatio="none"
                       style={{
                         right: '6px',
@@ -1200,19 +1175,19 @@ const SolutionsSuiteSection = () => {
                   </>
                 )}
                 <SpotlightCard
-                  className={`flex-1 flex flex-col relative ${isVisible ? 'services-blur-animate' : ''} ${index < 2 ? 'border-b md:border-b-0 border-[#E2E7F1]' : ''}`}
+                  className={`flex-1 flex flex-col relative ${isVisible ? 'services-blur-animate' : ''} ${index < 2 ? 'border-b md:border-b-0 border-[#2A2A2F]' : ''}`}
                   style={{ animationDelay: `${0.3 + index * 0.1}s`, opacity: 0 }}
                   spotlightColor="rgba(255, 255, 255, 0.2)"
                 >
                   {/* Card Image/Icon Area */}
-                  <div className="h-64 md:h-80 relative overflow-hidden bg-[#FAFBFC]">
+                  <div className="h-64 md:h-80 relative overflow-hidden bg-[#101013]">
                     {/* Background Grid */}
                     <div
                       className="absolute inset-0 opacity-[0.15]"
                       style={{
                         backgroundImage: `
-                        linear-gradient(#E2E7F1 1px, transparent 1px),
-                        linear-gradient(90deg, #E2E7F1 1px, transparent 1px)
+                        linear-gradient(#2A2A2F 1px, transparent 1px),
+                        linear-gradient(90deg, #2A2A2F 1px, transparent 1px)
                       `,
                         backgroundSize: '24px 24px',
                         backgroundPosition: 'center center'
@@ -1221,7 +1196,7 @@ const SolutionsSuiteSection = () => {
 
                     {index === 2 && card.badge && (
                       <div className="absolute top-4 right-4 z-20">
-                        <span className="px-3 py-1 bg-[#2869D6]/20 text-[#1E3A8A] text-xs font-semibold rounded-full border border-[#2869D6]/30">
+                        <span className="px-3 py-1 bg-[#2869D6]/20 text-[#8AB4F8] text-xs font-semibold rounded-full border border-[#2869D6]/30">
                           {card.badge}
                         </span>
                       </div>
@@ -1233,9 +1208,9 @@ const SolutionsSuiteSection = () => {
                   </div>
 
                   {/* Card Content */}
-                  <div className="p-8 border-t border-[#E2E7F1]">
+                  <div className="p-8 border-t border-[#2A2A2F]">
                     <h3
-                      className="text-xl text-[#1C1C1E] mb-3"
+                      className="text-xl text-[#F5F7FA] mb-3"
                       style={{
                         fontFamily: 'Fustat-Bold, sans-serif',
                         fontWeight: 'normal'
@@ -1243,7 +1218,7 @@ const SolutionsSuiteSection = () => {
                     >
                       {card.title}
                     </h3>
-                    <p className="text-[#6B7280] text-sm leading-relaxed">
+                    <p className="text-[#9A9AA3] text-sm leading-relaxed">
                       {card.description}
                     </p>
                   </div>
@@ -1293,7 +1268,7 @@ const FAQSection = () => {
         {/* Left Side: Heading and Description */}
         <div className={`flex flex-col space-y-8 ${isVisible ? 'services-blur-animate' : ''}`} style={{ opacity: 0 }}>
           <h2
-            className="text-4xl md:text-5xl text-[#1C1C1E] leading-none"
+            className="text-4xl md:text-5xl text-[#F5F7FA] leading-none"
             style={{
               fontFamily: 'Fustat-Bold, sans-serif',
               fontWeight: 'normal',
@@ -1303,18 +1278,20 @@ const FAQSection = () => {
           >
             {t.faq.heading}
           </h2>
-          <p className="text-[#1C1C1E] text-base md:text-lg max-w-md leading-tight">
+          <p className="text-[#F5F7FA] text-base md:text-lg max-w-md leading-tight">
             {t.faq.description}
           </p>
         </div>
 
         {/* Right Side: FAQ Accordion */}
-        <div className={`flex flex-col border border-[#E2E7F1] rounded-sm bg-white overflow-hidden divide-y divide-[#E2E7F1] ${isVisible ? 'services-blur-animate' : ''}`} style={{ opacity: 0, animationDelay: '0.2s' }}>
+        <div className={`flex flex-col border border-[#2A2A2F] rounded-sm bg-[#0B0B0D] overflow-hidden divide-y divide-[#2A2A2F] ${isVisible ? 'services-blur-animate' : ''}`} style={{ opacity: 0, animationDelay: '0.2s' }}>
           {t.faq.items.map((item, index) => (
             <div key={index} className="flex flex-col">
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="flex items-start gap-4 p-6 md:p-8 text-left hover:bg-slate-50/50 transition-colors group w-full cursor-pointer"
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-answer-${index}`}
+                className="flex items-start gap-4 p-6 md:p-8 text-start hover:bg-white/[0.035] transition-colors group w-full cursor-pointer"
               >
                 <div className="flex-shrink-0 mt-1">
                   <Plus
@@ -1322,7 +1299,7 @@ const FAQSection = () => {
                   />
                 </div>
                 <span
-                  className="text-[#1C1C1E] text-base md:text-lg flex-1 pr-4"
+                  className="text-[#F5F7FA] text-base md:text-lg flex-1 pr-4"
                   style={{
                     fontFamily: 'Fustat-Bold, sans-serif',
                     fontWeight: 'normal',
@@ -1333,16 +1310,18 @@ const FAQSection = () => {
                 </span>
               </button>
 
-              <motion.div
-                initial={false}
-                animate={{ height: openIndex === index ? 'auto' : 0, opacity: openIndex === index ? 1 : 0 }}
-                transition={{ duration: 0.3, ease: 'easeInOut' }}
-                className="overflow-hidden"
+              <div
+                id={`faq-answer-${index}`}
+                className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
+                  openIndex === index ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                }`}
               >
-                <div className="px-6 pb-6 md:px-8 md:pb-8 pt-0 text-[#6B7280] text-base md:text-lg leading-relaxed ml-9 md:ml-12">
-                  {item.answer}
+                <div className="overflow-hidden">
+                  <div className="px-6 pb-6 md:px-8 md:pb-8 pt-0 text-[#9A9AA3] text-base md:text-lg leading-relaxed ml-9 md:ml-12">
+                    {item.answer}
+                  </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           ))}
         </div>
@@ -1390,7 +1369,7 @@ const FinalCTASection = () => {
       >
         <div className="flex flex-col items-center space-y-6 z-10 w-full max-w-2xl">
           <h2
-            className="text-4xl md:text-5xl text-[#1C1C1E] leading-none"
+            className="text-4xl md:text-5xl text-[#F5F7FA] leading-none"
             style={{
               fontFamily: 'Fustat-Bold, sans-serif',
               fontWeight: 'normal',
@@ -1400,13 +1379,13 @@ const FinalCTASection = () => {
           >
             {t.finalCTA.heading}
           </h2>
-          <p className="text-[#1C1C1E] text-base md:text-lg leading-tight max-w-lg">
+          <p className="text-[#F5F7FA] text-base md:text-lg leading-tight max-w-lg">
             {t.finalCTA.description}
           </p>
           
           <SpotlightButton
             onClick={openWhatsApp}
-            className="bg-[#2869D6] text-white h-12 px-10 rounded-full font-medium flex items-center justify-center cursor-pointer mt-4"
+            className="bg-[#2869D6] text-white h-12 px-10 rounded-full font-semibold flex items-center justify-center cursor-pointer mt-4"
           >
             {t.finalCTA.cta}
           </SpotlightButton>
@@ -1455,20 +1434,20 @@ const FooterSection = () => {
         className={`w-full flex flex-col-reverse md:flex-row items-center justify-between gap-8 ${isVisible ? 'services-blur-animate' : ''}`}
         style={{ animationDelay: '0.1s', opacity: 0 }}
       >
-        <p className="text-[#6B7280] text-lg text-center md:text-left leading-relaxed max-w-4xl">
+        <p className="text-[#9A9AA3] text-lg text-center md:text-left leading-relaxed max-w-4xl">
           {t.footer.copyright}
         </p>
         <div className="flex items-center gap-8">
-          <div className="hidden md:block w-px h-6 bg-[#E2E7F1]"></div>
+          <div className="hidden md:block w-px h-6 bg-[#2A2A2F]"></div>
           {/* Social Icons */}
           <div className="flex items-center gap-6">
-            <a href="https://www.instagram.com/monfilydigital/" target="_blank" rel="noopener noreferrer" className="text-[#1C1C1E] hover:text-[#2869D6] transition-colors" aria-label="Instagram da Monfily">
+            <a href="https://www.instagram.com/monfilydigital/" target="_blank" rel="noopener noreferrer" className="text-[#F5F7FA] hover:text-[#2869D6] transition-colors" aria-label="Instagram da Monfily">
               <Instagram className="w-5 h-5" />
             </a>
-            <a href="mailto:monfilydigital@gmail.com" className="text-[#1C1C1E] hover:text-[#2869D6] transition-colors" aria-label="Enviar e-mail para Monfily">
+            <a href="mailto:monfilydigital@gmail.com" className="text-[#F5F7FA] hover:text-[#2869D6] transition-colors" aria-label="Enviar e-mail para Monfily">
               <Mail className="w-5 h-5" />
             </a>
-            <a href={`https://wa.me/${t.whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="text-[#1C1C1E] hover:text-[#2869D6] transition-colors" aria-label="WhatsApp da Monfily">
+            <a href={`https://wa.me/${t.whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="text-[#F5F7FA] hover:text-[#2869D6] transition-colors" aria-label="WhatsApp da Monfily">
               <Whatsapp className="w-5 h-5" />
             </a>
           </div>
@@ -1485,50 +1464,26 @@ const FloatingIcon = ({
   delay,
   isVisible
 }: {
-  name: string;
+  name: GoogleProduct;
   position: { top: string; left?: string; right?: string };
   delay: number;
   isVisible: boolean;
 }) => {
-  const getIcon = () => {
-    const iconUrls: Record<string, string> = {
-      python: 'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_40/v1764964166/python_umggwd.png',
-      n8n: 'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_40/v1764964165/n8n_frmmel.png',
-      chatgpt: 'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_40/v1764964165/chatgpt_m0zqpv.png',
-      react: 'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_40/v1764964166/react_y5fogs.png',
-      nodejs: 'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_40/v1764964166/nodejs_qzxzzd.png',
-      claude: 'https://res.cloudinary.com/dopp0v9eq/image/upload/f_auto,q_auto,w_40/v1764964166/claude_kmb9jl.png'
-    };
-
-    const iconUrl = iconUrls[name];
-    if (!iconUrl) return null;
-
-    return (
-      <img
-        src={iconUrl}
-        alt={getLabel()}
-        width={20}
-        height={20}
-        style={{ display: 'block' }}
-      />
-    );
-  };
-
   const getLabel = () => {
     switch (name) {
-      case 'python': return 'Python';
-      case 'n8n': return 'n8n';
-      case 'react': return 'React';
-      case 'nodejs': return 'Node.js';
-      case 'chatgpt': return 'ChatGPT';
-      case 'claude': return 'Claude';
+      case 'business-profile': return 'Business Profile';
+      case 'maps': return 'Google Maps';
+      case 'ads': return 'Google Ads';
+      case 'search-console': return 'Search Console';
+      case 'analytics': return 'Google Analytics';
+      case 'local-services': return 'Local Services Ads';
       default: return '';
     }
   };
 
   return (
     <div
-      className={`absolute flex items-center gap-2 bg-white rounded-full border border-[#E2E7F1] shadow-sm hover:shadow-md transition-shadow select-none ${isVisible ? 'services-blur-animate' : ''} animate-pulse-slow-1`}
+      className={`absolute flex items-center gap-2 bg-[#0B0B0D] rounded-full border border-[#2A2A2F] shadow-sm hover:shadow-md transition-shadow select-none ${isVisible ? 'services-blur-animate' : ''} animate-pulse-slow-1`}
       style={{
         ...position,
         animationDelay: `${delay}s`,
@@ -1541,13 +1496,13 @@ const FloatingIcon = ({
       }}
     >
       <div className="flex-shrink-0">
-        {getIcon()}
+        <GoogleProductIcon product={name} />
       </div>
       <span
         className="whitespace-nowrap select-none"
         style={{
           fontSize: '20px',
-          color: '#121217',
+          color: '#F5F7FA',
           fontFamily: 'Fustat-Bold, sans-serif',
           fontWeight: 'normal',
           userSelect: 'none',
