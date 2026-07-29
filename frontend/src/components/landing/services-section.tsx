@@ -211,12 +211,9 @@ const MonfilyWordmarkDivider = () => (
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute z-10 whitespace-nowrap text-center"
+        className="pointer-events-none absolute left-1/2 top-1/2 z-10 whitespace-nowrap text-center text-[clamp(58px,17vw,96px)] [transform:translate(-50%,-50%)_scaleX(.92)_scaleY(1.05)] sm:left-[48%] sm:top-[58%] sm:text-[clamp(92px,24vw,360px)] sm:[transform:translate(-50%,-50%)_scaleX(1.15)_scaleY(1.46)]"
         style={{
-          left: '48%',
-          top: '58%',
           fontFamily: 'Fustat-Bold, sans-serif',
-          fontSize: 'clamp(92px, 24vw, 360px)',
           fontWeight: 'normal',
           lineHeight: 0.72,
           letterSpacing: '-0.085em',
@@ -224,9 +221,7 @@ const MonfilyWordmarkDivider = () => (
           WebkitTextFillColor: '#0B0B0D',
           WebkitTextStroke: '1.25px #41434D',
           paintOrder: 'stroke fill',
-          textShadow: '0 0 28px rgba(0,0,0,.32)',
-          transform: 'translate(-50%, -50%) scaleX(1.15) scaleY(1.46)',
-          transformOrigin: 'center'
+          textShadow: '0 0 28px rgba(0,0,0,.32)'
         }}
       >
         MONFILY
