@@ -73,11 +73,11 @@ export function WebsiteMockupMobile() {
         <p className="mt-2 line-clamp-2 text-[7px] leading-[1.3] text-white/52">{t.mockup.description}</p>
 
         <div className="mt-2 flex gap-1">
-          <div className="flex flex-1 items-center justify-between rounded-full bg-[#FF6B35] px-2 py-1.5 text-[6.5px] font-bold text-[#0B0B0D]">
+          <div className="flex flex-1 items-center justify-between rounded-full bg-[#FF6B35] px-2 py-1.5 text-[6.5px] font-normal text-[#0B0B0D]">
             {t.mockup.cta.viewPrices}
             <ArrowRight className="h-2.5 w-2.5" />
           </div>
-          <div className="flex items-center gap-1 rounded-full border border-white/15 px-2 py-1.5 text-[6.5px] font-semibold">
+          <div className="flex items-center gap-1 rounded-full border border-white/15 px-2 py-1.5 text-[6.5px] font-normal">
             <Phone className="h-2.5 w-2.5 text-[#FF6B35]" />
             {t.mockup.cta.scheduleNow}
           </div>

@@ -731,7 +731,7 @@ const ExpertiseSection = () => {
                 el.scrollIntoView({ behavior: 'smooth', block: 'center' });
               }
             }}
-            className={`group bg-[#2869D6] text-white text-base font-semibold py-4 px-8 rounded-full transition-all flex items-center justify-start gap-3 cursor-pointer w-auto relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`group bg-[#2869D6] text-white text-base font-normal py-4 px-8 rounded-full transition-all flex items-center justify-start gap-3 cursor-pointer w-auto relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.4s', opacity: isVisible ? 0 : 0 }}
           >
             {t.expertise.cta}
@@ -799,7 +799,7 @@ const ExpertiseSection = () => {
                 el.scrollIntoView({ behavior: 'smooth', block: 'center' });
               }
             }}
-            className={`group bg-[#2869D6] text-white text-base font-semibold py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
+            className={`group bg-[#2869D6] text-white text-base font-normal py-4 px-8 rounded-full transition-all flex items-center justify-center gap-3 cursor-pointer relative z-10 ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.4s', opacity: isVisible ? 0 : 0 }}
           >
             {t.expertise.cta}
@@ -1376,7 +1376,7 @@ const FinalCTASection = () => {
           
           <SpotlightButton
             onClick={openWhatsApp}
-            className="bg-[#2869D6] text-white h-12 px-10 rounded-full font-semibold flex items-center justify-center cursor-pointer mt-4"
+            className="bg-[#2869D6] text-white h-12 px-10 rounded-full font-normal flex items-center justify-center cursor-pointer mt-4"
           >
             {t.finalCTA.cta}
           </SpotlightButton>

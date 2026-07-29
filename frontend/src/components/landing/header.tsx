@@ -93,6 +93,13 @@ export function Header() {
         .header-blur-animate {
           animation: blurText 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
+        .language-control:focus,
+        .language-control:focus-visible,
+        .language-option:focus,
+        .language-option:focus-visible {
+          outline: none !important;
+          box-shadow: none !important;
+        }
       `}</style>
       {/* Logo */}
       <a
@@ -174,7 +181,7 @@ export function Header() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button
-                className="flex h-12 items-center justify-center rounded-full bg-[#1C1C1E] px-4 transition-colors duration-300 hover:bg-[#2869D6] focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
+                className="language-control flex h-12 items-center justify-center rounded-full bg-[#1C1C1E] px-4 transition-colors duration-300 hover:bg-[#151517] focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
                 style={{ animationDelay: `${0.3 + navItems.length * 0.05}s`, opacity: 0 }}
               >
                 <LanguageFlag language={language} detectedCountry={detectedCountry} className="w-5 h-4" />
@@ -191,7 +198,7 @@ export function Header() {
                 return (
                 <DropdownMenuItem
                   key={option.code}
-                  className={`flex items-center gap-2 cursor-pointer ${isActive ? 'font-medium bg-white/5' : ''}`}
+                  className={`language-option flex items-center gap-2 cursor-pointer focus:bg-[#151517] focus:text-[#F5F7FA] ${isActive ? 'font-medium bg-white/5' : ''}`}
                   onClick={() => handleLanguageChange(option.code)}
                 >
                   <LanguageFlag language={option.code} detectedCountry={detectedCountry} className="w-4 h-3" />
@@ -203,7 +210,7 @@ export function Header() {
           </DropdownMenu>
           <SpotlightButton
             onClick={openWhatsApp}
-            className="flex h-12 cursor-pointer items-center justify-center rounded-full bg-[#1C1C1E] px-7 font-semibold text-white transition-colors duration-300 hover:bg-[#2869D6] header-blur-animate"
+            className="flex h-12 cursor-pointer items-center justify-center rounded-full bg-[#1C1C1E] px-7 font-normal text-white transition-colors duration-300 hover:bg-[#2869D6] header-blur-animate"
             style={{ animationDelay: `${0.35 + navItems.length * 0.05}s`, opacity: 0 }}
           >
             {t.header.cta}
@@ -216,7 +223,7 @@ export function Header() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button
-              className="flex h-12 items-center justify-center rounded-full bg-[#1C1C1E] px-4 transition-colors duration-300 hover:bg-[#2869D6] focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
+              className="language-control flex h-12 items-center justify-center rounded-full bg-[#1C1C1E] px-4 transition-colors duration-300 hover:bg-[#151517] focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
               style={{ animationDelay: '0.15s', opacity: 0 }}
             >
               <LanguageFlag language={language} detectedCountry={detectedCountry} className="w-5 h-4" />
@@ -233,7 +240,7 @@ export function Header() {
               return (
               <DropdownMenuItem
                 key={option.code}
-                className={`flex items-center gap-2 cursor-pointer ${isActive ? 'font-medium bg-white/5' : ''}`}
+                className={`language-option flex items-center gap-2 cursor-pointer focus:bg-[#151517] focus:text-[#F5F7FA] ${isActive ? 'font-medium bg-white/5' : ''}`}
                 onClick={() => handleLanguageChange(option.code)}
               >
                 <LanguageFlag language={option.code} detectedCountry={detectedCountry} className="w-4 h-3" />
@@ -246,7 +253,7 @@ export function Header() {
 
         <SpotlightButton
           onClick={openWhatsApp}
-          className="flex h-12 cursor-pointer items-center justify-center rounded-full bg-[#1C1C1E] px-5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#2869D6] header-blur-animate"
+          className="flex h-12 cursor-pointer items-center justify-center rounded-full bg-[#1C1C1E] px-5 text-sm font-normal text-white transition-colors duration-300 hover:bg-[#2869D6] header-blur-animate"
           style={{ animationDelay: '0.2s', opacity: 0 }}
         >
           {t.header.ctaMobile}

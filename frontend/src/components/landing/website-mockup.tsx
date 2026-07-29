@@ -49,13 +49,13 @@ export function WebsiteMockup() {
           <p className="mt-5 max-w-[360px] text-sm leading-[1.35] text-white/58">{t.mockup.description}</p>
 
           <div className="mt-6 flex items-center gap-2">
-            <div className="flex items-center gap-2 rounded-full bg-[#FF6B35] py-2 pl-4 pr-2 text-xs font-bold text-[#0B0B0D]">
+            <div className="flex items-center gap-2 rounded-full bg-[#FF6B35] py-2 pl-4 pr-2 text-xs font-normal text-[#0B0B0D]">
               {t.mockup.cta.viewPrices}
               <span className="grid h-6 w-6 place-items-center rounded-full bg-[#0B0B0D]">
                 <ArrowRight className="h-3 w-3 text-[#FF6B35]" />
               </span>
             </div>
-            <div className="flex items-center gap-2 rounded-full border border-white/15 bg-[#0B0B0D]/5 px-4 py-2 text-xs font-semibold text-white">
+            <div className="flex items-center gap-2 rounded-full border border-white/15 bg-[#0B0B0D]/5 px-4 py-2 text-xs font-normal text-white">
               <Phone className="h-3.5 w-3.5 text-[#FF6B35]" />
               {t.mockup.cta.scheduleNow}
             </div>
