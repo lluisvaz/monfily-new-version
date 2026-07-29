@@ -48,7 +48,7 @@ export function WebsiteMockupMobile() {
         </div>
       </header>
 
-      <div className="relative h-[155px] flex-none overflow-hidden">
+      <div className="relative h-[145px] flex-none overflow-hidden">
         <img
           src="/hvac-hero.webp"
           alt="HVAC technician servicing a residential system"
@@ -60,40 +60,31 @@ export function WebsiteMockupMobile() {
           <span className="h-1 w-1 rounded-full bg-[#FF6B35]" />
           <span>{t.mockup.badge}</span>
         </div>
-        <div className="absolute inset-x-2 bottom-2 grid grid-cols-[1.3fr_.7fr] gap-1.5">
-          <div className="rounded-lg border border-white/15 bg-[#101013]/85 px-2 py-1.5 backdrop-blur">
-            <CheckCircle className="mb-1 h-2.5 w-2.5 text-[#FF6B35]" />
-            <div className="text-[5.5px] font-bold text-white">Same-day service</div>
-            <div className="mt-0.5 text-[4.5px] text-white/45">Licensed &amp; insured</div>
-          </div>
-          <div className="rounded-lg border border-[#FF6B35] bg-[#FF6B35] px-2 py-1.5">
-            <div className="text-[13px] font-black leading-none text-[#101013]">4.9</div>
-            <div className="mt-1 text-[4.5px] font-bold text-[#101013]/65">Google rating</div>
-          </div>
-        </div>
       </div>
 
-      <div className="flex min-h-0 flex-1 flex-col justify-between px-3 py-3">
-        <h2 className="text-[18px] leading-[0.9] tracking-[-0.06em]" style={{ fontFamily: "Fustat-Bold, sans-serif" }}>
-          {t.mockup.heading.line1}
-          <span className="text-white/48">{t.mockup.heading.line2}</span>
-        </h2>
-        <p className="line-clamp-2 text-[7px] leading-[1.3] text-white/52">{t.mockup.description}</p>
+      <div className="flex min-h-0 flex-1 flex-col px-3 py-2.5">
+        <div>
+          <h2 className="text-[18px] leading-[0.9] tracking-[-0.06em]" style={{ fontFamily: "Fustat-Bold, sans-serif" }}>
+            {t.mockup.heading.line1}
+            <span className="text-white/48">{t.mockup.heading.line2}</span>
+          </h2>
+          <p className="mt-1 line-clamp-2 text-[7px] leading-[1.25] text-white/52">{t.mockup.description}</p>
 
-        <div className="flex gap-1">
-          <div className="flex flex-1 items-center justify-between rounded-full bg-[#FF6B35] py-1 pl-2.5 pr-1 text-[6.5px] font-normal text-[#0B0B0D]">
-            {t.mockup.cta.viewPrices}
-            <span className="grid h-4 w-4 place-items-center rounded-full bg-[#101013]">
-              <ArrowRight className="h-2.5 w-2.5 text-[#FF6B35]" />
-            </span>
-          </div>
-          <div className="flex items-center gap-1 rounded-full border border-white/15 bg-[#101013]/5 px-2 py-1 text-[6.5px] font-normal">
-            <Phone className="h-2.5 w-2.5 text-[#FF6B35]" />
-            {t.mockup.cta.scheduleNow}
+          <div className="mt-1.5 flex gap-1">
+            <div className="flex flex-1 items-center justify-between rounded-full bg-[#FF6B35] py-1 pl-2.5 pr-1 text-[7.5px] font-normal text-[#0B0B0D]">
+              {t.mockup.cta.viewPrices}
+              <span className="grid h-[18px] w-[18px] place-items-center rounded-full bg-[#101013]">
+                <ArrowRight className="h-2.5 w-2.5 text-[#FF6B35]" />
+              </span>
+            </div>
+            <div className="flex items-center gap-1 rounded-full border border-white/15 bg-[#101013]/5 px-2 py-1 text-[7.5px] font-normal">
+              <Phone className="h-2.5 w-2.5 text-[#FF6B35]" />
+              {t.mockup.cta.scheduleNow}
+            </div>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="mt-2 flex items-center gap-2">
           <div className="flex -space-x-1">
             {["J", "M", "A"].map((initial) => (
               <span key={initial} className="grid h-4 w-4 place-items-center rounded-full border border-[#101013] bg-[#26262C] text-[4.5px] font-bold text-white">
@@ -108,6 +99,18 @@ export function WebsiteMockupMobile() {
               ))}
             </div>
             <span className="block text-[5px] leading-none text-white/40">{t.mockup.trust}</span>
+          </div>
+        </div>
+
+        <div className="mt-2 grid grid-cols-[1.3fr_.7fr] gap-1.5">
+          <div className="rounded-lg border border-white/15 bg-[#18181C] px-2 py-1.5">
+            <CheckCircle className="mb-1 h-2.5 w-2.5 text-[#FF6B35]" />
+            <div className="text-[6px] font-bold text-white">Same-day service</div>
+            <div className="mt-0.5 text-[5px] text-white/45">Licensed &amp; insured</div>
+          </div>
+          <div className="rounded-lg border border-[#FF6B35] bg-[#FF6B35] px-2 py-1.5">
+            <div className="text-[14px] font-black leading-none text-[#101013]">4.9</div>
+            <div className="mt-1 text-[5px] font-bold text-[#101013]/65">Google rating</div>
           </div>
         </div>
       </div>
