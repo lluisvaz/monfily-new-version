@@ -13,3 +13,13 @@ binding = "ASSETS"
 not_found_handling = "single-page-application"
 # /api/* passa pelo Worker; o restante é servido como SPA estática.
 run_worker_first = ["/api/*"]
+
+# Preserve the Durable Object migration history while removing the scheduler
+# that belonged exclusively to the deleted landing-page flow.
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["WhatsappScheduler"]
+
+[[migrations]]
+tag = "v2-remove-landing-page-whatsapp-scheduler"
+deleted_classes = ["WhatsappScheduler"]
