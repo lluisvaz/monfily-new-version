@@ -185,6 +185,12 @@ body::before {
   opacity: 1;
 }
 
+@media (max-width: 1023px), (pointer: coarse) {
+  .smooth-cursor-dot {
+    display: none !important;
+  }
+}
+
 ::selection {
   background: #2869D6;
   color: #0b0b0d;

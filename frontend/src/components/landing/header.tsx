@@ -174,7 +174,7 @@ export function Header() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button
-                className="flex items-center justify-center h-10 px-3 rounded-full border border-[#2A2A2F] hover:bg-white/5 transition-colors focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
+                className="flex h-12 items-center justify-center rounded-full bg-[#1C1C1E] px-4 transition-colors duration-300 hover:bg-[#2869D6] focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
                 style={{ animationDelay: `${0.3 + navItems.length * 0.05}s`, opacity: 0 }}
               >
                 <LanguageFlag language={language} detectedCountry={detectedCountry} className="w-5 h-4" />
@@ -203,7 +203,7 @@ export function Header() {
           </DropdownMenu>
           <SpotlightButton
             onClick={openWhatsApp}
-            className="bg-[#2869D6] text-white h-10 px-6 rounded-full font-semibold header-blur-animate flex items-center justify-center cursor-pointer"
+            className="flex h-12 cursor-pointer items-center justify-center rounded-full bg-[#1C1C1E] px-7 font-semibold text-white transition-colors duration-300 hover:bg-[#2869D6] header-blur-animate"
             style={{ animationDelay: `${0.35 + navItems.length * 0.05}s`, opacity: 0 }}
           >
             {t.header.cta}
@@ -216,7 +216,7 @@ export function Header() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button
-              className="flex items-center justify-center h-10 px-3 rounded-full border border-[#2A2A2F] hover:bg-white/5 transition-colors focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
+              className="flex h-12 items-center justify-center rounded-full bg-[#1C1C1E] px-4 transition-colors duration-300 hover:bg-[#2869D6] focus:outline-none focus-visible:outline-none header-blur-animate cursor-pointer"
               style={{ animationDelay: '0.15s', opacity: 0 }}
             >
               <LanguageFlag language={language} detectedCountry={detectedCountry} className="w-5 h-4" />
@@ -246,7 +246,7 @@ export function Header() {
 
         <SpotlightButton
           onClick={openWhatsApp}
-          className="bg-[#2869D6] text-white h-10 px-5 rounded-full font-semibold header-blur-animate flex items-center justify-center cursor-pointer text-sm"
+          className="flex h-12 cursor-pointer items-center justify-center rounded-full bg-[#1C1C1E] px-5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#2869D6] header-blur-animate"
           style={{ animationDelay: '0.2s', opacity: 0 }}
         >
           {t.header.ctaMobile}

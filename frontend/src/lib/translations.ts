@@ -190,7 +190,7 @@ const english: TranslationCopy = {
     description:
       "Google-first growth systems for U.S. home service companies. We turn local searches into booked calls with high-converting pages, local SEO, Google Ads, branding and rigorous user testing.",
     cta: {
-      primary: "Get your growth plan",
+      primary: "Start growing",
       secondary: "Explore our system",
     },
     features: {
@@ -382,7 +382,7 @@ const portugueseBrazil: TranslationCopy = {
     description:
       "Sistemas de crescimento focados em Google para empresas de home services nos EUA. Transformamos buscas locais em ligações e orçamentos com landing pages, SEO local, Google Ads, branding e testes reais de conversão.",
     cta: {
-      primary: "Receber plano de crescimento",
+      primary: "Começar agora",
       secondary: "Conhecer nosso método",
     },
     features: {
@@ -628,7 +628,7 @@ const spanish: TranslationCopy = {
     description:
       "Sistemas de crecimiento centrados en Google para empresas de servicios del hogar en EE. UU. Convertimos búsquedas locales en llamadas y presupuestos con landing pages, SEO local, Google Ads, branding y pruebas de conversión.",
     cta: {
-      primary: "Recibir plan de crecimiento",
+      primary: "Empezar ahora",
       secondary: "Conocer el sistema",
     },
     features: {
@@ -820,7 +820,7 @@ const italian: TranslationCopy = {
     description:
       "Sistemi di crescita Google-first per aziende di servizi per la casa negli USA. Trasformiamo le ricerche locali in chiamate e preventivi con landing page, SEO locale, Google Ads, branding e test di conversione.",
     cta: {
-      primary: "Ricevi il piano di crescita",
+      primary: "Inizia ora",
       secondary: "Scopri il sistema",
     },
     features: {
@@ -1012,7 +1012,7 @@ const hebrew: TranslationCopy = {
     description:
       "מערכות צמיחה ממוקדות Google לעסקי שירותי בית בארה״ב. אנחנו הופכים חיפושים מקומיים לשיחות ולהצעות מחיר באמצעות דפי נחיתה, SEO מקומי, Google Ads, מיתוג ובדיקות המרה.",
     cta: {
-      primary: "קבלת תוכנית צמיחה",
+      primary: "מתחילים עכשיו",
       secondary: "הכירו את השיטה",
     },
     features: {
