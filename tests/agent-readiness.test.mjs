@@ -80,15 +80,19 @@ test("agent-readable endpoints and unknown routes behave correctly", async () =>
     const llms = await fetch(`${origin}/llms.txt`);
     const llmsBody = await llms.text();
     assert.match(llmsBody, /\[Sitemap\]\(https:\/\/monfily\.com\/sitemap\.xml\)/);
+    assert.match(llmsBody, /\[Monfily Digital brand profile\]\(https:\/\/monfily\.com\/monfily-digital\)/);
     assert.doesNotMatch(llmsBody, /instagram\.com/);
 
-    for (const path of ["/llms.txt", "/sitemap.xml", "/robots.txt", "/about", "/contact", "/privacy"]) {
+    const sitemap = await fetch(`${origin}/sitemap.xml`);
+    assert.match(await sitemap.text(), /<loc>https:\/\/monfily\.com\/monfily-digital<\/loc>/);
+
+    for (const path of ["/llms.txt", "/sitemap.xml", "/robots.txt", "/monfily-digital", "/about", "/contact", "/privacy"]) {
       const response = await fetch(`${origin}${path}`);
       assert.equal(response.status, 200, `${path} should return 200`);
       await response.text();
     }
 
-    for (const path of ["/about", "/contact", "/privacy"]) {
+    for (const path of ["/monfily-digital", "/about", "/contact", "/privacy"]) {
       const response = await fetch(`${origin}${path}`);
       assert.ok((await response.text()).length > 500, `${path} should be substantive`);
     }
