@@ -16,6 +16,7 @@
     "pages:dev": "npm run build && wrangler pages dev dist",
     "pages:deploy": "npm run build && wrangler pages deploy dist",
     "check": "npm run check --workspaces --if-present",
+    "test:agent-readiness": "npm run build && node --test tests/agent-readiness.test.mjs",
     "clean": "rimraf node_modules dist frontend/node_modules shared/node_modules",
     "install:all": "npm install"
   },
