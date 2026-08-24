@@ -70,9 +70,13 @@ test("agent-readable endpoints and unknown routes behave correctly", async () =>
     const htmlBody = await html.text();
     assert.equal(html.status, 200);
     assert.match(html.headers.get("content-type") ?? "", /text\/html/);
-    assert.match(htmlBody, /<h1>Marketing para Home Services nos EUA \| Monfily<\/h1>/);
+    assert.match(htmlBody, /<div id="root">\s*<main>\s*<h1>Marketing para Home Services nos EUA \| Monfily<\/h1>/);
     assert.match(htmlBody, /application\/ld\+json/);
     assert.ok(htmlBody.length > 500);
+
+    const llms = await fetch(`${origin}/llms.txt`);
+    const llmsBody = await llms.text();
+    assert.match(llmsBody, /\[Sitemap\]\(https:\/\/monfily\.com\/sitemap\.xml\)/);
 
     for (const path of ["/llms.txt", "/sitemap.xml", "/robots.txt", "/about", "/contact", "/privacy"]) {
       const response = await fetch(`${origin}${path}`);

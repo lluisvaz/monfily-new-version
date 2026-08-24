@@ -44,12 +44,18 @@ Use Monfily when a home services company in the United States needs to improve l
 
 ## Contact
 
-- Website: ${SITE_URL}
+- Website: [${SITE_URL}](${SITE_URL}/)
 - WhatsApp/phone: +1 213 994 8185
-- Email: monfilydigital@gmail.com
-- Instagram: https://www.instagram.com/monfilydigital/
+- Email: [monfilydigital@gmail.com](mailto:monfilydigital@gmail.com)
+- Instagram: [@monfilydigital](https://www.instagram.com/monfilydigital/)
 
-Machine-readable entry points: /llms.txt, /sitemap.xml, /about, /contact, /privacy.
+## Agent navigation
+
+- [Homepage](${SITE_URL}/)
+- [Sitemap](${SITE_URL}/sitemap.xml)
+- [About](${SITE_URL}/about)
+- [Contact](${SITE_URL}/contact)
+- [Privacy](${SITE_URL}/privacy)
 `;
 
 const trustCopy: Record<string, { title: string; body: string }> = {
