@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { useLanguage } from "@/hooks/use-language";
-import { translations } from "@/lib/translations";
 import {
   buildWhatsAppUrl,
   getWhatsAppCtaMessage,
   resolveMarketKey,
+  SITE_WHATSAPP_CTA_NUMBER,
   type MarketKey,
 } from "@/lib/whatsapp";
 
@@ -48,8 +48,7 @@ export function useWhatsAppNumber(market: MarketKey, fallback: string): string {
 export function useWhatsAppCta() {
   const { language, detectedCountry } = useLanguage();
   const market = resolveMarketKey(language, detectedCountry);
-  const fallback = translations[language].whatsappNumber;
-  const number = useWhatsAppNumber(market, fallback);
+  const number = SITE_WHATSAPP_CTA_NUMBER;
 
   const open = useCallback(() => {
     window.open(buildWhatsAppUrl(number, getWhatsAppCtaMessage(language)), "_blank");

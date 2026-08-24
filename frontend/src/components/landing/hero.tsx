@@ -138,12 +138,13 @@ export function Hero() {
             {t.hero.cta.primary}
           </ProjectCtaButton>
 
-          <a
-            href="#servicos"
+          <button
+            type="button"
+            onClick={openWhatsApp}
             className="flex h-12 w-full max-w-[340px] cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#1C1C1E] px-7 text-base font-normal text-white transition-[background-color,transform] duration-300 hover:bg-[#2869D6] active:scale-[0.985] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2869D6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0D] xl:w-auto"
           >
             {t.hero.cta.secondary}
-          </a>
+          </button>
         </div>
 
         {/* Features */}
@@ -221,7 +222,7 @@ export function Hero() {
 
       {/* Mobile Mockups - Visible only on mobile, positioned at bottom */}
       <div
-        className="absolute bottom-0 left-0 right-0 flex w-screen items-end justify-center overflow-hidden pointer-events-none hero-blur-animate lg:hidden"
+        className="absolute bottom-7 left-0 right-0 flex w-screen items-end justify-center overflow-hidden pointer-events-none hero-blur-animate lg:hidden"
         style={{ zIndex: 1, left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw', animationDelay: '0.6s' }}
       >
         <div className="relative" style={{ transform: 'scale(0.55)', transformOrigin: 'bottom center', pointerEvents: 'none', userSelect: 'none' }}>

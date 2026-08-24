@@ -2,6 +2,8 @@ import type { Language } from "@/lib/translations";
 
 export type MarketKey = "PT" | "IT" | "ES" | "SG" | "BR" | "GB" | "US";
 
+export const SITE_WHATSAPP_CTA_NUMBER = "12139948185";
+
 /** ISO country code -> contact market. */
 export const MARKET_BY_COUNTRY: Record<string, MarketKey> = {
   PT: "PT",
