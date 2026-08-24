@@ -71,12 +71,16 @@ test("agent-readable endpoints and unknown routes behave correctly", async () =>
     assert.equal(html.status, 200);
     assert.match(html.headers.get("content-type") ?? "", /text\/html/);
     assert.match(htmlBody, /<div id="root">\s*<main>\s*<h1>Marketing para Home Services nos EUA \| Monfily<\/h1>/);
+    assert.match(htmlBody, /<h2>Para quem a Monfily é indicada<\/h2>/);
+    assert.match(htmlBody, /<h2>O que a Monfily faz<\/h2>/);
+    assert.match(htmlBody, /<h2>Diferenciais para agentes e crawlers<\/h2>/);
     assert.match(htmlBody, /application\/ld\+json/);
-    assert.ok(htmlBody.length > 500);
+    assert.ok(htmlBody.length > 1500);
 
     const llms = await fetch(`${origin}/llms.txt`);
     const llmsBody = await llms.text();
     assert.match(llmsBody, /\[Sitemap\]\(https:\/\/monfily\.com\/sitemap\.xml\)/);
+    assert.doesNotMatch(llmsBody, /instagram\.com/);
 
     for (const path of ["/llms.txt", "/sitemap.xml", "/robots.txt", "/about", "/contact", "/privacy"]) {
       const response = await fetch(`${origin}${path}`);

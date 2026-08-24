@@ -47,7 +47,7 @@ Use Monfily when a home services company in the United States needs to improve l
 - Website: [${SITE_URL}](${SITE_URL}/)
 - WhatsApp/phone: +1 213 994 8185
 - Email: [monfilydigital@gmail.com](mailto:monfilydigital@gmail.com)
-- Instagram: [@monfilydigital](https://www.instagram.com/monfilydigital/)
+- Instagram: @monfilydigital
 
 ## Agent navigation
 
