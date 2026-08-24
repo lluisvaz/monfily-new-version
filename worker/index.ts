@@ -100,7 +100,7 @@ function markdownResponse(markdown: string, status = 200): Response {
   });
 }
 
-function htmlPage(title: string, body: string): Response {
+function htmlPage(pathname: string, title: string, body: string): Response {
   return new Response(`<!doctype html>
 <html lang="en">
   <head>
@@ -108,7 +108,7 @@ function htmlPage(title: string, body: string): Response {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>${title} | Monfily Digital</title>
     <meta name="description" content="Agent-readable ${title} page for Monfily Digital." />
-    <link rel="canonical" href="${SITE_URL}/${title.toLowerCase().split(" ")[0]}" />
+    <link rel="canonical" href="${SITE_URL}${pathname}" />
   </head>
   <body>
     <main>
@@ -130,7 +130,7 @@ function trustResponse(pathname: string, request: Request): Response {
   if (wantsMarkdown(request)) {
     return markdownResponse(`# ${page.title}\n\n${page.body}\n\nResources: /llms.txt, /sitemap.xml, /.`);
   }
-  return htmlPage(page.title, page.body);
+  return htmlPage(pathname, page.title, page.body);
 }
 
 function sitemapResponse(): Response {

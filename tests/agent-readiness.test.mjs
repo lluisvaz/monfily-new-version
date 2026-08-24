@@ -94,7 +94,9 @@ test("agent-readable endpoints and unknown routes behave correctly", async () =>
 
     for (const path of ["/monfily-digital", "/about", "/contact", "/privacy"]) {
       const response = await fetch(`${origin}${path}`);
-      assert.ok((await response.text()).length > 500, `${path} should be substantive`);
+      const body = await response.text();
+      assert.ok(body.length > 500, `${path} should be substantive`);
+      assert.match(body, new RegExp(`<link rel="canonical" href="https://monfily\\.com${path}" />`));
     }
   });
 });
