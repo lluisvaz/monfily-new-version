@@ -646,6 +646,7 @@ export function ServicesSection() {
 const ExpertiseSection = () => {
   const { language } = useLanguage();
   const t = translations[language];
+  const { open: openWhatsApp } = useWhatsAppCta();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -760,12 +761,7 @@ const ExpertiseSection = () => {
 
           {/* CTA Button */}
           <ProjectCtaButton
-            onClick={() => {
-              const el = document.getElementById('contato');
-              if (el) {
-                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              }
-            }}
+            onClick={openWhatsApp}
             className={`relative z-10 md:w-[300px] ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.4s', opacity: isVisible ? 0 : 0 }}
           >
@@ -825,12 +821,7 @@ const ExpertiseSection = () => {
 
           {/* CTA Button */}
           <ProjectCtaButton
-            onClick={() => {
-              const el = document.getElementById('contato');
-              if (el) {
-                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              }
-            }}
+            onClick={openWhatsApp}
             className={`relative z-10 md:w-[300px] ${isVisible ? 'services-blur-animate' : ''}`}
             style={{ animationDelay: '0.4s', opacity: isVisible ? 0 : 0 }}
           >

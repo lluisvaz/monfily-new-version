@@ -1,0 +1,26 @@
+name = "monfily-new-version"
+main = "worker/index.ts"
+compatibility_date = "2026-05-22"
+workers_dev = true
+preview_urls = true
+
+[dev]
+port = 3001
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+# The Worker validates app routes, agent-readable files and real 404s before
+# delegating known static assets to the built SPA.
+run_worker_first = true
+
+# Preserve the Durable Object migration history while removing the scheduler
+# that belonged exclusively to the deleted landing-page flow.
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["WhatsappScheduler"]
+
+[[migrations]]
+tag = "v2-remove-landing-page-whatsapp-scheduler"
+deleted_classes = ["WhatsappScheduler"]

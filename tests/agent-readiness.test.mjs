@@ -1,0 +1,102 @@
+import assert from "node:assert/strict";
+import { spawn, spawnSync } from "node:child_process";
+import { test } from "node:test";
+
+const port = 8789;
+const origin = `http://127.0.0.1:${port}`;
+
+function waitForServer(process) {
+  return new Promise((resolve, reject) => {
+    let output = "";
+    const timeout = setTimeout(() => {
+      reject(new Error(`Timed out waiting for wrangler dev. Output:\n${output}`));
+    }, 30000);
+
+    const onData = (chunk) => {
+      output += chunk.toString();
+      if (output.includes(`http://127.0.0.1:${port}`) || output.includes("Ready on")) {
+        clearTimeout(timeout);
+        resolve();
+      }
+    };
+
+    process.stdout.on("data", onData);
+    process.stderr.on("data", onData);
+    process.once("exit", (code) => {
+      clearTimeout(timeout);
+      reject(new Error(`wrangler dev exited before ready with code ${code}. Output:\n${output}`));
+    });
+  });
+}
+
+async function withWorker(fn) {
+  const child = spawn("npx", ["wrangler", "dev", "--local", "--port", String(port)], {
+    cwd: process.cwd(),
+    shell: process.platform === "win32",
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+
+  try {
+    await waitForServer(child);
+    await fn();
+  } finally {
+    if (process.platform === "win32") {
+      spawnSync("taskkill", ["/pid", String(child.pid), "/T", "/F"], { stdio: "ignore" });
+    } else {
+      child.kill("SIGTERM");
+    }
+  }
+}
+
+test("agent-readable endpoints and unknown routes behave correctly", async () => {
+  await withWorker(async () => {
+    const missing = await fetch(`${origin}/definitely-not-a-real-agent-path`, {
+      headers: { Accept: "text/markdown" },
+    });
+    assert.equal(missing.status, 404);
+    assert.match(await missing.text(), /sitemap\.xml/);
+
+    const markdown = await fetch(`${origin}/`, {
+      headers: { Accept: "text/markdown" },
+    });
+    assert.equal(markdown.status, 200);
+    assert.match(markdown.headers.get("content-type") ?? "", /text\/markdown/);
+    assert.match(markdown.headers.get("vary") ?? "", /Accept/);
+    assert.match(await markdown.text(), /^# Monfily Digital/m);
+
+    const html = await fetch(`${origin}/`, {
+      headers: { Accept: "text/html" },
+    });
+    const htmlBody = await html.text();
+    assert.equal(html.status, 200);
+    assert.match(html.headers.get("content-type") ?? "", /text\/html/);
+    assert.match(htmlBody, /<div id="root">\s*<main>\s*<h1>Marketing para Home Services nos EUA \| Monfily<\/h1>/);
+    assert.match(htmlBody, /<h2>Para quem a Monfily é indicada<\/h2>/);
+    assert.match(htmlBody, /<h2>O que a Monfily faz<\/h2>/);
+    assert.match(htmlBody, /<h2>Diferenciais para agentes e crawlers<\/h2>/);
+    assert.match(htmlBody, /application\/ld\+json/);
+    assert.ok(htmlBody.length > 1500);
+
+    const llms = await fetch(`${origin}/llms.txt`);
+    const llmsBody = await llms.text();
+    assert.match(llmsBody, /\[Sitemap\]\(https:\/\/monfily\.com\/sitemap\.xml\)/);
+    assert.match(llmsBody, /\[Monfily Digital brand profile\]\(https:\/\/monfily\.com\/monfily-digital\)/);
+    assert.doesNotMatch(llmsBody, /instagram\.com/);
+
+    const sitemap = await fetch(`${origin}/sitemap.xml`);
+    assert.match(await sitemap.text(), /<loc>https:\/\/monfily\.com\/monfily-digital<\/loc>/);
+
+    for (const path of ["/llms.txt", "/sitemap.xml", "/robots.txt", "/monfily-digital", "/about", "/contact", "/privacy"]) {
+      const response = await fetch(`${origin}${path}`);
+      assert.equal(response.status, 200, `${path} should return 200`);
+      await response.text();
+    }
+
+    for (const path of ["/monfily-digital", "/about", "/contact", "/privacy"]) {
+      const response = await fetch(`${origin}${path}`);
+      const body = await response.text();
+      assert.ok(body.length > 500, `${path} should be substantive`);
+      assert.match(body, new RegExp(`<link rel="canonical" href="https://monfily\\.com${path}" />`));
+    }
+  });
+});
